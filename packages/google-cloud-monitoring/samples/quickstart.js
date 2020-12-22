@@ -20,7 +20,10 @@ const monitoring = require('@google-cloud/monitoring');
 
 async function quickstart() {
   // Your Google Cloud Platform project ID
-  const projectId = process.env.GCLOUD_PROJECT || 'YOUR_PROJECT_ID';
+  const projectId =
+    process.env.GCLOUD_PROJECT ||
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    'YOUR_PROJECT_ID';
 
   // Creates a client
   const client = new monitoring.MetricServiceClient();
