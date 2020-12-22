@@ -691,72 +691,83 @@ describe('Compute', () => {
     });
   });
 
-  describe.skip('rules', () => {
+  describe('rules', () => {
     const RULE_NAME = generateName('rule');
-    const rule = compute.rule(RULE_NAME);
-    const service = compute.service(generateName('service'));
-    const INSTANCE_GROUP_NAME = generateName('instance-group');
-    const HEALTH_CHECK_NAME = generateName('health-check');
-
-    // To create a rule, we need to also create a TargetHttpProxy and UrlMap.
-    // Until they are officially supported by google-cloud-node, we make manual
-    // requests to create and delete them.
-    const TARGET_PROXY_NAME = generateName('target-proxy');
-    const URL_MAP_NAME = generateName('url-map');
+    const NETWORK_NAME = generateName('network');
+    const SUBNETWORK_NAME = generateName('subnetwork');
+    const BACKEND_SERVICE_NAME = generateName('backend-service');
+    let RULE;
+    let SUBNETWORK;
 
     before(async () => {
-      await createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME);
-      await createUrlMap({
-        name: URL_MAP_NAME,
-        defaultService: 'global/backendServices/' + service.name,
+      const projectId = await compute.authClient.getProjectId();
+      const resourceUrlPrefix = `https://www.googleapis.com/compute/v1/projects/${projectId}`;
+      const [network, networkOperation] = await compute.createNetwork(
+        NETWORK_NAME,
+        {
+          autoCreateSubnetworks: false,
+        }
+      );
+      await networkOperation.promise();
+
+      const [subnetwork, subnetworkOperation] = await network.createSubnetwork(
+        SUBNETWORK_NAME,
+        {
+          region: 'us-central1',
+          range: '10.0.1.0/24',
+        }
+      );
+      SUBNETWORK = subnetwork;
+      await subnetworkOperation.promise();
+
+      const region = compute.region('us-central1');
+
+      const resp = await computeRequest({
+        method: 'POST',
+        uri: '/regions/us-central1/backendServices',
+        json: {
+          name: BACKEND_SERVICE_NAME,
+          loadBalancingScheme: 'INTERNAL',
+        },
       });
-      await createTargetProxy({
-        name: TARGET_PROXY_NAME,
-        urlMap: 'global/urlMaps/' + URL_MAP_NAME,
+      await region.operation(resp.name).promise();
+
+      const [rule, ruleOperation] = await region.createRule(RULE_NAME, {
+        loadBalancingScheme: 'INTERNAL',
+        backendService: `${resourceUrlPrefix}/regions/us-central1/backendServices/${BACKEND_SERVICE_NAME}`,
+        subnetwork: `${resourceUrlPrefix}/regions/us-central1/subnetworks/${SUBNETWORK_NAME}`,
+        network: `${resourceUrlPrefix}/global/networks/${NETWORK_NAME}`,
+        ports: ['80', '81', '82'],
       });
-      await create(rule, {
-        target: 'global/targetHttpProxies/' + TARGET_PROXY_NAME,
-        portRange: '8080',
-        IPProtocol: 'TCP',
-      });
+      RULE = rule;
+      await ruleOperation.promise();
     });
 
-    it('should get a list of rules', async () => {
-      const [rules] = await compute.getRules();
-      assert(rules.length > 0);
+    after(async () => {
+      const [firewalls] = await compute.getFirewalls();
+      const firewallsToDelete = firewalls.filter(x =>
+        x.name.startsWith(TESTS_PREFIX)
+      );
+      for (const firewall of firewallsToDelete) {
+        await firewall.delete();
+      }
+      const [ruleOperation] = await RULE.delete();
+      await ruleOperation.promise();
+      await computeRequest({
+        method: 'DELETE',
+        uri: 'regions/us-central1/backendServices/' + BACKEND_SERVICE_NAME,
+      });
+
+      const [subnetworkOperation] = await SUBNETWORK.delete();
+      await subnetworkOperation.promise();
     });
 
     it('should have created the right rule', async () => {
-      const target = [
-        'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
-        TARGET_PROXY_NAME,
-      ].join('');
-
-      const [metadata] = await rule.getMetadata();
+      const [metadata] = await RULE.getMetadata();
       assert.strictEqual(metadata.name, RULE_NAME);
       assert.strictEqual(metadata.IPProtocol, 'TCP');
-      assert.strictEqual(metadata.portRange, '8080-8080');
-
-      // The projectId may have been replaced depending on how the system
-      // tests are being run, so let's not care about that.
-      metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
-      assert.strictEqual(metadata.target, target);
-    });
-
-    it('should set a new target', async () => {
-      let target = [
-        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
-        '/global/targetHttpProxies/' + TARGET_PROXY_NAME,
-      ].join('');
-
-      await awaitResult(rule.setTarget(target));
-      const [metadata] = await rule.getMetadata();
-
-      // The projectId may have been replaced depending on how the system
-      // tests are being run, so let's not care about that.
-      target = target.replace(/projects\/[^/]*\//, '');
-      metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
-      assert.strictEqual(metadata.target, target);
+      assert.deepStrictEqual(metadata.ports, ['80', '81', '82']);
+      assert.strictEqual(metadata.loadBalancingScheme, 'INTERNAL');
     });
   });
 
@@ -1239,16 +1250,6 @@ describe('Compute', () => {
     );
   }
 
-  async function createUrlMap(config) {
-    const resp = await computeRequest({
-      method: 'POST',
-      uri: '/global/urlMaps',
-      json: config,
-    });
-    const operation = compute.operation(resp.name);
-    await operation.promise();
-  }
-
   async function deleteUrlMap(name) {
     const resp = await computeRequest({
       method: 'DELETE',
@@ -1270,16 +1271,6 @@ describe('Compute', () => {
         .map(x => x.name)
         .map(deleteTargetProxy)
     );
-  }
-
-  async function createTargetProxy(config) {
-    const resp = await computeRequest({
-      method: 'POST',
-      uri: '/global/targetHttpProxies',
-      json: config,
-    });
-    const operation = compute.operation(resp.name);
-    await operation.promise();
   }
 
   async function deleteTargetProxy(name) {
