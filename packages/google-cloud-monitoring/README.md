@@ -65,7 +65,10 @@ const monitoring = require('@google-cloud/monitoring');
 
 async function quickstart() {
   // Your Google Cloud Platform project ID
-  const projectId = process.env.GCLOUD_PROJECT || 'YOUR_PROJECT_ID';
+  const projectId =
+    process.env.GCLOUD_PROJECT ||
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    'YOUR_PROJECT_ID';
 
   // Creates a client
   const client = new monitoring.MetricServiceClient();
@@ -117,8 +120,7 @@ async function quickstart() {
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-monitoring/tree/master/samples) directory. The samples' `README.md`
-has instructions for running the samples.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-monitoring/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
