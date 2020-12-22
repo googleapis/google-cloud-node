@@ -124,8 +124,7 @@ quickStart();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dlp/tree/master/samples) directory. The samples' `README.md`
-has instructions for running the samples.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dlp/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
