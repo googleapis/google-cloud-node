@@ -1,0 +1,14 @@
+{
+  "name": "policytroubleshooter",
+  "name_pretty": "IAM Policy Troubleshooter API",
+  "product_documentation": "https://cloud.google.com/iam/docs/troubleshooting-access#rest-api/",
+  "client_documentation": "https://googleapis.dev/nodejs/policytroubleshooter/latest/",
+  "issue_tracker": "https://github.com/googleapis/nodejs-policy-troubleshooter/issues",
+  "release_level": "GA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-policy-troubleshooter",
+  "distribution_name": "@google-cloud/policy-troubleshooter",
+  "api_id": "policytroubleshooter.googleapis.com",
+  "requires_billing": true
+}
+

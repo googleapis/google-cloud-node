@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/sofialeon/nodejs-policy-troubleshooter",
+        "sha": "8e8c2e15ffed9278832df68ace50441167f9d723"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "49e64a5a8eb24ab49a81049f3bb31df869515715",
+        "internalRef": "347844600"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "d73e8dea90af1b463a7f9d4a33244cf4612ada7c"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "policytroubleshooter",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
