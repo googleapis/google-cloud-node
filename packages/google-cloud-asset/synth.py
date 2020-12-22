@@ -25,7 +25,7 @@ AUTOSYNTH_MULTIPLE_COMMITS = True
 
 
 gapic = gcp.GAPICBazel()
-versions = ['v1beta1', 'v1p1beta1', 'v1p2beta1', 'v1p4beta1', 'v1p5beta1', 'v1']
+versions = ['v1p1beta1', 'v1p2beta1', 'v1p4beta1', 'v1p5beta1', 'v1']
 name = 'asset'
 for version in versions:
     library = gapic.node_library(name, version)
