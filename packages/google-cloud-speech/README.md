@@ -59,22 +59,17 @@ npm install @google-cloud/speech
 ```javascript
 // Imports the Google Cloud client library
 const speech = require('@google-cloud/speech');
-const fs = require('fs').promises;
 
 // Creates a client
 const client = new speech.SpeechClient();
 
 async function quickstart() {
-  // The name of the audio file to transcribe
-  const fileName = './resources/audio.raw';
-
-  // Reads a local audio file and converts it to base64
-  const file = await fs.readFile(fileName);
-  const audioBytes = file.toString('base64');
+  // The path to the remote LINEAR16 file
+  const gcsUri = 'gs://cloud-samples-data/speech/brooklyn_bridge.raw';
 
   // The audio file's encoding, sample rate in hertz, and BCP-47 language code
   const audio = {
-    content: audioBytes,
+    uri: gcsUri,
   };
   const config = {
     encoding: 'LINEAR16',
@@ -109,6 +104,7 @@ has instructions for running the samples.
 | Microphone stream | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/MicrophoneStream.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/MicrophoneStream.js,samples/README.md) |
 | Beta Features | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/betaFeatures.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/betaFeatures.js,samples/README.md) |
 | Infinite Streaming | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/infiniteStreaming.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/infiniteStreaming.js,samples/README.md) |
+| Multi Region | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/multiRegion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/multiRegion.js,samples/README.md) |
 | Profanity Filter | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/profanityFilter.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/profanityFilter.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Recognize | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.js,samples/README.md) |
