@@ -84,20 +84,6 @@
                             }
                           ]
                         },
-                        "GetUniversalMetadata": {
-                          "requestType": "GetUniversalMetadataRequest",
-                          "responseType": "UniversalMetadata",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/universalMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/universalMetadata"
-                              }
-                            }
-                          ]
-                        },
                         "GetMetadata": {
                           "requestType": "GetMetadataRequest",
                           "responseType": "Metadata",
@@ -397,23 +383,6 @@
                           "rule": "repeated",
                           "type": "RunPivotReportResponse",
                           "id": 1
-                        }
-                      }
-                    },
-                    "GetUniversalMetadataRequest": {
-                      "fields": {}
-                    },
-                    "UniversalMetadata": {
-                      "fields": {
-                        "dimensions": {
-                          "rule": "repeated",
-                          "type": "DimensionMetadata",
-                          "id": 1
-                        },
-                        "metrics": {
-                          "rule": "repeated",
-                          "type": "MetricMetadata",
-                          "id": 2
                         }
                       }
                     },
@@ -921,14 +890,6 @@
                         }
                       }
                     },
-                    "CohortReportSettings": {
-                      "fields": {
-                        "accumulate": {
-                          "type": "bool",
-                          "id": 1
-                        }
-                      }
-                    },
                     "CohortsRange": {
                       "fields": {
                         "granularity": {
@@ -952,6 +913,14 @@
                             "WEEKLY": 2,
                             "MONTHLY": 3
                           }
+                        }
+                      }
+                    },
+                    "CohortReportSettings": {
+                      "fields": {
+                        "accumulate": {
+                          "type": "bool",
+                          "id": 1
                         }
                       }
                     },
@@ -1119,6 +1088,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 4
+                        },
+                        "customDefinition": {
+                          "type": "bool",
+                          "id": 5
                         }
                       }
                     },
@@ -1148,6 +1121,10 @@
                         "expression": {
                           "type": "string",
                           "id": 6
+                        },
+                        "customDefinition": {
+                          "type": "bool",
+                          "id": 7
                         }
                       }
                     },

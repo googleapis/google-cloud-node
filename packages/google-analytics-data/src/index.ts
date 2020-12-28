@@ -18,6 +18,7 @@
 
 import * as v1alpha from './v1alpha';
 const AlphaAnalyticsDataClient = v1alpha.AlphaAnalyticsDataClient;
+type AlphaAnalyticsDataClient = v1alpha.AlphaAnalyticsDataClient;
 export {v1alpha, AlphaAnalyticsDataClient};
 export default {v1alpha, AlphaAnalyticsDataClient};
 import * as protos from '../protos/protos';

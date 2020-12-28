@@ -103,20 +103,6 @@ export namespace google {
                     public batchRunPivotReports(request: google.analytics.data.v1alpha.IBatchRunPivotReportsRequest): Promise<google.analytics.data.v1alpha.BatchRunPivotReportsResponse>;
 
                     /**
-                     * Calls GetUniversalMetadata.
-                     * @param request GetUniversalMetadataRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and UniversalMetadata
-                     */
-                    public getUniversalMetadata(request: google.analytics.data.v1alpha.IGetUniversalMetadataRequest, callback: google.analytics.data.v1alpha.AlphaAnalyticsData.GetUniversalMetadataCallback): void;
-
-                    /**
-                     * Calls GetUniversalMetadata.
-                     * @param request GetUniversalMetadataRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getUniversalMetadata(request: google.analytics.data.v1alpha.IGetUniversalMetadataRequest): Promise<google.analytics.data.v1alpha.UniversalMetadata>;
-
-                    /**
                      * Calls GetMetadata.
                      * @param request GetMetadataRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Metadata
@@ -174,13 +160,6 @@ export namespace google {
                      * @param [response] BatchRunPivotReportsResponse
                      */
                     type BatchRunPivotReportsCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.BatchRunPivotReportsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData#getUniversalMetadata}.
-                     * @param error Error, if any
-                     * @param [response] UniversalMetadata
-                     */
-                    type GetUniversalMetadataCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.UniversalMetadata) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData#getMetadata}.
@@ -1248,186 +1227,6 @@ export namespace google {
 
                     /**
                      * Converts this BatchRunPivotReportsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetUniversalMetadataRequest. */
-                interface IGetUniversalMetadataRequest {
-                }
-
-                /** Represents a GetUniversalMetadataRequest. */
-                class GetUniversalMetadataRequest implements IGetUniversalMetadataRequest {
-
-                    /**
-                     * Constructs a new GetUniversalMetadataRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.data.v1alpha.IGetUniversalMetadataRequest);
-
-                    /**
-                     * Creates a new GetUniversalMetadataRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetUniversalMetadataRequest instance
-                     */
-                    public static create(properties?: google.analytics.data.v1alpha.IGetUniversalMetadataRequest): google.analytics.data.v1alpha.GetUniversalMetadataRequest;
-
-                    /**
-                     * Encodes the specified GetUniversalMetadataRequest message. Does not implicitly {@link google.analytics.data.v1alpha.GetUniversalMetadataRequest.verify|verify} messages.
-                     * @param message GetUniversalMetadataRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.data.v1alpha.IGetUniversalMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetUniversalMetadataRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.GetUniversalMetadataRequest.verify|verify} messages.
-                     * @param message GetUniversalMetadataRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.data.v1alpha.IGetUniversalMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetUniversalMetadataRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetUniversalMetadataRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.GetUniversalMetadataRequest;
-
-                    /**
-                     * Decodes a GetUniversalMetadataRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetUniversalMetadataRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.GetUniversalMetadataRequest;
-
-                    /**
-                     * Verifies a GetUniversalMetadataRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetUniversalMetadataRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetUniversalMetadataRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.GetUniversalMetadataRequest;
-
-                    /**
-                     * Creates a plain object from a GetUniversalMetadataRequest message. Also converts values to other types if specified.
-                     * @param message GetUniversalMetadataRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.data.v1alpha.GetUniversalMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetUniversalMetadataRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UniversalMetadata. */
-                interface IUniversalMetadata {
-
-                    /** UniversalMetadata dimensions */
-                    dimensions?: (google.analytics.data.v1alpha.IDimensionMetadata[]|null);
-
-                    /** UniversalMetadata metrics */
-                    metrics?: (google.analytics.data.v1alpha.IMetricMetadata[]|null);
-                }
-
-                /** Represents an UniversalMetadata. */
-                class UniversalMetadata implements IUniversalMetadata {
-
-                    /**
-                     * Constructs a new UniversalMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.data.v1alpha.IUniversalMetadata);
-
-                    /** UniversalMetadata dimensions. */
-                    public dimensions: google.analytics.data.v1alpha.IDimensionMetadata[];
-
-                    /** UniversalMetadata metrics. */
-                    public metrics: google.analytics.data.v1alpha.IMetricMetadata[];
-
-                    /**
-                     * Creates a new UniversalMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UniversalMetadata instance
-                     */
-                    public static create(properties?: google.analytics.data.v1alpha.IUniversalMetadata): google.analytics.data.v1alpha.UniversalMetadata;
-
-                    /**
-                     * Encodes the specified UniversalMetadata message. Does not implicitly {@link google.analytics.data.v1alpha.UniversalMetadata.verify|verify} messages.
-                     * @param message UniversalMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.data.v1alpha.IUniversalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UniversalMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.UniversalMetadata.verify|verify} messages.
-                     * @param message UniversalMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.data.v1alpha.IUniversalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UniversalMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UniversalMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.UniversalMetadata;
-
-                    /**
-                     * Decodes an UniversalMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UniversalMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.UniversalMetadata;
-
-                    /**
-                     * Verifies an UniversalMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UniversalMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UniversalMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.UniversalMetadata;
-
-                    /**
-                     * Creates a plain object from an UniversalMetadata message. Also converts values to other types if specified.
-                     * @param message UniversalMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.data.v1alpha.UniversalMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UniversalMetadata to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -4045,96 +3844,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a CohortReportSettings. */
-                interface ICohortReportSettings {
-
-                    /** CohortReportSettings accumulate */
-                    accumulate?: (boolean|null);
-                }
-
-                /** Represents a CohortReportSettings. */
-                class CohortReportSettings implements ICohortReportSettings {
-
-                    /**
-                     * Constructs a new CohortReportSettings.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.data.v1alpha.ICohortReportSettings);
-
-                    /** CohortReportSettings accumulate. */
-                    public accumulate: boolean;
-
-                    /**
-                     * Creates a new CohortReportSettings instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CohortReportSettings instance
-                     */
-                    public static create(properties?: google.analytics.data.v1alpha.ICohortReportSettings): google.analytics.data.v1alpha.CohortReportSettings;
-
-                    /**
-                     * Encodes the specified CohortReportSettings message. Does not implicitly {@link google.analytics.data.v1alpha.CohortReportSettings.verify|verify} messages.
-                     * @param message CohortReportSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.data.v1alpha.ICohortReportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CohortReportSettings message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.CohortReportSettings.verify|verify} messages.
-                     * @param message CohortReportSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.data.v1alpha.ICohortReportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CohortReportSettings message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CohortReportSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.CohortReportSettings;
-
-                    /**
-                     * Decodes a CohortReportSettings message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CohortReportSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.CohortReportSettings;
-
-                    /**
-                     * Verifies a CohortReportSettings message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CohortReportSettings message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CohortReportSettings
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.CohortReportSettings;
-
-                    /**
-                     * Creates a plain object from a CohortReportSettings message. Also converts values to other types if specified.
-                     * @param message CohortReportSettings
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.data.v1alpha.CohortReportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CohortReportSettings to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a CohortsRange. */
                 interface ICohortsRange {
 
@@ -4246,6 +3955,96 @@ export namespace google {
                         WEEKLY = 2,
                         MONTHLY = 3
                     }
+                }
+
+                /** Properties of a CohortReportSettings. */
+                interface ICohortReportSettings {
+
+                    /** CohortReportSettings accumulate */
+                    accumulate?: (boolean|null);
+                }
+
+                /** Represents a CohortReportSettings. */
+                class CohortReportSettings implements ICohortReportSettings {
+
+                    /**
+                     * Constructs a new CohortReportSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.ICohortReportSettings);
+
+                    /** CohortReportSettings accumulate. */
+                    public accumulate: boolean;
+
+                    /**
+                     * Creates a new CohortReportSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CohortReportSettings instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.ICohortReportSettings): google.analytics.data.v1alpha.CohortReportSettings;
+
+                    /**
+                     * Encodes the specified CohortReportSettings message. Does not implicitly {@link google.analytics.data.v1alpha.CohortReportSettings.verify|verify} messages.
+                     * @param message CohortReportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.ICohortReportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CohortReportSettings message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.CohortReportSettings.verify|verify} messages.
+                     * @param message CohortReportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.ICohortReportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CohortReportSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CohortReportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.CohortReportSettings;
+
+                    /**
+                     * Decodes a CohortReportSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CohortReportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.CohortReportSettings;
+
+                    /**
+                     * Verifies a CohortReportSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CohortReportSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CohortReportSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.CohortReportSettings;
+
+                    /**
+                     * Creates a plain object from a CohortReportSettings message. Also converts values to other types if specified.
+                     * @param message CohortReportSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.CohortReportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CohortReportSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ResponseMetaData. */
@@ -5309,6 +5108,9 @@ export namespace google {
 
                     /** DimensionMetadata deprecatedApiNames */
                     deprecatedApiNames?: (string[]|null);
+
+                    /** DimensionMetadata customDefinition */
+                    customDefinition?: (boolean|null);
                 }
 
                 /** Represents a DimensionMetadata. */
@@ -5331,6 +5133,9 @@ export namespace google {
 
                     /** DimensionMetadata deprecatedApiNames. */
                     public deprecatedApiNames: string[];
+
+                    /** DimensionMetadata customDefinition. */
+                    public customDefinition: boolean;
 
                     /**
                      * Creates a new DimensionMetadata instance using the specified properties.
@@ -5423,6 +5228,9 @@ export namespace google {
 
                     /** MetricMetadata expression */
                     expression?: (string|null);
+
+                    /** MetricMetadata customDefinition */
+                    customDefinition?: (boolean|null);
                 }
 
                 /** Represents a MetricMetadata. */
@@ -5451,6 +5259,9 @@ export namespace google {
 
                     /** MetricMetadata expression. */
                     public expression: string;
+
+                    /** MetricMetadata customDefinition. */
+                    public customDefinition: boolean;
 
                     /**
                      * Creates a new MetricMetadata instance using the specified properties.
