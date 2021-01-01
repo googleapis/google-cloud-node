@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-redis.git",
-        "sha": "78d14cd0b9ba66c8319ec540ea050606b7ec7a6c"
+        "sha": "9738df032f1e53597c9b6754eb03fb0100cec60f"
       }
     },
     {
