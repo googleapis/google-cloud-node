@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-text-to-speech.git",
-        "sha": "39cfcb57f3f447d8fadc94aa6893c7b1627a4885"
+        "sha": "9a5449582b0448a64cac24c01e816838780dbb87"
       }
     },
     {
