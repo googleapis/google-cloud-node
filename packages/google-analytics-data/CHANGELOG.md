@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v1.1.0...v2.0.0) (2020-12-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* GetUniversalMetadata method removed from the API, GetMetadata method should be used instead feat: reporting requests support longer date ranges (#43)
+
+### Bug Fixes
+
+* GetUniversalMetadata method removed from the API, GetMetadata method should be used instead feat: reporting requests support longer date ranges ([#43](https://www.github.com/googleapis/nodejs-analytics-data/issues/43)) ([661ee0e](https://www.github.com/googleapis/nodejs-analytics-data/commit/661ee0e27abea9978d09ee06b2d6c259712b351f))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v1.0.2...v1.1.0) (2020-11-11)
 
 
