@@ -57,7 +57,7 @@
     "@google-cloud/promisify": "^2.0.0",
     "arrify": "^2.0.0",
     "compressible": "^2.0.12",
-    "date-and-time": "^0.14.0",
+    "date-and-time": "^0.14.2",
     "duplexify": "^4.0.0",
     "extend": "^3.0.2",
     "gaxios": "^4.0.0",
