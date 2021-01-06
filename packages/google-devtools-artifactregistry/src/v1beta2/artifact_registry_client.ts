@@ -2361,9 +2361,7 @@ export class ArtifactRegistryClient {
   listRepositoriesAsync(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.devtools.artifactregistry.v1beta2.IRepository
-  > {
+  ): AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IRepository> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2380,9 +2378,7 @@ export class ArtifactRegistryClient {
       this.innerApiCalls['listRepositories'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.devtools.artifactregistry.v1beta2.IRepository
-    >;
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IRepository>;
   }
   listPackages(
     request: protos.google.devtools.artifactregistry.v1beta2.IListPackagesRequest,
@@ -2579,9 +2575,7 @@ export class ArtifactRegistryClient {
       this.innerApiCalls['listPackages'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.devtools.artifactregistry.v1beta2.IPackage
-    >;
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IPackage>;
   }
   listVersions(
     request: protos.google.devtools.artifactregistry.v1beta2.IListVersionsRequest,
@@ -2784,9 +2778,7 @@ export class ArtifactRegistryClient {
       this.innerApiCalls['listVersions'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.devtools.artifactregistry.v1beta2.IVersion
-    >;
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IVersion>;
   }
   listFiles(
     request: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,

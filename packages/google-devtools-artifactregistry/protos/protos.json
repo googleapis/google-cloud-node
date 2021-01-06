@@ -306,7 +306,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*}/repositories",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/locations/*}/repositories"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetRepository": {
                           "requestType": "GetRepositoryRequest",
@@ -314,7 +324,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/repositories/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/locations/*/repositories/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateRepository": {
                           "requestType": "CreateRepositoryRequest",
@@ -325,7 +345,24 @@
                             "(google.api.method_signature)": "parent,repository,repository_id",
                             "(google.longrunning.operation_info).response_type": "Repository",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/locations/*}/repositories",
+                                "body": "repository"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,repository,repository_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Repository",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateRepository": {
                           "requestType": "UpdateRepositoryRequest",
@@ -334,7 +371,18 @@
                             "(google.api.http).patch": "/v1beta2/{repository.name=projects/*/locations/*/repositories/*}",
                             "(google.api.http).body": "repository",
                             "(google.api.method_signature)": "repository,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta2/{repository.name=projects/*/locations/*/repositories/*}",
+                                "body": "repository"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "repository,update_mask"
+                            }
+                          ]
                         },
                         "DeleteRepository": {
                           "requestType": "DeleteRepositoryRequest",
@@ -344,7 +392,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/{name=projects/*/locations/*/repositories/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ListPackages": {
                           "requestType": "ListPackagesRequest",
@@ -352,7 +416,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/packages",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/packages"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetPackage": {
                           "requestType": "GetPackageRequest",
@@ -360,7 +434,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeletePackage": {
                           "requestType": "DeletePackageRequest",
@@ -370,7 +454,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ListVersions": {
                           "requestType": "ListVersionsRequest",
@@ -378,7 +478,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*/repositories/*/packages/*}/versions",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/locations/*/repositories/*/packages/*}/versions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetVersion": {
                           "requestType": "GetVersionRequest",
@@ -386,7 +496,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/versions/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteVersion": {
                           "requestType": "DeleteVersionRequest",
@@ -396,7 +516,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ListFiles": {
                           "requestType": "ListFilesRequest",
@@ -404,7 +540,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/files",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/locations/*/repositories/*}/files"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetFile": {
                           "requestType": "GetFileRequest",
@@ -412,7 +558,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/repositories/*/files/**}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/locations/*/repositories/*/files/**}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListTags": {
                           "requestType": "ListTagsRequest",
@@ -420,7 +576,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{parent=projects/*/locations/*/repositories/*/packages/*}/tags",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{parent=projects/*/locations/*/repositories/*/packages/*}/tags"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetTag": {
                           "requestType": "GetTagRequest",
@@ -428,7 +594,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/tags/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/tags/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "CreateTag": {
                           "requestType": "CreateTagRequest",
@@ -437,7 +613,18 @@
                             "(google.api.http).post": "/v1beta2/{parent=projects/*/locations/*/repositories/*/packages/*}/tags",
                             "(google.api.http).body": "tag",
                             "(google.api.method_signature)": "parent,tag,tag_id"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{parent=projects/*/locations/*/repositories/*/packages/*}/tags",
+                                "body": "tag"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tag,tag_id"
+                            }
+                          ]
                         },
                         "UpdateTag": {
                           "requestType": "UpdateTagRequest",
@@ -446,7 +633,18 @@
                             "(google.api.http).patch": "/v1beta2/{tag.name=projects/*/locations/*/repositories/*/packages/*/tags/*}",
                             "(google.api.http).body": "tag",
                             "(google.api.method_signature)": "tag,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta2/{tag.name=projects/*/locations/*/repositories/*/packages/*/tags/*}",
+                                "body": "tag"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tag,update_mask"
+                            }
+                          ]
                         },
                         "DeleteTag": {
                           "requestType": "DeleteTagRequest",
@@ -454,7 +652,17 @@
                           "options": {
                             "(google.api.http).delete": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/tags/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta2/{name=projects/*/locations/*/repositories/*/packages/*/tags/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -462,14 +670,29 @@
                           "options": {
                             "(google.api.http).post": "/v1beta2/{resource=projects/*/locations/*/repositories/*}:setIamPolicy",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{resource=projects/*/locations/*/repositories/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetIamPolicy": {
                           "requestType": "google.iam.v1.GetIamPolicyRequest",
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).get": "/v1beta2/{resource=projects/*/locations/*/repositories/*}:getIamPolicy"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta2/{resource=projects/*/locations/*/repositories/*}:getIamPolicy"
+                              }
+                            }
+                          ]
                         },
                         "TestIamPermissions": {
                           "requestType": "google.iam.v1.TestIamPermissionsRequest",
@@ -477,7 +700,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta2/{resource=projects/*/locations/*/repositories/*}:testIamPermissions",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{resource=projects/*/locations/*/repositories/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1834,7 +2065,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:setIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:setIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "GetIamPolicy": {
                       "requestType": "GetIamPolicyRequest",
@@ -1842,7 +2081,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:getIamPolicy",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:getIamPolicy",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     },
                     "TestIamPermissions": {
                       "requestType": "TestIamPermissionsRequest",
@@ -1850,7 +2097,15 @@
                       "options": {
                         "(google.api.http).post": "/v1/{resource=**}:testIamPermissions",
                         "(google.api.http).body": "*"
-                      }
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{resource=**}:testIamPermissions",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -2094,7 +2349,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -2102,7 +2367,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -2110,7 +2385,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -2119,7 +2404,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",
