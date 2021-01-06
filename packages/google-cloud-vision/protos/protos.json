@@ -639,6 +639,14 @@
                         }
                       }
                     },
+                    "TextDetectionParams": {
+                      "fields": {
+                        "enableTextDetectionConfidenceScore": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      }
+                    },
                     "ImageContext": {
                       "fields": {
                         "latLongRect": {
@@ -661,6 +669,10 @@
                         "webDetectionParams": {
                           "type": "WebDetectionParams",
                           "id": 6
+                        },
+                        "textDetectionParams": {
+                          "type": "TextDetectionParams",
+                          "id": 12
                         }
                       }
                     },
@@ -2783,6 +2795,14 @@
                         }
                       }
                     },
+                    "TextDetectionParams": {
+                      "fields": {
+                        "enableTextDetectionConfidenceScore": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      }
+                    },
                     "ImageContext": {
                       "fields": {
                         "latLongRect": {
@@ -2801,6 +2821,10 @@
                         "webDetectionParams": {
                           "type": "WebDetectionParams",
                           "id": 6
+                        },
+                        "textDetectionParams": {
+                          "type": "TextDetectionParams",
+                          "id": 12
                         }
                       }
                     },
@@ -3670,6 +3694,14 @@
                         }
                       }
                     },
+                    "TextDetectionParams": {
+                      "fields": {
+                        "enableTextDetectionConfidenceScore": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      }
+                    },
                     "ImageContext": {
                       "fields": {
                         "latLongRect": {
@@ -3688,6 +3720,10 @@
                         "webDetectionParams": {
                           "type": "WebDetectionParams",
                           "id": 6
+                        },
+                        "textDetectionParams": {
+                          "type": "TextDetectionParams",
+                          "id": 12
                         }
                       }
                     },
@@ -4738,6 +4774,14 @@
                         }
                       }
                     },
+                    "TextDetectionParams": {
+                      "fields": {
+                        "enableTextDetectionConfidenceScore": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      }
+                    },
                     "ImageContext": {
                       "fields": {
                         "latLongRect": {
@@ -4760,6 +4804,10 @@
                         "webDetectionParams": {
                           "type": "WebDetectionParams",
                           "id": 6
+                        },
+                        "textDetectionParams": {
+                          "type": "TextDetectionParams",
+                          "id": 12
                         }
                       }
                     },
@@ -6917,6 +6965,14 @@
                         }
                       }
                     },
+                    "TextDetectionParams": {
+                      "fields": {
+                        "enableTextDetectionConfidenceScore": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      }
+                    },
                     "ImageContext": {
                       "fields": {
                         "latLongRect": {
@@ -6943,6 +6999,10 @@
                         "webDetectionParams": {
                           "type": "WebDetectionParams",
                           "id": 6
+                        },
+                        "textDetectionParams": {
+                          "type": "TextDetectionParams",
+                          "id": 12
                         }
                       }
                     },

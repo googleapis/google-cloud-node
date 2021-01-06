@@ -2507,6 +2507,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a TextDetectionParams. */
+                interface ITextDetectionParams {
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore */
+                    enableTextDetectionConfidenceScore?: (boolean|null);
+                }
+
+                /** Represents a TextDetectionParams. */
+                class TextDetectionParams implements ITextDetectionParams {
+
+                    /**
+                     * Constructs a new TextDetectionParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1.ITextDetectionParams);
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore. */
+                    public enableTextDetectionConfidenceScore: boolean;
+
+                    /**
+                     * Creates a new TextDetectionParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextDetectionParams instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1.ITextDetectionParams): google.cloud.vision.v1.TextDetectionParams;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message. Does not implicitly {@link google.cloud.vision.v1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1.TextDetectionParams;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1.TextDetectionParams;
+
+                    /**
+                     * Verifies a TextDetectionParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextDetectionParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextDetectionParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1.TextDetectionParams;
+
+                    /**
+                     * Creates a plain object from a TextDetectionParams message. Also converts values to other types if specified.
+                     * @param message TextDetectionParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1.TextDetectionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextDetectionParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ImageContext. */
                 interface IImageContext {
 
@@ -2524,6 +2614,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams */
                     webDetectionParams?: (google.cloud.vision.v1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams */
+                    textDetectionParams?: (google.cloud.vision.v1.ITextDetectionParams|null);
                 }
 
                 /** Represents an ImageContext. */
@@ -2549,6 +2642,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams. */
                     public webDetectionParams?: (google.cloud.vision.v1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams. */
+                    public textDetectionParams?: (google.cloud.vision.v1.ITextDetectionParams|null);
 
                     /**
                      * Creates a new ImageContext instance using the specified properties.
@@ -12386,6 +12482,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a TextDetectionParams. */
+                interface ITextDetectionParams {
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore */
+                    enableTextDetectionConfidenceScore?: (boolean|null);
+                }
+
+                /** Represents a TextDetectionParams. */
+                class TextDetectionParams implements ITextDetectionParams {
+
+                    /**
+                     * Constructs a new TextDetectionParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p1beta1.ITextDetectionParams);
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore. */
+                    public enableTextDetectionConfidenceScore: boolean;
+
+                    /**
+                     * Creates a new TextDetectionParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextDetectionParams instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p1beta1.ITextDetectionParams): google.cloud.vision.v1p1beta1.TextDetectionParams;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message. Does not implicitly {@link google.cloud.vision.v1p1beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p1beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1p1beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p1beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p1beta1.TextDetectionParams;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p1beta1.TextDetectionParams;
+
+                    /**
+                     * Verifies a TextDetectionParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextDetectionParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextDetectionParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p1beta1.TextDetectionParams;
+
+                    /**
+                     * Creates a plain object from a TextDetectionParams message. Also converts values to other types if specified.
+                     * @param message TextDetectionParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p1beta1.TextDetectionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextDetectionParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ImageContext. */
                 interface IImageContext {
 
@@ -12400,6 +12586,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams */
                     webDetectionParams?: (google.cloud.vision.v1p1beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams */
+                    textDetectionParams?: (google.cloud.vision.v1p1beta1.ITextDetectionParams|null);
                 }
 
                 /** Represents an ImageContext. */
@@ -12422,6 +12611,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams. */
                     public webDetectionParams?: (google.cloud.vision.v1p1beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams. */
+                    public textDetectionParams?: (google.cloud.vision.v1p1beta1.ITextDetectionParams|null);
 
                     /**
                      * Creates a new ImageContext instance using the specified properties.
@@ -16713,6 +16905,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a TextDetectionParams. */
+                interface ITextDetectionParams {
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore */
+                    enableTextDetectionConfidenceScore?: (boolean|null);
+                }
+
+                /** Represents a TextDetectionParams. */
+                class TextDetectionParams implements ITextDetectionParams {
+
+                    /**
+                     * Constructs a new TextDetectionParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p2beta1.ITextDetectionParams);
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore. */
+                    public enableTextDetectionConfidenceScore: boolean;
+
+                    /**
+                     * Creates a new TextDetectionParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextDetectionParams instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p2beta1.ITextDetectionParams): google.cloud.vision.v1p2beta1.TextDetectionParams;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message. Does not implicitly {@link google.cloud.vision.v1p2beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p2beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1p2beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p2beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p2beta1.TextDetectionParams;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p2beta1.TextDetectionParams;
+
+                    /**
+                     * Verifies a TextDetectionParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextDetectionParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextDetectionParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p2beta1.TextDetectionParams;
+
+                    /**
+                     * Creates a plain object from a TextDetectionParams message. Also converts values to other types if specified.
+                     * @param message TextDetectionParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p2beta1.TextDetectionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextDetectionParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ImageContext. */
                 interface IImageContext {
 
@@ -16727,6 +17009,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams */
                     webDetectionParams?: (google.cloud.vision.v1p2beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams */
+                    textDetectionParams?: (google.cloud.vision.v1p2beta1.ITextDetectionParams|null);
                 }
 
                 /** Represents an ImageContext. */
@@ -16749,6 +17034,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams. */
                     public webDetectionParams?: (google.cloud.vision.v1p2beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams. */
+                    public textDetectionParams?: (google.cloud.vision.v1p2beta1.ITextDetectionParams|null);
 
                     /**
                      * Creates a new ImageContext instance using the specified properties.
@@ -22308,6 +22596,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a TextDetectionParams. */
+                interface ITextDetectionParams {
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore */
+                    enableTextDetectionConfidenceScore?: (boolean|null);
+                }
+
+                /** Represents a TextDetectionParams. */
+                class TextDetectionParams implements ITextDetectionParams {
+
+                    /**
+                     * Constructs a new TextDetectionParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p3beta1.ITextDetectionParams);
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore. */
+                    public enableTextDetectionConfidenceScore: boolean;
+
+                    /**
+                     * Creates a new TextDetectionParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextDetectionParams instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p3beta1.ITextDetectionParams): google.cloud.vision.v1p3beta1.TextDetectionParams;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message. Does not implicitly {@link google.cloud.vision.v1p3beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p3beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1p3beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p3beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p3beta1.TextDetectionParams;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p3beta1.TextDetectionParams;
+
+                    /**
+                     * Verifies a TextDetectionParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextDetectionParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextDetectionParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p3beta1.TextDetectionParams;
+
+                    /**
+                     * Creates a plain object from a TextDetectionParams message. Also converts values to other types if specified.
+                     * @param message TextDetectionParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p3beta1.TextDetectionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextDetectionParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ImageContext. */
                 interface IImageContext {
 
@@ -22325,6 +22703,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams */
                     webDetectionParams?: (google.cloud.vision.v1p3beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams */
+                    textDetectionParams?: (google.cloud.vision.v1p3beta1.ITextDetectionParams|null);
                 }
 
                 /** Represents an ImageContext. */
@@ -22350,6 +22731,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams. */
                     public webDetectionParams?: (google.cloud.vision.v1p3beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams. */
+                    public textDetectionParams?: (google.cloud.vision.v1p3beta1.ITextDetectionParams|null);
 
                     /**
                      * Creates a new ImageContext instance using the specified properties.
@@ -31991,6 +32375,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a TextDetectionParams. */
+                interface ITextDetectionParams {
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore */
+                    enableTextDetectionConfidenceScore?: (boolean|null);
+                }
+
+                /** Represents a TextDetectionParams. */
+                class TextDetectionParams implements ITextDetectionParams {
+
+                    /**
+                     * Constructs a new TextDetectionParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.ITextDetectionParams);
+
+                    /** TextDetectionParams enableTextDetectionConfidenceScore. */
+                    public enableTextDetectionConfidenceScore: boolean;
+
+                    /**
+                     * Creates a new TextDetectionParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextDetectionParams instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.ITextDetectionParams): google.cloud.vision.v1p4beta1.TextDetectionParams;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message. Does not implicitly {@link google.cloud.vision.v1p4beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextDetectionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.TextDetectionParams.verify|verify} messages.
+                     * @param message TextDetectionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.ITextDetectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.TextDetectionParams;
+
+                    /**
+                     * Decodes a TextDetectionParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextDetectionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.TextDetectionParams;
+
+                    /**
+                     * Verifies a TextDetectionParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextDetectionParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextDetectionParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.TextDetectionParams;
+
+                    /**
+                     * Creates a plain object from a TextDetectionParams message. Also converts values to other types if specified.
+                     * @param message TextDetectionParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.TextDetectionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextDetectionParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ImageContext. */
                 interface IImageContext {
 
@@ -32011,6 +32485,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams */
                     webDetectionParams?: (google.cloud.vision.v1p4beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams */
+                    textDetectionParams?: (google.cloud.vision.v1p4beta1.ITextDetectionParams|null);
                 }
 
                 /** Represents an ImageContext. */
@@ -32039,6 +32516,9 @@ export namespace google {
 
                     /** ImageContext webDetectionParams. */
                     public webDetectionParams?: (google.cloud.vision.v1p4beta1.IWebDetectionParams|null);
+
+                    /** ImageContext textDetectionParams. */
+                    public textDetectionParams?: (google.cloud.vision.v1p4beta1.ITextDetectionParams|null);
 
                     /**
                      * Creates a new ImageContext instance using the specified properties.
