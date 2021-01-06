@@ -13,31 +13,27 @@
 
 'use strict';
 
-async function main() {
+async function main(projectId) {
   // [START nodejs_access_approval_quickstart]
   // Imports the Google Cloud client library
 
   // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
   const {AccessApprovalClient} = require('@google-cloud/access-approval');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {AccessApprovalClient}();
+  const client = new AccessApprovalClient();
 
   //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function listRequests() {
+    const requests = await client.listApprovalRequests({
+      parent: `projects/${projectId}`,
+    });
+    console.info(requests);
   }
-  doSomething();
+  listRequests();
   // [END nodejs_access_approval_quickstart]
 }
 

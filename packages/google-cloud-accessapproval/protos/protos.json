@@ -8,10 +8,12 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.AccessApproval.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/accessapproval/v1;accessapproval",
                     "java_multiple_files": true,
                     "java_outer_classname": "AccessApprovalProto",
                     "java_package": "com.google.cloud.accessapproval.v1",
+                    "php_namespace": "Google\\Cloud\\AccessApproval\\V1",
                     "ruby_package": "Google::Cloud::AccessApproval::V1"
                   },
                   "nested": {
@@ -28,7 +30,25 @@
                             "(google.api.http).get": "/v1/{parent=projects/*}/approvalRequests",
                             "(google.api.http).additional_bindings.get": "/v1/{parent=organizations/*}/approvalRequests",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/approvalRequests",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*}/approvalRequests"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=organizations/*}/approvalRequests"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetApprovalRequest": {
                           "requestType": "GetApprovalRequestMessage",
@@ -37,7 +57,25 @@
                             "(google.api.http).get": "/v1/{name=projects/*/approvalRequests/*}",
                             "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/approvalRequests/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/approvalRequests/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/approvalRequests/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=organizations/*/approvalRequests/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ApproveApprovalRequest": {
                           "requestType": "ApproveApprovalRequestMessage",
@@ -47,7 +85,25 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{name=organizations/*/approvalRequests/*}:approve",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/approvalRequests/*}:approve",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{name=folders/*/approvalRequests/*}:approve",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{name=organizations/*/approvalRequests/*}:approve",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
                         },
                         "DismissApprovalRequest": {
                           "requestType": "DismissApprovalRequestMessage",
@@ -57,7 +113,25 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{name=organizations/*/approvalRequests/*}:dismiss",
                             "(google.api.http).additional_bindings.body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/approvalRequests/*}:dismiss",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{name=folders/*/approvalRequests/*}:dismiss",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{name=organizations/*/approvalRequests/*}:dismiss",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
                         },
                         "GetAccessApprovalSettings": {
                           "requestType": "GetAccessApprovalSettingsMessage",
@@ -66,7 +140,25 @@
                             "(google.api.http).get": "/v1/{name=projects/*/accessApprovalSettings}",
                             "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/accessApprovalSettings}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/accessApprovalSettings}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/accessApprovalSettings}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=organizations/*/accessApprovalSettings}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateAccessApprovalSettings": {
                           "requestType": "UpdateAccessApprovalSettingsMessage",
@@ -77,7 +169,28 @@
                             "(google.api.http).additional_bindings.patch": "/v1/{settings.name=organizations/*/accessApprovalSettings}",
                             "(google.api.http).additional_bindings.body": "settings",
                             "(google.api.method_signature)": "settings,update_mask"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{settings.name=projects/*/accessApprovalSettings}",
+                                "body": "settings",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{settings.name=folders/*/accessApprovalSettings}",
+                                    "body": "settings"
+                                  },
+                                  {
+                                    "patch": "/v1/{settings.name=organizations/*/accessApprovalSettings}",
+                                    "body": "settings"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "settings,update_mask"
+                            }
+                          ]
                         },
                         "DeleteAccessApprovalSettings": {
                           "requestType": "DeleteAccessApprovalSettingsMessage",
@@ -86,7 +199,25 @@
                             "(google.api.http).delete": "/v1/{name=projects/*/accessApprovalSettings}",
                             "(google.api.http).additional_bindings.delete": "/v1/{name=organizations/*/accessApprovalSettings}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/accessApprovalSettings}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1/{name=folders/*/accessApprovalSettings}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=organizations/*/accessApprovalSettings}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },

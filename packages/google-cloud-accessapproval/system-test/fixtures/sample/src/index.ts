@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AccessApprovalClient} from 'accessapproval';
+import {AccessApprovalClient} from '@google-cloud/access-approval';
 
 // check that the client class type name can be used
 function doStuffWithAccessApprovalClient(client: AccessApprovalClient) {
