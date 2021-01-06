@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-dns/compare/v2.0.2...v2.1.0) (2020-12-22)
+
+
+### Features
+
+* add support for setting DNS Sec ([#439](https://www.github.com/googleapis/nodejs-dns/issues/439)) ([32792e1](https://www.github.com/googleapis/nodejs-dns/commit/32792e1659bb7df5b15a65b5ff3f0c6f5e80b949))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-dns/compare/v2.0.1...v2.0.2) (2020-07-09)
 
 
