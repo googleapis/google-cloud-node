@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots._google_devtools_artifact_registry_protos || ($protobuf.roots._google_devtools_artifact_registry_protos = {});
+    var $root = $protobuf.roots._google_cloud_artifact_registry_protos || ($protobuf.roots._google_cloud_artifact_registry_protos = {});
     
     $root.google = (function() {
     

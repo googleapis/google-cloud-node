@@ -7,7 +7,7 @@
   "release_level": "BETA",
   "language": "nodejs",
   "repo": "googleapis/nodejs-artifact-registry",
-  "distribution_name": "@google-devtools/artifact-registry",
+  "distribution_name": "@google-cloud/artifact-registry",
   "api_id": "artifactregistry.googleapis.com",
   "requires_billing": true
 }
