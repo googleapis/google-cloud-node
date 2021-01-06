@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-security-center.git",
-        "sha": "79f1433d05037d1bb9f7d0a252cb483a0f817568"
+        "sha": "1bb655d570a20bd1d099feaeb9b6e9b53f002e2c"
       }
     },
     {
