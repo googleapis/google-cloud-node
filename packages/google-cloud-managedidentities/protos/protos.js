@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots.managedidentities_protos || ($protobuf.roots.managedidentities_protos = {});
+    var $root = $protobuf.roots._google_cloud_managed_identities_protos || ($protobuf.roots._google_cloud_managed_identities_protos = {});
     
     $root.google = (function() {
     

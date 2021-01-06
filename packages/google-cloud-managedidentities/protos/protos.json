@@ -33,7 +33,24 @@
                             "(google.api.method_signature)": "parent,domain_name,domain",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/global}/domains",
+                                "body": "domain"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,domain_name,domain"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ResetAdminPassword": {
                           "requestType": "ResetAdminPasswordRequest",
@@ -42,7 +59,18 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/global/domains/*}:resetAdminPassword",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/domains/*}:resetAdminPassword",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "ListDomains": {
                           "requestType": "ListDomainsRequest",
@@ -50,7 +78,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/global}/domains",
                             "(google.api.method_signature)": "parent"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/global}/domains"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         },
                         "GetDomain": {
                           "requestType": "GetDomainRequest",
@@ -58,7 +96,17 @@
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/global/domains/*}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/global/domains/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "UpdateDomain": {
                           "requestType": "UpdateDomainRequest",
@@ -69,7 +117,24 @@
                             "(google.api.method_signature)": "domain,update_mask",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{domain.name=projects/*/locations/global/domains/*}",
+                                "body": "domain"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "domain,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteDomain": {
                           "requestType": "DeleteDomainRequest",
@@ -79,7 +144,23 @@
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/global/domains/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "AttachTrust": {
                           "requestType": "AttachTrustRequest",
@@ -90,7 +171,24 @@
                             "(google.api.method_signature)": "name,trust",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/domains/*}:attachTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,trust"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ReconfigureTrust": {
                           "requestType": "ReconfigureTrustRequest",
@@ -101,7 +199,24 @@
                             "(google.api.method_signature)": "name,target_domain_name,target_dns_ip_addresses",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/domains/*}:reconfigureTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,target_domain_name,target_dns_ip_addresses"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DetachTrust": {
                           "requestType": "DetachTrustRequest",
@@ -112,7 +227,24 @@
                             "(google.api.method_signature)": "name,trust",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/domains/*}:detachTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,trust"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ValidateTrust": {
                           "requestType": "ValidateTrustRequest",
@@ -123,7 +255,24 @@
                             "(google.api.method_signature)": "name,trust",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/domains/*}:validateTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,trust"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -650,7 +799,21 @@
                             "(google.api.http).body": "domain",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/global}/domains",
+                                "body": "domain"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ResetAdminPassword": {
                           "requestType": "ResetAdminPasswordRequest",
@@ -658,21 +821,43 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/global/domains/*}:resetAdminPassword",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:resetAdminPassword",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "ListDomains": {
                           "requestType": "ListDomainsRequest",
                           "responseType": "ListDomainsResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/global}/domains"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/global}/domains"
+                              }
+                            }
+                          ]
                         },
                         "GetDomain": {
                           "requestType": "GetDomainRequest",
                           "responseType": "Domain",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/global/domains/*}"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/global/domains/*}"
+                              }
+                            }
+                          ]
                         },
                         "UpdateDomain": {
                           "requestType": "UpdateDomainRequest",
@@ -682,7 +867,21 @@
                             "(google.api.http).body": "domain",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{domain.name=projects/*/locations/global/domains/*}",
+                                "body": "domain"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DeleteDomain": {
                           "requestType": "DeleteDomainRequest",
@@ -691,7 +890,20 @@
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/global/domains/*}",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/global/domains/*}"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "AttachTrust": {
                           "requestType": "AttachTrustRequest",
@@ -701,7 +913,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:attachTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ReconfigureTrust": {
                           "requestType": "ReconfigureTrustRequest",
@@ -711,7 +937,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:reconfigureTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "DetachTrust": {
                           "requestType": "DetachTrustRequest",
@@ -721,7 +961,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:detachTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ValidateTrust": {
                           "requestType": "ValidateTrustRequest",
@@ -731,7 +985,21 @@
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "Domain",
                             "(google.longrunning.operation_info).metadata_type": "OpMetadata"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/global/domains/*}:validateTrust",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Domain",
+                                "metadata_type": "OpMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2257,7 +2525,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations}",
                     "(google.api.method_signature)": "name,filter"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
                 },
                 "GetOperation": {
                   "requestType": "GetOperationRequest",
@@ -2265,7 +2543,17 @@
                   "options": {
                     "(google.api.http).get": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "DeleteOperation": {
                   "requestType": "DeleteOperationRequest",
@@ -2273,7 +2561,17 @@
                   "options": {
                     "(google.api.http).delete": "/v1/{name=operations/**}",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "CancelOperation": {
                   "requestType": "CancelOperationRequest",
@@ -2282,7 +2580,18 @@
                     "(google.api.http).post": "/v1/{name=operations/**}:cancel",
                     "(google.api.http).body": "*",
                     "(google.api.method_signature)": "name"
-                  }
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
                 },
                 "WaitOperation": {
                   "requestType": "WaitOperationRequest",

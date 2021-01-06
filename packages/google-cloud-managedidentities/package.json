@@ -1,8 +1,8 @@
 {
-  "name": "managedidentities",
+  "name": "@google-cloud/managed-identities",
   "version": "0.1.0",
   "description": "Managedidentities client for Node.js",
-  "repository": "googleapis/nodejs-managedidentities",
+  "repository": "googleapis/nodejs-managed-identities",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -34,28 +34,30 @@
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
     "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "test": "c8 mocha build/test",
+    "samples-test": "cd samples/ && npm link ../ && npm test",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
     "google-gax": "^2.9.2"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.4",
-    "@types/node": "^14.14.8",
-    "@types/sinon": "^9.0.8",
+    "@types/node": "^14.14.10",
+    "@types/sinon": "^9.0.9",
     "c8": "^7.3.5",
     "gts": "^3.0.2",
     "jsdoc": "^3.6.6",
     "jsdoc-fresh": "^1.0.2",
     "jsdoc-region-tag": "^1.0.6",
-    "linkinator": "^2.2.2",
+    "linkinator": "^2.5.1",
     "mocha": "^8.2.1",
     "null-loader": "^4.0.1",
     "pack-n-play": "^1.0.0-2",
     "sinon": "^9.2.1",
     "ts-loader": "^8.0.11",
-    "typescript": "^4.0.5",
-    "webpack": "^5.5.1",
+    "typescript": "^4.1.2",
+    "webpack": "^5.9.0",
     "webpack-cli": "^4.2.0"
   },
   "engines": {

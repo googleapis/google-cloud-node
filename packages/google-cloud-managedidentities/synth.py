@@ -30,7 +30,7 @@ for version in versions:
   name, 
   version,
   bazel_target=f"//google/cloud/managedidentities/{version}:managedidentities-{version}-nodejs")
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=["README.md", "package.json"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

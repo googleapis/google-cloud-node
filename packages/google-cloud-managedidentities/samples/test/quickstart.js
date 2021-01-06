@@ -1,4 +1,3 @@
-// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,11 +15,32 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const managedidentities = require('@google-cloud/managed-identities');
+'use strict';
 
-function main() {
-  const managedIdentitiesServiceClient = new managedidentities.ManagedIdentitiesServiceClient();
-}
+const path = require('path');
+const cp = require('child_process');
+const {before, describe, it} = require('mocha');
+const {
+  ManagedIdentitiesServiceClient,
+} = require('@google-cloud/managed-identities');
+const {assert} = require('chai');
 
-main();
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+
+const cwd = path.join(__dirname, '..');
+
+const client = new ManagedIdentitiesServiceClient();
+
+describe('Quickstart', () => {
+  //TODO: remove this if not using the projectId
+  let projectId;
+
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
+
+  it('should run quickstart', async () => {
+    const stdout = execSync(`node ./quickstart.js ${projectId}`, {cwd});
+    assert(stdout, stdout.match(/\[\]/));
+  });
+});
