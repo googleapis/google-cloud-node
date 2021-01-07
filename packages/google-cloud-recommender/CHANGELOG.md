@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-recommender/compare/v3.2.2...v4.0.0) (2021-01-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* resource path helper recommenderPath has been removed
+
+### Features
+
+* Add support for "billingAccounts" as another parent resource name for recommendations and insights APIs. ([#138](https://www.github.com/googleapis/nodejs-recommender/issues/138)) ([42d07c5](https://www.github.com/googleapis/nodejs-recommender/commit/42d07c5a4e802882f94a1e3272ad8591cb370236))
+
 ### [3.2.2](https://www.github.com/googleapis/nodejs-recommender/compare/v3.2.1...v3.2.2) (2020-11-25)
 
 
