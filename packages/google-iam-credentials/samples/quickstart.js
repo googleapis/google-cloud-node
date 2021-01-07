@@ -13,31 +13,29 @@
 
 'use strict';
 
-async function main() {
+async function main(serviceAccount, scopes) {
   // [START nodejs_iam_credentials_quickstart]
   // Imports the Google Cloud client library
 
   // remove this line after package is released
   // eslint-disable-next-line node/no-missing-require
-  const {IAMCredentialsClient} = require('@google-iam/credentials');
+  const {IAMCredentialsClient} = require('@google-cloud/iam-credentials');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {IAMCredentialsClient}();
+  const client = new IAMCredentialsClient();
 
   //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function generateAccessToken() {
+    const token = await client.generateAccessToken({
+      name: `projects/-/serviceAccounts/${serviceAccount}`,
+      scope: [scopes],
+    });
+    console.info(token);
   }
-  doSomething();
+  generateAccessToken();
   // [END nodejs_iam_credentials_quickstart]
 }
 

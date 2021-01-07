@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-iam-credentials",
-        "sha": "10b97741804e7202f89ee253202e479e46c0355d"
+        "remote": "git@github.com:googleapis/nodejs-iam-credentials.git",
+        "sha": "c932c45d344742352c5576f563bee5a0dcdbe514"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2d22118d88946059ab0c3a05588f577a6e82a0c4",
-        "internalRef": "345621354"
+        "sha": "5256ab60f3d396a3d1bd393043776936b9651c5b",
+        "internalRef": "347703845"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "18c5dbdb4ac8cf75d4d8174e7b4558f48e76f8a1"
+        "sha": "3f67ceece7e797a5736a25488aae35405649b90b"
       }
     }
   ],

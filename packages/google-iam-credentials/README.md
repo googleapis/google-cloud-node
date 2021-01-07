@@ -5,7 +5,7 @@
 # [IAM Service Account Credentials API: Node.js Client](https://github.com/googleapis/nodejs-iam-credentials)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-iam/credentials.svg)](https://www.npmjs.org/package/@google-iam/credentials)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/iam-credentials.svg)](https://www.npmjs.org/package/@google-cloud/iam-credentials)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-iam-credentials/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-iam-credentials)
 
 
@@ -18,7 +18,7 @@ A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-iam-credentials/blob/master/CHANGELOG.md).
 
 * [IAM Service Account Credentials API Node.js Client API Reference][client-docs]
-* [IAM Service Account Credentials API Documentation][product-docs]
+
 * [github.com/googleapis/nodejs-iam-credentials](https://github.com/googleapis/nodejs-iam-credentials)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-iam/credentials
+npm install @google-cloud/iam-credentials
 ```
 
 
@@ -62,23 +62,23 @@ npm install @google-iam/credentials
 
 // remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
-const {IAMCredentialsClient} = require('@google-iam/credentials');
+const {IAMCredentialsClient} = require('@google-cloud/iam-credentials');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {IAMCredentialsClient}();
+const client = new IAMCredentialsClient();
 
 //TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('Developer! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function generateAccessToken() {
+  const token = await client.generateAccessToken({
+    name: `projects/-/serviceAccounts/${serviceAccount}`,
+    scope: [scopes],
+  });
+  console.info(token);
 }
-doSomething();
+generateAccessToken();
 
 ```
 
@@ -149,7 +149,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-iam-credentials/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/iamcredentials/latest/
-[product-docs]: null
+
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {IAMCredentialsClient} from '@google-iam/credentials';
+import {IAMCredentialsClient} from '@google-cloud/iam-credentials';
 
 // check that the client class type name can be used
 function doStuffWithIAMCredentialsClient(client: IAMCredentialsClient) {
