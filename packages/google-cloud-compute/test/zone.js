@@ -791,6 +791,27 @@ describe('Zone', () => {
 
         zone.createVM(NAME, CONFIG, assert.ifError);
       });
+
+      it('should not set default value for machineType', done => {
+        zone.request = function (reqOpts) {
+          assert.strictEqual(typeof reqOpts.json.machineType, 'undefined');
+          done();
+        };
+
+        zone.createVM(NAME, CONFIG, assert.ifError);
+      });
+
+      it('should not set default value for network', done => {
+        zone.request = function (reqOpts) {
+          assert.strictEqual(
+            typeof reqOpts.json.networkInterfaces,
+            'undefined'
+          );
+          done();
+        };
+
+        zone.createVM(NAME, CONFIG, assert.ifError);
+      });
     });
 
     describe('config.machineType', () => {

@@ -582,23 +582,18 @@ class Zone extends common.ServiceObject {
   createVM(name, config, callback) {
     const self = this;
     const query = {};
-    const body = Object.assign(
-      {
-        name: name,
-        machineType: 'n1-standard-1',
-        networkInterfaces: [
-          {
-            network: 'global/networks/default',
-          },
-        ],
-      },
-      config
-    );
+    const body = Object.assign({name}, config);
     if (body.template) {
       query.sourceInstanceTemplate = body.template;
       delete body.template;
     }
-    if (body.machineType.indexOf('/') === -1) {
+    if (!is.defined(query.sourceInstanceTemplate)) {
+      body.machineType = body.machineType || 'n1-standard-1';
+      body.networkInterfaces = body.networkInterfaces || [
+        {network: 'global/networks/default'},
+      ];
+    }
+    if (body.machineType && body.machineType.indexOf('/') === -1) {
       // The specified machineType is only a partial name, e.g. 'n1-standard-1'.
       body.machineType = format('zones/{zoneName}/machineTypes/{machineType}', {
         zoneName: this.name,
