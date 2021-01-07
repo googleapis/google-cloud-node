@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-translate.git",
-        "sha": "f0397048fe4633f04354a8b1a783561fe9188e3e"
+        "sha": "c5400a8ed60371ce793230c27d622e1da70feeaf"
       }
     },
     {
