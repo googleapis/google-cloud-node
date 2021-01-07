@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.4...v2.2.0) (2021-01-06)
+
+
+### Features
+
+* introduces style enum ([7e8c957](https://www.github.com/googleapis/nodejs-kms/commit/7e8c957bd457939fb27e9922b4c92ae1e98c4961))
+
 ### [2.1.4](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.3...v2.1.4) (2020-11-25)
 
 
