@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.3...v1.3.0) (2021-01-07)
+
+
+### Features
+
+* added name field to GlobalSiteTag ([#65](https://www.github.com/googleapis/nodejs-analytics-admin/issues/65)) ([a4baba5](https://www.github.com/googleapis/nodejs-analytics-admin/commit/a4baba570e07b637ec5d8be0a9d98ebec5969559))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.2...v1.2.3) (2020-11-25)
 
 
