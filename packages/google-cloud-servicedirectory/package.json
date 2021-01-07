@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "google-gax": "^2.9.2",
-    "json-schema": "^0.2.5"
+    "json-schema": "^0.3.0"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.0",
