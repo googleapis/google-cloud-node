@@ -9,9 +9,11 @@ applications that interact with individual Google Cloud services:
 
 | Repo | API Docs | Install Command | Enable    |  Free Tier |
 |------|----------|-----------------|-----------|------------|
+| [Access Approval](https://github.com/googleapis/nodejs-access-approval) | [:notebook:](https://googleapis.dev/nodejs/accessapproval/latest/) | `npm i @google-cloud/access-approval` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=accessapproval.googleapis.com) | ✖ |
 | [AI Platform](https://github.com/googleapis/nodejs-ai-platform) | [:notebook:](https://googleapis.dev/nodejs/aiplatform/latest) | `npm i @google-cloud/aiplatform` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=aiplatform.googleapis.com) | ✖ |
 | [AI Platform Notebooks](https://github.com/googleapis/nodejs-notebooks) | [:notebook:](https://googleapis.dev/nodejs/notebooks/latest) | `npm i @google-cloud/notebooks` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=notebooks.googleapis.com) | ✖ |
 | [Area120 Tables API](https://github.com/googleapis/nodejs-area120-tables) | [:notebook:](https://googleapis.dev/nodejs/area120tables/latest) | `npm i @google/area120-tables` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=area120tables.googleapis.com) | ✖ |
+| [Artifact Registry](https://github.com/googleapis/nodejs-artifact-registry) | [:notebook:](https://googleapis.dev/nodejs/artifactregistry/latest/) | `npm i @google-cloud/artifact-registry` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=artifactregistry.googleapis.com) | ✖ |
 | [Asset Inventory](https://github.com/googleapis/nodejs-asset) | [:notebook:](https://googleapis.dev/nodejs/asset/latest) | `npm i @google-cloud/asset` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=cloudasset.googleapis.com) | ✖ |
 | [Assured Workloads for Government](https://github.com/googleapis/nodejs-assured-workloads) | [:notebook:](https://googleapis.dev/nodejs/assuredworkloads/latest) | `npm i @google-cloud/assured-workloads` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=assuredworkloads.googleapis.com) | ✖ |
 | [AutoML](https://github.com/googleapis/nodejs-automl) | [:notebook:](https://googleapis.dev/nodejs/automl/latest) | `npm i @google-cloud/automl` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=automl.googleapis.com) | ✖ |
@@ -24,6 +26,7 @@ applications that interact with individual Google Cloud services:
 | [Data Catalog](https://github.com/googleapis/nodejs-datacatalog) | [:notebook:](https://googleapis.dev/nodejs/datacatalog/latest) | `npm i @google-cloud/datacatalog` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=datacatalog.googleapis.com) | ✖ |
 | [Data Labeling](https://github.com/googleapis/nodejs-datalabeling) | [:notebook:](https://googleapis.dev/nodejs/datalabeling/latest) | `npm i @google-cloud/datalabeling` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=datalabeling.googleapis.com) | ✖ |
 | [Data Loss Prevention](https://github.com/googleapis/nodejs-dlp) | [:notebook:](https://googleapis.dev/nodejs/dlp/latest) | `npm i @google-cloud/dlp` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=dlp.googleapis.com) | ✖ |
+| [Data QnA](https://github.com/googleapis/nodejs-data-qna) | [:notebook:](https://googleapis.dev/nodejs/dataqna/latest) | `npm i @google-cloud/data-qna` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=dataqna.googleapis.com) | ✖ |
 | [Dataproc](https://github.com/googleapis/nodejs-dataproc) | [:notebook:](https://googleapis.dev/nodejs/dataproc/latest) | `npm i @google-cloud/dataproc` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=dataproc.googleapis.com) | ✖ |
 | [Datastore](https://github.com/googleapis/nodejs-datastore) | [:notebook:](https://googleapis.dev/nodejs/datastore/latest) | `npm i @google-cloud/datastore` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=datastore.googleapis.com) | ✔ |
 | [Datastore Session](https://github.com/googleapis/nodejs-datastore-session) | [:notebook:](https://github.com/googleapis/nodejs-datastore-session/blob/master/README.md) | `npm i @google-cloud/connect-datastore` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=datastore.googleapis.com) | ✔ |
@@ -46,6 +49,8 @@ applications that interact with individual Google Cloud services:
 | [Google Compute Engine](https://github.com/googleapis/nodejs-compute) | [:notebook:](https://googleapis.dev/nodejs/compute/latest) | `npm i @google-cloud/compute` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=compute.googleapis.com) | ✖ |
 | [Google Container Analysis](https://github.com/googleapis/nodejs-containeranalysis) | [:notebook:](https://googleapis.dev/nodejs/containeranalysis/latest) | `npm i @google-cloud/containeranalysis` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=containeranalysis.googleapis.com) | ✖ |
 | [Grafeas](https://github.com/googleapis/nodejs-grafeas) | [:notebook:](https://googleapis.dev/nodejs/grafeas/latest) | `npm i @google-cloud/grafeas` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=containeranalysis.googleapis.com) | ✔ |
+| [IAM Policy Troubleshooter API](https://github.com/googleapis/nodejs-policy-troubleshooter) | [:notebook:](https://googleapis.dev/nodejs/policytroubleshooter/latest/) | `npm i @google-cloud/policy-troubleshooter` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=policytroubleshooter.googleapis.com) | ✖ |
+| [IAM Service Account Credentials API](https://github.com/googleapis/nodejs-iam-credentials) | [:notebook:](https://googleapis.dev/nodejs/iamcredentials/latest/) | `npm i @google-cloud/iam-credentials` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=iamcredentials.googleapis.com) | ✖ |
 | [Internet of Things (IoT) Core](https://github.com/googleapis/nodejs-iot) | [:notebook:](https://googleapis.dev/nodejs/iot/latest) | `npm i @google-cloud/iot` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=cloudiot.googleapis.com) | ✖ |
 | [Key Management Service](https://github.com/googleapis/nodejs-kms) | [:notebook:](https://googleapis.dev/nodejs/kms/latest) | `npm i @google-cloud/kms` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=kms.googleapis.com) | ✖ |
 | [Kubernetes Engine Cluster Manager API](https://github.com/googleapis/nodejs-cloud-container) | [:notebook:](https://googleapis.dev/nodejs/container/latest) | `npm i @google-cloud/container` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=container.googleapis.com) | ✖ |
@@ -85,6 +90,7 @@ applications that interact with individual Google Cloud services:
 | [Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence) | [:notebook:](https://googleapis.dev/nodejs/video/latest) | `npm i @google-cloud/video-intelligence` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=videointelligence.googleapis.com) | ✖ |
 | [Vision API](https://github.com/googleapis/nodejs-vision) | [:notebook:](https://googleapis.dev/nodejs/vision/latest) | `npm i @google-cloud/vision` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com) | ✖ |
 | [Web Risk API](https://github.com/googleapis/nodejs-web-risk) | [:notebook:](https://googleapis.dev/nodejs/web-risk/latest) | `npm i @google-cloud/web-risk` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=webrisk.googleapis.com) | ✖ |
+| [Web Security Scanner](https://github.com/googleapis/nodejs-web-security-scanner) | [:notebook:](https://googleapis.dev/nodejs/websecurityscanner/latest/) | `npm i @google-cloud/web-security-scanner` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=websecurityscanner.googleapis.com) | ✖ |
 | [Workflows](https://github.com/googleapis/nodejs-workflows) | [:notebook:](https://googleapis.dev/nodejs/workflows/latest/index.html) | `npm i @google-cloud/workflows` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=workflows.googleapis.com) | ✖ |
 
 
@@ -181,7 +187,7 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [hya-io]: https://hya.io
 [gstore-node]: https://github.com/sebelga/gstore-node
 [gstore-api]: https://github.com/sebelga/gstore-api
-[devconsole]: https://console.developers.google.com
+[devconsole]: https://console.developer.google.com
 [googleapis]: https://github.com/google/google-api-nodejs-client
 [semver]: http://semver.org
 [contributing]: CONTRIBUTING.md

@@ -1,5 +1,19 @@
 [
   {
+    "name": "accessapproval",
+    "name_pretty": "Access Approval",
+    "product_documentation": "https://cloud.google.com/access-approval/",
+    "client_documentation": "https://googleapis.dev/nodejs/accessapproval/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-access-approval/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-access-approval",
+    "distribution_name": "@google-cloud/access-approval",
+    "api_id": "accessapproval.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/access-approval/"
+  },
+  {
     "name": "aiplatform",
     "name_pretty": "AI Platform",
     "product_documentation": "https://cloud.google.com/ai-platform/docs",
@@ -40,6 +54,20 @@
     "api_id": "area120tables.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://area120.google.com/"
+  },
+  {
+    "name": "artifactregistry",
+    "name_pretty": "Artifact Registry",
+    "product_documentation": "https://cloud.google.com/artifact-registry/",
+    "client_documentation": "https://googleapis.dev/nodejs/artifactregistry/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-artifact-registry/issues",
+    "release_level": "BETA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-artifact-registry",
+    "distribution_name": "@google-cloud/artifact-registry",
+    "api_id": "artifactregistry.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/artifact-registry/docs/getting-support"
   },
   {
     "name": "asset",
@@ -165,7 +193,7 @@
     "distribution_name": "@google-cloud/security-private-ca",
     "api_id": "privateca.googleapis.com",
     "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/certificate-authority-service"
+    "support_documentation": "https://cloud.google.com/certificate-authority-service/docs/getting-support"
   },
   {
     "name": "datacatalog",
@@ -208,6 +236,20 @@
     "api_id": "dlp.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/dlp/docs/"
+  },
+  {
+    "name": "dataqna",
+    "name_pretty": "Data QnA",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/dataqna",
+    "client_documentation": "https://googleapis.dev/nodejs/dataqna/latest",
+    "issue_tracker": "",
+    "release_level": "alpha",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-data-qna",
+    "distribution_name": "@google-cloud/data-qna",
+    "api_id": "dataqna.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
     "name": "dataproc",
@@ -513,6 +555,33 @@
     "api_id": "containeranalysis.googleapis.com",
     "requires_billing": false,
     "support_documentation": "https://cloud.google.com/container-registry/docs/getting-support"
+  },
+  {
+    "name": "policytroubleshooter",
+    "name_pretty": "IAM Policy Troubleshooter API",
+    "product_documentation": "https://cloud.google.com/iam/docs/troubleshooting-access#rest-api/",
+    "client_documentation": "https://googleapis.dev/nodejs/policytroubleshooter/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-policy-troubleshooter/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-policy-troubleshooter",
+    "distribution_name": "@google-cloud/policy-troubleshooter",
+    "api_id": "policytroubleshooter.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/iam/docs/getting-support"
+  },
+  {
+    "name": "iamcredentials",
+    "name_pretty": "IAM Service Account Credentials API",
+    "product_documentation": "",
+    "client_documentation": "https://googleapis.dev/nodejs/iamcredentials/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-iam-credentials/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-iam-credentials",
+    "distribution_name": "@google-cloud/iam-credentials",
+    "api_id": "iamcredentials.googleapis.com",
+    "requires_billing": true
   },
   {
     "name": "iot",
@@ -1051,6 +1120,20 @@
     "api_id": "webrisk.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/web-risk/docs/getting-support"
+  },
+  {
+    "name": "websecurityscanner",
+    "name_pretty": "Web Security Scanner",
+    "product_documentation": "https://cloud.google.com/security-scanner/",
+    "client_documentation": "https://googleapis.dev/nodejs/websecurityscanner/latest/",
+    "issue_tracker": "https://github.com/googleapis/nodejs-web-security-scanner/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-web-security-scanner",
+    "distribution_name": "@google-cloud/web-security-scanner",
+    "api_id": "websecurityscanner.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/security-scanner/docs/getting-support"
   },
   {
     "name": "workflows",
