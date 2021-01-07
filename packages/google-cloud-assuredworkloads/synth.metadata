@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-assured-workloads.git",
-        "sha": "0cffbafe6e2f600745f3b90ebdc0550dc29b1dd3"
+        "sha": "7d78aadfa9f46e85ec0c153a63074da4c00dcb8f"
       }
     },
     {
