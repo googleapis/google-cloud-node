@@ -15,13 +15,13 @@
                     "java_package": "com.google.cloud.recommender.v1",
                     "objc_class_prefix": "CREC",
                     "(google.api.resource_definition).type": "recommender.googleapis.com/Recommender",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/recommenders/{recommender}"
+                    "(google.api.resource_definition).pattern": "billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}"
                   },
                   "nested": {
                     "Insight": {
                       "options": {
                         "(google.api.resource).type": "recommender.googleapis.com/Insight",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}"
+                        "(google.api.resource).pattern": "billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/insights/{insight}"
                       },
                       "fields": {
                         "name": {
@@ -117,7 +117,7 @@
                     "Recommendation": {
                       "options": {
                         "(google.api.resource).type": "recommender.googleapis.com/Recommendation",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}"
+                        "(google.api.resource).pattern": "billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}"
                       },
                       "fields": {
                         "name": {
@@ -339,12 +339,16 @@
                           "responseType": "ListInsightsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/insightTypes/*}/insights",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=billingAccounts/*/locations/*/insightTypes/*}/insights",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=projects/*/locations/*/insightTypes/*}/insights"
+                                "get": "/v1/{parent=projects/*/locations/*/insightTypes/*}/insights",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=billingAccounts/*/locations/*/insightTypes/*}/insights"
+                                }
                               }
                             },
                             {
@@ -357,12 +361,16 @@
                           "responseType": "Insight",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=billingAccounts/*/locations/*/insightTypes/*/insights/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}"
+                                "get": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=billingAccounts/*/locations/*/insightTypes/*/insights/*}"
+                                }
                               }
                             },
                             {
@@ -376,13 +384,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}:markAccepted",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=billingAccounts/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{name=projects/*/locations/*/insightTypes/*/insights/*}:markAccepted",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=billingAccounts/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -395,12 +409,16 @@
                           "responseType": "ListRecommendationsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/recommenders/*}/recommendations",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=billingAccounts/*/locations/*/recommenders/*}/recommendations",
                             "(google.api.method_signature)": "parent,filter"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=projects/*/locations/*/recommenders/*}/recommendations"
+                                "get": "/v1/{parent=projects/*/locations/*/recommenders/*}/recommendations",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=billingAccounts/*/locations/*/recommenders/*}/recommendations"
+                                }
                               }
                             },
                             {
@@ -416,12 +434,16 @@
                           "responseType": "Recommendation",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}"
+                                "get": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}"
+                                }
                               }
                             },
                             {
@@ -435,13 +457,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -455,13 +483,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -475,13 +509,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -761,6 +801,11 @@
                 "singular": {
                   "type": "string",
                   "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
                 }
               },
               "nested": {
@@ -769,6 +814,12 @@
                     "HISTORY_UNSPECIFIED": 0,
                     "ORIGINALLY_SINGLE_PATTERN": 1,
                     "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
                   }
                 }
               }
@@ -908,7 +959,7 @@
         },
         "protobuf": {
           "options": {
-            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
             "java_package": "com.google.protobuf",
             "java_outer_classname": "DescriptorProtos",
             "csharp_namespace": "Google.Protobuf.Reflection",
