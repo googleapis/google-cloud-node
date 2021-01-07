@@ -9818,6 +9818,7 @@
                  * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
                  * @property {string|null} [plural] ResourceDescriptor plural
                  * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
                  */
     
                 /**
@@ -9830,6 +9831,7 @@
                  */
                 function ResourceDescriptor(properties) {
                     this.pattern = [];
+                    this.style = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -9885,6 +9887,14 @@
                 ResourceDescriptor.prototype.singular = "";
     
                 /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
                  * Creates a new ResourceDescriptor instance using the specified properties.
                  * @function create
                  * @memberof google.api.ResourceDescriptor
@@ -9921,6 +9931,12 @@
                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
                     if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
                     return writer;
                 };
     
@@ -9974,6 +9990,16 @@
                             break;
                         case 6:
                             message.singular = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.style && message.style.length))
+                                message.style = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.style.push(reader.int32());
+                            } else
+                                message.style.push(reader.int32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -10038,6 +10064,18 @@
                     if (message.singular != null && message.hasOwnProperty("singular"))
                         if (!$util.isString(message.singular))
                             return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
                     return null;
                 };
     
@@ -10082,6 +10120,23 @@
                         message.plural = String(object.plural);
                     if (object.singular != null)
                         message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
                     return message;
                 };
     
@@ -10098,8 +10153,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.pattern = [];
+                        object.style = [];
+                    }
                     if (options.defaults) {
                         object.type = "";
                         object.nameField = "";
@@ -10122,6 +10179,11 @@
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
                         object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
                     return object;
                 };
     
@@ -10149,6 +10211,20 @@
                     values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
                     values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
                     values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
                     return values;
                 })();
     
