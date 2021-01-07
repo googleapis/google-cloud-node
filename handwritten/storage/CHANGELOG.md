@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.7.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.7.0...v5.7.1) (2021-01-07)
+
+
+### Bug Fixes
+
+* bump dependencies See [#1372](https://www.github.com/googleapis/nodejs-storage/issues/1372) for details ([#1375](https://www.github.com/googleapis/nodejs-storage/issues/1375)) ([7cf0264](https://www.github.com/googleapis/nodejs-storage/commit/7cf0264c0cea2e0d668818924aaa737381c07bfa))
+
 ## [5.7.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.6.0...v5.7.0) (2020-12-10)
 
 
