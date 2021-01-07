@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [2.1.5](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.4...v2.1.5) (2021-01-07)
+
+
+### Bug Fixes
+
+* update alert policies one at a time because (concurrent updates are not supported) ([#507](https://www.github.com/googleapis/nodejs-monitoring/issues/507)) ([2bf75a2](https://www.github.com/googleapis/nodejs-monitoring/commit/2bf75a2294f82d3b75e0ee3d44c91b0b8e5ec358))
+
 ### [2.1.4](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.3...v2.1.4) (2020-11-25)
 
 
