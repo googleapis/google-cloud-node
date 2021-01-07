@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.3.2...v2.3.3) (2021-01-07)
+
+
+### Bug Fixes
+
+* check for fetch on window ([6d3eef2](https://www.github.com/googleapis/nodejs-phishing-protection/commit/6d3eef2af1fdce2bc34682d1f1364f4935d36885))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.3.1...v2.3.2) (2020-11-12)
 
 
