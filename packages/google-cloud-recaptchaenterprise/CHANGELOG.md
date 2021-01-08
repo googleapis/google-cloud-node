@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.0.3...v2.1.0) (2021-01-07)
+
+
+### Features
+
+* introduces style enumeration ([#234](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/234)) ([35f1bb6](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/35f1bb6de0d16a10cc9e18ab7cf5aadd332bd0d8))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.0.2...v2.0.3) (2020-11-25)
 
 
