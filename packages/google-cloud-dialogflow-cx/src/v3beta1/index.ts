@@ -22,6 +22,7 @@ export {EnvironmentsClient} from './environments_client';
 export {FlowsClient} from './flows_client';
 export {IntentsClient} from './intents_client';
 export {PagesClient} from './pages_client';
+export {SecuritySettingsServiceClient} from './security_settings_service_client';
 export {SessionEntityTypesClient} from './session_entity_types_client';
 export {SessionsClient} from './sessions_client';
 export {TransitionRouteGroupsClient} from './transition_route_groups_client';

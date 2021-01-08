@@ -1939,6 +1939,73 @@ describe('v3beta1.WebhooksClient', () => {
       });
     });
 
+    describe('securitySettings', () => {
+      const fakePath = '/rendered/path/securitySettings';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        security_settings: 'securitySettingsValue',
+      };
+      const client = new webhooksModule.v3beta1.WebhooksClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.securitySettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.securitySettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('securitySettingsPath', () => {
+        const result = client.securitySettingsPath(
+          'projectValue',
+          'locationValue',
+          'securitySettingsValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.securitySettingsPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSecuritySettingsName', () => {
+        const result = client.matchProjectFromSecuritySettingsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSecuritySettingsName', () => {
+        const result = client.matchLocationFromSecuritySettingsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecuritySettingsFromSecuritySettingsName', () => {
+        const result = client.matchSecuritySettingsFromSecuritySettingsName(
+          fakePath
+        );
+        assert.strictEqual(result, 'securitySettingsValue');
+        assert(
+          (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('transitionRouteGroup', () => {
       const fakePath = '/rendered/path/transitionRouteGroup';
       const expectedParameters = {

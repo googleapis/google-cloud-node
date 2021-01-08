@@ -457,6 +457,74 @@
         }
       }
     },
+    "SecuritySettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SecuritySettingsServiceClient",
+          "rpcs": {
+            "CreateSecuritySettings": {
+              "methods": [
+                "createSecuritySettings"
+              ]
+            },
+            "GetSecuritySettings": {
+              "methods": [
+                "getSecuritySettings"
+              ]
+            },
+            "UpdateSecuritySettings": {
+              "methods": [
+                "updateSecuritySettings"
+              ]
+            },
+            "DeleteSecuritySettings": {
+              "methods": [
+                "deleteSecuritySettings"
+              ]
+            },
+            "ListSecuritySettings": {
+              "methods": [
+                "listSecuritySettings",
+                "listSecuritySettingsStream",
+                "listSecuritySettingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SecuritySettingsServiceClient",
+          "rpcs": {
+            "CreateSecuritySettings": {
+              "methods": [
+                "createSecuritySettings"
+              ]
+            },
+            "GetSecuritySettings": {
+              "methods": [
+                "getSecuritySettings"
+              ]
+            },
+            "UpdateSecuritySettings": {
+              "methods": [
+                "updateSecuritySettings"
+              ]
+            },
+            "DeleteSecuritySettings": {
+              "methods": [
+                "deleteSecuritySettings"
+              ]
+            },
+            "ListSecuritySettings": {
+              "methods": [
+                "listSecuritySettings",
+                "listSecuritySettingsStream",
+                "listSecuritySettingsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SessionEntityTypes": {
       "clients": {
         "grpc": {

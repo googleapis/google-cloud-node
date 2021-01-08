@@ -198,6 +198,9 @@ export class AgentsClient {
       projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
       ),
+      securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securitySettings/{security_settings}'
+      ),
       transitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
       ),
@@ -1957,6 +1960,65 @@ export class AgentsClient {
     return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
       projectLocationAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified securitySettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} security_settings
+   * @returns {string} Resource name string.
+   */
+  securitySettingsPath(
+    project: string,
+    location: string,
+    securitySettings: string
+  ) {
+    return this.pathTemplates.securitySettingsPathTemplate.render({
+      project: project,
+      location: location,
+      security_settings: securitySettings,
+    });
+  }
+
+  /**
+   * Parse the project from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName
+    ).location;
+  }
+
+  /**
+   * Parse the security_settings from SecuritySettings resource.
+   *
+   * @param {string} securitySettingsName
+   *   A fully-qualified path representing SecuritySettings resource.
+   * @returns {string} A string representing the security_settings.
+   */
+  matchSecuritySettingsFromSecuritySettingsName(securitySettingsName: string) {
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName
+    ).security_settings;
   }
 
   /**

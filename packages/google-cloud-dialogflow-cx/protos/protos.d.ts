@@ -21767,90 +21767,6 @@ export namespace google {
                             public toJSON(): { [k: string]: any };
                         }
 
-                        /** Properties of an EndInteraction. */
-                        interface IEndInteraction {
-                        }
-
-                        /** Represents an EndInteraction. */
-                        class EndInteraction implements IEndInteraction {
-
-                            /**
-                             * Constructs a new EndInteraction.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction);
-
-                            /**
-                             * Creates a new EndInteraction instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns EndInteraction instance
-                             */
-                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Encodes the specified EndInteraction message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
-                             * @param message EndInteraction message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified EndInteraction message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
-                             * @param message EndInteraction message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an EndInteraction message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns EndInteraction
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Decodes an EndInteraction message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns EndInteraction
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Verifies an EndInteraction message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an EndInteraction message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns EndInteraction
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
-
-                            /**
-                             * Creates a plain object from an EndInteraction message. Also converts values to other types if specified.
-                             * @param message EndInteraction
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this EndInteraction to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
                         /** Properties of a MixedAudio. */
                         interface IMixedAudio {
 
@@ -22047,6 +21963,939 @@ export namespace google {
                                  */
                                 public toJSON(): { [k: string]: any };
                             }
+                        }
+
+                        /** Properties of an EndInteraction. */
+                        interface IEndInteraction {
+                        }
+
+                        /** Represents an EndInteraction. */
+                        class EndInteraction implements IEndInteraction {
+
+                            /**
+                             * Constructs a new EndInteraction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction);
+
+                            /**
+                             * Creates a new EndInteraction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EndInteraction instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Encodes the specified EndInteraction message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
+                             * @param message EndInteraction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EndInteraction message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction.verify|verify} messages.
+                             * @param message EndInteraction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IEndInteraction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EndInteraction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EndInteraction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Decodes an EndInteraction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EndInteraction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Verifies an EndInteraction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EndInteraction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EndInteraction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction;
+
+                            /**
+                             * Creates a plain object from an EndInteraction message. Also converts values to other types if specified.
+                             * @param message EndInteraction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.EndInteraction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EndInteraction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Represents a SecuritySettingsService */
+                    class SecuritySettingsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new SecuritySettingsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new SecuritySettingsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SecuritySettingsService;
+
+                        /**
+                         * Calls CreateSecuritySettings.
+                         * @param request CreateSecuritySettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and SecuritySettings
+                         */
+                        public createSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest, callback: google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.CreateSecuritySettingsCallback): void;
+
+                        /**
+                         * Calls CreateSecuritySettings.
+                         * @param request CreateSecuritySettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest): Promise<google.cloud.dialogflow.cx.v3beta1.SecuritySettings>;
+
+                        /**
+                         * Calls GetSecuritySettings.
+                         * @param request GetSecuritySettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and SecuritySettings
+                         */
+                        public getSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest, callback: google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.GetSecuritySettingsCallback): void;
+
+                        /**
+                         * Calls GetSecuritySettings.
+                         * @param request GetSecuritySettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest): Promise<google.cloud.dialogflow.cx.v3beta1.SecuritySettings>;
+
+                        /**
+                         * Calls UpdateSecuritySettings.
+                         * @param request UpdateSecuritySettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and SecuritySettings
+                         */
+                        public updateSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest, callback: google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.UpdateSecuritySettingsCallback): void;
+
+                        /**
+                         * Calls UpdateSecuritySettings.
+                         * @param request UpdateSecuritySettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest): Promise<google.cloud.dialogflow.cx.v3beta1.SecuritySettings>;
+
+                        /**
+                         * Calls ListSecuritySettings.
+                         * @param request ListSecuritySettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListSecuritySettingsResponse
+                         */
+                        public listSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest, callback: google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.ListSecuritySettingsCallback): void;
+
+                        /**
+                         * Calls ListSecuritySettings.
+                         * @param request ListSecuritySettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest): Promise<google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse>;
+
+                        /**
+                         * Calls DeleteSecuritySettings.
+                         * @param request DeleteSecuritySettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest, callback: google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.DeleteSecuritySettingsCallback): void;
+
+                        /**
+                         * Calls DeleteSecuritySettings.
+                         * @param request DeleteSecuritySettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteSecuritySettings(request: google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace SecuritySettingsService {
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService#createSecuritySettings}.
+                         * @param error Error, if any
+                         * @param [response] SecuritySettings
+                         */
+                        type CreateSecuritySettingsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.SecuritySettings) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService#getSecuritySettings}.
+                         * @param error Error, if any
+                         * @param [response] SecuritySettings
+                         */
+                        type GetSecuritySettingsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.SecuritySettings) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService#updateSecuritySettings}.
+                         * @param error Error, if any
+                         * @param [response] SecuritySettings
+                         */
+                        type UpdateSecuritySettingsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.SecuritySettings) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService#listSecuritySettings}.
+                         * @param error Error, if any
+                         * @param [response] ListSecuritySettingsResponse
+                         */
+                        type ListSecuritySettingsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService#deleteSecuritySettings}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteSecuritySettingsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a GetSecuritySettingsRequest. */
+                    interface IGetSecuritySettingsRequest {
+
+                        /** GetSecuritySettingsRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetSecuritySettingsRequest. */
+                    class GetSecuritySettingsRequest implements IGetSecuritySettingsRequest {
+
+                        /**
+                         * Constructs a new GetSecuritySettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest);
+
+                        /** GetSecuritySettingsRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetSecuritySettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetSecuritySettingsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest): google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest;
+
+                        /**
+                         * Encodes the specified GetSecuritySettingsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest.verify|verify} messages.
+                         * @param message GetSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetSecuritySettingsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest.verify|verify} messages.
+                         * @param message GetSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetSecuritySettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest;
+
+                        /**
+                         * Decodes a GetSecuritySettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest;
+
+                        /**
+                         * Verifies a GetSecuritySettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetSecuritySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetSecuritySettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest;
+
+                        /**
+                         * Creates a plain object from a GetSecuritySettingsRequest message. Also converts values to other types if specified.
+                         * @param message GetSecuritySettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetSecuritySettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateSecuritySettingsRequest. */
+                    interface IUpdateSecuritySettingsRequest {
+
+                        /** UpdateSecuritySettingsRequest securitySettings */
+                        securitySettings?: (google.cloud.dialogflow.cx.v3beta1.ISecuritySettings|null);
+
+                        /** UpdateSecuritySettingsRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateSecuritySettingsRequest. */
+                    class UpdateSecuritySettingsRequest implements IUpdateSecuritySettingsRequest {
+
+                        /**
+                         * Constructs a new UpdateSecuritySettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest);
+
+                        /** UpdateSecuritySettingsRequest securitySettings. */
+                        public securitySettings?: (google.cloud.dialogflow.cx.v3beta1.ISecuritySettings|null);
+
+                        /** UpdateSecuritySettingsRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateSecuritySettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateSecuritySettingsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest): google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest;
+
+                        /**
+                         * Encodes the specified UpdateSecuritySettingsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest.verify|verify} messages.
+                         * @param message UpdateSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateSecuritySettingsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest.verify|verify} messages.
+                         * @param message UpdateSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateSecuritySettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest;
+
+                        /**
+                         * Decodes an UpdateSecuritySettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest;
+
+                        /**
+                         * Verifies an UpdateSecuritySettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateSecuritySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateSecuritySettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateSecuritySettingsRequest message. Also converts values to other types if specified.
+                         * @param message UpdateSecuritySettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateSecuritySettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListSecuritySettingsRequest. */
+                    interface IListSecuritySettingsRequest {
+
+                        /** ListSecuritySettingsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListSecuritySettingsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListSecuritySettingsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListSecuritySettingsRequest. */
+                    class ListSecuritySettingsRequest implements IListSecuritySettingsRequest {
+
+                        /**
+                         * Constructs a new ListSecuritySettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest);
+
+                        /** ListSecuritySettingsRequest parent. */
+                        public parent: string;
+
+                        /** ListSecuritySettingsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListSecuritySettingsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListSecuritySettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListSecuritySettingsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest;
+
+                        /**
+                         * Encodes the specified ListSecuritySettingsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest.verify|verify} messages.
+                         * @param message ListSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListSecuritySettingsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest.verify|verify} messages.
+                         * @param message ListSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListSecuritySettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest;
+
+                        /**
+                         * Decodes a ListSecuritySettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest;
+
+                        /**
+                         * Verifies a ListSecuritySettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListSecuritySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListSecuritySettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest;
+
+                        /**
+                         * Creates a plain object from a ListSecuritySettingsRequest message. Also converts values to other types if specified.
+                         * @param message ListSecuritySettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListSecuritySettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListSecuritySettingsResponse. */
+                    interface IListSecuritySettingsResponse {
+
+                        /** ListSecuritySettingsResponse securitySettings */
+                        securitySettings?: (google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[]|null);
+
+                        /** ListSecuritySettingsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListSecuritySettingsResponse. */
+                    class ListSecuritySettingsResponse implements IListSecuritySettingsResponse {
+
+                        /**
+                         * Constructs a new ListSecuritySettingsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse);
+
+                        /** ListSecuritySettingsResponse securitySettings. */
+                        public securitySettings: google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[];
+
+                        /** ListSecuritySettingsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListSecuritySettingsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListSecuritySettingsResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse;
+
+                        /**
+                         * Encodes the specified ListSecuritySettingsResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse.verify|verify} messages.
+                         * @param message ListSecuritySettingsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListSecuritySettingsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse.verify|verify} messages.
+                         * @param message ListSecuritySettingsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListSecuritySettingsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListSecuritySettingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse;
+
+                        /**
+                         * Decodes a ListSecuritySettingsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListSecuritySettingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse;
+
+                        /**
+                         * Verifies a ListSecuritySettingsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListSecuritySettingsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListSecuritySettingsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse;
+
+                        /**
+                         * Creates a plain object from a ListSecuritySettingsResponse message. Also converts values to other types if specified.
+                         * @param message ListSecuritySettingsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListSecuritySettingsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CreateSecuritySettingsRequest. */
+                    interface ICreateSecuritySettingsRequest {
+
+                        /** CreateSecuritySettingsRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateSecuritySettingsRequest securitySettings */
+                        securitySettings?: (google.cloud.dialogflow.cx.v3beta1.ISecuritySettings|null);
+                    }
+
+                    /** Represents a CreateSecuritySettingsRequest. */
+                    class CreateSecuritySettingsRequest implements ICreateSecuritySettingsRequest {
+
+                        /**
+                         * Constructs a new CreateSecuritySettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest);
+
+                        /** CreateSecuritySettingsRequest parent. */
+                        public parent: string;
+
+                        /** CreateSecuritySettingsRequest securitySettings. */
+                        public securitySettings?: (google.cloud.dialogflow.cx.v3beta1.ISecuritySettings|null);
+
+                        /**
+                         * Creates a new CreateSecuritySettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateSecuritySettingsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest): google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest;
+
+                        /**
+                         * Encodes the specified CreateSecuritySettingsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest.verify|verify} messages.
+                         * @param message CreateSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateSecuritySettingsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest.verify|verify} messages.
+                         * @param message CreateSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateSecuritySettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest;
+
+                        /**
+                         * Decodes a CreateSecuritySettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest;
+
+                        /**
+                         * Verifies a CreateSecuritySettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateSecuritySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateSecuritySettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest;
+
+                        /**
+                         * Creates a plain object from a CreateSecuritySettingsRequest message. Also converts values to other types if specified.
+                         * @param message CreateSecuritySettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateSecuritySettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DeleteSecuritySettingsRequest. */
+                    interface IDeleteSecuritySettingsRequest {
+
+                        /** DeleteSecuritySettingsRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteSecuritySettingsRequest. */
+                    class DeleteSecuritySettingsRequest implements IDeleteSecuritySettingsRequest {
+
+                        /**
+                         * Constructs a new DeleteSecuritySettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest);
+
+                        /** DeleteSecuritySettingsRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteSecuritySettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteSecuritySettingsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest): google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest;
+
+                        /**
+                         * Encodes the specified DeleteSecuritySettingsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest.verify|verify} messages.
+                         * @param message DeleteSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteSecuritySettingsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest.verify|verify} messages.
+                         * @param message DeleteSecuritySettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteSecuritySettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest;
+
+                        /**
+                         * Decodes a DeleteSecuritySettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteSecuritySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest;
+
+                        /**
+                         * Verifies a DeleteSecuritySettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteSecuritySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteSecuritySettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteSecuritySettingsRequest message. Also converts values to other types if specified.
+                         * @param message DeleteSecuritySettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteSecuritySettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a SecuritySettings. */
+                    interface ISecuritySettings {
+
+                        /** SecuritySettings name */
+                        name?: (string|null);
+
+                        /** SecuritySettings displayName */
+                        displayName?: (string|null);
+
+                        /** SecuritySettings redactionStrategy */
+                        redactionStrategy?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionStrategy|null);
+
+                        /** SecuritySettings redactionScope */
+                        redactionScope?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionScope|keyof typeof google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionScope|null);
+
+                        /** SecuritySettings inspectTemplate */
+                        inspectTemplate?: (string|null);
+
+                        /** SecuritySettings retentionWindowDays */
+                        retentionWindowDays?: (number|null);
+
+                        /** SecuritySettings purgeDataTypes */
+                        purgeDataTypes?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.PurgeDataType[]|null);
+                    }
+
+                    /** Represents a SecuritySettings. */
+                    class SecuritySettings implements ISecuritySettings {
+
+                        /**
+                         * Constructs a new SecuritySettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ISecuritySettings);
+
+                        /** SecuritySettings name. */
+                        public name: string;
+
+                        /** SecuritySettings displayName. */
+                        public displayName: string;
+
+                        /** SecuritySettings redactionStrategy. */
+                        public redactionStrategy: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionStrategy);
+
+                        /** SecuritySettings redactionScope. */
+                        public redactionScope: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionScope|keyof typeof google.cloud.dialogflow.cx.v3beta1.SecuritySettings.RedactionScope);
+
+                        /** SecuritySettings inspectTemplate. */
+                        public inspectTemplate: string;
+
+                        /** SecuritySettings retentionWindowDays. */
+                        public retentionWindowDays: number;
+
+                        /** SecuritySettings purgeDataTypes. */
+                        public purgeDataTypes: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.PurgeDataType[];
+
+                        /** SecuritySettings dataRetention. */
+                        public dataRetention?: "retentionWindowDays";
+
+                        /**
+                         * Creates a new SecuritySettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SecuritySettings instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ISecuritySettings): google.cloud.dialogflow.cx.v3beta1.SecuritySettings;
+
+                        /**
+                         * Encodes the specified SecuritySettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings.verify|verify} messages.
+                         * @param message SecuritySettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ISecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SecuritySettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings.verify|verify} messages.
+                         * @param message SecuritySettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ISecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SecuritySettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SecuritySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SecuritySettings;
+
+                        /**
+                         * Decodes a SecuritySettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SecuritySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SecuritySettings;
+
+                        /**
+                         * Verifies a SecuritySettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SecuritySettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SecuritySettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SecuritySettings;
+
+                        /**
+                         * Creates a plain object from a SecuritySettings message. Also converts values to other types if specified.
+                         * @param message SecuritySettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SecuritySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SecuritySettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace SecuritySettings {
+
+                        /** RedactionStrategy enum. */
+                        enum RedactionStrategy {
+                            REDACTION_STRATEGY_UNSPECIFIED = 0,
+                            REDACT_WITH_SERVICE = 1
+                        }
+
+                        /** RedactionScope enum. */
+                        enum RedactionScope {
+                            REDACTION_SCOPE_UNSPECIFIED = 0,
+                            REDACT_DISK_STORAGE = 2
+                        }
+
+                        /** PurgeDataType enum. */
+                        enum PurgeDataType {
+                            PURGE_DATA_TYPE_UNSPECIFIED = 0,
+                            DIALOGFLOW_HISTORY = 1
                         }
                     }
 
