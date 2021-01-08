@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.1...v2.4.2) (2021-01-07)
+
+
+### Bug Fixes
+
+* **createVM:** do not define machineType or networkInterfaces when template provided ([#530](https://www.github.com/googleapis/nodejs-compute/issues/530)) ([e7b705e](https://www.github.com/googleapis/nodejs-compute/commit/e7b705e583936772663b9dba0a5d530a8e4d0dae)), closes [#529](https://www.github.com/googleapis/nodejs-compute/issues/529)
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.0...v2.4.1) (2020-11-25)
 
 
