@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-os-login.git",
-        "sha": "df7141b9f4d72bd495b13ab5f2f39fd83fe3b56d"
+        "sha": "5f1191e29e12f91e6fc3648bdd79415396a36c2a"
       }
     },
     {
