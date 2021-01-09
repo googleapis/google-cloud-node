@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-memcache.git",
-        "sha": "fcaf9d14598d1ed5e3bccc2cdbbf5120d277709f"
+        "sha": "eff497bd516e12aaa922abbad41d270791ee3419"
       }
     },
     {
