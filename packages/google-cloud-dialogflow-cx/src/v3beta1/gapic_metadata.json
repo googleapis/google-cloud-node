@@ -243,6 +243,94 @@
         }
       }
     },
+    "Experiments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExperimentsClient",
+          "rpcs": {
+            "GetExperiment": {
+              "methods": [
+                "getExperiment"
+              ]
+            },
+            "CreateExperiment": {
+              "methods": [
+                "createExperiment"
+              ]
+            },
+            "UpdateExperiment": {
+              "methods": [
+                "updateExperiment"
+              ]
+            },
+            "DeleteExperiment": {
+              "methods": [
+                "deleteExperiment"
+              ]
+            },
+            "StartExperiment": {
+              "methods": [
+                "startExperiment"
+              ]
+            },
+            "StopExperiment": {
+              "methods": [
+                "stopExperiment"
+              ]
+            },
+            "ListExperiments": {
+              "methods": [
+                "listExperiments",
+                "listExperimentsStream",
+                "listExperimentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExperimentsClient",
+          "rpcs": {
+            "GetExperiment": {
+              "methods": [
+                "getExperiment"
+              ]
+            },
+            "CreateExperiment": {
+              "methods": [
+                "createExperiment"
+              ]
+            },
+            "UpdateExperiment": {
+              "methods": [
+                "updateExperiment"
+              ]
+            },
+            "DeleteExperiment": {
+              "methods": [
+                "deleteExperiment"
+              ]
+            },
+            "StartExperiment": {
+              "methods": [
+                "startExperiment"
+              ]
+            },
+            "StopExperiment": {
+              "methods": [
+                "stopExperiment"
+              ]
+            },
+            "ListExperiments": {
+              "methods": [
+                "listExperiments",
+                "listExperimentsStream",
+                "listExperimentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Flows": {
       "clients": {
         "grpc": {

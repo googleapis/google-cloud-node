@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 export {AgentsClient} from './agents_client';
 export {EntityTypesClient} from './entity_types_client';
 export {EnvironmentsClient} from './environments_client';
+export {ExperimentsClient} from './experiments_client';
 export {FlowsClient} from './flows_client';
 export {IntentsClient} from './intents_client';
 export {PagesClient} from './pages_client';

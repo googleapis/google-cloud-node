@@ -25,6 +25,8 @@ const EntityTypesClient = v3.EntityTypesClient;
 type EntityTypesClient = v3.EntityTypesClient;
 const EnvironmentsClient = v3.EnvironmentsClient;
 type EnvironmentsClient = v3.EnvironmentsClient;
+const ExperimentsClient = v3.ExperimentsClient;
+type ExperimentsClient = v3.ExperimentsClient;
 const FlowsClient = v3.FlowsClient;
 type FlowsClient = v3.FlowsClient;
 const IntentsClient = v3.IntentsClient;
@@ -50,6 +52,7 @@ export {
   AgentsClient,
   EntityTypesClient,
   EnvironmentsClient,
+  ExperimentsClient,
   FlowsClient,
   IntentsClient,
   PagesClient,
@@ -66,6 +69,7 @@ export default {
   AgentsClient,
   EntityTypesClient,
   EnvironmentsClient,
+  ExperimentsClient,
   FlowsClient,
   IntentsClient,
   PagesClient,

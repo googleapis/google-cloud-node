@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ function main() {
   const agentsClient = new cx.AgentsClient();
   const entityTypesClient = new cx.EntityTypesClient();
   const environmentsClient = new cx.EnvironmentsClient();
+  const experimentsClient = new cx.ExperimentsClient();
   const flowsClient = new cx.FlowsClient();
   const intentsClient = new cx.IntentsClient();
   const pagesClient = new cx.PagesClient();

@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import {
   AgentsClient,
   EntityTypesClient,
   EnvironmentsClient,
+  ExperimentsClient,
   FlowsClient,
   IntentsClient,
   PagesClient,
@@ -39,6 +40,9 @@ function doStuffWithEntityTypesClient(client: EntityTypesClient) {
   client.close();
 }
 function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {
+  client.close();
+}
+function doStuffWithExperimentsClient(client: ExperimentsClient) {
   client.close();
 }
 function doStuffWithFlowsClient(client: FlowsClient) {
@@ -83,6 +87,9 @@ function main() {
   // check that the client instance can be created
   const environmentsClient = new EnvironmentsClient();
   doStuffWithEnvironmentsClient(environmentsClient);
+  // check that the client instance can be created
+  const experimentsClient = new ExperimentsClient();
+  doStuffWithExperimentsClient(experimentsClient);
   // check that the client instance can be created
   const flowsClient = new FlowsClient();
   doStuffWithFlowsClient(flowsClient);

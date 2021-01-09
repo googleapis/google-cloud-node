@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,6 +167,9 @@ export class SessionsClient {
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}'
+      ),
+      experimentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}'
       ),
       flowPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}'
@@ -382,6 +385,10 @@ export class SessionsClient {
    * entity types to be updated, which in turn might affect results of future
    * queries.
    *
+   * Note: Always use agent versions for production traffic.
+   * See [Versions and
+   * environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.session
@@ -397,6 +404,10 @@ export class SessionsClient {
    *
    *   For more information, see the [sessions
    *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *
+   *   Note: Always use agent versions for production traffic.
+   *   See [Versions and
+   *   environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
    * @param {google.cloud.dialogflow.cx.v3.QueryParameters} request.queryParams
    *   The parameters of this query.
    * @param {google.cloud.dialogflow.cx.v3.QueryInput} request.queryInput
@@ -670,6 +681,10 @@ export class SessionsClient {
    * and returns structured, actionable data as a result. This method is only
    * available via the gRPC API (not REST).
    *
+   * Note: Always use agent versions for production traffic.
+   * See [Versions and
+   * environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   *
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -884,6 +899,92 @@ export class SessionsClient {
   matchEnvironmentFromEnvironmentName(environmentName: string) {
     return this.pathTemplates.environmentPathTemplate.match(environmentName)
       .environment;
+  }
+
+  /**
+   * Return a fully-qualified experiment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} environment
+   * @param {string} experiment
+   * @returns {string} Resource name string.
+   */
+  experimentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    experiment: string
+  ) {
+    return this.pathTemplates.experimentPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      environment: environment,
+      experiment: experiment,
+    });
+  }
+
+  /**
+   * Parse the project from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .agent;
+  }
+
+  /**
+   * Parse the environment from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .environment;
+  }
+
+  /**
+   * Parse the experiment from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .experiment;
   }
 
   /**

@@ -3,6 +3,7 @@
   "../../protos/google/cloud/dialogflow/cx/v3/audio_config.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/entity_type.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/environment.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3/experiment.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/flow.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/fulfillment.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/intent.proto",

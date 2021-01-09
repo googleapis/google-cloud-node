@@ -2181,6 +2181,489 @@
                             }
                           }
                         },
+                        "Experiments": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "ListExperiments": {
+                              "requestType": "ListExperimentsRequest",
+                              "responseType": "ListExperimentsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*/environments/*}/experiments",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*/environments/*}/experiments"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetExperiment": {
+                              "requestType": "GetExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateExperiment": {
+                              "requestType": "CreateExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*/environments/*}/experiments",
+                                "(google.api.http).body": "experiment",
+                                "(google.api.method_signature)": "parent,experiment"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*/environments/*}/experiments",
+                                    "body": "experiment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,experiment"
+                                }
+                              ]
+                            },
+                            "UpdateExperiment": {
+                              "requestType": "UpdateExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).patch": "/v3/{experiment.name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                "(google.api.http).body": "experiment",
+                                "(google.api.method_signature)": "experiment,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3/{experiment.name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                    "body": "experiment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "experiment,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteExperiment": {
+                              "requestType": "DeleteExperimentRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "StartExperiment": {
+                              "requestType": "StartExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:start",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:start",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "StopExperiment": {
+                              "requestType": "StopExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:stop",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:stop",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "Experiment": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/Experiment",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 4
+                            },
+                            "definition": {
+                              "type": "Definition",
+                              "id": 5
+                            },
+                            "result": {
+                              "type": "Result",
+                              "id": 6
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9
+                            },
+                            "lastUpdateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10
+                            },
+                            "experimentLength": {
+                              "type": "google.protobuf.Duration",
+                              "id": 11
+                            },
+                            "variantsHistory": {
+                              "rule": "repeated",
+                              "type": "VariantsHistory",
+                              "id": 12
+                            }
+                          },
+                          "nested": {
+                            "Definition": {
+                              "oneofs": {
+                                "variants": {
+                                  "oneof": [
+                                    "versionVariants"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "condition": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "versionVariants": {
+                                  "type": "VersionVariants",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Result": {
+                              "fields": {
+                                "versionMetrics": {
+                                  "rule": "repeated",
+                                  "type": "VersionMetrics",
+                                  "id": 1
+                                },
+                                "lastUpdateTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "ConfidenceInterval": {
+                                  "fields": {
+                                    "confidenceLevel": {
+                                      "type": "double",
+                                      "id": 1
+                                    },
+                                    "ratio": {
+                                      "type": "double",
+                                      "id": 2
+                                    },
+                                    "lowerBound": {
+                                      "type": "double",
+                                      "id": 3
+                                    },
+                                    "upperBound": {
+                                      "type": "double",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "Metric": {
+                                  "oneofs": {
+                                    "value": {
+                                      "oneof": [
+                                        "ratio"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "type": {
+                                      "type": "MetricType",
+                                      "id": 1
+                                    },
+                                    "ratio": {
+                                      "type": "double",
+                                      "id": 2
+                                    },
+                                    "confidenceInterval": {
+                                      "type": "ConfidenceInterval",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "VersionMetrics": {
+                                  "fields": {
+                                    "version": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                                      }
+                                    },
+                                    "metrics": {
+                                      "rule": "repeated",
+                                      "type": "Metric",
+                                      "id": 2
+                                    },
+                                    "sessionCount": {
+                                      "type": "int32",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "MetricType": {
+                                  "values": {
+                                    "METRIC_UNSPECIFIED": 0,
+                                    "CONTAINED_SESSION_NO_CALLBACK_RATE": 1,
+                                    "LIVE_AGENT_HANDOFF_RATE": 2,
+                                    "CALLBACK_SESSION_RATE": 3,
+                                    "ABANDONED_SESSION_RATE": 4,
+                                    "SESSION_END_RATE": 5
+                                  }
+                                }
+                              }
+                            },
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "DRAFT": 1,
+                                "RUNNING": 2,
+                                "DONE": 3
+                              }
+                            }
+                          }
+                        },
+                        "VersionVariants": {
+                          "fields": {
+                            "variants": {
+                              "rule": "repeated",
+                              "type": "Variant",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Variant": {
+                              "fields": {
+                                "version": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "trafficAllocation": {
+                                  "type": "float",
+                                  "id": 2
+                                },
+                                "isControlGroup": {
+                                  "type": "bool",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "VariantsHistory": {
+                          "oneofs": {
+                            "variants": {
+                              "oneof": [
+                                "versionVariants"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "versionVariants": {
+                              "type": "VersionVariants",
+                              "id": 1
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ListExperimentsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ListExperimentsResponse": {
+                          "fields": {
+                            "experiments": {
+                              "rule": "repeated",
+                              "type": "Experiment",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GetExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            }
+                          }
+                        },
+                        "CreateExperimentRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            },
+                            "experiment": {
+                              "type": "Experiment",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateExperimentRequest": {
+                          "fields": {
+                            "experiment": {
+                              "type": "Experiment",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            }
+                          }
+                        },
+                        "StartExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            }
+                          }
+                        },
+                        "StopExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            }
+                          }
+                        },
                         "Intents": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -3026,6 +3509,11 @@
                             "analyzeQueryTextSentiment": {
                               "type": "bool",
                               "id": 8
+                            },
+                            "webhookHeaders": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 10
                             }
                           }
                         },
@@ -5999,24 +6487,6 @@
                                 }
                               }
                             },
-                            "PlayAudio": {
-                              "fields": {
-                                "audioUri": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "allowPlaybackInterruption": {
-                                  "type": "bool",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
-                                  }
-                                }
-                              }
-                            },
                             "MixedAudio": {
                               "fields": {
                                 "segments": {
@@ -6057,6 +6527,24 @@
                             },
                             "EndInteraction": {
                               "fields": {}
+                            },
+                            "PlayAudio": {
+                              "fields": {
+                                "audioUri": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "allowPlaybackInterruption": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -6326,6 +6814,18 @@
                             }
                           }
                         },
+                        "AudioEncoding": {
+                          "values": {
+                            "AUDIO_ENCODING_UNSPECIFIED": 0,
+                            "AUDIO_ENCODING_LINEAR_16": 1,
+                            "AUDIO_ENCODING_FLAC": 2,
+                            "AUDIO_ENCODING_MULAW": 3,
+                            "AUDIO_ENCODING_AMR": 4,
+                            "AUDIO_ENCODING_AMR_WB": 5,
+                            "AUDIO_ENCODING_OGG_OPUS": 6,
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                          }
+                        },
                         "SpeechWordInfo": {
                           "fields": {
                             "word": {
@@ -6344,18 +6844,6 @@
                               "type": "float",
                               "id": 4
                             }
-                          }
-                        },
-                        "AudioEncoding": {
-                          "values": {
-                            "AUDIO_ENCODING_UNSPECIFIED": 0,
-                            "AUDIO_ENCODING_LINEAR_16": 1,
-                            "AUDIO_ENCODING_FLAC": 2,
-                            "AUDIO_ENCODING_MULAW": 3,
-                            "AUDIO_ENCODING_AMR": 4,
-                            "AUDIO_ENCODING_AMR_WB": 5,
-                            "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                           }
                         },
                         "InputAudioConfig": {
@@ -7091,6 +7579,489 @@
                             "nextPageToken": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "Experiments": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "ListExperiments": {
+                              "requestType": "ListExperimentsRequest",
+                              "responseType": "ListExperimentsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*}/experiments",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*}/experiments"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetExperiment": {
+                              "requestType": "GetExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateExperiment": {
+                              "requestType": "CreateExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*}/experiments",
+                                "(google.api.http).body": "experiment",
+                                "(google.api.method_signature)": "parent,experiment"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*}/experiments",
+                                    "body": "experiment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,experiment"
+                                }
+                              ]
+                            },
+                            "UpdateExperiment": {
+                              "requestType": "UpdateExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).patch": "/v3beta1/{experiment.name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                "(google.api.http).body": "experiment",
+                                "(google.api.method_signature)": "experiment,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3beta1/{experiment.name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                    "body": "experiment"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "experiment,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteExperiment": {
+                              "requestType": "DeleteExperimentRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "StartExperiment": {
+                              "requestType": "StartExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:start",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:start",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "StopExperiment": {
+                              "requestType": "StopExperimentRequest",
+                              "responseType": "Experiment",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:stop",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/environments/*/experiments/*}:stop",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "Experiment": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/Experiment",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 4
+                            },
+                            "definition": {
+                              "type": "Definition",
+                              "id": 5
+                            },
+                            "result": {
+                              "type": "Result",
+                              "id": 6
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9
+                            },
+                            "lastUpdateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10
+                            },
+                            "experimentLength": {
+                              "type": "google.protobuf.Duration",
+                              "id": 11
+                            },
+                            "variantsHistory": {
+                              "rule": "repeated",
+                              "type": "VariantsHistory",
+                              "id": 12
+                            }
+                          },
+                          "nested": {
+                            "Definition": {
+                              "oneofs": {
+                                "variants": {
+                                  "oneof": [
+                                    "versionVariants"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "condition": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "versionVariants": {
+                                  "type": "VersionVariants",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Result": {
+                              "fields": {
+                                "versionMetrics": {
+                                  "rule": "repeated",
+                                  "type": "VersionMetrics",
+                                  "id": 1
+                                },
+                                "lastUpdateTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "ConfidenceInterval": {
+                                  "fields": {
+                                    "confidenceLevel": {
+                                      "type": "double",
+                                      "id": 1
+                                    },
+                                    "ratio": {
+                                      "type": "double",
+                                      "id": 2
+                                    },
+                                    "lowerBound": {
+                                      "type": "double",
+                                      "id": 3
+                                    },
+                                    "upperBound": {
+                                      "type": "double",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "Metric": {
+                                  "oneofs": {
+                                    "value": {
+                                      "oneof": [
+                                        "ratio"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "type": {
+                                      "type": "MetricType",
+                                      "id": 1
+                                    },
+                                    "ratio": {
+                                      "type": "double",
+                                      "id": 2
+                                    },
+                                    "confidenceInterval": {
+                                      "type": "ConfidenceInterval",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "VersionMetrics": {
+                                  "fields": {
+                                    "version": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                                      }
+                                    },
+                                    "metrics": {
+                                      "rule": "repeated",
+                                      "type": "Metric",
+                                      "id": 2
+                                    },
+                                    "sessionCount": {
+                                      "type": "int32",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "MetricType": {
+                                  "values": {
+                                    "METRIC_UNSPECIFIED": 0,
+                                    "CONTAINED_SESSION_NO_CALLBACK_RATE": 1,
+                                    "LIVE_AGENT_HANDOFF_RATE": 2,
+                                    "CALLBACK_SESSION_RATE": 3,
+                                    "ABANDONED_SESSION_RATE": 4,
+                                    "SESSION_END_RATE": 5
+                                  }
+                                }
+                              }
+                            },
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "DRAFT": 1,
+                                "RUNNING": 2,
+                                "DONE": 3
+                              }
+                            }
+                          }
+                        },
+                        "VersionVariants": {
+                          "fields": {
+                            "variants": {
+                              "rule": "repeated",
+                              "type": "Variant",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Variant": {
+                              "fields": {
+                                "version": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "trafficAllocation": {
+                                  "type": "float",
+                                  "id": 2
+                                },
+                                "isControlGroup": {
+                                  "type": "bool",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "VariantsHistory": {
+                          "oneofs": {
+                            "variants": {
+                              "oneof": [
+                                "versionVariants"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "versionVariants": {
+                              "type": "VersionVariants",
+                              "id": 1
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ListExperimentsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ListExperimentsResponse": {
+                          "fields": {
+                            "experiments": {
+                              "rule": "repeated",
+                              "type": "Experiment",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GetExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            }
+                          }
+                        },
+                        "CreateExperimentRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            },
+                            "experiment": {
+                              "type": "Experiment",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateExperimentRequest": {
+                          "fields": {
+                            "experiment": {
+                              "type": "Experiment",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            }
+                          }
+                        },
+                        "StartExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
+                            }
+                          }
+                        },
+                        "StopExperimentRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
+                              }
                             }
                           }
                         },
@@ -9484,6 +10455,11 @@
                 "singular": {
                   "type": "string",
                   "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
                 }
               },
               "nested": {
@@ -9492,6 +10468,12 @@
                     "HISTORY_UNSPECIFIED": 0,
                     "ORIGINALLY_SINGLE_PATTERN": 1,
                     "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
                   }
                 }
               }
@@ -9512,7 +10494,7 @@
         },
         "protobuf": {
           "options": {
-            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
             "java_package": "com.google.protobuf",
             "java_outer_classname": "DescriptorProtos",
             "csharp_namespace": "Google.Protobuf.Reflection",
