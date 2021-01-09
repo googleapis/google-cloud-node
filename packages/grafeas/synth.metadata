@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-grafeas.git",
-        "sha": "d5cb6add8a63d873a593c63988cebe762e73b41e"
+        "sha": "1b4fa7c880e05f4372e0a72d82d94b39eb7a134a"
       }
     },
     {
