@@ -8,6 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.CloudBuild.V1",
                     "go_package": "google.golang.org/genproto/googleapis/devtools/cloudbuild/v1;cloudbuild",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloudbuild.v1",
@@ -1697,6 +1698,11 @@
                 "singular": {
                   "type": "string",
                   "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
                 }
               },
               "nested": {
@@ -1705,6 +1711,12 @@
                     "HISTORY_UNSPECIFIED": 0,
                     "ORIGINALLY_SINGLE_PATTERN": 1,
                     "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
                   }
                 }
               }
@@ -1725,7 +1737,7 @@
         },
         "protobuf": {
           "options": {
-            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
             "java_package": "com.google.protobuf",
             "java_outer_classname": "DescriptorProtos",
             "csharp_namespace": "Google.Protobuf.Reflection",
