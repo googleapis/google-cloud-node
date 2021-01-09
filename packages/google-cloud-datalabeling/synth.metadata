@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-datalabeling.git",
-        "sha": "001044307c8146ac76b57eadb0745b443c1dc479"
+        "sha": "261c1b02d4a75c09b2517e9108ba6162fa4592f8"
       }
     },
     {
