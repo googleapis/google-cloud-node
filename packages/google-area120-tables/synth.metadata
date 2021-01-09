@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-area120-tables.git",
-        "sha": "c61d65041efb9bf462bff139d6ea9635d28ca4fc"
+        "sha": "79162d1625f621195169c80b5de08ae31e96a0a1"
       }
     },
     {
