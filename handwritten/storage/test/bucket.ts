@@ -1478,6 +1478,7 @@ describe('Bucket', () => {
     });
 
     it('should allow setting a directory', done => {
+      //Note: Directory is deprecated.
       const directory = 'directory-name';
       bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.prefix, `${directory}/`);
@@ -1488,6 +1489,7 @@ describe('Bucket', () => {
     });
 
     it('should strip excess slashes from a directory', done => {
+      //Note: Directory is deprecated.
       const directory = 'directory-name///';
       bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.prefix, 'directory-name/');
