@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.3...v2.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#220](https://www.github.com/googleapis/nodejs-web-risk/issues/220)) ([772ff4f](https://www.github.com/googleapis/nodejs-web-risk/commit/772ff4f9be9fa6b745f96a3d6b93578741968dbe))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.2...v2.0.3) (2020-11-25)
 
 
