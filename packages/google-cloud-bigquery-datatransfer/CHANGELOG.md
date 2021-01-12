@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.1.2...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* introduce style enumeration ([#422](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/422)) ([f07e2a0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/f07e2a07db04138d7bfe268915e9ca0b60f7a8f3))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.1.1...v2.1.2) (2020-11-25)
 
 
