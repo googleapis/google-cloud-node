@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.1.3...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* introduces style enumeration ([#496](https://www.github.com/googleapis/nodejs-tasks/issues/496)) ([680f1dc](https://www.github.com/googleapis/nodejs-tasks/commit/680f1dcd269d25247a54157108c524f8946dc624))
+
+
+### Bug Fixes
+
+* **samples:** remove unused variables ([#492](https://www.github.com/googleapis/nodejs-tasks/issues/492)) ([81c4b4e](https://www.github.com/googleapis/nodejs-tasks/commit/81c4b4ece21eb99cec582d3256192de6c402d771))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-tasks/compare/v2.1.2...v2.1.3) (2020-11-25)
 
 
