@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.3...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#143](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/143)) ([4a90ce9](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/4a90ce9fa7722fde537868ae8aa8f47e45c7789c))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.2...v2.1.3) (2020-11-25)
 
 
