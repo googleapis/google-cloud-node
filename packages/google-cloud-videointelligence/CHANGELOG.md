@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.2.0...v3.3.0) (2021-01-09)
+
+
+### Features
+
+* introduce tracks and thumbnails fields for FaceDetectionAnnotation ([#508](https://www.github.com/googleapis/nodejs-video-intelligence/issues/508)) ([9bfff4b](https://www.github.com/googleapis/nodejs-video-intelligence/commit/9bfff4b941e9d52cd8c7051e8fba66a6256b854a))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.1.2...v3.2.0) (2020-12-08)
 
 
