@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.2.0...v2.3.0) (2021-01-08)
+
+
+### Features
+
+* **samples:** add integrity verification to Cloud KMS crypto samples ([#409](https://www.github.com/googleapis/nodejs-kms/issues/409)) ([d2897f6](https://www.github.com/googleapis/nodejs-kms/commit/d2897f681ae409b34a50b91ea718fa9e294895c5))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.1.4...v2.2.0) (2021-01-06)
 
 
