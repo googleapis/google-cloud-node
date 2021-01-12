@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.0.2...v1.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#28](https://www.github.com/googleapis/nodejs-notebooks/issues/28)) ([5caf3c3](https://www.github.com/googleapis/nodejs-notebooks/commit/5caf3c38eaa8c0d27350d65a4710bb78b74b8450))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.0.1...v1.0.2) (2020-11-25)
 
 
