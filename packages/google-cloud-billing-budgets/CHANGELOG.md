@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.0.2...v3.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#193](https://www.github.com/googleapis/nodejs-billing-budgets/issues/193)) ([051a076](https://www.github.com/googleapis/nodejs-billing-budgets/commit/051a0762633ebfaa0140b2fc2902fe4ed0b24846))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.0.1...v3.0.2) (2020-11-25)
 
 
