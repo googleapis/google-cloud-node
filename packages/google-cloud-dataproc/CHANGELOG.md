@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.2.0...v2.2.1) (2021-01-09)
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([64fd55c](https://www.github.com/googleapis/nodejs-dataproc/commit/64fd55c3d42281f01dbabab5d823039dc5a26416))
+* do not modify options object, use defaultScopes ([#445](https://www.github.com/googleapis/nodejs-dataproc/issues/445)) ([c89bc66](https://www.github.com/googleapis/nodejs-dataproc/commit/c89bc662bd8387c82581a02026be5a6d6a40f5af))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.1.1...v2.2.0) (2020-07-31)
 
 
