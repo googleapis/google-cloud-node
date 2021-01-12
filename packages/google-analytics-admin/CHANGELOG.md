@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.3.0...v1.4.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#70](https://www.github.com/googleapis/nodejs-analytics-admin/issues/70)) ([cffd8f5](https://www.github.com/googleapis/nodejs-analytics-admin/commit/cffd8f53db7a24c1741a2818c168adb674c27c85))
+* adds style enumeration ([#71](https://www.github.com/googleapis/nodejs-analytics-admin/issues/71)) ([fd88f82](https://www.github.com/googleapis/nodejs-analytics-admin/commit/fd88f826f3d5cf37c5f1ed7a32a997e7ec6441ed))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.2.3...v1.3.0) (2021-01-07)
 
 
