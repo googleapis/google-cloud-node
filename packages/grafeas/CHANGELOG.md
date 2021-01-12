@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.3.3...v3.4.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#223](https://www.github.com/googleapis/nodejs-grafeas/issues/223)) ([c1318e4](https://www.github.com/googleapis/nodejs-grafeas/commit/c1318e483c8ed39ed45d9a5391c075131ef63a71))
+
 ### [3.3.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.3.2...v3.3.3) (2020-11-25)
 
 
