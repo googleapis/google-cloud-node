@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.11.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.10.0...v3.11.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#445](https://www.github.com/googleapis/nodejs-asset/issues/445)) ([28c3612](https://www.github.com/googleapis/nodejs-asset/commit/28c361225ab0cdc2d4b141b5ef02cac5f257a85b))
+
 ## [3.10.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.9.1...v3.10.0) (2020-12-02)
 
 
