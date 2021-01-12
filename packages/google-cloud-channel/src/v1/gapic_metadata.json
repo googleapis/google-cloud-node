@@ -1,0 +1,363 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.channel.v1",
+  "libraryPackage": "channel",
+  "services": {
+    "CloudChannelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudChannelServiceClient",
+          "rpcs": {
+            "GetCustomer": {
+              "methods": [
+                "getCustomer"
+              ]
+            },
+            "CheckCloudIdentityAccountsExist": {
+              "methods": [
+                "checkCloudIdentityAccountsExist"
+              ]
+            },
+            "CreateCustomer": {
+              "methods": [
+                "createCustomer"
+              ]
+            },
+            "UpdateCustomer": {
+              "methods": [
+                "updateCustomer"
+              ]
+            },
+            "DeleteCustomer": {
+              "methods": [
+                "deleteCustomer"
+              ]
+            },
+            "GetEntitlement": {
+              "methods": [
+                "getEntitlement"
+              ]
+            },
+            "GetChannelPartnerLink": {
+              "methods": [
+                "getChannelPartnerLink"
+              ]
+            },
+            "CreateChannelPartnerLink": {
+              "methods": [
+                "createChannelPartnerLink"
+              ]
+            },
+            "UpdateChannelPartnerLink": {
+              "methods": [
+                "updateChannelPartnerLink"
+              ]
+            },
+            "ProvisionCloudIdentity": {
+              "methods": [
+                "provisionCloudIdentity"
+              ]
+            },
+            "CreateEntitlement": {
+              "methods": [
+                "createEntitlement"
+              ]
+            },
+            "ChangeParameters": {
+              "methods": [
+                "changeParameters"
+              ]
+            },
+            "ChangeRenewalSettings": {
+              "methods": [
+                "changeRenewalSettings"
+              ]
+            },
+            "ChangeOffer": {
+              "methods": [
+                "changeOffer"
+              ]
+            },
+            "StartPaidService": {
+              "methods": [
+                "startPaidService"
+              ]
+            },
+            "SuspendEntitlement": {
+              "methods": [
+                "suspendEntitlement"
+              ]
+            },
+            "CancelEntitlement": {
+              "methods": [
+                "cancelEntitlement"
+              ]
+            },
+            "ActivateEntitlement": {
+              "methods": [
+                "activateEntitlement"
+              ]
+            },
+            "TransferEntitlements": {
+              "methods": [
+                "transferEntitlements"
+              ]
+            },
+            "TransferEntitlementsToGoogle": {
+              "methods": [
+                "transferEntitlementsToGoogle"
+              ]
+            },
+            "ListCustomers": {
+              "methods": [
+                "listCustomers",
+                "listCustomersStream",
+                "listCustomersAsync"
+              ]
+            },
+            "ListEntitlements": {
+              "methods": [
+                "listEntitlements",
+                "listEntitlementsStream",
+                "listEntitlementsAsync"
+              ]
+            },
+            "ListTransferableSkus": {
+              "methods": [
+                "listTransferableSkus",
+                "listTransferableSkusStream",
+                "listTransferableSkusAsync"
+              ]
+            },
+            "ListTransferableOffers": {
+              "methods": [
+                "listTransferableOffers",
+                "listTransferableOffersStream",
+                "listTransferableOffersAsync"
+              ]
+            },
+            "ListChannelPartnerLinks": {
+              "methods": [
+                "listChannelPartnerLinks",
+                "listChannelPartnerLinksStream",
+                "listChannelPartnerLinksAsync"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
+              ]
+            },
+            "ListOffers": {
+              "methods": [
+                "listOffers",
+                "listOffersStream",
+                "listOffersAsync"
+              ]
+            },
+            "ListPurchasableSkus": {
+              "methods": [
+                "listPurchasableSkus",
+                "listPurchasableSkusStream",
+                "listPurchasableSkusAsync"
+              ]
+            },
+            "ListPurchasableOffers": {
+              "methods": [
+                "listPurchasableOffers",
+                "listPurchasableOffersStream",
+                "listPurchasableOffersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudChannelServiceClient",
+          "rpcs": {
+            "GetCustomer": {
+              "methods": [
+                "getCustomer"
+              ]
+            },
+            "CheckCloudIdentityAccountsExist": {
+              "methods": [
+                "checkCloudIdentityAccountsExist"
+              ]
+            },
+            "CreateCustomer": {
+              "methods": [
+                "createCustomer"
+              ]
+            },
+            "UpdateCustomer": {
+              "methods": [
+                "updateCustomer"
+              ]
+            },
+            "DeleteCustomer": {
+              "methods": [
+                "deleteCustomer"
+              ]
+            },
+            "GetEntitlement": {
+              "methods": [
+                "getEntitlement"
+              ]
+            },
+            "GetChannelPartnerLink": {
+              "methods": [
+                "getChannelPartnerLink"
+              ]
+            },
+            "CreateChannelPartnerLink": {
+              "methods": [
+                "createChannelPartnerLink"
+              ]
+            },
+            "UpdateChannelPartnerLink": {
+              "methods": [
+                "updateChannelPartnerLink"
+              ]
+            },
+            "ProvisionCloudIdentity": {
+              "methods": [
+                "provisionCloudIdentity"
+              ]
+            },
+            "CreateEntitlement": {
+              "methods": [
+                "createEntitlement"
+              ]
+            },
+            "ChangeParameters": {
+              "methods": [
+                "changeParameters"
+              ]
+            },
+            "ChangeRenewalSettings": {
+              "methods": [
+                "changeRenewalSettings"
+              ]
+            },
+            "ChangeOffer": {
+              "methods": [
+                "changeOffer"
+              ]
+            },
+            "StartPaidService": {
+              "methods": [
+                "startPaidService"
+              ]
+            },
+            "SuspendEntitlement": {
+              "methods": [
+                "suspendEntitlement"
+              ]
+            },
+            "CancelEntitlement": {
+              "methods": [
+                "cancelEntitlement"
+              ]
+            },
+            "ActivateEntitlement": {
+              "methods": [
+                "activateEntitlement"
+              ]
+            },
+            "TransferEntitlements": {
+              "methods": [
+                "transferEntitlements"
+              ]
+            },
+            "TransferEntitlementsToGoogle": {
+              "methods": [
+                "transferEntitlementsToGoogle"
+              ]
+            },
+            "ListCustomers": {
+              "methods": [
+                "listCustomers",
+                "listCustomersStream",
+                "listCustomersAsync"
+              ]
+            },
+            "ListEntitlements": {
+              "methods": [
+                "listEntitlements",
+                "listEntitlementsStream",
+                "listEntitlementsAsync"
+              ]
+            },
+            "ListTransferableSkus": {
+              "methods": [
+                "listTransferableSkus",
+                "listTransferableSkusStream",
+                "listTransferableSkusAsync"
+              ]
+            },
+            "ListTransferableOffers": {
+              "methods": [
+                "listTransferableOffers",
+                "listTransferableOffersStream",
+                "listTransferableOffersAsync"
+              ]
+            },
+            "ListChannelPartnerLinks": {
+              "methods": [
+                "listChannelPartnerLinks",
+                "listChannelPartnerLinksStream",
+                "listChannelPartnerLinksAsync"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
+              ]
+            },
+            "ListOffers": {
+              "methods": [
+                "listOffers",
+                "listOffersStream",
+                "listOffersAsync"
+              ]
+            },
+            "ListPurchasableSkus": {
+              "methods": [
+                "listPurchasableSkus",
+                "listPurchasableSkusStream",
+                "listPurchasableSkusAsync"
+              ]
+            },
+            "ListPurchasableOffers": {
+              "methods": [
+                "listPurchasableOffers",
+                "listPurchasableOffersStream",
+                "listPurchasableOffersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
