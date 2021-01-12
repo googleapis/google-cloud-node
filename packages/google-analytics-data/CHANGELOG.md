@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.0.0...v2.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#47](https://www.github.com/googleapis/nodejs-analytics-data/issues/47)) ([3028672](https://www.github.com/googleapis/nodejs-analytics-data/commit/3028672c3307fc68aea858c5d7f901f606a73a99))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v1.1.0...v2.0.0) (2020-12-28)
 
 
