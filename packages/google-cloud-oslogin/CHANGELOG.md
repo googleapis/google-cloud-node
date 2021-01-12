@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.3...v3.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#408](https://www.github.com/googleapis/nodejs-os-login/issues/408)) ([b413e00](https://www.github.com/googleapis/nodejs-os-login/commit/b413e004b0d3c686a25ee2068c761f6aeb65d6e4))
+
 ### [3.1.3](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.2...v3.1.3) (2020-11-25)
 
 
