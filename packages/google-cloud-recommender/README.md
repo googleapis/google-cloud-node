@@ -66,7 +66,11 @@ async function listRecommendations() {
   // recommenderId = 'google.compute.instance.MachineTypeRecommender';
 
   const [recommendations] = await recommender.listRecommendations({
-    parent: recommender.projectLocationRecommenderPath(project, 'global', recommenderId),
+    parent: recommender.projectLocationRecommenderPath(
+      project,
+      'global',
+      recommenderId
+    ),
   });
   console.info(`recommendations for ${recommenderId}:`);
   for (const recommendation of recommendations) {
