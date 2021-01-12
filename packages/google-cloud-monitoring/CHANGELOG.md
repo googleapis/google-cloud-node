@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.5...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#513](https://www.github.com/googleapis/nodejs-monitoring/issues/513)) ([2ca2169](https://www.github.com/googleapis/nodejs-monitoring/commit/2ca2169553c90a588cc8c7374d4790da3bf122f2))
+
 ### [2.1.5](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.4...v2.1.5) (2021-01-07)
 
 
