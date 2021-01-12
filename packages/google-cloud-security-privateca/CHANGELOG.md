@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.0.1...v2.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#43](https://www.github.com/googleapis/nodejs-security-private-ca/issues/43)) ([1bdcac1](https://www.github.com/googleapis/nodejs-security-private-ca/commit/1bdcac1a327eab72bd6ed2afe477807df3e1f1c5))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.0.0...v2.0.1) (2020-11-25)
 
 
