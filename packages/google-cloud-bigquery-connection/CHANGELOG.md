@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.2.2...v1.3.0) (2021-01-09)
+
+
+### Features
+
+* introduce style enumeration ([#60](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/60)) ([44b7182](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/44b7182422254a6267eef8b59271a09796503720))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.2.1...v1.2.2) (2020-12-04)
 
 
