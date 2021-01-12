@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.3...v2.3.0) (2021-01-09)
+
+
+### Features
+
+* introduce style enumeration ([#135](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/135)) ([4a8f699](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/4a8f699472d67aae4300c458308c2fa4fa372592))
+
 ### [2.2.3](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.2...v2.2.3) (2020-11-25)
 
 
