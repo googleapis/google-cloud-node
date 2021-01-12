@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.1.2...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* introduces style enumeration ([#242](https://www.github.com/googleapis/nodejs-datalabeling/issues/242)) ([34bd1ec](https://www.github.com/googleapis/nodejs-datalabeling/commit/34bd1ec34d76976cbb96ee75892a62500dbd3cef))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.1.1...v2.1.2) (2020-11-25)
 
 
