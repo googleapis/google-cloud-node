@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.6...v3.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#569](https://www.github.com/googleapis/nodejs-dlp/issues/569)) ([3c8acf2](https://www.github.com/googleapis/nodejs-dlp/commit/3c8acf24523f2b130abc48bb18927ccac6cb6c3a))
+
 ### [3.0.6](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.5...v3.0.6) (2020-11-25)
 
 
