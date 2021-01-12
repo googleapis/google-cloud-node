@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.1.1...v1.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#25](https://www.github.com/googleapis/nodejs-assured-workloads/issues/25)) ([700731f](https://www.github.com/googleapis/nodejs-assured-workloads/commit/700731fc48712c2af46bf7e74de42e7f24f7171c))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.1.0...v1.1.1) (2020-11-25)
 
 
