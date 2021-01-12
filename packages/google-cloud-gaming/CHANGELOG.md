@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.1.2...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#142](https://www.github.com/googleapis/nodejs-game-servers/issues/142)) ([59f7332](https://www.github.com/googleapis/nodejs-game-servers/commit/59f7332fee754b11e8a395d19013cc78351e5659))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.1.1...v2.1.2) (2020-11-25)
 
 
