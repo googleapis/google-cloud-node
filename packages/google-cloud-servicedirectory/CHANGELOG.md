@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.0.0...v3.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#105](https://www.github.com/googleapis/nodejs-service-directory/issues/105)) ([0807e17](https://www.github.com/googleapis/nodejs-service-directory/commit/0807e17411d6608d0cbad33a417bed25c883bcb4))
+
+
+### Bug Fixes
+
+* **deps:** update dependency json-schema to ^0.3.0 ([#102](https://www.github.com/googleapis/nodejs-service-directory/issues/102)) ([e7cb54b](https://www.github.com/googleapis/nodejs-service-directory/commit/e7cb54bac1f0101f47b10d9244487ae91ca4239d))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v2.1.2...v3.0.0) (2020-11-19)
 
 
