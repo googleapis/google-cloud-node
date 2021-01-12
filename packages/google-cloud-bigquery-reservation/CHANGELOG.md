@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.0.2...v1.1.0) (2021-01-09)
+
+
+### Features
+
+* introduce style enumeration ([#43](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/43)) ([06bfdc6](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/06bfdc6a0c6c3b0416bbb34ff5b46e96256215ef))
+
+
+### Bug Fixes
+
+* **deps:** roll back dependency @google-cloud/bigquery-reservation to ^1.0.1 ([#38](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/38)) ([b4ee172](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/b4ee172520adbbdff077d2a1db7d72c88401f98a))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.0.1...v1.0.2) (2020-11-25)
 
 
