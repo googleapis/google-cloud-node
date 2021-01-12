@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-managed-identities.git",
-        "sha": "41216f2a3f75d8ec9c18074e0eef4df1c3122b05"
+        "remote": "https://github.com/googleapis/nodejs-managed-identities.git",
+        "sha": "09a59a901ff9fc97b3e9accbd8434306fe8ed603"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "18c5dbdb4ac8cf75d4d8174e7b4558f48e76f8a1"
+        "sha": "363fe305e9ce34a6cd53951c6ee5f997094b54ee"
       }
     }
   ],
