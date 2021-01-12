@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.3...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#426](https://www.github.com/googleapis/nodejs-iot/issues/426)) ([4daeff4](https://www.github.com/googleapis/nodejs-iot/commit/4daeff47d5cfc5fd826705f4da5b8dbed1784e44))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.2...v2.1.3) (2020-11-25)
 
 
