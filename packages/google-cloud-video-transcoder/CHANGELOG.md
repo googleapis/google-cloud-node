@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.1.0...v1.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#22](https://www.github.com/googleapis/nodejs-video-transcoder/issues/22)) ([9b9ca5d](https://www.github.com/googleapis/nodejs-video-transcoder/commit/9b9ca5db8168d70b8afb7dc994659ed92d6a645a))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.0.1...v1.1.0) (2020-11-30)
 
 
