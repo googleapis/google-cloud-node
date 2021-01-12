@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.1.0...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#49](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/49)) ([6d65571](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/6d655718327044ea6e77bc8501c805b5cd3fc4e2))
+* allowed custom to specify webhook headers through query parameters docs: suggested to always use version for production traffic when calling DetectIntent ([#44](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/44)) ([0ffd0b7](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/0ffd0b7a8a2f34c06062c9baf4f33b719b15ad9f))
+* expose Security Settings API. ([#46](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/46)) ([f6460ce](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/f6460cea16473d1f208eae4bfa3def7cf5583579))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.0.0...v2.1.0) (2020-11-25)
 
 
