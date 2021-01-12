@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.1.3...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* introduces style enumeration ([#318](https://www.github.com/googleapis/nodejs-scheduler/issues/318)) ([173b34e](https://www.github.com/googleapis/nodejs-scheduler/commit/173b34ebaa92cdfb402e66ccca7b37d68bc35ddd))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.1.2...v2.1.3) (2020-12-07)
 
 
