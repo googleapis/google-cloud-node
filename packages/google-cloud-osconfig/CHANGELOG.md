@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.3.1...v1.4.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#75](https://www.github.com/googleapis/nodejs-os-config/issues/75)) ([797ad14](https://www.github.com/googleapis/nodejs-os-config/commit/797ad14b56e331d5926ca7d952583b4094217ccc))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.3.0...v1.3.1) (2020-11-25)
 
 
