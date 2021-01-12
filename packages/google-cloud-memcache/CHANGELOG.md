@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-memcache/compare/v1.2.1...v1.3.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#85](https://www.github.com/googleapis/nodejs-memcache/issues/85)) ([07e4454](https://www.github.com/googleapis/nodejs-memcache/commit/07e44541b9056d83a9505b72913c2b52ecd6e859))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-memcache/compare/v1.2.0...v1.2.1) (2020-11-25)
 
 
