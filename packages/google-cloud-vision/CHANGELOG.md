@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-vision/compare/v2.2.0...v2.3.0) (2021-01-06)
+
+
+### Features
+
+* introduce style enumeration ([b5fe1ac](https://www.github.com/googleapis/nodejs-vision/commit/b5fe1aca1ee70176c5569d1ff9255958988a0077))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-vision/compare/v2.1.2...v2.2.0) (2021-01-06)
 
 
