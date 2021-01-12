@@ -1,1 +1,10 @@
-{"recurse":true,"skip":["https://googleapis.dev/nodejs/artifactregistry/latest/","https://github.com/googleapis/nodejs-artifact-registry","https://github.com/googleapis/nodejs-artifact-registry/blob/master/CHANGELOG.md","https://github.com/googleapis/nodejs-artifact-registry/blob/master/samples/quickstart.js","https://github.com/googleapis/nodejs-artifact-registry/tree/master/samples","https://github.com/googleapis/nodejs-artifact-registry/blob/master/CONTRIBUTING.md","https://github.com/googleapis/nodejs-artifact-registry/blob/master/LICENSE","http://localhost:5695/","https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":10}
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io"
+  ],
+  "silent": true,
+  "concurrency": 10
+}
