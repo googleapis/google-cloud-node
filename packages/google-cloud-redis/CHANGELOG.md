@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.1.2...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* introduces style enumeration ([#456](https://www.github.com/googleapis/nodejs-redis/issues/456)) ([e437847](https://www.github.com/googleapis/nodejs-redis/commit/e43784757f0682a1eefb58b8920a229e757dc017))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-redis/compare/v2.1.1...v2.1.2) (2020-11-25)
 
 
