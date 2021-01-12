@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.3.3...v2.4.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#233](https://www.github.com/googleapis/nodejs-phishing-protection/issues/233)) ([f276eaf](https://www.github.com/googleapis/nodejs-phishing-protection/commit/f276eaf70ed7d0dad754554b10b0039e670d0ea5))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.3.2...v2.3.3) (2021-01-07)
 
 
