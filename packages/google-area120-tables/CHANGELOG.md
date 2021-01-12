@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.0.2...v1.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#27](https://www.github.com/googleapis/nodejs-area120-tables/issues/27)) ([61589a9](https://www.github.com/googleapis/nodejs-area120-tables/commit/61589a9f06674b8723fbe3b68022ebee58df9faf))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.0.1...v1.0.2) (2020-11-24)
 
 
