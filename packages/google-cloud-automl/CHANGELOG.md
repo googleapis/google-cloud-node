@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.3.1...v2.4.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#478](https://www.github.com/googleapis/nodejs-automl/issues/478)) ([1eddaf2](https://www.github.com/googleapis/nodejs-automl/commit/1eddaf2618a1e65d3f54faba4e1ef37abcdab916))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-automl/compare/v2.3.0...v2.3.1) (2020-11-25)
 
 
