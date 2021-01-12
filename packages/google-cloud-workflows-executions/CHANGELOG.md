@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.0.2...v1.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#30](https://www.github.com/googleapis/nodejs-workflows/issues/30)) ([de3c259](https://www.github.com/googleapis/nodejs-workflows/commit/de3c259d08dae7edd775310c0db35fa089f58db3))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-workflows/compare/v1.0.1...v1.0.2) (2020-11-25)
 
 
