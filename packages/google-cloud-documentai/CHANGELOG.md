@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.2.2...v2.3.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#143](https://www.github.com/googleapis/nodejs-document-ai/issues/143)) ([0ed64c4](https://www.github.com/googleapis/nodejs-document-ai/commit/0ed64c40cb5908838348cb9c968841941114473c))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.2.1...v2.2.2) (2020-12-01)
 
 
