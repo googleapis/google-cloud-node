@@ -17,7 +17,6 @@ async function main(projectId) {
   // [START nodejs_access_approval_quickstart]
   // Imports the Google Cloud client library
 
-  // remove this line after package is released
   const {AccessApprovalClient} = require('@google-cloud/access-approval');
 
   // TODO(developer): replace with your prefered project ID.
@@ -26,7 +25,6 @@ async function main(projectId) {
   // Creates a client
   const client = new AccessApprovalClient();
 
-  //TODO(library generator): write the actual function you will be testing
   async function listRequests() {
     const requests = await client.listApprovalRequests({
       parent: `projects/${projectId}`,
