@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-recommender/compare/v4.0.0...v4.1.0) (2021-01-12)
+
+
+### Features
+
+* introduce style enumeration ([#141](https://www.github.com/googleapis/nodejs-recommender/issues/141)) ([478a062](https://www.github.com/googleapis/nodejs-recommender/commit/478a06281fe0845035ec8bb48e531eae25066c66))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-recommender/compare/v3.2.2...v4.0.0) (2021-01-07)
 
 
