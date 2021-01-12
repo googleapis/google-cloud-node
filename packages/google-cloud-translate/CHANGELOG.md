@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [6.1.0](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.5...v6.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#611](https://www.github.com/googleapis/nodejs-translate/issues/611)) ([3189de4](https://www.github.com/googleapis/nodejs-translate/commit/3189de48c865e86e86475819a95698bc9c7e6822))
+
 ### [6.0.5](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.4...v6.0.5) (2020-12-04)
 
 
