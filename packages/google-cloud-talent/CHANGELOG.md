@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.0.2...v3.1.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#281](https://www.github.com/googleapis/nodejs-talent/issues/281)) ([88651c2](https://www.github.com/googleapis/nodejs-talent/commit/88651c2a95638e685235fd8bdf478d4ce71ce941))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-talent/compare/v3.0.1...v3.0.2) (2020-11-25)
 
 
