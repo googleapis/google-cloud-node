@@ -30,7 +30,7 @@ for version in versions:
   name, 
   version,
   bazel_target=f"//google/cloud/retail/{version}:retail-{version}-nodejs")
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=["package.json","linkinator.config.json", "system-test/fixtures/sample/src/index.js","system-test/fixtures/sample/src/index.ts"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

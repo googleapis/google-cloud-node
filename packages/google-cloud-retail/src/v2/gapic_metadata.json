@@ -1,0 +1,199 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.retail.v2",
+  "libraryPackage": "retail",
+  "services": {
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "UpdateCatalog": {
+              "methods": [
+                "updateCatalog"
+              ]
+            },
+            "ListCatalogs": {
+              "methods": [
+                "listCatalogs",
+                "listCatalogsStream",
+                "listCatalogsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "UpdateCatalog": {
+              "methods": [
+                "updateCatalog"
+              ]
+            },
+            "ListCatalogs": {
+              "methods": [
+                "listCatalogs",
+                "listCatalogsStream",
+                "listCatalogsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProductService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProductServiceClient",
+          "rpcs": {
+            "CreateProduct": {
+              "methods": [
+                "createProduct"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "getProduct"
+              ]
+            },
+            "UpdateProduct": {
+              "methods": [
+                "updateProduct"
+              ]
+            },
+            "DeleteProduct": {
+              "methods": [
+                "deleteProduct"
+              ]
+            },
+            "ImportProducts": {
+              "methods": [
+                "importProducts"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProductServiceClient",
+          "rpcs": {
+            "CreateProduct": {
+              "methods": [
+                "createProduct"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "getProduct"
+              ]
+            },
+            "UpdateProduct": {
+              "methods": [
+                "updateProduct"
+              ]
+            },
+            "DeleteProduct": {
+              "methods": [
+                "deleteProduct"
+              ]
+            },
+            "ImportProducts": {
+              "methods": [
+                "importProducts"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UserEventServiceClient",
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "writeUserEvent"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collectUserEvent"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "importUserEvents"
+              ]
+            },
+            "RejoinUserEvents": {
+              "methods": [
+                "rejoinUserEvents"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UserEventServiceClient",
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "writeUserEvent"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collectUserEvent"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "importUserEvents"
+              ]
+            },
+            "RejoinUserEvents": {
+              "methods": [
+                "rejoinUserEvents"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
