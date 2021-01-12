@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.3...v2.2.0) (2021-01-09)
+
+
+### Features
+
+* adds style enumeration ([#120](https://www.github.com/googleapis/nodejs-billing/issues/120)) ([8f70df9](https://www.github.com/googleapis/nodejs-billing/commit/8f70df92f1a2a5217ae64c10819da55cb01b20fd))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-billing/compare/v2.1.2...v2.1.3) (2020-11-25)
 
 
