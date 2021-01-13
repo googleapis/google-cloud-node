@@ -23,6 +23,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # List of excludes for the enhanced library
 excludes = [
+    ".kokoro/presubmit/node12/samples-test.cfg",
     "package.json",
     "README.md",
     "src/decorator.ts",
