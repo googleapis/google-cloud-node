@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-retail",
-        "sha": "f208eeb3030d243d9a4f3cc7d02d8a2e2eaaaf5e"
+        "remote": "git@github.com:googleapis/nodejs-retail.git",
+        "sha": "718b2af37036eb9c54428282c8184dca502b4518"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b241bbc1ad920771707fe03e4cedd4e8c492e143",
-        "internalRef": "350670798"
+        "sha": "463702142d32ffd81db5d3dbcc9f7986e1689690",
+        "internalRef": "351489155"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "fb53b6fb373b7c3edf4e55f3e8036bc6d73fa483"
+        "sha": "16ec872dd898d7de6e1822badfac32484b5d9031"
       }
     }
   ],
