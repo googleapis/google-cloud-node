@@ -58,27 +58,112 @@ npm install @google-cloud/channel
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
+// Reads the secrets from a `oauth2.keys.json` file, which should be downloaded
+// from the Google Developers Console and saved in the same directory with the
+// sample app.
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {CloudChannelServiceClient} = require('@google-cloud/channel');
+// This sample app only calls read-only methods from the Channel API. Include
+// additional scopes if calling methods that modify the configuration.
+const SCOPES = ['https://www.googleapis.com/auth/apps.order'];
 
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
+async function listCustomers(authClient, accountNumber) {
+  // Imports the Google Cloud client library
+  const {CloudChannelServiceClient} = require('@google-cloud/channel');
 
-// Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {CloudChannelServiceClient}();
+  // Instantiates a client using OAuth2 credentials.
+  const sslCreds = grpc.credentials.createSsl();
+  const credentials = grpc.credentials.combineChannelCredentials(
+    sslCreds,
+    grpc.credentials.createFromGoogleCredential(authClient)
+  );
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('Developer! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+  // Instantiates a client
+  const client = new CloudChannelServiceClient({
+    sslCreds: credentials,
+  });
+
+  // Calls listCustomers() method
+  const customers = await client.listCustomers({
+    parent: `accounts/${accountNumber}`,
+  });
+  console.info(customers);
 }
-doSomething();
+
+/**
+ * Create a new OAuth2Client, and go through the OAuth2 content
+ * workflow.  Return the full client to the callback.
+ */
+function getAuthenticatedClient(keys) {
+  return new Promise((resolve, reject) => {
+    // Create an oAuth client to authorize the API call. Secrets are kept in a
+    // `keys.json` file, which should be downloaded from the Google Developers
+    // Console.
+    const oAuth2Client = new OAuth2Client(
+      keys.web.client_id,
+      keys.web.client_secret,
+      // The first redirect URL from the `oauth2.keys.json` file will be used
+      // to generate the OAuth2 callback URL. Update the line below or edit
+      // the redirect URL in the Google Developers Console if needed.
+      // This sample app expects the callback URL to be
+      // 'http://localhost:3000/oauth2callback'
+      keys.web.redirect_uris[0]
+    );
+
+    // Generate the url that will be used for the consent dialog.
+    const authorizeUrl = oAuth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: SCOPES.join(' '),
+    });
+
+    // Open an http server to accept the oauth callback. In this example, the
+    // only request to our webserver is to /oauth2callback?code=<code>
+    const server = http
+      .createServer(async (req, res) => {
+        try {
+          if (req.url.indexOf('/oauth2callback') > -1) {
+            // Acquire the code from the querystring, and close the web
+            // server.
+            const qs = new url.URL(req.url, 'http://localhost:3000')
+              .searchParams;
+            const code = qs.get('code');
+            console.log(`Code is ${code}`);
+            res.end('Authentication successful! Please return to the console.');
+            server.destroy();
+
+            // Now that we have the code, use that to acquire tokens.
+            const r = await oAuth2Client.getToken(code);
+            // Make sure to set the credentials on the OAuth2 client.
+            oAuth2Client.setCredentials(r.tokens);
+            console.info('Tokens acquired.');
+            resolve(oAuth2Client);
+          }
+        } catch (e) {
+          reject(e);
+        }
+      })
+      .listen(3000, () => {
+        // Open the browser to the authorize url to start the workflow.
+        // This line will not work if you are running the code in the
+        // environment where a browser is not available. In this case,
+        // copy the URL and open it manually in a browser.
+        console.info(`Opening the browser with URL: ${authorizeUrl}`);
+        open(authorizeUrl, {wait: false}).then(cp => cp.unref());
+      });
+    destroyer(server);
+  });
+}
+
+async function main(accountNumber, keys) {
+  // TODO: uncomment with your account number
+  // const accountNumber = '1234'
+
+  // TODO: uncomment this line with your oAuth2 file
+  //const keys = require('./oauth2.keys.json');
+
+  getAuthenticatedClient(keys).then(authClient =>
+    listCustomers(authClient, accountNumber)
+  );
+}
 
 ```
 
