@@ -69,6 +69,13 @@ it('should set a buckets default KMS key', async () => {
   );
 });
 
+it('should remove a buckets default KMS key', async () => {
+  const output = execSync(`node removeDefaultKMSKey.js ${bucketName}`);
+  assert.include(output, `Default KMS key was removed from ${bucketName}.`);
+  const [metadata] = await bucket.getMetadata();
+  assert.ok(!metadata.encryption);
+});
+
 it("should enable a bucket's uniform bucket-level access", async () => {
   const output = execSync(
     `node enableUniformBucketLevelAccess.js ${bucketName}`
@@ -138,6 +145,37 @@ it('should remove a bucket cors configuration', async () => {
   );
   await bucket.getMetadata();
   assert.ok(!bucket.metadata.cors);
+});
+
+it("should add a bucket's website configuration", async () => {
+  const output = execSync(
+    `node addBucketWebsiteConfiguration.js ${bucketName} http://example.com http://example.com/404.html`
+  );
+
+  assert.include(
+    output,
+    `Static website bucket ${bucketName} is set up to use http://example.com as the index page and http://example.com/404.html as the 404 page.`
+  );
+
+  const [metadata] = await bucket.getMetadata();
+  assert.deepStrictEqual(metadata.website, {
+    mainPageSuffix: 'http://example.com',
+    notFoundPage: 'http://example.com/404.html',
+  });
+});
+
+it('should make bucket publicly readable', async () => {
+  const output = execSync(`node makeBucketPublic.js ${bucketName}`);
+  assert.match(
+    output,
+    new RegExp(`Bucket ${bucketName} is now publicly readable.`)
+  );
+  const [policy] = await bucket.iam.getPolicy();
+  const objectViewerBinding = policy.bindings.filter(binding => {
+    return binding.role === 'roles/storage.legacyBucketReader';
+  })[0];
+
+  assert(objectViewerBinding.members.includes('allUsers'));
 });
 
 it("should enable a bucket's versioning", async () => {

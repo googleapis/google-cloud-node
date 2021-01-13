@@ -203,14 +203,48 @@ describe('file', () => {
     assert.strictEqual(oldFileExists, false);
   });
 
-  it('should make a file public', () => {
-    const output = execSync(
-      `node makePublic.js ${bucketName} ${copiedFileName}`
-    );
-    assert.match(
-      output,
-      new RegExp(`gs://${bucketName}/${copiedFileName} is now public.`)
-    );
+  describe('public data', () => {
+    let GOOGLE_APPLICATION_CREDENTIALS;
+    let GOOGLE_CLOUD_PROJECT;
+    const publicFileName = 'public.txt';
+    const downloadPublicFilePath = path.join(cwd, 'public-downloaded.txt');
+
+    before(async () => {
+      // CI authentication is done with ADC. Cache it here, restore it `after`
+      // Incase of sample fails it's restore from here.
+      await bucket.file(publicFileName).save('public data');
+      GOOGLE_APPLICATION_CREDENTIALS =
+        process.env.GOOGLE_APPLICATION_CREDENTIALS;
+      GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
+    });
+
+    after(async () => {
+      await promisify(fs.unlink)(downloadPublicFilePath).catch(console.error);
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = GOOGLE_APPLICATION_CREDENTIALS;
+      process.env.GOOGLE_CLOUD_PROJECT = GOOGLE_CLOUD_PROJECT;
+      await bucket.file(publicFileName).delete();
+    });
+
+    it('should make a file public', () => {
+      const output = execSync(
+        `node makePublic.js ${bucketName} ${publicFileName}`
+      );
+      assert.match(
+        output,
+        new RegExp(`gs://${bucketName}/${publicFileName} is now public.`)
+      );
+    });
+
+    it('should download public file', () => {
+      const output = execSync(
+        `node downloadPublicFile.js ${bucketName} ${publicFileName} ${downloadPublicFilePath}`
+      );
+      assert.include(
+        output,
+        `Downloaded public file ${publicFileName} from bucket name ${bucketName} to ${downloadPublicFilePath}.`
+      );
+      fs.statSync(downloadPublicFilePath);
+    });
   });
 
   it('should generate a v2 signed URL for a file', async () => {
@@ -330,6 +364,34 @@ describe('file', () => {
       .file(copiedFileName)
       .getMetadata();
     assert.strictEqual(metadata.storageClass, 'STANDARD');
+  });
+
+  it('should combine multiple files into one new file', async () => {
+    const firstFileName = 'file-one.txt';
+    const secondFileName = 'file-two.txt';
+    const destinationFileName = 'file-one-two.txt';
+
+    const files = [
+      {file: bucket.file(firstFileName), contents: '123'},
+      {file: bucket.file(secondFileName), contents: '456'},
+    ];
+
+    await Promise.all(files.map(file => createFileAsync(file)));
+    const destinationFile = bucket.file(destinationFileName);
+
+    const output = execSync(
+      `node composeFile.js ${bucketName} ${firstFileName} ${secondFileName} ${destinationFileName}`
+    );
+    assert.include(
+      output,
+      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}.`
+    );
+
+    const [contents] = await destinationFile.download();
+    assert.strictEqual(
+      contents.toString(),
+      files.map(x => x.contents).join('')
+    );
   });
 
   it('should delete a file', async () => {

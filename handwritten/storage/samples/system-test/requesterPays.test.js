@@ -102,3 +102,8 @@ it('should disable requester-pays requests', () => {
     `Requester-pays requests have been disabled for bucket ${bucketName}.`
   );
 });
+
+it('should get service account', () => {
+  const out = execSync(`node getServiceAccount.js ${projectId}`);
+  assert.include(out, '@gs-project-accounts.iam.gserviceaccount.com');
+});
