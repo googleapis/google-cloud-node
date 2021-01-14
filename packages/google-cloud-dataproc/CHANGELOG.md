@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.2.1...v2.3.0) (2021-01-14)
+
+
+### Features
+
+* adds style enum ([5762be7](https://www.github.com/googleapis/nodejs-dataproc/commit/5762be73d0b01f5abd7e7612b1efa94fabd6bf9e))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.2.0...v2.2.1) (2021-01-09)
 
 
