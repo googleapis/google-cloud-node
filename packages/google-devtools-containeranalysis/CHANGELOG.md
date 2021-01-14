@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.0.1...v3.1.0) (2021-01-14)
+
+
+### Features
+
+* adds style enum ([641da22](https://www.github.com/googleapis/nodejs-containeranalysis/commit/641da22ad3af60cff2e9f796d47d267d4d414f37))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.0.0...v3.0.1) (2020-11-25)
 
 
