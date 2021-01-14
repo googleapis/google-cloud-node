@@ -43,7 +43,7 @@ describe('Manual handler', () => {
     warn(message: string) {
       // The use of `report` in this class should issue the following
       // warning becasue the `report` class is used directly and, as such,
-      // cannot by itself have information where a ErrorMesasge was
+      // cannot by itself have information where a ErrorMessage was
       // constructed.  It only knows that an error has been reported. Thus,
       // the ErrorMessage objects given to the `report` method in the tests
       // do not have construction site information to verify that if that
