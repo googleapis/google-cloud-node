@@ -109,7 +109,7 @@ export class ErrorReporting {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     err: any,
     request?: manualRequestExtractor.Request,
-    additionalMessage?: string | {},
+    customMessage?: string,
     callback?: manualInterface.Callback | {} | string
   ) => ErrorMessage;
   event!: () => ErrorMessage;

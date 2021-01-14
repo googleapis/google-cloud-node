@@ -55,12 +55,14 @@ export function handlerSetup(
    * application code.
    * @param {Any|ErrorMessage} err - error information of any type or content.
    *  This can be of any type but by giving an instance of ErrorMessage as the
-   *  error arugment one can manually provide values to all fields of the
+   *  error argument one can manually provide values to all fields of the
    *  potential payload.
    * @param {Object} [request] - an object containing request information. This
    *  is expected to be an object similar to the Node/Express request object.
-   * @param {String} [additionalMessage] - a string containing error message
-   *  information to override the builtin message given by an Error/Exception
+   * @param {String} [customMessage] - an optional error message string that
+   *  overrides the default message & stack trace. Message format must comply
+   *  with message field requirements defined in the documentation:
+   *  https://cloud.google.com/error-reporting/reference/rest/v1beta1/projects.events/report#reportederrorevent
    * @param {Function} [callback] - a callback to be invoked once the message
    *  has been successfully submitted to the error reporting API or has failed
    *  after four attempts with the success or error response.
@@ -71,7 +73,7 @@ export function handlerSetup(
   function reportManualError(err: AnyError, request: Request): ErrorMessage;
   function reportManualError(
     err: AnyError,
-    additionalMessage: string
+    customMessage: string
   ): ErrorMessage;
   function reportManualError(err: AnyError, callback: Callback): ErrorMessage;
   function reportManualError(
@@ -82,41 +84,41 @@ export function handlerSetup(
   function reportManualError(
     err: AnyError,
     request: Request,
-    additionalMessage: string
+    customMessage: string
   ): ErrorMessage;
   function reportManualError(
     err: AnyError,
-    additionalMessage: string,
+    customMessage: string,
     callback: Callback
   ): ErrorMessage;
   function reportManualError(
     err: AnyError,
     request: Request,
-    additionalMessage: string,
+    customMessage: string,
     callback: Callback
   ): ErrorMessage;
   function reportManualError(
     err: AnyError,
     request?: Request | Callback | string,
-    additionalMessage?: Callback | string | {},
+    customMessage?: Callback | string,
     callback?: Callback | {} | string
   ): ErrorMessage {
     let em;
     if (is.string(request)) {
       // no request given
-      callback = additionalMessage;
-      additionalMessage = request;
+      callback = customMessage;
+      customMessage = request as string;
       request = undefined;
     } else if (is.function(request)) {
-      // neither request nor additionalMessage given
+      // neither request nor customMessage given
       callback = request;
       request = undefined;
-      additionalMessage = undefined;
+      customMessage = undefined;
     }
 
-    if (is.function(additionalMessage)) {
-      callback = additionalMessage;
-      additionalMessage = undefined;
+    if (is.function(customMessage)) {
+      callback = customMessage;
+      customMessage = undefined;
     }
 
     if (err instanceof ErrorMessage) {
@@ -157,8 +159,8 @@ export function handlerSetup(
       );
     }
 
-    if (is.string(additionalMessage)) {
-      em.setMessage(additionalMessage as string);
+    if (is.string(customMessage)) {
+      em.setMessage(customMessage as string);
     }
 
     // TODO: Address this type cast
