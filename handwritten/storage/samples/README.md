@@ -23,9 +23,12 @@ objects to users via direct download.
   * [Add Bucket Iam Member](#add-bucket-iam-member)
   * [Storage Add Bucket Label.](#storage-add-bucket-label.)
   * [Add Bucket Owner Acl](#add-bucket-owner-acl)
+  * [Bucket Website Configuration.](#bucket-website-configuration.)
   * [Add File Owner Acl](#add-file-owner-acl)
   * [Storage Get Bucket Metadata.](#storage-get-bucket-metadata.)
   * [Change Bucket's Default Storage Class.](#change-bucket's-default-storage-class.)
+  * [Storage File Convert CSEK to CMEK.](#storage-file-convert-csek-to-cmek.)
+  * [Storage Combine files.](#storage-combine-files.)
   * [Storage Configure Bucket Cors.](#storage-configure-bucket-cors.)
   * [Copy File](#copy-file)
   * [Copy Old Version Of File.](#copy-old-version-of-file.)
@@ -44,6 +47,7 @@ objects to users via direct download.
   * [Download Encrypted File](#download-encrypted-file)
   * [Download File](#download-file)
   * [Download File Using Requester Pays](#download-file-using-requester-pays)
+  * [Storage Download Public File.](#storage-download-public-file.)
   * [Enable Bucket Lifecycle Management](#enable-bucket-lifecycle-management)
   * [Storage Enable Bucket Versioning.](#storage-enable-bucket-versioning.)
   * [Enable Default Event Based Hold](#enable-default-event-based-hold)
@@ -62,6 +66,7 @@ objects to users via direct download.
   * [Get Metadata Notifications](#get-metadata-notifications)
   * [Get Requester Pays Status](#get-requester-pays-status)
   * [Get Retention Policy](#get-retention-policy)
+  * [Storage Get Service Account.](#storage-get-service-account.)
   * [Get Uniform Bucket Level Access](#get-uniform-bucket-level-access)
   * [Activate HMAC SA Key.](#activate-hmac-sa-key.)
   * [Create HMAC SA Key.](#create-hmac-sa-key.)
@@ -76,6 +81,7 @@ objects to users via direct download.
   * [List Files with Old Versions.](#list-files-with-old-versions.)
   * [List Notifications](#list-notifications)
   * [Lock Retention Policy](#lock-retention-policy)
+  * [Storage Make Bucket Public.](#storage-make-bucket-public.)
   * [Make Public](#make-public)
   * [Move File](#move-file)
   * [Notifications](#notifications)
@@ -92,6 +98,7 @@ objects to users via direct download.
   * [Remove Bucket Iam Member](#remove-bucket-iam-member)
   * [Storage Remove Bucket Label.](#storage-remove-bucket-label.)
   * [Remove Bucket Owner Acl](#remove-bucket-owner-acl)
+  * [Remove Default KMS Key.](#remove-default-kms-key.)
   * [Remove File Owner Acl](#remove-file-owner-acl)
   * [Remove Retention Policy](#remove-retention-policy)
   * [Rename File](#rename-file)
@@ -207,6 +214,25 @@ __Usage:__
 
 
 
+### Bucket Website Configuration.
+
+Bucket Website Configuration.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/addBucketWebsiteConfiguration.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/addBucketWebsiteConfiguration.js,samples/README.md)
+
+__Usage:__
+
+
+`node addBucketWebsiteConfiguration.js <BUCKET_NAME> <MAIN_PAGE_SUFFIX> <NOT_FOUND_PAGE>`
+
+
+-----
+
+
+
+
 ### Add File Owner Acl
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/addFileOwnerAcl.js).
@@ -255,6 +281,44 @@ __Usage:__
 
 
 `node changeDefaultStorageClass.js <BUCKET_NAME> <CLASS_NAME>`
+
+
+-----
+
+
+
+
+### Storage File Convert CSEK to CMEK.
+
+Storage File Convert CSEK to CMEK.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/changeFileCSEKToCMEK.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/changeFileCSEKToCMEK.js,samples/README.md)
+
+__Usage:__
+
+
+`node changeFileCSEKToCMEK.js <BUCKET_NAME> <FILE_NAME> <ENCRYPTION_KEY> <KMS_KEY_NAME>`
+
+
+-----
+
+
+
+
+### Storage Combine files.
+
+Combine multiple files into one new file.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/composeFile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/composeFile.js,samples/README.md)
+
+__Usage:__
+
+
+`node composeFile.js <BUCKET_NAME> <FIRST_FILE_NAME> <SECOND_FILE_NAME> <DESTINATION_FILE_NAME>`
 
 
 -----
@@ -578,6 +642,25 @@ __Usage:__
 
 
 
+### Storage Download Public File.
+
+Download Public File.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/downloadPublicFile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/downloadPublicFile.js,samples/README.md)
+
+__Usage:__
+
+
+`node downloadPublicFile.js <BUCKET_NAME> <SRC_FILE_NAME> <DEST_FILE_NAME>`
+
+
+-----
+
+
+
+
 ### Enable Bucket Lifecycle Management
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/enableBucketLifecycleManagement.js).
@@ -890,6 +973,25 @@ __Usage:__
 
 
 
+### Storage Get Service Account.
+
+Get Service Account.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/getServiceAccount.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/getServiceAccount.js,samples/README.md)
+
+__Usage:__
+
+
+`node getServiceAccount.js <PROJECT_ID>`
+
+
+-----
+
+
+
+
 ### Get Uniform Bucket Level Access
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/getUniformBucketLevelAccess.js).
@@ -1135,6 +1237,25 @@ __Usage:__
 
 
 `node samples/lockRetentionPolicy.js`
+
+
+-----
+
+
+
+
+### Storage Make Bucket Public.
+
+Storage Make Bucket Public.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/makeBucketPublic.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/makeBucketPublic.js,samples/README.md)
+
+__Usage:__
+
+
+`node makeBucketPublic.js <BUCKET_NAME>`
 
 
 -----
@@ -1411,6 +1532,25 @@ __Usage:__
 
 
 `node samples/removeBucketOwnerAcl.js`
+
+
+-----
+
+
+
+
+### Remove Default KMS Key.
+
+Remove Default KMS Key.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/removeDefaultKMSKey.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/removeDefaultKMSKey.js,samples/README.md)
+
+__Usage:__
+
+
+`node removeDefaultKMSKey.js <BUCKET_NAME>`
 
 
 -----
