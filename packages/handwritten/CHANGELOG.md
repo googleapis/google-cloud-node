@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-error-reporting/compare/v2.0.0...v2.0.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* convert AdditionalMessage param into string type CustomMessage ([#535](https://www.github.com/googleapis/nodejs-error-reporting/issues/535)) ([ba7d8b0](https://www.github.com/googleapis/nodejs-error-reporting/commit/ba7d8b01b6351354c88a675bfe55910e7a2c0eff))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-error-reporting/compare/v1.1.3...v2.0.0) (2020-05-27)
 
 
