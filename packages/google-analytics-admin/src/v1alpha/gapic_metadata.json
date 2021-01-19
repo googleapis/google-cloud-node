@@ -175,11 +175,6 @@
                 "deleteFirebaseLink"
               ]
             },
-            "ListFirebaseLinks": {
-              "methods": [
-                "listFirebaseLinks"
-              ]
-            },
             "GetGlobalSiteTag": {
               "methods": [
                 "getGlobalSiteTag"
@@ -259,6 +254,13 @@
                 "listAndroidAppDataStreams",
                 "listAndroidAppDataStreamsStream",
                 "listAndroidAppDataStreamsAsync"
+              ]
+            },
+            "ListFirebaseLinks": {
+              "methods": [
+                "listFirebaseLinks",
+                "listFirebaseLinksStream",
+                "listFirebaseLinksAsync"
               ]
             },
             "ListGoogleAdsLinks": {
@@ -438,11 +440,6 @@
                 "deleteFirebaseLink"
               ]
             },
-            "ListFirebaseLinks": {
-              "methods": [
-                "listFirebaseLinks"
-              ]
-            },
             "GetGlobalSiteTag": {
               "methods": [
                 "getGlobalSiteTag"
@@ -522,6 +519,13 @@
                 "listAndroidAppDataStreams",
                 "listAndroidAppDataStreamsStream",
                 "listAndroidAppDataStreamsAsync"
+              ]
+            },
+            "ListFirebaseLinks": {
+              "methods": [
+                "listFirebaseLinks",
+                "listFirebaseLinksStream",
+                "listFirebaseLinksAsync"
               ]
             },
             "ListGoogleAdsLinks": {

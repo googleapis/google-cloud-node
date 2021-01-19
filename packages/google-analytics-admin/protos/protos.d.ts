@@ -5899,6 +5899,12 @@ export namespace google {
 
                     /** ListFirebaseLinksRequest parent */
                     parent?: (string|null);
+
+                    /** ListFirebaseLinksRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFirebaseLinksRequest pageToken */
+                    pageToken?: (string|null);
                 }
 
                 /** Represents a ListFirebaseLinksRequest. */
@@ -5912,6 +5918,12 @@ export namespace google {
 
                     /** ListFirebaseLinksRequest parent. */
                     public parent: string;
+
+                    /** ListFirebaseLinksRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFirebaseLinksRequest pageToken. */
+                    public pageToken: string;
 
                     /**
                      * Creates a new ListFirebaseLinksRequest instance using the specified properties.
@@ -5989,6 +6001,9 @@ export namespace google {
 
                     /** ListFirebaseLinksResponse firebaseLinks */
                     firebaseLinks?: (google.analytics.admin.v1alpha.IFirebaseLink[]|null);
+
+                    /** ListFirebaseLinksResponse nextPageToken */
+                    nextPageToken?: (string|null);
                 }
 
                 /** Represents a ListFirebaseLinksResponse. */
@@ -6002,6 +6017,9 @@ export namespace google {
 
                     /** ListFirebaseLinksResponse firebaseLinks. */
                     public firebaseLinks: google.analytics.admin.v1alpha.IFirebaseLink[];
+
+                    /** ListFirebaseLinksResponse nextPageToken. */
+                    public nextPageToken: string;
 
                     /**
                      * Creates a new ListFirebaseLinksResponse instance using the specified properties.
@@ -6981,8 +6999,8 @@ export namespace google {
                     /** Account displayName */
                     displayName?: (string|null);
 
-                    /** Account countryCode */
-                    countryCode?: (string|null);
+                    /** Account regionCode */
+                    regionCode?: (string|null);
 
                     /** Account deleted */
                     deleted?: (boolean|null);
@@ -7009,8 +7027,8 @@ export namespace google {
                     /** Account displayName. */
                     public displayName: string;
 
-                    /** Account countryCode. */
-                    public countryCode: string;
+                    /** Account regionCode. */
+                    public regionCode: string;
 
                     /** Account deleted. */
                     public deleted: boolean;
@@ -7818,14 +7836,8 @@ export namespace google {
                     /** EnhancedMeasurementSettings outboundClicksEnabled */
                     outboundClicksEnabled?: (boolean|null);
 
-                    /** EnhancedMeasurementSettings contentViewsEnabled */
-                    contentViewsEnabled?: (boolean|null);
-
                     /** EnhancedMeasurementSettings siteSearchEnabled */
                     siteSearchEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings formInteractionsEnabled */
-                    formInteractionsEnabled?: (boolean|null);
 
                     /** EnhancedMeasurementSettings videoEngagementEnabled */
                     videoEngagementEnabled?: (boolean|null);
@@ -7833,29 +7845,17 @@ export namespace google {
                     /** EnhancedMeasurementSettings fileDownloadsEnabled */
                     fileDownloadsEnabled?: (boolean|null);
 
-                    /** EnhancedMeasurementSettings dataTaggedElementClicksEnabled */
-                    dataTaggedElementClicksEnabled?: (boolean|null);
-
                     /** EnhancedMeasurementSettings pageLoadsEnabled */
                     pageLoadsEnabled?: (boolean|null);
 
                     /** EnhancedMeasurementSettings pageChangesEnabled */
                     pageChangesEnabled?: (boolean|null);
 
-                    /** EnhancedMeasurementSettings articlesAndBlogsEnabled */
-                    articlesAndBlogsEnabled?: (boolean|null);
-
-                    /** EnhancedMeasurementSettings productsAndEcommerceEnabled */
-                    productsAndEcommerceEnabled?: (boolean|null);
-
                     /** EnhancedMeasurementSettings searchQueryParameter */
                     searchQueryParameter?: (string|null);
 
-                    /** EnhancedMeasurementSettings urlQueryParameter */
-                    urlQueryParameter?: (string|null);
-
-                    /** EnhancedMeasurementSettings excludedDomains */
-                    excludedDomains?: (string|null);
+                    /** EnhancedMeasurementSettings uriQueryParameter */
+                    uriQueryParameter?: (string|null);
                 }
 
                 /** Represents an EnhancedMeasurementSettings. */
@@ -7882,14 +7882,8 @@ export namespace google {
                     /** EnhancedMeasurementSettings outboundClicksEnabled. */
                     public outboundClicksEnabled: boolean;
 
-                    /** EnhancedMeasurementSettings contentViewsEnabled. */
-                    public contentViewsEnabled: boolean;
-
                     /** EnhancedMeasurementSettings siteSearchEnabled. */
                     public siteSearchEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings formInteractionsEnabled. */
-                    public formInteractionsEnabled: boolean;
 
                     /** EnhancedMeasurementSettings videoEngagementEnabled. */
                     public videoEngagementEnabled: boolean;
@@ -7897,29 +7891,17 @@ export namespace google {
                     /** EnhancedMeasurementSettings fileDownloadsEnabled. */
                     public fileDownloadsEnabled: boolean;
 
-                    /** EnhancedMeasurementSettings dataTaggedElementClicksEnabled. */
-                    public dataTaggedElementClicksEnabled: boolean;
-
                     /** EnhancedMeasurementSettings pageLoadsEnabled. */
                     public pageLoadsEnabled: boolean;
 
                     /** EnhancedMeasurementSettings pageChangesEnabled. */
                     public pageChangesEnabled: boolean;
 
-                    /** EnhancedMeasurementSettings articlesAndBlogsEnabled. */
-                    public articlesAndBlogsEnabled: boolean;
-
-                    /** EnhancedMeasurementSettings productsAndEcommerceEnabled. */
-                    public productsAndEcommerceEnabled: boolean;
-
                     /** EnhancedMeasurementSettings searchQueryParameter. */
                     public searchQueryParameter: string;
 
-                    /** EnhancedMeasurementSettings urlQueryParameter. */
-                    public urlQueryParameter: string;
-
-                    /** EnhancedMeasurementSettings excludedDomains. */
-                    public excludedDomains: string;
+                    /** EnhancedMeasurementSettings uriQueryParameter. */
+                    public uriQueryParameter: string;
 
                     /**
                      * Creates a new EnhancedMeasurementSettings instance using the specified properties.
@@ -8103,11 +8085,11 @@ export namespace google {
                 /** Properties of a GlobalSiteTag. */
                 interface IGlobalSiteTag {
 
-                    /** GlobalSiteTag snippet */
-                    snippet?: (string|null);
-
                     /** GlobalSiteTag name */
                     name?: (string|null);
+
+                    /** GlobalSiteTag snippet */
+                    snippet?: (string|null);
                 }
 
                 /** Represents a GlobalSiteTag. */
@@ -8119,11 +8101,11 @@ export namespace google {
                      */
                     constructor(properties?: google.analytics.admin.v1alpha.IGlobalSiteTag);
 
-                    /** GlobalSiteTag snippet. */
-                    public snippet: string;
-
                     /** GlobalSiteTag name. */
                     public name: string;
+
+                    /** GlobalSiteTag snippet. */
+                    public snippet: string;
 
                     /**
                      * Creates a new GlobalSiteTag instance using the specified properties.
@@ -8202,9 +8184,6 @@ export namespace google {
                     /** GoogleAdsLink name */
                     name?: (string|null);
 
-                    /** GoogleAdsLink parent */
-                    parent?: (string|null);
-
                     /** GoogleAdsLink customerId */
                     customerId?: (string|null);
 
@@ -8235,9 +8214,6 @@ export namespace google {
 
                     /** GoogleAdsLink name. */
                     public name: string;
-
-                    /** GoogleAdsLink parent. */
-                    public parent: string;
 
                     /** GoogleAdsLink customerId. */
                     public customerId: string;

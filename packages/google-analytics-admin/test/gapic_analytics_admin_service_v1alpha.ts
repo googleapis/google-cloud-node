@@ -4151,124 +4151,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
-  describe('listFirebaseLinks', () => {
-    it('invokes listFirebaseLinks without error', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksResponse()
-      );
-      client.innerApiCalls.listFirebaseLinks = stubSimpleCall(expectedResponse);
-      const [response] = await client.listFirebaseLinks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFirebaseLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listFirebaseLinks without error using callback', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksResponse()
-      );
-      client.innerApiCalls.listFirebaseLinks = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.listFirebaseLinks(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFirebaseLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes listFirebaseLinks with error', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listFirebaseLinks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listFirebaseLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.listFirebaseLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('getGlobalSiteTag', () => {
     it('invokes getGlobalSiteTag without error', async () => {
       const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
@@ -7345,6 +7227,336 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       assert.strictEqual(
         (client.descriptors.page.listAndroidAppDataStreams
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listFirebaseLinks', () => {
+    it('invokes listFirebaseLinks without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+      ];
+      client.innerApiCalls.listFirebaseLinks = stubSimpleCall(expectedResponse);
+      const [response] = await client.listFirebaseLinks(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listFirebaseLinks as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listFirebaseLinks without error using callback', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+      ];
+      client.innerApiCalls.listFirebaseLinks = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listFirebaseLinks(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IFirebaseLink[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listFirebaseLinks as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listFirebaseLinks with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listFirebaseLinks = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listFirebaseLinks(request), expectedError);
+      assert(
+        (client.innerApiCalls.listFirebaseLinks as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listFirebaseLinksStream without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+      ];
+      client.descriptors.page.listFirebaseLinks.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listFirebaseLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.FirebaseLink[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.FirebaseLink) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listFirebaseLinks, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listFirebaseLinks
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listFirebaseLinksStream with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listFirebaseLinks.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listFirebaseLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.FirebaseLink[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.FirebaseLink) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listFirebaseLinks, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listFirebaseLinks
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listFirebaseLinks without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.FirebaseLink()
+        ),
+      ];
+      client.descriptors.page.listFirebaseLinks.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.analytics.admin.v1alpha.IFirebaseLink[] = [];
+      const iterable = client.listFirebaseLinksAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listFirebaseLinks
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listFirebaseLinks
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listFirebaseLinks with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listFirebaseLinks.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listFirebaseLinksAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IFirebaseLink[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listFirebaseLinks
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listFirebaseLinks
           .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
           'x-goog-request-params'
         ],

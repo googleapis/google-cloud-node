@@ -252,6 +252,11 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'androidAppDataStreams'
       ),
+      listFirebaseLinks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'firebaseLinks'
+      ),
       listGoogleAdsLinks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -473,8 +478,6 @@ export class AnalyticsAdminServiceClient {
   ): void;
   /**
    * Lookup for a single Account.
-   * Throws "Target not found" if no such account found, or if caller does not
-   * have permissions to access it.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -680,7 +683,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The account to update.
    *   The account's `name` field is used to identify the account.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -866,9 +871,6 @@ export class AnalyticsAdminServiceClient {
   ): void;
   /**
    * Lookup for a single "GA4" Property.
-   *
-   * Throws "Target not found" if no such property found, if property is not
-   * of the type "GA4", or if caller does not have permissions to access it.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1161,7 +1163,9 @@ export class AnalyticsAdminServiceClient {
    *   The property's `name` field is used to identify the property to be
    *   updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2054,9 +2058,6 @@ export class AnalyticsAdminServiceClient {
   /**
    * Lookup for a single WebDataStream
    *
-   * Throws "Target not found" if no such web data stream found, or if the
-   * caller does not have permissions to access it.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -2263,7 +2264,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The web stream to update.
    *   The `name` field is used to identify the web stream to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2458,9 +2461,6 @@ export class AnalyticsAdminServiceClient {
   ): void;
   /**
    * Lookup for a single IosAppDataStream
-   *
-   * Throws "Target not found" if no such iOS app data stream found, or if the
-   * caller does not have permissions to access it.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2672,7 +2672,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The iOS app stream to update.
    *   The `name` field is used to identify the iOS app stream to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2875,9 +2877,6 @@ export class AnalyticsAdminServiceClient {
   ): void;
   /**
    * Lookup for a single AndroidAppDataStream
-   *
-   * Throws "Target not found" if no such android app data stream found, or if
-   * the caller does not have permissions to access it.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3093,7 +3092,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The android app stream to update.
    *   The `name` field is used to identify the android app stream to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3304,7 +3305,6 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.name
    *   Required. The name of the settings to lookup.
    *   Format:
-   *
    *   properties/{property_id}/webDataStreams/{stream_id}/enhancedMeasurementSettings
    *   Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
    * @param {object} [options]
@@ -3413,7 +3413,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The settings to update.
    *   The `name` field is used to identify the settings to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3621,7 +3623,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.FirebaseLink} request.firebaseLink
    *   Required. The Firebase link to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3777,106 +3781,6 @@ export class AnalyticsAdminServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.deleteFirebaseLink(request, options, callback);
-  }
-  listFirebaseLinks(
-    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
-      (
-        | protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  listFirebaseLinks(
-    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
-      | protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listFirebaseLinks(
-    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
-      | protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Lists FirebaseLinks on a property.
-   * Properties can have at most one FirebaseLink.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format: properties/{property_id}
-   *   Example: properties/1234
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListFirebaseLinksResponse]{@link google.analytics.admin.v1alpha.ListFirebaseLinksResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listFirebaseLinks(request);
-   */
-  listFirebaseLinks(
-    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
-          | protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
-      | protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
-      (
-        | protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.listFirebaseLinks(request, options, callback);
   }
   getGlobalSiteTag(
     request: protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest,
@@ -4122,7 +4026,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.GoogleAdsLink} request.googleAdsLink
    *   The GoogleAdsLink to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Omitted fields will not be updated.
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6109,6 +6015,222 @@ export class AnalyticsAdminServiceClient {
       (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAndroidAppDataStream>;
+  }
+  listFirebaseLinks(
+    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IFirebaseLink[],
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest | null,
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+    ]
+  >;
+  listFirebaseLinks(
+    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IFirebaseLink
+    >
+  ): void;
+  listFirebaseLinks(
+    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IFirebaseLink
+    >
+  ): void;
+  /**
+   * Lists FirebaseLinks on a property.
+   * Properties can have at most one FirebaseLink.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: properties/{property_id}
+   *   Example: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListFirebaseLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListProperties` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [FirebaseLink]{@link google.analytics.admin.v1alpha.FirebaseLink}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFirebaseLinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listFirebaseLinks(
+    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IFirebaseLink
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IFirebaseLink
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IFirebaseLink[],
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest | null,
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.listFirebaseLinks(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: properties/{property_id}
+   *   Example: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListFirebaseLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListProperties` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [FirebaseLink]{@link google.analytics.admin.v1alpha.FirebaseLink} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFirebaseLinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listFirebaseLinksStream(
+    request?: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listFirebaseLinks.createStream(
+      this.innerApiCalls.listFirebaseLinks as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listFirebaseLinks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: properties/{property_id}
+   *   Example: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListFirebaseLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListProperties` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [FirebaseLink]{@link google.analytics.admin.v1alpha.FirebaseLink}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listFirebaseLinksAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listFirebaseLinksAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IFirebaseLink> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listFirebaseLinks.asyncIterate(
+      this.innerApiCalls['listFirebaseLinks'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IFirebaseLink>;
   }
   listGoogleAdsLinks(
     request: protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest,

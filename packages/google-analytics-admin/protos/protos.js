@@ -12562,6 +12562,8 @@
                          * @memberof google.analytics.admin.v1alpha
                          * @interface IListFirebaseLinksRequest
                          * @property {string|null} [parent] ListFirebaseLinksRequest parent
+                         * @property {number|null} [pageSize] ListFirebaseLinksRequest pageSize
+                         * @property {string|null} [pageToken] ListFirebaseLinksRequest pageToken
                          */
     
                         /**
@@ -12586,6 +12588,22 @@
                          * @instance
                          */
                         ListFirebaseLinksRequest.prototype.parent = "";
+    
+                        /**
+                         * ListFirebaseLinksRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListFirebaseLinksRequest
+                         * @instance
+                         */
+                        ListFirebaseLinksRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListFirebaseLinksRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListFirebaseLinksRequest
+                         * @instance
+                         */
+                        ListFirebaseLinksRequest.prototype.pageToken = "";
     
                         /**
                          * Creates a new ListFirebaseLinksRequest instance using the specified properties.
@@ -12613,6 +12631,10 @@
                                 writer = $Writer.create();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             return writer;
                         };
     
@@ -12649,6 +12671,12 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -12688,6 +12716,12 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
                             return null;
                         };
     
@@ -12705,6 +12739,10 @@
                             var message = new $root.google.analytics.admin.v1alpha.ListFirebaseLinksRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
                             return message;
                         };
     
@@ -12721,10 +12759,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
                             return object;
                         };
     
@@ -12749,6 +12794,7 @@
                          * @memberof google.analytics.admin.v1alpha
                          * @interface IListFirebaseLinksResponse
                          * @property {Array.<google.analytics.admin.v1alpha.IFirebaseLink>|null} [firebaseLinks] ListFirebaseLinksResponse firebaseLinks
+                         * @property {string|null} [nextPageToken] ListFirebaseLinksResponse nextPageToken
                          */
     
                         /**
@@ -12774,6 +12820,14 @@
                          * @instance
                          */
                         ListFirebaseLinksResponse.prototype.firebaseLinks = $util.emptyArray;
+    
+                        /**
+                         * ListFirebaseLinksResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListFirebaseLinksResponse
+                         * @instance
+                         */
+                        ListFirebaseLinksResponse.prototype.nextPageToken = "";
     
                         /**
                          * Creates a new ListFirebaseLinksResponse instance using the specified properties.
@@ -12802,6 +12856,8 @@
                             if (message.firebaseLinks != null && message.firebaseLinks.length)
                                 for (var i = 0; i < message.firebaseLinks.length; ++i)
                                     $root.google.analytics.admin.v1alpha.FirebaseLink.encode(message.firebaseLinks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                             return writer;
                         };
     
@@ -12840,6 +12896,9 @@
                                     if (!(message.firebaseLinks && message.firebaseLinks.length))
                                         message.firebaseLinks = [];
                                     message.firebaseLinks.push($root.google.analytics.admin.v1alpha.FirebaseLink.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -12885,6 +12944,9 @@
                                         return "firebaseLinks." + error;
                                 }
                             }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
                             return null;
                         };
     
@@ -12910,6 +12972,8 @@
                                     message.firebaseLinks[i] = $root.google.analytics.admin.v1alpha.FirebaseLink.fromObject(object.firebaseLinks[i]);
                                 }
                             }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
                             return message;
                         };
     
@@ -12928,11 +12992,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.firebaseLinks = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
                             if (message.firebaseLinks && message.firebaseLinks.length) {
                                 object.firebaseLinks = [];
                                 for (var j = 0; j < message.firebaseLinks.length; ++j)
                                     object.firebaseLinks[j] = $root.google.analytics.admin.v1alpha.FirebaseLink.toObject(message.firebaseLinks[j], options);
                             }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
                             return object;
                         };
     
@@ -14944,7 +15012,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Account createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Account updateTime
                          * @property {string|null} [displayName] Account displayName
-                         * @property {string|null} [countryCode] Account countryCode
+                         * @property {string|null} [regionCode] Account regionCode
                          * @property {boolean|null} [deleted] Account deleted
                          */
     
@@ -14996,12 +15064,12 @@
                         Account.prototype.displayName = "";
     
                         /**
-                         * Account countryCode.
-                         * @member {string} countryCode
+                         * Account regionCode.
+                         * @member {string} regionCode
                          * @memberof google.analytics.admin.v1alpha.Account
                          * @instance
                          */
-                        Account.prototype.countryCode = "";
+                        Account.prototype.regionCode = "";
     
                         /**
                          * Account deleted.
@@ -15043,8 +15111,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
-                            if (message.countryCode != null && Object.hasOwnProperty.call(message, "countryCode"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.countryCode);
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.regionCode);
                             if (message.deleted != null && Object.hasOwnProperty.call(message, "deleted"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deleted);
                             return writer;
@@ -15094,7 +15162,7 @@
                                     message.displayName = reader.string();
                                     break;
                                 case 5:
-                                    message.countryCode = reader.string();
+                                    message.regionCode = reader.string();
                                     break;
                                 case 6:
                                     message.deleted = reader.bool();
@@ -15150,9 +15218,9 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 if (!$util.isString(message.displayName))
                                     return "displayName: string expected";
-                            if (message.countryCode != null && message.hasOwnProperty("countryCode"))
-                                if (!$util.isString(message.countryCode))
-                                    return "countryCode: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
                             if (message.deleted != null && message.hasOwnProperty("deleted"))
                                 if (typeof message.deleted !== "boolean")
                                     return "deleted: boolean expected";
@@ -15185,8 +15253,8 @@
                             }
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
-                            if (object.countryCode != null)
-                                message.countryCode = String(object.countryCode);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
                             if (object.deleted != null)
                                 message.deleted = Boolean(object.deleted);
                             return message;
@@ -15210,7 +15278,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.displayName = "";
-                                object.countryCode = "";
+                                object.regionCode = "";
                                 object.deleted = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -15221,8 +15289,8 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
-                            if (message.countryCode != null && message.hasOwnProperty("countryCode"))
-                                object.countryCode = message.countryCode;
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
                             if (message.deleted != null && message.hasOwnProperty("deleted"))
                                 object.deleted = message.deleted;
                             return object;
@@ -17248,19 +17316,13 @@
                          * @property {boolean|null} [pageViewsEnabled] EnhancedMeasurementSettings pageViewsEnabled
                          * @property {boolean|null} [scrollsEnabled] EnhancedMeasurementSettings scrollsEnabled
                          * @property {boolean|null} [outboundClicksEnabled] EnhancedMeasurementSettings outboundClicksEnabled
-                         * @property {boolean|null} [contentViewsEnabled] EnhancedMeasurementSettings contentViewsEnabled
                          * @property {boolean|null} [siteSearchEnabled] EnhancedMeasurementSettings siteSearchEnabled
-                         * @property {boolean|null} [formInteractionsEnabled] EnhancedMeasurementSettings formInteractionsEnabled
                          * @property {boolean|null} [videoEngagementEnabled] EnhancedMeasurementSettings videoEngagementEnabled
                          * @property {boolean|null} [fileDownloadsEnabled] EnhancedMeasurementSettings fileDownloadsEnabled
-                         * @property {boolean|null} [dataTaggedElementClicksEnabled] EnhancedMeasurementSettings dataTaggedElementClicksEnabled
                          * @property {boolean|null} [pageLoadsEnabled] EnhancedMeasurementSettings pageLoadsEnabled
                          * @property {boolean|null} [pageChangesEnabled] EnhancedMeasurementSettings pageChangesEnabled
-                         * @property {boolean|null} [articlesAndBlogsEnabled] EnhancedMeasurementSettings articlesAndBlogsEnabled
-                         * @property {boolean|null} [productsAndEcommerceEnabled] EnhancedMeasurementSettings productsAndEcommerceEnabled
                          * @property {string|null} [searchQueryParameter] EnhancedMeasurementSettings searchQueryParameter
-                         * @property {string|null} [urlQueryParameter] EnhancedMeasurementSettings urlQueryParameter
-                         * @property {string|null} [excludedDomains] EnhancedMeasurementSettings excludedDomains
+                         * @property {string|null} [uriQueryParameter] EnhancedMeasurementSettings uriQueryParameter
                          */
     
                         /**
@@ -17319,28 +17381,12 @@
                         EnhancedMeasurementSettings.prototype.outboundClicksEnabled = false;
     
                         /**
-                         * EnhancedMeasurementSettings contentViewsEnabled.
-                         * @member {boolean} contentViewsEnabled
-                         * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
-                         * @instance
-                         */
-                        EnhancedMeasurementSettings.prototype.contentViewsEnabled = false;
-    
-                        /**
                          * EnhancedMeasurementSettings siteSearchEnabled.
                          * @member {boolean} siteSearchEnabled
                          * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
                          * @instance
                          */
                         EnhancedMeasurementSettings.prototype.siteSearchEnabled = false;
-    
-                        /**
-                         * EnhancedMeasurementSettings formInteractionsEnabled.
-                         * @member {boolean} formInteractionsEnabled
-                         * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
-                         * @instance
-                         */
-                        EnhancedMeasurementSettings.prototype.formInteractionsEnabled = false;
     
                         /**
                          * EnhancedMeasurementSettings videoEngagementEnabled.
@@ -17359,14 +17405,6 @@
                         EnhancedMeasurementSettings.prototype.fileDownloadsEnabled = false;
     
                         /**
-                         * EnhancedMeasurementSettings dataTaggedElementClicksEnabled.
-                         * @member {boolean} dataTaggedElementClicksEnabled
-                         * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
-                         * @instance
-                         */
-                        EnhancedMeasurementSettings.prototype.dataTaggedElementClicksEnabled = false;
-    
-                        /**
                          * EnhancedMeasurementSettings pageLoadsEnabled.
                          * @member {boolean} pageLoadsEnabled
                          * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
@@ -17383,22 +17421,6 @@
                         EnhancedMeasurementSettings.prototype.pageChangesEnabled = false;
     
                         /**
-                         * EnhancedMeasurementSettings articlesAndBlogsEnabled.
-                         * @member {boolean} articlesAndBlogsEnabled
-                         * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
-                         * @instance
-                         */
-                        EnhancedMeasurementSettings.prototype.articlesAndBlogsEnabled = false;
-    
-                        /**
-                         * EnhancedMeasurementSettings productsAndEcommerceEnabled.
-                         * @member {boolean} productsAndEcommerceEnabled
-                         * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
-                         * @instance
-                         */
-                        EnhancedMeasurementSettings.prototype.productsAndEcommerceEnabled = false;
-    
-                        /**
                          * EnhancedMeasurementSettings searchQueryParameter.
                          * @member {string} searchQueryParameter
                          * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
@@ -17407,20 +17429,12 @@
                         EnhancedMeasurementSettings.prototype.searchQueryParameter = "";
     
                         /**
-                         * EnhancedMeasurementSettings urlQueryParameter.
-                         * @member {string} urlQueryParameter
+                         * EnhancedMeasurementSettings uriQueryParameter.
+                         * @member {string} uriQueryParameter
                          * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
                          * @instance
                          */
-                        EnhancedMeasurementSettings.prototype.urlQueryParameter = "";
-    
-                        /**
-                         * EnhancedMeasurementSettings excludedDomains.
-                         * @member {string} excludedDomains
-                         * @memberof google.analytics.admin.v1alpha.EnhancedMeasurementSettings
-                         * @instance
-                         */
-                        EnhancedMeasurementSettings.prototype.excludedDomains = "";
+                        EnhancedMeasurementSettings.prototype.uriQueryParameter = "";
     
                         /**
                          * Creates a new EnhancedMeasurementSettings instance using the specified properties.
@@ -17456,32 +17470,20 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.scrollsEnabled);
                             if (message.outboundClicksEnabled != null && Object.hasOwnProperty.call(message, "outboundClicksEnabled"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.outboundClicksEnabled);
-                            if (message.contentViewsEnabled != null && Object.hasOwnProperty.call(message, "contentViewsEnabled"))
-                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.contentViewsEnabled);
                             if (message.siteSearchEnabled != null && Object.hasOwnProperty.call(message, "siteSearchEnabled"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.siteSearchEnabled);
-                            if (message.formInteractionsEnabled != null && Object.hasOwnProperty.call(message, "formInteractionsEnabled"))
-                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.formInteractionsEnabled);
                             if (message.videoEngagementEnabled != null && Object.hasOwnProperty.call(message, "videoEngagementEnabled"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.videoEngagementEnabled);
                             if (message.fileDownloadsEnabled != null && Object.hasOwnProperty.call(message, "fileDownloadsEnabled"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.fileDownloadsEnabled);
-                            if (message.dataTaggedElementClicksEnabled != null && Object.hasOwnProperty.call(message, "dataTaggedElementClicksEnabled"))
-                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.dataTaggedElementClicksEnabled);
                             if (message.pageLoadsEnabled != null && Object.hasOwnProperty.call(message, "pageLoadsEnabled"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.pageLoadsEnabled);
                             if (message.pageChangesEnabled != null && Object.hasOwnProperty.call(message, "pageChangesEnabled"))
                                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.pageChangesEnabled);
-                            if (message.articlesAndBlogsEnabled != null && Object.hasOwnProperty.call(message, "articlesAndBlogsEnabled"))
-                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.articlesAndBlogsEnabled);
-                            if (message.productsAndEcommerceEnabled != null && Object.hasOwnProperty.call(message, "productsAndEcommerceEnabled"))
-                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.productsAndEcommerceEnabled);
                             if (message.searchQueryParameter != null && Object.hasOwnProperty.call(message, "searchQueryParameter"))
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.searchQueryParameter);
-                            if (message.urlQueryParameter != null && Object.hasOwnProperty.call(message, "urlQueryParameter"))
-                                writer.uint32(/* id 17, wireType 2 =*/138).string(message.urlQueryParameter);
-                            if (message.excludedDomains != null && Object.hasOwnProperty.call(message, "excludedDomains"))
-                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.excludedDomains);
+                            if (message.uriQueryParameter != null && Object.hasOwnProperty.call(message, "uriQueryParameter"))
+                                writer.uint32(/* id 17, wireType 2 =*/138).string(message.uriQueryParameter);
                             return writer;
                         };
     
@@ -17531,14 +17533,8 @@
                                 case 5:
                                     message.outboundClicksEnabled = reader.bool();
                                     break;
-                                case 6:
-                                    message.contentViewsEnabled = reader.bool();
-                                    break;
                                 case 7:
                                     message.siteSearchEnabled = reader.bool();
-                                    break;
-                                case 8:
-                                    message.formInteractionsEnabled = reader.bool();
                                     break;
                                 case 9:
                                     message.videoEngagementEnabled = reader.bool();
@@ -17546,29 +17542,17 @@
                                 case 10:
                                     message.fileDownloadsEnabled = reader.bool();
                                     break;
-                                case 11:
-                                    message.dataTaggedElementClicksEnabled = reader.bool();
-                                    break;
                                 case 12:
                                     message.pageLoadsEnabled = reader.bool();
                                     break;
                                 case 13:
                                     message.pageChangesEnabled = reader.bool();
                                     break;
-                                case 14:
-                                    message.articlesAndBlogsEnabled = reader.bool();
-                                    break;
-                                case 15:
-                                    message.productsAndEcommerceEnabled = reader.bool();
-                                    break;
                                 case 16:
                                     message.searchQueryParameter = reader.string();
                                     break;
                                 case 17:
-                                    message.urlQueryParameter = reader.string();
-                                    break;
-                                case 18:
-                                    message.excludedDomains = reader.string();
+                                    message.uriQueryParameter = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -17620,45 +17604,27 @@
                             if (message.outboundClicksEnabled != null && message.hasOwnProperty("outboundClicksEnabled"))
                                 if (typeof message.outboundClicksEnabled !== "boolean")
                                     return "outboundClicksEnabled: boolean expected";
-                            if (message.contentViewsEnabled != null && message.hasOwnProperty("contentViewsEnabled"))
-                                if (typeof message.contentViewsEnabled !== "boolean")
-                                    return "contentViewsEnabled: boolean expected";
                             if (message.siteSearchEnabled != null && message.hasOwnProperty("siteSearchEnabled"))
                                 if (typeof message.siteSearchEnabled !== "boolean")
                                     return "siteSearchEnabled: boolean expected";
-                            if (message.formInteractionsEnabled != null && message.hasOwnProperty("formInteractionsEnabled"))
-                                if (typeof message.formInteractionsEnabled !== "boolean")
-                                    return "formInteractionsEnabled: boolean expected";
                             if (message.videoEngagementEnabled != null && message.hasOwnProperty("videoEngagementEnabled"))
                                 if (typeof message.videoEngagementEnabled !== "boolean")
                                     return "videoEngagementEnabled: boolean expected";
                             if (message.fileDownloadsEnabled != null && message.hasOwnProperty("fileDownloadsEnabled"))
                                 if (typeof message.fileDownloadsEnabled !== "boolean")
                                     return "fileDownloadsEnabled: boolean expected";
-                            if (message.dataTaggedElementClicksEnabled != null && message.hasOwnProperty("dataTaggedElementClicksEnabled"))
-                                if (typeof message.dataTaggedElementClicksEnabled !== "boolean")
-                                    return "dataTaggedElementClicksEnabled: boolean expected";
                             if (message.pageLoadsEnabled != null && message.hasOwnProperty("pageLoadsEnabled"))
                                 if (typeof message.pageLoadsEnabled !== "boolean")
                                     return "pageLoadsEnabled: boolean expected";
                             if (message.pageChangesEnabled != null && message.hasOwnProperty("pageChangesEnabled"))
                                 if (typeof message.pageChangesEnabled !== "boolean")
                                     return "pageChangesEnabled: boolean expected";
-                            if (message.articlesAndBlogsEnabled != null && message.hasOwnProperty("articlesAndBlogsEnabled"))
-                                if (typeof message.articlesAndBlogsEnabled !== "boolean")
-                                    return "articlesAndBlogsEnabled: boolean expected";
-                            if (message.productsAndEcommerceEnabled != null && message.hasOwnProperty("productsAndEcommerceEnabled"))
-                                if (typeof message.productsAndEcommerceEnabled !== "boolean")
-                                    return "productsAndEcommerceEnabled: boolean expected";
                             if (message.searchQueryParameter != null && message.hasOwnProperty("searchQueryParameter"))
                                 if (!$util.isString(message.searchQueryParameter))
                                     return "searchQueryParameter: string expected";
-                            if (message.urlQueryParameter != null && message.hasOwnProperty("urlQueryParameter"))
-                                if (!$util.isString(message.urlQueryParameter))
-                                    return "urlQueryParameter: string expected";
-                            if (message.excludedDomains != null && message.hasOwnProperty("excludedDomains"))
-                                if (!$util.isString(message.excludedDomains))
-                                    return "excludedDomains: string expected";
+                            if (message.uriQueryParameter != null && message.hasOwnProperty("uriQueryParameter"))
+                                if (!$util.isString(message.uriQueryParameter))
+                                    return "uriQueryParameter: string expected";
                             return null;
                         };
     
@@ -17684,32 +17650,20 @@
                                 message.scrollsEnabled = Boolean(object.scrollsEnabled);
                             if (object.outboundClicksEnabled != null)
                                 message.outboundClicksEnabled = Boolean(object.outboundClicksEnabled);
-                            if (object.contentViewsEnabled != null)
-                                message.contentViewsEnabled = Boolean(object.contentViewsEnabled);
                             if (object.siteSearchEnabled != null)
                                 message.siteSearchEnabled = Boolean(object.siteSearchEnabled);
-                            if (object.formInteractionsEnabled != null)
-                                message.formInteractionsEnabled = Boolean(object.formInteractionsEnabled);
                             if (object.videoEngagementEnabled != null)
                                 message.videoEngagementEnabled = Boolean(object.videoEngagementEnabled);
                             if (object.fileDownloadsEnabled != null)
                                 message.fileDownloadsEnabled = Boolean(object.fileDownloadsEnabled);
-                            if (object.dataTaggedElementClicksEnabled != null)
-                                message.dataTaggedElementClicksEnabled = Boolean(object.dataTaggedElementClicksEnabled);
                             if (object.pageLoadsEnabled != null)
                                 message.pageLoadsEnabled = Boolean(object.pageLoadsEnabled);
                             if (object.pageChangesEnabled != null)
                                 message.pageChangesEnabled = Boolean(object.pageChangesEnabled);
-                            if (object.articlesAndBlogsEnabled != null)
-                                message.articlesAndBlogsEnabled = Boolean(object.articlesAndBlogsEnabled);
-                            if (object.productsAndEcommerceEnabled != null)
-                                message.productsAndEcommerceEnabled = Boolean(object.productsAndEcommerceEnabled);
                             if (object.searchQueryParameter != null)
                                 message.searchQueryParameter = String(object.searchQueryParameter);
-                            if (object.urlQueryParameter != null)
-                                message.urlQueryParameter = String(object.urlQueryParameter);
-                            if (object.excludedDomains != null)
-                                message.excludedDomains = String(object.excludedDomains);
+                            if (object.uriQueryParameter != null)
+                                message.uriQueryParameter = String(object.uriQueryParameter);
                             return message;
                         };
     
@@ -17732,19 +17686,13 @@
                                 object.pageViewsEnabled = false;
                                 object.scrollsEnabled = false;
                                 object.outboundClicksEnabled = false;
-                                object.contentViewsEnabled = false;
                                 object.siteSearchEnabled = false;
-                                object.formInteractionsEnabled = false;
                                 object.videoEngagementEnabled = false;
                                 object.fileDownloadsEnabled = false;
-                                object.dataTaggedElementClicksEnabled = false;
                                 object.pageLoadsEnabled = false;
                                 object.pageChangesEnabled = false;
-                                object.articlesAndBlogsEnabled = false;
-                                object.productsAndEcommerceEnabled = false;
                                 object.searchQueryParameter = "";
-                                object.urlQueryParameter = "";
-                                object.excludedDomains = "";
+                                object.uriQueryParameter = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -17756,32 +17704,20 @@
                                 object.scrollsEnabled = message.scrollsEnabled;
                             if (message.outboundClicksEnabled != null && message.hasOwnProperty("outboundClicksEnabled"))
                                 object.outboundClicksEnabled = message.outboundClicksEnabled;
-                            if (message.contentViewsEnabled != null && message.hasOwnProperty("contentViewsEnabled"))
-                                object.contentViewsEnabled = message.contentViewsEnabled;
                             if (message.siteSearchEnabled != null && message.hasOwnProperty("siteSearchEnabled"))
                                 object.siteSearchEnabled = message.siteSearchEnabled;
-                            if (message.formInteractionsEnabled != null && message.hasOwnProperty("formInteractionsEnabled"))
-                                object.formInteractionsEnabled = message.formInteractionsEnabled;
                             if (message.videoEngagementEnabled != null && message.hasOwnProperty("videoEngagementEnabled"))
                                 object.videoEngagementEnabled = message.videoEngagementEnabled;
                             if (message.fileDownloadsEnabled != null && message.hasOwnProperty("fileDownloadsEnabled"))
                                 object.fileDownloadsEnabled = message.fileDownloadsEnabled;
-                            if (message.dataTaggedElementClicksEnabled != null && message.hasOwnProperty("dataTaggedElementClicksEnabled"))
-                                object.dataTaggedElementClicksEnabled = message.dataTaggedElementClicksEnabled;
                             if (message.pageLoadsEnabled != null && message.hasOwnProperty("pageLoadsEnabled"))
                                 object.pageLoadsEnabled = message.pageLoadsEnabled;
                             if (message.pageChangesEnabled != null && message.hasOwnProperty("pageChangesEnabled"))
                                 object.pageChangesEnabled = message.pageChangesEnabled;
-                            if (message.articlesAndBlogsEnabled != null && message.hasOwnProperty("articlesAndBlogsEnabled"))
-                                object.articlesAndBlogsEnabled = message.articlesAndBlogsEnabled;
-                            if (message.productsAndEcommerceEnabled != null && message.hasOwnProperty("productsAndEcommerceEnabled"))
-                                object.productsAndEcommerceEnabled = message.productsAndEcommerceEnabled;
                             if (message.searchQueryParameter != null && message.hasOwnProperty("searchQueryParameter"))
                                 object.searchQueryParameter = message.searchQueryParameter;
-                            if (message.urlQueryParameter != null && message.hasOwnProperty("urlQueryParameter"))
-                                object.urlQueryParameter = message.urlQueryParameter;
-                            if (message.excludedDomains != null && message.hasOwnProperty("excludedDomains"))
-                                object.excludedDomains = message.excludedDomains;
+                            if (message.uriQueryParameter != null && message.hasOwnProperty("uriQueryParameter"))
+                                object.uriQueryParameter = message.uriQueryParameter;
                             return object;
                         };
     
@@ -18092,8 +18028,8 @@
                          * Properties of a GlobalSiteTag.
                          * @memberof google.analytics.admin.v1alpha
                          * @interface IGlobalSiteTag
-                         * @property {string|null} [snippet] GlobalSiteTag snippet
                          * @property {string|null} [name] GlobalSiteTag name
+                         * @property {string|null} [snippet] GlobalSiteTag snippet
                          */
     
                         /**
@@ -18112,20 +18048,20 @@
                         }
     
                         /**
-                         * GlobalSiteTag snippet.
-                         * @member {string} snippet
-                         * @memberof google.analytics.admin.v1alpha.GlobalSiteTag
-                         * @instance
-                         */
-                        GlobalSiteTag.prototype.snippet = "";
-    
-                        /**
                          * GlobalSiteTag name.
                          * @member {string} name
                          * @memberof google.analytics.admin.v1alpha.GlobalSiteTag
                          * @instance
                          */
                         GlobalSiteTag.prototype.name = "";
+    
+                        /**
+                         * GlobalSiteTag snippet.
+                         * @member {string} snippet
+                         * @memberof google.analytics.admin.v1alpha.GlobalSiteTag
+                         * @instance
+                         */
+                        GlobalSiteTag.prototype.snippet = "";
     
                         /**
                          * Creates a new GlobalSiteTag instance using the specified properties.
@@ -18151,10 +18087,10 @@
                         GlobalSiteTag.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.snippet != null && Object.hasOwnProperty.call(message, "snippet"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.snippet);
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.snippet != null && Object.hasOwnProperty.call(message, "snippet"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.snippet);
                             return writer;
                         };
     
@@ -18190,10 +18126,10 @@
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    message.snippet = reader.string();
+                                    message.name = reader.string();
                                     break;
                                 case 2:
-                                    message.name = reader.string();
+                                    message.snippet = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -18230,12 +18166,12 @@
                         GlobalSiteTag.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.snippet != null && message.hasOwnProperty("snippet"))
-                                if (!$util.isString(message.snippet))
-                                    return "snippet: string expected";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.snippet != null && message.hasOwnProperty("snippet"))
+                                if (!$util.isString(message.snippet))
+                                    return "snippet: string expected";
                             return null;
                         };
     
@@ -18251,10 +18187,10 @@
                             if (object instanceof $root.google.analytics.admin.v1alpha.GlobalSiteTag)
                                 return object;
                             var message = new $root.google.analytics.admin.v1alpha.GlobalSiteTag();
-                            if (object.snippet != null)
-                                message.snippet = String(object.snippet);
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.snippet != null)
+                                message.snippet = String(object.snippet);
                             return message;
                         };
     
@@ -18272,13 +18208,13 @@
                                 options = {};
                             var object = {};
                             if (options.defaults) {
-                                object.snippet = "";
                                 object.name = "";
+                                object.snippet = "";
                             }
-                            if (message.snippet != null && message.hasOwnProperty("snippet"))
-                                object.snippet = message.snippet;
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.snippet != null && message.hasOwnProperty("snippet"))
+                                object.snippet = message.snippet;
                             return object;
                         };
     
@@ -18303,7 +18239,6 @@
                          * @memberof google.analytics.admin.v1alpha
                          * @interface IGoogleAdsLink
                          * @property {string|null} [name] GoogleAdsLink name
-                         * @property {string|null} [parent] GoogleAdsLink parent
                          * @property {string|null} [customerId] GoogleAdsLink customerId
                          * @property {boolean|null} [canManageClients] GoogleAdsLink canManageClients
                          * @property {google.protobuf.IBoolValue|null} [adsPersonalizationEnabled] GoogleAdsLink adsPersonalizationEnabled
@@ -18334,14 +18269,6 @@
                          * @instance
                          */
                         GoogleAdsLink.prototype.name = "";
-    
-                        /**
-                         * GoogleAdsLink parent.
-                         * @member {string} parent
-                         * @memberof google.analytics.admin.v1alpha.GoogleAdsLink
-                         * @instance
-                         */
-                        GoogleAdsLink.prototype.parent = "";
     
                         /**
                          * GoogleAdsLink customerId.
@@ -18417,8 +18344,6 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parent);
                             if (message.customerId != null && Object.hasOwnProperty.call(message, "customerId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.customerId);
                             if (message.canManageClients != null && Object.hasOwnProperty.call(message, "canManageClients"))
@@ -18467,9 +18392,6 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.parent = reader.string();
                                     break;
                                 case 3:
                                     message.customerId = reader.string();
@@ -18527,9 +18449,6 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
                             if (message.customerId != null && message.hasOwnProperty("customerId"))
                                 if (!$util.isString(message.customerId))
                                     return "customerId: string expected";
@@ -18571,8 +18490,6 @@
                             var message = new $root.google.analytics.admin.v1alpha.GoogleAdsLink();
                             if (object.name != null)
                                 message.name = String(object.name);
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
                             if (object.customerId != null)
                                 message.customerId = String(object.customerId);
                             if (object.canManageClients != null)
@@ -18612,7 +18529,6 @@
                             var object = {};
                             if (options.defaults) {
                                 object.name = "";
-                                object.parent = "";
                                 object.customerId = "";
                                 object.canManageClients = false;
                                 object.adsPersonalizationEnabled = null;
@@ -18622,8 +18538,6 @@
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
                             if (message.customerId != null && message.hasOwnProperty("customerId"))
                                 object.customerId = message.customerId;
                             if (message.canManageClients != null && message.hasOwnProperty("canManageClients"))
