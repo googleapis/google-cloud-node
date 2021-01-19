@@ -175,7 +175,7 @@ describe('topics', () => {
 
     const {data, publishTime} = await _pullOneMessage(subscription);
     const actualWait = publishTime.getTime() - startTime;
-    const acceptableLatency = 150;
+    const acceptableLatency = 300;
 
     assert.strictEqual(data.toString(), expectedMessage.data);
     assert.isAtMost(
