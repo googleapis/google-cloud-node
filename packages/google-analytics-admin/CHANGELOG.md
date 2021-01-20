@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.4.0...v2.0.0) (2021-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* `update_mask` field is required for all Update operations
+* rename `country_code` field to `region_code` in `Account`
+* rename `url_query_parameter` field to `uri_query_parameter` in `EnhancedMeasurementSettings`
+* remove `parent` field from `GoogleAdsLink` (#73)
+* remove unused fields from `EnhancedMeasurementSettings`
+
+### Features
+
+* add pagination support for `ListFirebaseLinks` operation ([57205d1](https://www.github.com/googleapis/nodejs-analytics-admin/commit/57205d16409af361342f77261767d77e84582965))
+
+
+### Bug Fixes
+
+* `update_mask` field is required for all Update operations ([57205d1](https://www.github.com/googleapis/nodejs-analytics-admin/commit/57205d16409af361342f77261767d77e84582965))
+* remove `parent` field from `GoogleAdsLink` ([#73](https://www.github.com/googleapis/nodejs-analytics-admin/issues/73)) ([57205d1](https://www.github.com/googleapis/nodejs-analytics-admin/commit/57205d16409af361342f77261767d77e84582965))
+* remove unused fields from `EnhancedMeasurementSettings`   ([57205d1](https://www.github.com/googleapis/nodejs-analytics-admin/commit/57205d16409af361342f77261767d77e84582965))
+* rename `country_code` field to `region_code` in `Account` ([57205d1](https://www.github.com/googleapis/nodejs-analytics-admin/commit/57205d16409af361342f77261767d77e84582965))
+* rename `url_query_parameter` field to `uri_query_parameter` in `EnhancedMeasurementSettings` ([57205d1](https://www.github.com/googleapis/nodejs-analytics-admin/commit/57205d16409af361342f77261767d77e84582965))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.3.0...v1.4.0) (2021-01-09)
 
 
