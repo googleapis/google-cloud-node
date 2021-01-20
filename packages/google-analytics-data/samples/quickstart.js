@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,17 +49,17 @@ function main(propertyId = 'YOUR-GA4-PROPERTY-ID') {
    * TODO(developer): Uncomment this variable and replace with your GA4
    *   property ID before running the sample.
    */
-  // const propertyId = 'YOUR-GA4-PROPERTY-ID';
+  // propertyId = 'YOUR-GA4-PROPERTY-ID';
 
-  // Imports the Google Analytics Data API client library
+  // Imports the Google Analytics Data API client library.
   const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
 
-  // Creates a client
-  const client = new AlphaAnalyticsDataClient();
+  // Creates a client.
+  const analyticsDataClient = new AlphaAnalyticsDataClient();
 
   // Runs a simple report.
   async function runReport() {
-    const [response] = await client.runReport({
+    const [response] = await analyticsDataClient.runReport({
       entity: {
         propertyId: propertyId,
       },
