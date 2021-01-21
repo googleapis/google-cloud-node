@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.3.0...v3.4.0) (2021-01-21)
+
+
+### Features
+
+* added expire_time and ttl fields to Secret ([#201](https://www.github.com/googleapis/nodejs-secret-manager/issues/201)) ([93ed224](https://www.github.com/googleapis/nodejs-secret-manager/commit/93ed2245d073a16113f8f3d033f6c4bdc9b52dbe))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.2.3...v3.3.0) (2021-01-09)
 
 
