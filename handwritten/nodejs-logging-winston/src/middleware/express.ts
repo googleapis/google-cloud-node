@@ -42,15 +42,23 @@ export async function makeMiddleware(
 ): Promise<Middleware> {
   let transport: LoggingWinston;
 
-  // If a transport was not provided, instantiate one.
-  if (!(optionsOrTransport instanceof LoggingWinston)) {
-    const options = {logName: 'winston_log', ...optionsOrTransport};
+  // If no custom transports are provided, use default or instantiate one.
+  const cloudTransport = logger.transports.find(
+    t => t instanceof LoggingWinston
+  );
 
-    transport = new LoggingWinston(options);
-  } else {
+  // If user provides a custom transport, always add it to the logger.
+  if (optionsOrTransport instanceof LoggingWinston) {
     transport = optionsOrTransport;
+    logger.add(transport);
+  } else if (cloudTransport && !optionsOrTransport) {
+    // Check if logger already contains a Cloud transport
+    transport = cloudTransport as LoggingWinston;
+  } else {
+    const options = {logName: 'winston_log', ...optionsOrTransport};
+    transport = new LoggingWinston(options);
+    logger.add(transport);
   }
-  logger.add(transport);
 
   const auth = transport.common.stackdriverLog.logging.auth;
   const [env, projectId] = await Promise.all([

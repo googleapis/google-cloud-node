@@ -107,6 +107,16 @@ describe('middleware/express', () => {
     );
   });
 
+  it('should not allocate a transport when it can be inferred', async () => {
+    const t = new FakeLoggingWinston({});
+    logger = winston.createLogger({
+      transports: [t],
+    });
+    await makeMiddleware(logger);
+    assert.strictEqual(logger.transports.length, 1);
+    assert.strictEqual(logger.transports[0], t);
+  });
+
   it('should add a transport to the logger when not provided', async () => {
     await makeMiddleware(logger);
     assert.strictEqual(logger.transports.length, 1);
