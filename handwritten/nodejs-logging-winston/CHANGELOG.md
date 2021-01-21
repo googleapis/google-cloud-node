@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.0.3](https://www.github.com/googleapis/nodejs-logging-winston/compare/v4.0.2...v4.0.3) (2021-01-21)
+
+
+### Bug Fixes
+
+* dedupe logs when using middleware ([#553](https://www.github.com/googleapis/nodejs-logging-winston/issues/553)) ([34c9a47](https://www.github.com/googleapis/nodejs-logging-winston/commit/34c9a47e19420b2163b86862732b75a1275e37c9))
+
 ### [4.0.2](https://www.github.com/googleapis/nodejs-logging-winston/compare/v4.0.1...v4.0.2) (2020-12-08)
 
 
