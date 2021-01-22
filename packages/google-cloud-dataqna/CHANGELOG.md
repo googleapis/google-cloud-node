@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.0...v1.0.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* fix docs links ([#6](https://www.github.com/googleapis/nodejs-data-qna/issues/6)) ([48558f2](https://www.github.com/googleapis/nodejs-data-qna/commit/48558f2c18da5b404fc97aec6fd57ae17e0fb7c2))
+
 ## 1.0.0 (2020-12-17)
 
 
