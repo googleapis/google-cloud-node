@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.2.0...v2.3.0) (2021-01-22)
+
+
+### Features
+
+* introducing fields: ListQueuesRequest.read_mask, GetQueueRequest .read_mask, Queue.task_ttl, Queue.tombstone_ttl, Queue.stats and introducing messages: QueueStats ([#499](https://www.github.com/googleapis/nodejs-tasks/issues/499)) ([d04ef73](https://www.github.com/googleapis/nodejs-tasks/commit/d04ef7311ac26ea17f44cfbc1acb980cb78fb149))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.1.3...v2.2.0) (2021-01-09)
 
 
