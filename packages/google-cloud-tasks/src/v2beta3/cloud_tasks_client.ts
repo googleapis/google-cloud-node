@@ -375,6 +375,11 @@ export class CloudTasksClient {
    * @param {string} request.name
    *   Required. The resource name of the queue. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Read mask is used for a more granular control over what the API returns.
+   *   If the mask is not present all fields will be returned except
+   *   [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+   *   specified in the mask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1833,6 +1838,11 @@ export class CloudTasksClient {
    *   from the previous call to {@link google.cloud.tasks.v2beta3.CloudTasks.ListQueues|ListQueues}
    *   method. It is an error to switch the value of the
    *   {@link google.cloud.tasks.v2beta3.ListQueuesRequest.filter|filter} while iterating through pages.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Read mask is used for a more granular control over what the API returns.
+   *   If the mask is not present all fields will be returned except
+   *   [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+   *   specified in the mask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1925,6 +1935,11 @@ export class CloudTasksClient {
    *   from the previous call to {@link google.cloud.tasks.v2beta3.CloudTasks.ListQueues|ListQueues}
    *   method. It is an error to switch the value of the
    *   {@link google.cloud.tasks.v2beta3.ListQueuesRequest.filter|filter} while iterating through pages.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Read mask is used for a more granular control over what the API returns.
+   *   If the mask is not present all fields will be returned except
+   *   [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+   *   specified in the mask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1997,6 +2012,11 @@ export class CloudTasksClient {
    *   from the previous call to {@link google.cloud.tasks.v2beta3.CloudTasks.ListQueues|ListQueues}
    *   method. It is an error to switch the value of the
    *   {@link google.cloud.tasks.v2beta3.ListQueuesRequest.filter|filter} while iterating through pages.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Read mask is used for a more granular control over what the API returns.
+   *   If the mask is not present all fields will be returned except
+   *   [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+   *   specified in the mask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

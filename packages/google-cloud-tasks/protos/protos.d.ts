@@ -3545,6 +3545,9 @@ export namespace google {
 
                     /** ListQueuesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListQueuesRequest readMask */
+                    readMask?: (google.protobuf.IFieldMask|null);
                 }
 
                 /** Represents a ListQueuesRequest. */
@@ -3567,6 +3570,9 @@ export namespace google {
 
                     /** ListQueuesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListQueuesRequest readMask. */
+                    public readMask?: (google.protobuf.IFieldMask|null);
 
                     /**
                      * Creates a new ListQueuesRequest instance using the specified properties.
@@ -3740,6 +3746,9 @@ export namespace google {
 
                     /** GetQueueRequest name */
                     name?: (string|null);
+
+                    /** GetQueueRequest readMask */
+                    readMask?: (google.protobuf.IFieldMask|null);
                 }
 
                 /** Represents a GetQueueRequest. */
@@ -3753,6 +3762,9 @@ export namespace google {
 
                     /** GetQueueRequest name. */
                     public name: string;
+
+                    /** GetQueueRequest readMask. */
+                    public readMask?: (google.protobuf.IFieldMask|null);
 
                     /**
                      * Creates a new GetQueueRequest instance using the specified properties.
@@ -5498,6 +5510,15 @@ export namespace google {
 
                     /** Queue purgeTime */
                     purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Queue taskTtl */
+                    taskTtl?: (google.protobuf.IDuration|null);
+
+                    /** Queue tombstoneTtl */
+                    tombstoneTtl?: (google.protobuf.IDuration|null);
+
+                    /** Queue stats */
+                    stats?: (google.cloud.tasks.v2beta2.IQueueStats|null);
                 }
 
                 /** Represents a Queue. */
@@ -5529,6 +5550,15 @@ export namespace google {
 
                     /** Queue purgeTime. */
                     public purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Queue taskTtl. */
+                    public taskTtl?: (google.protobuf.IDuration|null);
+
+                    /** Queue tombstoneTtl. */
+                    public tombstoneTtl?: (google.protobuf.IDuration|null);
+
+                    /** Queue stats. */
+                    public stats?: (google.cloud.tasks.v2beta2.IQueueStats|null);
 
                     /** Queue targetType. */
                     public targetType?: ("appEngineHttpTarget"|"pullTarget");
@@ -5835,6 +5865,120 @@ export namespace google {
 
                     /**
                      * Converts this RetryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a QueueStats. */
+                interface IQueueStats {
+
+                    /** QueueStats tasksCount */
+                    tasksCount?: (number|Long|string|null);
+
+                    /** QueueStats oldestEstimatedArrivalTime */
+                    oldestEstimatedArrivalTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueueStats executedLastMinuteCount */
+                    executedLastMinuteCount?: (number|Long|string|null);
+
+                    /** QueueStats concurrentDispatchesCount */
+                    concurrentDispatchesCount?: (number|Long|string|null);
+
+                    /** QueueStats effectiveExecutionRate */
+                    effectiveExecutionRate?: (number|null);
+                }
+
+                /** Represents a QueueStats. */
+                class QueueStats implements IQueueStats {
+
+                    /**
+                     * Constructs a new QueueStats.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2beta2.IQueueStats);
+
+                    /** QueueStats tasksCount. */
+                    public tasksCount: (number|Long|string);
+
+                    /** QueueStats oldestEstimatedArrivalTime. */
+                    public oldestEstimatedArrivalTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueueStats executedLastMinuteCount. */
+                    public executedLastMinuteCount: (number|Long|string);
+
+                    /** QueueStats concurrentDispatchesCount. */
+                    public concurrentDispatchesCount: (number|Long|string);
+
+                    /** QueueStats effectiveExecutionRate. */
+                    public effectiveExecutionRate: number;
+
+                    /**
+                     * Creates a new QueueStats instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueueStats instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2beta2.IQueueStats): google.cloud.tasks.v2beta2.QueueStats;
+
+                    /**
+                     * Encodes the specified QueueStats message. Does not implicitly {@link google.cloud.tasks.v2beta2.QueueStats.verify|verify} messages.
+                     * @param message QueueStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2beta2.IQueueStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueueStats message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta2.QueueStats.verify|verify} messages.
+                     * @param message QueueStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2beta2.IQueueStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueueStats message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueueStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2beta2.QueueStats;
+
+                    /**
+                     * Decodes a QueueStats message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueueStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2beta2.QueueStats;
+
+                    /**
+                     * Verifies a QueueStats message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueueStats message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueueStats
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2beta2.QueueStats;
+
+                    /**
+                     * Creates a plain object from a QueueStats message. Also converts values to other types if specified.
+                     * @param message QueueStats
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2beta2.QueueStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueueStats to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -7075,6 +7219,9 @@ export namespace google {
 
                     /** ListQueuesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListQueuesRequest readMask */
+                    readMask?: (google.protobuf.IFieldMask|null);
                 }
 
                 /** Represents a ListQueuesRequest. */
@@ -7097,6 +7244,9 @@ export namespace google {
 
                     /** ListQueuesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListQueuesRequest readMask. */
+                    public readMask?: (google.protobuf.IFieldMask|null);
 
                     /**
                      * Creates a new ListQueuesRequest instance using the specified properties.
@@ -7270,6 +7420,9 @@ export namespace google {
 
                     /** GetQueueRequest name */
                     name?: (string|null);
+
+                    /** GetQueueRequest readMask */
+                    readMask?: (google.protobuf.IFieldMask|null);
                 }
 
                 /** Represents a GetQueueRequest. */
@@ -7283,6 +7436,9 @@ export namespace google {
 
                     /** GetQueueRequest name. */
                     public name: string;
+
+                    /** GetQueueRequest readMask. */
+                    public readMask?: (google.protobuf.IFieldMask|null);
 
                     /**
                      * Creates a new GetQueueRequest instance using the specified properties.
@@ -8516,11 +8672,20 @@ export namespace google {
                     /** Queue purgeTime */
                     purgeTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Queue taskTtl */
+                    taskTtl?: (google.protobuf.IDuration|null);
+
+                    /** Queue tombstoneTtl */
+                    tombstoneTtl?: (google.protobuf.IDuration|null);
+
                     /** Queue stackdriverLoggingConfig */
                     stackdriverLoggingConfig?: (google.cloud.tasks.v2beta3.IStackdriverLoggingConfig|null);
 
                     /** Queue type */
                     type?: (google.cloud.tasks.v2beta3.Queue.Type|keyof typeof google.cloud.tasks.v2beta3.Queue.Type|null);
+
+                    /** Queue stats */
+                    stats?: (google.cloud.tasks.v2beta3.IQueueStats|null);
                 }
 
                 /** Represents a Queue. */
@@ -8550,11 +8715,20 @@ export namespace google {
                     /** Queue purgeTime. */
                     public purgeTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Queue taskTtl. */
+                    public taskTtl?: (google.protobuf.IDuration|null);
+
+                    /** Queue tombstoneTtl. */
+                    public tombstoneTtl?: (google.protobuf.IDuration|null);
+
                     /** Queue stackdriverLoggingConfig. */
                     public stackdriverLoggingConfig?: (google.cloud.tasks.v2beta3.IStackdriverLoggingConfig|null);
 
                     /** Queue type. */
                     public type: (google.cloud.tasks.v2beta3.Queue.Type|keyof typeof google.cloud.tasks.v2beta3.Queue.Type);
+
+                    /** Queue stats. */
+                    public stats?: (google.cloud.tasks.v2beta3.IQueueStats|null);
 
                     /** Queue queueType. */
                     public queueType?: "appEngineHttpQueue";
@@ -8949,6 +9123,216 @@ export namespace google {
 
                     /**
                      * Converts this StackdriverLoggingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a QueueStats. */
+                interface IQueueStats {
+
+                    /** QueueStats tasksCount */
+                    tasksCount?: (number|Long|string|null);
+
+                    /** QueueStats oldestEstimatedArrivalTime */
+                    oldestEstimatedArrivalTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueueStats executedLastMinuteCount */
+                    executedLastMinuteCount?: (number|Long|string|null);
+
+                    /** QueueStats concurrentDispatchesCount */
+                    concurrentDispatchesCount?: (number|Long|string|null);
+
+                    /** QueueStats effectiveExecutionRate */
+                    effectiveExecutionRate?: (number|null);
+                }
+
+                /** Represents a QueueStats. */
+                class QueueStats implements IQueueStats {
+
+                    /**
+                     * Constructs a new QueueStats.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2beta3.IQueueStats);
+
+                    /** QueueStats tasksCount. */
+                    public tasksCount: (number|Long|string);
+
+                    /** QueueStats oldestEstimatedArrivalTime. */
+                    public oldestEstimatedArrivalTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueueStats executedLastMinuteCount. */
+                    public executedLastMinuteCount: (number|Long|string);
+
+                    /** QueueStats concurrentDispatchesCount. */
+                    public concurrentDispatchesCount: (number|Long|string);
+
+                    /** QueueStats effectiveExecutionRate. */
+                    public effectiveExecutionRate: number;
+
+                    /**
+                     * Creates a new QueueStats instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueueStats instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2beta3.IQueueStats): google.cloud.tasks.v2beta3.QueueStats;
+
+                    /**
+                     * Encodes the specified QueueStats message. Does not implicitly {@link google.cloud.tasks.v2beta3.QueueStats.verify|verify} messages.
+                     * @param message QueueStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2beta3.IQueueStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueueStats message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.QueueStats.verify|verify} messages.
+                     * @param message QueueStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2beta3.IQueueStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueueStats message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueueStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2beta3.QueueStats;
+
+                    /**
+                     * Decodes a QueueStats message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueueStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2beta3.QueueStats;
+
+                    /**
+                     * Verifies a QueueStats message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueueStats message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueueStats
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2beta3.QueueStats;
+
+                    /**
+                     * Creates a plain object from a QueueStats message. Also converts values to other types if specified.
+                     * @param message QueueStats
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2beta3.QueueStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueueStats to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PullMessage. */
+                interface IPullMessage {
+
+                    /** PullMessage payload */
+                    payload?: (Uint8Array|string|null);
+
+                    /** PullMessage tag */
+                    tag?: (string|null);
+                }
+
+                /** Represents a PullMessage. */
+                class PullMessage implements IPullMessage {
+
+                    /**
+                     * Constructs a new PullMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2beta3.IPullMessage);
+
+                    /** PullMessage payload. */
+                    public payload: (Uint8Array|string);
+
+                    /** PullMessage tag. */
+                    public tag: string;
+
+                    /**
+                     * Creates a new PullMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PullMessage instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2beta3.IPullMessage): google.cloud.tasks.v2beta3.PullMessage;
+
+                    /**
+                     * Encodes the specified PullMessage message. Does not implicitly {@link google.cloud.tasks.v2beta3.PullMessage.verify|verify} messages.
+                     * @param message PullMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2beta3.IPullMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PullMessage message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.PullMessage.verify|verify} messages.
+                     * @param message PullMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2beta3.IPullMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PullMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PullMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2beta3.PullMessage;
+
+                    /**
+                     * Decodes a PullMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PullMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2beta3.PullMessage;
+
+                    /**
+                     * Verifies a PullMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PullMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PullMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2beta3.PullMessage;
+
+                    /**
+                     * Creates a plain object from a PullMessage message. Also converts values to other types if specified.
+                     * @param message PullMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2beta3.PullMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PullMessage to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -9605,6 +9989,9 @@ export namespace google {
                     /** Task httpRequest */
                     httpRequest?: (google.cloud.tasks.v2beta3.IHttpRequest|null);
 
+                    /** Task pullMessage */
+                    pullMessage?: (google.cloud.tasks.v2beta3.IPullMessage|null);
+
                     /** Task scheduleTime */
                     scheduleTime?: (google.protobuf.ITimestamp|null);
 
@@ -9648,6 +10035,9 @@ export namespace google {
                     /** Task httpRequest. */
                     public httpRequest?: (google.cloud.tasks.v2beta3.IHttpRequest|null);
 
+                    /** Task pullMessage. */
+                    public pullMessage?: (google.cloud.tasks.v2beta3.IPullMessage|null);
+
                     /** Task scheduleTime. */
                     public scheduleTime?: (google.protobuf.ITimestamp|null);
 
@@ -9673,7 +10063,7 @@ export namespace google {
                     public view: (google.cloud.tasks.v2beta3.Task.View|keyof typeof google.cloud.tasks.v2beta3.Task.View);
 
                     /** Task payloadType. */
-                    public payloadType?: ("appEngineHttpRequest"|"httpRequest");
+                    public payloadType?: ("appEngineHttpRequest"|"httpRequest"|"pullMessage");
 
                     /**
                      * Creates a new Task instance using the specified properties.
