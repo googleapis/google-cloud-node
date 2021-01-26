@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-gke-hub",
-        "sha": "b33c6492964f4a243fd1d27249994eefcec8cc27"
+        "remote": "git@github.com:googleapis/nodejs-gke-hub.git",
+        "sha": "1a349584f6d2012ef40b5f112a18009757c647ee"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b241bbc1ad920771707fe03e4cedd4e8c492e143",
-        "internalRef": "350670798"
+        "sha": "c8bfd324b41ad1f6f65fed124572f92fe116517b",
+        "internalRef": "351218127"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "fb53b6fb373b7c3edf4e55f3e8036bc6d73fa483"
+        "sha": "16ec872dd898d7de6e1822badfac32484b5d9031"
       }
     }
   ],

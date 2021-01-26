@@ -30,7 +30,7 @@ for version in versions:
   name, 
   version,
   bazel_target=f"//google/cloud/gkehub/{version}:gkehub-{version}-nodejs")
-  s.copy(library, excludes=["package.json","linkinator.config.json", "system-test/fixtures/sample/src/index.js","system-test/fixtures/sample/src/index.ts"])
+  s.copy(library, excludes=["package.json","README.md"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

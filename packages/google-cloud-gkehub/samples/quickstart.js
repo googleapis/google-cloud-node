@@ -13,31 +13,26 @@
 
 'use strict';
 
-async function main() {
+async function main(projectId, location) {
   // [START nodejs_gke_hub_quickstart]
-  // Imports the Google Cloud client library
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
+  // Imports the Google Cloud client library
   const {GkeHubMembershipServiceClient} = require('@google-cloud/gke-hub');
 
-  // TODO(developer): replace with your prefered project ID.
+  // TODO(developer): replace with your preferred values.
   // const projectId = 'my-project'
+  // const location = 'global'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {GkeHubMembershipServiceClient}();
+  const client = new GkeHubMembershipServiceClient();
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function listMemberships() {
+    const memberships = await client.listMemberships({
+      parent: `projects/${projectId}/locations/${location}`,
+    });
+    console.info(memberships);
   }
-  doSomething();
+  listMemberships();
   // [END nodejs_gke_hub_quickstart]
 }
 
