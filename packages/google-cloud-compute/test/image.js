@@ -41,7 +41,6 @@ describe('Image', () => {
 
   const COMPUTE = {
     projectId: 'project-id',
-    createImage: util.noop,
     operation: util.noop,
   };
   const IMAGE_NAME = 'image-name';
@@ -66,13 +65,7 @@ describe('Image', () => {
     });
 
     it('should inherit from ServiceObject', () => {
-      const computeInstance = Object.assign({}, COMPUTE, {
-        createImage: {
-          bind: function (context) {
-            assert.strictEqual(context, computeInstance);
-          },
-        },
-      });
+      const computeInstance = Object.assign({}, COMPUTE);
 
       const image = new Image(computeInstance, IMAGE_NAME);
       assert(image instanceof ServiceObject);
@@ -83,11 +76,26 @@ describe('Image', () => {
       assert.strictEqual(calledWith.baseUrl, '/global/images');
       assert.strictEqual(calledWith.id, IMAGE_NAME);
       assert.deepStrictEqual(calledWith.methods, {
-        create: true,
         exists: true,
         get: true,
         getMetadata: true,
       });
+    });
+  });
+
+  describe('create', () => {
+    it('should pass correct arguments to compute.createImage method', done => {
+      const disk = {};
+      const options = {};
+
+      image.parent.createImage = (id, disk_, options_, callback) => {
+        assert.strictEqual(id, image.id);
+        assert.strictEqual(disk_, disk);
+        assert.strictEqual(options_, options);
+        callback(); // done()
+      };
+
+      image.create(disk, options, done);
     });
   });
 

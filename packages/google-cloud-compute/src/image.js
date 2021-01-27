@@ -38,37 +38,6 @@ class Image extends common.ServiceObject {
   constructor(compute, name) {
     const methods = {
       /**
-       * Create an image.
-       *
-       * @method Image#create
-       * @param {Disk} disk - See {@link Compute#createImage}.
-       * @param {object} [options] - See {@link Compute#createImage}.
-       *
-       * @example
-       * const Compute = require('@google-cloud/compute');
-       * const compute = new Compute();
-       * const zone = compute.zone('us-central1-a');
-       * const disk = zone.disk('disk1');
-       * const image = compute.image('image-name');
-       *
-       * image.create(disk, function(err, image, operation, apiResponse) {
-       *   // `image` is an Image object.
-       *
-       *   // `operation` is an Operation object that can be used to check the
-       *   // status of the request.
-       * });
-       *
-       * //-
-       * // If the callback is omitted, we'll return a Promise.
-       * //-
-       * image.create(disk).then(function(data) {
-       *   const image = data[0];
-       *   const operation = data[1];
-       *   const apiResponse = data[2];
-       * });
-       */
-      create: true,
-      /**
        * Check if the image exists.
        *
        * @method Image#exists
@@ -154,11 +123,45 @@ class Image extends common.ServiceObject {
        * @type {string}
        */
       id: name,
-      createMethod: compute.createImage.bind(compute),
       methods: methods,
       pollIntervalMs: compute.pollIntervalMs,
     });
   }
+
+  /**
+   * Create an image.
+   *
+   * @method Image#create
+   * @param {Disk} disk - See {@link Compute#createImage}.
+   * @param {object} [options] - See {@link Compute#createImage}.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('us-central1-a');
+   * const disk = zone.disk('disk1');
+   * const image = compute.image('image-name');
+   *
+   * image.create(disk, function(err, image, operation, apiResponse) {
+   *   // `image` is an Image object.
+   *
+   *   // `operation` is an Operation object that can be used to check the
+   *   // status of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * image.create(disk).then(function(data) {
+   *   const image = data[0];
+   *   const operation = data[1];
+   *   const apiResponse = data[2];
+   * });
+   */
+  create(disk, options, callback) {
+    this.parent.createImage(this.id, disk, options, callback);
+  }
+
   /**
    * Delete the image.
    *

@@ -384,6 +384,12 @@ describe('Compute', () => {
       assert.strictEqual(exists, true);
     });
 
+    it('should create an image from an image object', async () => {
+      const image = compute.image(generateName('image'));
+      const [, operation] = await image.create(DISK, {labels: {a: 'b'}});
+      await operation.promise();
+    });
+
     it('should list images', async () => {
       const [images] = await compute.getImages();
       assert(images.length > 0);

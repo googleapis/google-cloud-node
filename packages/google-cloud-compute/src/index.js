@@ -329,8 +329,9 @@ class Compute extends common.Service {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * compute.createImage('new-image', disk).then(function(data) {
-   *   var operation = data[0];
-   *   var apiResponse = data[1];
+   *   var image = data[0];
+   *   var operation = data[1];
+   *   var apiResponse = data[2];
    * });
    */
   createImage(name, disk, options, callback) {
