@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.4.3](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.2...v2.4.3) (2021-01-27)
+
+
+### Bug Fixes
+
+* handle parameters to image.create() ([#541](https://www.github.com/googleapis/nodejs-compute/issues/541)) ([3b3a7dd](https://www.github.com/googleapis/nodejs-compute/commit/3b3a7dd81790b788d5d53947e2948df55b702c93))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.1...v2.4.2) (2021-01-07)
 
 
