@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-billing.git",
-        "sha": "f4e68c42af86121de0da550e44c94572efe1f74b"
+        "sha": "d9ad464effebc2b9eb101f44bf3cd1d797005d32"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "363fe305e9ce34a6cd53951c6ee5f997094b54ee"
+        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
       }
     }
   ],
