@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.0](https://www.github.com/googleapis/nodejs-recommender/compare/v4.1.0...v4.2.0) (2021-01-27)
+
+
+### Features
+
+* add bindings for folder/org type resources for protos in recommendations, insights and recommender_service to enable v1 api for folder/org ([5ec8c2d](https://www.github.com/googleapis/nodejs-recommender/commit/5ec8c2daf1c5ad58e568761d372bb8de3e5c0063))
+* Add support for "billingAccounts" as another parent resource name for recommendations and insights APIs. ([5ec8c2d](https://www.github.com/googleapis/nodejs-recommender/commit/5ec8c2daf1c5ad58e568761d372bb8de3e5c0063))
+
 ## [4.1.0](https://www.github.com/googleapis/nodejs-recommender/compare/v4.0.0...v4.1.0) (2021-01-12)
 
 
