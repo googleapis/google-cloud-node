@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-notebooks.git",
-        "sha": "57c532c94d6843355cb7f03c3344dfd41f5f4c58"
+        "sha": "405e06c67f59def9d4f1b439f2b7ae5e50b62373"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "363fe305e9ce34a6cd53951c6ee5f997094b54ee"
+        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
       }
     }
   ],
