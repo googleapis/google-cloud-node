@@ -4,7 +4,8 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-speech.git",
-        "sha": "76416504d280b0137c60bdfea2ff76b4225db9b7"      }
+        "sha": "d6c269dfae1e1f4bc6f0eabf80b64d0e09025dea"
+      }
     },
     {
       "git": {
@@ -18,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "363fe305e9ce34a6cd53951c6ee5f997094b54ee"
+        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
       }
     }
   ],
