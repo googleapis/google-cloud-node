@@ -84,7 +84,10 @@ node -v
 NODEDIR=$(dirname $(dirname $(which node)))
 
 # Install agent
-retry git clone {{.Repo}}
+git_clone_repo() {
+	rm -rf cloud-profiler-nodejs && git clone {{.Repo}}
+}
+retry git_clone_repo
 cd cloud-profiler-nodejs
 retry git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pull_branch
 git checkout pull_branch
