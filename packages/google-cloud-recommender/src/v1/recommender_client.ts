@@ -181,6 +181,30 @@ export class RecommenderClient {
       billingAccountLocationRecommenderRecommendationPathTemplate: new this._gaxModule.PathTemplate(
         'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
       ),
+      folderLocationInsightTypePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/insightTypes/{insight_type}'
+      ),
+      folderLocationInsightTypeInsightPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
+      ),
+      folderLocationRecommenderPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/recommenders/{recommender}'
+      ),
+      folderLocationRecommenderRecommendationPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
+      ),
+      organizationLocationInsightTypePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/insightTypes/{insight_type}'
+      ),
+      organizationLocationInsightTypeInsightPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
+      ),
+      organizationLocationRecommenderPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/recommenders/{recommender}'
+      ),
+      organizationLocationRecommenderRecommendationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
+      ),
       projectLocationInsightTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/insightTypes/{insight_type}'
       ),
@@ -1794,6 +1818,610 @@ export class RecommenderClient {
   ) {
     return this.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match(
       billingAccountLocationRecommenderRecommendationName
+    ).recommendation;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationInsightType resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} insight_type
+   * @returns {string} Resource name string.
+   */
+  folderLocationInsightTypePath(
+    folder: string,
+    location: string,
+    insightType: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypePathTemplate.render({
+      folder: folder,
+      location: location,
+      insight_type: insightType,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationInsightType resource.
+   *
+   * @param {string} folderLocationInsightTypeName
+   *   A fully-qualified path representing folder_location_insight_type resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationInsightTypeName(
+    folderLocationInsightTypeName: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypePathTemplate.match(
+      folderLocationInsightTypeName
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationInsightType resource.
+   *
+   * @param {string} folderLocationInsightTypeName
+   *   A fully-qualified path representing folder_location_insight_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationInsightTypeName(
+    folderLocationInsightTypeName: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypePathTemplate.match(
+      folderLocationInsightTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the insight_type from FolderLocationInsightType resource.
+   *
+   * @param {string} folderLocationInsightTypeName
+   *   A fully-qualified path representing folder_location_insight_type resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromFolderLocationInsightTypeName(
+    folderLocationInsightTypeName: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypePathTemplate.match(
+      folderLocationInsightTypeName
+    ).insight_type;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationInsightTypeInsight resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} insight_type
+   * @param {string} insight
+   * @returns {string} Resource name string.
+   */
+  folderLocationInsightTypeInsightPath(
+    folder: string,
+    location: string,
+    insightType: string,
+    insight: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypeInsightPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        insight_type: insightType,
+        insight: insight,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderLocationInsightTypeInsight resource.
+   *
+   * @param {string} folderLocationInsightTypeInsightName
+   *   A fully-qualified path representing folder_location_insight_type_insight resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationInsightTypeInsightName(
+    folderLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match(
+      folderLocationInsightTypeInsightName
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationInsightTypeInsight resource.
+   *
+   * @param {string} folderLocationInsightTypeInsightName
+   *   A fully-qualified path representing folder_location_insight_type_insight resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationInsightTypeInsightName(
+    folderLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match(
+      folderLocationInsightTypeInsightName
+    ).location;
+  }
+
+  /**
+   * Parse the insight_type from FolderLocationInsightTypeInsight resource.
+   *
+   * @param {string} folderLocationInsightTypeInsightName
+   *   A fully-qualified path representing folder_location_insight_type_insight resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromFolderLocationInsightTypeInsightName(
+    folderLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match(
+      folderLocationInsightTypeInsightName
+    ).insight_type;
+  }
+
+  /**
+   * Parse the insight from FolderLocationInsightTypeInsight resource.
+   *
+   * @param {string} folderLocationInsightTypeInsightName
+   *   A fully-qualified path representing folder_location_insight_type_insight resource.
+   * @returns {string} A string representing the insight.
+   */
+  matchInsightFromFolderLocationInsightTypeInsightName(
+    folderLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match(
+      folderLocationInsightTypeInsightName
+    ).insight;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationRecommender resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} recommender
+   * @returns {string} Resource name string.
+   */
+  folderLocationRecommenderPath(
+    folder: string,
+    location: string,
+    recommender: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderPathTemplate.render({
+      folder: folder,
+      location: location,
+      recommender: recommender,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationRecommender resource.
+   *
+   * @param {string} folderLocationRecommenderName
+   *   A fully-qualified path representing folder_location_recommender resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationRecommenderName(
+    folderLocationRecommenderName: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderPathTemplate.match(
+      folderLocationRecommenderName
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationRecommender resource.
+   *
+   * @param {string} folderLocationRecommenderName
+   *   A fully-qualified path representing folder_location_recommender resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationRecommenderName(
+    folderLocationRecommenderName: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderPathTemplate.match(
+      folderLocationRecommenderName
+    ).location;
+  }
+
+  /**
+   * Parse the recommender from FolderLocationRecommender resource.
+   *
+   * @param {string} folderLocationRecommenderName
+   *   A fully-qualified path representing folder_location_recommender resource.
+   * @returns {string} A string representing the recommender.
+   */
+  matchRecommenderFromFolderLocationRecommenderName(
+    folderLocationRecommenderName: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderPathTemplate.match(
+      folderLocationRecommenderName
+    ).recommender;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationRecommenderRecommendation resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} recommender
+   * @param {string} recommendation
+   * @returns {string} Resource name string.
+   */
+  folderLocationRecommenderRecommendationPath(
+    folder: string,
+    location: string,
+    recommender: string,
+    recommendation: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        recommender: recommender,
+        recommendation: recommendation,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderLocationRecommenderRecommendation resource.
+   *
+   * @param {string} folderLocationRecommenderRecommendationName
+   *   A fully-qualified path representing folder_location_recommender_recommendation resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationRecommenderRecommendationName(
+    folderLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match(
+      folderLocationRecommenderRecommendationName
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationRecommenderRecommendation resource.
+   *
+   * @param {string} folderLocationRecommenderRecommendationName
+   *   A fully-qualified path representing folder_location_recommender_recommendation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationRecommenderRecommendationName(
+    folderLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match(
+      folderLocationRecommenderRecommendationName
+    ).location;
+  }
+
+  /**
+   * Parse the recommender from FolderLocationRecommenderRecommendation resource.
+   *
+   * @param {string} folderLocationRecommenderRecommendationName
+   *   A fully-qualified path representing folder_location_recommender_recommendation resource.
+   * @returns {string} A string representing the recommender.
+   */
+  matchRecommenderFromFolderLocationRecommenderRecommendationName(
+    folderLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match(
+      folderLocationRecommenderRecommendationName
+    ).recommender;
+  }
+
+  /**
+   * Parse the recommendation from FolderLocationRecommenderRecommendation resource.
+   *
+   * @param {string} folderLocationRecommenderRecommendationName
+   *   A fully-qualified path representing folder_location_recommender_recommendation resource.
+   * @returns {string} A string representing the recommendation.
+   */
+  matchRecommendationFromFolderLocationRecommenderRecommendationName(
+    folderLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match(
+      folderLocationRecommenderRecommendationName
+    ).recommendation;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationInsightType resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} insight_type
+   * @returns {string} Resource name string.
+   */
+  organizationLocationInsightTypePath(
+    organization: string,
+    location: string,
+    insightType: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        insight_type: insightType,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationInsightType resource.
+   *
+   * @param {string} organizationLocationInsightTypeName
+   *   A fully-qualified path representing organization_location_insight_type resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationInsightTypeName(
+    organizationLocationInsightTypeName: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypePathTemplate.match(
+      organizationLocationInsightTypeName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationInsightType resource.
+   *
+   * @param {string} organizationLocationInsightTypeName
+   *   A fully-qualified path representing organization_location_insight_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationInsightTypeName(
+    organizationLocationInsightTypeName: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypePathTemplate.match(
+      organizationLocationInsightTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the insight_type from OrganizationLocationInsightType resource.
+   *
+   * @param {string} organizationLocationInsightTypeName
+   *   A fully-qualified path representing organization_location_insight_type resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromOrganizationLocationInsightTypeName(
+    organizationLocationInsightTypeName: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypePathTemplate.match(
+      organizationLocationInsightTypeName
+    ).insight_type;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationInsightTypeInsight resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} insight_type
+   * @param {string} insight
+   * @returns {string} Resource name string.
+   */
+  organizationLocationInsightTypeInsightPath(
+    organization: string,
+    location: string,
+    insightType: string,
+    insight: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        insight_type: insightType,
+        insight: insight,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationInsightTypeInsight resource.
+   *
+   * @param {string} organizationLocationInsightTypeInsightName
+   *   A fully-qualified path representing organization_location_insight_type_insight resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationInsightTypeInsightName(
+    organizationLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match(
+      organizationLocationInsightTypeInsightName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationInsightTypeInsight resource.
+   *
+   * @param {string} organizationLocationInsightTypeInsightName
+   *   A fully-qualified path representing organization_location_insight_type_insight resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationInsightTypeInsightName(
+    organizationLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match(
+      organizationLocationInsightTypeInsightName
+    ).location;
+  }
+
+  /**
+   * Parse the insight_type from OrganizationLocationInsightTypeInsight resource.
+   *
+   * @param {string} organizationLocationInsightTypeInsightName
+   *   A fully-qualified path representing organization_location_insight_type_insight resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromOrganizationLocationInsightTypeInsightName(
+    organizationLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match(
+      organizationLocationInsightTypeInsightName
+    ).insight_type;
+  }
+
+  /**
+   * Parse the insight from OrganizationLocationInsightTypeInsight resource.
+   *
+   * @param {string} organizationLocationInsightTypeInsightName
+   *   A fully-qualified path representing organization_location_insight_type_insight resource.
+   * @returns {string} A string representing the insight.
+   */
+  matchInsightFromOrganizationLocationInsightTypeInsightName(
+    organizationLocationInsightTypeInsightName: string
+  ) {
+    return this.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match(
+      organizationLocationInsightTypeInsightName
+    ).insight;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationRecommender resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} recommender
+   * @returns {string} Resource name string.
+   */
+  organizationLocationRecommenderPath(
+    organization: string,
+    location: string,
+    recommender: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        recommender: recommender,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationRecommender resource.
+   *
+   * @param {string} organizationLocationRecommenderName
+   *   A fully-qualified path representing organization_location_recommender resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationRecommenderName(
+    organizationLocationRecommenderName: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderPathTemplate.match(
+      organizationLocationRecommenderName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationRecommender resource.
+   *
+   * @param {string} organizationLocationRecommenderName
+   *   A fully-qualified path representing organization_location_recommender resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationRecommenderName(
+    organizationLocationRecommenderName: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderPathTemplate.match(
+      organizationLocationRecommenderName
+    ).location;
+  }
+
+  /**
+   * Parse the recommender from OrganizationLocationRecommender resource.
+   *
+   * @param {string} organizationLocationRecommenderName
+   *   A fully-qualified path representing organization_location_recommender resource.
+   * @returns {string} A string representing the recommender.
+   */
+  matchRecommenderFromOrganizationLocationRecommenderName(
+    organizationLocationRecommenderName: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderPathTemplate.match(
+      organizationLocationRecommenderName
+    ).recommender;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationRecommenderRecommendation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} recommender
+   * @param {string} recommendation
+   * @returns {string} Resource name string.
+   */
+  organizationLocationRecommenderRecommendationPath(
+    organization: string,
+    location: string,
+    recommender: string,
+    recommendation: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        recommender: recommender,
+        recommendation: recommendation,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationRecommenderRecommendation resource.
+   *
+   * @param {string} organizationLocationRecommenderRecommendationName
+   *   A fully-qualified path representing organization_location_recommender_recommendation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationRecommenderRecommendationName(
+    organizationLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match(
+      organizationLocationRecommenderRecommendationName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationRecommenderRecommendation resource.
+   *
+   * @param {string} organizationLocationRecommenderRecommendationName
+   *   A fully-qualified path representing organization_location_recommender_recommendation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationRecommenderRecommendationName(
+    organizationLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match(
+      organizationLocationRecommenderRecommendationName
+    ).location;
+  }
+
+  /**
+   * Parse the recommender from OrganizationLocationRecommenderRecommendation resource.
+   *
+   * @param {string} organizationLocationRecommenderRecommendationName
+   *   A fully-qualified path representing organization_location_recommender_recommendation resource.
+   * @returns {string} A string representing the recommender.
+   */
+  matchRecommenderFromOrganizationLocationRecommenderRecommendationName(
+    organizationLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match(
+      organizationLocationRecommenderRecommendationName
+    ).recommender;
+  }
+
+  /**
+   * Parse the recommendation from OrganizationLocationRecommenderRecommendation resource.
+   *
+   * @param {string} organizationLocationRecommenderRecommendationName
+   *   A fully-qualified path representing organization_location_recommender_recommendation resource.
+   * @returns {string} A string representing the recommendation.
+   */
+  matchRecommendationFromOrganizationLocationRecommenderRecommendationName(
+    organizationLocationRecommenderRecommendationName: string
+  ) {
+    return this.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match(
+      organizationLocationRecommenderRecommendationName
     ).recommendation;
   }
 
