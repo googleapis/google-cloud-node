@@ -418,14 +418,14 @@ __Usage:__
 
 Demonstrates how to enable OpenTelemetry tracing in a publisher or subscriber.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/opentelemetryTracing.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/openTelemetryTracing.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/opentelemetryTracing.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/openTelemetryTracing.js,samples/README.md)
 
 __Usage:__
 
 
-`node opentelemetryTracing.js <topic-name> <subscription-name>`
+`node openTelemetryTracing.js <topic-name> <subscription-name>`
 
 
 -----
