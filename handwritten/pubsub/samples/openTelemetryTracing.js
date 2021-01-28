@@ -35,7 +35,7 @@ const SUBSCRIBER_TIMEOUT = 10;
 function main(
   topicName = 'YOUR_TOPIC_NAME',
   subscriptionName = 'YOUR_SUBSCRIPTION_NAME',
-  data = {foo: 'bar'}
+  data = 'Hello, world!'
 ) {
   // [START opentelemetry_tracing]
   /**
@@ -49,7 +49,7 @@ function main(
   const {PubSub} = require('@google-cloud/pubsub');
 
   // Imports the OpenTelemetry API
-  const {opentelemetry} = require('@opentelemetry/api');
+  const opentelemetry = require('@opentelemetry/api');
 
   // Imports the OpenTelemetry span handlers and exporter
   const {
@@ -78,7 +78,6 @@ function main(
   async function publishMessage() {
     // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
     const dataBuffer = Buffer.from(data);
-
     const messageId = await pubSubClient
       .topic(topicName, enableOpenTelemetryTracing)
       .publish(dataBuffer);
@@ -90,10 +89,18 @@ function main(
     const messageHandler = message => {
       console.log(`Message ${message.id} received.`);
       message.ack();
+      process.exit(0);
+    };
+
+    const errorHandler = error => {
+      console.log('Received error:', error);
+      process.exit(0);
     };
 
     // Listens for new messages from the topic
     pubSubClient.subscription(subscriptionName).on('message', messageHandler);
+    pubSubClient.subscription(subscriptionName).on('error', errorHandler);
+
     setTimeout(() => {
       pubSubClient
         .subscription(subscriptionName, enableOpenTelemetryTracing)
