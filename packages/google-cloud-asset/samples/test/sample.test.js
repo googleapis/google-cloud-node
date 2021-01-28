@@ -26,6 +26,13 @@ const storage = new Storage();
 const bucketName = `asset-nodejs-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+const options = {
+  location: 'US',
+};
+const datasetId = `asset_nodejs_${uuid.v4()}`.replace(/-/gi, '_');
+
 const Compute = require('@google-cloud/compute');
 const zone = new Compute().zone('us-central1-c');
 const vmName = `asset-nodejs-${uuid.v4()}`;
@@ -49,11 +56,14 @@ const delay = async test => {
 describe('quickstart sample tests', () => {
   before(async () => {
     await bucket.create();
+    await bigquery.createDataset(datasetId, options);
+    await bigquery.dataset(datasetId).exists();
     [vm] = await zone.createVM(vmName, {os: 'ubuntu'});
   });
 
   after(async () => {
     await bucket.delete();
+    await bigquery.dataset(datasetId).delete({force: true}).catch(console.warn);
     await vm.delete();
   });
 
@@ -98,5 +108,42 @@ describe('quickstart sample tests', () => {
     const assetType = 'storage.googleapis.com/Bucket';
     const stdout = execSync(`node listAssets ${assetType}`);
     assert.include(stdout, assetType);
+  });
+
+  it('should analyze iam policy successfully', async () => {
+    const stdout = execSync('node analyzeIamPolicy');
+    assert.include(stdout, '//cloudresourcemanager.googleapis.com/projects');
+  });
+
+  it('should analyze iam policy and write analysis results to gcs successfully', async function () {
+    this.retries(2);
+    await delay(this.test);
+    const uri = `gs://${bucketName}/my-analysis.json`;
+    execSync(`node analyzeIamPolicyLongrunningGcs ${uri}`);
+    const file = await bucket.file('my-analysis.json');
+    const exists = await file.exists();
+    assert.ok(exists);
+    await file.delete();
+  });
+
+  it('should analyze iam policy and write analysis results to bigquery successfully', async function () {
+    this.retries(2);
+    await delay(this.test);
+    const tablePrefix = 'analysis_nodejs';
+    execSync(
+      `node analyzeIamPolicyLongrunningBigquery ${datasetId} ${tablePrefix}`
+    );
+    const metadataTable = await bigquery
+      .dataset(datasetId)
+      .table('analysis_nodejs_analysis');
+    const metadataTable_exists = await metadataTable.exists();
+    assert.ok(metadataTable_exists);
+    const resultsTable = await bigquery
+      .dataset(datasetId)
+      .table('analysis_nodejs_analysis_result');
+    const resultsTable_exists = await resultsTable.exists();
+    assert.ok(resultsTable_exists);
+    await metadataTable.delete();
+    await resultsTable.delete();
   });
 });
