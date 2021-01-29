@@ -300,6 +300,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 19
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -406,6 +410,17 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EncryptionSpec": {
+                      "fields": {
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -622,6 +637,41 @@
                             "sigma": {
                               "type": "float",
                               "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExplanationSpecOverride": {
+                      "fields": {
+                        "parameters": {
+                          "type": "ExplanationParameters",
+                          "id": 1
+                        },
+                        "metadata": {
+                          "type": "ExplanationMetadataOverride",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExplanationMetadataOverride": {
+                      "fields": {
+                        "inputs": {
+                          "keyType": "string",
+                          "type": "InputMetadataOverride",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "InputMetadataOverride": {
+                          "fields": {
+                            "inputBaselines": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Value",
+                              "id": 1
                             }
                           }
                         }
@@ -1096,6 +1146,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 11
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 12
                         }
                       }
                     },
@@ -1156,7 +1210,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "diskSpec": {
@@ -1240,7 +1294,10 @@
                         },
                         "value": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1408,6 +1465,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 16
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 20
                         },
                         "activeLearningConfig": {
                           "type": "ActiveLearningConfig",
@@ -1585,6 +1646,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 7
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 11
                         }
                       }
                     },
@@ -2286,6 +2351,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 15
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 18
                         }
                       }
                     },
@@ -2540,10 +2609,7 @@
                         },
                         "explanationSpec": {
                           "type": "ExplanationSpec",
-                          "id": 23,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 23
                         },
                         "etag": {
                           "type": "string",
@@ -2553,6 +2619,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 17
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -2774,6 +2844,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 10
                         }
                       }
                     },
@@ -3316,10 +3390,18 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 16
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 17
                         }
                       }
                     },
                     "Trial": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Trial",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/studies/{study}/trials/{trial}"
+                      },
                       "fields": {
                         "id": {
                           "type": "string",
@@ -3425,6 +3507,14 @@
                         "algorithm": {
                           "type": "Algorithm",
                           "id": 3
+                        },
+                        "observationNoise": {
+                          "type": "ObservationNoise",
+                          "id": 6
+                        },
+                        "measurementSelectionType": {
+                          "type": "MeasurementSelectionType",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -3646,6 +3736,20 @@
                             "ALGORITHM_UNSPECIFIED": 0,
                             "GRID_SEARCH": 2,
                             "RANDOM_SEARCH": 3
+                          }
+                        },
+                        "ObservationNoise": {
+                          "values": {
+                            "OBSERVATION_NOISE_UNSPECIFIED": 0,
+                            "LOW": 1,
+                            "HIGH": 2
+                          }
+                        },
+                        "MeasurementSelectionType": {
+                          "values": {
+                            "MEASUREMENT_SELECTION_TYPE_UNSPECIFIED": 0,
+                            "LAST_MEASUREMENT": 1,
+                            "BEST_MEASUREMENT": 2
                           }
                         }
                       }
@@ -4706,6 +4810,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -4923,6 +5031,48 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        },
+                        "partialResults": {
+                          "rule": "repeated",
+                          "type": "PartialResult",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "PartialResult": {
+                          "oneofs": {
+                            "result": {
+                              "oneof": [
+                                "error",
+                                "model",
+                                "dataset"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            },
+                            "model": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                              }
+                            },
+                            "dataset": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                              }
+                            },
+                            "request": {
+                              "type": "MigrateResourceRequest",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -4973,6 +5123,28 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "explanationSpecs": {
+                          "rule": "repeated",
+                          "type": "ModelEvaluationExplanationSpec",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ModelEvaluationExplanationSpec": {
+                          "fields": {
+                            "explanationType": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "explanationSpec": {
+                              "type": "ExplanationSpec",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -5872,6 +6044,10 @@
                         "parameters": {
                           "type": "google.protobuf.Value",
                           "id": 4
+                        },
+                        "explanationSpecOverride": {
+                          "type": "ExplanationSpecOverride",
+                          "id": 5
                         },
                         "deployedModelId": {
                           "type": "string",

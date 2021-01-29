@@ -212,6 +212,9 @@ export class DatasetServiceClient {
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
+      trialPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}/trials/{trial}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -574,9 +577,7 @@ export class DatasetServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
    *   For the `FieldMask` definition, see
-   *
-   *   [FieldMask](https:
-   *   //tinyurl.com/dev-google-protobuf#google.protobuf.FieldMask).
+   *   [FieldMask](https://tinyurl.com/protobufs/google.protobuf#fieldmask).
    *   Updatable fields:
    *
    *     * `display_name`
@@ -1362,7 +1363,19 @@ export class DatasetServiceClient {
    *   Required. The name of the Dataset's parent resource.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
+   *   An expression for filtering the results of the request. For field names
+   *   both snake_case and camelCase are supported.
+   *
+   *     * `display_name`: supports = and !=
+   *     * `metadata_schema_uri`: supports = and !=
+   *     * `labels` supports general map functions that is:
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *
+   *   Some examples:
+   *     * `displayName="myDisplayName"`
+   *     * `labels.myKey="myValue"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1374,7 +1387,7 @@ export class DatasetServiceClient {
    *   Use "desc" after a field name for descending.
    *   Supported fields:
    *     * `display_name`
-   *     * `data_item_count`   * `create_time`
+   *     * `create_time`
    *     * `update_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1442,7 +1455,19 @@ export class DatasetServiceClient {
    *   Required. The name of the Dataset's parent resource.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
+   *   An expression for filtering the results of the request. For field names
+   *   both snake_case and camelCase are supported.
+   *
+   *     * `display_name`: supports = and !=
+   *     * `metadata_schema_uri`: supports = and !=
+   *     * `labels` supports general map functions that is:
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *
+   *   Some examples:
+   *     * `displayName="myDisplayName"`
+   *     * `labels.myKey="myValue"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1454,7 +1479,7 @@ export class DatasetServiceClient {
    *   Use "desc" after a field name for descending.
    *   Supported fields:
    *     * `display_name`
-   *     * `data_item_count`   * `create_time`
+   *     * `create_time`
    *     * `update_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1500,7 +1525,19 @@ export class DatasetServiceClient {
    *   Required. The name of the Dataset's parent resource.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
+   *   An expression for filtering the results of the request. For field names
+   *   both snake_case and camelCase are supported.
+   *
+   *     * `display_name`: supports = and !=
+   *     * `metadata_schema_uri`: supports = and !=
+   *     * `labels` supports general map functions that is:
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *
+   *   Some examples:
+   *     * `displayName="myDisplayName"`
+   *     * `labels.myKey="myValue"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1512,7 +1549,7 @@ export class DatasetServiceClient {
    *   Use "desc" after a field name for descending.
    *   Supported fields:
    *     * `display_name`
-   *     * `data_item_count`   * `create_time`
+   *     * `create_time`
    *     * `update_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2934,6 +2971,68 @@ export class DatasetServiceClient {
     return this.pathTemplates.trainingPipelinePathTemplate.match(
       trainingPipelineName
     ).training_pipeline;
+  }
+
+  /**
+   * Return a fully-qualified trial resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @param {string} trial
+   * @returns {string} Resource name string.
+   */
+  trialPath(project: string, location: string, study: string, trial: string) {
+    return this.pathTemplates.trialPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+      trial: trial,
+    });
+  }
+
+  /**
+   * Parse the project from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).project;
+  }
+
+  /**
+   * Parse the location from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).location;
+  }
+
+  /**
+   * Parse the study from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).study;
+  }
+
+  /**
+   * Parse the trial from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the trial.
+   */
+  matchTrialFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).trial;
   }
 
   /**

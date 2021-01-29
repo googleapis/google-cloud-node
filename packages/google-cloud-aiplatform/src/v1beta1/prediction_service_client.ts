@@ -199,6 +199,9 @@ export class PredictionServiceClient {
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
+      trialPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}/trials/{trial}'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -491,6 +494,15 @@ export class PredictionServiceClient {
    *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's }
    *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
    *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+   * @param {google.cloud.aiplatform.v1beta1.ExplanationSpecOverride} request.explanationSpecOverride
+   *   If specified, overrides the
+   *   {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec} of the DeployedModel.
+   *   Can be used for explaining prediction results with different
+   *   configurations, such as:
+   *    - Explaining top-5 predictions results as opposed to top-1;
+   *    - Increasing path count or step count of the attribution methods to reduce
+   *      approximate errors;
+   *    - Using different baselines for explaining the prediction results.
    * @param {string} request.deployedModelId
    *   If specified, this ExplainRequest will be served by the chosen
    *   DeployedModel, overriding {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|Endpoint.traffic_split}.
@@ -1448,6 +1460,68 @@ export class PredictionServiceClient {
     return this.pathTemplates.trainingPipelinePathTemplate.match(
       trainingPipelineName
     ).training_pipeline;
+  }
+
+  /**
+   * Return a fully-qualified trial resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @param {string} trial
+   * @returns {string} Resource name string.
+   */
+  trialPath(project: string, location: string, study: string, trial: string) {
+    return this.pathTemplates.trialPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+      trial: trial,
+    });
+  }
+
+  /**
+   * Parse the project from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).project;
+  }
+
+  /**
+   * Parse the location from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).location;
+  }
+
+  /**
+   * Parse the study from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).study;
+  }
+
+  /**
+   * Parse the trial from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the trial.
+   */
+  matchTrialFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).trial;
   }
 
   /**

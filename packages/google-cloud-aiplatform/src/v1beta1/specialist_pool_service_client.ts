@@ -219,6 +219,9 @@ export class SpecialistPoolServiceClient {
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
+      trialPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}/trials/{trial}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -2108,6 +2111,68 @@ export class SpecialistPoolServiceClient {
     return this.pathTemplates.trainingPipelinePathTemplate.match(
       trainingPipelineName
     ).training_pipeline;
+  }
+
+  /**
+   * Return a fully-qualified trial resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @param {string} trial
+   * @returns {string} Resource name string.
+   */
+  trialPath(project: string, location: string, study: string, trial: string) {
+    return this.pathTemplates.trialPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+      trial: trial,
+    });
+  }
+
+  /**
+   * Parse the project from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).project;
+  }
+
+  /**
+   * Parse the location from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).location;
+  }
+
+  /**
+   * Parse the study from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).study;
+  }
+
+  /**
+   * Parse the trial from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the trial.
+   */
+  matchTrialFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).trial;
   }
 
   /**

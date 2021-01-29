@@ -454,6 +454,9 @@ export namespace google {
 
                     /** BatchPredictionJob labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** BatchPredictionJob encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a BatchPredictionJob. */
@@ -527,6 +530,9 @@ export namespace google {
 
                     /** BatchPredictionJob labels. */
                     public labels: { [k: string]: string };
+
+                    /** BatchPredictionJob encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new BatchPredictionJob instance using the specified properties.
@@ -1008,6 +1014,96 @@ export namespace google {
 
                     /**
                      * Converts this CompletionStats to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EncryptionSpec. */
+                interface IEncryptionSpec {
+
+                    /** EncryptionSpec kmsKeyName */
+                    kmsKeyName?: (string|null);
+                }
+
+                /** Represents an EncryptionSpec. */
+                class EncryptionSpec implements IEncryptionSpec {
+
+                    /**
+                     * Constructs a new EncryptionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IEncryptionSpec);
+
+                    /** EncryptionSpec kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /**
+                     * Creates a new EncryptionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionSpec instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IEncryptionSpec): google.cloud.aiplatform.v1beta1.EncryptionSpec;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.EncryptionSpec;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.EncryptionSpec;
+
+                    /**
+                     * Verifies an EncryptionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.EncryptionSpec;
+
+                    /**
+                     * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                     * @param message EncryptionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionSpec to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2102,6 +2198,285 @@ export namespace google {
 
                         /**
                          * Converts this NoiseSigmaForFeature to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of an ExplanationSpecOverride. */
+                interface IExplanationSpecOverride {
+
+                    /** ExplanationSpecOverride parameters */
+                    parameters?: (google.cloud.aiplatform.v1beta1.IExplanationParameters|null);
+
+                    /** ExplanationSpecOverride metadata */
+                    metadata?: (google.cloud.aiplatform.v1beta1.IExplanationMetadataOverride|null);
+                }
+
+                /** Represents an ExplanationSpecOverride. */
+                class ExplanationSpecOverride implements IExplanationSpecOverride {
+
+                    /**
+                     * Constructs a new ExplanationSpecOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IExplanationSpecOverride);
+
+                    /** ExplanationSpecOverride parameters. */
+                    public parameters?: (google.cloud.aiplatform.v1beta1.IExplanationParameters|null);
+
+                    /** ExplanationSpecOverride metadata. */
+                    public metadata?: (google.cloud.aiplatform.v1beta1.IExplanationMetadataOverride|null);
+
+                    /**
+                     * Creates a new ExplanationSpecOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExplanationSpecOverride instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IExplanationSpecOverride): google.cloud.aiplatform.v1beta1.ExplanationSpecOverride;
+
+                    /**
+                     * Encodes the specified ExplanationSpecOverride message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ExplanationSpecOverride.verify|verify} messages.
+                     * @param message ExplanationSpecOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IExplanationSpecOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExplanationSpecOverride message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ExplanationSpecOverride.verify|verify} messages.
+                     * @param message ExplanationSpecOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IExplanationSpecOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExplanationSpecOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExplanationSpecOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ExplanationSpecOverride;
+
+                    /**
+                     * Decodes an ExplanationSpecOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExplanationSpecOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ExplanationSpecOverride;
+
+                    /**
+                     * Verifies an ExplanationSpecOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExplanationSpecOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExplanationSpecOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ExplanationSpecOverride;
+
+                    /**
+                     * Creates a plain object from an ExplanationSpecOverride message. Also converts values to other types if specified.
+                     * @param message ExplanationSpecOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ExplanationSpecOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExplanationSpecOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExplanationMetadataOverride. */
+                interface IExplanationMetadataOverride {
+
+                    /** ExplanationMetadataOverride inputs */
+                    inputs?: ({ [k: string]: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.IInputMetadataOverride }|null);
+                }
+
+                /** Represents an ExplanationMetadataOverride. */
+                class ExplanationMetadataOverride implements IExplanationMetadataOverride {
+
+                    /**
+                     * Constructs a new ExplanationMetadataOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IExplanationMetadataOverride);
+
+                    /** ExplanationMetadataOverride inputs. */
+                    public inputs: { [k: string]: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.IInputMetadataOverride };
+
+                    /**
+                     * Creates a new ExplanationMetadataOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExplanationMetadataOverride instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IExplanationMetadataOverride): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride;
+
+                    /**
+                     * Encodes the specified ExplanationMetadataOverride message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.verify|verify} messages.
+                     * @param message ExplanationMetadataOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IExplanationMetadataOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExplanationMetadataOverride message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.verify|verify} messages.
+                     * @param message ExplanationMetadataOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IExplanationMetadataOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExplanationMetadataOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExplanationMetadataOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride;
+
+                    /**
+                     * Decodes an ExplanationMetadataOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExplanationMetadataOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride;
+
+                    /**
+                     * Verifies an ExplanationMetadataOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExplanationMetadataOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExplanationMetadataOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride;
+
+                    /**
+                     * Creates a plain object from an ExplanationMetadataOverride message. Also converts values to other types if specified.
+                     * @param message ExplanationMetadataOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExplanationMetadataOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ExplanationMetadataOverride {
+
+                    /** Properties of an InputMetadataOverride. */
+                    interface IInputMetadataOverride {
+
+                        /** InputMetadataOverride inputBaselines */
+                        inputBaselines?: (google.protobuf.IValue[]|null);
+                    }
+
+                    /** Represents an InputMetadataOverride. */
+                    class InputMetadataOverride implements IInputMetadataOverride {
+
+                        /**
+                         * Constructs a new InputMetadataOverride.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.IInputMetadataOverride);
+
+                        /** InputMetadataOverride inputBaselines. */
+                        public inputBaselines: google.protobuf.IValue[];
+
+                        /**
+                         * Creates a new InputMetadataOverride instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputMetadataOverride instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.IInputMetadataOverride): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.InputMetadataOverride;
+
+                        /**
+                         * Encodes the specified InputMetadataOverride message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.InputMetadataOverride.verify|verify} messages.
+                         * @param message InputMetadataOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.IInputMetadataOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputMetadataOverride message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.InputMetadataOverride.verify|verify} messages.
+                         * @param message InputMetadataOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.IInputMetadataOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputMetadataOverride message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputMetadataOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.InputMetadataOverride;
+
+                        /**
+                         * Decodes an InputMetadataOverride message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputMetadataOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.InputMetadataOverride;
+
+                        /**
+                         * Verifies an InputMetadataOverride message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputMetadataOverride message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputMetadataOverride
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.InputMetadataOverride;
+
+                        /**
+                         * Creates a plain object from an InputMetadataOverride message. Also converts values to other types if specified.
+                         * @param message InputMetadataOverride
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.ExplanationMetadataOverride.InputMetadataOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputMetadataOverride to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -3927,6 +4302,9 @@ export namespace google {
 
                     /** CustomJob labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** CustomJob encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a CustomJob. */
@@ -3967,6 +4345,9 @@ export namespace google {
 
                     /** CustomJob labels. */
                     public labels: { [k: string]: string };
+
+                    /** CustomJob encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new CustomJob instance using the specified properties.
@@ -4843,6 +5224,9 @@ export namespace google {
                     /** DataLabelingJob specialistPools */
                     specialistPools?: (string[]|null);
 
+                    /** DataLabelingJob encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
+
                     /** DataLabelingJob activeLearningConfig */
                     activeLearningConfig?: (google.cloud.aiplatform.v1beta1.IActiveLearningConfig|null);
                 }
@@ -4903,6 +5287,9 @@ export namespace google {
 
                     /** DataLabelingJob specialistPools. */
                     public specialistPools: string[];
+
+                    /** DataLabelingJob encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /** DataLabelingJob activeLearningConfig. */
                     public activeLearningConfig?: (google.cloud.aiplatform.v1beta1.IActiveLearningConfig|null);
@@ -5436,6 +5823,9 @@ export namespace google {
 
                     /** Dataset labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** Dataset encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a Dataset. */
@@ -5470,6 +5860,9 @@ export namespace google {
 
                     /** Dataset labels. */
                     public labels: { [k: string]: string };
+
+                    /** Dataset encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new Dataset instance using the specified properties.
@@ -7980,6 +8373,9 @@ export namespace google {
 
                     /** TrainingPipeline labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** TrainingPipeline encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a TrainingPipeline. */
@@ -8032,6 +8428,9 @@ export namespace google {
 
                     /** TrainingPipeline labels. */
                     public labels: { [k: string]: string };
+
+                    /** TrainingPipeline encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new TrainingPipeline instance using the specified properties.
@@ -8709,6 +9108,9 @@ export namespace google {
 
                     /** Model labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** Model encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a Model. */
@@ -8776,6 +9178,9 @@ export namespace google {
 
                     /** Model labels. */
                     public labels: { [k: string]: string };
+
+                    /** Model encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new Model instance using the specified properties.
@@ -9420,6 +9825,9 @@ export namespace google {
 
                     /** Endpoint updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Endpoint encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents an Endpoint. */
@@ -9457,6 +9865,9 @@ export namespace google {
 
                     /** Endpoint updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Endpoint encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -11124,6 +11535,9 @@ export namespace google {
 
                     /** HyperparameterTuningJob labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** HyperparameterTuningJob encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a HyperparameterTuningJob. */
@@ -11179,6 +11593,9 @@ export namespace google {
 
                     /** HyperparameterTuningJob labels. */
                     public labels: { [k: string]: string };
+
+                    /** HyperparameterTuningJob encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new HyperparameterTuningJob instance using the specified properties.
@@ -11497,6 +11914,12 @@ export namespace google {
 
                     /** StudySpec algorithm */
                     algorithm?: (google.cloud.aiplatform.v1beta1.StudySpec.Algorithm|keyof typeof google.cloud.aiplatform.v1beta1.StudySpec.Algorithm|null);
+
+                    /** StudySpec observationNoise */
+                    observationNoise?: (google.cloud.aiplatform.v1beta1.StudySpec.ObservationNoise|keyof typeof google.cloud.aiplatform.v1beta1.StudySpec.ObservationNoise|null);
+
+                    /** StudySpec measurementSelectionType */
+                    measurementSelectionType?: (google.cloud.aiplatform.v1beta1.StudySpec.MeasurementSelectionType|keyof typeof google.cloud.aiplatform.v1beta1.StudySpec.MeasurementSelectionType|null);
                 }
 
                 /** Represents a StudySpec. */
@@ -11516,6 +11939,12 @@ export namespace google {
 
                     /** StudySpec algorithm. */
                     public algorithm: (google.cloud.aiplatform.v1beta1.StudySpec.Algorithm|keyof typeof google.cloud.aiplatform.v1beta1.StudySpec.Algorithm);
+
+                    /** StudySpec observationNoise. */
+                    public observationNoise: (google.cloud.aiplatform.v1beta1.StudySpec.ObservationNoise|keyof typeof google.cloud.aiplatform.v1beta1.StudySpec.ObservationNoise);
+
+                    /** StudySpec measurementSelectionType. */
+                    public measurementSelectionType: (google.cloud.aiplatform.v1beta1.StudySpec.MeasurementSelectionType|keyof typeof google.cloud.aiplatform.v1beta1.StudySpec.MeasurementSelectionType);
 
                     /**
                      * Creates a new StudySpec instance using the specified properties.
@@ -12597,6 +13026,20 @@ export namespace google {
                         ALGORITHM_UNSPECIFIED = 0,
                         GRID_SEARCH = 2,
                         RANDOM_SEARCH = 3
+                    }
+
+                    /** ObservationNoise enum. */
+                    enum ObservationNoise {
+                        OBSERVATION_NOISE_UNSPECIFIED = 0,
+                        LOW = 1,
+                        HIGH = 2
+                    }
+
+                    /** MeasurementSelectionType enum. */
+                    enum MeasurementSelectionType {
+                        MEASUREMENT_SELECTION_TYPE_UNSPECIFIED = 0,
+                        LAST_MEASUREMENT = 1,
+                        BEST_MEASUREMENT = 2
                     }
                 }
 
@@ -16241,6 +16684,9 @@ export namespace google {
 
                     /** SearchMigratableResourcesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** SearchMigratableResourcesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a SearchMigratableResourcesRequest. */
@@ -16260,6 +16706,9 @@ export namespace google {
 
                     /** SearchMigratableResourcesRequest pageToken. */
                     public pageToken: string;
+
+                    /** SearchMigratableResourcesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new SearchMigratableResourcesRequest instance using the specified properties.
@@ -17327,6 +17776,9 @@ export namespace google {
 
                     /** BatchMigrateResourcesOperationMetadata genericMetadata */
                     genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** BatchMigrateResourcesOperationMetadata partialResults */
+                    partialResults?: (google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.IPartialResult[]|null);
                 }
 
                 /** Represents a BatchMigrateResourcesOperationMetadata. */
@@ -17340,6 +17792,9 @@ export namespace google {
 
                     /** BatchMigrateResourcesOperationMetadata genericMetadata. */
                     public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** BatchMigrateResourcesOperationMetadata partialResults. */
+                    public partialResults: google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.IPartialResult[];
 
                     /**
                      * Creates a new BatchMigrateResourcesOperationMetadata instance using the specified properties.
@@ -17412,6 +17867,120 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                namespace BatchMigrateResourcesOperationMetadata {
+
+                    /** Properties of a PartialResult. */
+                    interface IPartialResult {
+
+                        /** PartialResult error */
+                        error?: (google.rpc.IStatus|null);
+
+                        /** PartialResult model */
+                        model?: (string|null);
+
+                        /** PartialResult dataset */
+                        dataset?: (string|null);
+
+                        /** PartialResult request */
+                        request?: (google.cloud.aiplatform.v1beta1.IMigrateResourceRequest|null);
+                    }
+
+                    /** Represents a PartialResult. */
+                    class PartialResult implements IPartialResult {
+
+                        /**
+                         * Constructs a new PartialResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.IPartialResult);
+
+                        /** PartialResult error. */
+                        public error?: (google.rpc.IStatus|null);
+
+                        /** PartialResult model. */
+                        public model: string;
+
+                        /** PartialResult dataset. */
+                        public dataset: string;
+
+                        /** PartialResult request. */
+                        public request?: (google.cloud.aiplatform.v1beta1.IMigrateResourceRequest|null);
+
+                        /** PartialResult result. */
+                        public result?: ("error"|"model"|"dataset");
+
+                        /**
+                         * Creates a new PartialResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PartialResult instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.IPartialResult): google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.PartialResult;
+
+                        /**
+                         * Encodes the specified PartialResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.PartialResult.verify|verify} messages.
+                         * @param message PartialResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.IPartialResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PartialResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.PartialResult.verify|verify} messages.
+                         * @param message PartialResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.IPartialResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PartialResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PartialResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.PartialResult;
+
+                        /**
+                         * Decodes a PartialResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PartialResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.PartialResult;
+
+                        /**
+                         * Verifies a PartialResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PartialResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PartialResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.PartialResult;
+
+                        /**
+                         * Creates a plain object from a PartialResult message. Also converts values to other types if specified.
+                         * @param message PartialResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.BatchMigrateResourcesOperationMetadata.PartialResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PartialResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Properties of a ModelEvaluation. */
                 interface IModelEvaluation {
 
@@ -17432,6 +18001,9 @@ export namespace google {
 
                     /** ModelEvaluation modelExplanation */
                     modelExplanation?: (google.cloud.aiplatform.v1beta1.IModelExplanation|null);
+
+                    /** ModelEvaluation explanationSpecs */
+                    explanationSpecs?: (google.cloud.aiplatform.v1beta1.ModelEvaluation.IModelEvaluationExplanationSpec[]|null);
                 }
 
                 /** Represents a ModelEvaluation. */
@@ -17460,6 +18032,9 @@ export namespace google {
 
                     /** ModelEvaluation modelExplanation. */
                     public modelExplanation?: (google.cloud.aiplatform.v1beta1.IModelExplanation|null);
+
+                    /** ModelEvaluation explanationSpecs. */
+                    public explanationSpecs: google.cloud.aiplatform.v1beta1.ModelEvaluation.IModelEvaluationExplanationSpec[];
 
                     /**
                      * Creates a new ModelEvaluation instance using the specified properties.
@@ -17530,6 +18105,105 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace ModelEvaluation {
+
+                    /** Properties of a ModelEvaluationExplanationSpec. */
+                    interface IModelEvaluationExplanationSpec {
+
+                        /** ModelEvaluationExplanationSpec explanationType */
+                        explanationType?: (string|null);
+
+                        /** ModelEvaluationExplanationSpec explanationSpec */
+                        explanationSpec?: (google.cloud.aiplatform.v1beta1.IExplanationSpec|null);
+                    }
+
+                    /** Represents a ModelEvaluationExplanationSpec. */
+                    class ModelEvaluationExplanationSpec implements IModelEvaluationExplanationSpec {
+
+                        /**
+                         * Constructs a new ModelEvaluationExplanationSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.ModelEvaluation.IModelEvaluationExplanationSpec);
+
+                        /** ModelEvaluationExplanationSpec explanationType. */
+                        public explanationType: string;
+
+                        /** ModelEvaluationExplanationSpec explanationSpec. */
+                        public explanationSpec?: (google.cloud.aiplatform.v1beta1.IExplanationSpec|null);
+
+                        /**
+                         * Creates a new ModelEvaluationExplanationSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ModelEvaluationExplanationSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.ModelEvaluation.IModelEvaluationExplanationSpec): google.cloud.aiplatform.v1beta1.ModelEvaluation.ModelEvaluationExplanationSpec;
+
+                        /**
+                         * Encodes the specified ModelEvaluationExplanationSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ModelEvaluation.ModelEvaluationExplanationSpec.verify|verify} messages.
+                         * @param message ModelEvaluationExplanationSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.ModelEvaluation.IModelEvaluationExplanationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ModelEvaluationExplanationSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ModelEvaluation.ModelEvaluationExplanationSpec.verify|verify} messages.
+                         * @param message ModelEvaluationExplanationSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ModelEvaluation.IModelEvaluationExplanationSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ModelEvaluationExplanationSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ModelEvaluationExplanationSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ModelEvaluation.ModelEvaluationExplanationSpec;
+
+                        /**
+                         * Decodes a ModelEvaluationExplanationSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ModelEvaluationExplanationSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ModelEvaluation.ModelEvaluationExplanationSpec;
+
+                        /**
+                         * Verifies a ModelEvaluationExplanationSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ModelEvaluationExplanationSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ModelEvaluationExplanationSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ModelEvaluation.ModelEvaluationExplanationSpec;
+
+                        /**
+                         * Creates a plain object from a ModelEvaluationExplanationSpec message. Also converts values to other types if specified.
+                         * @param message ModelEvaluationExplanationSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.ModelEvaluation.ModelEvaluationExplanationSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ModelEvaluationExplanationSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of a ModelEvaluationSlice. */
@@ -20802,6 +21476,9 @@ export namespace google {
                     /** ExplainRequest parameters */
                     parameters?: (google.protobuf.IValue|null);
 
+                    /** ExplainRequest explanationSpecOverride */
+                    explanationSpecOverride?: (google.cloud.aiplatform.v1beta1.IExplanationSpecOverride|null);
+
                     /** ExplainRequest deployedModelId */
                     deployedModelId?: (string|null);
                 }
@@ -20823,6 +21500,9 @@ export namespace google {
 
                     /** ExplainRequest parameters. */
                     public parameters?: (google.protobuf.IValue|null);
+
+                    /** ExplainRequest explanationSpecOverride. */
+                    public explanationSpecOverride?: (google.cloud.aiplatform.v1beta1.IExplanationSpecOverride|null);
 
                     /** ExplainRequest deployedModelId. */
                     public deployedModelId: string;

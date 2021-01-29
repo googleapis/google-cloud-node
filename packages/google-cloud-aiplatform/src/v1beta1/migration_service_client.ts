@@ -214,6 +214,9 @@ export class MigrationServiceClient {
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
+      trialPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}/trials/{trial}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -591,6 +594,16 @@ export class MigrationServiceClient {
    *   The default and maximum value is 100.
    * @param {string} request.pageToken
    *   The standard page token.
+   * @param {string} request.filter
+   *   Supported filters are:
+   *   * Resource type: For a specific type of MigratableResource.
+   *     * `ml_engine_model_version:*`
+   *     * `automl_model:*`,
+   *     * `automl_dataset:*`
+   *     * `data_labeling_dataset:*`.
+   *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
+   *     * `last_migrate_time:*` will filter migrated resources.
+   *     * `NOT last_migrate_time:*` will filter not yet migrated resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -668,6 +681,16 @@ export class MigrationServiceClient {
    *   The default and maximum value is 100.
    * @param {string} request.pageToken
    *   The standard page token.
+   * @param {string} request.filter
+   *   Supported filters are:
+   *   * Resource type: For a specific type of MigratableResource.
+   *     * `ml_engine_model_version:*`
+   *     * `automl_model:*`,
+   *     * `automl_dataset:*`
+   *     * `data_labeling_dataset:*`.
+   *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
+   *     * `last_migrate_time:*` will filter migrated resources.
+   *     * `NOT last_migrate_time:*` will filter not yet migrated resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -719,6 +742,16 @@ export class MigrationServiceClient {
    *   The default and maximum value is 100.
    * @param {string} request.pageToken
    *   The standard page token.
+   * @param {string} request.filter
+   *   Supported filters are:
+   *   * Resource type: For a specific type of MigratableResource.
+   *     * `ml_engine_model_version:*`
+   *     * `automl_model:*`,
+   *     * `automl_dataset:*`
+   *     * `data_labeling_dataset:*`.
+   *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
+   *     * `last_migrate_time:*` will filter migrated resources.
+   *     * `NOT last_migrate_time:*` will filter not yet migrated resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1694,6 +1727,68 @@ export class MigrationServiceClient {
     return this.pathTemplates.trainingPipelinePathTemplate.match(
       trainingPipelineName
     ).training_pipeline;
+  }
+
+  /**
+   * Return a fully-qualified trial resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @param {string} trial
+   * @returns {string} Resource name string.
+   */
+  trialPath(project: string, location: string, study: string, trial: string) {
+    return this.pathTemplates.trialPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+      trial: trial,
+    });
+  }
+
+  /**
+   * Parse the project from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).project;
+  }
+
+  /**
+   * Parse the location from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).location;
+  }
+
+  /**
+   * Parse the study from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).study;
+  }
+
+  /**
+   * Parse the trial from Trial resource.
+   *
+   * @param {string} trialName
+   *   A fully-qualified path representing Trial resource.
+   * @returns {string} A string representing the trial.
+   */
+  matchTrialFromTrialName(trialName: string) {
+    return this.pathTemplates.trialPathTemplate.match(trialName).trial;
   }
 
   /**
