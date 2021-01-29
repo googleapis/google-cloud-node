@@ -1,0 +1,157 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.domains.v1beta1",
+  "libraryPackage": "domains",
+  "services": {
+    "Domains": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DomainsClient",
+          "rpcs": {
+            "SearchDomains": {
+              "methods": [
+                "searchDomains"
+              ]
+            },
+            "RetrieveRegisterParameters": {
+              "methods": [
+                "retrieveRegisterParameters"
+              ]
+            },
+            "GetRegistration": {
+              "methods": [
+                "getRegistration"
+              ]
+            },
+            "RetrieveAuthorizationCode": {
+              "methods": [
+                "retrieveAuthorizationCode"
+              ]
+            },
+            "ResetAuthorizationCode": {
+              "methods": [
+                "resetAuthorizationCode"
+              ]
+            },
+            "RegisterDomain": {
+              "methods": [
+                "registerDomain"
+              ]
+            },
+            "UpdateRegistration": {
+              "methods": [
+                "updateRegistration"
+              ]
+            },
+            "ConfigureManagementSettings": {
+              "methods": [
+                "configureManagementSettings"
+              ]
+            },
+            "ConfigureDnsSettings": {
+              "methods": [
+                "configureDnsSettings"
+              ]
+            },
+            "ConfigureContactSettings": {
+              "methods": [
+                "configureContactSettings"
+              ]
+            },
+            "ExportRegistration": {
+              "methods": [
+                "exportRegistration"
+              ]
+            },
+            "DeleteRegistration": {
+              "methods": [
+                "deleteRegistration"
+              ]
+            },
+            "ListRegistrations": {
+              "methods": [
+                "listRegistrations",
+                "listRegistrationsStream",
+                "listRegistrationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DomainsClient",
+          "rpcs": {
+            "SearchDomains": {
+              "methods": [
+                "searchDomains"
+              ]
+            },
+            "RetrieveRegisterParameters": {
+              "methods": [
+                "retrieveRegisterParameters"
+              ]
+            },
+            "GetRegistration": {
+              "methods": [
+                "getRegistration"
+              ]
+            },
+            "RetrieveAuthorizationCode": {
+              "methods": [
+                "retrieveAuthorizationCode"
+              ]
+            },
+            "ResetAuthorizationCode": {
+              "methods": [
+                "resetAuthorizationCode"
+              ]
+            },
+            "RegisterDomain": {
+              "methods": [
+                "registerDomain"
+              ]
+            },
+            "UpdateRegistration": {
+              "methods": [
+                "updateRegistration"
+              ]
+            },
+            "ConfigureManagementSettings": {
+              "methods": [
+                "configureManagementSettings"
+              ]
+            },
+            "ConfigureDnsSettings": {
+              "methods": [
+                "configureDnsSettings"
+              ]
+            },
+            "ConfigureContactSettings": {
+              "methods": [
+                "configureContactSettings"
+              ]
+            },
+            "ExportRegistration": {
+              "methods": [
+                "exportRegistration"
+              ]
+            },
+            "DeleteRegistration": {
+              "methods": [
+                "deleteRegistration"
+              ]
+            },
+            "ListRegistrations": {
+              "methods": [
+                "listRegistrations",
+                "listRegistrationsStream",
+                "listRegistrationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

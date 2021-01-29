@@ -1,0 +1,14 @@
+{
+  "name": "domains",
+  "name_pretty": "Cloud Domains",
+  "product_documentation": "https://cloud.google.com/domains/",
+  "client_documentation": "https://cloud.google.com/domains/docs/overview",
+  "issue_tracker": "https://github.com/googleapis/nodejs-domains/issues",
+  "release_level": "BETA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-domains",
+  "distribution_name": "",
+  "api_id": "domains.googleapis.com",
+  "requires_billing": true
+}
+
