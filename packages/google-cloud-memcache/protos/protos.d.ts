@@ -23,6 +23,1732 @@ export namespace google {
         /** Namespace memcache. */
         namespace memcache {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents a CloudMemcache */
+                class CloudMemcache extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CloudMemcache service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CloudMemcache service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CloudMemcache;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListInstancesResponse
+                     */
+                    public listInstances(request: google.cloud.memcache.v1.IListInstancesRequest, callback: google.cloud.memcache.v1.CloudMemcache.ListInstancesCallback): void;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listInstances(request: google.cloud.memcache.v1.IListInstancesRequest): Promise<google.cloud.memcache.v1.ListInstancesResponse>;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Instance
+                     */
+                    public getInstance(request: google.cloud.memcache.v1.IGetInstanceRequest, callback: google.cloud.memcache.v1.CloudMemcache.GetInstanceCallback): void;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getInstance(request: google.cloud.memcache.v1.IGetInstanceRequest): Promise<google.cloud.memcache.v1.Instance>;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createInstance(request: google.cloud.memcache.v1.ICreateInstanceRequest, callback: google.cloud.memcache.v1.CloudMemcache.CreateInstanceCallback): void;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createInstance(request: google.cloud.memcache.v1.ICreateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateInstance(request: google.cloud.memcache.v1.IUpdateInstanceRequest, callback: google.cloud.memcache.v1.CloudMemcache.UpdateInstanceCallback): void;
+
+                    /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateInstance(request: google.cloud.memcache.v1.IUpdateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateParameters.
+                     * @param request UpdateParametersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateParameters(request: google.cloud.memcache.v1.IUpdateParametersRequest, callback: google.cloud.memcache.v1.CloudMemcache.UpdateParametersCallback): void;
+
+                    /**
+                     * Calls UpdateParameters.
+                     * @param request UpdateParametersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateParameters(request: google.cloud.memcache.v1.IUpdateParametersRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteInstance(request: google.cloud.memcache.v1.IDeleteInstanceRequest, callback: google.cloud.memcache.v1.CloudMemcache.DeleteInstanceCallback): void;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteInstance(request: google.cloud.memcache.v1.IDeleteInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ApplyParameters.
+                     * @param request ApplyParametersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public applyParameters(request: google.cloud.memcache.v1.IApplyParametersRequest, callback: google.cloud.memcache.v1.CloudMemcache.ApplyParametersCallback): void;
+
+                    /**
+                     * Calls ApplyParameters.
+                     * @param request ApplyParametersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public applyParameters(request: google.cloud.memcache.v1.IApplyParametersRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace CloudMemcache {
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#listInstances}.
+                     * @param error Error, if any
+                     * @param [response] ListInstancesResponse
+                     */
+                    type ListInstancesCallback = (error: (Error|null), response?: google.cloud.memcache.v1.ListInstancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#getInstance}.
+                     * @param error Error, if any
+                     * @param [response] Instance
+                     */
+                    type GetInstanceCallback = (error: (Error|null), response?: google.cloud.memcache.v1.Instance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#createInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#updateInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#updateParameters}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateParametersCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#deleteInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#applyParameters}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ApplyParametersCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of an Instance. */
+                interface IInstance {
+
+                    /** Instance name */
+                    name?: (string|null);
+
+                    /** Instance displayName */
+                    displayName?: (string|null);
+
+                    /** Instance labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Instance authorizedNetwork */
+                    authorizedNetwork?: (string|null);
+
+                    /** Instance zones */
+                    zones?: (string[]|null);
+
+                    /** Instance nodeCount */
+                    nodeCount?: (number|null);
+
+                    /** Instance nodeConfig */
+                    nodeConfig?: (google.cloud.memcache.v1.Instance.INodeConfig|null);
+
+                    /** Instance memcacheVersion */
+                    memcacheVersion?: (google.cloud.memcache.v1.MemcacheVersion|keyof typeof google.cloud.memcache.v1.MemcacheVersion|null);
+
+                    /** Instance parameters */
+                    parameters?: (google.cloud.memcache.v1.IMemcacheParameters|null);
+
+                    /** Instance memcacheNodes */
+                    memcacheNodes?: (google.cloud.memcache.v1.Instance.INode[]|null);
+
+                    /** Instance createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance state */
+                    state?: (google.cloud.memcache.v1.Instance.State|keyof typeof google.cloud.memcache.v1.Instance.State|null);
+
+                    /** Instance memcacheFullVersion */
+                    memcacheFullVersion?: (string|null);
+
+                    /** Instance instanceMessages */
+                    instanceMessages?: (google.cloud.memcache.v1.Instance.IInstanceMessage[]|null);
+
+                    /** Instance discoveryEndpoint */
+                    discoveryEndpoint?: (string|null);
+                }
+
+                /** Represents an Instance. */
+                class Instance implements IInstance {
+
+                    /**
+                     * Constructs a new Instance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IInstance);
+
+                    /** Instance name. */
+                    public name: string;
+
+                    /** Instance displayName. */
+                    public displayName: string;
+
+                    /** Instance labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Instance authorizedNetwork. */
+                    public authorizedNetwork: string;
+
+                    /** Instance zones. */
+                    public zones: string[];
+
+                    /** Instance nodeCount. */
+                    public nodeCount: number;
+
+                    /** Instance nodeConfig. */
+                    public nodeConfig?: (google.cloud.memcache.v1.Instance.INodeConfig|null);
+
+                    /** Instance memcacheVersion. */
+                    public memcacheVersion: (google.cloud.memcache.v1.MemcacheVersion|keyof typeof google.cloud.memcache.v1.MemcacheVersion);
+
+                    /** Instance parameters. */
+                    public parameters?: (google.cloud.memcache.v1.IMemcacheParameters|null);
+
+                    /** Instance memcacheNodes. */
+                    public memcacheNodes: google.cloud.memcache.v1.Instance.INode[];
+
+                    /** Instance createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance state. */
+                    public state: (google.cloud.memcache.v1.Instance.State|keyof typeof google.cloud.memcache.v1.Instance.State);
+
+                    /** Instance memcacheFullVersion. */
+                    public memcacheFullVersion: string;
+
+                    /** Instance instanceMessages. */
+                    public instanceMessages: google.cloud.memcache.v1.Instance.IInstanceMessage[];
+
+                    /** Instance discoveryEndpoint. */
+                    public discoveryEndpoint: string;
+
+                    /**
+                     * Creates a new Instance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Instance instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IInstance): google.cloud.memcache.v1.Instance;
+
+                    /**
+                     * Encodes the specified Instance message. Does not implicitly {@link google.cloud.memcache.v1.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Instance message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.Instance;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.Instance;
+
+                    /**
+                     * Verifies an Instance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Instance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Instance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.Instance;
+
+                    /**
+                     * Creates a plain object from an Instance message. Also converts values to other types if specified.
+                     * @param message Instance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.Instance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Instance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Instance {
+
+                    /** Properties of a NodeConfig. */
+                    interface INodeConfig {
+
+                        /** NodeConfig cpuCount */
+                        cpuCount?: (number|null);
+
+                        /** NodeConfig memorySizeMb */
+                        memorySizeMb?: (number|null);
+                    }
+
+                    /** Represents a NodeConfig. */
+                    class NodeConfig implements INodeConfig {
+
+                        /**
+                         * Constructs a new NodeConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memcache.v1.Instance.INodeConfig);
+
+                        /** NodeConfig cpuCount. */
+                        public cpuCount: number;
+
+                        /** NodeConfig memorySizeMb. */
+                        public memorySizeMb: number;
+
+                        /**
+                         * Creates a new NodeConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NodeConfig instance
+                         */
+                        public static create(properties?: google.cloud.memcache.v1.Instance.INodeConfig): google.cloud.memcache.v1.Instance.NodeConfig;
+
+                        /**
+                         * Encodes the specified NodeConfig message. Does not implicitly {@link google.cloud.memcache.v1.Instance.NodeConfig.verify|verify} messages.
+                         * @param message NodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memcache.v1.Instance.INodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NodeConfig message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.NodeConfig.verify|verify} messages.
+                         * @param message NodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memcache.v1.Instance.INodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NodeConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.Instance.NodeConfig;
+
+                        /**
+                         * Decodes a NodeConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.Instance.NodeConfig;
+
+                        /**
+                         * Verifies a NodeConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NodeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NodeConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.Instance.NodeConfig;
+
+                        /**
+                         * Creates a plain object from a NodeConfig message. Also converts values to other types if specified.
+                         * @param message NodeConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memcache.v1.Instance.NodeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NodeConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a Node. */
+                    interface INode {
+
+                        /** Node nodeId */
+                        nodeId?: (string|null);
+
+                        /** Node zone */
+                        zone?: (string|null);
+
+                        /** Node state */
+                        state?: (google.cloud.memcache.v1.Instance.Node.State|keyof typeof google.cloud.memcache.v1.Instance.Node.State|null);
+
+                        /** Node host */
+                        host?: (string|null);
+
+                        /** Node port */
+                        port?: (number|null);
+
+                        /** Node parameters */
+                        parameters?: (google.cloud.memcache.v1.IMemcacheParameters|null);
+                    }
+
+                    /** Represents a Node. */
+                    class Node implements INode {
+
+                        /**
+                         * Constructs a new Node.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memcache.v1.Instance.INode);
+
+                        /** Node nodeId. */
+                        public nodeId: string;
+
+                        /** Node zone. */
+                        public zone: string;
+
+                        /** Node state. */
+                        public state: (google.cloud.memcache.v1.Instance.Node.State|keyof typeof google.cloud.memcache.v1.Instance.Node.State);
+
+                        /** Node host. */
+                        public host: string;
+
+                        /** Node port. */
+                        public port: number;
+
+                        /** Node parameters. */
+                        public parameters?: (google.cloud.memcache.v1.IMemcacheParameters|null);
+
+                        /**
+                         * Creates a new Node instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Node instance
+                         */
+                        public static create(properties?: google.cloud.memcache.v1.Instance.INode): google.cloud.memcache.v1.Instance.Node;
+
+                        /**
+                         * Encodes the specified Node message. Does not implicitly {@link google.cloud.memcache.v1.Instance.Node.verify|verify} messages.
+                         * @param message Node message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memcache.v1.Instance.INode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Node message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.Node.verify|verify} messages.
+                         * @param message Node message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memcache.v1.Instance.INode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Node message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Node
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.Instance.Node;
+
+                        /**
+                         * Decodes a Node message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Node
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.Instance.Node;
+
+                        /**
+                         * Verifies a Node message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Node message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Node
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.Instance.Node;
+
+                        /**
+                         * Creates a plain object from a Node message. Also converts values to other types if specified.
+                         * @param message Node
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memcache.v1.Instance.Node, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Node to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Node {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CREATING = 1,
+                            READY = 2,
+                            DELETING = 3,
+                            UPDATING = 4
+                        }
+                    }
+
+                    /** Properties of an InstanceMessage. */
+                    interface IInstanceMessage {
+
+                        /** InstanceMessage code */
+                        code?: (google.cloud.memcache.v1.Instance.InstanceMessage.Code|keyof typeof google.cloud.memcache.v1.Instance.InstanceMessage.Code|null);
+
+                        /** InstanceMessage message */
+                        message?: (string|null);
+                    }
+
+                    /** Represents an InstanceMessage. */
+                    class InstanceMessage implements IInstanceMessage {
+
+                        /**
+                         * Constructs a new InstanceMessage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.memcache.v1.Instance.IInstanceMessage);
+
+                        /** InstanceMessage code. */
+                        public code: (google.cloud.memcache.v1.Instance.InstanceMessage.Code|keyof typeof google.cloud.memcache.v1.Instance.InstanceMessage.Code);
+
+                        /** InstanceMessage message. */
+                        public message: string;
+
+                        /**
+                         * Creates a new InstanceMessage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstanceMessage instance
+                         */
+                        public static create(properties?: google.cloud.memcache.v1.Instance.IInstanceMessage): google.cloud.memcache.v1.Instance.InstanceMessage;
+
+                        /**
+                         * Encodes the specified InstanceMessage message. Does not implicitly {@link google.cloud.memcache.v1.Instance.InstanceMessage.verify|verify} messages.
+                         * @param message InstanceMessage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.memcache.v1.Instance.IInstanceMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstanceMessage message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.InstanceMessage.verify|verify} messages.
+                         * @param message InstanceMessage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.memcache.v1.Instance.IInstanceMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstanceMessage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstanceMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.Instance.InstanceMessage;
+
+                        /**
+                         * Decodes an InstanceMessage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstanceMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.Instance.InstanceMessage;
+
+                        /**
+                         * Verifies an InstanceMessage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstanceMessage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstanceMessage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.Instance.InstanceMessage;
+
+                        /**
+                         * Creates a plain object from an InstanceMessage message. Also converts values to other types if specified.
+                         * @param message InstanceMessage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.memcache.v1.Instance.InstanceMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstanceMessage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace InstanceMessage {
+
+                        /** Code enum. */
+                        enum Code {
+                            CODE_UNSPECIFIED = 0,
+                            ZONE_DISTRIBUTION_UNBALANCED = 1
+                        }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        DELETING = 4,
+                        PERFORMING_MAINTENANCE = 5
+                    }
+                }
+
+                /** Properties of a ListInstancesRequest. */
+                interface IListInstancesRequest {
+
+                    /** ListInstancesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListInstancesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListInstancesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListInstancesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListInstancesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListInstancesRequest. */
+                class ListInstancesRequest implements IListInstancesRequest {
+
+                    /**
+                     * Constructs a new ListInstancesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IListInstancesRequest);
+
+                    /** ListInstancesRequest parent. */
+                    public parent: string;
+
+                    /** ListInstancesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListInstancesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListInstancesRequest filter. */
+                    public filter: string;
+
+                    /** ListInstancesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListInstancesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IListInstancesRequest): google.cloud.memcache.v1.ListInstancesRequest;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.ListInstancesRequest;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.ListInstancesRequest;
+
+                    /**
+                     * Verifies a ListInstancesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.ListInstancesRequest;
+
+                    /**
+                     * Creates a plain object from a ListInstancesRequest message. Also converts values to other types if specified.
+                     * @param message ListInstancesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.ListInstancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListInstancesResponse. */
+                interface IListInstancesResponse {
+
+                    /** ListInstancesResponse instances */
+                    instances?: (google.cloud.memcache.v1.IInstance[]|null);
+
+                    /** ListInstancesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListInstancesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListInstancesResponse. */
+                class ListInstancesResponse implements IListInstancesResponse {
+
+                    /**
+                     * Constructs a new ListInstancesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IListInstancesResponse);
+
+                    /** ListInstancesResponse instances. */
+                    public instances: google.cloud.memcache.v1.IInstance[];
+
+                    /** ListInstancesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListInstancesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListInstancesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesResponse instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IListInstancesResponse): google.cloud.memcache.v1.ListInstancesResponse;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.ListInstancesResponse;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.ListInstancesResponse;
+
+                    /**
+                     * Verifies a ListInstancesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.ListInstancesResponse;
+
+                    /**
+                     * Creates a plain object from a ListInstancesResponse message. Also converts values to other types if specified.
+                     * @param message ListInstancesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.ListInstancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetInstanceRequest. */
+                interface IGetInstanceRequest {
+
+                    /** GetInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetInstanceRequest. */
+                class GetInstanceRequest implements IGetInstanceRequest {
+
+                    /**
+                     * Constructs a new GetInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IGetInstanceRequest);
+
+                    /** GetInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IGetInstanceRequest): google.cloud.memcache.v1.GetInstanceRequest;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.GetInstanceRequest;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.GetInstanceRequest;
+
+                    /**
+                     * Verifies a GetInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.GetInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a GetInstanceRequest message. Also converts values to other types if specified.
+                     * @param message GetInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.GetInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateInstanceRequest. */
+                interface ICreateInstanceRequest {
+
+                    /** CreateInstanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateInstanceRequest instanceId */
+                    instanceId?: (string|null);
+
+                    /** CreateInstanceRequest instance */
+                    instance?: (google.cloud.memcache.v1.IInstance|null);
+                }
+
+                /** Represents a CreateInstanceRequest. */
+                class CreateInstanceRequest implements ICreateInstanceRequest {
+
+                    /**
+                     * Constructs a new CreateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.ICreateInstanceRequest);
+
+                    /** CreateInstanceRequest parent. */
+                    public parent: string;
+
+                    /** CreateInstanceRequest instanceId. */
+                    public instanceId: string;
+
+                    /** CreateInstanceRequest instance. */
+                    public instance?: (google.cloud.memcache.v1.IInstance|null);
+
+                    /**
+                     * Creates a new CreateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.ICreateInstanceRequest): google.cloud.memcache.v1.CreateInstanceRequest;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.CreateInstanceRequest;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.CreateInstanceRequest;
+
+                    /**
+                     * Verifies a CreateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.CreateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message CreateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.CreateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateInstanceRequest. */
+                interface IUpdateInstanceRequest {
+
+                    /** UpdateInstanceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest instance */
+                    instance?: (google.cloud.memcache.v1.IInstance|null);
+                }
+
+                /** Represents an UpdateInstanceRequest. */
+                class UpdateInstanceRequest implements IUpdateInstanceRequest {
+
+                    /**
+                     * Constructs a new UpdateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IUpdateInstanceRequest);
+
+                    /** UpdateInstanceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest instance. */
+                    public instance?: (google.cloud.memcache.v1.IInstance|null);
+
+                    /**
+                     * Creates a new UpdateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IUpdateInstanceRequest): google.cloud.memcache.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Verifies an UpdateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.UpdateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteInstanceRequest. */
+                interface IDeleteInstanceRequest {
+
+                    /** DeleteInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteInstanceRequest. */
+                class DeleteInstanceRequest implements IDeleteInstanceRequest {
+
+                    /**
+                     * Constructs a new DeleteInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IDeleteInstanceRequest);
+
+                    /** DeleteInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IDeleteInstanceRequest): google.cloud.memcache.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Verifies a DeleteInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.DeleteInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ApplyParametersRequest. */
+                interface IApplyParametersRequest {
+
+                    /** ApplyParametersRequest name */
+                    name?: (string|null);
+
+                    /** ApplyParametersRequest nodeIds */
+                    nodeIds?: (string[]|null);
+
+                    /** ApplyParametersRequest applyAll */
+                    applyAll?: (boolean|null);
+                }
+
+                /** Represents an ApplyParametersRequest. */
+                class ApplyParametersRequest implements IApplyParametersRequest {
+
+                    /**
+                     * Constructs a new ApplyParametersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IApplyParametersRequest);
+
+                    /** ApplyParametersRequest name. */
+                    public name: string;
+
+                    /** ApplyParametersRequest nodeIds. */
+                    public nodeIds: string[];
+
+                    /** ApplyParametersRequest applyAll. */
+                    public applyAll: boolean;
+
+                    /**
+                     * Creates a new ApplyParametersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApplyParametersRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IApplyParametersRequest): google.cloud.memcache.v1.ApplyParametersRequest;
+
+                    /**
+                     * Encodes the specified ApplyParametersRequest message. Does not implicitly {@link google.cloud.memcache.v1.ApplyParametersRequest.verify|verify} messages.
+                     * @param message ApplyParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IApplyParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApplyParametersRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ApplyParametersRequest.verify|verify} messages.
+                     * @param message ApplyParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IApplyParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApplyParametersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApplyParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.ApplyParametersRequest;
+
+                    /**
+                     * Decodes an ApplyParametersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApplyParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.ApplyParametersRequest;
+
+                    /**
+                     * Verifies an ApplyParametersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApplyParametersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApplyParametersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.ApplyParametersRequest;
+
+                    /**
+                     * Creates a plain object from an ApplyParametersRequest message. Also converts values to other types if specified.
+                     * @param message ApplyParametersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.ApplyParametersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApplyParametersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateParametersRequest. */
+                interface IUpdateParametersRequest {
+
+                    /** UpdateParametersRequest name */
+                    name?: (string|null);
+
+                    /** UpdateParametersRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateParametersRequest parameters */
+                    parameters?: (google.cloud.memcache.v1.IMemcacheParameters|null);
+                }
+
+                /** Represents an UpdateParametersRequest. */
+                class UpdateParametersRequest implements IUpdateParametersRequest {
+
+                    /**
+                     * Constructs a new UpdateParametersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IUpdateParametersRequest);
+
+                    /** UpdateParametersRequest name. */
+                    public name: string;
+
+                    /** UpdateParametersRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateParametersRequest parameters. */
+                    public parameters?: (google.cloud.memcache.v1.IMemcacheParameters|null);
+
+                    /**
+                     * Creates a new UpdateParametersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateParametersRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IUpdateParametersRequest): google.cloud.memcache.v1.UpdateParametersRequest;
+
+                    /**
+                     * Encodes the specified UpdateParametersRequest message. Does not implicitly {@link google.cloud.memcache.v1.UpdateParametersRequest.verify|verify} messages.
+                     * @param message UpdateParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IUpdateParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateParametersRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.UpdateParametersRequest.verify|verify} messages.
+                     * @param message UpdateParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IUpdateParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateParametersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.UpdateParametersRequest;
+
+                    /**
+                     * Decodes an UpdateParametersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.UpdateParametersRequest;
+
+                    /**
+                     * Verifies an UpdateParametersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateParametersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateParametersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.UpdateParametersRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateParametersRequest message. Also converts values to other types if specified.
+                     * @param message UpdateParametersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.UpdateParametersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateParametersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MemcacheParameters. */
+                interface IMemcacheParameters {
+
+                    /** MemcacheParameters id */
+                    id?: (string|null);
+
+                    /** MemcacheParameters params */
+                    params?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a MemcacheParameters. */
+                class MemcacheParameters implements IMemcacheParameters {
+
+                    /**
+                     * Constructs a new MemcacheParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IMemcacheParameters);
+
+                    /** MemcacheParameters id. */
+                    public id: string;
+
+                    /** MemcacheParameters params. */
+                    public params: { [k: string]: string };
+
+                    /**
+                     * Creates a new MemcacheParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MemcacheParameters instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IMemcacheParameters): google.cloud.memcache.v1.MemcacheParameters;
+
+                    /**
+                     * Encodes the specified MemcacheParameters message. Does not implicitly {@link google.cloud.memcache.v1.MemcacheParameters.verify|verify} messages.
+                     * @param message MemcacheParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IMemcacheParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MemcacheParameters message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.MemcacheParameters.verify|verify} messages.
+                     * @param message MemcacheParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IMemcacheParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MemcacheParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MemcacheParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.MemcacheParameters;
+
+                    /**
+                     * Decodes a MemcacheParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MemcacheParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.MemcacheParameters;
+
+                    /**
+                     * Verifies a MemcacheParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MemcacheParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MemcacheParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.MemcacheParameters;
+
+                    /**
+                     * Creates a plain object from a MemcacheParameters message. Also converts values to other types if specified.
+                     * @param message MemcacheParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.MemcacheParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MemcacheParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusDetail */
+                    statusDetail?: (string|null);
+
+                    /** OperationMetadata cancelRequested */
+                    cancelRequested?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusDetail. */
+                    public statusDetail: string;
+
+                    /** OperationMetadata cancelRequested. */
+                    public cancelRequested: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IOperationMetadata): google.cloud.memcache.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.memcache.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** MemcacheVersion enum. */
+                enum MemcacheVersion {
+                    MEMCACHE_VERSION_UNSPECIFIED = 0,
+                    MEMCACHE_1_5 = 1
+                }
+            }
+
             /** Namespace v1beta2. */
             namespace v1beta2 {
 

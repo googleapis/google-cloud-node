@@ -57,6 +57,4234 @@
                  */
                 var memcache = {};
     
+                memcache.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.memcache
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.CloudMemcache = (function() {
+    
+                        /**
+                         * Constructs a new CloudMemcache service.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a CloudMemcache
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function CloudMemcache(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (CloudMemcache.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CloudMemcache;
+    
+                        /**
+                         * Creates new CloudMemcache service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {CloudMemcache} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        CloudMemcache.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#listInstances}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef ListInstancesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memcache.v1.ListInstancesResponse} [response] ListInstancesResponse
+                         */
+    
+                        /**
+                         * Calls ListInstances.
+                         * @function listInstances
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IListInstancesRequest} request ListInstancesRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.ListInstancesCallback} callback Node-style callback called with the error, if any, and ListInstancesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.listInstances = function listInstances(request, callback) {
+                            return this.rpcCall(listInstances, $root.google.cloud.memcache.v1.ListInstancesRequest, $root.google.cloud.memcache.v1.ListInstancesResponse, request, callback);
+                        }, "name", { value: "ListInstances" });
+    
+                        /**
+                         * Calls ListInstances.
+                         * @function listInstances
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IListInstancesRequest} request ListInstancesRequest message or plain object
+                         * @returns {Promise<google.cloud.memcache.v1.ListInstancesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#getInstance}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef GetInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memcache.v1.Instance} [response] Instance
+                         */
+    
+                        /**
+                         * Calls GetInstance.
+                         * @function getInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IGetInstanceRequest} request GetInstanceRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.GetInstanceCallback} callback Node-style callback called with the error, if any, and Instance
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.getInstance = function getInstance(request, callback) {
+                            return this.rpcCall(getInstance, $root.google.cloud.memcache.v1.GetInstanceRequest, $root.google.cloud.memcache.v1.Instance, request, callback);
+                        }, "name", { value: "GetInstance" });
+    
+                        /**
+                         * Calls GetInstance.
+                         * @function getInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IGetInstanceRequest} request GetInstanceRequest message or plain object
+                         * @returns {Promise<google.cloud.memcache.v1.Instance>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#createInstance}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef CreateInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateInstance.
+                         * @function createInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.ICreateInstanceRequest} request CreateInstanceRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.CreateInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.createInstance = function createInstance(request, callback) {
+                            return this.rpcCall(createInstance, $root.google.cloud.memcache.v1.CreateInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateInstance" });
+    
+                        /**
+                         * Calls CreateInstance.
+                         * @function createInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.ICreateInstanceRequest} request CreateInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#updateInstance}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef UpdateInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateInstance.
+                         * @function updateInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IUpdateInstanceRequest} request UpdateInstanceRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.UpdateInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.updateInstance = function updateInstance(request, callback) {
+                            return this.rpcCall(updateInstance, $root.google.cloud.memcache.v1.UpdateInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateInstance" });
+    
+                        /**
+                         * Calls UpdateInstance.
+                         * @function updateInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IUpdateInstanceRequest} request UpdateInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#updateParameters}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef UpdateParametersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateParameters.
+                         * @function updateParameters
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IUpdateParametersRequest} request UpdateParametersRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.UpdateParametersCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.updateParameters = function updateParameters(request, callback) {
+                            return this.rpcCall(updateParameters, $root.google.cloud.memcache.v1.UpdateParametersRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateParameters" });
+    
+                        /**
+                         * Calls UpdateParameters.
+                         * @function updateParameters
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IUpdateParametersRequest} request UpdateParametersRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#deleteInstance}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef DeleteInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteInstance.
+                         * @function deleteInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IDeleteInstanceRequest} request DeleteInstanceRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.DeleteInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.deleteInstance = function deleteInstance(request, callback) {
+                            return this.rpcCall(deleteInstance, $root.google.cloud.memcache.v1.DeleteInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteInstance" });
+    
+                        /**
+                         * Calls DeleteInstance.
+                         * @function deleteInstance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IDeleteInstanceRequest} request DeleteInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache#applyParameters}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef ApplyParametersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ApplyParameters.
+                         * @function applyParameters
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IApplyParametersRequest} request ApplyParametersRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.ApplyParametersCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.applyParameters = function applyParameters(request, callback) {
+                            return this.rpcCall(applyParameters, $root.google.cloud.memcache.v1.ApplyParametersRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ApplyParameters" });
+    
+                        /**
+                         * Calls ApplyParameters.
+                         * @function applyParameters
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IApplyParametersRequest} request ApplyParametersRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return CloudMemcache;
+                    })();
+    
+                    v1.Instance = (function() {
+    
+                        /**
+                         * Properties of an Instance.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IInstance
+                         * @property {string|null} [name] Instance name
+                         * @property {string|null} [displayName] Instance displayName
+                         * @property {Object.<string,string>|null} [labels] Instance labels
+                         * @property {string|null} [authorizedNetwork] Instance authorizedNetwork
+                         * @property {Array.<string>|null} [zones] Instance zones
+                         * @property {number|null} [nodeCount] Instance nodeCount
+                         * @property {google.cloud.memcache.v1.Instance.INodeConfig|null} [nodeConfig] Instance nodeConfig
+                         * @property {google.cloud.memcache.v1.MemcacheVersion|null} [memcacheVersion] Instance memcacheVersion
+                         * @property {google.cloud.memcache.v1.IMemcacheParameters|null} [parameters] Instance parameters
+                         * @property {Array.<google.cloud.memcache.v1.Instance.INode>|null} [memcacheNodes] Instance memcacheNodes
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Instance createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Instance updateTime
+                         * @property {google.cloud.memcache.v1.Instance.State|null} [state] Instance state
+                         * @property {string|null} [memcacheFullVersion] Instance memcacheFullVersion
+                         * @property {Array.<google.cloud.memcache.v1.Instance.IInstanceMessage>|null} [instanceMessages] Instance instanceMessages
+                         * @property {string|null} [discoveryEndpoint] Instance discoveryEndpoint
+                         */
+    
+                        /**
+                         * Constructs a new Instance.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents an Instance.
+                         * @implements IInstance
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IInstance=} [properties] Properties to set
+                         */
+                        function Instance(properties) {
+                            this.labels = {};
+                            this.zones = [];
+                            this.memcacheNodes = [];
+                            this.instanceMessages = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Instance name.
+                         * @member {string} name
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.name = "";
+    
+                        /**
+                         * Instance displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.displayName = "";
+    
+                        /**
+                         * Instance labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Instance authorizedNetwork.
+                         * @member {string} authorizedNetwork
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.authorizedNetwork = "";
+    
+                        /**
+                         * Instance zones.
+                         * @member {Array.<string>} zones
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.zones = $util.emptyArray;
+    
+                        /**
+                         * Instance nodeCount.
+                         * @member {number} nodeCount
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.nodeCount = 0;
+    
+                        /**
+                         * Instance nodeConfig.
+                         * @member {google.cloud.memcache.v1.Instance.INodeConfig|null|undefined} nodeConfig
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.nodeConfig = null;
+    
+                        /**
+                         * Instance memcacheVersion.
+                         * @member {google.cloud.memcache.v1.MemcacheVersion} memcacheVersion
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.memcacheVersion = 0;
+    
+                        /**
+                         * Instance parameters.
+                         * @member {google.cloud.memcache.v1.IMemcacheParameters|null|undefined} parameters
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.parameters = null;
+    
+                        /**
+                         * Instance memcacheNodes.
+                         * @member {Array.<google.cloud.memcache.v1.Instance.INode>} memcacheNodes
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.memcacheNodes = $util.emptyArray;
+    
+                        /**
+                         * Instance createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.createTime = null;
+    
+                        /**
+                         * Instance updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.updateTime = null;
+    
+                        /**
+                         * Instance state.
+                         * @member {google.cloud.memcache.v1.Instance.State} state
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.state = 0;
+    
+                        /**
+                         * Instance memcacheFullVersion.
+                         * @member {string} memcacheFullVersion
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.memcacheFullVersion = "";
+    
+                        /**
+                         * Instance instanceMessages.
+                         * @member {Array.<google.cloud.memcache.v1.Instance.IInstanceMessage>} instanceMessages
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.instanceMessages = $util.emptyArray;
+    
+                        /**
+                         * Instance discoveryEndpoint.
+                         * @member {string} discoveryEndpoint
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.discoveryEndpoint = "";
+    
+                        /**
+                         * Creates a new Instance instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {google.cloud.memcache.v1.IInstance=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.Instance} Instance instance
+                         */
+                        Instance.create = function create(properties) {
+                            return new Instance(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Instance message. Does not implicitly {@link google.cloud.memcache.v1.Instance.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {google.cloud.memcache.v1.IInstance} message Instance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Instance.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.authorizedNetwork != null && Object.hasOwnProperty.call(message, "authorizedNetwork"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.authorizedNetwork);
+                            if (message.zones != null && message.zones.length)
+                                for (var i = 0; i < message.zones.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.zones[i]);
+                            if (message.nodeCount != null && Object.hasOwnProperty.call(message, "nodeCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.nodeCount);
+                            if (message.nodeConfig != null && Object.hasOwnProperty.call(message, "nodeConfig"))
+                                $root.google.cloud.memcache.v1.Instance.NodeConfig.encode(message.nodeConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.memcacheVersion != null && Object.hasOwnProperty.call(message, "memcacheVersion"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.memcacheVersion);
+                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                $root.google.cloud.memcache.v1.MemcacheParameters.encode(message.parameters, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.memcacheNodes != null && message.memcacheNodes.length)
+                                for (var i = 0; i < message.memcacheNodes.length; ++i)
+                                    $root.google.cloud.memcache.v1.Instance.Node.encode(message.memcacheNodes[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.state);
+                            if (message.memcacheFullVersion != null && Object.hasOwnProperty.call(message, "memcacheFullVersion"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.memcacheFullVersion);
+                            if (message.instanceMessages != null && message.instanceMessages.length)
+                                for (var i = 0; i < message.instanceMessages.length; ++i)
+                                    $root.google.cloud.memcache.v1.Instance.InstanceMessage.encode(message.instanceMessages[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.discoveryEndpoint != null && Object.hasOwnProperty.call(message, "discoveryEndpoint"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.discoveryEndpoint);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Instance message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {google.cloud.memcache.v1.IInstance} message Instance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Instance.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Instance message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.Instance} Instance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Instance.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.Instance(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 4:
+                                    message.authorizedNetwork = reader.string();
+                                    break;
+                                case 5:
+                                    if (!(message.zones && message.zones.length))
+                                        message.zones = [];
+                                    message.zones.push(reader.string());
+                                    break;
+                                case 6:
+                                    message.nodeCount = reader.int32();
+                                    break;
+                                case 7:
+                                    message.nodeConfig = $root.google.cloud.memcache.v1.Instance.NodeConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.memcacheVersion = reader.int32();
+                                    break;
+                                case 11:
+                                    message.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.decode(reader, reader.uint32());
+                                    break;
+                                case 12:
+                                    if (!(message.memcacheNodes && message.memcacheNodes.length))
+                                        message.memcacheNodes = [];
+                                    message.memcacheNodes.push($root.google.cloud.memcache.v1.Instance.Node.decode(reader, reader.uint32()));
+                                    break;
+                                case 13:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 15:
+                                    message.state = reader.int32();
+                                    break;
+                                case 18:
+                                    message.memcacheFullVersion = reader.string();
+                                    break;
+                                case 19:
+                                    if (!(message.instanceMessages && message.instanceMessages.length))
+                                        message.instanceMessages = [];
+                                    message.instanceMessages.push($root.google.cloud.memcache.v1.Instance.InstanceMessage.decode(reader, reader.uint32()));
+                                    break;
+                                case 20:
+                                    message.discoveryEndpoint = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Instance message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.Instance} Instance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Instance.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Instance message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Instance.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.authorizedNetwork != null && message.hasOwnProperty("authorizedNetwork"))
+                                if (!$util.isString(message.authorizedNetwork))
+                                    return "authorizedNetwork: string expected";
+                            if (message.zones != null && message.hasOwnProperty("zones")) {
+                                if (!Array.isArray(message.zones))
+                                    return "zones: array expected";
+                                for (var i = 0; i < message.zones.length; ++i)
+                                    if (!$util.isString(message.zones[i]))
+                                        return "zones: string[] expected";
+                            }
+                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                if (!$util.isInteger(message.nodeCount))
+                                    return "nodeCount: integer expected";
+                            if (message.nodeConfig != null && message.hasOwnProperty("nodeConfig")) {
+                                var error = $root.google.cloud.memcache.v1.Instance.NodeConfig.verify(message.nodeConfig);
+                                if (error)
+                                    return "nodeConfig." + error;
+                            }
+                            if (message.memcacheVersion != null && message.hasOwnProperty("memcacheVersion"))
+                                switch (message.memcacheVersion) {
+                                default:
+                                    return "memcacheVersion: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                var error = $root.google.cloud.memcache.v1.MemcacheParameters.verify(message.parameters);
+                                if (error)
+                                    return "parameters." + error;
+                            }
+                            if (message.memcacheNodes != null && message.hasOwnProperty("memcacheNodes")) {
+                                if (!Array.isArray(message.memcacheNodes))
+                                    return "memcacheNodes: array expected";
+                                for (var i = 0; i < message.memcacheNodes.length; ++i) {
+                                    var error = $root.google.cloud.memcache.v1.Instance.Node.verify(message.memcacheNodes[i]);
+                                    if (error)
+                                        return "memcacheNodes." + error;
+                                }
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.memcacheFullVersion != null && message.hasOwnProperty("memcacheFullVersion"))
+                                if (!$util.isString(message.memcacheFullVersion))
+                                    return "memcacheFullVersion: string expected";
+                            if (message.instanceMessages != null && message.hasOwnProperty("instanceMessages")) {
+                                if (!Array.isArray(message.instanceMessages))
+                                    return "instanceMessages: array expected";
+                                for (var i = 0; i < message.instanceMessages.length; ++i) {
+                                    var error = $root.google.cloud.memcache.v1.Instance.InstanceMessage.verify(message.instanceMessages[i]);
+                                    if (error)
+                                        return "instanceMessages." + error;
+                                }
+                            }
+                            if (message.discoveryEndpoint != null && message.hasOwnProperty("discoveryEndpoint"))
+                                if (!$util.isString(message.discoveryEndpoint))
+                                    return "discoveryEndpoint: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Instance message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.Instance} Instance
+                         */
+                        Instance.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.Instance)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.Instance();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.authorizedNetwork != null)
+                                message.authorizedNetwork = String(object.authorizedNetwork);
+                            if (object.zones) {
+                                if (!Array.isArray(object.zones))
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.zones: array expected");
+                                message.zones = [];
+                                for (var i = 0; i < object.zones.length; ++i)
+                                    message.zones[i] = String(object.zones[i]);
+                            }
+                            if (object.nodeCount != null)
+                                message.nodeCount = object.nodeCount | 0;
+                            if (object.nodeConfig != null) {
+                                if (typeof object.nodeConfig !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.nodeConfig: object expected");
+                                message.nodeConfig = $root.google.cloud.memcache.v1.Instance.NodeConfig.fromObject(object.nodeConfig);
+                            }
+                            switch (object.memcacheVersion) {
+                            case "MEMCACHE_VERSION_UNSPECIFIED":
+                            case 0:
+                                message.memcacheVersion = 0;
+                                break;
+                            case "MEMCACHE_1_5":
+                            case 1:
+                                message.memcacheVersion = 1;
+                                break;
+                            }
+                            if (object.parameters != null) {
+                                if (typeof object.parameters !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.parameters: object expected");
+                                message.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.fromObject(object.parameters);
+                            }
+                            if (object.memcacheNodes) {
+                                if (!Array.isArray(object.memcacheNodes))
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.memcacheNodes: array expected");
+                                message.memcacheNodes = [];
+                                for (var i = 0; i < object.memcacheNodes.length; ++i) {
+                                    if (typeof object.memcacheNodes[i] !== "object")
+                                        throw TypeError(".google.cloud.memcache.v1.Instance.memcacheNodes: object expected");
+                                    message.memcacheNodes[i] = $root.google.cloud.memcache.v1.Instance.Node.fromObject(object.memcacheNodes[i]);
+                                }
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "PERFORMING_MAINTENANCE":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.memcacheFullVersion != null)
+                                message.memcacheFullVersion = String(object.memcacheFullVersion);
+                            if (object.instanceMessages) {
+                                if (!Array.isArray(object.instanceMessages))
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.instanceMessages: array expected");
+                                message.instanceMessages = [];
+                                for (var i = 0; i < object.instanceMessages.length; ++i) {
+                                    if (typeof object.instanceMessages[i] !== "object")
+                                        throw TypeError(".google.cloud.memcache.v1.Instance.instanceMessages: object expected");
+                                    message.instanceMessages[i] = $root.google.cloud.memcache.v1.Instance.InstanceMessage.fromObject(object.instanceMessages[i]);
+                                }
+                            }
+                            if (object.discoveryEndpoint != null)
+                                message.discoveryEndpoint = String(object.discoveryEndpoint);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Instance message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @static
+                         * @param {google.cloud.memcache.v1.Instance} message Instance
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Instance.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.zones = [];
+                                object.memcacheNodes = [];
+                                object.instanceMessages = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.authorizedNetwork = "";
+                                object.nodeCount = 0;
+                                object.nodeConfig = null;
+                                object.memcacheVersion = options.enums === String ? "MEMCACHE_VERSION_UNSPECIFIED" : 0;
+                                object.parameters = null;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.memcacheFullVersion = "";
+                                object.discoveryEndpoint = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.authorizedNetwork != null && message.hasOwnProperty("authorizedNetwork"))
+                                object.authorizedNetwork = message.authorizedNetwork;
+                            if (message.zones && message.zones.length) {
+                                object.zones = [];
+                                for (var j = 0; j < message.zones.length; ++j)
+                                    object.zones[j] = message.zones[j];
+                            }
+                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                object.nodeCount = message.nodeCount;
+                            if (message.nodeConfig != null && message.hasOwnProperty("nodeConfig"))
+                                object.nodeConfig = $root.google.cloud.memcache.v1.Instance.NodeConfig.toObject(message.nodeConfig, options);
+                            if (message.memcacheVersion != null && message.hasOwnProperty("memcacheVersion"))
+                                object.memcacheVersion = options.enums === String ? $root.google.cloud.memcache.v1.MemcacheVersion[message.memcacheVersion] : message.memcacheVersion;
+                            if (message.parameters != null && message.hasOwnProperty("parameters"))
+                                object.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.toObject(message.parameters, options);
+                            if (message.memcacheNodes && message.memcacheNodes.length) {
+                                object.memcacheNodes = [];
+                                for (var j = 0; j < message.memcacheNodes.length; ++j)
+                                    object.memcacheNodes[j] = $root.google.cloud.memcache.v1.Instance.Node.toObject(message.memcacheNodes[j], options);
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.memcache.v1.Instance.State[message.state] : message.state;
+                            if (message.memcacheFullVersion != null && message.hasOwnProperty("memcacheFullVersion"))
+                                object.memcacheFullVersion = message.memcacheFullVersion;
+                            if (message.instanceMessages && message.instanceMessages.length) {
+                                object.instanceMessages = [];
+                                for (var j = 0; j < message.instanceMessages.length; ++j)
+                                    object.instanceMessages[j] = $root.google.cloud.memcache.v1.Instance.InstanceMessage.toObject(message.instanceMessages[j], options);
+                            }
+                            if (message.discoveryEndpoint != null && message.hasOwnProperty("discoveryEndpoint"))
+                                object.discoveryEndpoint = message.discoveryEndpoint;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Instance to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Instance.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        Instance.NodeConfig = (function() {
+    
+                            /**
+                             * Properties of a NodeConfig.
+                             * @memberof google.cloud.memcache.v1.Instance
+                             * @interface INodeConfig
+                             * @property {number|null} [cpuCount] NodeConfig cpuCount
+                             * @property {number|null} [memorySizeMb] NodeConfig memorySizeMb
+                             */
+    
+                            /**
+                             * Constructs a new NodeConfig.
+                             * @memberof google.cloud.memcache.v1.Instance
+                             * @classdesc Represents a NodeConfig.
+                             * @implements INodeConfig
+                             * @constructor
+                             * @param {google.cloud.memcache.v1.Instance.INodeConfig=} [properties] Properties to set
+                             */
+                            function NodeConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NodeConfig cpuCount.
+                             * @member {number} cpuCount
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @instance
+                             */
+                            NodeConfig.prototype.cpuCount = 0;
+    
+                            /**
+                             * NodeConfig memorySizeMb.
+                             * @member {number} memorySizeMb
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @instance
+                             */
+                            NodeConfig.prototype.memorySizeMb = 0;
+    
+                            /**
+                             * Creates a new NodeConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.INodeConfig=} [properties] Properties to set
+                             * @returns {google.cloud.memcache.v1.Instance.NodeConfig} NodeConfig instance
+                             */
+                            NodeConfig.create = function create(properties) {
+                                return new NodeConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NodeConfig message. Does not implicitly {@link google.cloud.memcache.v1.Instance.NodeConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.INodeConfig} message NodeConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NodeConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cpuCount != null && Object.hasOwnProperty.call(message, "cpuCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cpuCount);
+                                if (message.memorySizeMb != null && Object.hasOwnProperty.call(message, "memorySizeMb"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.memorySizeMb);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NodeConfig message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.NodeConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.INodeConfig} message NodeConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NodeConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NodeConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memcache.v1.Instance.NodeConfig} NodeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NodeConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.Instance.NodeConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.cpuCount = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.memorySizeMb = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NodeConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memcache.v1.Instance.NodeConfig} NodeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NodeConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NodeConfig message.
+                             * @function verify
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NodeConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.cpuCount != null && message.hasOwnProperty("cpuCount"))
+                                    if (!$util.isInteger(message.cpuCount))
+                                        return "cpuCount: integer expected";
+                                if (message.memorySizeMb != null && message.hasOwnProperty("memorySizeMb"))
+                                    if (!$util.isInteger(message.memorySizeMb))
+                                        return "memorySizeMb: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NodeConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memcache.v1.Instance.NodeConfig} NodeConfig
+                             */
+                            NodeConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memcache.v1.Instance.NodeConfig)
+                                    return object;
+                                var message = new $root.google.cloud.memcache.v1.Instance.NodeConfig();
+                                if (object.cpuCount != null)
+                                    message.cpuCount = object.cpuCount | 0;
+                                if (object.memorySizeMb != null)
+                                    message.memorySizeMb = object.memorySizeMb | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NodeConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.NodeConfig} message NodeConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NodeConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.cpuCount = 0;
+                                    object.memorySizeMb = 0;
+                                }
+                                if (message.cpuCount != null && message.hasOwnProperty("cpuCount"))
+                                    object.cpuCount = message.cpuCount;
+                                if (message.memorySizeMb != null && message.hasOwnProperty("memorySizeMb"))
+                                    object.memorySizeMb = message.memorySizeMb;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NodeConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memcache.v1.Instance.NodeConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NodeConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return NodeConfig;
+                        })();
+    
+                        Instance.Node = (function() {
+    
+                            /**
+                             * Properties of a Node.
+                             * @memberof google.cloud.memcache.v1.Instance
+                             * @interface INode
+                             * @property {string|null} [nodeId] Node nodeId
+                             * @property {string|null} [zone] Node zone
+                             * @property {google.cloud.memcache.v1.Instance.Node.State|null} [state] Node state
+                             * @property {string|null} [host] Node host
+                             * @property {number|null} [port] Node port
+                             * @property {google.cloud.memcache.v1.IMemcacheParameters|null} [parameters] Node parameters
+                             */
+    
+                            /**
+                             * Constructs a new Node.
+                             * @memberof google.cloud.memcache.v1.Instance
+                             * @classdesc Represents a Node.
+                             * @implements INode
+                             * @constructor
+                             * @param {google.cloud.memcache.v1.Instance.INode=} [properties] Properties to set
+                             */
+                            function Node(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Node nodeId.
+                             * @member {string} nodeId
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @instance
+                             */
+                            Node.prototype.nodeId = "";
+    
+                            /**
+                             * Node zone.
+                             * @member {string} zone
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @instance
+                             */
+                            Node.prototype.zone = "";
+    
+                            /**
+                             * Node state.
+                             * @member {google.cloud.memcache.v1.Instance.Node.State} state
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @instance
+                             */
+                            Node.prototype.state = 0;
+    
+                            /**
+                             * Node host.
+                             * @member {string} host
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @instance
+                             */
+                            Node.prototype.host = "";
+    
+                            /**
+                             * Node port.
+                             * @member {number} port
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @instance
+                             */
+                            Node.prototype.port = 0;
+    
+                            /**
+                             * Node parameters.
+                             * @member {google.cloud.memcache.v1.IMemcacheParameters|null|undefined} parameters
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @instance
+                             */
+                            Node.prototype.parameters = null;
+    
+                            /**
+                             * Creates a new Node instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.INode=} [properties] Properties to set
+                             * @returns {google.cloud.memcache.v1.Instance.Node} Node instance
+                             */
+                            Node.create = function create(properties) {
+                                return new Node(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Node message. Does not implicitly {@link google.cloud.memcache.v1.Instance.Node.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.INode} message Node message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Node.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.nodeId != null && Object.hasOwnProperty.call(message, "nodeId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.nodeId);
+                                if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.zone);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                                if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.host);
+                                if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.port);
+                                if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                    $root.google.cloud.memcache.v1.MemcacheParameters.encode(message.parameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Node message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.Node.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.INode} message Node message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Node.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Node message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memcache.v1.Instance.Node} Node
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Node.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.Instance.Node();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.nodeId = reader.string();
+                                        break;
+                                    case 2:
+                                        message.zone = reader.string();
+                                        break;
+                                    case 3:
+                                        message.state = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.host = reader.string();
+                                        break;
+                                    case 5:
+                                        message.port = reader.int32();
+                                        break;
+                                    case 6:
+                                        message.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Node message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memcache.v1.Instance.Node} Node
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Node.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Node message.
+                             * @function verify
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Node.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.nodeId != null && message.hasOwnProperty("nodeId"))
+                                    if (!$util.isString(message.nodeId))
+                                        return "nodeId: string expected";
+                                if (message.zone != null && message.hasOwnProperty("zone"))
+                                    if (!$util.isString(message.zone))
+                                        return "zone: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.host != null && message.hasOwnProperty("host"))
+                                    if (!$util.isString(message.host))
+                                        return "host: string expected";
+                                if (message.port != null && message.hasOwnProperty("port"))
+                                    if (!$util.isInteger(message.port))
+                                        return "port: integer expected";
+                                if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                    var error = $root.google.cloud.memcache.v1.MemcacheParameters.verify(message.parameters);
+                                    if (error)
+                                        return "parameters." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Node message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memcache.v1.Instance.Node} Node
+                             */
+                            Node.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memcache.v1.Instance.Node)
+                                    return object;
+                                var message = new $root.google.cloud.memcache.v1.Instance.Node();
+                                if (object.nodeId != null)
+                                    message.nodeId = String(object.nodeId);
+                                if (object.zone != null)
+                                    message.zone = String(object.zone);
+                                switch (object.state) {
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "CREATING":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "READY":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "UPDATING":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                if (object.host != null)
+                                    message.host = String(object.host);
+                                if (object.port != null)
+                                    message.port = object.port | 0;
+                                if (object.parameters != null) {
+                                    if (typeof object.parameters !== "object")
+                                        throw TypeError(".google.cloud.memcache.v1.Instance.Node.parameters: object expected");
+                                    message.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.fromObject(object.parameters);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Node message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.Node} message Node
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Node.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.nodeId = "";
+                                    object.zone = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.host = "";
+                                    object.port = 0;
+                                    object.parameters = null;
+                                }
+                                if (message.nodeId != null && message.hasOwnProperty("nodeId"))
+                                    object.nodeId = message.nodeId;
+                                if (message.zone != null && message.hasOwnProperty("zone"))
+                                    object.zone = message.zone;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.memcache.v1.Instance.Node.State[message.state] : message.state;
+                                if (message.host != null && message.hasOwnProperty("host"))
+                                    object.host = message.host;
+                                if (message.port != null && message.hasOwnProperty("port"))
+                                    object.port = message.port;
+                                if (message.parameters != null && message.hasOwnProperty("parameters"))
+                                    object.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.toObject(message.parameters, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Node to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memcache.v1.Instance.Node
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Node.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.memcache.v1.Instance.Node.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} CREATING=1 CREATING value
+                             * @property {number} READY=2 READY value
+                             * @property {number} DELETING=3 DELETING value
+                             * @property {number} UPDATING=4 UPDATING value
+                             */
+                            Node.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CREATING"] = 1;
+                                values[valuesById[2] = "READY"] = 2;
+                                values[valuesById[3] = "DELETING"] = 3;
+                                values[valuesById[4] = "UPDATING"] = 4;
+                                return values;
+                            })();
+    
+                            return Node;
+                        })();
+    
+                        Instance.InstanceMessage = (function() {
+    
+                            /**
+                             * Properties of an InstanceMessage.
+                             * @memberof google.cloud.memcache.v1.Instance
+                             * @interface IInstanceMessage
+                             * @property {google.cloud.memcache.v1.Instance.InstanceMessage.Code|null} [code] InstanceMessage code
+                             * @property {string|null} [message] InstanceMessage message
+                             */
+    
+                            /**
+                             * Constructs a new InstanceMessage.
+                             * @memberof google.cloud.memcache.v1.Instance
+                             * @classdesc Represents an InstanceMessage.
+                             * @implements IInstanceMessage
+                             * @constructor
+                             * @param {google.cloud.memcache.v1.Instance.IInstanceMessage=} [properties] Properties to set
+                             */
+                            function InstanceMessage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InstanceMessage code.
+                             * @member {google.cloud.memcache.v1.Instance.InstanceMessage.Code} code
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @instance
+                             */
+                            InstanceMessage.prototype.code = 0;
+    
+                            /**
+                             * InstanceMessage message.
+                             * @member {string} message
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @instance
+                             */
+                            InstanceMessage.prototype.message = "";
+    
+                            /**
+                             * Creates a new InstanceMessage instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.IInstanceMessage=} [properties] Properties to set
+                             * @returns {google.cloud.memcache.v1.Instance.InstanceMessage} InstanceMessage instance
+                             */
+                            InstanceMessage.create = function create(properties) {
+                                return new InstanceMessage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceMessage message. Does not implicitly {@link google.cloud.memcache.v1.Instance.InstanceMessage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.IInstanceMessage} message InstanceMessage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceMessage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceMessage message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.Instance.InstanceMessage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.IInstanceMessage} message InstanceMessage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InstanceMessage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memcache.v1.Instance.InstanceMessage} InstanceMessage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceMessage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.Instance.InstanceMessage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.code = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.message = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InstanceMessage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memcache.v1.Instance.InstanceMessage} InstanceMessage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceMessage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InstanceMessage message.
+                             * @function verify
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InstanceMessage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    switch (message.code) {
+                                    default:
+                                        return "code: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    if (!$util.isString(message.message))
+                                        return "message: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InstanceMessage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memcache.v1.Instance.InstanceMessage} InstanceMessage
+                             */
+                            InstanceMessage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memcache.v1.Instance.InstanceMessage)
+                                    return object;
+                                var message = new $root.google.cloud.memcache.v1.Instance.InstanceMessage();
+                                switch (object.code) {
+                                case "CODE_UNSPECIFIED":
+                                case 0:
+                                    message.code = 0;
+                                    break;
+                                case "ZONE_DISTRIBUTION_UNBALANCED":
+                                case 1:
+                                    message.code = 1;
+                                    break;
+                                }
+                                if (object.message != null)
+                                    message.message = String(object.message);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InstanceMessage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @static
+                             * @param {google.cloud.memcache.v1.Instance.InstanceMessage} message InstanceMessage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InstanceMessage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.code = options.enums === String ? "CODE_UNSPECIFIED" : 0;
+                                    object.message = "";
+                                }
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    object.code = options.enums === String ? $root.google.cloud.memcache.v1.Instance.InstanceMessage.Code[message.code] : message.code;
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    object.message = message.message;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InstanceMessage to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memcache.v1.Instance.InstanceMessage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InstanceMessage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Code enum.
+                             * @name google.cloud.memcache.v1.Instance.InstanceMessage.Code
+                             * @enum {number}
+                             * @property {number} CODE_UNSPECIFIED=0 CODE_UNSPECIFIED value
+                             * @property {number} ZONE_DISTRIBUTION_UNBALANCED=1 ZONE_DISTRIBUTION_UNBALANCED value
+                             */
+                            InstanceMessage.Code = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ZONE_DISTRIBUTION_UNBALANCED"] = 1;
+                                return values;
+                            })();
+    
+                            return InstanceMessage;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.memcache.v1.Instance.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} PERFORMING_MAINTENANCE=5 PERFORMING_MAINTENANCE value
+                         */
+                        Instance.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "PERFORMING_MAINTENANCE"] = 5;
+                            return values;
+                        })();
+    
+                        return Instance;
+                    })();
+    
+                    v1.ListInstancesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListInstancesRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IListInstancesRequest
+                         * @property {string|null} [parent] ListInstancesRequest parent
+                         * @property {number|null} [pageSize] ListInstancesRequest pageSize
+                         * @property {string|null} [pageToken] ListInstancesRequest pageToken
+                         * @property {string|null} [filter] ListInstancesRequest filter
+                         * @property {string|null} [orderBy] ListInstancesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListInstancesRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a ListInstancesRequest.
+                         * @implements IListInstancesRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IListInstancesRequest=} [properties] Properties to set
+                         */
+                        function ListInstancesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInstancesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @instance
+                         */
+                        ListInstancesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListInstancesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @instance
+                         */
+                        ListInstancesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListInstancesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @instance
+                         */
+                        ListInstancesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListInstancesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @instance
+                         */
+                        ListInstancesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListInstancesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @instance
+                         */
+                        ListInstancesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListInstancesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IListInstancesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.ListInstancesRequest} ListInstancesRequest instance
+                         */
+                        ListInstancesRequest.create = function create(properties) {
+                            return new ListInstancesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInstancesRequest message. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IListInstancesRequest} message ListInstancesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInstancesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IListInstancesRequest} message ListInstancesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInstancesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInstancesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.ListInstancesRequest} ListInstancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInstancesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.ListInstancesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInstancesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.ListInstancesRequest} ListInstancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInstancesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInstancesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInstancesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.ListInstancesRequest} ListInstancesRequest
+                         */
+                        ListInstancesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.ListInstancesRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.ListInstancesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInstancesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.ListInstancesRequest} message ListInstancesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInstancesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInstancesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.ListInstancesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInstancesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListInstancesRequest;
+                    })();
+    
+                    v1.ListInstancesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListInstancesResponse.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IListInstancesResponse
+                         * @property {Array.<google.cloud.memcache.v1.IInstance>|null} [instances] ListInstancesResponse instances
+                         * @property {string|null} [nextPageToken] ListInstancesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListInstancesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListInstancesResponse.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a ListInstancesResponse.
+                         * @implements IListInstancesResponse
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IListInstancesResponse=} [properties] Properties to set
+                         */
+                        function ListInstancesResponse(properties) {
+                            this.instances = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInstancesResponse instances.
+                         * @member {Array.<google.cloud.memcache.v1.IInstance>} instances
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @instance
+                         */
+                        ListInstancesResponse.prototype.instances = $util.emptyArray;
+    
+                        /**
+                         * ListInstancesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @instance
+                         */
+                        ListInstancesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListInstancesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @instance
+                         */
+                        ListInstancesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListInstancesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {google.cloud.memcache.v1.IListInstancesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.ListInstancesResponse} ListInstancesResponse instance
+                         */
+                        ListInstancesResponse.create = function create(properties) {
+                            return new ListInstancesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInstancesResponse message. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {google.cloud.memcache.v1.IListInstancesResponse} message ListInstancesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInstancesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instances != null && message.instances.length)
+                                for (var i = 0; i < message.instances.length; ++i)
+                                    $root.google.cloud.memcache.v1.Instance.encode(message.instances[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ListInstancesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {google.cloud.memcache.v1.IListInstancesResponse} message ListInstancesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInstancesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInstancesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.ListInstancesResponse} ListInstancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInstancesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.ListInstancesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.instances && message.instances.length))
+                                        message.instances = [];
+                                    message.instances.push($root.google.cloud.memcache.v1.Instance.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInstancesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.ListInstancesResponse} ListInstancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInstancesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInstancesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInstancesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instances != null && message.hasOwnProperty("instances")) {
+                                if (!Array.isArray(message.instances))
+                                    return "instances: array expected";
+                                for (var i = 0; i < message.instances.length; ++i) {
+                                    var error = $root.google.cloud.memcache.v1.Instance.verify(message.instances[i]);
+                                    if (error)
+                                        return "instances." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.ListInstancesResponse} ListInstancesResponse
+                         */
+                        ListInstancesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.ListInstancesResponse)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.ListInstancesResponse();
+                            if (object.instances) {
+                                if (!Array.isArray(object.instances))
+                                    throw TypeError(".google.cloud.memcache.v1.ListInstancesResponse.instances: array expected");
+                                message.instances = [];
+                                for (var i = 0; i < object.instances.length; ++i) {
+                                    if (typeof object.instances[i] !== "object")
+                                        throw TypeError(".google.cloud.memcache.v1.ListInstancesResponse.instances: object expected");
+                                    message.instances[i] = $root.google.cloud.memcache.v1.Instance.fromObject(object.instances[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.memcache.v1.ListInstancesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInstancesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @static
+                         * @param {google.cloud.memcache.v1.ListInstancesResponse} message ListInstancesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInstancesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.instances = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.instances && message.instances.length) {
+                                object.instances = [];
+                                for (var j = 0; j < message.instances.length; ++j)
+                                    object.instances[j] = $root.google.cloud.memcache.v1.Instance.toObject(message.instances[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInstancesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.ListInstancesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInstancesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListInstancesResponse;
+                    })();
+    
+                    v1.GetInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IGetInstanceRequest
+                         * @property {string|null} [name] GetInstanceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a GetInstanceRequest.
+                         * @implements IGetInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IGetInstanceRequest=} [properties] Properties to set
+                         */
+                        function GetInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetInstanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @instance
+                         */
+                        GetInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IGetInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.GetInstanceRequest} GetInstanceRequest instance
+                         */
+                        GetInstanceRequest.create = function create(properties) {
+                            return new GetInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.GetInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IGetInstanceRequest} message GetInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.GetInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IGetInstanceRequest} message GetInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.GetInstanceRequest} GetInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInstanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.GetInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.GetInstanceRequest} GetInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.GetInstanceRequest} GetInstanceRequest
+                         */
+                        GetInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.GetInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.GetInstanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.GetInstanceRequest} message GetInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.GetInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetInstanceRequest;
+                    })();
+    
+                    v1.CreateInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface ICreateInstanceRequest
+                         * @property {string|null} [parent] CreateInstanceRequest parent
+                         * @property {string|null} [instanceId] CreateInstanceRequest instanceId
+                         * @property {google.cloud.memcache.v1.IInstance|null} [instance] CreateInstanceRequest instance
+                         */
+    
+                        /**
+                         * Constructs a new CreateInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a CreateInstanceRequest.
+                         * @implements ICreateInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.ICreateInstanceRequest=} [properties] Properties to set
+                         */
+                        function CreateInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateInstanceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @instance
+                         */
+                        CreateInstanceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateInstanceRequest instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @instance
+                         */
+                        CreateInstanceRequest.prototype.instanceId = "";
+    
+                        /**
+                         * CreateInstanceRequest instance.
+                         * @member {google.cloud.memcache.v1.IInstance|null|undefined} instance
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @instance
+                         */
+                        CreateInstanceRequest.prototype.instance = null;
+    
+                        /**
+                         * Creates a new CreateInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.ICreateInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.CreateInstanceRequest} CreateInstanceRequest instance
+                         */
+                        CreateInstanceRequest.create = function create(properties) {
+                            return new CreateInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.CreateInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.ICreateInstanceRequest} message CreateInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceId);
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                $root.google.cloud.memcache.v1.Instance.encode(message.instance, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.CreateInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.ICreateInstanceRequest} message CreateInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.CreateInstanceRequest} CreateInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateInstanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.CreateInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.instanceId = reader.string();
+                                    break;
+                                case 3:
+                                    message.instance = $root.google.cloud.memcache.v1.Instance.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.CreateInstanceRequest} CreateInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            if (message.instance != null && message.hasOwnProperty("instance")) {
+                                var error = $root.google.cloud.memcache.v1.Instance.verify(message.instance);
+                                if (error)
+                                    return "instance." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.CreateInstanceRequest} CreateInstanceRequest
+                         */
+                        CreateInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.CreateInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.CreateInstanceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            if (object.instance != null) {
+                                if (typeof object.instance !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.CreateInstanceRequest.instance: object expected");
+                                message.instance = $root.google.cloud.memcache.v1.Instance.fromObject(object.instance);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.CreateInstanceRequest} message CreateInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.instanceId = "";
+                                object.instance = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = $root.google.cloud.memcache.v1.Instance.toObject(message.instance, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.CreateInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateInstanceRequest;
+                    })();
+    
+                    v1.UpdateInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IUpdateInstanceRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateInstanceRequest updateMask
+                         * @property {google.cloud.memcache.v1.IInstance|null} [instance] UpdateInstanceRequest instance
+                         */
+    
+                        /**
+                         * Constructs a new UpdateInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents an UpdateInstanceRequest.
+                         * @implements IUpdateInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IUpdateInstanceRequest=} [properties] Properties to set
+                         */
+                        function UpdateInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateInstanceRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @instance
+                         */
+                        UpdateInstanceRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateInstanceRequest instance.
+                         * @member {google.cloud.memcache.v1.IInstance|null|undefined} instance
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @instance
+                         */
+                        UpdateInstanceRequest.prototype.instance = null;
+    
+                        /**
+                         * Creates a new UpdateInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IUpdateInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.UpdateInstanceRequest} UpdateInstanceRequest instance
+                         */
+                        UpdateInstanceRequest.create = function create(properties) {
+                            return new UpdateInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.UpdateInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IUpdateInstanceRequest} message UpdateInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                $root.google.cloud.memcache.v1.Instance.encode(message.instance, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.UpdateInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IUpdateInstanceRequest} message UpdateInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.UpdateInstanceRequest} UpdateInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInstanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.UpdateInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.instance = $root.google.cloud.memcache.v1.Instance.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.UpdateInstanceRequest} UpdateInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance")) {
+                                var error = $root.google.cloud.memcache.v1.Instance.verify(message.instance);
+                                if (error)
+                                    return "instance." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.UpdateInstanceRequest} UpdateInstanceRequest
+                         */
+                        UpdateInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.UpdateInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.UpdateInstanceRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.UpdateInstanceRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.instance != null) {
+                                if (typeof object.instance !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.UpdateInstanceRequest.instance: object expected");
+                                message.instance = $root.google.cloud.memcache.v1.Instance.fromObject(object.instance);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.UpdateInstanceRequest} message UpdateInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.instance = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = $root.google.cloud.memcache.v1.Instance.toObject(message.instance, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.UpdateInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateInstanceRequest;
+                    })();
+    
+                    v1.DeleteInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IDeleteInstanceRequest
+                         * @property {string|null} [name] DeleteInstanceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteInstanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a DeleteInstanceRequest.
+                         * @implements IDeleteInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IDeleteInstanceRequest=} [properties] Properties to set
+                         */
+                        function DeleteInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteInstanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @instance
+                         */
+                        DeleteInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IDeleteInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.DeleteInstanceRequest} DeleteInstanceRequest instance
+                         */
+                        DeleteInstanceRequest.create = function create(properties) {
+                            return new DeleteInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteInstanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.DeleteInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IDeleteInstanceRequest} message DeleteInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.DeleteInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IDeleteInstanceRequest} message DeleteInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.DeleteInstanceRequest} DeleteInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteInstanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.DeleteInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.DeleteInstanceRequest} DeleteInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.DeleteInstanceRequest} DeleteInstanceRequest
+                         */
+                        DeleteInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.DeleteInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.DeleteInstanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.DeleteInstanceRequest} message DeleteInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.DeleteInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteInstanceRequest;
+                    })();
+    
+                    v1.ApplyParametersRequest = (function() {
+    
+                        /**
+                         * Properties of an ApplyParametersRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IApplyParametersRequest
+                         * @property {string|null} [name] ApplyParametersRequest name
+                         * @property {Array.<string>|null} [nodeIds] ApplyParametersRequest nodeIds
+                         * @property {boolean|null} [applyAll] ApplyParametersRequest applyAll
+                         */
+    
+                        /**
+                         * Constructs a new ApplyParametersRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents an ApplyParametersRequest.
+                         * @implements IApplyParametersRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IApplyParametersRequest=} [properties] Properties to set
+                         */
+                        function ApplyParametersRequest(properties) {
+                            this.nodeIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApplyParametersRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @instance
+                         */
+                        ApplyParametersRequest.prototype.name = "";
+    
+                        /**
+                         * ApplyParametersRequest nodeIds.
+                         * @member {Array.<string>} nodeIds
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @instance
+                         */
+                        ApplyParametersRequest.prototype.nodeIds = $util.emptyArray;
+    
+                        /**
+                         * ApplyParametersRequest applyAll.
+                         * @member {boolean} applyAll
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @instance
+                         */
+                        ApplyParametersRequest.prototype.applyAll = false;
+    
+                        /**
+                         * Creates a new ApplyParametersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IApplyParametersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.ApplyParametersRequest} ApplyParametersRequest instance
+                         */
+                        ApplyParametersRequest.create = function create(properties) {
+                            return new ApplyParametersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApplyParametersRequest message. Does not implicitly {@link google.cloud.memcache.v1.ApplyParametersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IApplyParametersRequest} message ApplyParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplyParametersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.nodeIds != null && message.nodeIds.length)
+                                for (var i = 0; i < message.nodeIds.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeIds[i]);
+                            if (message.applyAll != null && Object.hasOwnProperty.call(message, "applyAll"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.applyAll);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApplyParametersRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ApplyParametersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IApplyParametersRequest} message ApplyParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplyParametersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApplyParametersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.ApplyParametersRequest} ApplyParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplyParametersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.ApplyParametersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.nodeIds && message.nodeIds.length))
+                                        message.nodeIds = [];
+                                    message.nodeIds.push(reader.string());
+                                    break;
+                                case 3:
+                                    message.applyAll = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApplyParametersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.ApplyParametersRequest} ApplyParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplyParametersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApplyParametersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApplyParametersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.nodeIds != null && message.hasOwnProperty("nodeIds")) {
+                                if (!Array.isArray(message.nodeIds))
+                                    return "nodeIds: array expected";
+                                for (var i = 0; i < message.nodeIds.length; ++i)
+                                    if (!$util.isString(message.nodeIds[i]))
+                                        return "nodeIds: string[] expected";
+                            }
+                            if (message.applyAll != null && message.hasOwnProperty("applyAll"))
+                                if (typeof message.applyAll !== "boolean")
+                                    return "applyAll: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApplyParametersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.ApplyParametersRequest} ApplyParametersRequest
+                         */
+                        ApplyParametersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.ApplyParametersRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.ApplyParametersRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.nodeIds) {
+                                if (!Array.isArray(object.nodeIds))
+                                    throw TypeError(".google.cloud.memcache.v1.ApplyParametersRequest.nodeIds: array expected");
+                                message.nodeIds = [];
+                                for (var i = 0; i < object.nodeIds.length; ++i)
+                                    message.nodeIds[i] = String(object.nodeIds[i]);
+                            }
+                            if (object.applyAll != null)
+                                message.applyAll = Boolean(object.applyAll);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApplyParametersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.ApplyParametersRequest} message ApplyParametersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApplyParametersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.nodeIds = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.applyAll = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.nodeIds && message.nodeIds.length) {
+                                object.nodeIds = [];
+                                for (var j = 0; j < message.nodeIds.length; ++j)
+                                    object.nodeIds[j] = message.nodeIds[j];
+                            }
+                            if (message.applyAll != null && message.hasOwnProperty("applyAll"))
+                                object.applyAll = message.applyAll;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApplyParametersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.ApplyParametersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApplyParametersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ApplyParametersRequest;
+                    })();
+    
+                    v1.UpdateParametersRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateParametersRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IUpdateParametersRequest
+                         * @property {string|null} [name] UpdateParametersRequest name
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateParametersRequest updateMask
+                         * @property {google.cloud.memcache.v1.IMemcacheParameters|null} [parameters] UpdateParametersRequest parameters
+                         */
+    
+                        /**
+                         * Constructs a new UpdateParametersRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents an UpdateParametersRequest.
+                         * @implements IUpdateParametersRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IUpdateParametersRequest=} [properties] Properties to set
+                         */
+                        function UpdateParametersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateParametersRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @instance
+                         */
+                        UpdateParametersRequest.prototype.name = "";
+    
+                        /**
+                         * UpdateParametersRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @instance
+                         */
+                        UpdateParametersRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateParametersRequest parameters.
+                         * @member {google.cloud.memcache.v1.IMemcacheParameters|null|undefined} parameters
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @instance
+                         */
+                        UpdateParametersRequest.prototype.parameters = null;
+    
+                        /**
+                         * Creates a new UpdateParametersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IUpdateParametersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.UpdateParametersRequest} UpdateParametersRequest instance
+                         */
+                        UpdateParametersRequest.create = function create(properties) {
+                            return new UpdateParametersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateParametersRequest message. Does not implicitly {@link google.cloud.memcache.v1.UpdateParametersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IUpdateParametersRequest} message UpdateParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateParametersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                $root.google.cloud.memcache.v1.MemcacheParameters.encode(message.parameters, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateParametersRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.UpdateParametersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IUpdateParametersRequest} message UpdateParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateParametersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateParametersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.UpdateParametersRequest} UpdateParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateParametersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.UpdateParametersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateParametersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.UpdateParametersRequest} UpdateParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateParametersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateParametersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateParametersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                var error = $root.google.cloud.memcache.v1.MemcacheParameters.verify(message.parameters);
+                                if (error)
+                                    return "parameters." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateParametersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.UpdateParametersRequest} UpdateParametersRequest
+                         */
+                        UpdateParametersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.UpdateParametersRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.UpdateParametersRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.UpdateParametersRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.parameters != null) {
+                                if (typeof object.parameters !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.UpdateParametersRequest.parameters: object expected");
+                                message.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.fromObject(object.parameters);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateParametersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.UpdateParametersRequest} message UpdateParametersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateParametersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.updateMask = null;
+                                object.parameters = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.parameters != null && message.hasOwnProperty("parameters"))
+                                object.parameters = $root.google.cloud.memcache.v1.MemcacheParameters.toObject(message.parameters, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateParametersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.UpdateParametersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateParametersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateParametersRequest;
+                    })();
+    
+                    v1.MemcacheParameters = (function() {
+    
+                        /**
+                         * Properties of a MemcacheParameters.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IMemcacheParameters
+                         * @property {string|null} [id] MemcacheParameters id
+                         * @property {Object.<string,string>|null} [params] MemcacheParameters params
+                         */
+    
+                        /**
+                         * Constructs a new MemcacheParameters.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a MemcacheParameters.
+                         * @implements IMemcacheParameters
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IMemcacheParameters=} [properties] Properties to set
+                         */
+                        function MemcacheParameters(properties) {
+                            this.params = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MemcacheParameters id.
+                         * @member {string} id
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @instance
+                         */
+                        MemcacheParameters.prototype.id = "";
+    
+                        /**
+                         * MemcacheParameters params.
+                         * @member {Object.<string,string>} params
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @instance
+                         */
+                        MemcacheParameters.prototype.params = $util.emptyObject;
+    
+                        /**
+                         * Creates a new MemcacheParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMemcacheParameters=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.MemcacheParameters} MemcacheParameters instance
+                         */
+                        MemcacheParameters.create = function create(properties) {
+                            return new MemcacheParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MemcacheParameters message. Does not implicitly {@link google.cloud.memcache.v1.MemcacheParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMemcacheParameters} message MemcacheParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MemcacheParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.params != null && Object.hasOwnProperty.call(message, "params"))
+                                for (var keys = Object.keys(message.params), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.params[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MemcacheParameters message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.MemcacheParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMemcacheParameters} message MemcacheParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MemcacheParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MemcacheParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.MemcacheParameters} MemcacheParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MemcacheParameters.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.MemcacheParameters(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.id = reader.string();
+                                    break;
+                                case 3:
+                                    if (message.params === $util.emptyObject)
+                                        message.params = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.params[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MemcacheParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.MemcacheParameters} MemcacheParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MemcacheParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MemcacheParameters message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MemcacheParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.params != null && message.hasOwnProperty("params")) {
+                                if (!$util.isObject(message.params))
+                                    return "params: object expected";
+                                var key = Object.keys(message.params);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.params[key[i]]))
+                                        return "params: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MemcacheParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.MemcacheParameters} MemcacheParameters
+                         */
+                        MemcacheParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.MemcacheParameters)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.MemcacheParameters();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.params) {
+                                if (typeof object.params !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.MemcacheParameters.params: object expected");
+                                message.params = {};
+                                for (var keys = Object.keys(object.params), i = 0; i < keys.length; ++i)
+                                    message.params[keys[i]] = String(object.params[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MemcacheParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @static
+                         * @param {google.cloud.memcache.v1.MemcacheParameters} message MemcacheParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MemcacheParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.params = {};
+                            if (options.defaults)
+                                object.id = "";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            var keys2;
+                            if (message.params && (keys2 = Object.keys(message.params)).length) {
+                                object.params = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.params[keys2[j]] = message.params[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MemcacheParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.MemcacheParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MemcacheParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MemcacheParameters;
+                    })();
+    
+                    v1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusDetail] OperationMetadata statusDetail
+                         * @property {boolean|null} [cancelRequested] OperationMetadata cancelRequested
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusDetail.
+                         * @member {string} statusDetail
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusDetail = "";
+    
+                        /**
+                         * OperationMetadata cancelRequested.
+                         * @member {boolean} cancelRequested
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.cancelRequested = false;
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.memcache.v1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusDetail != null && Object.hasOwnProperty.call(message, "statusDetail"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusDetail);
+                            if (message.cancelRequested != null && Object.hasOwnProperty.call(message, "cancelRequested"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.cancelRequested);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.target = reader.string();
+                                    break;
+                                case 4:
+                                    message.verb = reader.string();
+                                    break;
+                                case 5:
+                                    message.statusDetail = reader.string();
+                                    break;
+                                case 6:
+                                    message.cancelRequested = reader.bool();
+                                    break;
+                                case 7:
+                                    message.apiVersion = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                if (!$util.isString(message.statusDetail))
+                                    return "statusDetail: string expected";
+                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
+                                if (typeof message.cancelRequested !== "boolean")
+                                    return "cancelRequested: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusDetail != null)
+                                message.statusDetail = String(object.statusDetail);
+                            if (object.cancelRequested != null)
+                                message.cancelRequested = Boolean(object.cancelRequested);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusDetail = "";
+                                object.cancelRequested = false;
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                object.statusDetail = message.statusDetail;
+                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
+                                object.cancelRequested = message.cancelRequested;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    /**
+                     * MemcacheVersion enum.
+                     * @name google.cloud.memcache.v1.MemcacheVersion
+                     * @enum {number}
+                     * @property {number} MEMCACHE_VERSION_UNSPECIFIED=0 MEMCACHE_VERSION_UNSPECIFIED value
+                     * @property {number} MEMCACHE_1_5=1 MEMCACHE_1_5 value
+                     */
+                    v1.MemcacheVersion = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MEMCACHE_VERSION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MEMCACHE_1_5"] = 1;
+                        return values;
+                    })();
+    
+                    return v1;
+                })();
+    
                 memcache.v1beta2 = (function() {
     
                     /**

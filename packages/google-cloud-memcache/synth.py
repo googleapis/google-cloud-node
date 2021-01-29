@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
 gapic = gcp.GAPICBazel()
-versions = ['v1beta2']
+versions = ['v1beta2', 'v1']
 name = 'memcache'
 for version in versions:
   library = gapic.node_library(name, version)

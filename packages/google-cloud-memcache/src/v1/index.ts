@@ -16,10 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const CloudMemcacheClient = v1.CloudMemcacheClient;
-type CloudMemcacheClient = v1.CloudMemcacheClient;
-export {v1, CloudMemcacheClient};
-export default {v1, CloudMemcacheClient};
-import * as protos from '../protos/protos';
-export {protos};
+export {CloudMemcacheClient} from './cloud_memcache_client';

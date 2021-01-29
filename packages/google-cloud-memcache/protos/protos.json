@@ -6,6 +6,637 @@
           "nested": {
             "memcache": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/memcache/v1;memcache",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "CloudMemcacheProto",
+                    "java_package": "com.google.cloud.memcache.v1"
+                  },
+                  "nested": {
+                    "CloudMemcache": {
+                      "options": {
+                        "(google.api.default_host)": "memcache.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListInstances": {
+                          "requestType": "ListInstancesRequest",
+                          "responseType": "ListInstancesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/instances",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/instances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetInstance": {
+                          "requestType": "GetInstanceRequest",
+                          "responseType": "Instance",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateInstance": {
+                          "requestType": "CreateInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/instances",
+                            "(google.api.http).body": "instance",
+                            "(google.api.method_signature)": "parent,instance,instance_id",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1.Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/instances",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,instance,instance_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1.Instance",
+                                "metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateInstance": {
+                          "requestType": "UpdateInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{instance.name=projects/*/locations/*/instances/*}",
+                            "(google.api.http).body": "instance",
+                            "(google.api.method_signature)": "instance,update_mask",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1.Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{instance.name=projects/*/locations/*/instances/*}",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1.Instance",
+                                "metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateParameters": {
+                          "requestType": "UpdateParametersRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/instances/*}:updateParameters",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,update_mask,parameters",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1.Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/instances/*}:updateParameters",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,update_mask,parameters"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1.Instance",
+                                "metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteInstance": {
+                          "requestType": "DeleteInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/instances/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ApplyParameters": {
+                          "requestType": "ApplyParametersRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:applyParameters",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,node_ids,apply_all",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1.Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:applyParameters",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,node_ids,apply_all"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1.Instance",
+                                "metadata_type": "google.cloud.memcache.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Instance": {
+                      "options": {
+                        "(google.api.resource).type": "memcache.googleapis.com/Instance",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "authorizedNetwork": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "zones": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "nodeCount": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodeConfig": {
+                          "type": "NodeConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "memcacheVersion": {
+                          "type": "MemcacheVersion",
+                          "id": 9
+                        },
+                        "parameters": {
+                          "type": "MemcacheParameters",
+                          "id": 11
+                        },
+                        "memcacheNodes": {
+                          "rule": "repeated",
+                          "type": "Node",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "memcacheFullVersion": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceMessages": {
+                          "rule": "repeated",
+                          "type": "InstanceMessage",
+                          "id": 19
+                        },
+                        "discoveryEndpoint": {
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "NodeConfig": {
+                          "fields": {
+                            "cpuCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "memorySizeMb": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "Node": {
+                          "fields": {
+                            "nodeId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "zone": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "host": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "port": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "parameters": {
+                              "type": "MemcacheParameters",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "CREATING": 1,
+                                "READY": 2,
+                                "DELETING": 3,
+                                "UPDATING": 4
+                              }
+                            }
+                          }
+                        },
+                        "InstanceMessage": {
+                          "fields": {
+                            "code": {
+                              "type": "Code",
+                              "id": 1
+                            },
+                            "message": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Code": {
+                              "values": {
+                                "CODE_UNSPECIFIED": 0,
+                                "ZONE_DISTRIBUTION_UNBALANCED": 1
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 4,
+                            "PERFORMING_MAINTENANCE": 5
+                          }
+                        }
+                      }
+                    },
+                    "ListInstancesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListInstancesResponse": {
+                      "fields": {
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memcache.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "CreateInstanceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "Instance",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateInstanceRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "Instance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memcache.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "ApplyParametersRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memcache.googleapis.com/Instance"
+                          }
+                        },
+                        "nodeIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "applyAll": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateParametersRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memcache.googleapis.com/Instance"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameters": {
+                          "type": "MemcacheParameters",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "MemcacheParameters": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusDetail": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cancelRequested": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MemcacheVersion": {
+                      "values": {
+                        "MEMCACHE_VERSION_UNSPECIFIED": 0,
+                        "MEMCACHE_1_5": 1
+                      }
+                    }
+                  }
+                },
                 "v1beta2": {
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/memcache/v1beta2;memcache",
