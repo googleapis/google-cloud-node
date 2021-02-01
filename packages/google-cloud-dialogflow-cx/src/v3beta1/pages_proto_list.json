@@ -12,7 +12,9 @@
   "../../protos/google/cloud/dialogflow/cx/v3beta1/security_settings.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/session.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/session_entity_type.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3beta1/test_case.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/transition_route_group.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3beta1/validation_message.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/version.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/webhook.proto"
 ]

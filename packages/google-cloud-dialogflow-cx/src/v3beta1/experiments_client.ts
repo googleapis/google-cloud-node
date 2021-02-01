@@ -41,7 +41,8 @@ import * as gapicConfig from './experiments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiments}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiments}.
  * @class
  * @memberof v3beta1
  */
@@ -169,6 +170,9 @@ export class ExperimentsClient {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}'
       ),
+      agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/validationResult'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}'
       ),
@@ -180,6 +184,9 @@ export class ExperimentsClient {
       ),
       flowPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}'
+      ),
+      flowValidationResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/validationResult'
       ),
       intentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/intents/{intent}'
@@ -201,6 +208,12 @@ export class ExperimentsClient {
       ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
+      ),
+      testCasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}'
+      ),
+      testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
       ),
       transitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
@@ -396,13 +409,15 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
+   * Retrieves the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -496,12 +511,15 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Creates an {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment} in the specified {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
+   * Creates an {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment} in
+   * the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Agent|Agent} to create an {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} for.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Agent|Agent} to create
+   *   an {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} for.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Experiment} request.experiment
@@ -598,7 +616,8 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
+   * Updates the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -698,12 +717,14 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
+   * Deletes the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to delete.
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to delete.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
    * @param {object} [options]
@@ -798,8 +819,9 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Starts the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only changes the state of
-   * experiment from PENDING to RUNNING.
+   * Starts the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only
+   * changes the state of experiment from PENDING to RUNNING.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -899,8 +921,9 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Stops the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only changes the state of
-   * experiment from RUNNING to DONE.
+   * Stops the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only
+   * changes the state of experiment from RUNNING to DONE.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -998,14 +1021,16 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Returns the list of all experiments in the specified {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
+   * Returns the list of all experiments in the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format: `projects/<Project
+   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+   *   ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1074,9 +1099,10 @@ export class ExperimentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format: `projects/<Project
+   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+   *   ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1123,9 +1149,10 @@ export class ExperimentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format: `projects/<Project
+   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+   *   ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1220,6 +1247,63 @@ export class ExperimentsClient {
    */
   matchAgentFromAgentName(agentName: string) {
     return this.pathTemplates.agentPathTemplate.match(agentName).agent;
+  }
+
+  /**
+   * Return a fully-qualified agentValidationResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @returns {string} Resource name string.
+   */
+  agentValidationResultPath(project: string, location: string, agent: string) {
+    return this.pathTemplates.agentValidationResultPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+    });
+  }
+
+  /**
+   * Parse the project from AgentValidationResult resource.
+   *
+   * @param {string} agentValidationResultName
+   *   A fully-qualified path representing AgentValidationResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentValidationResultName(agentValidationResultName: string) {
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AgentValidationResult resource.
+   *
+   * @param {string} agentValidationResultName
+   *   A fully-qualified path representing AgentValidationResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentValidationResultName(
+    agentValidationResultName: string
+  ) {
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from AgentValidationResult resource.
+   *
+   * @param {string} agentValidationResultName
+   *   A fully-qualified path representing AgentValidationResult resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromAgentValidationResultName(agentValidationResultName: string) {
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName
+    ).agent;
   }
 
   /**
@@ -1510,6 +1594,81 @@ export class ExperimentsClient {
    */
   matchFlowFromFlowName(flowName: string) {
     return this.pathTemplates.flowPathTemplate.match(flowName).flow;
+  }
+
+  /**
+   * Return a fully-qualified flowValidationResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} flow
+   * @returns {string} Resource name string.
+   */
+  flowValidationResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string
+  ) {
+    return this.pathTemplates.flowValidationResultPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      flow: flow,
+    });
+  }
+
+  /**
+   * Parse the project from FlowValidationResult resource.
+   *
+   * @param {string} flowValidationResultName
+   *   A fully-qualified path representing FlowValidationResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFlowValidationResultName(flowValidationResultName: string) {
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName
+    ).project;
+  }
+
+  /**
+   * Parse the location from FlowValidationResult resource.
+   *
+   * @param {string} flowValidationResultName
+   *   A fully-qualified path representing FlowValidationResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFlowValidationResultName(flowValidationResultName: string) {
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from FlowValidationResult resource.
+   *
+   * @param {string} flowValidationResultName
+   *   A fully-qualified path representing FlowValidationResult resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromFlowValidationResultName(flowValidationResultName: string) {
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName
+    ).agent;
+  }
+
+  /**
+   * Parse the flow from FlowValidationResult resource.
+   *
+   * @param {string} flowValidationResultName
+   *   A fully-qualified path representing FlowValidationResult resource.
+   * @returns {string} A string representing the flow.
+   */
+  matchFlowFromFlowValidationResultName(flowValidationResultName: string) {
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName
+    ).flow;
   }
 
   /**
@@ -1995,6 +2154,165 @@ export class ExperimentsClient {
     return this.pathTemplates.securitySettingsPathTemplate.match(
       securitySettingsName
     ).security_settings;
+  }
+
+  /**
+   * Return a fully-qualified testCase resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} test_case
+   * @returns {string} Resource name string.
+   */
+  testCasePath(
+    project: string,
+    location: string,
+    agent: string,
+    testCase: string
+  ) {
+    return this.pathTemplates.testCasePathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      test_case: testCase,
+    });
+  }
+
+  /**
+   * Parse the project from TestCase resource.
+   *
+   * @param {string} testCaseName
+   *   A fully-qualified path representing TestCase resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTestCaseName(testCaseName: string) {
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName).project;
+  }
+
+  /**
+   * Parse the location from TestCase resource.
+   *
+   * @param {string} testCaseName
+   *   A fully-qualified path representing TestCase resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTestCaseName(testCaseName: string) {
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName).location;
+  }
+
+  /**
+   * Parse the agent from TestCase resource.
+   *
+   * @param {string} testCaseName
+   *   A fully-qualified path representing TestCase resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromTestCaseName(testCaseName: string) {
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName).agent;
+  }
+
+  /**
+   * Parse the test_case from TestCase resource.
+   *
+   * @param {string} testCaseName
+   *   A fully-qualified path representing TestCase resource.
+   * @returns {string} A string representing the test_case.
+   */
+  matchTestCaseFromTestCaseName(testCaseName: string) {
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName)
+      .test_case;
+  }
+
+  /**
+   * Return a fully-qualified testCaseResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} test_case
+   * @param {string} result
+   * @returns {string} Resource name string.
+   */
+  testCaseResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    testCase: string,
+    result: string
+  ) {
+    return this.pathTemplates.testCaseResultPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      test_case: testCase,
+      result: result,
+    });
+  }
+
+  /**
+   * Parse the project from TestCaseResult resource.
+   *
+   * @param {string} testCaseResultName
+   *   A fully-qualified path representing TestCaseResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTestCaseResultName(testCaseResultName: string) {
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TestCaseResult resource.
+   *
+   * @param {string} testCaseResultName
+   *   A fully-qualified path representing TestCaseResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTestCaseResultName(testCaseResultName: string) {
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from TestCaseResult resource.
+   *
+   * @param {string} testCaseResultName
+   *   A fully-qualified path representing TestCaseResult resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromTestCaseResultName(testCaseResultName: string) {
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName
+    ).agent;
+  }
+
+  /**
+   * Parse the test_case from TestCaseResult resource.
+   *
+   * @param {string} testCaseResultName
+   *   A fully-qualified path representing TestCaseResult resource.
+   * @returns {string} A string representing the test_case.
+   */
+  matchTestCaseFromTestCaseResultName(testCaseResultName: string) {
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName
+    ).test_case;
+  }
+
+  /**
+   * Parse the result from TestCaseResult resource.
+   *
+   * @param {string} testCaseResultName
+   *   A fully-qualified path representing TestCaseResult resource.
+   * @returns {string} A string representing the result.
+   */
+  matchResultFromTestCaseResultName(testCaseResultName: string) {
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName
+    ).result;
   }
 
   /**

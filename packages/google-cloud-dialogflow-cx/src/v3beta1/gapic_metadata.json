@@ -30,6 +30,16 @@
                 "deleteAgent"
               ]
             },
+            "ValidateAgent": {
+              "methods": [
+                "validateAgent"
+              ]
+            },
+            "GetAgentValidationResult": {
+              "methods": [
+                "getAgentValidationResult"
+              ]
+            },
             "ExportAgent": {
               "methods": [
                 "exportAgent"
@@ -70,6 +80,16 @@
             "DeleteAgent": {
               "methods": [
                 "deleteAgent"
+              ]
+            },
+            "ValidateAgent": {
+              "methods": [
+                "validateAgent"
+              ]
+            },
+            "GetAgentValidationResult": {
+              "methods": [
+                "getAgentValidationResult"
               ]
             },
             "ExportAgent": {
@@ -356,6 +376,16 @@
                 "updateFlow"
               ]
             },
+            "ValidateFlow": {
+              "methods": [
+                "validateFlow"
+              ]
+            },
+            "GetFlowValidationResult": {
+              "methods": [
+                "getFlowValidationResult"
+              ]
+            },
             "TrainFlow": {
               "methods": [
                 "trainFlow"
@@ -391,6 +421,16 @@
             "UpdateFlow": {
               "methods": [
                 "updateFlow"
+              ]
+            },
+            "ValidateFlow": {
+              "methods": [
+                "validateFlow"
+              ]
+            },
+            "GetFlowValidationResult": {
+              "methods": [
+                "getFlowValidationResult"
               ]
             },
             "TrainFlow": {
@@ -724,6 +764,138 @@
             "FulfillIntent": {
               "methods": [
                 "fulfillIntent"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TestCases": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TestCasesClient",
+          "rpcs": {
+            "BatchDeleteTestCases": {
+              "methods": [
+                "batchDeleteTestCases"
+              ]
+            },
+            "GetTestCase": {
+              "methods": [
+                "getTestCase"
+              ]
+            },
+            "CreateTestCase": {
+              "methods": [
+                "createTestCase"
+              ]
+            },
+            "UpdateTestCase": {
+              "methods": [
+                "updateTestCase"
+              ]
+            },
+            "CalculateCoverage": {
+              "methods": [
+                "calculateCoverage"
+              ]
+            },
+            "RunTestCase": {
+              "methods": [
+                "runTestCase"
+              ]
+            },
+            "BatchRunTestCases": {
+              "methods": [
+                "batchRunTestCases"
+              ]
+            },
+            "ImportTestCases": {
+              "methods": [
+                "importTestCases"
+              ]
+            },
+            "ExportTestCases": {
+              "methods": [
+                "exportTestCases"
+              ]
+            },
+            "ListTestCases": {
+              "methods": [
+                "listTestCases",
+                "listTestCasesStream",
+                "listTestCasesAsync"
+              ]
+            },
+            "ListTestCaseResults": {
+              "methods": [
+                "listTestCaseResults",
+                "listTestCaseResultsStream",
+                "listTestCaseResultsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TestCasesClient",
+          "rpcs": {
+            "BatchDeleteTestCases": {
+              "methods": [
+                "batchDeleteTestCases"
+              ]
+            },
+            "GetTestCase": {
+              "methods": [
+                "getTestCase"
+              ]
+            },
+            "CreateTestCase": {
+              "methods": [
+                "createTestCase"
+              ]
+            },
+            "UpdateTestCase": {
+              "methods": [
+                "updateTestCase"
+              ]
+            },
+            "CalculateCoverage": {
+              "methods": [
+                "calculateCoverage"
+              ]
+            },
+            "RunTestCase": {
+              "methods": [
+                "runTestCase"
+              ]
+            },
+            "BatchRunTestCases": {
+              "methods": [
+                "batchRunTestCases"
+              ]
+            },
+            "ImportTestCases": {
+              "methods": [
+                "importTestCases"
+              ]
+            },
+            "ExportTestCases": {
+              "methods": [
+                "exportTestCases"
+              ]
+            },
+            "ListTestCases": {
+              "methods": [
+                "listTestCases",
+                "listTestCasesStream",
+                "listTestCasesAsync"
+              ]
+            },
+            "ListTestCaseResults": {
+              "methods": [
+                "listTestCaseResults",
+                "listTestCaseResultsStream",
+                "listTestCaseResultsAsync"
               ]
             }
           }

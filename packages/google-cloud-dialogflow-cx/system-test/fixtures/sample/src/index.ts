@@ -27,6 +27,7 @@ import {
   SecuritySettingsServiceClient,
   SessionEntityTypesClient,
   SessionsClient,
+  TestCasesClient,
   TransitionRouteGroupsClient,
   VersionsClient,
   WebhooksClient,
@@ -63,6 +64,9 @@ function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
   client.close();
 }
 function doStuffWithSessionsClient(client: SessionsClient) {
+  client.close();
+}
+function doStuffWithTestCasesClient(client: TestCasesClient) {
   client.close();
 }
 function doStuffWithTransitionRouteGroupsClient(
@@ -108,6 +112,9 @@ function main() {
   // check that the client instance can be created
   const sessionsClient = new SessionsClient();
   doStuffWithSessionsClient(sessionsClient);
+  // check that the client instance can be created
+  const testCasesClient = new TestCasesClient();
+  doStuffWithTestCasesClient(testCasesClient);
   // check that the client instance can be created
   const transitionRouteGroupsClient = new TransitionRouteGroupsClient();
   doStuffWithTransitionRouteGroupsClient(transitionRouteGroupsClient);

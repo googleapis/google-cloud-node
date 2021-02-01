@@ -33,6 +33,10 @@ option java_multiple_files = true;
 option java_outer_classname = "WebhookProto";
 option java_package = "com.google.cloud.dialogflow.cx.v3beta1";
 option objc_class_prefix = "DF";
+option (google.api.resource_definition) = {
+  type: "servicedirectory.googleapis.com/Service"
+  pattern: "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
+};
 
 // Service for managing [Webhooks][google.cloud.dialogflow.cx.v3beta1.Webhook].
 service Webhooks {
@@ -255,11 +259,18 @@ message WebhookRequest {
                                       type: "dialogflow.googleapis.com/Intent"
                                     }];
 
+    // Always present. The display name of the last matched [intent][google.cloud.dialogflow.cx.v3beta1.Intent].
+    string display_name = 3;
+
     // Parameters identified as a result of intent matching. This is a map of
     // the name of the identified parameter to the value of the parameter
     // identified from the user's utterance. All parameters defined in the
     // matched intent that are identified will be surfaced here.
     map<string, IntentParameterValue> parameters = 2;
+
+    // The confidence of the matched intent. Values range from 0.0 (completely
+    // uncertain) to 1.0 (completely certain).
+    float confidence = 4;
   }
 
   // Always present. The unique identifier of the [DetectIntentResponse][google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse] that
@@ -424,9 +435,11 @@ message PageInfo {
 message SessionInfo {
   // Always present for [WebhookRequest][google.cloud.dialogflow.cx.v3beta1.WebhookRequest]. Ignored for [WebhookResponse][google.cloud.dialogflow.cx.v3beta1.WebhookResponse].
   // The unique identifier of the [session][google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest.session]. This
-  // field can be used by the webhook to identify a user.
+  // field can be used by the webhook to identify a session.
   // Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-  // ID>/sessions/<Session ID>`.
+  // ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
+  // ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`
+  // if environment is specified.
   string session = 1 [(google.api.resource_reference) = {
                         type: "dialogflow.googleapis.com/Session"
                       }];

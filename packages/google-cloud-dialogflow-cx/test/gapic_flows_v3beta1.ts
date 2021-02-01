@@ -674,6 +674,235 @@ describe('v3beta1.FlowsClient', () => {
     });
   });
 
+  describe('validateFlow', () => {
+    it('invokes validateFlow without error', async () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ValidateFlowRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.FlowValidationResult()
+      );
+      client.innerApiCalls.validateFlow = stubSimpleCall(expectedResponse);
+      const [response] = await client.validateFlow(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.validateFlow as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes validateFlow without error using callback', async () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ValidateFlowRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.FlowValidationResult()
+      );
+      client.innerApiCalls.validateFlow = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.validateFlow(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.validateFlow as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes validateFlow with error', async () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ValidateFlowRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.validateFlow = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.validateFlow(request), expectedError);
+      assert(
+        (client.innerApiCalls.validateFlow as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getFlowValidationResult', () => {
+    it('invokes getFlowValidationResult without error', async () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetFlowValidationResultRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.FlowValidationResult()
+      );
+      client.innerApiCalls.getFlowValidationResult = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.getFlowValidationResult(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getFlowValidationResult as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getFlowValidationResult without error using callback', async () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetFlowValidationResultRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.FlowValidationResult()
+      );
+      client.innerApiCalls.getFlowValidationResult = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getFlowValidationResult(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getFlowValidationResult as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getFlowValidationResult with error', async () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetFlowValidationResultRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getFlowValidationResult = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getFlowValidationResult(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getFlowValidationResult as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('trainFlow', () => {
     it('invokes trainFlow without error', async () => {
       const client = new flowsModule.v3beta1.FlowsClient({
@@ -1233,6 +1462,78 @@ describe('v3beta1.FlowsClient', () => {
       });
     });
 
+    describe('agentValidationResult', () => {
+      const fakePath = '/rendered/path/agentValidationResult';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+      };
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.agentValidationResultPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.agentValidationResultPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('agentValidationResultPath', () => {
+        const result = client.agentValidationResultPath(
+          'projectValue',
+          'locationValue',
+          'agentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.agentValidationResultPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAgentValidationResultName', () => {
+        const result = client.matchProjectFromAgentValidationResultName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.agentValidationResultPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAgentValidationResultName', () => {
+        const result = client.matchLocationFromAgentValidationResultName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.agentValidationResultPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromAgentValidationResultName', () => {
+        const result = client.matchAgentFromAgentValidationResultName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.agentValidationResultPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('entityType', () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {
@@ -1543,6 +1844,91 @@ describe('v3beta1.FlowsClient', () => {
         assert.strictEqual(result, 'flowValue');
         assert(
           (client.pathTemplates.flowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('flowValidationResult', () => {
+      const fakePath = '/rendered/path/flowValidationResult';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        flow: 'flowValue',
+      };
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.flowValidationResultPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.flowValidationResultPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('flowValidationResultPath', () => {
+        const result = client.flowValidationResultPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'flowValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.flowValidationResultPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFlowValidationResultName', () => {
+        const result = client.matchProjectFromFlowValidationResultName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.flowValidationResultPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFlowValidationResultName', () => {
+        const result = client.matchLocationFromFlowValidationResultName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.flowValidationResultPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromFlowValidationResultName', () => {
+        const result = client.matchAgentFromFlowValidationResultName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.flowValidationResultPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFlowFromFlowValidationResultName', () => {
+        const result = client.matchFlowFromFlowValidationResultName(fakePath);
+        assert.strictEqual(result, 'flowValue');
+        assert(
+          (client.pathTemplates.flowValidationResultPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2098,6 +2484,170 @@ describe('v3beta1.FlowsClient', () => {
         assert.strictEqual(result, 'securitySettingsValue');
         assert(
           (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('testCase', () => {
+      const fakePath = '/rendered/path/testCase';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        test_case: 'testCaseValue',
+      };
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.testCasePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.testCasePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('testCasePath', () => {
+        const result = client.testCasePath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'testCaseValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.testCasePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTestCaseName', () => {
+        const result = client.matchProjectFromTestCaseName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTestCaseName', () => {
+        const result = client.matchLocationFromTestCaseName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromTestCaseName', () => {
+        const result = client.matchAgentFromTestCaseName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTestCaseFromTestCaseName', () => {
+        const result = client.matchTestCaseFromTestCaseName(fakePath);
+        assert.strictEqual(result, 'testCaseValue');
+        assert(
+          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('testCaseResult', () => {
+      const fakePath = '/rendered/path/testCaseResult';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        test_case: 'testCaseValue',
+        result: 'resultValue',
+      };
+      const client = new flowsModule.v3beta1.FlowsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.testCaseResultPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.testCaseResultPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('testCaseResultPath', () => {
+        const result = client.testCaseResultPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'testCaseValue',
+          'resultValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.testCaseResultPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTestCaseResultName', () => {
+        const result = client.matchProjectFromTestCaseResultName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTestCaseResultName', () => {
+        const result = client.matchLocationFromTestCaseResultName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromTestCaseResultName', () => {
+        const result = client.matchAgentFromTestCaseResultName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTestCaseFromTestCaseResultName', () => {
+        const result = client.matchTestCaseFromTestCaseResultName(fakePath);
+        assert.strictEqual(result, 'testCaseValue');
+        assert(
+          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchResultFromTestCaseResultName', () => {
+        const result = client.matchResultFromTestCaseResultName(fakePath);
+        assert.strictEqual(result, 'resultValue');
+        assert(
+          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

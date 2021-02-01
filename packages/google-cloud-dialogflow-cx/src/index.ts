@@ -39,6 +39,8 @@ const SessionEntityTypesClient = v3.SessionEntityTypesClient;
 type SessionEntityTypesClient = v3.SessionEntityTypesClient;
 const SessionsClient = v3.SessionsClient;
 type SessionsClient = v3.SessionsClient;
+const TestCasesClient = v3.TestCasesClient;
+type TestCasesClient = v3.TestCasesClient;
 const TransitionRouteGroupsClient = v3.TransitionRouteGroupsClient;
 type TransitionRouteGroupsClient = v3.TransitionRouteGroupsClient;
 const VersionsClient = v3.VersionsClient;
@@ -59,6 +61,7 @@ export {
   SecuritySettingsServiceClient,
   SessionEntityTypesClient,
   SessionsClient,
+  TestCasesClient,
   TransitionRouteGroupsClient,
   VersionsClient,
   WebhooksClient,
@@ -76,6 +79,7 @@ export default {
   SecuritySettingsServiceClient,
   SessionEntityTypesClient,
   SessionsClient,
+  TestCasesClient,
   TransitionRouteGroupsClient,
   VersionsClient,
   WebhooksClient,

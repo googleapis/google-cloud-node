@@ -57,6 +57,16 @@
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
+        },
+        "ValidateAgent": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "GetAgentValidationResult": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
         }
       }
     }
