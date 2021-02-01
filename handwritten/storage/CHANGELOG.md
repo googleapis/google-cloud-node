@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.7.4](https://www.github.com/googleapis/nodejs-storage/compare/v5.7.3...v5.7.4) (2021-02-01)
+
+
+### Bug Fixes
+
+* specified acceptable types for File.save data parameter ([#1388](https://www.github.com/googleapis/nodejs-storage/issues/1388)) ([607f6c1](https://www.github.com/googleapis/nodejs-storage/commit/607f6c1c8b9ae5414513957f54a5de2490c454b1))
+
 ### [5.7.3](https://www.github.com/googleapis/nodejs-storage/compare/v5.7.2...v5.7.3) (2021-01-22)
 
 
