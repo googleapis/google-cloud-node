@@ -44,6 +44,11 @@ s.copy(templates, excludes=[])
 # Add beta version PolicyTagManagerClient, PolicyTagManagerSerializationClient to export
 s.replace('src/index.ts',
           '\nexport \{v1\, v1beta1\, DataCatalogClient\}\;\nexport default \{v1\, v1beta1\, DataCatalogClient\}\;',
-          'const PolicyTagManagerClient = v1beta1.PolicyTagManagerClient;\nconst PolicyTagManagerSerializationClient = v1beta1.PolicyTagManagerSerializationClient\n\nexport {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};\nexport default {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};')
+          """const PolicyTagManagerClient = v1beta1.PolicyTagManagerClient;
+type PolicyTagManagerClient = v1beta1.PolicyTagManagerClient;
+const PolicyTagManagerSerializationClient = v1beta1.PolicyTagManagerSerializationClient;
+type PolicyTagManagerSerializationClient = v1beta1.PolicyTagManagerSerializationClient;
+export {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};
+export default {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};""")
 
 node.postprocess_gapic_library()

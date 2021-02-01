@@ -1,0 +1,309 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.datacatalog.v1",
+  "libraryPackage": "@google-cloud/datacatalog",
+  "services": {
+    "DataCatalog": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataCatalogClient",
+          "rpcs": {
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "CreateTagTemplate": {
+              "methods": [
+                "createTagTemplate"
+              ]
+            },
+            "GetTagTemplate": {
+              "methods": [
+                "getTagTemplate"
+              ]
+            },
+            "UpdateTagTemplate": {
+              "methods": [
+                "updateTagTemplate"
+              ]
+            },
+            "DeleteTagTemplate": {
+              "methods": [
+                "deleteTagTemplate"
+              ]
+            },
+            "CreateTagTemplateField": {
+              "methods": [
+                "createTagTemplateField"
+              ]
+            },
+            "UpdateTagTemplateField": {
+              "methods": [
+                "updateTagTemplateField"
+              ]
+            },
+            "RenameTagTemplateField": {
+              "methods": [
+                "renameTagTemplateField"
+              ]
+            },
+            "DeleteTagTemplateField": {
+              "methods": [
+                "deleteTagTemplateField"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "createTag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "updateTag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "deleteTag"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "SearchCatalog": {
+              "methods": [
+                "searchCatalog",
+                "searchCatalogStream",
+                "searchCatalogAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "listTags",
+                "listTagsStream",
+                "listTagsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataCatalogClient",
+          "rpcs": {
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "CreateTagTemplate": {
+              "methods": [
+                "createTagTemplate"
+              ]
+            },
+            "GetTagTemplate": {
+              "methods": [
+                "getTagTemplate"
+              ]
+            },
+            "UpdateTagTemplate": {
+              "methods": [
+                "updateTagTemplate"
+              ]
+            },
+            "DeleteTagTemplate": {
+              "methods": [
+                "deleteTagTemplate"
+              ]
+            },
+            "CreateTagTemplateField": {
+              "methods": [
+                "createTagTemplateField"
+              ]
+            },
+            "UpdateTagTemplateField": {
+              "methods": [
+                "updateTagTemplateField"
+              ]
+            },
+            "RenameTagTemplateField": {
+              "methods": [
+                "renameTagTemplateField"
+              ]
+            },
+            "DeleteTagTemplateField": {
+              "methods": [
+                "deleteTagTemplateField"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "createTag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "updateTag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "deleteTag"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "SearchCatalog": {
+              "methods": [
+                "searchCatalog",
+                "searchCatalogStream",
+                "searchCatalogAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "listTags",
+                "listTagsStream",
+                "listTagsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

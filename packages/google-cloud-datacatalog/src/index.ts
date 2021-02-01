@@ -26,7 +26,6 @@ type PolicyTagManagerClient = v1beta1.PolicyTagManagerClient;
 const PolicyTagManagerSerializationClient =
   v1beta1.PolicyTagManagerSerializationClient;
 type PolicyTagManagerSerializationClient = v1beta1.PolicyTagManagerSerializationClient;
-
 export {
   v1,
   v1beta1,

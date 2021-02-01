@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/data_catalog_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './data_catalog_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -84,9 +90,9 @@ export class DataCatalogClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -99,7 +105,9 @@ export class DataCatalogClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -370,7 +378,7 @@ export class DataCatalogClient {
   // -------------------
   createEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
@@ -383,7 +391,7 @@ export class DataCatalogClient {
   >;
   createEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
       | protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest
@@ -439,7 +447,7 @@ export class DataCatalogClient {
   createEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
           | protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest
@@ -465,12 +473,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -485,7 +493,7 @@ export class DataCatalogClient {
   }
   updateEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
@@ -498,7 +506,7 @@ export class DataCatalogClient {
   >;
   updateEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
       | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
@@ -544,7 +552,7 @@ export class DataCatalogClient {
   updateEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
           | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
@@ -570,12 +578,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -590,7 +598,7 @@ export class DataCatalogClient {
   }
   getEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
@@ -600,7 +608,7 @@ export class DataCatalogClient {
   >;
   getEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
       | protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest
@@ -642,7 +650,7 @@ export class DataCatalogClient {
   getEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
           | protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest
@@ -665,12 +673,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -685,7 +693,7 @@ export class DataCatalogClient {
   }
   deleteEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -698,7 +706,7 @@ export class DataCatalogClient {
   >;
   deleteEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest
@@ -744,7 +752,7 @@ export class DataCatalogClient {
   deleteEntryGroup(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest
@@ -770,12 +778,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -790,7 +798,7 @@ export class DataCatalogClient {
   }
   createEntry(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
@@ -800,7 +808,7 @@ export class DataCatalogClient {
   >;
   createEntry(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       | protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest
@@ -856,7 +864,7 @@ export class DataCatalogClient {
   createEntry(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IEntry,
           | protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest
@@ -879,12 +887,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -899,7 +907,7 @@ export class DataCatalogClient {
   }
   updateEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
@@ -909,7 +917,7 @@ export class DataCatalogClient {
   >;
   updateEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest
@@ -973,7 +981,7 @@ export class DataCatalogClient {
   updateEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IEntry,
           | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest
@@ -996,12 +1004,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1016,7 +1024,7 @@ export class DataCatalogClient {
   }
   deleteEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1026,7 +1034,7 @@ export class DataCatalogClient {
   >;
   deleteEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest
@@ -1073,7 +1081,7 @@ export class DataCatalogClient {
   deleteEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest
@@ -1096,12 +1104,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1116,7 +1124,7 @@ export class DataCatalogClient {
   }
   getEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
@@ -1126,7 +1134,7 @@ export class DataCatalogClient {
   >;
   getEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       | protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest
@@ -1167,7 +1175,7 @@ export class DataCatalogClient {
   getEntry(
     request: protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IEntry,
           | protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest
@@ -1190,12 +1198,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1210,7 +1218,7 @@ export class DataCatalogClient {
   }
   lookupEntry(
     request: protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
@@ -1220,7 +1228,7 @@ export class DataCatalogClient {
   >;
   lookupEntry(
     request: protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       | protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest
@@ -1282,7 +1290,7 @@ export class DataCatalogClient {
   lookupEntry(
     request: protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IEntry,
           | protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest
@@ -1305,12 +1313,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -1318,7 +1326,7 @@ export class DataCatalogClient {
   }
   createTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
@@ -1331,7 +1339,7 @@ export class DataCatalogClient {
   >;
   createTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
       | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest
@@ -1383,7 +1391,7 @@ export class DataCatalogClient {
   createTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
           | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest
@@ -1409,12 +1417,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1429,7 +1437,7 @@ export class DataCatalogClient {
   }
   getTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
@@ -1442,7 +1450,7 @@ export class DataCatalogClient {
   >;
   getTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
       | protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest
@@ -1483,7 +1491,7 @@ export class DataCatalogClient {
   getTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
           | protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest
@@ -1509,12 +1517,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1529,7 +1537,7 @@ export class DataCatalogClient {
   }
   updateTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
@@ -1542,7 +1550,7 @@ export class DataCatalogClient {
   >;
   updateTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
       | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest
@@ -1595,7 +1603,7 @@ export class DataCatalogClient {
   updateTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITagTemplate,
           | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest
@@ -1621,12 +1629,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1641,7 +1649,7 @@ export class DataCatalogClient {
   }
   deleteTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1654,7 +1662,7 @@ export class DataCatalogClient {
   >;
   deleteTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest
@@ -1703,7 +1711,7 @@ export class DataCatalogClient {
   deleteTagTemplate(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest
@@ -1729,12 +1737,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1749,7 +1757,7 @@ export class DataCatalogClient {
   }
   createTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
@@ -1762,7 +1770,7 @@ export class DataCatalogClient {
   >;
   createTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
       | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest
@@ -1818,7 +1826,7 @@ export class DataCatalogClient {
   createTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
           | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest
@@ -1844,12 +1852,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1868,7 +1876,7 @@ export class DataCatalogClient {
   }
   updateTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
@@ -1881,7 +1889,7 @@ export class DataCatalogClient {
   >;
   updateTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
       | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest
@@ -1943,7 +1951,7 @@ export class DataCatalogClient {
   updateTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
           | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest
@@ -1969,12 +1977,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1993,7 +2001,7 @@ export class DataCatalogClient {
   }
   renameTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
@@ -2006,7 +2014,7 @@ export class DataCatalogClient {
   >;
   renameTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
       | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest
@@ -2053,7 +2061,7 @@ export class DataCatalogClient {
   renameTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
           | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest
@@ -2079,12 +2087,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2103,7 +2111,7 @@ export class DataCatalogClient {
   }
   deleteTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2116,7 +2124,7 @@ export class DataCatalogClient {
   >;
   deleteTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest
@@ -2165,7 +2173,7 @@ export class DataCatalogClient {
   deleteTagTemplateField(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest
@@ -2191,12 +2199,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2215,7 +2223,7 @@ export class DataCatalogClient {
   }
   createTag(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITag,
@@ -2225,7 +2233,7 @@ export class DataCatalogClient {
   >;
   createTag(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITag,
       | protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest
@@ -2278,7 +2286,7 @@ export class DataCatalogClient {
   createTag(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITag,
           | protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest
@@ -2301,12 +2309,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2321,7 +2329,7 @@ export class DataCatalogClient {
   }
   updateTag(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITag,
@@ -2331,7 +2339,7 @@ export class DataCatalogClient {
   >;
   updateTag(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITag,
       | protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest
@@ -2373,7 +2381,7 @@ export class DataCatalogClient {
   updateTag(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITag,
           | protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest
@@ -2396,12 +2404,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2416,7 +2424,7 @@ export class DataCatalogClient {
   }
   deleteTag(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -2426,7 +2434,7 @@ export class DataCatalogClient {
   >;
   deleteTag(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest
@@ -2467,7 +2475,7 @@ export class DataCatalogClient {
   deleteTag(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest
@@ -2490,12 +2498,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2510,7 +2518,7 @@ export class DataCatalogClient {
   }
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -2520,7 +2528,7 @@ export class DataCatalogClient {
   >;
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -2574,7 +2582,7 @@ export class DataCatalogClient {
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -2593,12 +2601,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2613,7 +2621,7 @@ export class DataCatalogClient {
   }
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -2623,7 +2631,7 @@ export class DataCatalogClient {
   >;
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -2677,7 +2685,7 @@ export class DataCatalogClient {
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -2696,12 +2704,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2716,7 +2724,7 @@ export class DataCatalogClient {
   }
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -2726,7 +2734,7 @@ export class DataCatalogClient {
   >;
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -2779,7 +2787,7 @@ export class DataCatalogClient {
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
           protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -2798,12 +2806,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2819,7 +2827,7 @@ export class DataCatalogClient {
 
   searchCatalog(
     request: protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult[],
@@ -2829,7 +2837,7 @@ export class DataCatalogClient {
   >;
   searchCatalog(
     request: protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
       | protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse
@@ -2921,7 +2929,7 @@ export class DataCatalogClient {
   searchCatalog(
     request: protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
           | protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse
@@ -2944,12 +2952,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     this.initialize();
@@ -3011,7 +3019,7 @@ export class DataCatalogClient {
    */
   searchCatalogStream(
     request?: protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3085,7 +3093,7 @@ export class DataCatalogClient {
    */
   searchCatalogAsync(
     request?: protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult> {
     request = request || {};
     options = options || {};
@@ -3100,7 +3108,7 @@ export class DataCatalogClient {
   }
   listEntryGroups(
     request: protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup[],
@@ -3110,7 +3118,7 @@ export class DataCatalogClient {
   >;
   listEntryGroups(
     request: protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
       | protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
@@ -3161,7 +3169,7 @@ export class DataCatalogClient {
   listEntryGroups(
     request: protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
           | protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
@@ -3184,12 +3192,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3232,7 +3240,7 @@ export class DataCatalogClient {
    */
   listEntryGroupsStream(
     request?: protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3287,7 +3295,7 @@ export class DataCatalogClient {
    */
   listEntryGroupsAsync(
     request?: protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IEntryGroup> {
     request = request || {};
     options = options || {};
@@ -3309,7 +3317,7 @@ export class DataCatalogClient {
   }
   listEntries(
     request: protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry[],
@@ -3319,7 +3327,7 @@ export class DataCatalogClient {
   >;
   listEntries(
     request: protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
       | protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse
@@ -3375,7 +3383,7 @@ export class DataCatalogClient {
   listEntries(
     request: protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
           | protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse
@@ -3398,12 +3406,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3451,7 +3459,7 @@ export class DataCatalogClient {
    */
   listEntriesStream(
     request?: protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3511,7 +3519,7 @@ export class DataCatalogClient {
    */
   listEntriesAsync(
     request?: protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IEntry> {
     request = request || {};
     options = options || {};
@@ -3533,7 +3541,7 @@ export class DataCatalogClient {
   }
   listTags(
     request: protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITag[],
@@ -3543,7 +3551,7 @@ export class DataCatalogClient {
   >;
   listTags(
     request: protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
       | protos.google.cloud.datacatalog.v1beta1.IListTagsResponse
@@ -3597,7 +3605,7 @@ export class DataCatalogClient {
   listTags(
     request: protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
           | protos.google.cloud.datacatalog.v1beta1.IListTagsResponse
@@ -3620,12 +3628,12 @@ export class DataCatalogClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3671,7 +3679,7 @@ export class DataCatalogClient {
    */
   listTagsStream(
     request?: protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3729,7 +3737,7 @@ export class DataCatalogClient {
    */
   listTagsAsync(
     request?: protos.google.cloud.datacatalog.v1beta1.IListTagsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ITag> {
     request = request || {};
     options = options || {};

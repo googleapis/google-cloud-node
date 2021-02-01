@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* global window */
 import * as gax from 'google-gax';
 import {
   Callback,
@@ -30,6 +31,11 @@ import * as path from 'path';
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/policy_tag_manager_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './policy_tag_manager_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -84,9 +90,9 @@ export class PolicyTagManagerClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     TODO(@alexander-fenster): link to gax documentation.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -99,7 +105,9 @@ export class PolicyTagManagerClient {
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? typeof window !== 'undefined';
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -347,7 +355,7 @@ export class PolicyTagManagerClient {
   // -------------------
   createTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
@@ -360,7 +368,7 @@ export class PolicyTagManagerClient {
   >;
   createTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
       | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
@@ -401,7 +409,7 @@ export class PolicyTagManagerClient {
   createTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
           | protos.google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest
@@ -427,12 +435,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -447,7 +455,7 @@ export class PolicyTagManagerClient {
   }
   deleteTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -460,7 +468,7 @@ export class PolicyTagManagerClient {
   >;
   deleteTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
@@ -501,7 +509,7 @@ export class PolicyTagManagerClient {
   deleteTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest
@@ -527,12 +535,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -547,7 +555,7 @@ export class PolicyTagManagerClient {
   }
   updateTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
@@ -560,7 +568,7 @@ export class PolicyTagManagerClient {
   >;
   updateTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
       | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
@@ -605,7 +613,7 @@ export class PolicyTagManagerClient {
   updateTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
           | protos.google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest
@@ -631,12 +639,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -651,7 +659,7 @@ export class PolicyTagManagerClient {
   }
   getTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
@@ -661,7 +669,7 @@ export class PolicyTagManagerClient {
   >;
   getTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
       | protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
@@ -700,7 +708,7 @@ export class PolicyTagManagerClient {
   getTaxonomy(
     request: protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.ITaxonomy,
           | protos.google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest
@@ -723,12 +731,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -743,7 +751,7 @@ export class PolicyTagManagerClient {
   }
   createPolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
@@ -756,7 +764,7 @@ export class PolicyTagManagerClient {
   >;
   createPolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
       | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
@@ -797,7 +805,7 @@ export class PolicyTagManagerClient {
   createPolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
           | protos.google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest
@@ -823,12 +831,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -843,7 +851,7 @@ export class PolicyTagManagerClient {
   }
   deletePolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -856,7 +864,7 @@ export class PolicyTagManagerClient {
   >;
   deletePolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
       | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
@@ -896,7 +904,7 @@ export class PolicyTagManagerClient {
   deletePolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
           | protos.google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest
@@ -922,12 +930,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -942,7 +950,7 @@ export class PolicyTagManagerClient {
   }
   updatePolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
@@ -955,7 +963,7 @@ export class PolicyTagManagerClient {
   >;
   updatePolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
       | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
@@ -1003,7 +1011,7 @@ export class PolicyTagManagerClient {
   updatePolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
           | protos.google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest
@@ -1029,12 +1037,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1049,7 +1057,7 @@ export class PolicyTagManagerClient {
   }
   getPolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
@@ -1059,7 +1067,7 @@ export class PolicyTagManagerClient {
   >;
   getPolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
       | protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
@@ -1098,7 +1106,7 @@ export class PolicyTagManagerClient {
   getPolicyTag(
     request: protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IPolicyTag,
           | protos.google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest
@@ -1121,12 +1129,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1141,7 +1149,7 @@ export class PolicyTagManagerClient {
   }
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1151,7 +1159,7 @@ export class PolicyTagManagerClient {
   >;
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1190,7 +1198,7 @@ export class PolicyTagManagerClient {
   getIamPolicy(
     request: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
@@ -1209,12 +1217,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1229,7 +1237,7 @@ export class PolicyTagManagerClient {
   }
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.IPolicy,
@@ -1239,7 +1247,7 @@ export class PolicyTagManagerClient {
   >;
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1280,7 +1288,7 @@ export class PolicyTagManagerClient {
   setIamPolicy(
     request: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.IPolicy,
           protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
@@ -1299,12 +1307,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1319,7 +1327,7 @@ export class PolicyTagManagerClient {
   }
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1329,7 +1337,7 @@ export class PolicyTagManagerClient {
   >;
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: Callback<
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1371,7 +1379,7 @@ export class PolicyTagManagerClient {
   testIamPermissions(
     request: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
           protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
@@ -1390,12 +1398,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1411,7 +1419,7 @@ export class PolicyTagManagerClient {
 
   listTaxonomies(
     request: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.ITaxonomy[],
@@ -1421,7 +1429,7 @@ export class PolicyTagManagerClient {
   >;
   listTaxonomies(
     request: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
       | protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
@@ -1470,7 +1478,7 @@ export class PolicyTagManagerClient {
   listTaxonomies(
     request: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
           | protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse
@@ -1493,12 +1501,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1538,7 +1546,7 @@ export class PolicyTagManagerClient {
    */
   listTaxonomiesStream(
     request?: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1590,7 +1598,7 @@ export class PolicyTagManagerClient {
    */
   listTaxonomiesAsync(
     request?: protos.google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.ITaxonomy> {
     request = request || {};
     options = options || {};
@@ -1612,7 +1620,7 @@ export class PolicyTagManagerClient {
   }
   listPolicyTags(
     request: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.datacatalog.v1beta1.IPolicyTag[],
@@ -1622,7 +1630,7 @@ export class PolicyTagManagerClient {
   >;
   listPolicyTags(
     request: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
-    options: gax.CallOptions,
+    options: CallOptions,
     callback: PaginationCallback<
       protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
       | protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
@@ -1670,7 +1678,7 @@ export class PolicyTagManagerClient {
   listPolicyTags(
     request: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
     optionsOrCallback?:
-      | gax.CallOptions
+      | CallOptions
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
           | protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse
@@ -1693,12 +1701,12 @@ export class PolicyTagManagerClient {
     ]
   > | void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
     } else {
-      options = optionsOrCallback as gax.CallOptions;
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1738,7 +1746,7 @@ export class PolicyTagManagerClient {
    */
   listPolicyTagsStream(
     request?: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1790,7 +1798,7 @@ export class PolicyTagManagerClient {
    */
   listPolicyTagsAsync(
     request?: protos.google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest,
-    options?: gax.CallOptions
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IPolicyTag> {
     request = request || {};
     options = options || {};
