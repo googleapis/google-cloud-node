@@ -8,5 +8,6 @@
   "language": "nodejs",
   "repo": "googleapis/cloud-profiler-nodejs",
   "distribution_name": "@google-cloud/profiler",
-  "api_id": "cloudprofiler.googleapis.com"
+  "api_id": "cloudprofiler.googleapis.com",
+  "codeowner_team": "@googleapis/api-profiler"
 }
