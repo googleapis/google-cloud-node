@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-scheduler",
   "distribution_name": "@google-cloud/scheduler",
   "api_id": "cloudscheduler.googleapis.com",
-  "requires_billing": false
+  "requires_billing": false,
+  "codeowner_team": "@googleapis/serverless-team"
 }
