@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-notebooks",
   "distribution_name": "@google-cloud/notebooks",
   "api_id": "notebooks.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
