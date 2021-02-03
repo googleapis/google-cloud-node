@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-language",
   "distribution_name": "@google-cloud/language",
   "api_id": "language.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
