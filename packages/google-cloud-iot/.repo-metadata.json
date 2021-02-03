@@ -8,5 +8,6 @@
   "repo": "googleapis/nodejs-iot",
   "distribution_name": "@google-cloud/iot",
   "api_id": "cloudiot.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
