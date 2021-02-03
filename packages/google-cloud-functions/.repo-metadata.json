@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-functions",
   "distribution_name": "@google-cloud/functions",
   "api_id": "cloudfunctions.googleapis.com",
-  "requires_billing": false
+  "requires_billing": false,
+  "codeowner_team": "@googleapis/serverless-team"
 }
