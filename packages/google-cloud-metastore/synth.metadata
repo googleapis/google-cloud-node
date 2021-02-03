@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/sofialeon/nodejs-metastore",
+        "sha": "c0c6a2292beac83385a0170df5121d13bde2ba59"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2e29020ce87808b810deb20e0925b7e26c5e72c1",
+        "internalRef": "353683381"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "3816b080296d4d52975079fd26c110dd26ba25af"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "metastore",
+        "apiVersion": "v1alpha",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

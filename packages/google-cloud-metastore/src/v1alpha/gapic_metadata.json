@@ -1,0 +1,121 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.metastore.v1alpha",
+  "libraryPackage": "metastore",
+  "services": {
+    "DataprocMetastore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataprocMetastoreClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetMetadataImport": {
+              "methods": [
+                "getMetadataImport"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "CreateMetadataImport": {
+              "methods": [
+                "createMetadataImport"
+              ]
+            },
+            "UpdateMetadataImport": {
+              "methods": [
+                "updateMetadataImport"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListMetadataImports": {
+              "methods": [
+                "listMetadataImports",
+                "listMetadataImportsStream",
+                "listMetadataImportsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataprocMetastoreClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetMetadataImport": {
+              "methods": [
+                "getMetadataImport"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "CreateMetadataImport": {
+              "methods": [
+                "createMetadataImport"
+              ]
+            },
+            "UpdateMetadataImport": {
+              "methods": [
+                "updateMetadataImport"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListMetadataImports": {
+              "methods": [
+                "listMetadataImports",
+                "listMetadataImportsStream",
+                "listMetadataImportsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
