@@ -1,5 +1,5 @@
 {
-  "name": "undefined",
+  "name": "@google-cloud/domains",
   "version": "0.1.0",
   "description": "Domains client for Node.js",
   "repository": "googleapis/nodejs-domains",

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DomainsClient} from 'undefined';
+import {DomainsClient} from '@google-cloud/domains';
 
 // check that the client class type name can be used
 function doStuffWithDomainsClient(client: DomainsClient) {

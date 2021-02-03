@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const domains = require('undefined');
+const domains = require('@google-cloud/domains');
 
 function main() {
   const domainsClient = new domains.DomainsClient();

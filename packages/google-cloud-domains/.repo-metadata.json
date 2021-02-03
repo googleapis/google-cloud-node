@@ -7,7 +7,7 @@
   "release_level": "BETA",
   "language": "nodejs",
   "repo": "googleapis/nodejs-domains",
-  "distribution_name": "",
+  "distribution_name": "@google-cloud/domains",
   "api_id": "domains.googleapis.com",
   "requires_billing": true
 }

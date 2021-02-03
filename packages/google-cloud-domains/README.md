@@ -5,7 +5,7 @@
 # [Cloud Domains: Node.js Client](https://github.com/googleapis/nodejs-domains)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/undefined.svg)](https://www.npmjs.org/package/undefined)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/domains.svg)](https://www.npmjs.org/package/@google-cloud/domains)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-domains/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-domains)
 
 
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install undefined
+npm install @google-cloud/domains
 ```
 
 
@@ -60,25 +60,22 @@ npm install undefined
 ```javascript
 // Imports the Google Cloud client library
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {DomainsClient} = require('');
+const {DomainsClient} = require('@google-cloud/domains');
 
-// TODO(developer): replace with your prefered project ID.
+// TODO(developer): replace with your preferred values.
 // const projectId = 'my-project'
+// const location = 'my-location'
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {DomainsClient}();
+const client = new DomainsClient();
 
 //TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function listRegistrations() {
+  const [registrations] = await client.listRegistrations({parent: `projects/${projectId}/locations/${location}`
+  });
+  console.info(registrations);
 }
-doSomething();
+listRegistrations();
 
 ```
 
