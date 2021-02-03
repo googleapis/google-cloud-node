@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-text-to-speech",
   "distribution_name": "@google-cloud/text-to-speech",
   "api_id": "texttospeech.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
