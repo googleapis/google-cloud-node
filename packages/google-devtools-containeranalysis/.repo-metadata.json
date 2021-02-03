@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-containeranalysis",
   "distribution_name": "@google-cloud/containeranalysis",
   "api_id": "containeranalysis.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/cicd"
 }
