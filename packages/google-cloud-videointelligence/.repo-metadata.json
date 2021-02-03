@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-video-intelligence",
   "distribution_name": "@google-cloud/video-intelligence",
   "api_id": "videointelligence.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
