@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-vision",
   "distribution_name": "@google-cloud/vision",
   "api_id": "vision.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
