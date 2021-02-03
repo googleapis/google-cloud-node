@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-speech",
   "distribution_name": "@google-cloud/speech",
   "api_id": "speech.googleapis.com",
-  "requires_billing": false
+  "requires_billing": false,
+  "codeowner_team": "@googleapis/ml-apis"
 }
