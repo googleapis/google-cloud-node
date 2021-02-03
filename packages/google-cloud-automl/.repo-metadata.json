@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-automl",
   "distribution_name": "@google-cloud/automl",
   "api_id": "automl.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
