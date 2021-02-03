@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/sofialeon/nodejs-network-connectivity",
+        "sha": "60f0e6000acf3ac1e73dee43baf46805bdd87801"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "6fa7194aba4d0c501592dea28c041890265079dc",
+        "internalRef": "353783208"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "3816b080296d4d52975079fd26c110dd26ba25af"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "networkconnectivity",
+        "apiVersion": "v1alpha1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
