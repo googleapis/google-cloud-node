@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-datalabeling",
   "distribution_name": "@google-cloud/datalabeling",
   "api_id": "datalabeling.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
