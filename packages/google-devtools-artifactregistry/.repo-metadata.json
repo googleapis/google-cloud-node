@@ -9,6 +9,6 @@
   "repo": "googleapis/nodejs-artifact-registry",
   "distribution_name": "@google-cloud/artifact-registry",
   "api_id": "artifactregistry.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/cicd"
 }
-
