@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-area120-tables",
   "distribution_name": "@google/area120-tables",
   "api_id": "area120tables.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/area120-tables"
 }
