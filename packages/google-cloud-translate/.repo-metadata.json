@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-translate",
   "distribution_name": "@google-cloud/translate",
   "api_id": "translate.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/ml-apis"
 }
