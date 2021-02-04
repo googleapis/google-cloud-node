@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-monitoring-dashboards.git",
-        "sha": "fddf74df9558d5bc3a8767bfddbfc3dc59906751"
+        "sha": "8154bd6b6038791be4aee28637583665c3bd5e0a"
       }
     },
     {
