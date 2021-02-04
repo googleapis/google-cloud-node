@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dialogflow.git",
-        "sha": "09c96f2c5c7bd3a5e1b695a19f1059bf12a98d83"
+        "sha": "0a8ed269f58d869c09e8883407d90072d8df6e2b"
       }
     },
     {
