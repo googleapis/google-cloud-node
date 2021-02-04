@@ -12,13 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function main(bucketName = 'my-bucket', filename = './local/path/to/file.txt') {
+function main(
+  bucketName = 'my-bucket',
+  filename = './local/path/to/file.txt',
+  destination = 'file.txt'
+) {
   // [START storage_upload_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
   // const filename = 'Local file to upload, e.g. ./local/path/to/file.txt';
+  // const destination = 'Destination object name, e.g. file.txt';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -29,9 +34,8 @@ function main(bucketName = 'my-bucket', filename = './local/path/to/file.txt') {
   async function uploadFile() {
     // Uploads a local file to the bucket
     await storage.bucket(bucketName).upload(filename, {
-      // Support for HTTP requests made with `Accept-Encoding: gzip`
-      gzip: true,
       // By setting the option `destination`, you can change the name of the
+      destination: destination,
       // object you are uploading to a bucket.
       metadata: {
         // Enable long-lived HTTP caching headers
