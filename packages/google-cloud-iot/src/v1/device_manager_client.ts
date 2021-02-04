@@ -847,7 +847,8 @@ export class DeviceManagerClient {
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   The fields of the `Device` resource to be returned in the response. If the
-   *   field mask is unset or empty, all fields are returned.
+   *   field mask is unset or empty, all fields are returned. Fields have to be
+   *   provided in snake_case format, for example: `last_heartbeat_time`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2216,7 +2217,8 @@ export class DeviceManagerClient {
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   The fields of the `Device` resource to be returned in the response. The
    *   fields `id` and `num_id` are always returned, along with any
-   *   other fields specified.
+   *   other fields specified in snake_case format, for example:
+   *   `last_heartbeat_time`.
    * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
    *   Options related to gateways.
    * @param {number} request.pageSize
@@ -2298,7 +2300,8 @@ export class DeviceManagerClient {
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   The fields of the `Device` resource to be returned in the response. The
    *   fields `id` and `num_id` are always returned, along with any
-   *   other fields specified.
+   *   other fields specified in snake_case format, for example:
+   *   `last_heartbeat_time`.
    * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
    *   Options related to gateways.
    * @param {number} request.pageSize
@@ -2362,7 +2365,8 @@ export class DeviceManagerClient {
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   The fields of the `Device` resource to be returned in the response. The
    *   fields `id` and `num_id` are always returned, along with any
-   *   other fields specified.
+   *   other fields specified in snake_case format, for example:
+   *   `last_heartbeat_time`.
    * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
    *   Options related to gateways.
    * @param {number} request.pageSize
