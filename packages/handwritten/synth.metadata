@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-error-reporting.git",
-        "sha": "79ef3c65a088ca4f7b45e418a89e18a537f00d2c"
+        "sha": "e9639ea374772f4d2a3107a557af5745a62984c4"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
+        "sha": "318e351e26ba65b2b3cfa3f61b3b64e3540c3525"
       }
     }
   ]
