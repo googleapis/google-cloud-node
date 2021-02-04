@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const artifactregistry = require('@google-cloud/artifact-registry');
+const artifactregistry = require('artifactregistry');
 
 function main() {
   const artifactRegistryClient = new artifactregistry.ArtifactRegistryClient();
