@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-analytics-admin.git",
-        "sha": "c104cceacb5f6f299117c63fba69d709d2937f75"
+        "sha": "a264ca93f5ef4d53df02ae3ce632566e4f17764e"
       }
     },
     {
