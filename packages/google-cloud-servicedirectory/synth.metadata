@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-service-directory.git",
-        "sha": "cef080a79eb1bc0d1a10caf7f24a992500e1a65a"
+        "sha": "90efa7af798591a64150f02740eccd3aca234bc4"
       }
     },
     {
