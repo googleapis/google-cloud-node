@@ -1313,6 +1313,246 @@ describe('v1.CloudChannelServiceClient', () => {
     });
   });
 
+  describe('registerSubscriber', () => {
+    it('invokes registerSubscriber without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.RegisterSubscriberResponse()
+      );
+      client.innerApiCalls.registerSubscriber = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.registerSubscriber(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.registerSubscriber as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes registerSubscriber without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.RegisterSubscriberResponse()
+      );
+      client.innerApiCalls.registerSubscriber = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.registerSubscriber(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IRegisterSubscriberResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.registerSubscriber as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes registerSubscriber with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.registerSubscriber = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.registerSubscriber(request), expectedError);
+      assert(
+        (client.innerApiCalls.registerSubscriber as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('unregisterSubscriber', () => {
+    it('invokes unregisterSubscriber without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UnregisterSubscriberResponse()
+      );
+      client.innerApiCalls.unregisterSubscriber = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.unregisterSubscriber(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.unregisterSubscriber as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes unregisterSubscriber without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UnregisterSubscriberResponse()
+      );
+      client.innerApiCalls.unregisterSubscriber = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.unregisterSubscriber(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IUnregisterSubscriberResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.unregisterSubscriber as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes unregisterSubscriber with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.unregisterSubscriber = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.unregisterSubscriber(request), expectedError);
+      assert(
+        (client.innerApiCalls.unregisterSubscriber as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('provisionCloudIdentity', () => {
     it('invokes provisionCloudIdentity without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
@@ -6697,6 +6937,285 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       assert.strictEqual(
         (client.descriptors.page.listPurchasableOffers
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listSubscribers', () => {
+    it('invokes listSubscribers without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListSubscribersRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [new String(), new String(), new String()];
+      client.innerApiCalls.listSubscribers = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSubscribers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listSubscribers as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listSubscribers without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListSubscribersRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [new String(), new String(), new String()];
+      client.innerApiCalls.listSubscribers = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listSubscribers(
+          request,
+          (err?: Error | null, result?: string[] | null) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listSubscribers as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listSubscribers with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListSubscribersRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSubscribers = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listSubscribers(request), expectedError);
+      assert(
+        (client.innerApiCalls.listSubscribers as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listSubscribersStream without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListSubscribersRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedResponse = [new String(), new String(), new String()];
+      client.descriptors.page.listSubscribers.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listSubscribersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: string[] = [];
+        stream.on('data', (response: string) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSubscribers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSubscribers, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listSubscribers
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listSubscribersStream with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListSubscribersRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSubscribers.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listSubscribersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: string[] = [];
+        stream.on('data', (response: string) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSubscribers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSubscribers, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listSubscribers
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listSubscribers without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListSubscribersRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedResponse = [new String(), new String(), new String()];
+      client.descriptors.page.listSubscribers.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: string[] = [];
+      const iterable = client.listSubscribersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listSubscribers
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listSubscribers
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listSubscribers with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListSubscribersRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSubscribers.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listSubscribersAsync(request);
+      await assert.rejects(async () => {
+        const responses: string[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listSubscribers
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listSubscribers
           .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
           'x-goog-request-params'
         ],

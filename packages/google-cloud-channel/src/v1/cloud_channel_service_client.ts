@@ -259,6 +259,11 @@ export class CloudChannelServiceClient {
         'nextPageToken',
         'purchasableOffers'
       ),
+      listSubscribers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'serviceAccounts'
+      ),
     };
 
     // This API contains "long-running operations", which return a
@@ -488,6 +493,9 @@ export class CloudChannelServiceClient {
       'listOffers',
       'listPurchasableSkus',
       'listPurchasableOffers',
+      'registerSubscriber',
+      'unregisterSubscriber',
+      'listSubscribers',
     ];
     for (const methodName of cloudChannelServiceStubMethods) {
       const callPromise = this.cloudChannelServiceStub.then(
@@ -1573,6 +1581,235 @@ export class CloudChannelServiceClient {
       options,
       callback
     );
+  }
+  registerSubscriber(
+    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      protos.google.cloud.channel.v1.IRegisterSubscriberRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  registerSubscriber(
+    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  registerSubscriber(
+    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Registers a service account with subscriber privileges on the Cloud Pub/Sub
+   * topic created for this Channel Services account. Once you create a
+   * subscriber, you will get the events as per {@link google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the reseller account making the request and the
+   * reseller account being provided are different, or if the impersonated user
+   * is not a super admin.
+   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. In this case, contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in
+   * the backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * Topic name with service email address registered if successful,
+   * otherwise error is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. Resource name of the account.
+   * @param {string} request.serviceAccount
+   *   Required. Service account which will provide subscriber access to the
+   *   registered topic.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RegisterSubscriberResponse]{@link google.cloud.channel.v1.RegisterSubscriberResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.registerSubscriber(request);
+   */
+  registerSubscriber(
+    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+          | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      protos.google.cloud.channel.v1.IRegisterSubscriberRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.registerSubscriber(request, options, callback);
+  }
+  unregisterSubscriber(
+    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      protos.google.cloud.channel.v1.IUnregisterSubscriberRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  unregisterSubscriber(
+    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unregisterSubscriber(
+    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Unregisters a service account with subscriber privileges on the Cloud
+   * Pub/Sub topic created for this Channel Services account. If there are no
+   * more service account left with sunbscriber privileges, the topic will be
+   * deleted. You can check this by calling ListSubscribers api.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the reseller account making the request and the
+   * reseller account being provided are different, or if the impersonated user
+   * is not a super admin.
+   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request.
+   * * NOT_FOUND: If the topic resource doesn't exist.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. In this case, contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in
+   * the backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * Topic name from which service email address has been unregistered if
+   * successful, otherwise error is returned. If the service email was already
+   * not associated with the topic, the success response will be returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. Resource name of the account.
+   * @param {string} request.serviceAccount
+   *   Required. Service account which will be unregistered from getting subscriber access
+   *   to the topic.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UnregisterSubscriberResponse]{@link google.cloud.channel.v1.UnregisterSubscriberResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.unregisterSubscriber(request);
+   */
+  unregisterSubscriber(
+    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+          | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      protos.google.cloud.channel.v1.IUnregisterSubscriberRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.unregisterSubscriber(request, options, callback);
   }
 
   provisionCloudIdentity(
@@ -5998,6 +6235,239 @@ export class CloudChannelServiceClient {
       (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IPurchasableOffer>;
+  }
+  listSubscribers(
+    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      string[],
+      protos.google.cloud.channel.v1.IListSubscribersRequest | null,
+      protos.google.cloud.channel.v1.IListSubscribersResponse
+    ]
+  >;
+  listSubscribers(
+    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSubscribersRequest,
+      | protos.google.cloud.channel.v1.IListSubscribersResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
+  listSubscribers(
+    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSubscribersRequest,
+      | protos.google.cloud.channel.v1.IListSubscribersResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
+  /**
+   * Lists service accounts with subscriber privileges on the Cloud Pub/Sub
+   * topic created for this Channel Services account.
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the reseller account making the request and the
+   * reseller account being provided are different, or if the account is not
+   * a super admin.
+   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request.
+   * * NOT_FOUND: If the topic resource doesn't exist.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. In this case, contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in
+   * the backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * List of service email addresses if successful, otherwise error is
+   * returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. Resource name of the account.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of service accounts to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 100 service accounts will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListSubscribers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListSubscribers` must
+   *    match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of string.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSubscribersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSubscribers(
+    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListSubscribersRequest,
+          | protos.google.cloud.channel.v1.IListSubscribersResponse
+          | null
+          | undefined,
+          string
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSubscribersRequest,
+      | protos.google.cloud.channel.v1.IListSubscribersResponse
+      | null
+      | undefined,
+      string
+    >
+  ): Promise<
+    [
+      string[],
+      protos.google.cloud.channel.v1.IListSubscribersRequest | null,
+      protos.google.cloud.channel.v1.IListSubscribersResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.listSubscribers(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. Resource name of the account.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of service accounts to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 100 service accounts will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListSubscribers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListSubscribers` must
+   *    match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing string on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSubscribersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSubscribersStream(
+    request?: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listSubscribers.createStream(
+      this.innerApiCalls.listSubscribers as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSubscribers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. Resource name of the account.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of service accounts to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 100 service accounts will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListSubscribers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListSubscribers` must
+   *    match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   string. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listSubscribersAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listSubscribersAsync(
+    request?: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    options?: CallOptions
+  ): AsyncIterable<string> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listSubscribers.asyncIterate(
+      this.innerApiCalls['listSubscribers'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<string>;
   }
   // --------------------
   // -- Path templates --

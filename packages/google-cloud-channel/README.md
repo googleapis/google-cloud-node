@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Channel Services: Node.js Client](https://github.com/googleapis/nodejs-channel)
+# [Cloud Channel API: Node.js Client](https://github.com/googleapis/nodejs-channel)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/channel.svg)](https://www.npmjs.org/package/@google-cloud/channel)
@@ -17,8 +17,8 @@ Channel client for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-channel/blob/master/CHANGELOG.md).
 
-* [Channel Services Node.js Client API Reference][client-docs]
-* [Channel Services Documentation][product-docs]
+* [Cloud Channel API Node.js Client API Reference][client-docs]
+* [Cloud Channel API Documentation][product-docs]
 * [github.com/googleapis/nodejs-channel](https://github.com/googleapis/nodejs-channel)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Channel Services API][enable_api].
+1.  [Enable the Cloud Channel API API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -179,7 +179,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-channel/tre
 
 
 
-The [Channel Services Node.js Client API Reference][client-docs] documentation
+The [Cloud Channel API Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -207,6 +207,12 @@ _Legacy Node.js versions are supported as a best effort:_
 
 This library follows [Semantic Versioning](http://semver.org/).
 
+
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
 
 
 

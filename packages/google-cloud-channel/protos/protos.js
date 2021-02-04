@@ -10426,6 +10426,105 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#registerSubscriber}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef RegisterSubscriberCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.RegisterSubscriberResponse} [response] RegisterSubscriberResponse
+                         */
+    
+                        /**
+                         * Calls RegisterSubscriber.
+                         * @function registerSubscriber
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberRequest} request RegisterSubscriberRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.RegisterSubscriberCallback} callback Node-style callback called with the error, if any, and RegisterSubscriberResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.registerSubscriber = function registerSubscriber(request, callback) {
+                            return this.rpcCall(registerSubscriber, $root.google.cloud.channel.v1.RegisterSubscriberRequest, $root.google.cloud.channel.v1.RegisterSubscriberResponse, request, callback);
+                        }, "name", { value: "RegisterSubscriber" });
+    
+                        /**
+                         * Calls RegisterSubscriber.
+                         * @function registerSubscriber
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberRequest} request RegisterSubscriberRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.RegisterSubscriberResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#unregisterSubscriber}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef UnregisterSubscriberCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.UnregisterSubscriberResponse} [response] UnregisterSubscriberResponse
+                         */
+    
+                        /**
+                         * Calls UnregisterSubscriber.
+                         * @function unregisterSubscriber
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberRequest} request UnregisterSubscriberRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.UnregisterSubscriberCallback} callback Node-style callback called with the error, if any, and UnregisterSubscriberResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.unregisterSubscriber = function unregisterSubscriber(request, callback) {
+                            return this.rpcCall(unregisterSubscriber, $root.google.cloud.channel.v1.UnregisterSubscriberRequest, $root.google.cloud.channel.v1.UnregisterSubscriberResponse, request, callback);
+                        }, "name", { value: "UnregisterSubscriber" });
+    
+                        /**
+                         * Calls UnregisterSubscriber.
+                         * @function unregisterSubscriber
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberRequest} request UnregisterSubscriberRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.UnregisterSubscriberResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#listSubscribers}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef ListSubscribersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ListSubscribersResponse} [response] ListSubscribersResponse
+                         */
+    
+                        /**
+                         * Calls ListSubscribers.
+                         * @function listSubscribers
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListSubscribersRequest} request ListSubscribersRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.ListSubscribersCallback} callback Node-style callback called with the error, if any, and ListSubscribersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.listSubscribers = function listSubscribers(request, callback) {
+                            return this.rpcCall(listSubscribers, $root.google.cloud.channel.v1.ListSubscribersRequest, $root.google.cloud.channel.v1.ListSubscribersResponse, request, callback);
+                        }, "name", { value: "ListSubscribers" });
+    
+                        /**
+                         * Calls ListSubscribers.
+                         * @function listSubscribers
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListSubscribersRequest} request ListSubscribersRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ListSubscribersResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudChannelService;
                     })();
     
@@ -22310,6 +22409,2063 @@
                         return PurchasableOffer;
                     })();
     
+                    v1.RegisterSubscriberRequest = (function() {
+    
+                        /**
+                         * Properties of a RegisterSubscriberRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRegisterSubscriberRequest
+                         * @property {string|null} [account] RegisterSubscriberRequest account
+                         * @property {string|null} [serviceAccount] RegisterSubscriberRequest serviceAccount
+                         */
+    
+                        /**
+                         * Constructs a new RegisterSubscriberRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a RegisterSubscriberRequest.
+                         * @implements IRegisterSubscriberRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberRequest=} [properties] Properties to set
+                         */
+                        function RegisterSubscriberRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RegisterSubscriberRequest account.
+                         * @member {string} account
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @instance
+                         */
+                        RegisterSubscriberRequest.prototype.account = "";
+    
+                        /**
+                         * RegisterSubscriberRequest serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @instance
+                         */
+                        RegisterSubscriberRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * Creates a new RegisterSubscriberRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberRequest} RegisterSubscriberRequest instance
+                         */
+                        RegisterSubscriberRequest.create = function create(properties) {
+                            return new RegisterSubscriberRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterSubscriberRequest message. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberRequest} message RegisterSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterSubscriberRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterSubscriberRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberRequest} message RegisterSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterSubscriberRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RegisterSubscriberRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberRequest} RegisterSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterSubscriberRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RegisterSubscriberRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.account = reader.string();
+                                    break;
+                                case 2:
+                                    message.serviceAccount = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RegisterSubscriberRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberRequest} RegisterSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterSubscriberRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RegisterSubscriberRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RegisterSubscriberRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                if (!$util.isString(message.account))
+                                    return "account: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RegisterSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberRequest} RegisterSubscriberRequest
+                         */
+                        RegisterSubscriberRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.RegisterSubscriberRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.RegisterSubscriberRequest();
+                            if (object.account != null)
+                                message.account = String(object.account);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RegisterSubscriberRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.RegisterSubscriberRequest} message RegisterSubscriberRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RegisterSubscriberRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.account = "";
+                                object.serviceAccount = "";
+                            }
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                object.account = message.account;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RegisterSubscriberRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RegisterSubscriberRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RegisterSubscriberRequest;
+                    })();
+    
+                    v1.RegisterSubscriberResponse = (function() {
+    
+                        /**
+                         * Properties of a RegisterSubscriberResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRegisterSubscriberResponse
+                         * @property {string|null} [topic] RegisterSubscriberResponse topic
+                         */
+    
+                        /**
+                         * Constructs a new RegisterSubscriberResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a RegisterSubscriberResponse.
+                         * @implements IRegisterSubscriberResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberResponse=} [properties] Properties to set
+                         */
+                        function RegisterSubscriberResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RegisterSubscriberResponse topic.
+                         * @member {string} topic
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @instance
+                         */
+                        RegisterSubscriberResponse.prototype.topic = "";
+    
+                        /**
+                         * Creates a new RegisterSubscriberResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberResponse} RegisterSubscriberResponse instance
+                         */
+                        RegisterSubscriberResponse.create = function create(properties) {
+                            return new RegisterSubscriberResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterSubscriberResponse message. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberResponse} message RegisterSubscriberResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterSubscriberResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterSubscriberResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IRegisterSubscriberResponse} message RegisterSubscriberResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterSubscriberResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RegisterSubscriberResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberResponse} RegisterSubscriberResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterSubscriberResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RegisterSubscriberResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.topic = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RegisterSubscriberResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberResponse} RegisterSubscriberResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterSubscriberResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RegisterSubscriberResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RegisterSubscriberResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                if (!$util.isString(message.topic))
+                                    return "topic: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RegisterSubscriberResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.RegisterSubscriberResponse} RegisterSubscriberResponse
+                         */
+                        RegisterSubscriberResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.RegisterSubscriberResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.RegisterSubscriberResponse();
+                            if (object.topic != null)
+                                message.topic = String(object.topic);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RegisterSubscriberResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.RegisterSubscriberResponse} message RegisterSubscriberResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RegisterSubscriberResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.topic = "";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                object.topic = message.topic;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RegisterSubscriberResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.RegisterSubscriberResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RegisterSubscriberResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RegisterSubscriberResponse;
+                    })();
+    
+                    v1.UnregisterSubscriberRequest = (function() {
+    
+                        /**
+                         * Properties of an UnregisterSubscriberRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IUnregisterSubscriberRequest
+                         * @property {string|null} [account] UnregisterSubscriberRequest account
+                         * @property {string|null} [serviceAccount] UnregisterSubscriberRequest serviceAccount
+                         */
+    
+                        /**
+                         * Constructs a new UnregisterSubscriberRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents an UnregisterSubscriberRequest.
+                         * @implements IUnregisterSubscriberRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberRequest=} [properties] Properties to set
+                         */
+                        function UnregisterSubscriberRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UnregisterSubscriberRequest account.
+                         * @member {string} account
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @instance
+                         */
+                        UnregisterSubscriberRequest.prototype.account = "";
+    
+                        /**
+                         * UnregisterSubscriberRequest serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @instance
+                         */
+                        UnregisterSubscriberRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * Creates a new UnregisterSubscriberRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberRequest} UnregisterSubscriberRequest instance
+                         */
+                        UnregisterSubscriberRequest.create = function create(properties) {
+                            return new UnregisterSubscriberRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UnregisterSubscriberRequest message. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberRequest} message UnregisterSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnregisterSubscriberRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UnregisterSubscriberRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberRequest} message UnregisterSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnregisterSubscriberRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UnregisterSubscriberRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberRequest} UnregisterSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnregisterSubscriberRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.UnregisterSubscriberRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.account = reader.string();
+                                    break;
+                                case 2:
+                                    message.serviceAccount = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UnregisterSubscriberRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberRequest} UnregisterSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnregisterSubscriberRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UnregisterSubscriberRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UnregisterSubscriberRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                if (!$util.isString(message.account))
+                                    return "account: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UnregisterSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberRequest} UnregisterSubscriberRequest
+                         */
+                        UnregisterSubscriberRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.UnregisterSubscriberRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.UnregisterSubscriberRequest();
+                            if (object.account != null)
+                                message.account = String(object.account);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UnregisterSubscriberRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.UnregisterSubscriberRequest} message UnregisterSubscriberRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UnregisterSubscriberRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.account = "";
+                                object.serviceAccount = "";
+                            }
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                object.account = message.account;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UnregisterSubscriberRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UnregisterSubscriberRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UnregisterSubscriberRequest;
+                    })();
+    
+                    v1.UnregisterSubscriberResponse = (function() {
+    
+                        /**
+                         * Properties of an UnregisterSubscriberResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IUnregisterSubscriberResponse
+                         * @property {string|null} [topic] UnregisterSubscriberResponse topic
+                         */
+    
+                        /**
+                         * Constructs a new UnregisterSubscriberResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents an UnregisterSubscriberResponse.
+                         * @implements IUnregisterSubscriberResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberResponse=} [properties] Properties to set
+                         */
+                        function UnregisterSubscriberResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UnregisterSubscriberResponse topic.
+                         * @member {string} topic
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @instance
+                         */
+                        UnregisterSubscriberResponse.prototype.topic = "";
+    
+                        /**
+                         * Creates a new UnregisterSubscriberResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberResponse} UnregisterSubscriberResponse instance
+                         */
+                        UnregisterSubscriberResponse.create = function create(properties) {
+                            return new UnregisterSubscriberResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UnregisterSubscriberResponse message. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberResponse} message UnregisterSubscriberResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnregisterSubscriberResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UnregisterSubscriberResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IUnregisterSubscriberResponse} message UnregisterSubscriberResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnregisterSubscriberResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UnregisterSubscriberResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberResponse} UnregisterSubscriberResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnregisterSubscriberResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.UnregisterSubscriberResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.topic = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UnregisterSubscriberResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberResponse} UnregisterSubscriberResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnregisterSubscriberResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UnregisterSubscriberResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UnregisterSubscriberResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                if (!$util.isString(message.topic))
+                                    return "topic: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UnregisterSubscriberResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.UnregisterSubscriberResponse} UnregisterSubscriberResponse
+                         */
+                        UnregisterSubscriberResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.UnregisterSubscriberResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.UnregisterSubscriberResponse();
+                            if (object.topic != null)
+                                message.topic = String(object.topic);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UnregisterSubscriberResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.UnregisterSubscriberResponse} message UnregisterSubscriberResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UnregisterSubscriberResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.topic = "";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                object.topic = message.topic;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UnregisterSubscriberResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.UnregisterSubscriberResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UnregisterSubscriberResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UnregisterSubscriberResponse;
+                    })();
+    
+                    v1.ListSubscribersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSubscribersRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListSubscribersRequest
+                         * @property {string|null} [account] ListSubscribersRequest account
+                         * @property {number|null} [pageSize] ListSubscribersRequest pageSize
+                         * @property {string|null} [pageToken] ListSubscribersRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSubscribersRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListSubscribersRequest.
+                         * @implements IListSubscribersRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListSubscribersRequest=} [properties] Properties to set
+                         */
+                        function ListSubscribersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubscribersRequest account.
+                         * @member {string} account
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @instance
+                         */
+                        ListSubscribersRequest.prototype.account = "";
+    
+                        /**
+                         * ListSubscribersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @instance
+                         */
+                        ListSubscribersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSubscribersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @instance
+                         */
+                        ListSubscribersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSubscribersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSubscribersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListSubscribersRequest} ListSubscribersRequest instance
+                         */
+                        ListSubscribersRequest.create = function create(properties) {
+                            return new ListSubscribersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersRequest message. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSubscribersRequest} message ListSubscribersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.account);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSubscribersRequest} message ListSubscribersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListSubscribersRequest} ListSubscribersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListSubscribersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.account = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListSubscribersRequest} ListSubscribersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubscribersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubscribersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                if (!$util.isString(message.account))
+                                    return "account: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubscribersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListSubscribersRequest} ListSubscribersRequest
+                         */
+                        ListSubscribersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListSubscribersRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListSubscribersRequest();
+                            if (object.account != null)
+                                message.account = String(object.account);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubscribersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ListSubscribersRequest} message ListSubscribersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubscribersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.account = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.account != null && message.hasOwnProperty("account"))
+                                object.account = message.account;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubscribersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListSubscribersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubscribersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListSubscribersRequest;
+                    })();
+    
+                    v1.ListSubscribersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSubscribersResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListSubscribersResponse
+                         * @property {string|null} [topic] ListSubscribersResponse topic
+                         * @property {Array.<string>|null} [serviceAccounts] ListSubscribersResponse serviceAccounts
+                         * @property {string|null} [nextPageToken] ListSubscribersResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSubscribersResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListSubscribersResponse.
+                         * @implements IListSubscribersResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListSubscribersResponse=} [properties] Properties to set
+                         */
+                        function ListSubscribersResponse(properties) {
+                            this.serviceAccounts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubscribersResponse topic.
+                         * @member {string} topic
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @instance
+                         */
+                        ListSubscribersResponse.prototype.topic = "";
+    
+                        /**
+                         * ListSubscribersResponse serviceAccounts.
+                         * @member {Array.<string>} serviceAccounts
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @instance
+                         */
+                        ListSubscribersResponse.prototype.serviceAccounts = $util.emptyArray;
+    
+                        /**
+                         * ListSubscribersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @instance
+                         */
+                        ListSubscribersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSubscribersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSubscribersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListSubscribersResponse} ListSubscribersResponse instance
+                         */
+                        ListSubscribersResponse.create = function create(properties) {
+                            return new ListSubscribersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersResponse message. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSubscribersResponse} message ListSubscribersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
+                            if (message.serviceAccounts != null && message.serviceAccounts.length)
+                                for (var i = 0; i < message.serviceAccounts.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccounts[i]);
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListSubscribersResponse} message ListSubscribersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListSubscribersResponse} ListSubscribersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListSubscribersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.topic = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.serviceAccounts && message.serviceAccounts.length))
+                                        message.serviceAccounts = [];
+                                    message.serviceAccounts.push(reader.string());
+                                    break;
+                                case 3:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListSubscribersResponse} ListSubscribersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubscribersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubscribersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                if (!$util.isString(message.topic))
+                                    return "topic: string expected";
+                            if (message.serviceAccounts != null && message.hasOwnProperty("serviceAccounts")) {
+                                if (!Array.isArray(message.serviceAccounts))
+                                    return "serviceAccounts: array expected";
+                                for (var i = 0; i < message.serviceAccounts.length; ++i)
+                                    if (!$util.isString(message.serviceAccounts[i]))
+                                        return "serviceAccounts: string[] expected";
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubscribersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListSubscribersResponse} ListSubscribersResponse
+                         */
+                        ListSubscribersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListSubscribersResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListSubscribersResponse();
+                            if (object.topic != null)
+                                message.topic = String(object.topic);
+                            if (object.serviceAccounts) {
+                                if (!Array.isArray(object.serviceAccounts))
+                                    throw TypeError(".google.cloud.channel.v1.ListSubscribersResponse.serviceAccounts: array expected");
+                                message.serviceAccounts = [];
+                                for (var i = 0; i < object.serviceAccounts.length; ++i)
+                                    message.serviceAccounts[i] = String(object.serviceAccounts[i]);
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubscribersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.ListSubscribersResponse} message ListSubscribersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubscribersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.serviceAccounts = [];
+                            if (options.defaults) {
+                                object.topic = "";
+                                object.nextPageToken = "";
+                            }
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                object.topic = message.topic;
+                            if (message.serviceAccounts && message.serviceAccounts.length) {
+                                object.serviceAccounts = [];
+                                for (var j = 0; j < message.serviceAccounts.length; ++j)
+                                    object.serviceAccounts[j] = message.serviceAccounts[j];
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubscribersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListSubscribersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubscribersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListSubscribersResponse;
+                    })();
+    
+                    v1.CustomerEvent = (function() {
+    
+                        /**
+                         * Properties of a CustomerEvent.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ICustomerEvent
+                         * @property {string|null} [customer] CustomerEvent customer
+                         * @property {google.cloud.channel.v1.CustomerEvent.Type|null} [eventType] CustomerEvent eventType
+                         */
+    
+                        /**
+                         * Constructs a new CustomerEvent.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a CustomerEvent.
+                         * @implements ICustomerEvent
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ICustomerEvent=} [properties] Properties to set
+                         */
+                        function CustomerEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerEvent customer.
+                         * @member {string} customer
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @instance
+                         */
+                        CustomerEvent.prototype.customer = "";
+    
+                        /**
+                         * CustomerEvent eventType.
+                         * @member {google.cloud.channel.v1.CustomerEvent.Type} eventType
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @instance
+                         */
+                        CustomerEvent.prototype.eventType = 0;
+    
+                        /**
+                         * Creates a new CustomerEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.ICustomerEvent=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.CustomerEvent} CustomerEvent instance
+                         */
+                        CustomerEvent.create = function create(properties) {
+                            return new CustomerEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerEvent message. Does not implicitly {@link google.cloud.channel.v1.CustomerEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.ICustomerEvent} message CustomerEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.customer);
+                            if (message.eventType != null && Object.hasOwnProperty.call(message, "eventType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.eventType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerEvent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.CustomerEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.ICustomerEvent} message CustomerEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.CustomerEvent} CustomerEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.CustomerEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.customer = reader.string();
+                                    break;
+                                case 2:
+                                    message.eventType = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.CustomerEvent} CustomerEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerEvent message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                if (!$util.isString(message.customer))
+                                    return "customer: string expected";
+                            if (message.eventType != null && message.hasOwnProperty("eventType"))
+                                switch (message.eventType) {
+                                default:
+                                    return "eventType: enum value expected";
+                                case 0:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.CustomerEvent} CustomerEvent
+                         */
+                        CustomerEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.CustomerEvent)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.CustomerEvent();
+                            if (object.customer != null)
+                                message.customer = String(object.customer);
+                            switch (object.eventType) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.eventType = 0;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.CustomerEvent} message CustomerEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.customer = "";
+                                object.eventType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                object.customer = message.customer;
+                            if (message.eventType != null && message.hasOwnProperty("eventType"))
+                                object.eventType = options.enums === String ? $root.google.cloud.channel.v1.CustomerEvent.Type[message.eventType] : message.eventType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.CustomerEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.channel.v1.CustomerEvent.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         */
+                        CustomerEvent.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            return values;
+                        })();
+    
+                        return CustomerEvent;
+                    })();
+    
+                    v1.EntitlementEvent = (function() {
+    
+                        /**
+                         * Properties of an EntitlementEvent.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IEntitlementEvent
+                         * @property {string|null} [entitlement] EntitlementEvent entitlement
+                         * @property {google.cloud.channel.v1.EntitlementEvent.Type|null} [eventType] EntitlementEvent eventType
+                         */
+    
+                        /**
+                         * Constructs a new EntitlementEvent.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents an EntitlementEvent.
+                         * @implements IEntitlementEvent
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IEntitlementEvent=} [properties] Properties to set
+                         */
+                        function EntitlementEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EntitlementEvent entitlement.
+                         * @member {string} entitlement
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @instance
+                         */
+                        EntitlementEvent.prototype.entitlement = "";
+    
+                        /**
+                         * EntitlementEvent eventType.
+                         * @member {google.cloud.channel.v1.EntitlementEvent.Type} eventType
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @instance
+                         */
+                        EntitlementEvent.prototype.eventType = 0;
+    
+                        /**
+                         * Creates a new EntitlementEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.IEntitlementEvent=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.EntitlementEvent} EntitlementEvent instance
+                         */
+                        EntitlementEvent.create = function create(properties) {
+                            return new EntitlementEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EntitlementEvent message. Does not implicitly {@link google.cloud.channel.v1.EntitlementEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.IEntitlementEvent} message EntitlementEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntitlementEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.entitlement != null && Object.hasOwnProperty.call(message, "entitlement"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.entitlement);
+                            if (message.eventType != null && Object.hasOwnProperty.call(message, "eventType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.eventType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EntitlementEvent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.EntitlementEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.IEntitlementEvent} message EntitlementEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntitlementEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EntitlementEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.EntitlementEvent} EntitlementEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntitlementEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.EntitlementEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.entitlement = reader.string();
+                                    break;
+                                case 2:
+                                    message.eventType = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EntitlementEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.EntitlementEvent} EntitlementEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntitlementEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EntitlementEvent message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EntitlementEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                if (!$util.isString(message.entitlement))
+                                    return "entitlement: string expected";
+                            if (message.eventType != null && message.hasOwnProperty("eventType"))
+                                switch (message.eventType) {
+                                default:
+                                    return "eventType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EntitlementEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.EntitlementEvent} EntitlementEvent
+                         */
+                        EntitlementEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.EntitlementEvent)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.EntitlementEvent();
+                            if (object.entitlement != null)
+                                message.entitlement = String(object.entitlement);
+                            switch (object.eventType) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.eventType = 0;
+                                break;
+                            case "CREATED":
+                            case 1:
+                                message.eventType = 1;
+                                break;
+                            case "PRICE_PLAN_SWITCHED":
+                            case 3:
+                                message.eventType = 3;
+                                break;
+                            case "COMMITMENT_CHANGED":
+                            case 4:
+                                message.eventType = 4;
+                                break;
+                            case "RENEWED":
+                            case 5:
+                                message.eventType = 5;
+                                break;
+                            case "SUSPENDED":
+                            case 6:
+                                message.eventType = 6;
+                                break;
+                            case "ACTIVATED":
+                            case 7:
+                                message.eventType = 7;
+                                break;
+                            case "CANCELLED":
+                            case 8:
+                                message.eventType = 8;
+                                break;
+                            case "SKU_CHANGED":
+                            case 9:
+                                message.eventType = 9;
+                                break;
+                            case "RENEWAL_SETTING_CHANGED":
+                            case 10:
+                                message.eventType = 10;
+                                break;
+                            case "PAID_SERVICE_STARTED":
+                            case 11:
+                                message.eventType = 11;
+                                break;
+                            case "LICENSE_ASSIGNMENT_CHANGED":
+                            case 12:
+                                message.eventType = 12;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EntitlementEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.EntitlementEvent} message EntitlementEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EntitlementEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.entitlement = "";
+                                object.eventType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                object.entitlement = message.entitlement;
+                            if (message.eventType != null && message.hasOwnProperty("eventType"))
+                                object.eventType = options.enums === String ? $root.google.cloud.channel.v1.EntitlementEvent.Type[message.eventType] : message.eventType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EntitlementEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.EntitlementEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EntitlementEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.channel.v1.EntitlementEvent.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} CREATED=1 CREATED value
+                         * @property {number} PRICE_PLAN_SWITCHED=3 PRICE_PLAN_SWITCHED value
+                         * @property {number} COMMITMENT_CHANGED=4 COMMITMENT_CHANGED value
+                         * @property {number} RENEWED=5 RENEWED value
+                         * @property {number} SUSPENDED=6 SUSPENDED value
+                         * @property {number} ACTIVATED=7 ACTIVATED value
+                         * @property {number} CANCELLED=8 CANCELLED value
+                         * @property {number} SKU_CHANGED=9 SKU_CHANGED value
+                         * @property {number} RENEWAL_SETTING_CHANGED=10 RENEWAL_SETTING_CHANGED value
+                         * @property {number} PAID_SERVICE_STARTED=11 PAID_SERVICE_STARTED value
+                         * @property {number} LICENSE_ASSIGNMENT_CHANGED=12 LICENSE_ASSIGNMENT_CHANGED value
+                         */
+                        EntitlementEvent.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATED"] = 1;
+                            values[valuesById[3] = "PRICE_PLAN_SWITCHED"] = 3;
+                            values[valuesById[4] = "COMMITMENT_CHANGED"] = 4;
+                            values[valuesById[5] = "RENEWED"] = 5;
+                            values[valuesById[6] = "SUSPENDED"] = 6;
+                            values[valuesById[7] = "ACTIVATED"] = 7;
+                            values[valuesById[8] = "CANCELLED"] = 8;
+                            values[valuesById[9] = "SKU_CHANGED"] = 9;
+                            values[valuesById[10] = "RENEWAL_SETTING_CHANGED"] = 10;
+                            values[valuesById[11] = "PAID_SERVICE_STARTED"] = 11;
+                            values[valuesById[12] = "LICENSE_ASSIGNMENT_CHANGED"] = 12;
+                            return values;
+                        })();
+    
+                        return EntitlementEvent;
+                    })();
+    
+                    v1.SubscriberEvent = (function() {
+    
+                        /**
+                         * Properties of a SubscriberEvent.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ISubscriberEvent
+                         * @property {google.cloud.channel.v1.ICustomerEvent|null} [customerEvent] SubscriberEvent customerEvent
+                         * @property {google.cloud.channel.v1.IEntitlementEvent|null} [entitlementEvent] SubscriberEvent entitlementEvent
+                         */
+    
+                        /**
+                         * Constructs a new SubscriberEvent.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a SubscriberEvent.
+                         * @implements ISubscriberEvent
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ISubscriberEvent=} [properties] Properties to set
+                         */
+                        function SubscriberEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SubscriberEvent customerEvent.
+                         * @member {google.cloud.channel.v1.ICustomerEvent|null|undefined} customerEvent
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @instance
+                         */
+                        SubscriberEvent.prototype.customerEvent = null;
+    
+                        /**
+                         * SubscriberEvent entitlementEvent.
+                         * @member {google.cloud.channel.v1.IEntitlementEvent|null|undefined} entitlementEvent
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @instance
+                         */
+                        SubscriberEvent.prototype.entitlementEvent = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SubscriberEvent event.
+                         * @member {"customerEvent"|"entitlementEvent"|undefined} event
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @instance
+                         */
+                        Object.defineProperty(SubscriberEvent.prototype, "event", {
+                            get: $util.oneOfGetter($oneOfFields = ["customerEvent", "entitlementEvent"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SubscriberEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.ISubscriberEvent=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.SubscriberEvent} SubscriberEvent instance
+                         */
+                        SubscriberEvent.create = function create(properties) {
+                            return new SubscriberEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriberEvent message. Does not implicitly {@link google.cloud.channel.v1.SubscriberEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.ISubscriberEvent} message SubscriberEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriberEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customerEvent != null && Object.hasOwnProperty.call(message, "customerEvent"))
+                                $root.google.cloud.channel.v1.CustomerEvent.encode(message.customerEvent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.entitlementEvent != null && Object.hasOwnProperty.call(message, "entitlementEvent"))
+                                $root.google.cloud.channel.v1.EntitlementEvent.encode(message.entitlementEvent, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriberEvent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.SubscriberEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.ISubscriberEvent} message SubscriberEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriberEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SubscriberEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.SubscriberEvent} SubscriberEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriberEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.SubscriberEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.customerEvent = $root.google.cloud.channel.v1.CustomerEvent.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.entitlementEvent = $root.google.cloud.channel.v1.EntitlementEvent.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SubscriberEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.SubscriberEvent} SubscriberEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriberEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SubscriberEvent message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SubscriberEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.customerEvent != null && message.hasOwnProperty("customerEvent")) {
+                                properties.event = 1;
+                                {
+                                    var error = $root.google.cloud.channel.v1.CustomerEvent.verify(message.customerEvent);
+                                    if (error)
+                                        return "customerEvent." + error;
+                                }
+                            }
+                            if (message.entitlementEvent != null && message.hasOwnProperty("entitlementEvent")) {
+                                if (properties.event === 1)
+                                    return "event: multiple values";
+                                properties.event = 1;
+                                {
+                                    var error = $root.google.cloud.channel.v1.EntitlementEvent.verify(message.entitlementEvent);
+                                    if (error)
+                                        return "entitlementEvent." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SubscriberEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.SubscriberEvent} SubscriberEvent
+                         */
+                        SubscriberEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.SubscriberEvent)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.SubscriberEvent();
+                            if (object.customerEvent != null) {
+                                if (typeof object.customerEvent !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.SubscriberEvent.customerEvent: object expected");
+                                message.customerEvent = $root.google.cloud.channel.v1.CustomerEvent.fromObject(object.customerEvent);
+                            }
+                            if (object.entitlementEvent != null) {
+                                if (typeof object.entitlementEvent !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.SubscriberEvent.entitlementEvent: object expected");
+                                message.entitlementEvent = $root.google.cloud.channel.v1.EntitlementEvent.fromObject(object.entitlementEvent);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SubscriberEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @static
+                         * @param {google.cloud.channel.v1.SubscriberEvent} message SubscriberEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SubscriberEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.customerEvent != null && message.hasOwnProperty("customerEvent")) {
+                                object.customerEvent = $root.google.cloud.channel.v1.CustomerEvent.toObject(message.customerEvent, options);
+                                if (options.oneofs)
+                                    object.event = "customerEvent";
+                            }
+                            if (message.entitlementEvent != null && message.hasOwnProperty("entitlementEvent")) {
+                                object.entitlementEvent = $root.google.cloud.channel.v1.EntitlementEvent.toObject(message.entitlementEvent, options);
+                                if (options.oneofs)
+                                    object.event = "entitlementEvent";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SubscriberEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.SubscriberEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SubscriberEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SubscriberEvent;
+                    })();
+    
                     return v1;
                 })();
     
@@ -22338,6 +24494,7 @@
              * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
              * @property {number} INPUT_ONLY=4 INPUT_ONLY value
              * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -22347,6 +24504,7 @@
                 values[valuesById[3] = "OUTPUT_ONLY"] = 3;
                 values[valuesById[4] = "INPUT_ONLY"] = 4;
                 values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 return values;
             })();
     
@@ -29418,6 +31576,7 @@
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
                                 break;
                             }
                     }
@@ -29517,6 +31676,10 @@
                             case "IMMUTABLE":
                             case 5:
                                 message[".google.api.fieldBehavior"][i] = 5;
+                                break;
+                            case "UNORDERED_LIST":
+                            case 6:
+                                message[".google.api.fieldBehavior"][i] = 6;
                                 break;
                             }
                     }

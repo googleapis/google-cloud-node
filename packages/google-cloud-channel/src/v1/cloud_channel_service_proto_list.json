@@ -6,5 +6,6 @@
   "../../protos/google/cloud/channel/v1/offers.proto",
   "../../protos/google/cloud/channel/v1/operations.proto",
   "../../protos/google/cloud/channel/v1/products.proto",
-  "../../protos/google/cloud/channel/v1/service.proto"
+  "../../protos/google/cloud/channel/v1/service.proto",
+  "../../protos/google/cloud/channel/v1/subscriber_event.proto"
 ]

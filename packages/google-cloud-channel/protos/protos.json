@@ -10,7 +10,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/channel/v1;channel",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ServiceProto",
+                    "java_outer_classname": "SubscriberEventProto",
                     "java_package": "com.google.cloud.channel.v1"
                   },
                   "nested": {
@@ -1531,6 +1531,52 @@
                               }
                             }
                           ]
+                        },
+                        "RegisterSubscriber": {
+                          "requestType": "RegisterSubscriberRequest",
+                          "responseType": "RegisterSubscriberResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{account=accounts/*}:register",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{account=accounts/*}:register",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "UnregisterSubscriber": {
+                          "requestType": "UnregisterSubscriberRequest",
+                          "responseType": "UnregisterSubscriberResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{account=accounts/*}:unregister",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{account=accounts/*}:unregister",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ListSubscribers": {
+                          "requestType": "ListSubscribersRequest",
+                          "responseType": "ListSubscribersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{account=accounts/*}:listSubscribers"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{account=accounts/*}:listSubscribers"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2609,6 +2655,175 @@
                           "id": 1
                         }
                       }
+                    },
+                    "RegisterSubscriberRequest": {
+                      "fields": {
+                        "account": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RegisterSubscriberResponse": {
+                      "fields": {
+                        "topic": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UnregisterSubscriberRequest": {
+                      "fields": {
+                        "account": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UnregisterSubscriberResponse": {
+                      "fields": {
+                        "topic": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListSubscribersRequest": {
+                      "fields": {
+                        "account": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSubscribersResponse": {
+                      "fields": {
+                        "topic": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "serviceAccounts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CustomerEvent": {
+                      "fields": {
+                        "customer": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Customer"
+                          }
+                        },
+                        "eventType": {
+                          "type": "Type",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0
+                          }
+                        }
+                      }
+                    },
+                    "EntitlementEvent": {
+                      "fields": {
+                        "entitlement": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Entitlement"
+                          }
+                        },
+                        "eventType": {
+                          "type": "Type",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "CREATED": 1,
+                            "PRICE_PLAN_SWITCHED": 3,
+                            "COMMITMENT_CHANGED": 4,
+                            "RENEWED": 5,
+                            "SUSPENDED": 6,
+                            "ACTIVATED": 7,
+                            "CANCELLED": 8,
+                            "SKU_CHANGED": 9,
+                            "RENEWAL_SETTING_CHANGED": 10,
+                            "PAID_SERVICE_STARTED": 11,
+                            "LICENSE_ASSIGNMENT_CHANGED": 12
+                          }
+                        }
+                      }
+                    },
+                    "SubscriberEvent": {
+                      "oneofs": {
+                        "event": {
+                          "oneof": [
+                            "customerEvent",
+                            "entitlementEvent"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "customerEvent": {
+                          "type": "CustomerEvent",
+                          "id": 1
+                        },
+                        "entitlementEvent": {
+                          "type": "EntitlementEvent",
+                          "id": 2
+                        }
+                      }
                     }
                   }
                 }
@@ -2639,7 +2854,8 @@
                 "REQUIRED": 2,
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
               }
             },
             "http": {

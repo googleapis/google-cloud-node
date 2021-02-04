@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.channel.v1",
-  "libraryPackage": "channel",
+  "libraryPackage": "@google-cloud/channel",
   "services": {
     "CloudChannelService": {
       "clients": {
@@ -53,6 +53,16 @@
             "UpdateChannelPartnerLink": {
               "methods": [
                 "updateChannelPartnerLink"
+              ]
+            },
+            "RegisterSubscriber": {
+              "methods": [
+                "registerSubscriber"
+              ]
+            },
+            "UnregisterSubscriber": {
+              "methods": [
+                "unregisterSubscriber"
               ]
             },
             "ProvisionCloudIdentity": {
@@ -178,6 +188,13 @@
                 "listPurchasableOffers",
                 "listPurchasableOffersStream",
                 "listPurchasableOffersAsync"
+              ]
+            },
+            "ListSubscribers": {
+              "methods": [
+                "listSubscribers",
+                "listSubscribersStream",
+                "listSubscribersAsync"
               ]
             }
           }
@@ -230,6 +247,16 @@
                 "updateChannelPartnerLink"
               ]
             },
+            "RegisterSubscriber": {
+              "methods": [
+                "registerSubscriber"
+              ]
+            },
+            "UnregisterSubscriber": {
+              "methods": [
+                "unregisterSubscriber"
+              ]
+            },
             "ProvisionCloudIdentity": {
               "methods": [
                 "provisionCloudIdentity"
@@ -353,6 +380,13 @@
                 "listPurchasableOffers",
                 "listPurchasableOffersStream",
                 "listPurchasableOffersAsync"
+              ]
+            },
+            "ListSubscribers": {
+              "methods": [
+                "listSubscribers",
+                "listSubscribersStream",
+                "listSubscribersAsync"
               ]
             }
           }

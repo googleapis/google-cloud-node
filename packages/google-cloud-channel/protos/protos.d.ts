@@ -4018,6 +4018,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public listPurchasableOffers(request: google.cloud.channel.v1.IListPurchasableOffersRequest): Promise<google.cloud.channel.v1.ListPurchasableOffersResponse>;
+
+                    /**
+                     * Calls RegisterSubscriber.
+                     * @param request RegisterSubscriberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RegisterSubscriberResponse
+                     */
+                    public registerSubscriber(request: google.cloud.channel.v1.IRegisterSubscriberRequest, callback: google.cloud.channel.v1.CloudChannelService.RegisterSubscriberCallback): void;
+
+                    /**
+                     * Calls RegisterSubscriber.
+                     * @param request RegisterSubscriberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public registerSubscriber(request: google.cloud.channel.v1.IRegisterSubscriberRequest): Promise<google.cloud.channel.v1.RegisterSubscriberResponse>;
+
+                    /**
+                     * Calls UnregisterSubscriber.
+                     * @param request UnregisterSubscriberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UnregisterSubscriberResponse
+                     */
+                    public unregisterSubscriber(request: google.cloud.channel.v1.IUnregisterSubscriberRequest, callback: google.cloud.channel.v1.CloudChannelService.UnregisterSubscriberCallback): void;
+
+                    /**
+                     * Calls UnregisterSubscriber.
+                     * @param request UnregisterSubscriberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public unregisterSubscriber(request: google.cloud.channel.v1.IUnregisterSubscriberRequest): Promise<google.cloud.channel.v1.UnregisterSubscriberResponse>;
+
+                    /**
+                     * Calls ListSubscribers.
+                     * @param request ListSubscribersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSubscribersResponse
+                     */
+                    public listSubscribers(request: google.cloud.channel.v1.IListSubscribersRequest, callback: google.cloud.channel.v1.CloudChannelService.ListSubscribersCallback): void;
+
+                    /**
+                     * Calls ListSubscribers.
+                     * @param request ListSubscribersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSubscribers(request: google.cloud.channel.v1.IListSubscribersRequest): Promise<google.cloud.channel.v1.ListSubscribersResponse>;
                 }
 
                 namespace CloudChannelService {
@@ -4231,6 +4273,27 @@ export namespace google {
                      * @param [response] ListPurchasableOffersResponse
                      */
                     type ListPurchasableOffersCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListPurchasableOffersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#registerSubscriber}.
+                     * @param error Error, if any
+                     * @param [response] RegisterSubscriberResponse
+                     */
+                    type RegisterSubscriberCallback = (error: (Error|null), response?: google.cloud.channel.v1.RegisterSubscriberResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#unregisterSubscriber}.
+                     * @param error Error, if any
+                     * @param [response] UnregisterSubscriberResponse
+                     */
+                    type UnregisterSubscriberCallback = (error: (Error|null), response?: google.cloud.channel.v1.UnregisterSubscriberResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#listSubscribers}.
+                     * @param error Error, if any
+                     * @param [response] ListSubscribersResponse
+                     */
+                    type ListSubscribersCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListSubscribersResponse) => void;
                 }
 
                 /** Properties of a CheckCloudIdentityAccountsExistRequest. */
@@ -9276,6 +9339,900 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+
+                /** Properties of a RegisterSubscriberRequest. */
+                interface IRegisterSubscriberRequest {
+
+                    /** RegisterSubscriberRequest account */
+                    account?: (string|null);
+
+                    /** RegisterSubscriberRequest serviceAccount */
+                    serviceAccount?: (string|null);
+                }
+
+                /** Represents a RegisterSubscriberRequest. */
+                class RegisterSubscriberRequest implements IRegisterSubscriberRequest {
+
+                    /**
+                     * Constructs a new RegisterSubscriberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IRegisterSubscriberRequest);
+
+                    /** RegisterSubscriberRequest account. */
+                    public account: string;
+
+                    /** RegisterSubscriberRequest serviceAccount. */
+                    public serviceAccount: string;
+
+                    /**
+                     * Creates a new RegisterSubscriberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegisterSubscriberRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IRegisterSubscriberRequest): google.cloud.channel.v1.RegisterSubscriberRequest;
+
+                    /**
+                     * Encodes the specified RegisterSubscriberRequest message. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberRequest.verify|verify} messages.
+                     * @param message RegisterSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IRegisterSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegisterSubscriberRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberRequest.verify|verify} messages.
+                     * @param message RegisterSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IRegisterSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegisterSubscriberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegisterSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.RegisterSubscriberRequest;
+
+                    /**
+                     * Decodes a RegisterSubscriberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegisterSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.RegisterSubscriberRequest;
+
+                    /**
+                     * Verifies a RegisterSubscriberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegisterSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegisterSubscriberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.RegisterSubscriberRequest;
+
+                    /**
+                     * Creates a plain object from a RegisterSubscriberRequest message. Also converts values to other types if specified.
+                     * @param message RegisterSubscriberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.RegisterSubscriberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegisterSubscriberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RegisterSubscriberResponse. */
+                interface IRegisterSubscriberResponse {
+
+                    /** RegisterSubscriberResponse topic */
+                    topic?: (string|null);
+                }
+
+                /** Represents a RegisterSubscriberResponse. */
+                class RegisterSubscriberResponse implements IRegisterSubscriberResponse {
+
+                    /**
+                     * Constructs a new RegisterSubscriberResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IRegisterSubscriberResponse);
+
+                    /** RegisterSubscriberResponse topic. */
+                    public topic: string;
+
+                    /**
+                     * Creates a new RegisterSubscriberResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegisterSubscriberResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IRegisterSubscriberResponse): google.cloud.channel.v1.RegisterSubscriberResponse;
+
+                    /**
+                     * Encodes the specified RegisterSubscriberResponse message. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberResponse.verify|verify} messages.
+                     * @param message RegisterSubscriberResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IRegisterSubscriberResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegisterSubscriberResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RegisterSubscriberResponse.verify|verify} messages.
+                     * @param message RegisterSubscriberResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IRegisterSubscriberResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegisterSubscriberResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegisterSubscriberResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.RegisterSubscriberResponse;
+
+                    /**
+                     * Decodes a RegisterSubscriberResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegisterSubscriberResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.RegisterSubscriberResponse;
+
+                    /**
+                     * Verifies a RegisterSubscriberResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegisterSubscriberResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegisterSubscriberResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.RegisterSubscriberResponse;
+
+                    /**
+                     * Creates a plain object from a RegisterSubscriberResponse message. Also converts values to other types if specified.
+                     * @param message RegisterSubscriberResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.RegisterSubscriberResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegisterSubscriberResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UnregisterSubscriberRequest. */
+                interface IUnregisterSubscriberRequest {
+
+                    /** UnregisterSubscriberRequest account */
+                    account?: (string|null);
+
+                    /** UnregisterSubscriberRequest serviceAccount */
+                    serviceAccount?: (string|null);
+                }
+
+                /** Represents an UnregisterSubscriberRequest. */
+                class UnregisterSubscriberRequest implements IUnregisterSubscriberRequest {
+
+                    /**
+                     * Constructs a new UnregisterSubscriberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IUnregisterSubscriberRequest);
+
+                    /** UnregisterSubscriberRequest account. */
+                    public account: string;
+
+                    /** UnregisterSubscriberRequest serviceAccount. */
+                    public serviceAccount: string;
+
+                    /**
+                     * Creates a new UnregisterSubscriberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UnregisterSubscriberRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IUnregisterSubscriberRequest): google.cloud.channel.v1.UnregisterSubscriberRequest;
+
+                    /**
+                     * Encodes the specified UnregisterSubscriberRequest message. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberRequest.verify|verify} messages.
+                     * @param message UnregisterSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IUnregisterSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UnregisterSubscriberRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberRequest.verify|verify} messages.
+                     * @param message UnregisterSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IUnregisterSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UnregisterSubscriberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UnregisterSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.UnregisterSubscriberRequest;
+
+                    /**
+                     * Decodes an UnregisterSubscriberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UnregisterSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.UnregisterSubscriberRequest;
+
+                    /**
+                     * Verifies an UnregisterSubscriberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UnregisterSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UnregisterSubscriberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.UnregisterSubscriberRequest;
+
+                    /**
+                     * Creates a plain object from an UnregisterSubscriberRequest message. Also converts values to other types if specified.
+                     * @param message UnregisterSubscriberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.UnregisterSubscriberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UnregisterSubscriberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UnregisterSubscriberResponse. */
+                interface IUnregisterSubscriberResponse {
+
+                    /** UnregisterSubscriberResponse topic */
+                    topic?: (string|null);
+                }
+
+                /** Represents an UnregisterSubscriberResponse. */
+                class UnregisterSubscriberResponse implements IUnregisterSubscriberResponse {
+
+                    /**
+                     * Constructs a new UnregisterSubscriberResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IUnregisterSubscriberResponse);
+
+                    /** UnregisterSubscriberResponse topic. */
+                    public topic: string;
+
+                    /**
+                     * Creates a new UnregisterSubscriberResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UnregisterSubscriberResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IUnregisterSubscriberResponse): google.cloud.channel.v1.UnregisterSubscriberResponse;
+
+                    /**
+                     * Encodes the specified UnregisterSubscriberResponse message. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberResponse.verify|verify} messages.
+                     * @param message UnregisterSubscriberResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IUnregisterSubscriberResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UnregisterSubscriberResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.UnregisterSubscriberResponse.verify|verify} messages.
+                     * @param message UnregisterSubscriberResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IUnregisterSubscriberResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UnregisterSubscriberResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UnregisterSubscriberResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.UnregisterSubscriberResponse;
+
+                    /**
+                     * Decodes an UnregisterSubscriberResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UnregisterSubscriberResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.UnregisterSubscriberResponse;
+
+                    /**
+                     * Verifies an UnregisterSubscriberResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UnregisterSubscriberResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UnregisterSubscriberResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.UnregisterSubscriberResponse;
+
+                    /**
+                     * Creates a plain object from an UnregisterSubscriberResponse message. Also converts values to other types if specified.
+                     * @param message UnregisterSubscriberResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.UnregisterSubscriberResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UnregisterSubscriberResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListSubscribersRequest. */
+                interface IListSubscribersRequest {
+
+                    /** ListSubscribersRequest account */
+                    account?: (string|null);
+
+                    /** ListSubscribersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSubscribersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSubscribersRequest. */
+                class ListSubscribersRequest implements IListSubscribersRequest {
+
+                    /**
+                     * Constructs a new ListSubscribersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListSubscribersRequest);
+
+                    /** ListSubscribersRequest account. */
+                    public account: string;
+
+                    /** ListSubscribersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSubscribersRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSubscribersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubscribersRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListSubscribersRequest): google.cloud.channel.v1.ListSubscribersRequest;
+
+                    /**
+                     * Encodes the specified ListSubscribersRequest message. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersRequest.verify|verify} messages.
+                     * @param message ListSubscribersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListSubscribersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubscribersRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersRequest.verify|verify} messages.
+                     * @param message ListSubscribersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListSubscribersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubscribersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubscribersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListSubscribersRequest;
+
+                    /**
+                     * Decodes a ListSubscribersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubscribersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListSubscribersRequest;
+
+                    /**
+                     * Verifies a ListSubscribersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubscribersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubscribersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListSubscribersRequest;
+
+                    /**
+                     * Creates a plain object from a ListSubscribersRequest message. Also converts values to other types if specified.
+                     * @param message ListSubscribersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListSubscribersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubscribersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListSubscribersResponse. */
+                interface IListSubscribersResponse {
+
+                    /** ListSubscribersResponse topic */
+                    topic?: (string|null);
+
+                    /** ListSubscribersResponse serviceAccounts */
+                    serviceAccounts?: (string[]|null);
+
+                    /** ListSubscribersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSubscribersResponse. */
+                class ListSubscribersResponse implements IListSubscribersResponse {
+
+                    /**
+                     * Constructs a new ListSubscribersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListSubscribersResponse);
+
+                    /** ListSubscribersResponse topic. */
+                    public topic: string;
+
+                    /** ListSubscribersResponse serviceAccounts. */
+                    public serviceAccounts: string[];
+
+                    /** ListSubscribersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSubscribersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubscribersResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListSubscribersResponse): google.cloud.channel.v1.ListSubscribersResponse;
+
+                    /**
+                     * Encodes the specified ListSubscribersResponse message. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersResponse.verify|verify} messages.
+                     * @param message ListSubscribersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListSubscribersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubscribersResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListSubscribersResponse.verify|verify} messages.
+                     * @param message ListSubscribersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListSubscribersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubscribersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubscribersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListSubscribersResponse;
+
+                    /**
+                     * Decodes a ListSubscribersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubscribersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListSubscribersResponse;
+
+                    /**
+                     * Verifies a ListSubscribersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubscribersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubscribersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListSubscribersResponse;
+
+                    /**
+                     * Creates a plain object from a ListSubscribersResponse message. Also converts values to other types if specified.
+                     * @param message ListSubscribersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListSubscribersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubscribersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CustomerEvent. */
+                interface ICustomerEvent {
+
+                    /** CustomerEvent customer */
+                    customer?: (string|null);
+
+                    /** CustomerEvent eventType */
+                    eventType?: (google.cloud.channel.v1.CustomerEvent.Type|keyof typeof google.cloud.channel.v1.CustomerEvent.Type|null);
+                }
+
+                /** Represents a CustomerEvent. */
+                class CustomerEvent implements ICustomerEvent {
+
+                    /**
+                     * Constructs a new CustomerEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.ICustomerEvent);
+
+                    /** CustomerEvent customer. */
+                    public customer: string;
+
+                    /** CustomerEvent eventType. */
+                    public eventType: (google.cloud.channel.v1.CustomerEvent.Type|keyof typeof google.cloud.channel.v1.CustomerEvent.Type);
+
+                    /**
+                     * Creates a new CustomerEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerEvent instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.ICustomerEvent): google.cloud.channel.v1.CustomerEvent;
+
+                    /**
+                     * Encodes the specified CustomerEvent message. Does not implicitly {@link google.cloud.channel.v1.CustomerEvent.verify|verify} messages.
+                     * @param message CustomerEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.ICustomerEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerEvent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.CustomerEvent.verify|verify} messages.
+                     * @param message CustomerEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.ICustomerEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.CustomerEvent;
+
+                    /**
+                     * Decodes a CustomerEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.CustomerEvent;
+
+                    /**
+                     * Verifies a CustomerEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.CustomerEvent;
+
+                    /**
+                     * Creates a plain object from a CustomerEvent message. Also converts values to other types if specified.
+                     * @param message CustomerEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.CustomerEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CustomerEvent {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0
+                    }
+                }
+
+                /** Properties of an EntitlementEvent. */
+                interface IEntitlementEvent {
+
+                    /** EntitlementEvent entitlement */
+                    entitlement?: (string|null);
+
+                    /** EntitlementEvent eventType */
+                    eventType?: (google.cloud.channel.v1.EntitlementEvent.Type|keyof typeof google.cloud.channel.v1.EntitlementEvent.Type|null);
+                }
+
+                /** Represents an EntitlementEvent. */
+                class EntitlementEvent implements IEntitlementEvent {
+
+                    /**
+                     * Constructs a new EntitlementEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IEntitlementEvent);
+
+                    /** EntitlementEvent entitlement. */
+                    public entitlement: string;
+
+                    /** EntitlementEvent eventType. */
+                    public eventType: (google.cloud.channel.v1.EntitlementEvent.Type|keyof typeof google.cloud.channel.v1.EntitlementEvent.Type);
+
+                    /**
+                     * Creates a new EntitlementEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntitlementEvent instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IEntitlementEvent): google.cloud.channel.v1.EntitlementEvent;
+
+                    /**
+                     * Encodes the specified EntitlementEvent message. Does not implicitly {@link google.cloud.channel.v1.EntitlementEvent.verify|verify} messages.
+                     * @param message EntitlementEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IEntitlementEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntitlementEvent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.EntitlementEvent.verify|verify} messages.
+                     * @param message EntitlementEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IEntitlementEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntitlementEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntitlementEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.EntitlementEvent;
+
+                    /**
+                     * Decodes an EntitlementEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntitlementEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.EntitlementEvent;
+
+                    /**
+                     * Verifies an EntitlementEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntitlementEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntitlementEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.EntitlementEvent;
+
+                    /**
+                     * Creates a plain object from an EntitlementEvent message. Also converts values to other types if specified.
+                     * @param message EntitlementEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.EntitlementEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntitlementEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace EntitlementEvent {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        CREATED = 1,
+                        PRICE_PLAN_SWITCHED = 3,
+                        COMMITMENT_CHANGED = 4,
+                        RENEWED = 5,
+                        SUSPENDED = 6,
+                        ACTIVATED = 7,
+                        CANCELLED = 8,
+                        SKU_CHANGED = 9,
+                        RENEWAL_SETTING_CHANGED = 10,
+                        PAID_SERVICE_STARTED = 11,
+                        LICENSE_ASSIGNMENT_CHANGED = 12
+                    }
+                }
+
+                /** Properties of a SubscriberEvent. */
+                interface ISubscriberEvent {
+
+                    /** SubscriberEvent customerEvent */
+                    customerEvent?: (google.cloud.channel.v1.ICustomerEvent|null);
+
+                    /** SubscriberEvent entitlementEvent */
+                    entitlementEvent?: (google.cloud.channel.v1.IEntitlementEvent|null);
+                }
+
+                /** Represents a SubscriberEvent. */
+                class SubscriberEvent implements ISubscriberEvent {
+
+                    /**
+                     * Constructs a new SubscriberEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.ISubscriberEvent);
+
+                    /** SubscriberEvent customerEvent. */
+                    public customerEvent?: (google.cloud.channel.v1.ICustomerEvent|null);
+
+                    /** SubscriberEvent entitlementEvent. */
+                    public entitlementEvent?: (google.cloud.channel.v1.IEntitlementEvent|null);
+
+                    /** SubscriberEvent event. */
+                    public event?: ("customerEvent"|"entitlementEvent");
+
+                    /**
+                     * Creates a new SubscriberEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubscriberEvent instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.ISubscriberEvent): google.cloud.channel.v1.SubscriberEvent;
+
+                    /**
+                     * Encodes the specified SubscriberEvent message. Does not implicitly {@link google.cloud.channel.v1.SubscriberEvent.verify|verify} messages.
+                     * @param message SubscriberEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.ISubscriberEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubscriberEvent message, length delimited. Does not implicitly {@link google.cloud.channel.v1.SubscriberEvent.verify|verify} messages.
+                     * @param message SubscriberEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.ISubscriberEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubscriberEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubscriberEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.SubscriberEvent;
+
+                    /**
+                     * Decodes a SubscriberEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubscriberEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.SubscriberEvent;
+
+                    /**
+                     * Verifies a SubscriberEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubscriberEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubscriberEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.SubscriberEvent;
+
+                    /**
+                     * Creates a plain object from a SubscriberEvent message. Also converts values to other types if specified.
+                     * @param message SubscriberEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.SubscriberEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubscriberEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
             }
         }
     }
@@ -9290,7 +10247,8 @@ export namespace google {
             REQUIRED = 2,
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
-            IMMUTABLE = 5
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6
         }
 
         /** Properties of a Http. */
