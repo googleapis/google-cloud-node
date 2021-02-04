@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-functions.git",
-        "sha": "7e5385e0fbbdd90d129028d32ebcf1f9ff1be81c"
+        "sha": "98be716d08a5c5b97dfe69d7550036f8510fe06b"
       }
     },
     {
