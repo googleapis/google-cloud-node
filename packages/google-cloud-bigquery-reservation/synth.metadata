@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-bigquery-reservation.git",
-        "sha": "c7e8f75c78ac2dc1fb041106f09a92ff17a6af98"
+        "sha": "df6d7f30b092c1b291f2682df2c6e40dee8c9f4c"
       }
     },
     {
