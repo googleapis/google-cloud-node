@@ -3,9 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://googleapis.dev/nodejs/iamcredentials/latest/",
-    "https://github.com/googleapis/nodejs-iam-credentials/blob/master/CHANGELOG.md"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10

@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.iam.credentials.v1",
-  "libraryPackage": "credentials",
+  "libraryPackage": "@google-cloud/iam-credentials",
   "services": {
     "IAMCredentials": {
       "clients": {
