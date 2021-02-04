@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-storage.git",
-        "sha": "7fcc3ba17ab6103119437816fa60517778a134cb"
+        "sha": "421c0a4862bed5464b5a2f75b99dc8fb318323a2"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
+        "sha": "318e351e26ba65b2b3cfa3f61b3b64e3540c3525"
       }
     }
   ]
