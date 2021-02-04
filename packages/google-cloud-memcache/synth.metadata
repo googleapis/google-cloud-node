@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-memcache.git",
-        "sha": "8b2accf06332bc1fc504b50a5106aa50d61d6460"
+        "remote": "https://github.com/googleapis/nodejs-memcache.git",
+        "sha": "105dc474f33479cca0888116a9d63a4f9abc59ac"
       }
     },
     {
