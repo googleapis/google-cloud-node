@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ArtifactRegistryClient} from '@google-cloud/artifact-registry';
+import {ArtifactRegistryClient} from 'artifactregistry';
 
 // check that the client class type name can be used
 function doStuffWithArtifactRegistryClient(client: ArtifactRegistryClient) {

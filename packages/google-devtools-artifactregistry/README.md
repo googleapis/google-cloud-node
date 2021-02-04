@@ -62,9 +62,7 @@ npm install @google-cloud/artifact-registry
 
 // remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
-const {
-  ArtifactRegistryClient,
-} = require('@google-cloud/artifact-registry');
+const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
