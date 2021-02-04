@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-security-private-ca.git",
-        "sha": "a55a97bb32cfd2444035a2166a71438f1bd48a37"
+        "sha": "f3dc6778f8f22e023ef2c84938bdda94e0377c9a"
       }
     },
     {
