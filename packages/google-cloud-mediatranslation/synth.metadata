@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-media-translation.git",
-        "sha": "a5e2650a1dff2a387c9a6d38ac5eac785577161b"
+        "sha": "5ac8583ee687ca2f7545a7af055a2196a1bf7c21"
       }
     },
     {
