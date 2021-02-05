@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-iam-credentials.git",
-        "sha": "44d354ace22f3e5d6e30be8efd2eeb1babb1256f"
+        "sha": "1ae6a1fd5a37745a01b45d23785bc74def70b7d6"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "3f67ceece7e797a5736a25488aae35405649b90b"
+        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
       }
     }
   ],
