@@ -71,7 +71,8 @@ const client = new DomainsClient();
 
 //TODO(library generator): write the actual function you will be testing
 async function listRegistrations() {
-  const [registrations] = await client.listRegistrations({parent: `projects/${projectId}/locations/${location}`
+  const [registrations] = await client.listRegistrations({
+    parent: `projects/${projectId}/locations/${location}`,
   });
   console.info(registrations);
 }
