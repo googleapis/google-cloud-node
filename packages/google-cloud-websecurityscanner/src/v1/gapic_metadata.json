@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.websecurityscanner.v1",
-  "libraryPackage": "websecurityscanner",
+  "libraryPackage": "@google-cloud/web-security-scanner",
   "services": {
     "WebSecurityScanner": {
       "clients": {

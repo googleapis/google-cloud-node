@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-web-security-scanner.git",
-        "sha": "49895c3f78366879047e6c83c0cb6adc467fe024"
+        "remote": "https://github.com/googleapis/nodejs-web-security-scanner.git",
+        "sha": "c724cfb432f3f00a37352c8dde04087c8af87cae"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
-        "internalRef": "345596855"
+        "sha": "bfdb1df3876564228c43c3ea64edf5f90d10d92f",
+        "internalRef": "348500610"
       }
     },
     {
