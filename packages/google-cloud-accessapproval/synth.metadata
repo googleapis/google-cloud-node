@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-access-approval.git",
-        "sha": "b7ac9dd75f99d6dd39335e3e1df9c62636a81e3a"
+        "remote": "https://github.com/googleapis/nodejs-access-approval.git",
+        "sha": "5940e5f3b2ccdff6e63eba1d22da5632aaa52d40"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5256ab60f3d396a3d1bd393043776936b9651c5b",
-        "internalRef": "347703845"
+        "sha": "53dd6b53c7af308c69581c364ad20c52aa4c6ca0",
+        "internalRef": "355768486"
       }
     },
     {

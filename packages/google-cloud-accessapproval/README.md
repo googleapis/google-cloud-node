@@ -60,7 +60,6 @@ npm install @google-cloud/access-approval
 ```javascript
 // Imports the Google Cloud client library
 
-// remove this line after package is released
 const {AccessApprovalClient} = require('@google-cloud/access-approval');
 
 // TODO(developer): replace with your prefered project ID.
@@ -69,9 +68,10 @@ const {AccessApprovalClient} = require('@google-cloud/access-approval');
 // Creates a client
 const client = new AccessApprovalClient();
 
-//TODO(library generator): write the actual function you will be testing
 async function listRequests() {
-  const requests = await client.listApprovalRequests({parent: `projects/${projectId}`});
+  const requests = await client.listApprovalRequests({
+    parent: `projects/${projectId}`,
+  });
   console.info(requests);
 }
 listRequests();
