@@ -373,7 +373,7 @@ export class ProductServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog resource name, such as
-   *   "projects/* /locations/global/catalogs/default_catalog/branches/default_branch".
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch`.
    * @param {google.cloud.retail.v2.Product} request.product
    *   Required. The {@link google.cloud.retail.v2.Product|Product} to create.
    * @param {string} request.productId
@@ -479,7 +479,7 @@ export class ProductServiceClient {
    * @param {string} request.name
    *   Required. Full resource name of {@link google.cloud.retail.v2.Product|Product},
    *   such as
-   *   "projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *
    *   If the caller does not have permission to access the
    *   {@link google.cloud.retail.v2.Product|Product}, regardless of whether or not it
@@ -673,7 +673,7 @@ export class ProductServiceClient {
    * @param {string} request.name
    *   Required. Full resource name of {@link google.cloud.retail.v2.Product|Product},
    *   such as
-   *   "projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *
    *   If the caller does not have permission to delete the
    *   {@link google.cloud.retail.v2.Product|Product}, regardless of whether or not it
@@ -783,7 +783,7 @@ export class ProductServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required.
-   *   "projects/1234/locations/global/catalogs/default_catalog/branches/default_branch"
+   *   `projects/1234/locations/global/catalogs/default_catalog/branches/default_branch`
    *
    *   If no updateMask is specified, requires products.create permission.
    *   If updateMask is specified, requires products.update permission.

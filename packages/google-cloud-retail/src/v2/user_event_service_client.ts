@@ -391,7 +391,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog resource name, such as
-   *   "projects/1234/locations/global/catalogs/default_catalog".
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {google.cloud.retail.v2.UserEvent} request.userEvent
    *   Required. User event to write.
    * @param {object} [options]
@@ -484,7 +484,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog name, such as
-   *   "projects/1234/locations/global/catalogs/default_catalog".
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {string} request.userEvent
    *   Required. URL encoded UserEvent proto with a length limit of 2,000,000
    *   characters.
@@ -773,7 +773,7 @@ export class UserEventServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. "projects/1234/locations/global/catalogs/default_catalog"
+   *   Required. `projects/1234/locations/global/catalogs/default_catalog`
    * @param {google.cloud.retail.v2.UserEventInputConfig} request.inputConfig
    *   Required. The desired input location of the data.
    * @param {google.cloud.retail.v2.ImportErrorsConfig} request.errorsConfig
@@ -927,7 +927,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog resource name, such as
-   *   "projects/1234/locations/global/catalogs/default_catalog".
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {google.cloud.retail.v2.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
    *   The type of the user event rejoin to define the scope and range of the user
    *   events to be rejoined with the latest product catalog. Defaults to
