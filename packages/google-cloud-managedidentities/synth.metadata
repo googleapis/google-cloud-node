@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-managed-identities.git",
-        "sha": "09a59a901ff9fc97b3e9accbd8434306fe8ed603"
+        "sha": "6663152935a526e820f0d3c302a1820d591e822d"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "6bf92d7ceaf8841f77fe960163f5c607f4edc59a",
-        "internalRef": "345578804"
+        "sha": "bc89fd90b0dc87b387d83a56b27789f807d9da11",
+        "internalRef": "355768415"
       }
     },
     {

@@ -1,1 +1,10 @@
-{"recurse":true,"skip":["https://googleapis.dev/nodejs/managedidentities/latest/","https://github.com/googleapis/nodejs-managed-identities/blob/master/CHANGELOG.md","https://github.com/googleapis/nodejs-managed-identities/tree/master/samples","https://github.com/googleapis/nodejs-managed-identities/blob/master/samples/quickstart.js","http://localhost:5542/","https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":10}
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io"
+  ],
+  "silent": true,
+  "concurrency": 10
+}
