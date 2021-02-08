@@ -12,6 +12,9 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Analyze Iam Policy](#analyze-iam-policy)
+  * [Analyze Iam Policy Longrunning and write results to Bigquery](#analyze-iam-policy-longrunning-and-write-results-to-bigquery)
+  * [Analyze Iam Policy Longrunning and write results to GCS](#analyze-iam-policy-longrunning-and-write-results-to-gcs)
   * [Create Feed](#create-feed)
   * [Delete Feed](#delete-feed)
   * [Export Assets](#export-assets)
@@ -36,6 +39,63 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Analyze Iam Policy
+
+Analyzes accessible IAM policies that match a request.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/analyzeIamPolicy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/analyzeIamPolicy.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyzeIamPolicy`
+
+
+-----
+
+
+
+
+### Analyze Iam Policy Longrunning and write results to Bigquery
+
+Analyzes accessible IAM policies that match a request.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/analyzeIamPolicyLongrunningBigquery.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/analyzeIamPolicyLongrunningBigquery.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyzeIamPolicyLongrunningBigquery <dataset_id> <table_prefix>`
+
+
+-----
+
+
+
+
+### Analyze Iam Policy Longrunning and write results to GCS
+
+Analyzes accessible IAM policies that match a request.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/analyzeIamPolicyLongrunningGcs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/analyzeIamPolicyLongrunningGcs.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyzeIamPolicyLongrunningGcs <gs:my-bucket/my-analysis.json>`
+
+
+-----
+
 
 
 
