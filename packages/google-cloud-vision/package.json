@@ -31,7 +31,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "lint": "gts check",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha build/system-test",
+    "system-test": "mocha build/system-test --timeout 20000",
     "fix": "gts fix",
     "test-no-cover": "mocha test/*.js",
     "docs-test": "linkinator docs",
