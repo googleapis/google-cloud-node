@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.0.0...v1.0.1) (2021-02-08)
+
+
+### Bug Fixes
+
+* **build:** correct package name for docs ([#9](https://www.github.com/googleapis/nodejs-gke-hub/issues/9)) ([ce04a06](https://www.github.com/googleapis/nodejs-gke-hub/commit/ce04a06e49ff4c59d993d2034ef828d51407aa76))
+
 ## 1.0.0 (2021-01-26)
 
 
