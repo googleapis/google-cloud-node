@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2021 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/gkehub',
+    systemName: '@google-cloud/gke-hub',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

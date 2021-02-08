@@ -410,13 +410,13 @@ export class GkeHubMembershipServiceClient {
     >
   ): void;
   /**
-   * Gets details of a single Membership.
+   * Gets the details of a Membership.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The Membership resource name in the format:
-   *   `projects/[project_id]/locations/global/memberships/[membership_id]`
+   *   Required. The Membership resource name in the format
+   *   `projects/* /locations/* /memberships/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -506,23 +506,22 @@ export class GkeHubMembershipServiceClient {
     >
   ): void;
   /**
-   * Generate the manifest for deployment of GKE connect agent.
+   * Generates the manifest for deployment of the GKE connect agent.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The membership resource the connect agent is associated with.
-   *   `projects/[project_id]/locations/global/memberships/[membership_id]`.
+   *   Required. The Membership resource name the Agent will associate with, in the format
+   *   `projects/* /locations/* /memberships/*`.
    * @param {google.cloud.gkehub.v1beta1.ConnectAgent} [request.connectAgent]
    *   Optional. The connect agent to generate manifest for.
    * @param {string} [request.version]
-   *   Optional. The version to use for connect agent.
-   *   If empty, the current default version will be used.
+   *   Optional. The Connect agent version to use. Defaults to the most current version.
    * @param {boolean} [request.isUpgrade]
    *   Optional. If true, generate the resources for upgrade only. Some resources
-   *   (e.g. secrets) generated for installation will be excluded.
+   *   generated only for installation (e.g. secrets) will be excluded.
    * @param {string} [request.registry]
-   *   Optional. The registry to fetch connect agent image; default to
+   *   Optional. The registry to fetch the connect agent image from. Defaults to
    *   gcr.io/gkeconnect.
    * @param {Buffer} [request.imagePullSecretContent]
    *   Optional. The image pull secret content for the registry, if not public.
@@ -628,16 +627,14 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The desired parent collection of the membership to be created in the
-   *   format:
-   *   `projects/[project_id]/locations/global`.
+   *   Required. The parent (project and location) where the Memberships will be created.
+   *   Specified in the format `projects/* /locations/*`.
    * @param {string} [request.crManifest]
    *   Optional. The YAML of the membership CR in the cluster. Empty if the membership
    *   CR does not exist.
    * @param {string} request.intendedMembership
-   *   Required. The membership name under the "name" that could be created if the
-   *   validation succeed. The method only does validation in anticipation
-   *   of a CreateMembership call.
+   *   Required. The intended membership name under the `parent`. This method only does
+   *   validation in anticipation of a CreateMembership call with the same name.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -732,12 +729,13 @@ export class GkeHubMembershipServiceClient {
   /**
    * GenerateExclusivityManifest generates the manifests to update the
    * exclusivity artifacts in the cluster if needed.
-   * Exclusivity artifacts include the membership customer resource definition
-   * (CRD) and the singleton membership custom resource (CR).
-   * Combined with ValidateExclusivity, exclusivity
-   * artifacts guarantee that a Kubernetes cluster is only registered to
-   * a single GKE Hub.
-   * The membership CRD is versioned, and may require conversion when the GKE
+   *
+   * Exclusivity artifacts include the Membership custom resource definition
+   * (CRD) and the singleton Membership custom resource (CR). Combined with
+   * ValidateExclusivity, exclusivity artifacts guarantee that a Kubernetes
+   * cluster is only registered to a single GKE Hub.
+   *
+   * The Membership CRD is versioned, and may require conversion when the GKE
    * Hub API server begins serving a newer version of the CRD and
    * corresponding CR. The response will be the converted CRD and CR if there
    * are any differences between the versions.
@@ -745,8 +743,8 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The membership the cluster corresponds to in the format:
-   *   `projects/[project_id]/locations/global/memberships/[membership_id]`.
+   *   Required. The Membership resource name in the format
+   *   `projects/* /locations/* /memberships/*`.
    * @param {string} [request.crdManifest]
    *   Optional. The YAML manifest of the membership CRD retrieved by
    *   `kubectl get customresourcedefinitions membership`.
@@ -859,18 +857,20 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent in whose context the membership is created. The parent value is
-   *   in the format: `projects/[project_id]/locations/global`.
+   *   Required. The parent (project and location) where the Memberships will be created.
+   *   Specified in the format `projects/* /locations/*`.
    * @param {string} request.membershipId
-   *   Required. Client chosen ID for the membership. The ID must be a valid RFC 1123
-   *   compliant DNS label. In particular, the ID must be:
+   *   Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
+   *   1123 compliant DNS label:
+   *
    *     1. At most 63 characters in length
    *     2. It must consist of lower case alphanumeric characters or `-`
    *     3. It must start and end with an alphanumeric character
-   *   I.e. ID must match the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?` with at most
-   *   63 characters.
+   *
+   *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+   *   with a maximum length of 63 characters.
    * @param {google.cloud.gkehub.v1beta1.Membership} request.resource
-   *   Required. The resource to add.
+   *   Required. The membership to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1007,13 +1007,13 @@ export class GkeHubMembershipServiceClient {
     >
   ): void;
   /**
-   * Removes a single Membership.
+   * Removes a Membership.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The membership resource name in the format:
-   *   `projects/[project_id]/locations/global/memberships/[membership_id]`
+   *   Required. The Membership resource name in the format
+   *   `projects/* /locations/* /memberships/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1303,8 +1303,8 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent in whose context the memberships are listed. The parent value
-   *   is in the format: `projects/[project_id]/locations/global`.
+   *   Required. The parent (project and location) where the Memberships will be listed.
+   *   Specified in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
    *   Optional. When requesting a 'page' of resources, `page_size` specifies number of
    *   resources to return. If unspecified or set to 0, all resources will
@@ -1314,29 +1314,29 @@ export class GkeHubMembershipServiceClient {
    *   specifies the position in the list from where to continue listing the
    *   resources.
    * @param {string} [request.filter]
-   *   Optional. Lists the Memberships that match the filter expression. A filter expression
-   *   filters the resources listed in the response. The expression must be of
-   *   the form `<field> <operator> <value>` where operators: `<`, `>`, `<=`,
-   *   `>=`,
-   *   `!=`, `=`, `:` are supported (colon `:` represents a HAS operator which is
-   *   roughly synonymous with equality). <field> can refer to a proto or JSON
-   *   field, or a synthetic field. Field names can be camelCase or snake_case.
+   *   Optional. Lists Memberships that match the filter expression, following the syntax
+   *   outlined in https://google.aip.dev/160.
    *
    *   Examples:
-   *   - Filter by name:
-   *     name = "projects/foo-proj/locations/global/membership/bar
    *
-   *   - Filter by labels:
-   *     - Resources that have a key called `foo`
-   *       labels.foo:*
-   *     - Resources that have a key called `foo` whose value is `bar`
-   *       labels.foo = bar
+   *     - Name is `bar` in project `foo-proj` and location `global`:
    *
-   *    - Filter by state:
-   *      - Members in CREATING state.
-   *        state = CREATING
+   *         name = "projects/foo-proj/locations/global/membership/bar"
+   *
+   *     - Memberships that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Memberships that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   *
+   *     - Memberships in the CREATING state:
+   *
+   *         state = CREATING
    * @param {string} [request.orderBy]
-   *   Optional. Field to use to sort the list.
+   *   Optional. One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1400,8 +1400,8 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent in whose context the memberships are listed. The parent value
-   *   is in the format: `projects/[project_id]/locations/global`.
+   *   Required. The parent (project and location) where the Memberships will be listed.
+   *   Specified in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
    *   Optional. When requesting a 'page' of resources, `page_size` specifies number of
    *   resources to return. If unspecified or set to 0, all resources will
@@ -1411,29 +1411,29 @@ export class GkeHubMembershipServiceClient {
    *   specifies the position in the list from where to continue listing the
    *   resources.
    * @param {string} [request.filter]
-   *   Optional. Lists the Memberships that match the filter expression. A filter expression
-   *   filters the resources listed in the response. The expression must be of
-   *   the form `<field> <operator> <value>` where operators: `<`, `>`, `<=`,
-   *   `>=`,
-   *   `!=`, `=`, `:` are supported (colon `:` represents a HAS operator which is
-   *   roughly synonymous with equality). <field> can refer to a proto or JSON
-   *   field, or a synthetic field. Field names can be camelCase or snake_case.
+   *   Optional. Lists Memberships that match the filter expression, following the syntax
+   *   outlined in https://google.aip.dev/160.
    *
    *   Examples:
-   *   - Filter by name:
-   *     name = "projects/foo-proj/locations/global/membership/bar
    *
-   *   - Filter by labels:
-   *     - Resources that have a key called `foo`
-   *       labels.foo:*
-   *     - Resources that have a key called `foo` whose value is `bar`
-   *       labels.foo = bar
+   *     - Name is `bar` in project `foo-proj` and location `global`:
    *
-   *    - Filter by state:
-   *      - Members in CREATING state.
-   *        state = CREATING
+   *         name = "projects/foo-proj/locations/global/membership/bar"
+   *
+   *     - Memberships that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Memberships that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   *
+   *     - Memberships in the CREATING state:
+   *
+   *         state = CREATING
    * @param {string} [request.orderBy]
-   *   Optional. Field to use to sort the list.
+   *   Optional. One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1475,8 +1475,8 @@ export class GkeHubMembershipServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent in whose context the memberships are listed. The parent value
-   *   is in the format: `projects/[project_id]/locations/global`.
+   *   Required. The parent (project and location) where the Memberships will be listed.
+   *   Specified in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
    *   Optional. When requesting a 'page' of resources, `page_size` specifies number of
    *   resources to return. If unspecified or set to 0, all resources will
@@ -1486,29 +1486,29 @@ export class GkeHubMembershipServiceClient {
    *   specifies the position in the list from where to continue listing the
    *   resources.
    * @param {string} [request.filter]
-   *   Optional. Lists the Memberships that match the filter expression. A filter expression
-   *   filters the resources listed in the response. The expression must be of
-   *   the form `<field> <operator> <value>` where operators: `<`, `>`, `<=`,
-   *   `>=`,
-   *   `!=`, `=`, `:` are supported (colon `:` represents a HAS operator which is
-   *   roughly synonymous with equality). <field> can refer to a proto or JSON
-   *   field, or a synthetic field. Field names can be camelCase or snake_case.
+   *   Optional. Lists Memberships that match the filter expression, following the syntax
+   *   outlined in https://google.aip.dev/160.
    *
    *   Examples:
-   *   - Filter by name:
-   *     name = "projects/foo-proj/locations/global/membership/bar
    *
-   *   - Filter by labels:
-   *     - Resources that have a key called `foo`
-   *       labels.foo:*
-   *     - Resources that have a key called `foo` whose value is `bar`
-   *       labels.foo = bar
+   *     - Name is `bar` in project `foo-proj` and location `global`:
    *
-   *    - Filter by state:
-   *      - Members in CREATING state.
-   *        state = CREATING
+   *         name = "projects/foo-proj/locations/global/membership/bar"
+   *
+   *     - Memberships that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Memberships that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   *
+   *     - Memberships in the CREATING state:
+   *
+   *         state = CREATING
    * @param {string} [request.orderBy]
-   *   Optional. Field to use to sort the list.
+   *   Optional. One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

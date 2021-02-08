@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-gke-hub.git",
-        "sha": "1a349584f6d2012ef40b5f112a18009757c647ee"
+        "remote": "https://github.com/googleapis/nodejs-gke-hub.git",
+        "sha": "fe462ae030a12812b1b066c8edbe107f7ff4c633"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "c8bfd324b41ad1f6f65fed124572f92fe116517b",
-        "internalRef": "351218127"
+        "sha": "2502e8e92c798660ccb51ab2d7ce65818412b530",
+        "internalRef": "355768453"
       }
     },
     {

@@ -8,9 +8,12 @@
               "nested": {
                 "v1beta1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.GkeHub.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/gkehub/v1beta1;gkehub",
                     "java_multiple_files": true,
-                    "java_package": "com.google.cloud.gkehub.v1beta1"
+                    "java_package": "com.google.cloud.gkehub.v1beta1",
+                    "php_namespace": "Google\\Cloud\\GkeHub\\V1beta1",
+                    "ruby_package": "Google::Cloud::GkeHub::V1beta1"
                   },
                   "nested": {
                     "GkeHubMembershipService": {
@@ -719,7 +722,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "deprecated": true
                           }
                         },
                         "proxy": {
@@ -993,7 +996,8 @@
                 "REQUIRED": 2,
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
               }
             },
             "resourceReference": {
