@@ -17,8 +17,7 @@
 // sample-metadata:
 //   title: Analyze Iam Policy Longrunning and write results to GCS
 //   description: Analyzes accessible IAM policies that match a request.
-//   usage: node analyzeIamPolicyLongrunningGcs
-//   <gs://my-bucket/my-analysis.json>
+//   usage: node analyzeIamPolicyLongrunningGcs <gs://my-bucket/my-analysis.json>
 
 async function main(gcsUri) {
   // [START asset_quickstart_analyze_iam_policy_longrunning_gcs]
