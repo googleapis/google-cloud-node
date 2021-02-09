@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.2.0...v2.2.1) (2021-02-05)
+
+
+### Bug Fixes
+
+* add fieldMask for getDevice and listDevices ([#436](https://www.github.com/googleapis/nodejs-iot/issues/436)) ([a97ed10](https://www.github.com/googleapis/nodejs-iot/commit/a97ed10e8ecc75aeba1fcb89637ef1298801150e))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.1.3...v2.2.0) (2021-01-09)
 
 
