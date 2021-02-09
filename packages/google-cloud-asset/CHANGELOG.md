@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.12.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.11.0...v3.12.0) (2021-02-09)
+
+
+### Features
+
+* **samples:** add samples for analyzeIamPolicy and analyzeIamPolicyLongrunning ([#433](https://www.github.com/googleapis/nodejs-asset/issues/433)) ([dfbd75c](https://www.github.com/googleapis/nodejs-asset/commit/dfbd75c98f2977d3a9af06e7637c005b82eda973))
+
 ## [3.11.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.10.0...v3.11.0) (2021-01-09)
 
 
