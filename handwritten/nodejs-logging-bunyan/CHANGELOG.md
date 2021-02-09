@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [3.0.2](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.0.1...v3.0.2) (2021-02-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-auth-library to v7 ([#513](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/513)) ([07e5830](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/07e5830207f1bbfbe368625c19ee298775403bcb))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.0.0...v3.0.1) (2020-09-12)
 
 
