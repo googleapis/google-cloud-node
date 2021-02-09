@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.0...v2.0.1) (2021-02-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-auth-library to v7 ([#79](https://www.github.com/googleapis/nodejs-analytics-admin/issues/79)) ([8e0e55b](https://www.github.com/googleapis/nodejs-analytics-admin/commit/8e0e55b1ac2c69cee0eaac6102efdc7a105e758e))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v1.4.0...v2.0.0) (2021-01-19)
 
 
