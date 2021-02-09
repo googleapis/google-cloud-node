@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.0.1...v1.0.2) (2021-02-09)
+
+
+### Bug Fixes
+
+* **docs:** correct name in .repo-metadata.json ([#13](https://www.github.com/googleapis/nodejs-gke-hub/issues/13)) ([6d69b2d](https://www.github.com/googleapis/nodejs-gke-hub/commit/6d69b2d92284b6bacaba33f55dabf22d0f59c9e6))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.0.0...v1.0.1) (2021-02-08)
 
 
