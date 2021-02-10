@@ -28,7 +28,7 @@
 //   title: OpenTelemetry Tracing
 //   description: Demonstrates how to enable OpenTelemetry tracing in
 //     a publisher or subscriber.
-//   usage: node opentelemetryTracing.js <topic-name> <subscription-name>
+//   usage: node openTelemetryTracing.js <topic-name> <subscription-name>
 
 const SUBSCRIBER_TIMEOUT = 10;
 
