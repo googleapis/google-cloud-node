@@ -15,9 +15,9 @@
 
 'use strict';
 
-const {describe, it} = require('mocha');
 const assert = require('assert');
 const cp = require('child_process');
+const {describe, it} = require('mocha');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
