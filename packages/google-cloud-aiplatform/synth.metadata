@@ -32,6 +32,15 @@
         "language": "nodejs",
         "generator": "bazel"
       }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "aiplatform",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
     }
   ]
 }

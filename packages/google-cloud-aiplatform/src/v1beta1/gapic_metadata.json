@@ -11,39 +11,25 @@
           "libraryClient": "DatasetServiceClient",
           "rpcs": {
             "GetDataset": {
-              "methods": [
-                "getDataset"
-              ]
+              "methods": ["getDataset"]
             },
             "UpdateDataset": {
-              "methods": [
-                "updateDataset"
-              ]
+              "methods": ["updateDataset"]
             },
             "GetAnnotationSpec": {
-              "methods": [
-                "getAnnotationSpec"
-              ]
+              "methods": ["getAnnotationSpec"]
             },
             "CreateDataset": {
-              "methods": [
-                "createDataset"
-              ]
+              "methods": ["createDataset"]
             },
             "DeleteDataset": {
-              "methods": [
-                "deleteDataset"
-              ]
+              "methods": ["deleteDataset"]
             },
             "ImportData": {
-              "methods": [
-                "importData"
-              ]
+              "methods": ["importData"]
             },
             "ExportData": {
-              "methods": [
-                "exportData"
-              ]
+              "methods": ["exportData"]
             },
             "ListDatasets": {
               "methods": [
@@ -72,39 +58,25 @@
           "libraryClient": "DatasetServiceClient",
           "rpcs": {
             "GetDataset": {
-              "methods": [
-                "getDataset"
-              ]
+              "methods": ["getDataset"]
             },
             "UpdateDataset": {
-              "methods": [
-                "updateDataset"
-              ]
+              "methods": ["updateDataset"]
             },
             "GetAnnotationSpec": {
-              "methods": [
-                "getAnnotationSpec"
-              ]
+              "methods": ["getAnnotationSpec"]
             },
             "CreateDataset": {
-              "methods": [
-                "createDataset"
-              ]
+              "methods": ["createDataset"]
             },
             "DeleteDataset": {
-              "methods": [
-                "deleteDataset"
-              ]
+              "methods": ["deleteDataset"]
             },
             "ImportData": {
-              "methods": [
-                "importData"
-              ]
+              "methods": ["importData"]
             },
             "ExportData": {
-              "methods": [
-                "exportData"
-              ]
+              "methods": ["exportData"]
             },
             "ListDatasets": {
               "methods": [
@@ -137,34 +109,22 @@
           "libraryClient": "EndpointServiceClient",
           "rpcs": {
             "GetEndpoint": {
-              "methods": [
-                "getEndpoint"
-              ]
+              "methods": ["getEndpoint"]
             },
             "UpdateEndpoint": {
-              "methods": [
-                "updateEndpoint"
-              ]
+              "methods": ["updateEndpoint"]
             },
             "CreateEndpoint": {
-              "methods": [
-                "createEndpoint"
-              ]
+              "methods": ["createEndpoint"]
             },
             "DeleteEndpoint": {
-              "methods": [
-                "deleteEndpoint"
-              ]
+              "methods": ["deleteEndpoint"]
             },
             "DeployModel": {
-              "methods": [
-                "deployModel"
-              ]
+              "methods": ["deployModel"]
             },
             "UndeployModel": {
-              "methods": [
-                "undeployModel"
-              ]
+              "methods": ["undeployModel"]
             },
             "ListEndpoints": {
               "methods": [
@@ -179,34 +139,22 @@
           "libraryClient": "EndpointServiceClient",
           "rpcs": {
             "GetEndpoint": {
-              "methods": [
-                "getEndpoint"
-              ]
+              "methods": ["getEndpoint"]
             },
             "UpdateEndpoint": {
-              "methods": [
-                "updateEndpoint"
-              ]
+              "methods": ["updateEndpoint"]
             },
             "CreateEndpoint": {
-              "methods": [
-                "createEndpoint"
-              ]
+              "methods": ["createEndpoint"]
             },
             "DeleteEndpoint": {
-              "methods": [
-                "deleteEndpoint"
-              ]
+              "methods": ["deleteEndpoint"]
             },
             "DeployModel": {
-              "methods": [
-                "deployModel"
-              ]
+              "methods": ["deployModel"]
             },
             "UndeployModel": {
-              "methods": [
-                "undeployModel"
-              ]
+              "methods": ["undeployModel"]
             },
             "ListEndpoints": {
               "methods": [
@@ -225,84 +173,52 @@
           "libraryClient": "JobServiceClient",
           "rpcs": {
             "CreateCustomJob": {
-              "methods": [
-                "createCustomJob"
-              ]
+              "methods": ["createCustomJob"]
             },
             "GetCustomJob": {
-              "methods": [
-                "getCustomJob"
-              ]
+              "methods": ["getCustomJob"]
             },
             "CancelCustomJob": {
-              "methods": [
-                "cancelCustomJob"
-              ]
+              "methods": ["cancelCustomJob"]
             },
             "CreateDataLabelingJob": {
-              "methods": [
-                "createDataLabelingJob"
-              ]
+              "methods": ["createDataLabelingJob"]
             },
             "GetDataLabelingJob": {
-              "methods": [
-                "getDataLabelingJob"
-              ]
+              "methods": ["getDataLabelingJob"]
             },
             "CancelDataLabelingJob": {
-              "methods": [
-                "cancelDataLabelingJob"
-              ]
+              "methods": ["cancelDataLabelingJob"]
             },
             "CreateHyperparameterTuningJob": {
-              "methods": [
-                "createHyperparameterTuningJob"
-              ]
+              "methods": ["createHyperparameterTuningJob"]
             },
             "GetHyperparameterTuningJob": {
-              "methods": [
-                "getHyperparameterTuningJob"
-              ]
+              "methods": ["getHyperparameterTuningJob"]
             },
             "CancelHyperparameterTuningJob": {
-              "methods": [
-                "cancelHyperparameterTuningJob"
-              ]
+              "methods": ["cancelHyperparameterTuningJob"]
             },
             "CreateBatchPredictionJob": {
-              "methods": [
-                "createBatchPredictionJob"
-              ]
+              "methods": ["createBatchPredictionJob"]
             },
             "GetBatchPredictionJob": {
-              "methods": [
-                "getBatchPredictionJob"
-              ]
+              "methods": ["getBatchPredictionJob"]
             },
             "CancelBatchPredictionJob": {
-              "methods": [
-                "cancelBatchPredictionJob"
-              ]
+              "methods": ["cancelBatchPredictionJob"]
             },
             "DeleteCustomJob": {
-              "methods": [
-                "deleteCustomJob"
-              ]
+              "methods": ["deleteCustomJob"]
             },
             "DeleteDataLabelingJob": {
-              "methods": [
-                "deleteDataLabelingJob"
-              ]
+              "methods": ["deleteDataLabelingJob"]
             },
             "DeleteHyperparameterTuningJob": {
-              "methods": [
-                "deleteHyperparameterTuningJob"
-              ]
+              "methods": ["deleteHyperparameterTuningJob"]
             },
             "DeleteBatchPredictionJob": {
-              "methods": [
-                "deleteBatchPredictionJob"
-              ]
+              "methods": ["deleteBatchPredictionJob"]
             },
             "ListCustomJobs": {
               "methods": [
@@ -338,84 +254,52 @@
           "libraryClient": "JobServiceClient",
           "rpcs": {
             "CreateCustomJob": {
-              "methods": [
-                "createCustomJob"
-              ]
+              "methods": ["createCustomJob"]
             },
             "GetCustomJob": {
-              "methods": [
-                "getCustomJob"
-              ]
+              "methods": ["getCustomJob"]
             },
             "CancelCustomJob": {
-              "methods": [
-                "cancelCustomJob"
-              ]
+              "methods": ["cancelCustomJob"]
             },
             "CreateDataLabelingJob": {
-              "methods": [
-                "createDataLabelingJob"
-              ]
+              "methods": ["createDataLabelingJob"]
             },
             "GetDataLabelingJob": {
-              "methods": [
-                "getDataLabelingJob"
-              ]
+              "methods": ["getDataLabelingJob"]
             },
             "CancelDataLabelingJob": {
-              "methods": [
-                "cancelDataLabelingJob"
-              ]
+              "methods": ["cancelDataLabelingJob"]
             },
             "CreateHyperparameterTuningJob": {
-              "methods": [
-                "createHyperparameterTuningJob"
-              ]
+              "methods": ["createHyperparameterTuningJob"]
             },
             "GetHyperparameterTuningJob": {
-              "methods": [
-                "getHyperparameterTuningJob"
-              ]
+              "methods": ["getHyperparameterTuningJob"]
             },
             "CancelHyperparameterTuningJob": {
-              "methods": [
-                "cancelHyperparameterTuningJob"
-              ]
+              "methods": ["cancelHyperparameterTuningJob"]
             },
             "CreateBatchPredictionJob": {
-              "methods": [
-                "createBatchPredictionJob"
-              ]
+              "methods": ["createBatchPredictionJob"]
             },
             "GetBatchPredictionJob": {
-              "methods": [
-                "getBatchPredictionJob"
-              ]
+              "methods": ["getBatchPredictionJob"]
             },
             "CancelBatchPredictionJob": {
-              "methods": [
-                "cancelBatchPredictionJob"
-              ]
+              "methods": ["cancelBatchPredictionJob"]
             },
             "DeleteCustomJob": {
-              "methods": [
-                "deleteCustomJob"
-              ]
+              "methods": ["deleteCustomJob"]
             },
             "DeleteDataLabelingJob": {
-              "methods": [
-                "deleteDataLabelingJob"
-              ]
+              "methods": ["deleteDataLabelingJob"]
             },
             "DeleteHyperparameterTuningJob": {
-              "methods": [
-                "deleteHyperparameterTuningJob"
-              ]
+              "methods": ["deleteHyperparameterTuningJob"]
             },
             "DeleteBatchPredictionJob": {
-              "methods": [
-                "deleteBatchPredictionJob"
-              ]
+              "methods": ["deleteBatchPredictionJob"]
             },
             "ListCustomJobs": {
               "methods": [
@@ -455,9 +339,7 @@
           "libraryClient": "MigrationServiceClient",
           "rpcs": {
             "BatchMigrateResources": {
-              "methods": [
-                "batchMigrateResources"
-              ]
+              "methods": ["batchMigrateResources"]
             },
             "SearchMigratableResources": {
               "methods": [
@@ -472,9 +354,7 @@
           "libraryClient": "MigrationServiceClient",
           "rpcs": {
             "BatchMigrateResources": {
-              "methods": [
-                "batchMigrateResources"
-              ]
+              "methods": ["batchMigrateResources"]
             },
             "SearchMigratableResources": {
               "methods": [
@@ -493,46 +373,28 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "getModel"
-              ]
+              "methods": ["getModel"]
             },
             "UpdateModel": {
-              "methods": [
-                "updateModel"
-              ]
+              "methods": ["updateModel"]
             },
             "GetModelEvaluation": {
-              "methods": [
-                "getModelEvaluation"
-              ]
+              "methods": ["getModelEvaluation"]
             },
             "GetModelEvaluationSlice": {
-              "methods": [
-                "getModelEvaluationSlice"
-              ]
+              "methods": ["getModelEvaluationSlice"]
             },
             "UploadModel": {
-              "methods": [
-                "uploadModel"
-              ]
+              "methods": ["uploadModel"]
             },
             "DeleteModel": {
-              "methods": [
-                "deleteModel"
-              ]
+              "methods": ["deleteModel"]
             },
             "ExportModel": {
-              "methods": [
-                "exportModel"
-              ]
+              "methods": ["exportModel"]
             },
             "ListModels": {
-              "methods": [
-                "listModels",
-                "listModelsStream",
-                "listModelsAsync"
-              ]
+              "methods": ["listModels", "listModelsStream", "listModelsAsync"]
             },
             "ListModelEvaluations": {
               "methods": [
@@ -554,46 +416,28 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "getModel"
-              ]
+              "methods": ["getModel"]
             },
             "UpdateModel": {
-              "methods": [
-                "updateModel"
-              ]
+              "methods": ["updateModel"]
             },
             "GetModelEvaluation": {
-              "methods": [
-                "getModelEvaluation"
-              ]
+              "methods": ["getModelEvaluation"]
             },
             "GetModelEvaluationSlice": {
-              "methods": [
-                "getModelEvaluationSlice"
-              ]
+              "methods": ["getModelEvaluationSlice"]
             },
             "UploadModel": {
-              "methods": [
-                "uploadModel"
-              ]
+              "methods": ["uploadModel"]
             },
             "DeleteModel": {
-              "methods": [
-                "deleteModel"
-              ]
+              "methods": ["deleteModel"]
             },
             "ExportModel": {
-              "methods": [
-                "exportModel"
-              ]
+              "methods": ["exportModel"]
             },
             "ListModels": {
-              "methods": [
-                "listModels",
-                "listModelsStream",
-                "listModelsAsync"
-              ]
+              "methods": ["listModels", "listModelsStream", "listModelsAsync"]
             },
             "ListModelEvaluations": {
               "methods": [
@@ -619,24 +463,16 @@
           "libraryClient": "PipelineServiceClient",
           "rpcs": {
             "CreateTrainingPipeline": {
-              "methods": [
-                "createTrainingPipeline"
-              ]
+              "methods": ["createTrainingPipeline"]
             },
             "GetTrainingPipeline": {
-              "methods": [
-                "getTrainingPipeline"
-              ]
+              "methods": ["getTrainingPipeline"]
             },
             "CancelTrainingPipeline": {
-              "methods": [
-                "cancelTrainingPipeline"
-              ]
+              "methods": ["cancelTrainingPipeline"]
             },
             "DeleteTrainingPipeline": {
-              "methods": [
-                "deleteTrainingPipeline"
-              ]
+              "methods": ["deleteTrainingPipeline"]
             },
             "ListTrainingPipelines": {
               "methods": [
@@ -651,24 +487,16 @@
           "libraryClient": "PipelineServiceClient",
           "rpcs": {
             "CreateTrainingPipeline": {
-              "methods": [
-                "createTrainingPipeline"
-              ]
+              "methods": ["createTrainingPipeline"]
             },
             "GetTrainingPipeline": {
-              "methods": [
-                "getTrainingPipeline"
-              ]
+              "methods": ["getTrainingPipeline"]
             },
             "CancelTrainingPipeline": {
-              "methods": [
-                "cancelTrainingPipeline"
-              ]
+              "methods": ["cancelTrainingPipeline"]
             },
             "DeleteTrainingPipeline": {
-              "methods": [
-                "deleteTrainingPipeline"
-              ]
+              "methods": ["deleteTrainingPipeline"]
             },
             "ListTrainingPipelines": {
               "methods": [
@@ -687,14 +515,10 @@
           "libraryClient": "PredictionServiceClient",
           "rpcs": {
             "Predict": {
-              "methods": [
-                "predict"
-              ]
+              "methods": ["predict"]
             },
             "Explain": {
-              "methods": [
-                "explain"
-              ]
+              "methods": ["explain"]
             }
           }
         },
@@ -702,14 +526,10 @@
           "libraryClient": "PredictionServiceClient",
           "rpcs": {
             "Predict": {
-              "methods": [
-                "predict"
-              ]
+              "methods": ["predict"]
             },
             "Explain": {
-              "methods": [
-                "explain"
-              ]
+              "methods": ["explain"]
             }
           }
         }
@@ -721,24 +541,16 @@
           "libraryClient": "SpecialistPoolServiceClient",
           "rpcs": {
             "GetSpecialistPool": {
-              "methods": [
-                "getSpecialistPool"
-              ]
+              "methods": ["getSpecialistPool"]
             },
             "CreateSpecialistPool": {
-              "methods": [
-                "createSpecialistPool"
-              ]
+              "methods": ["createSpecialistPool"]
             },
             "DeleteSpecialistPool": {
-              "methods": [
-                "deleteSpecialistPool"
-              ]
+              "methods": ["deleteSpecialistPool"]
             },
             "UpdateSpecialistPool": {
-              "methods": [
-                "updateSpecialistPool"
-              ]
+              "methods": ["updateSpecialistPool"]
             },
             "ListSpecialistPools": {
               "methods": [
@@ -753,24 +565,16 @@
           "libraryClient": "SpecialistPoolServiceClient",
           "rpcs": {
             "GetSpecialistPool": {
-              "methods": [
-                "getSpecialistPool"
-              ]
+              "methods": ["getSpecialistPool"]
             },
             "CreateSpecialistPool": {
-              "methods": [
-                "createSpecialistPool"
-              ]
+              "methods": ["createSpecialistPool"]
             },
             "DeleteSpecialistPool": {
-              "methods": [
-                "deleteSpecialistPool"
-              ]
+              "methods": ["deleteSpecialistPool"]
             },
             "UpdateSpecialistPool": {
-              "methods": [
-                "updateSpecialistPool"
-              ]
+              "methods": ["updateSpecialistPool"]
             },
             "ListSpecialistPools": {
               "methods": [

@@ -38,7 +38,7 @@ excludes = [
 
 # run the gapic generator
 gapic = gcp.GAPICBazel()
-versions = ["v1beta1"]
+versions = ["v1beta1", "v1"]
 name = "aiplatform"
 for version in versions:
     library = gapic.node_library(name, version)

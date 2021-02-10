@@ -3,10 +3,7 @@
     "google.cloud.aiplatform.v1beta1.PredictionService": {
       "retry_codes": {
         "non_idempotent": [],
-        "idempotent": [
-          "DEADLINE_EXCEEDED",
-          "UNAVAILABLE"
-        ]
+        "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
       },
       "retry_params": {
         "default": {

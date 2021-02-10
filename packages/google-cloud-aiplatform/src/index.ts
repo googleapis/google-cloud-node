@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1beta1 from './v1beta1';
+import * as v1 from './v1';
 const DatasetServiceClient = v1beta1.DatasetServiceClient;
 type DatasetServiceClient = v1beta1.DatasetServiceClient;
 const EndpointServiceClient = v1beta1.EndpointServiceClient;
@@ -35,6 +36,7 @@ const SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
 type SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
 export {
   v1beta1,
+  v1,
   DatasetServiceClient,
   EndpointServiceClient,
   JobServiceClient,
@@ -46,6 +48,7 @@ export {
 };
 export default {
   v1beta1,
+  v1,
   DatasetServiceClient,
   EndpointServiceClient,
   JobServiceClient,
@@ -66,3 +69,4 @@ export {helpers};
 
 import {_enhance} from './decorator';
 _enhance('v1beta1');
+//_enhance('v1');

@@ -1,0 +1,585 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.aiplatform.v1",
+  "libraryPackage": "@google-cloud/aiplatform",
+  "services": {
+    "DatasetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DatasetServiceClient",
+          "rpcs": {
+            "GetDataset": {
+              "methods": ["getDataset"]
+            },
+            "UpdateDataset": {
+              "methods": ["updateDataset"]
+            },
+            "GetAnnotationSpec": {
+              "methods": ["getAnnotationSpec"]
+            },
+            "CreateDataset": {
+              "methods": ["createDataset"]
+            },
+            "DeleteDataset": {
+              "methods": ["deleteDataset"]
+            },
+            "ImportData": {
+              "methods": ["importData"]
+            },
+            "ExportData": {
+              "methods": ["exportData"]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            },
+            "ListDataItems": {
+              "methods": [
+                "listDataItems",
+                "listDataItemsStream",
+                "listDataItemsAsync"
+              ]
+            },
+            "ListAnnotations": {
+              "methods": [
+                "listAnnotations",
+                "listAnnotationsStream",
+                "listAnnotationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DatasetServiceClient",
+          "rpcs": {
+            "GetDataset": {
+              "methods": ["getDataset"]
+            },
+            "UpdateDataset": {
+              "methods": ["updateDataset"]
+            },
+            "GetAnnotationSpec": {
+              "methods": ["getAnnotationSpec"]
+            },
+            "CreateDataset": {
+              "methods": ["createDataset"]
+            },
+            "DeleteDataset": {
+              "methods": ["deleteDataset"]
+            },
+            "ImportData": {
+              "methods": ["importData"]
+            },
+            "ExportData": {
+              "methods": ["exportData"]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            },
+            "ListDataItems": {
+              "methods": [
+                "listDataItems",
+                "listDataItemsStream",
+                "listDataItemsAsync"
+              ]
+            },
+            "ListAnnotations": {
+              "methods": [
+                "listAnnotations",
+                "listAnnotationsStream",
+                "listAnnotationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EndpointService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EndpointServiceClient",
+          "rpcs": {
+            "GetEndpoint": {
+              "methods": ["getEndpoint"]
+            },
+            "UpdateEndpoint": {
+              "methods": ["updateEndpoint"]
+            },
+            "CreateEndpoint": {
+              "methods": ["createEndpoint"]
+            },
+            "DeleteEndpoint": {
+              "methods": ["deleteEndpoint"]
+            },
+            "DeployModel": {
+              "methods": ["deployModel"]
+            },
+            "UndeployModel": {
+              "methods": ["undeployModel"]
+            },
+            "ListEndpoints": {
+              "methods": [
+                "listEndpoints",
+                "listEndpointsStream",
+                "listEndpointsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EndpointServiceClient",
+          "rpcs": {
+            "GetEndpoint": {
+              "methods": ["getEndpoint"]
+            },
+            "UpdateEndpoint": {
+              "methods": ["updateEndpoint"]
+            },
+            "CreateEndpoint": {
+              "methods": ["createEndpoint"]
+            },
+            "DeleteEndpoint": {
+              "methods": ["deleteEndpoint"]
+            },
+            "DeployModel": {
+              "methods": ["deployModel"]
+            },
+            "UndeployModel": {
+              "methods": ["undeployModel"]
+            },
+            "ListEndpoints": {
+              "methods": [
+                "listEndpoints",
+                "listEndpointsStream",
+                "listEndpointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "JobService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "JobServiceClient",
+          "rpcs": {
+            "CreateCustomJob": {
+              "methods": ["createCustomJob"]
+            },
+            "GetCustomJob": {
+              "methods": ["getCustomJob"]
+            },
+            "CancelCustomJob": {
+              "methods": ["cancelCustomJob"]
+            },
+            "CreateDataLabelingJob": {
+              "methods": ["createDataLabelingJob"]
+            },
+            "GetDataLabelingJob": {
+              "methods": ["getDataLabelingJob"]
+            },
+            "CancelDataLabelingJob": {
+              "methods": ["cancelDataLabelingJob"]
+            },
+            "CreateHyperparameterTuningJob": {
+              "methods": ["createHyperparameterTuningJob"]
+            },
+            "GetHyperparameterTuningJob": {
+              "methods": ["getHyperparameterTuningJob"]
+            },
+            "CancelHyperparameterTuningJob": {
+              "methods": ["cancelHyperparameterTuningJob"]
+            },
+            "CreateBatchPredictionJob": {
+              "methods": ["createBatchPredictionJob"]
+            },
+            "GetBatchPredictionJob": {
+              "methods": ["getBatchPredictionJob"]
+            },
+            "CancelBatchPredictionJob": {
+              "methods": ["cancelBatchPredictionJob"]
+            },
+            "DeleteCustomJob": {
+              "methods": ["deleteCustomJob"]
+            },
+            "DeleteDataLabelingJob": {
+              "methods": ["deleteDataLabelingJob"]
+            },
+            "DeleteHyperparameterTuningJob": {
+              "methods": ["deleteHyperparameterTuningJob"]
+            },
+            "DeleteBatchPredictionJob": {
+              "methods": ["deleteBatchPredictionJob"]
+            },
+            "ListCustomJobs": {
+              "methods": [
+                "listCustomJobs",
+                "listCustomJobsStream",
+                "listCustomJobsAsync"
+              ]
+            },
+            "ListDataLabelingJobs": {
+              "methods": [
+                "listDataLabelingJobs",
+                "listDataLabelingJobsStream",
+                "listDataLabelingJobsAsync"
+              ]
+            },
+            "ListHyperparameterTuningJobs": {
+              "methods": [
+                "listHyperparameterTuningJobs",
+                "listHyperparameterTuningJobsStream",
+                "listHyperparameterTuningJobsAsync"
+              ]
+            },
+            "ListBatchPredictionJobs": {
+              "methods": [
+                "listBatchPredictionJobs",
+                "listBatchPredictionJobsStream",
+                "listBatchPredictionJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "JobServiceClient",
+          "rpcs": {
+            "CreateCustomJob": {
+              "methods": ["createCustomJob"]
+            },
+            "GetCustomJob": {
+              "methods": ["getCustomJob"]
+            },
+            "CancelCustomJob": {
+              "methods": ["cancelCustomJob"]
+            },
+            "CreateDataLabelingJob": {
+              "methods": ["createDataLabelingJob"]
+            },
+            "GetDataLabelingJob": {
+              "methods": ["getDataLabelingJob"]
+            },
+            "CancelDataLabelingJob": {
+              "methods": ["cancelDataLabelingJob"]
+            },
+            "CreateHyperparameterTuningJob": {
+              "methods": ["createHyperparameterTuningJob"]
+            },
+            "GetHyperparameterTuningJob": {
+              "methods": ["getHyperparameterTuningJob"]
+            },
+            "CancelHyperparameterTuningJob": {
+              "methods": ["cancelHyperparameterTuningJob"]
+            },
+            "CreateBatchPredictionJob": {
+              "methods": ["createBatchPredictionJob"]
+            },
+            "GetBatchPredictionJob": {
+              "methods": ["getBatchPredictionJob"]
+            },
+            "CancelBatchPredictionJob": {
+              "methods": ["cancelBatchPredictionJob"]
+            },
+            "DeleteCustomJob": {
+              "methods": ["deleteCustomJob"]
+            },
+            "DeleteDataLabelingJob": {
+              "methods": ["deleteDataLabelingJob"]
+            },
+            "DeleteHyperparameterTuningJob": {
+              "methods": ["deleteHyperparameterTuningJob"]
+            },
+            "DeleteBatchPredictionJob": {
+              "methods": ["deleteBatchPredictionJob"]
+            },
+            "ListCustomJobs": {
+              "methods": [
+                "listCustomJobs",
+                "listCustomJobsStream",
+                "listCustomJobsAsync"
+              ]
+            },
+            "ListDataLabelingJobs": {
+              "methods": [
+                "listDataLabelingJobs",
+                "listDataLabelingJobsStream",
+                "listDataLabelingJobsAsync"
+              ]
+            },
+            "ListHyperparameterTuningJobs": {
+              "methods": [
+                "listHyperparameterTuningJobs",
+                "listHyperparameterTuningJobsStream",
+                "listHyperparameterTuningJobsAsync"
+              ]
+            },
+            "ListBatchPredictionJobs": {
+              "methods": [
+                "listBatchPredictionJobs",
+                "listBatchPredictionJobsStream",
+                "listBatchPredictionJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MigrationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MigrationServiceClient",
+          "rpcs": {
+            "BatchMigrateResources": {
+              "methods": ["batchMigrateResources"]
+            },
+            "SearchMigratableResources": {
+              "methods": [
+                "searchMigratableResources",
+                "searchMigratableResourcesStream",
+                "searchMigratableResourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MigrationServiceClient",
+          "rpcs": {
+            "BatchMigrateResources": {
+              "methods": ["batchMigrateResources"]
+            },
+            "SearchMigratableResources": {
+              "methods": [
+                "searchMigratableResources",
+                "searchMigratableResourcesStream",
+                "searchMigratableResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": ["getModel"]
+            },
+            "UpdateModel": {
+              "methods": ["updateModel"]
+            },
+            "GetModelEvaluation": {
+              "methods": ["getModelEvaluation"]
+            },
+            "GetModelEvaluationSlice": {
+              "methods": ["getModelEvaluationSlice"]
+            },
+            "UploadModel": {
+              "methods": ["uploadModel"]
+            },
+            "DeleteModel": {
+              "methods": ["deleteModel"]
+            },
+            "ExportModel": {
+              "methods": ["exportModel"]
+            },
+            "ListModels": {
+              "methods": ["listModels", "listModelsStream", "listModelsAsync"]
+            },
+            "ListModelEvaluations": {
+              "methods": [
+                "listModelEvaluations",
+                "listModelEvaluationsStream",
+                "listModelEvaluationsAsync"
+              ]
+            },
+            "ListModelEvaluationSlices": {
+              "methods": [
+                "listModelEvaluationSlices",
+                "listModelEvaluationSlicesStream",
+                "listModelEvaluationSlicesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": ["getModel"]
+            },
+            "UpdateModel": {
+              "methods": ["updateModel"]
+            },
+            "GetModelEvaluation": {
+              "methods": ["getModelEvaluation"]
+            },
+            "GetModelEvaluationSlice": {
+              "methods": ["getModelEvaluationSlice"]
+            },
+            "UploadModel": {
+              "methods": ["uploadModel"]
+            },
+            "DeleteModel": {
+              "methods": ["deleteModel"]
+            },
+            "ExportModel": {
+              "methods": ["exportModel"]
+            },
+            "ListModels": {
+              "methods": ["listModels", "listModelsStream", "listModelsAsync"]
+            },
+            "ListModelEvaluations": {
+              "methods": [
+                "listModelEvaluations",
+                "listModelEvaluationsStream",
+                "listModelEvaluationsAsync"
+              ]
+            },
+            "ListModelEvaluationSlices": {
+              "methods": [
+                "listModelEvaluationSlices",
+                "listModelEvaluationSlicesStream",
+                "listModelEvaluationSlicesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PipelineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PipelineServiceClient",
+          "rpcs": {
+            "CreateTrainingPipeline": {
+              "methods": ["createTrainingPipeline"]
+            },
+            "GetTrainingPipeline": {
+              "methods": ["getTrainingPipeline"]
+            },
+            "CancelTrainingPipeline": {
+              "methods": ["cancelTrainingPipeline"]
+            },
+            "DeleteTrainingPipeline": {
+              "methods": ["deleteTrainingPipeline"]
+            },
+            "ListTrainingPipelines": {
+              "methods": [
+                "listTrainingPipelines",
+                "listTrainingPipelinesStream",
+                "listTrainingPipelinesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PipelineServiceClient",
+          "rpcs": {
+            "CreateTrainingPipeline": {
+              "methods": ["createTrainingPipeline"]
+            },
+            "GetTrainingPipeline": {
+              "methods": ["getTrainingPipeline"]
+            },
+            "CancelTrainingPipeline": {
+              "methods": ["cancelTrainingPipeline"]
+            },
+            "DeleteTrainingPipeline": {
+              "methods": ["deleteTrainingPipeline"]
+            },
+            "ListTrainingPipelines": {
+              "methods": [
+                "listTrainingPipelines",
+                "listTrainingPipelinesStream",
+                "listTrainingPipelinesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": ["predict"]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": ["predict"]
+            }
+          }
+        }
+      }
+    },
+    "SpecialistPoolService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SpecialistPoolServiceClient",
+          "rpcs": {
+            "GetSpecialistPool": {
+              "methods": ["getSpecialistPool"]
+            },
+            "CreateSpecialistPool": {
+              "methods": ["createSpecialistPool"]
+            },
+            "DeleteSpecialistPool": {
+              "methods": ["deleteSpecialistPool"]
+            },
+            "UpdateSpecialistPool": {
+              "methods": ["updateSpecialistPool"]
+            },
+            "ListSpecialistPools": {
+              "methods": [
+                "listSpecialistPools",
+                "listSpecialistPoolsStream",
+                "listSpecialistPoolsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SpecialistPoolServiceClient",
+          "rpcs": {
+            "GetSpecialistPool": {
+              "methods": ["getSpecialistPool"]
+            },
+            "CreateSpecialistPool": {
+              "methods": ["createSpecialistPool"]
+            },
+            "DeleteSpecialistPool": {
+              "methods": ["deleteSpecialistPool"]
+            },
+            "UpdateSpecialistPool": {
+              "methods": ["updateSpecialistPool"]
+            },
+            "ListSpecialistPools": {
+              "methods": [
+                "listSpecialistPools",
+                "listSpecialistPoolsStream",
+                "listSpecialistPoolsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
