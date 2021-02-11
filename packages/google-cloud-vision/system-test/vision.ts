@@ -69,7 +69,8 @@ describe('Vision', () => {
     );
   });
 
-  it('should detect from a URL', () => {
+  it('should detect from a URL', function () {
+    this.retries(3);
     const url =
       'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
     return client
