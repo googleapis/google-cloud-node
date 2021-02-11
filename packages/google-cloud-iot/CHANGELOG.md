@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.2.1...v2.3.0) (2021-02-10)
+
+
+### Features
+
+* add serverCertFile parameter ([#438](https://www.github.com/googleapis/nodejs-iot/issues/438)) ([e979160](https://www.github.com/googleapis/nodejs-iot/commit/e97916026e6d794b09143059203f8d3530311ffe))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.2.0...v2.2.1) (2021-02-05)
 
 
