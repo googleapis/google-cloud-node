@@ -1158,7 +1158,9 @@ export namespace google {
                             FOREHEAD_GLABELLA = 31,
                             CHIN_GNATHION = 32,
                             CHIN_LEFT_GONION = 33,
-                            CHIN_RIGHT_GONION = 34
+                            CHIN_RIGHT_GONION = 34,
+                            LEFT_CHEEK_CENTER = 35,
+                            RIGHT_CHEEK_CENTER = 36
                         }
                     }
                 }

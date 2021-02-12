@@ -404,7 +404,9 @@
                                 "FOREHEAD_GLABELLA": 31,
                                 "CHIN_GNATHION": 32,
                                 "CHIN_LEFT_GONION": 33,
-                                "CHIN_RIGHT_GONION": 34
+                                "CHIN_RIGHT_GONION": 34,
+                                "LEFT_CHEEK_CENTER": 35,
+                                "RIGHT_CHEEK_CENTER": 36
                               }
                             }
                           }
@@ -528,27 +530,45 @@
                         },
                         "adultConfidence": {
                           "type": "float",
-                          "id": 16
+                          "id": 16,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "spoofConfidence": {
                           "type": "float",
-                          "id": 18
+                          "id": 18,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "medicalConfidence": {
                           "type": "float",
-                          "id": 20
+                          "id": 20,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "violenceConfidence": {
                           "type": "float",
-                          "id": 22
+                          "id": 22,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "racyConfidence": {
                           "type": "float",
-                          "id": 24
+                          "id": 24,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "nsfwConfidence": {
                           "type": "float",
-                          "id": 26
+                          "id": 26,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
