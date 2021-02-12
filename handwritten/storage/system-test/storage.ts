@@ -2915,7 +2915,7 @@ describe('storage', () => {
 
       bucket.createChannel('new-channel', config, (err: Error | null) => {
         // Actually creating a channel is pretty complicated. This will at least
-        // let us know we hit the right endpoint and it received "yahoo.com".
+        // let us know we reached the right endpoint and it received "yahoo.com".
         assert(err!.message.includes(config.address));
         done();
       });
