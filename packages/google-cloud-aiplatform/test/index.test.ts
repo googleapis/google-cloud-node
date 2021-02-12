@@ -21,20 +21,6 @@ const aiplatform = require('../src');
 const enhancedTypes = require('../src/enhanced-types.json');
 
 describe('AI Platform enhanced types', () => {
-  const definitionTypeNames = enhancedTypes.schema.trainingjob.definition;
-  const predictInstanceTypeNames = enhancedTypes.schema.predict.instance;
-  const predictParamsTypeNames = enhancedTypes.schema.predict.params;
-  const predictResultTypeNames = enhancedTypes.schema.predict.prediction;
-
-  const {
-    definition,
-  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
-  const {
-    instance,
-    params,
-    prediction,
-  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
-
   function testNamespaceAgainstArray(
     namespace: Record<string, string>,
     arr: string[]
@@ -44,19 +30,70 @@ describe('AI Platform enhanced types', () => {
     }
   }
 
-  it('adds training job definition types', () => {
-    testNamespaceAgainstArray(definition, definitionTypeNames);
+  describe('v1beta1', () => {
+    const definitionTypeNames =
+      enhancedTypes.v1beta1.schema.trainingjob.definition;
+    const predictInstanceTypeNames =
+      enhancedTypes.v1beta1.schema.predict.instance;
+    const predictParamsTypeNames = enhancedTypes.v1beta1.schema.predict.params;
+    const predictResultTypeNames =
+      enhancedTypes.v1beta1.schema.predict.prediction;
+
+    const {
+      definition,
+    } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
+    const {
+      instance,
+      params,
+      prediction,
+    } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
+
+    it('adds training job definition types', () => {
+      testNamespaceAgainstArray(definition, definitionTypeNames);
+    });
+
+    it('adds prediction instance types', () => {
+      testNamespaceAgainstArray(instance, predictInstanceTypeNames);
+    });
+
+    it('adds prediction param types', () => {
+      testNamespaceAgainstArray(params, predictParamsTypeNames);
+    });
+
+    it('adds prediction result types', () => {
+      testNamespaceAgainstArray(prediction, predictResultTypeNames);
+    });
   });
 
-  it('adds prediction instance types', () => {
-    testNamespaceAgainstArray(instance, predictInstanceTypeNames);
-  });
+  describe('v1', () => {
+    const definitionTypeNames = enhancedTypes.v1.schema.trainingjob.definition;
+    const predictInstanceTypeNames = enhancedTypes.v1.schema.predict.instance;
+    const predictParamsTypeNames = enhancedTypes.v1.schema.predict.params;
+    const predictResultTypeNames = enhancedTypes.v1.schema.predict.prediction;
 
-  it('adds prediction param types', () => {
-    testNamespaceAgainstArray(params, predictParamsTypeNames);
-  });
+    const {
+      definition,
+    } = aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
+    const {
+      instance,
+      params,
+      prediction,
+    } = aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
 
-  it('adds prediction result types', () => {
-    testNamespaceAgainstArray(prediction, predictResultTypeNames);
+    it('adds training job definition types', () => {
+      testNamespaceAgainstArray(definition, definitionTypeNames);
+    });
+
+    it('adds prediction instance types', () => {
+      testNamespaceAgainstArray(instance, predictInstanceTypeNames);
+    });
+
+    it('adds prediction param types', () => {
+      testNamespaceAgainstArray(params, predictParamsTypeNames);
+    });
+
+    it('adds prediction result types', () => {
+      testNamespaceAgainstArray(prediction, predictResultTypeNames);
+    });
   });
 });

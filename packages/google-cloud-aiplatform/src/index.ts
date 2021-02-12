@@ -18,22 +18,22 @@
 
 import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
-const DatasetServiceClient = v1beta1.DatasetServiceClient;
-type DatasetServiceClient = v1beta1.DatasetServiceClient;
-const EndpointServiceClient = v1beta1.EndpointServiceClient;
-type EndpointServiceClient = v1beta1.EndpointServiceClient;
-const JobServiceClient = v1beta1.JobServiceClient;
-type JobServiceClient = v1beta1.JobServiceClient;
-const MigrationServiceClient = v1beta1.MigrationServiceClient;
-type MigrationServiceClient = v1beta1.MigrationServiceClient;
-const ModelServiceClient = v1beta1.ModelServiceClient;
-type ModelServiceClient = v1beta1.ModelServiceClient;
-const PipelineServiceClient = v1beta1.PipelineServiceClient;
-type PipelineServiceClient = v1beta1.PipelineServiceClient;
-const PredictionServiceClient = v1beta1.PredictionServiceClient;
-type PredictionServiceClient = v1beta1.PredictionServiceClient;
-const SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
-type SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
+const DatasetServiceClient = v1.DatasetServiceClient;
+type DatasetServiceClient = v1.DatasetServiceClient;
+const EndpointServiceClient = v1.EndpointServiceClient;
+type EndpointServiceClient = v1.EndpointServiceClient;
+const JobServiceClient = v1.JobServiceClient;
+type JobServiceClient = v1.JobServiceClient;
+const MigrationServiceClient = v1.MigrationServiceClient;
+type MigrationServiceClient = v1.MigrationServiceClient;
+const ModelServiceClient = v1.ModelServiceClient;
+type ModelServiceClient = v1.ModelServiceClient;
+const PipelineServiceClient = v1.PipelineServiceClient;
+type PipelineServiceClient = v1.PipelineServiceClient;
+const PredictionServiceClient = v1.PredictionServiceClient;
+type PredictionServiceClient = v1.PredictionServiceClient;
+const SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
+type SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
 export {
   v1beta1,
   v1,
@@ -69,4 +69,4 @@ export {helpers};
 
 import {_enhance} from './decorator';
 _enhance('v1beta1');
-//_enhance('v1');
+_enhance('v1');

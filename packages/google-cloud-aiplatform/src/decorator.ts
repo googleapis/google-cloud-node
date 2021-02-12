@@ -101,7 +101,7 @@ function assignMethodsToMessages(
 }
 
 export function _enhance(apiVersion: string): void {
-  const schemaRoot = enhancedTypesJson['schema'];
+  const schemaRoot = enhancedTypesJson[apiVersion]['schema'];
   const namespaceRoot = ((protos.google.cloud
     .aiplatform as unknown) as NestedNamespace)[apiVersion] as NestedNamespace;
   const namespaceSchemaRoot = namespaceRoot['schema'];

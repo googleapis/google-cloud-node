@@ -39,6 +39,8 @@ excludes = [
 # run the gapic generator
 gapic = gcp.GAPICBazel()
 versions = ["v1beta1", "v1"]
+default_version = "v1"
+
 name = "aiplatform"
 for version in versions:
     library = gapic.node_library(name, version)
@@ -47,7 +49,9 @@ for version in versions:
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location="build/src", versions=versions
+    source_location="build/src",
+    versions=versions,
+    default_version=default_version,
 )
 # We override the default sample configuration with a custom
 # environment file:
