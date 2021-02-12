@@ -3,7 +3,10 @@
     "google.cloud.aiplatform.v1.MigrationService": {
       "retry_codes": {
         "non_idempotent": [],
-        "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
       },
       "retry_params": {
         "default": {
