@@ -2411,6 +2411,7 @@
                          * @property {string|null} [issuer] Authority issuer
                          * @property {string|null} [workloadIdentityPool] Authority workloadIdentityPool
                          * @property {string|null} [identityProvider] Authority identityProvider
+                         * @property {Uint8Array|null} [oidcJwks] Authority oidcJwks
                          */
     
                         /**
@@ -2453,6 +2454,14 @@
                         Authority.prototype.identityProvider = "";
     
                         /**
+                         * Authority oidcJwks.
+                         * @member {Uint8Array} oidcJwks
+                         * @memberof google.cloud.gkehub.v1beta1.Authority
+                         * @instance
+                         */
+                        Authority.prototype.oidcJwks = $util.newBuffer([]);
+    
+                        /**
                          * Creates a new Authority instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkehub.v1beta1.Authority
@@ -2482,6 +2491,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.workloadIdentityPool);
                             if (message.identityProvider != null && Object.hasOwnProperty.call(message, "identityProvider"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.identityProvider);
+                            if (message.oidcJwks != null && Object.hasOwnProperty.call(message, "oidcJwks"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.oidcJwks);
                             return writer;
                         };
     
@@ -2524,6 +2535,9 @@
                                     break;
                                 case 3:
                                     message.identityProvider = reader.string();
+                                    break;
+                                case 4:
+                                    message.oidcJwks = reader.bytes();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2569,6 +2583,9 @@
                             if (message.identityProvider != null && message.hasOwnProperty("identityProvider"))
                                 if (!$util.isString(message.identityProvider))
                                     return "identityProvider: string expected";
+                            if (message.oidcJwks != null && message.hasOwnProperty("oidcJwks"))
+                                if (!(message.oidcJwks && typeof message.oidcJwks.length === "number" || $util.isString(message.oidcJwks)))
+                                    return "oidcJwks: buffer expected";
                             return null;
                         };
     
@@ -2590,6 +2607,11 @@
                                 message.workloadIdentityPool = String(object.workloadIdentityPool);
                             if (object.identityProvider != null)
                                 message.identityProvider = String(object.identityProvider);
+                            if (object.oidcJwks != null)
+                                if (typeof object.oidcJwks === "string")
+                                    $util.base64.decode(object.oidcJwks, message.oidcJwks = $util.newBuffer($util.base64.length(object.oidcJwks)), 0);
+                                else if (object.oidcJwks.length)
+                                    message.oidcJwks = object.oidcJwks;
                             return message;
                         };
     
@@ -2610,6 +2632,13 @@
                                 object.issuer = "";
                                 object.workloadIdentityPool = "";
                                 object.identityProvider = "";
+                                if (options.bytes === String)
+                                    object.oidcJwks = "";
+                                else {
+                                    object.oidcJwks = [];
+                                    if (options.bytes !== Array)
+                                        object.oidcJwks = $util.newBuffer(object.oidcJwks);
+                                }
                             }
                             if (message.issuer != null && message.hasOwnProperty("issuer"))
                                 object.issuer = message.issuer;
@@ -2617,6 +2646,8 @@
                                 object.workloadIdentityPool = message.workloadIdentityPool;
                             if (message.identityProvider != null && message.hasOwnProperty("identityProvider"))
                                 object.identityProvider = message.identityProvider;
+                            if (message.oidcJwks != null && message.hasOwnProperty("oidcJwks"))
+                                object.oidcJwks = options.bytes === String ? $util.base64.encode(message.oidcJwks, 0, message.oidcJwks.length) : options.bytes === Array ? Array.prototype.slice.call(message.oidcJwks) : message.oidcJwks;
                             return object;
                         };
     

@@ -1016,6 +1016,9 @@ export namespace google {
 
                     /** Authority identityProvider */
                     identityProvider?: (string|null);
+
+                    /** Authority oidcJwks */
+                    oidcJwks?: (Uint8Array|string|null);
                 }
 
                 /** Represents an Authority. */
@@ -1035,6 +1038,9 @@ export namespace google {
 
                     /** Authority identityProvider. */
                     public identityProvider: string;
+
+                    /** Authority oidcJwks. */
+                    public oidcJwks: (Uint8Array|string);
 
                     /**
                      * Creates a new Authority instance using the specified properties.
