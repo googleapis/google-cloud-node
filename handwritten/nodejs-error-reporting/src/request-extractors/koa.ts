@@ -49,7 +49,7 @@ export function koaRequestInformationExtractor(
     .setMethod(req.method)
     .setUrl(req.url)
     .setUserAgent(req.headers['user-agent'])
-    .setReferrer(req.headers.referrer)
+    .setReferrer(req.headers.referrer as string)
     .setStatusCode(res.status)
     .setRemoteAddress(req.ip);
 
