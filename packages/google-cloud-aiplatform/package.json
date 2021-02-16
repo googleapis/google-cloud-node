@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/aiplatform",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Aiplatform client for Node.js",
   "repository": "googleapis/nodejs-ai-platform",
   "license": "Apache-2.0",

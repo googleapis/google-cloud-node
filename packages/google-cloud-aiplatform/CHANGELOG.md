@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.3.0...v1.4.0) (2021-02-12)
+
+
+### Features
+
+* add encryption_spec to aiplatform v1beta1 ([#63](https://www.github.com/googleapis/nodejs-ai-platform/issues/63)) ([c3256aa](https://www.github.com/googleapis/nodejs-ai-platform/commit/c3256aae40e39c113dfdf6be9f28f0cb09a7b600))
+* adds v1 version of library ([#70](https://www.github.com/googleapis/nodejs-ai-platform/issues/70)) ([5a1b765](https://www.github.com/googleapis/nodejs-ai-platform/commit/5a1b765c03efdb5cbe82b1a34ccf70b86ebd8137))
+* **samples:** add additional samples to library ([#25](https://www.github.com/googleapis/nodejs-ai-platform/issues/25)) ([5a7f5db](https://www.github.com/googleapis/nodejs-ai-platform/commit/5a7f5db965a232a98f1bcf18f4f769db5ba3644c))
+* updates enhanced client library veneer and samples ([#73](https://www.github.com/googleapis/nodejs-ai-platform/issues/73)) ([59e293f](https://www.github.com/googleapis/nodejs-ai-platform/commit/59e293fa90ea2894b8c135d2ef18662564ceae2c))
+
+
+### Bug Fixes
+
+* reduces image object detection test file size ([#69](https://www.github.com/googleapis/nodejs-ai-platform/issues/69)) ([fb4308c](https://www.github.com/googleapis/nodejs-ai-platform/commit/fb4308ce09a9fc029996c5d9cd29ae02dc45adea))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.2.0...v1.3.0) (2021-01-14)
 
 
