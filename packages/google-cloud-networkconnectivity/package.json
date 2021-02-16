@@ -1,8 +1,8 @@
 {
-  "name": "undefined",
+  "name": "@google-cloud/network-connectivity",
   "version": "0.1.0",
   "description": "Networkconnectivity client for Node.js",
-  "repository": "googleapis/nodejs-networkconnectivity",
+  "repository": "googleapis/nodejs-network-connectivity",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -19,7 +19,7 @@
     "google cloud platform",
     "google cloud",
     "cloud",
-    "google networkconnectivity",
+    "google network-connectivity",
     "networkconnectivity",
     "hub service"
   ],

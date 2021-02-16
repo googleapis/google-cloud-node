@@ -13,31 +13,28 @@
 
 'use strict';
 
-async function main() {
+async function main(projectId, location) {
   // [START nodejs_network_connectivity_quickstart]
   // Imports the Google Cloud client library
 
-  // remove this line after package is released
   // eslint-disable-next-line node/no-missing-require
-  const {HubServiceClient} = require('');
+  const {HubServiceClient} = require('@google-cloud/network-connectivity');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
+  // const location = 'my-location'
 
   // Creates a client
   // eslint-disable-next-line no-unused-vars
-  const client = new {HubServiceClient}();
+  const client = new HubServiceClient();
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function listNetworkHubs() {
+    const [hubs] = await client.listHubs({
+      parent: `projects/${projectId}/locations/${location}`,
+    });
+    console.info(hubs);
   }
-  doSomething();
+  listNetworkHubs();
   // [END nodejs_network_connectivity_quickstart]
 }
 

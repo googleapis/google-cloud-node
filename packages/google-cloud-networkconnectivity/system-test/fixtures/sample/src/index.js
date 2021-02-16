@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const networkconnectivity = require('@google-cloud/networkconnectivity');
+const networkconnectivity = require('@google-cloud/network-connectivity');
 
 function main() {
   const hubServiceClient = new networkconnectivity.HubServiceClient();

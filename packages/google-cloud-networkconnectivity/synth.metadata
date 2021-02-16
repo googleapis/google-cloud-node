@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-network-connectivity",
-        "sha": "60f0e6000acf3ac1e73dee43baf46805bdd87801"
+        "remote": "git@github.com:googleapis/nodejs-network-connectivity.git",
+        "sha": "c1d7ea0d5ae0b2f816c340d46b508a6eb33e7d83"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "6fa7194aba4d0c501592dea28c041890265079dc",
-        "internalRef": "353783208"
+        "sha": "13b6ba5e35620d15a97ae0f8c38be0c0ff1c2d42",
+        "internalRef": "355397730"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "3816b080296d4d52975079fd26c110dd26ba25af"
+        "sha": "e935c9ecb47da0f2e054f5f1845f7cf7c95fa625"
       }
     }
   ],
@@ -27,7 +27,7 @@
     {
       "client": {
         "source": "googleapis",
-        "apiName": "networkconnectivity",
+        "apiName": "network-connectivity",
         "apiVersion": "v1alpha1",
         "language": "nodejs",
         "generator": "bazel"

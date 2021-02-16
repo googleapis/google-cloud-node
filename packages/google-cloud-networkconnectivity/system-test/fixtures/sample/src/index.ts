@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {HubServiceClient} from '@google-cloud/networkconnectivity';
+import {HubServiceClient} from '@google-cloud/network-connectivity';
 
 // check that the client class type name can be used
 function doStuffWithHubServiceClient(client: HubServiceClient) {
