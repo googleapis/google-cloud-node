@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-ai-platform.git",
-        "sha": "5a1b765c03efdb5cbe82b1a34ccf70b86ebd8137"
+        "sha": "07000cf9b75164640bb5815e018e718445def1f5"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "adfc95eb0c926db42afcfe63357bb1c8eea2196a",
-        "internalRef": "355637902"
+        "sha": "f9cd594c912a2ff456cc2b33f54dcc238133bb0c",
+        "internalRef": "357223795"
       }
     },
     {

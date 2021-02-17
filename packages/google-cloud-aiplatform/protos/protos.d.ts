@@ -50948,2481 +50948,6 @@ export namespace google {
                         }
                     }
 
-                    /** Properties of an ImageClassificationPredictionInstance. */
-                    interface IImageClassificationPredictionInstance {
-
-                        /** ImageClassificationPredictionInstance content */
-                        content?: (string|null);
-
-                        /** ImageClassificationPredictionInstance mimeType */
-                        mimeType?: (string|null);
-                    }
-
-                    /** Represents an ImageClassificationPredictionInstance. */
-                    class ImageClassificationPredictionInstance implements IImageClassificationPredictionInstance {
-
-                        /**
-                         * Constructs a new ImageClassificationPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionInstance);
-
-                        /** ImageClassificationPredictionInstance content. */
-                        public content: string;
-
-                        /** ImageClassificationPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /**
-                         * Creates a new ImageClassificationPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ImageClassificationPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionInstance): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionInstance;
-
-                        /**
-                         * Encodes the specified ImageClassificationPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionInstance.verify|verify} messages.
-                         * @param message ImageClassificationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ImageClassificationPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionInstance.verify|verify} messages.
-                         * @param message ImageClassificationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ImageClassificationPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ImageClassificationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionInstance;
-
-                        /**
-                         * Decodes an ImageClassificationPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ImageClassificationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionInstance;
-
-                        /**
-                         * Verifies an ImageClassificationPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ImageClassificationPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ImageClassificationPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionInstance;
-
-                        /**
-                         * Creates a plain object from an ImageClassificationPredictionInstance message. Also converts values to other types if specified.
-                         * @param message ImageClassificationPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ImageClassificationPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an ImageObjectDetectionPredictionInstance. */
-                    interface IImageObjectDetectionPredictionInstance {
-
-                        /** ImageObjectDetectionPredictionInstance content */
-                        content?: (string|null);
-
-                        /** ImageObjectDetectionPredictionInstance mimeType */
-                        mimeType?: (string|null);
-                    }
-
-                    /** Represents an ImageObjectDetectionPredictionInstance. */
-                    class ImageObjectDetectionPredictionInstance implements IImageObjectDetectionPredictionInstance {
-
-                        /**
-                         * Constructs a new ImageObjectDetectionPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionInstance);
-
-                        /** ImageObjectDetectionPredictionInstance content. */
-                        public content: string;
-
-                        /** ImageObjectDetectionPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /**
-                         * Creates a new ImageObjectDetectionPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ImageObjectDetectionPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionInstance): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionInstance;
-
-                        /**
-                         * Encodes the specified ImageObjectDetectionPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionInstance.verify|verify} messages.
-                         * @param message ImageObjectDetectionPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ImageObjectDetectionPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionInstance.verify|verify} messages.
-                         * @param message ImageObjectDetectionPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ImageObjectDetectionPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ImageObjectDetectionPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionInstance;
-
-                        /**
-                         * Decodes an ImageObjectDetectionPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ImageObjectDetectionPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionInstance;
-
-                        /**
-                         * Verifies an ImageObjectDetectionPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ImageObjectDetectionPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ImageObjectDetectionPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionInstance;
-
-                        /**
-                         * Creates a plain object from an ImageObjectDetectionPredictionInstance message. Also converts values to other types if specified.
-                         * @param message ImageObjectDetectionPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ImageObjectDetectionPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an ImageSegmentationPredictionInstance. */
-                    interface IImageSegmentationPredictionInstance {
-
-                        /** ImageSegmentationPredictionInstance content */
-                        content?: (string|null);
-
-                        /** ImageSegmentationPredictionInstance mimeType */
-                        mimeType?: (string|null);
-                    }
-
-                    /** Represents an ImageSegmentationPredictionInstance. */
-                    class ImageSegmentationPredictionInstance implements IImageSegmentationPredictionInstance {
-
-                        /**
-                         * Constructs a new ImageSegmentationPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionInstance);
-
-                        /** ImageSegmentationPredictionInstance content. */
-                        public content: string;
-
-                        /** ImageSegmentationPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /**
-                         * Creates a new ImageSegmentationPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ImageSegmentationPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionInstance): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionInstance;
-
-                        /**
-                         * Encodes the specified ImageSegmentationPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionInstance.verify|verify} messages.
-                         * @param message ImageSegmentationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ImageSegmentationPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionInstance.verify|verify} messages.
-                         * @param message ImageSegmentationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ImageSegmentationPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ImageSegmentationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionInstance;
-
-                        /**
-                         * Decodes an ImageSegmentationPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ImageSegmentationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionInstance;
-
-                        /**
-                         * Verifies an ImageSegmentationPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ImageSegmentationPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ImageSegmentationPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionInstance;
-
-                        /**
-                         * Creates a plain object from an ImageSegmentationPredictionInstance message. Also converts values to other types if specified.
-                         * @param message ImageSegmentationPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ImageSegmentationPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoClassificationPredictionInstance. */
-                    interface IVideoClassificationPredictionInstance {
-
-                        /** VideoClassificationPredictionInstance content */
-                        content?: (string|null);
-
-                        /** VideoClassificationPredictionInstance mimeType */
-                        mimeType?: (string|null);
-
-                        /** VideoClassificationPredictionInstance timeSegmentStart */
-                        timeSegmentStart?: (string|null);
-
-                        /** VideoClassificationPredictionInstance timeSegmentEnd */
-                        timeSegmentEnd?: (string|null);
-                    }
-
-                    /** Represents a VideoClassificationPredictionInstance. */
-                    class VideoClassificationPredictionInstance implements IVideoClassificationPredictionInstance {
-
-                        /**
-                         * Constructs a new VideoClassificationPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionInstance);
-
-                        /** VideoClassificationPredictionInstance content. */
-                        public content: string;
-
-                        /** VideoClassificationPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /** VideoClassificationPredictionInstance timeSegmentStart. */
-                        public timeSegmentStart: string;
-
-                        /** VideoClassificationPredictionInstance timeSegmentEnd. */
-                        public timeSegmentEnd: string;
-
-                        /**
-                         * Creates a new VideoClassificationPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoClassificationPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionInstance): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionInstance;
-
-                        /**
-                         * Encodes the specified VideoClassificationPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionInstance.verify|verify} messages.
-                         * @param message VideoClassificationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoClassificationPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionInstance.verify|verify} messages.
-                         * @param message VideoClassificationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoClassificationPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoClassificationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionInstance;
-
-                        /**
-                         * Decodes a VideoClassificationPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoClassificationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionInstance;
-
-                        /**
-                         * Verifies a VideoClassificationPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoClassificationPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoClassificationPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionInstance;
-
-                        /**
-                         * Creates a plain object from a VideoClassificationPredictionInstance message. Also converts values to other types if specified.
-                         * @param message VideoClassificationPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoClassificationPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoObjectTrackingPredictionInstance. */
-                    interface IVideoObjectTrackingPredictionInstance {
-
-                        /** VideoObjectTrackingPredictionInstance content */
-                        content?: (string|null);
-
-                        /** VideoObjectTrackingPredictionInstance mimeType */
-                        mimeType?: (string|null);
-
-                        /** VideoObjectTrackingPredictionInstance timeSegmentStart */
-                        timeSegmentStart?: (string|null);
-
-                        /** VideoObjectTrackingPredictionInstance timeSegmentEnd */
-                        timeSegmentEnd?: (string|null);
-                    }
-
-                    /** Represents a VideoObjectTrackingPredictionInstance. */
-                    class VideoObjectTrackingPredictionInstance implements IVideoObjectTrackingPredictionInstance {
-
-                        /**
-                         * Constructs a new VideoObjectTrackingPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionInstance);
-
-                        /** VideoObjectTrackingPredictionInstance content. */
-                        public content: string;
-
-                        /** VideoObjectTrackingPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /** VideoObjectTrackingPredictionInstance timeSegmentStart. */
-                        public timeSegmentStart: string;
-
-                        /** VideoObjectTrackingPredictionInstance timeSegmentEnd. */
-                        public timeSegmentEnd: string;
-
-                        /**
-                         * Creates a new VideoObjectTrackingPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoObjectTrackingPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionInstance): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionInstance;
-
-                        /**
-                         * Encodes the specified VideoObjectTrackingPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionInstance.verify|verify} messages.
-                         * @param message VideoObjectTrackingPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoObjectTrackingPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionInstance.verify|verify} messages.
-                         * @param message VideoObjectTrackingPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoObjectTrackingPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoObjectTrackingPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionInstance;
-
-                        /**
-                         * Decodes a VideoObjectTrackingPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoObjectTrackingPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionInstance;
-
-                        /**
-                         * Verifies a VideoObjectTrackingPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoObjectTrackingPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoObjectTrackingPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionInstance;
-
-                        /**
-                         * Creates a plain object from a VideoObjectTrackingPredictionInstance message. Also converts values to other types if specified.
-                         * @param message VideoObjectTrackingPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoObjectTrackingPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoActionRecognitionPredictionInstance. */
-                    interface IVideoActionRecognitionPredictionInstance {
-
-                        /** VideoActionRecognitionPredictionInstance content */
-                        content?: (string|null);
-
-                        /** VideoActionRecognitionPredictionInstance mimeType */
-                        mimeType?: (string|null);
-
-                        /** VideoActionRecognitionPredictionInstance timeSegmentStart */
-                        timeSegmentStart?: (string|null);
-
-                        /** VideoActionRecognitionPredictionInstance timeSegmentEnd */
-                        timeSegmentEnd?: (string|null);
-                    }
-
-                    /** Represents a VideoActionRecognitionPredictionInstance. */
-                    class VideoActionRecognitionPredictionInstance implements IVideoActionRecognitionPredictionInstance {
-
-                        /**
-                         * Constructs a new VideoActionRecognitionPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionInstance);
-
-                        /** VideoActionRecognitionPredictionInstance content. */
-                        public content: string;
-
-                        /** VideoActionRecognitionPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /** VideoActionRecognitionPredictionInstance timeSegmentStart. */
-                        public timeSegmentStart: string;
-
-                        /** VideoActionRecognitionPredictionInstance timeSegmentEnd. */
-                        public timeSegmentEnd: string;
-
-                        /**
-                         * Creates a new VideoActionRecognitionPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoActionRecognitionPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionInstance): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionInstance;
-
-                        /**
-                         * Encodes the specified VideoActionRecognitionPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionInstance.verify|verify} messages.
-                         * @param message VideoActionRecognitionPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoActionRecognitionPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionInstance.verify|verify} messages.
-                         * @param message VideoActionRecognitionPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoActionRecognitionPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoActionRecognitionPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionInstance;
-
-                        /**
-                         * Decodes a VideoActionRecognitionPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoActionRecognitionPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionInstance;
-
-                        /**
-                         * Verifies a VideoActionRecognitionPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoActionRecognitionPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoActionRecognitionPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionInstance;
-
-                        /**
-                         * Creates a plain object from a VideoActionRecognitionPredictionInstance message. Also converts values to other types if specified.
-                         * @param message VideoActionRecognitionPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoActionRecognitionPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a TextClassificationPredictionInstance. */
-                    interface ITextClassificationPredictionInstance {
-
-                        /** TextClassificationPredictionInstance content */
-                        content?: (string|null);
-
-                        /** TextClassificationPredictionInstance mimeType */
-                        mimeType?: (string|null);
-                    }
-
-                    /** Represents a TextClassificationPredictionInstance. */
-                    class TextClassificationPredictionInstance implements ITextClassificationPredictionInstance {
-
-                        /**
-                         * Constructs a new TextClassificationPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.ITextClassificationPredictionInstance);
-
-                        /** TextClassificationPredictionInstance content. */
-                        public content: string;
-
-                        /** TextClassificationPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /**
-                         * Creates a new TextClassificationPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TextClassificationPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.ITextClassificationPredictionInstance): google.cloud.aiplatform.v1beta1.schema.TextClassificationPredictionInstance;
-
-                        /**
-                         * Encodes the specified TextClassificationPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextClassificationPredictionInstance.verify|verify} messages.
-                         * @param message TextClassificationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.ITextClassificationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TextClassificationPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextClassificationPredictionInstance.verify|verify} messages.
-                         * @param message TextClassificationPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.ITextClassificationPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TextClassificationPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TextClassificationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.TextClassificationPredictionInstance;
-
-                        /**
-                         * Decodes a TextClassificationPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TextClassificationPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.TextClassificationPredictionInstance;
-
-                        /**
-                         * Verifies a TextClassificationPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TextClassificationPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TextClassificationPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.TextClassificationPredictionInstance;
-
-                        /**
-                         * Creates a plain object from a TextClassificationPredictionInstance message. Also converts values to other types if specified.
-                         * @param message TextClassificationPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.TextClassificationPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TextClassificationPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a TextSentimentPredictionInstance. */
-                    interface ITextSentimentPredictionInstance {
-
-                        /** TextSentimentPredictionInstance content */
-                        content?: (string|null);
-
-                        /** TextSentimentPredictionInstance mimeType */
-                        mimeType?: (string|null);
-                    }
-
-                    /** Represents a TextSentimentPredictionInstance. */
-                    class TextSentimentPredictionInstance implements ITextSentimentPredictionInstance {
-
-                        /**
-                         * Constructs a new TextSentimentPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionInstance);
-
-                        /** TextSentimentPredictionInstance content. */
-                        public content: string;
-
-                        /** TextSentimentPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /**
-                         * Creates a new TextSentimentPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TextSentimentPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionInstance): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionInstance;
-
-                        /**
-                         * Encodes the specified TextSentimentPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionInstance.verify|verify} messages.
-                         * @param message TextSentimentPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TextSentimentPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionInstance.verify|verify} messages.
-                         * @param message TextSentimentPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TextSentimentPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TextSentimentPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionInstance;
-
-                        /**
-                         * Decodes a TextSentimentPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TextSentimentPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionInstance;
-
-                        /**
-                         * Verifies a TextSentimentPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TextSentimentPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TextSentimentPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionInstance;
-
-                        /**
-                         * Creates a plain object from a TextSentimentPredictionInstance message. Also converts values to other types if specified.
-                         * @param message TextSentimentPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TextSentimentPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a TextExtractionPredictionInstance. */
-                    interface ITextExtractionPredictionInstance {
-
-                        /** TextExtractionPredictionInstance content */
-                        content?: (string|null);
-
-                        /** TextExtractionPredictionInstance mimeType */
-                        mimeType?: (string|null);
-
-                        /** TextExtractionPredictionInstance key */
-                        key?: (string|null);
-                    }
-
-                    /** Represents a TextExtractionPredictionInstance. */
-                    class TextExtractionPredictionInstance implements ITextExtractionPredictionInstance {
-
-                        /**
-                         * Constructs a new TextExtractionPredictionInstance.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionInstance);
-
-                        /** TextExtractionPredictionInstance content. */
-                        public content: string;
-
-                        /** TextExtractionPredictionInstance mimeType. */
-                        public mimeType: string;
-
-                        /** TextExtractionPredictionInstance key. */
-                        public key: string;
-
-                        /**
-                         * Creates a new TextExtractionPredictionInstance instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TextExtractionPredictionInstance instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionInstance): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionInstance;
-
-                        /**
-                         * Encodes the specified TextExtractionPredictionInstance message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionInstance.verify|verify} messages.
-                         * @param message TextExtractionPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TextExtractionPredictionInstance message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionInstance.verify|verify} messages.
-                         * @param message TextExtractionPredictionInstance message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionInstance, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TextExtractionPredictionInstance message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TextExtractionPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionInstance;
-
-                        /**
-                         * Decodes a TextExtractionPredictionInstance message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TextExtractionPredictionInstance
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionInstance;
-
-                        /**
-                         * Verifies a TextExtractionPredictionInstance message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TextExtractionPredictionInstance message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TextExtractionPredictionInstance
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionInstance;
-
-                        /**
-                         * Creates a plain object from a TextExtractionPredictionInstance message. Also converts values to other types if specified.
-                         * @param message TextExtractionPredictionInstance
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TextExtractionPredictionInstance to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an ImageClassificationPredictionParams. */
-                    interface IImageClassificationPredictionParams {
-
-                        /** ImageClassificationPredictionParams confidenceThreshold */
-                        confidenceThreshold?: (number|null);
-
-                        /** ImageClassificationPredictionParams maxPredictions */
-                        maxPredictions?: (number|null);
-                    }
-
-                    /** Represents an ImageClassificationPredictionParams. */
-                    class ImageClassificationPredictionParams implements IImageClassificationPredictionParams {
-
-                        /**
-                         * Constructs a new ImageClassificationPredictionParams.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionParams);
-
-                        /** ImageClassificationPredictionParams confidenceThreshold. */
-                        public confidenceThreshold: number;
-
-                        /** ImageClassificationPredictionParams maxPredictions. */
-                        public maxPredictions: number;
-
-                        /**
-                         * Creates a new ImageClassificationPredictionParams instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ImageClassificationPredictionParams instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionParams): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionParams;
-
-                        /**
-                         * Encodes the specified ImageClassificationPredictionParams message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionParams.verify|verify} messages.
-                         * @param message ImageClassificationPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ImageClassificationPredictionParams message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionParams.verify|verify} messages.
-                         * @param message ImageClassificationPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IImageClassificationPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ImageClassificationPredictionParams message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ImageClassificationPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionParams;
-
-                        /**
-                         * Decodes an ImageClassificationPredictionParams message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ImageClassificationPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionParams;
-
-                        /**
-                         * Verifies an ImageClassificationPredictionParams message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ImageClassificationPredictionParams message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ImageClassificationPredictionParams
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionParams;
-
-                        /**
-                         * Creates a plain object from an ImageClassificationPredictionParams message. Also converts values to other types if specified.
-                         * @param message ImageClassificationPredictionParams
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ImageClassificationPredictionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ImageClassificationPredictionParams to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an ImageObjectDetectionPredictionParams. */
-                    interface IImageObjectDetectionPredictionParams {
-
-                        /** ImageObjectDetectionPredictionParams confidenceThreshold */
-                        confidenceThreshold?: (number|null);
-
-                        /** ImageObjectDetectionPredictionParams maxPredictions */
-                        maxPredictions?: (number|null);
-                    }
-
-                    /** Represents an ImageObjectDetectionPredictionParams. */
-                    class ImageObjectDetectionPredictionParams implements IImageObjectDetectionPredictionParams {
-
-                        /**
-                         * Constructs a new ImageObjectDetectionPredictionParams.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionParams);
-
-                        /** ImageObjectDetectionPredictionParams confidenceThreshold. */
-                        public confidenceThreshold: number;
-
-                        /** ImageObjectDetectionPredictionParams maxPredictions. */
-                        public maxPredictions: number;
-
-                        /**
-                         * Creates a new ImageObjectDetectionPredictionParams instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ImageObjectDetectionPredictionParams instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionParams): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionParams;
-
-                        /**
-                         * Encodes the specified ImageObjectDetectionPredictionParams message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionParams.verify|verify} messages.
-                         * @param message ImageObjectDetectionPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ImageObjectDetectionPredictionParams message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionParams.verify|verify} messages.
-                         * @param message ImageObjectDetectionPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ImageObjectDetectionPredictionParams message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ImageObjectDetectionPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionParams;
-
-                        /**
-                         * Decodes an ImageObjectDetectionPredictionParams message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ImageObjectDetectionPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionParams;
-
-                        /**
-                         * Verifies an ImageObjectDetectionPredictionParams message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ImageObjectDetectionPredictionParams message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ImageObjectDetectionPredictionParams
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionParams;
-
-                        /**
-                         * Creates a plain object from an ImageObjectDetectionPredictionParams message. Also converts values to other types if specified.
-                         * @param message ImageObjectDetectionPredictionParams
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ImageObjectDetectionPredictionParams to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an ImageSegmentationPredictionParams. */
-                    interface IImageSegmentationPredictionParams {
-
-                        /** ImageSegmentationPredictionParams confidenceThreshold */
-                        confidenceThreshold?: (number|null);
-                    }
-
-                    /** Represents an ImageSegmentationPredictionParams. */
-                    class ImageSegmentationPredictionParams implements IImageSegmentationPredictionParams {
-
-                        /**
-                         * Constructs a new ImageSegmentationPredictionParams.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionParams);
-
-                        /** ImageSegmentationPredictionParams confidenceThreshold. */
-                        public confidenceThreshold: number;
-
-                        /**
-                         * Creates a new ImageSegmentationPredictionParams instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ImageSegmentationPredictionParams instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionParams): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionParams;
-
-                        /**
-                         * Encodes the specified ImageSegmentationPredictionParams message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionParams.verify|verify} messages.
-                         * @param message ImageSegmentationPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ImageSegmentationPredictionParams message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionParams.verify|verify} messages.
-                         * @param message ImageSegmentationPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IImageSegmentationPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ImageSegmentationPredictionParams message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ImageSegmentationPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionParams;
-
-                        /**
-                         * Decodes an ImageSegmentationPredictionParams message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ImageSegmentationPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionParams;
-
-                        /**
-                         * Verifies an ImageSegmentationPredictionParams message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ImageSegmentationPredictionParams message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ImageSegmentationPredictionParams
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionParams;
-
-                        /**
-                         * Creates a plain object from an ImageSegmentationPredictionParams message. Also converts values to other types if specified.
-                         * @param message ImageSegmentationPredictionParams
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ImageSegmentationPredictionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ImageSegmentationPredictionParams to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoClassificationPredictionParams. */
-                    interface IVideoClassificationPredictionParams {
-
-                        /** VideoClassificationPredictionParams confidenceThreshold */
-                        confidenceThreshold?: (number|null);
-
-                        /** VideoClassificationPredictionParams maxPredictions */
-                        maxPredictions?: (number|null);
-
-                        /** VideoClassificationPredictionParams segmentClassification */
-                        segmentClassification?: (boolean|null);
-
-                        /** VideoClassificationPredictionParams shotClassification */
-                        shotClassification?: (boolean|null);
-
-                        /** VideoClassificationPredictionParams oneSecIntervalClassification */
-                        oneSecIntervalClassification?: (boolean|null);
-                    }
-
-                    /** Represents a VideoClassificationPredictionParams. */
-                    class VideoClassificationPredictionParams implements IVideoClassificationPredictionParams {
-
-                        /**
-                         * Constructs a new VideoClassificationPredictionParams.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionParams);
-
-                        /** VideoClassificationPredictionParams confidenceThreshold. */
-                        public confidenceThreshold: number;
-
-                        /** VideoClassificationPredictionParams maxPredictions. */
-                        public maxPredictions: number;
-
-                        /** VideoClassificationPredictionParams segmentClassification. */
-                        public segmentClassification: boolean;
-
-                        /** VideoClassificationPredictionParams shotClassification. */
-                        public shotClassification: boolean;
-
-                        /** VideoClassificationPredictionParams oneSecIntervalClassification. */
-                        public oneSecIntervalClassification: boolean;
-
-                        /**
-                         * Creates a new VideoClassificationPredictionParams instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoClassificationPredictionParams instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionParams): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionParams;
-
-                        /**
-                         * Encodes the specified VideoClassificationPredictionParams message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionParams.verify|verify} messages.
-                         * @param message VideoClassificationPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoClassificationPredictionParams message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionParams.verify|verify} messages.
-                         * @param message VideoClassificationPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoClassificationPredictionParams message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoClassificationPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionParams;
-
-                        /**
-                         * Decodes a VideoClassificationPredictionParams message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoClassificationPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionParams;
-
-                        /**
-                         * Verifies a VideoClassificationPredictionParams message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoClassificationPredictionParams message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoClassificationPredictionParams
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionParams;
-
-                        /**
-                         * Creates a plain object from a VideoClassificationPredictionParams message. Also converts values to other types if specified.
-                         * @param message VideoClassificationPredictionParams
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoClassificationPredictionParams to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoObjectTrackingPredictionParams. */
-                    interface IVideoObjectTrackingPredictionParams {
-
-                        /** VideoObjectTrackingPredictionParams confidenceThreshold */
-                        confidenceThreshold?: (number|null);
-
-                        /** VideoObjectTrackingPredictionParams maxPredictions */
-                        maxPredictions?: (number|null);
-
-                        /** VideoObjectTrackingPredictionParams minBoundingBoxSize */
-                        minBoundingBoxSize?: (number|null);
-                    }
-
-                    /** Represents a VideoObjectTrackingPredictionParams. */
-                    class VideoObjectTrackingPredictionParams implements IVideoObjectTrackingPredictionParams {
-
-                        /**
-                         * Constructs a new VideoObjectTrackingPredictionParams.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionParams);
-
-                        /** VideoObjectTrackingPredictionParams confidenceThreshold. */
-                        public confidenceThreshold: number;
-
-                        /** VideoObjectTrackingPredictionParams maxPredictions. */
-                        public maxPredictions: number;
-
-                        /** VideoObjectTrackingPredictionParams minBoundingBoxSize. */
-                        public minBoundingBoxSize: number;
-
-                        /**
-                         * Creates a new VideoObjectTrackingPredictionParams instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoObjectTrackingPredictionParams instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionParams): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionParams;
-
-                        /**
-                         * Encodes the specified VideoObjectTrackingPredictionParams message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionParams.verify|verify} messages.
-                         * @param message VideoObjectTrackingPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoObjectTrackingPredictionParams message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionParams.verify|verify} messages.
-                         * @param message VideoObjectTrackingPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoObjectTrackingPredictionParams message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoObjectTrackingPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionParams;
-
-                        /**
-                         * Decodes a VideoObjectTrackingPredictionParams message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoObjectTrackingPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionParams;
-
-                        /**
-                         * Verifies a VideoObjectTrackingPredictionParams message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoObjectTrackingPredictionParams message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoObjectTrackingPredictionParams
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionParams;
-
-                        /**
-                         * Creates a plain object from a VideoObjectTrackingPredictionParams message. Also converts values to other types if specified.
-                         * @param message VideoObjectTrackingPredictionParams
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoObjectTrackingPredictionParams to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoActionRecognitionPredictionParams. */
-                    interface IVideoActionRecognitionPredictionParams {
-
-                        /** VideoActionRecognitionPredictionParams confidenceThreshold */
-                        confidenceThreshold?: (number|null);
-
-                        /** VideoActionRecognitionPredictionParams maxPredictions */
-                        maxPredictions?: (number|null);
-                    }
-
-                    /** Represents a VideoActionRecognitionPredictionParams. */
-                    class VideoActionRecognitionPredictionParams implements IVideoActionRecognitionPredictionParams {
-
-                        /**
-                         * Constructs a new VideoActionRecognitionPredictionParams.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionParams);
-
-                        /** VideoActionRecognitionPredictionParams confidenceThreshold. */
-                        public confidenceThreshold: number;
-
-                        /** VideoActionRecognitionPredictionParams maxPredictions. */
-                        public maxPredictions: number;
-
-                        /**
-                         * Creates a new VideoActionRecognitionPredictionParams instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoActionRecognitionPredictionParams instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionParams): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionParams;
-
-                        /**
-                         * Encodes the specified VideoActionRecognitionPredictionParams message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionParams.verify|verify} messages.
-                         * @param message VideoActionRecognitionPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoActionRecognitionPredictionParams message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionParams.verify|verify} messages.
-                         * @param message VideoActionRecognitionPredictionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoActionRecognitionPredictionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoActionRecognitionPredictionParams message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoActionRecognitionPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionParams;
-
-                        /**
-                         * Decodes a VideoActionRecognitionPredictionParams message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoActionRecognitionPredictionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionParams;
-
-                        /**
-                         * Verifies a VideoActionRecognitionPredictionParams message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoActionRecognitionPredictionParams message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoActionRecognitionPredictionParams
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionParams;
-
-                        /**
-                         * Creates a plain object from a VideoActionRecognitionPredictionParams message. Also converts values to other types if specified.
-                         * @param message VideoActionRecognitionPredictionParams
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoActionRecognitionPredictionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoActionRecognitionPredictionParams to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a PredictionResult. */
-                    interface IPredictionResult {
-
-                        /** PredictionResult instance */
-                        instance?: (google.protobuf.IStruct|null);
-
-                        /** PredictionResult key */
-                        key?: (string|null);
-
-                        /** PredictionResult prediction */
-                        prediction?: (google.protobuf.IValue|null);
-                    }
-
-                    /** Represents a PredictionResult. */
-                    class PredictionResult implements IPredictionResult {
-
-                        /**
-                         * Constructs a new PredictionResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IPredictionResult);
-
-                        /** PredictionResult instance. */
-                        public instance?: (google.protobuf.IStruct|null);
-
-                        /** PredictionResult key. */
-                        public key: string;
-
-                        /** PredictionResult prediction. */
-                        public prediction?: (google.protobuf.IValue|null);
-
-                        /** PredictionResult input. */
-                        public input?: ("instance"|"key");
-
-                        /**
-                         * Creates a new PredictionResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns PredictionResult instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IPredictionResult): google.cloud.aiplatform.v1beta1.schema.PredictionResult;
-
-                        /**
-                         * Encodes the specified PredictionResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.PredictionResult.verify|verify} messages.
-                         * @param message PredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified PredictionResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.PredictionResult.verify|verify} messages.
-                         * @param message PredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a PredictionResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns PredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.PredictionResult;
-
-                        /**
-                         * Decodes a PredictionResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns PredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.PredictionResult;
-
-                        /**
-                         * Verifies a PredictionResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a PredictionResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns PredictionResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.PredictionResult;
-
-                        /**
-                         * Creates a plain object from a PredictionResult message. Also converts values to other types if specified.
-                         * @param message PredictionResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.PredictionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this PredictionResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a TextSentimentPredictionResult. */
-                    interface ITextSentimentPredictionResult {
-
-                        /** TextSentimentPredictionResult instance */
-                        instance?: (google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionInstance|null);
-
-                        /** TextSentimentPredictionResult prediction */
-                        prediction?: (google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.IPrediction|null);
-                    }
-
-                    /** Represents a TextSentimentPredictionResult. */
-                    class TextSentimentPredictionResult implements ITextSentimentPredictionResult {
-
-                        /**
-                         * Constructs a new TextSentimentPredictionResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionResult);
-
-                        /** TextSentimentPredictionResult instance. */
-                        public instance?: (google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionInstance|null);
-
-                        /** TextSentimentPredictionResult prediction. */
-                        public prediction?: (google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.IPrediction|null);
-
-                        /**
-                         * Creates a new TextSentimentPredictionResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TextSentimentPredictionResult instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionResult): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult;
-
-                        /**
-                         * Encodes the specified TextSentimentPredictionResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.verify|verify} messages.
-                         * @param message TextSentimentPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TextSentimentPredictionResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.verify|verify} messages.
-                         * @param message TextSentimentPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.ITextSentimentPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TextSentimentPredictionResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TextSentimentPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult;
-
-                        /**
-                         * Decodes a TextSentimentPredictionResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TextSentimentPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult;
-
-                        /**
-                         * Verifies a TextSentimentPredictionResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TextSentimentPredictionResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TextSentimentPredictionResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult;
-
-                        /**
-                         * Creates a plain object from a TextSentimentPredictionResult message. Also converts values to other types if specified.
-                         * @param message TextSentimentPredictionResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TextSentimentPredictionResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace TextSentimentPredictionResult {
-
-                        /** Properties of a Prediction. */
-                        interface IPrediction {
-
-                            /** Prediction sentiment */
-                            sentiment?: (number|null);
-                        }
-
-                        /** Represents a Prediction. */
-                        class Prediction implements IPrediction {
-
-                            /**
-                             * Constructs a new Prediction.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.IPrediction);
-
-                            /** Prediction sentiment. */
-                            public sentiment: number;
-
-                            /**
-                             * Creates a new Prediction instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns Prediction instance
-                             */
-                            public static create(properties?: google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.IPrediction): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.Prediction;
-
-                            /**
-                             * Encodes the specified Prediction message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.Prediction.verify|verify} messages.
-                             * @param message Prediction message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.IPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified Prediction message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.Prediction.verify|verify} messages.
-                             * @param message Prediction message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.IPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a Prediction message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns Prediction
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.Prediction;
-
-                            /**
-                             * Decodes a Prediction message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns Prediction
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.Prediction;
-
-                            /**
-                             * Verifies a Prediction message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a Prediction message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns Prediction
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.Prediction;
-
-                            /**
-                             * Creates a plain object from a Prediction message. Also converts values to other types if specified.
-                             * @param message Prediction
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.aiplatform.v1beta1.schema.TextSentimentPredictionResult.Prediction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this Prediction to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-                    }
-
-                    /** Properties of a ClassificationPredictionResult. */
-                    interface IClassificationPredictionResult {
-
-                        /** ClassificationPredictionResult ids */
-                        ids?: ((number|Long|string)[]|null);
-
-                        /** ClassificationPredictionResult displayNames */
-                        displayNames?: (string[]|null);
-
-                        /** ClassificationPredictionResult confidences */
-                        confidences?: (number[]|null);
-                    }
-
-                    /** Represents a ClassificationPredictionResult. */
-                    class ClassificationPredictionResult implements IClassificationPredictionResult {
-
-                        /**
-                         * Constructs a new ClassificationPredictionResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IClassificationPredictionResult);
-
-                        /** ClassificationPredictionResult ids. */
-                        public ids: (number|Long|string)[];
-
-                        /** ClassificationPredictionResult displayNames. */
-                        public displayNames: string[];
-
-                        /** ClassificationPredictionResult confidences. */
-                        public confidences: number[];
-
-                        /**
-                         * Creates a new ClassificationPredictionResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ClassificationPredictionResult instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IClassificationPredictionResult): google.cloud.aiplatform.v1beta1.schema.ClassificationPredictionResult;
-
-                        /**
-                         * Encodes the specified ClassificationPredictionResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ClassificationPredictionResult.verify|verify} messages.
-                         * @param message ClassificationPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IClassificationPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ClassificationPredictionResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ClassificationPredictionResult.verify|verify} messages.
-                         * @param message ClassificationPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IClassificationPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ClassificationPredictionResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ClassificationPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ClassificationPredictionResult;
-
-                        /**
-                         * Decodes a ClassificationPredictionResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ClassificationPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ClassificationPredictionResult;
-
-                        /**
-                         * Verifies a ClassificationPredictionResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ClassificationPredictionResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ClassificationPredictionResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ClassificationPredictionResult;
-
-                        /**
-                         * Creates a plain object from a ClassificationPredictionResult message. Also converts values to other types if specified.
-                         * @param message ClassificationPredictionResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ClassificationPredictionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ClassificationPredictionResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of an ImageObjectDetectionPredictionResult. */
-                    interface IImageObjectDetectionPredictionResult {
-
-                        /** ImageObjectDetectionPredictionResult ids */
-                        ids?: ((number|Long|string)[]|null);
-
-                        /** ImageObjectDetectionPredictionResult displayNames */
-                        displayNames?: (string[]|null);
-
-                        /** ImageObjectDetectionPredictionResult confidences */
-                        confidences?: (number[]|null);
-
-                        /** ImageObjectDetectionPredictionResult bboxes */
-                        bboxes?: (google.protobuf.IListValue[]|null);
-                    }
-
-                    /** Represents an ImageObjectDetectionPredictionResult. */
-                    class ImageObjectDetectionPredictionResult implements IImageObjectDetectionPredictionResult {
-
-                        /**
-                         * Constructs a new ImageObjectDetectionPredictionResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionResult);
-
-                        /** ImageObjectDetectionPredictionResult ids. */
-                        public ids: (number|Long|string)[];
-
-                        /** ImageObjectDetectionPredictionResult displayNames. */
-                        public displayNames: string[];
-
-                        /** ImageObjectDetectionPredictionResult confidences. */
-                        public confidences: number[];
-
-                        /** ImageObjectDetectionPredictionResult bboxes. */
-                        public bboxes: google.protobuf.IListValue[];
-
-                        /**
-                         * Creates a new ImageObjectDetectionPredictionResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ImageObjectDetectionPredictionResult instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionResult): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionResult;
-
-                        /**
-                         * Encodes the specified ImageObjectDetectionPredictionResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionResult.verify|verify} messages.
-                         * @param message ImageObjectDetectionPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ImageObjectDetectionPredictionResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionResult.verify|verify} messages.
-                         * @param message ImageObjectDetectionPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IImageObjectDetectionPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an ImageObjectDetectionPredictionResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ImageObjectDetectionPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionResult;
-
-                        /**
-                         * Decodes an ImageObjectDetectionPredictionResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ImageObjectDetectionPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionResult;
-
-                        /**
-                         * Verifies an ImageObjectDetectionPredictionResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an ImageObjectDetectionPredictionResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ImageObjectDetectionPredictionResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionResult;
-
-                        /**
-                         * Creates a plain object from an ImageObjectDetectionPredictionResult message. Also converts values to other types if specified.
-                         * @param message ImageObjectDetectionPredictionResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.ImageObjectDetectionPredictionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ImageObjectDetectionPredictionResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoClassificationPredictionResult. */
-                    interface IVideoClassificationPredictionResult {
-
-                        /** VideoClassificationPredictionResult id */
-                        id?: (string|null);
-
-                        /** VideoClassificationPredictionResult displayName */
-                        displayName?: (string|null);
-
-                        /** VideoClassificationPredictionResult type */
-                        type?: (string|null);
-
-                        /** VideoClassificationPredictionResult timeSegmentStart */
-                        timeSegmentStart?: (google.protobuf.IDuration|null);
-
-                        /** VideoClassificationPredictionResult timeSegmentEnd */
-                        timeSegmentEnd?: (google.protobuf.IDuration|null);
-
-                        /** VideoClassificationPredictionResult confidence */
-                        confidence?: (google.protobuf.IFloatValue|null);
-                    }
-
-                    /** Represents a VideoClassificationPredictionResult. */
-                    class VideoClassificationPredictionResult implements IVideoClassificationPredictionResult {
-
-                        /**
-                         * Constructs a new VideoClassificationPredictionResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionResult);
-
-                        /** VideoClassificationPredictionResult id. */
-                        public id: string;
-
-                        /** VideoClassificationPredictionResult displayName. */
-                        public displayName: string;
-
-                        /** VideoClassificationPredictionResult type. */
-                        public type: string;
-
-                        /** VideoClassificationPredictionResult timeSegmentStart. */
-                        public timeSegmentStart?: (google.protobuf.IDuration|null);
-
-                        /** VideoClassificationPredictionResult timeSegmentEnd. */
-                        public timeSegmentEnd?: (google.protobuf.IDuration|null);
-
-                        /** VideoClassificationPredictionResult confidence. */
-                        public confidence?: (google.protobuf.IFloatValue|null);
-
-                        /**
-                         * Creates a new VideoClassificationPredictionResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoClassificationPredictionResult instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionResult): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionResult;
-
-                        /**
-                         * Encodes the specified VideoClassificationPredictionResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionResult.verify|verify} messages.
-                         * @param message VideoClassificationPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoClassificationPredictionResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionResult.verify|verify} messages.
-                         * @param message VideoClassificationPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoClassificationPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoClassificationPredictionResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoClassificationPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionResult;
-
-                        /**
-                         * Decodes a VideoClassificationPredictionResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoClassificationPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionResult;
-
-                        /**
-                         * Verifies a VideoClassificationPredictionResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoClassificationPredictionResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoClassificationPredictionResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionResult;
-
-                        /**
-                         * Creates a plain object from a VideoClassificationPredictionResult message. Also converts values to other types if specified.
-                         * @param message VideoClassificationPredictionResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoClassificationPredictionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoClassificationPredictionResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VideoObjectTrackingPredictionResult. */
-                    interface IVideoObjectTrackingPredictionResult {
-
-                        /** VideoObjectTrackingPredictionResult id */
-                        id?: (string|null);
-
-                        /** VideoObjectTrackingPredictionResult displayName */
-                        displayName?: (string|null);
-
-                        /** VideoObjectTrackingPredictionResult timeSegmentStart */
-                        timeSegmentStart?: (google.protobuf.IDuration|null);
-
-                        /** VideoObjectTrackingPredictionResult timeSegmentEnd */
-                        timeSegmentEnd?: (google.protobuf.IDuration|null);
-
-                        /** VideoObjectTrackingPredictionResult confidence */
-                        confidence?: (google.protobuf.IFloatValue|null);
-
-                        /** VideoObjectTrackingPredictionResult frames */
-                        frames?: (google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.IFrame[]|null);
-                    }
-
-                    /** Represents a VideoObjectTrackingPredictionResult. */
-                    class VideoObjectTrackingPredictionResult implements IVideoObjectTrackingPredictionResult {
-
-                        /**
-                         * Constructs a new VideoObjectTrackingPredictionResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionResult);
-
-                        /** VideoObjectTrackingPredictionResult id. */
-                        public id: string;
-
-                        /** VideoObjectTrackingPredictionResult displayName. */
-                        public displayName: string;
-
-                        /** VideoObjectTrackingPredictionResult timeSegmentStart. */
-                        public timeSegmentStart?: (google.protobuf.IDuration|null);
-
-                        /** VideoObjectTrackingPredictionResult timeSegmentEnd. */
-                        public timeSegmentEnd?: (google.protobuf.IDuration|null);
-
-                        /** VideoObjectTrackingPredictionResult confidence. */
-                        public confidence?: (google.protobuf.IFloatValue|null);
-
-                        /** VideoObjectTrackingPredictionResult frames. */
-                        public frames: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.IFrame[];
-
-                        /**
-                         * Creates a new VideoObjectTrackingPredictionResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VideoObjectTrackingPredictionResult instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionResult): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult;
-
-                        /**
-                         * Encodes the specified VideoObjectTrackingPredictionResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.verify|verify} messages.
-                         * @param message VideoObjectTrackingPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VideoObjectTrackingPredictionResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.verify|verify} messages.
-                         * @param message VideoObjectTrackingPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVideoObjectTrackingPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VideoObjectTrackingPredictionResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VideoObjectTrackingPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult;
-
-                        /**
-                         * Decodes a VideoObjectTrackingPredictionResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VideoObjectTrackingPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult;
-
-                        /**
-                         * Verifies a VideoObjectTrackingPredictionResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VideoObjectTrackingPredictionResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VideoObjectTrackingPredictionResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult;
-
-                        /**
-                         * Creates a plain object from a VideoObjectTrackingPredictionResult message. Also converts values to other types if specified.
-                         * @param message VideoObjectTrackingPredictionResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VideoObjectTrackingPredictionResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace VideoObjectTrackingPredictionResult {
-
-                        /** Properties of a Frame. */
-                        interface IFrame {
-
-                            /** Frame timeOffset */
-                            timeOffset?: (google.protobuf.IDuration|null);
-
-                            /** Frame xMin */
-                            xMin?: (google.protobuf.IFloatValue|null);
-
-                            /** Frame xMax */
-                            xMax?: (google.protobuf.IFloatValue|null);
-
-                            /** Frame yMin */
-                            yMin?: (google.protobuf.IFloatValue|null);
-
-                            /** Frame yMax */
-                            yMax?: (google.protobuf.IFloatValue|null);
-                        }
-
-                        /** Represents a Frame. */
-                        class Frame implements IFrame {
-
-                            /**
-                             * Constructs a new Frame.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.IFrame);
-
-                            /** Frame timeOffset. */
-                            public timeOffset?: (google.protobuf.IDuration|null);
-
-                            /** Frame xMin. */
-                            public xMin?: (google.protobuf.IFloatValue|null);
-
-                            /** Frame xMax. */
-                            public xMax?: (google.protobuf.IFloatValue|null);
-
-                            /** Frame yMin. */
-                            public yMin?: (google.protobuf.IFloatValue|null);
-
-                            /** Frame yMax. */
-                            public yMax?: (google.protobuf.IFloatValue|null);
-
-                            /**
-                             * Creates a new Frame instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns Frame instance
-                             */
-                            public static create(properties?: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.IFrame): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.Frame;
-
-                            /**
-                             * Encodes the specified Frame message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.Frame.verify|verify} messages.
-                             * @param message Frame message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.IFrame, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified Frame message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.Frame.verify|verify} messages.
-                             * @param message Frame message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.IFrame, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a Frame message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns Frame
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.Frame;
-
-                            /**
-                             * Decodes a Frame message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns Frame
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.Frame;
-
-                            /**
-                             * Verifies a Frame message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a Frame message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns Frame
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.Frame;
-
-                            /**
-                             * Creates a plain object from a Frame message. Also converts values to other types if specified.
-                             * @param message Frame
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VideoObjectTrackingPredictionResult.Frame, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this Frame to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-                    }
-
-                    /** Properties of a TextExtractionPredictionResult. */
-                    interface ITextExtractionPredictionResult {
-
-                        /** TextExtractionPredictionResult ids */
-                        ids?: ((number|Long|string)[]|null);
-
-                        /** TextExtractionPredictionResult displayNames */
-                        displayNames?: (string[]|null);
-
-                        /** TextExtractionPredictionResult textSegmentStartOffsets */
-                        textSegmentStartOffsets?: ((number|Long|string)[]|null);
-
-                        /** TextExtractionPredictionResult textSegmentEndOffsets */
-                        textSegmentEndOffsets?: ((number|Long|string)[]|null);
-
-                        /** TextExtractionPredictionResult confidences */
-                        confidences?: (number[]|null);
-                    }
-
-                    /** Represents a TextExtractionPredictionResult. */
-                    class TextExtractionPredictionResult implements ITextExtractionPredictionResult {
-
-                        /**
-                         * Constructs a new TextExtractionPredictionResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionResult);
-
-                        /** TextExtractionPredictionResult ids. */
-                        public ids: (number|Long|string)[];
-
-                        /** TextExtractionPredictionResult displayNames. */
-                        public displayNames: string[];
-
-                        /** TextExtractionPredictionResult textSegmentStartOffsets. */
-                        public textSegmentStartOffsets: (number|Long|string)[];
-
-                        /** TextExtractionPredictionResult textSegmentEndOffsets. */
-                        public textSegmentEndOffsets: (number|Long|string)[];
-
-                        /** TextExtractionPredictionResult confidences. */
-                        public confidences: number[];
-
-                        /**
-                         * Creates a new TextExtractionPredictionResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TextExtractionPredictionResult instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionResult): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionResult;
-
-                        /**
-                         * Encodes the specified TextExtractionPredictionResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionResult.verify|verify} messages.
-                         * @param message TextExtractionPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TextExtractionPredictionResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionResult.verify|verify} messages.
-                         * @param message TextExtractionPredictionResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.ITextExtractionPredictionResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TextExtractionPredictionResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TextExtractionPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionResult;
-
-                        /**
-                         * Decodes a TextExtractionPredictionResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TextExtractionPredictionResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionResult;
-
-                        /**
-                         * Verifies a TextExtractionPredictionResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TextExtractionPredictionResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TextExtractionPredictionResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionResult;
-
-                        /**
-                         * Creates a plain object from a TextExtractionPredictionResult message. Also converts values to other types if specified.
-                         * @param message TextExtractionPredictionResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.TextExtractionPredictionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TextExtractionPredictionResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
                     /** Namespace predict. */
                     namespace predict {
 
@@ -55151,10 +52676,10 @@ export namespace google {
                             interface IImageSegmentationPredictionResult {
 
                                 /** ImageSegmentationPredictionResult categoryMask */
-                                categoryMask?: (Uint8Array|string|null);
+                                categoryMask?: (string|null);
 
                                 /** ImageSegmentationPredictionResult confidenceMask */
-                                confidenceMask?: (Uint8Array|string|null);
+                                confidenceMask?: (string|null);
                             }
 
                             /** Represents an ImageSegmentationPredictionResult. */
@@ -55167,10 +52692,10 @@ export namespace google {
                                 constructor(properties?: google.cloud.aiplatform.v1beta1.schema.predict.prediction.IImageSegmentationPredictionResult);
 
                                 /** ImageSegmentationPredictionResult categoryMask. */
-                                public categoryMask: (Uint8Array|string);
+                                public categoryMask: string;
 
                                 /** ImageSegmentationPredictionResult confidenceMask. */
-                                public confidenceMask: (Uint8Array|string);
+                                public confidenceMask: string;
 
                                 /**
                                  * Creates a new ImageSegmentationPredictionResult instance using the specified properties.
@@ -55558,11 +53083,8 @@ export namespace google {
                             /** Properties of a TextSentimentPredictionResult. */
                             interface ITextSentimentPredictionResult {
 
-                                /** TextSentimentPredictionResult instance */
-                                instance?: (google.cloud.aiplatform.v1beta1.schema.predict.instance.ITextSentimentPredictionInstance|null);
-
-                                /** TextSentimentPredictionResult prediction */
-                                prediction?: (google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.IPrediction|null);
+                                /** TextSentimentPredictionResult sentiment */
+                                sentiment?: (number|null);
                             }
 
                             /** Represents a TextSentimentPredictionResult. */
@@ -55574,11 +53096,8 @@ export namespace google {
                                  */
                                 constructor(properties?: google.cloud.aiplatform.v1beta1.schema.predict.prediction.ITextSentimentPredictionResult);
 
-                                /** TextSentimentPredictionResult instance. */
-                                public instance?: (google.cloud.aiplatform.v1beta1.schema.predict.instance.ITextSentimentPredictionInstance|null);
-
-                                /** TextSentimentPredictionResult prediction. */
-                                public prediction?: (google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.IPrediction|null);
+                                /** TextSentimentPredictionResult sentiment. */
+                                public sentiment: number;
 
                                 /**
                                  * Creates a new TextSentimentPredictionResult instance using the specified properties.
@@ -55649,99 +53168,6 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
-                            }
-
-                            namespace TextSentimentPredictionResult {
-
-                                /** Properties of a Prediction. */
-                                interface IPrediction {
-
-                                    /** Prediction sentiment */
-                                    sentiment?: (number|null);
-                                }
-
-                                /** Represents a Prediction. */
-                                class Prediction implements IPrediction {
-
-                                    /**
-                                     * Constructs a new Prediction.
-                                     * @param [properties] Properties to set
-                                     */
-                                    constructor(properties?: google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.IPrediction);
-
-                                    /** Prediction sentiment. */
-                                    public sentiment: number;
-
-                                    /**
-                                     * Creates a new Prediction instance using the specified properties.
-                                     * @param [properties] Properties to set
-                                     * @returns Prediction instance
-                                     */
-                                    public static create(properties?: google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.IPrediction): google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.Prediction;
-
-                                    /**
-                                     * Encodes the specified Prediction message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.Prediction.verify|verify} messages.
-                                     * @param message Prediction message or plain object to encode
-                                     * @param [writer] Writer to encode to
-                                     * @returns Writer
-                                     */
-                                    public static encode(message: google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.IPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                    /**
-                                     * Encodes the specified Prediction message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.Prediction.verify|verify} messages.
-                                     * @param message Prediction message or plain object to encode
-                                     * @param [writer] Writer to encode to
-                                     * @returns Writer
-                                     */
-                                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.IPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                    /**
-                                     * Decodes a Prediction message from the specified reader or buffer.
-                                     * @param reader Reader or buffer to decode from
-                                     * @param [length] Message length if known beforehand
-                                     * @returns Prediction
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.Prediction;
-
-                                    /**
-                                     * Decodes a Prediction message from the specified reader or buffer, length delimited.
-                                     * @param reader Reader or buffer to decode from
-                                     * @returns Prediction
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.Prediction;
-
-                                    /**
-                                     * Verifies a Prediction message.
-                                     * @param message Plain object to verify
-                                     * @returns `null` if valid, otherwise the reason why it is not
-                                     */
-                                    public static verify(message: { [k: string]: any }): (string|null);
-
-                                    /**
-                                     * Creates a Prediction message from a plain object. Also converts values to their respective internal types.
-                                     * @param object Plain object
-                                     * @returns Prediction
-                                     */
-                                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.Prediction;
-
-                                    /**
-                                     * Creates a plain object from a Prediction message. Also converts values to other types if specified.
-                                     * @param message Prediction
-                                     * @param [options] Conversion options
-                                     * @returns Plain object
-                                     */
-                                    public static toObject(message: google.cloud.aiplatform.v1beta1.schema.predict.prediction.TextSentimentPredictionResult.Prediction, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                    /**
-                                     * Converts this Prediction to JSON.
-                                     * @returns JSON object
-                                     */
-                                    public toJSON(): { [k: string]: any };
-                                }
                             }
 
                             /** Properties of a TimeSeriesForecastingPredictionResult. */
@@ -56319,1718 +53745,11 @@ export namespace google {
                         }
                     }
 
-                    /** Properties of a TextSentimentSavedQueryMetadata. */
-                    interface ITextSentimentSavedQueryMetadata {
-
-                        /** TextSentimentSavedQueryMetadata sentimentMax */
-                        sentimentMax?: (number|null);
-                    }
-
-                    /** Represents a TextSentimentSavedQueryMetadata. */
-                    class TextSentimentSavedQueryMetadata implements ITextSentimentSavedQueryMetadata {
-
-                        /**
-                         * Constructs a new TextSentimentSavedQueryMetadata.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.ITextSentimentSavedQueryMetadata);
-
-                        /** TextSentimentSavedQueryMetadata sentimentMax. */
-                        public sentimentMax: number;
-
-                        /**
-                         * Creates a new TextSentimentSavedQueryMetadata instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns TextSentimentSavedQueryMetadata instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.ITextSentimentSavedQueryMetadata): google.cloud.aiplatform.v1beta1.schema.TextSentimentSavedQueryMetadata;
-
-                        /**
-                         * Encodes the specified TextSentimentSavedQueryMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentSavedQueryMetadata.verify|verify} messages.
-                         * @param message TextSentimentSavedQueryMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.ITextSentimentSavedQueryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified TextSentimentSavedQueryMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.TextSentimentSavedQueryMetadata.verify|verify} messages.
-                         * @param message TextSentimentSavedQueryMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.ITextSentimentSavedQueryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a TextSentimentSavedQueryMetadata message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns TextSentimentSavedQueryMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.TextSentimentSavedQueryMetadata;
-
-                        /**
-                         * Decodes a TextSentimentSavedQueryMetadata message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns TextSentimentSavedQueryMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.TextSentimentSavedQueryMetadata;
-
-                        /**
-                         * Verifies a TextSentimentSavedQueryMetadata message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a TextSentimentSavedQueryMetadata message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns TextSentimentSavedQueryMetadata
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.TextSentimentSavedQueryMetadata;
-
-                        /**
-                         * Creates a plain object from a TextSentimentSavedQueryMetadata message. Also converts values to other types if specified.
-                         * @param message TextSentimentSavedQueryMetadata
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.TextSentimentSavedQueryMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this TextSentimentSavedQueryMetadata to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VisualInspectionClassificationLabelSavedQueryMetadata. */
-                    interface IVisualInspectionClassificationLabelSavedQueryMetadata {
-
-                        /** VisualInspectionClassificationLabelSavedQueryMetadata multiLabel */
-                        multiLabel?: (boolean|null);
-                    }
-
-                    /** Represents a VisualInspectionClassificationLabelSavedQueryMetadata. */
-                    class VisualInspectionClassificationLabelSavedQueryMetadata implements IVisualInspectionClassificationLabelSavedQueryMetadata {
-
-                        /**
-                         * Constructs a new VisualInspectionClassificationLabelSavedQueryMetadata.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionClassificationLabelSavedQueryMetadata);
-
-                        /** VisualInspectionClassificationLabelSavedQueryMetadata multiLabel. */
-                        public multiLabel: boolean;
-
-                        /**
-                         * Creates a new VisualInspectionClassificationLabelSavedQueryMetadata instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VisualInspectionClassificationLabelSavedQueryMetadata instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionClassificationLabelSavedQueryMetadata): google.cloud.aiplatform.v1beta1.schema.VisualInspectionClassificationLabelSavedQueryMetadata;
-
-                        /**
-                         * Encodes the specified VisualInspectionClassificationLabelSavedQueryMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VisualInspectionClassificationLabelSavedQueryMetadata.verify|verify} messages.
-                         * @param message VisualInspectionClassificationLabelSavedQueryMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionClassificationLabelSavedQueryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VisualInspectionClassificationLabelSavedQueryMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VisualInspectionClassificationLabelSavedQueryMetadata.verify|verify} messages.
-                         * @param message VisualInspectionClassificationLabelSavedQueryMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionClassificationLabelSavedQueryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VisualInspectionClassificationLabelSavedQueryMetadata message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VisualInspectionClassificationLabelSavedQueryMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VisualInspectionClassificationLabelSavedQueryMetadata;
-
-                        /**
-                         * Decodes a VisualInspectionClassificationLabelSavedQueryMetadata message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VisualInspectionClassificationLabelSavedQueryMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VisualInspectionClassificationLabelSavedQueryMetadata;
-
-                        /**
-                         * Verifies a VisualInspectionClassificationLabelSavedQueryMetadata message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VisualInspectionClassificationLabelSavedQueryMetadata message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VisualInspectionClassificationLabelSavedQueryMetadata
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VisualInspectionClassificationLabelSavedQueryMetadata;
-
-                        /**
-                         * Creates a plain object from a VisualInspectionClassificationLabelSavedQueryMetadata message. Also converts values to other types if specified.
-                         * @param message VisualInspectionClassificationLabelSavedQueryMetadata
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VisualInspectionClassificationLabelSavedQueryMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VisualInspectionClassificationLabelSavedQueryMetadata to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a VisualInspectionMaskSavedQueryMetadata. */
-                    interface IVisualInspectionMaskSavedQueryMetadata {
-
-                        /** VisualInspectionMaskSavedQueryMetadata colorMap */
-                        colorMap?: (google.cloud.aiplatform.v1beta1.schema.IAnnotationSpecColor[]|null);
-                    }
-
-                    /** Represents a VisualInspectionMaskSavedQueryMetadata. */
-                    class VisualInspectionMaskSavedQueryMetadata implements IVisualInspectionMaskSavedQueryMetadata {
-
-                        /**
-                         * Constructs a new VisualInspectionMaskSavedQueryMetadata.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionMaskSavedQueryMetadata);
-
-                        /** VisualInspectionMaskSavedQueryMetadata colorMap. */
-                        public colorMap: google.cloud.aiplatform.v1beta1.schema.IAnnotationSpecColor[];
-
-                        /**
-                         * Creates a new VisualInspectionMaskSavedQueryMetadata instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VisualInspectionMaskSavedQueryMetadata instance
-                         */
-                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionMaskSavedQueryMetadata): google.cloud.aiplatform.v1beta1.schema.VisualInspectionMaskSavedQueryMetadata;
-
-                        /**
-                         * Encodes the specified VisualInspectionMaskSavedQueryMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VisualInspectionMaskSavedQueryMetadata.verify|verify} messages.
-                         * @param message VisualInspectionMaskSavedQueryMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionMaskSavedQueryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VisualInspectionMaskSavedQueryMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.VisualInspectionMaskSavedQueryMetadata.verify|verify} messages.
-                         * @param message VisualInspectionMaskSavedQueryMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.IVisualInspectionMaskSavedQueryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VisualInspectionMaskSavedQueryMetadata message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VisualInspectionMaskSavedQueryMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.VisualInspectionMaskSavedQueryMetadata;
-
-                        /**
-                         * Decodes a VisualInspectionMaskSavedQueryMetadata message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VisualInspectionMaskSavedQueryMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.VisualInspectionMaskSavedQueryMetadata;
-
-                        /**
-                         * Verifies a VisualInspectionMaskSavedQueryMetadata message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VisualInspectionMaskSavedQueryMetadata message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VisualInspectionMaskSavedQueryMetadata
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.VisualInspectionMaskSavedQueryMetadata;
-
-                        /**
-                         * Creates a plain object from a VisualInspectionMaskSavedQueryMetadata message. Also converts values to other types if specified.
-                         * @param message VisualInspectionMaskSavedQueryMetadata
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.VisualInspectionMaskSavedQueryMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VisualInspectionMaskSavedQueryMetadata to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
                     /** Namespace trainingjob. */
                     namespace trainingjob {
 
                         /** Namespace definition. */
                         namespace definition {
-
-                            /** Properties of an AutoMlForecasting. */
-                            interface IAutoMlForecasting {
-
-                                /** AutoMlForecasting inputs */
-                                inputs?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs|null);
-
-                                /** AutoMlForecasting metadata */
-                                metadata?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata|null);
-                            }
-
-                            /** Represents an AutoMlForecasting. */
-                            class AutoMlForecasting implements IAutoMlForecasting {
-
-                                /**
-                                 * Constructs a new AutoMlForecasting.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting);
-
-                                /** AutoMlForecasting inputs. */
-                                public inputs?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs|null);
-
-                                /** AutoMlForecasting metadata. */
-                                public metadata?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata|null);
-
-                                /**
-                                 * Creates a new AutoMlForecasting instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns AutoMlForecasting instance
-                                 */
-                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
-
-                                /**
-                                 * Encodes the specified AutoMlForecasting message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting.verify|verify} messages.
-                                 * @param message AutoMlForecasting message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified AutoMlForecasting message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting.verify|verify} messages.
-                                 * @param message AutoMlForecasting message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes an AutoMlForecasting message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns AutoMlForecasting
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
-
-                                /**
-                                 * Decodes an AutoMlForecasting message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns AutoMlForecasting
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
-
-                                /**
-                                 * Verifies an AutoMlForecasting message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates an AutoMlForecasting message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns AutoMlForecasting
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
-
-                                /**
-                                 * Creates a plain object from an AutoMlForecasting message. Also converts values to other types if specified.
-                                 * @param message AutoMlForecasting
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this AutoMlForecasting to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-                            }
-
-                            /** Properties of an AutoMlForecastingInputs. */
-                            interface IAutoMlForecastingInputs {
-
-                                /** AutoMlForecastingInputs targetColumn */
-                                targetColumn?: (string|null);
-
-                                /** AutoMlForecastingInputs timeSeriesIdentifierColumn */
-                                timeSeriesIdentifierColumn?: (string|null);
-
-                                /** AutoMlForecastingInputs timeColumn */
-                                timeColumn?: (string|null);
-
-                                /** AutoMlForecastingInputs transformations */
-                                transformations?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation[]|null);
-
-                                /** AutoMlForecastingInputs optimizationObjective */
-                                optimizationObjective?: (string|null);
-
-                                /** AutoMlForecastingInputs trainBudgetMilliNodeHours */
-                                trainBudgetMilliNodeHours?: (number|Long|string|null);
-
-                                /** AutoMlForecastingInputs weightColumn */
-                                weightColumn?: (string|null);
-
-                                /** AutoMlForecastingInputs staticColumns */
-                                staticColumns?: (string[]|null);
-
-                                /** AutoMlForecastingInputs timeVariantPastOnlyColumns */
-                                timeVariantPastOnlyColumns?: (string[]|null);
-
-                                /** AutoMlForecastingInputs timeVariantPastAndFutureColumns */
-                                timeVariantPastAndFutureColumns?: (string[]|null);
-
-                                /** AutoMlForecastingInputs period */
-                                period?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod|null);
-
-                                /** AutoMlForecastingInputs forecastWindowStart */
-                                forecastWindowStart?: (number|Long|string|null);
-
-                                /** AutoMlForecastingInputs forecastWindowEnd */
-                                forecastWindowEnd?: (number|Long|string|null);
-
-                                /** AutoMlForecastingInputs pastHorizon */
-                                pastHorizon?: (number|Long|string|null);
-
-                                /** AutoMlForecastingInputs exportEvaluatedDataItemsConfig */
-                                exportEvaluatedDataItemsConfig?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig|null);
-                            }
-
-                            /** Represents an AutoMlForecastingInputs. */
-                            class AutoMlForecastingInputs implements IAutoMlForecastingInputs {
-
-                                /**
-                                 * Constructs a new AutoMlForecastingInputs.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs);
-
-                                /** AutoMlForecastingInputs targetColumn. */
-                                public targetColumn: string;
-
-                                /** AutoMlForecastingInputs timeSeriesIdentifierColumn. */
-                                public timeSeriesIdentifierColumn: string;
-
-                                /** AutoMlForecastingInputs timeColumn. */
-                                public timeColumn: string;
-
-                                /** AutoMlForecastingInputs transformations. */
-                                public transformations: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation[];
-
-                                /** AutoMlForecastingInputs optimizationObjective. */
-                                public optimizationObjective: string;
-
-                                /** AutoMlForecastingInputs trainBudgetMilliNodeHours. */
-                                public trainBudgetMilliNodeHours: (number|Long|string);
-
-                                /** AutoMlForecastingInputs weightColumn. */
-                                public weightColumn: string;
-
-                                /** AutoMlForecastingInputs staticColumns. */
-                                public staticColumns: string[];
-
-                                /** AutoMlForecastingInputs timeVariantPastOnlyColumns. */
-                                public timeVariantPastOnlyColumns: string[];
-
-                                /** AutoMlForecastingInputs timeVariantPastAndFutureColumns. */
-                                public timeVariantPastAndFutureColumns: string[];
-
-                                /** AutoMlForecastingInputs period. */
-                                public period?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod|null);
-
-                                /** AutoMlForecastingInputs forecastWindowStart. */
-                                public forecastWindowStart: (number|Long|string);
-
-                                /** AutoMlForecastingInputs forecastWindowEnd. */
-                                public forecastWindowEnd: (number|Long|string);
-
-                                /** AutoMlForecastingInputs pastHorizon. */
-                                public pastHorizon: (number|Long|string);
-
-                                /** AutoMlForecastingInputs exportEvaluatedDataItemsConfig. */
-                                public exportEvaluatedDataItemsConfig?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig|null);
-
-                                /**
-                                 * Creates a new AutoMlForecastingInputs instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns AutoMlForecastingInputs instance
-                                 */
-                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
-
-                                /**
-                                 * Encodes the specified AutoMlForecastingInputs message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.verify|verify} messages.
-                                 * @param message AutoMlForecastingInputs message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified AutoMlForecastingInputs message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.verify|verify} messages.
-                                 * @param message AutoMlForecastingInputs message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes an AutoMlForecastingInputs message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns AutoMlForecastingInputs
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
-
-                                /**
-                                 * Decodes an AutoMlForecastingInputs message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns AutoMlForecastingInputs
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
-
-                                /**
-                                 * Verifies an AutoMlForecastingInputs message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates an AutoMlForecastingInputs message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns AutoMlForecastingInputs
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
-
-                                /**
-                                 * Creates a plain object from an AutoMlForecastingInputs message. Also converts values to other types if specified.
-                                 * @param message AutoMlForecastingInputs
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this AutoMlForecastingInputs to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-                            }
-
-                            namespace AutoMlForecastingInputs {
-
-                                /** Properties of a Transformation. */
-                                interface ITransformation {
-
-                                    /** Transformation auto */
-                                    auto?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation|null);
-
-                                    /** Transformation numeric */
-                                    numeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation|null);
-
-                                    /** Transformation categorical */
-                                    categorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation|null);
-
-                                    /** Transformation timestamp */
-                                    timestamp?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation|null);
-
-                                    /** Transformation text */
-                                    text?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation|null);
-
-                                    /** Transformation repeatedNumeric */
-                                    repeatedNumeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation|null);
-
-                                    /** Transformation repeatedCategorical */
-                                    repeatedCategorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation|null);
-
-                                    /** Transformation repeatedText */
-                                    repeatedText?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation|null);
-                                }
-
-                                /** Represents a Transformation. */
-                                class Transformation implements ITransformation {
-
-                                    /**
-                                     * Constructs a new Transformation.
-                                     * @param [properties] Properties to set
-                                     */
-                                    constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation);
-
-                                    /** Transformation auto. */
-                                    public auto?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation|null);
-
-                                    /** Transformation numeric. */
-                                    public numeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation|null);
-
-                                    /** Transformation categorical. */
-                                    public categorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation|null);
-
-                                    /** Transformation timestamp. */
-                                    public timestamp?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation|null);
-
-                                    /** Transformation text. */
-                                    public text?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation|null);
-
-                                    /** Transformation repeatedNumeric. */
-                                    public repeatedNumeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation|null);
-
-                                    /** Transformation repeatedCategorical. */
-                                    public repeatedCategorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation|null);
-
-                                    /** Transformation repeatedText. */
-                                    public repeatedText?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation|null);
-
-                                    /** Transformation transformationDetail. */
-                                    public transformationDetail?: ("auto"|"numeric"|"categorical"|"timestamp"|"text"|"repeatedNumeric"|"repeatedCategorical"|"repeatedText");
-
-                                    /**
-                                     * Creates a new Transformation instance using the specified properties.
-                                     * @param [properties] Properties to set
-                                     * @returns Transformation instance
-                                     */
-                                    public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
-
-                                    /**
-                                     * Encodes the specified Transformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.verify|verify} messages.
-                                     * @param message Transformation message or plain object to encode
-                                     * @param [writer] Writer to encode to
-                                     * @returns Writer
-                                     */
-                                    public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                    /**
-                                     * Encodes the specified Transformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.verify|verify} messages.
-                                     * @param message Transformation message or plain object to encode
-                                     * @param [writer] Writer to encode to
-                                     * @returns Writer
-                                     */
-                                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                    /**
-                                     * Decodes a Transformation message from the specified reader or buffer.
-                                     * @param reader Reader or buffer to decode from
-                                     * @param [length] Message length if known beforehand
-                                     * @returns Transformation
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
-
-                                    /**
-                                     * Decodes a Transformation message from the specified reader or buffer, length delimited.
-                                     * @param reader Reader or buffer to decode from
-                                     * @returns Transformation
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
-
-                                    /**
-                                     * Verifies a Transformation message.
-                                     * @param message Plain object to verify
-                                     * @returns `null` if valid, otherwise the reason why it is not
-                                     */
-                                    public static verify(message: { [k: string]: any }): (string|null);
-
-                                    /**
-                                     * Creates a Transformation message from a plain object. Also converts values to their respective internal types.
-                                     * @param object Plain object
-                                     * @returns Transformation
-                                     */
-                                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
-
-                                    /**
-                                     * Creates a plain object from a Transformation message. Also converts values to other types if specified.
-                                     * @param message Transformation
-                                     * @param [options] Conversion options
-                                     * @returns Plain object
-                                     */
-                                    public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                    /**
-                                     * Converts this Transformation to JSON.
-                                     * @returns JSON object
-                                     */
-                                    public toJSON(): { [k: string]: any };
-                                }
-
-                                namespace Transformation {
-
-                                    /** Properties of an AutoTransformation. */
-                                    interface IAutoTransformation {
-
-                                        /** AutoTransformation columnName */
-                                        columnName?: (string|null);
-                                    }
-
-                                    /** Represents an AutoTransformation. */
-                                    class AutoTransformation implements IAutoTransformation {
-
-                                        /**
-                                         * Constructs a new AutoTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation);
-
-                                        /** AutoTransformation columnName. */
-                                        public columnName: string;
-
-                                        /**
-                                         * Creates a new AutoTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns AutoTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
-
-                                        /**
-                                         * Encodes the specified AutoTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation.verify|verify} messages.
-                                         * @param message AutoTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified AutoTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation.verify|verify} messages.
-                                         * @param message AutoTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes an AutoTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns AutoTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
-
-                                        /**
-                                         * Decodes an AutoTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns AutoTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
-
-                                        /**
-                                         * Verifies an AutoTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates an AutoTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns AutoTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
-
-                                        /**
-                                         * Creates a plain object from an AutoTransformation message. Also converts values to other types if specified.
-                                         * @param message AutoTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this AutoTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-
-                                    /** Properties of a NumericTransformation. */
-                                    interface INumericTransformation {
-
-                                        /** NumericTransformation columnName */
-                                        columnName?: (string|null);
-
-                                        /** NumericTransformation invalidValuesAllowed */
-                                        invalidValuesAllowed?: (boolean|null);
-                                    }
-
-                                    /** Represents a NumericTransformation. */
-                                    class NumericTransformation implements INumericTransformation {
-
-                                        /**
-                                         * Constructs a new NumericTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation);
-
-                                        /** NumericTransformation columnName. */
-                                        public columnName: string;
-
-                                        /** NumericTransformation invalidValuesAllowed. */
-                                        public invalidValuesAllowed: boolean;
-
-                                        /**
-                                         * Creates a new NumericTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns NumericTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
-
-                                        /**
-                                         * Encodes the specified NumericTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation.verify|verify} messages.
-                                         * @param message NumericTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified NumericTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation.verify|verify} messages.
-                                         * @param message NumericTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes a NumericTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns NumericTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
-
-                                        /**
-                                         * Decodes a NumericTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns NumericTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
-
-                                        /**
-                                         * Verifies a NumericTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates a NumericTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns NumericTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
-
-                                        /**
-                                         * Creates a plain object from a NumericTransformation message. Also converts values to other types if specified.
-                                         * @param message NumericTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this NumericTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-
-                                    /** Properties of a CategoricalTransformation. */
-                                    interface ICategoricalTransformation {
-
-                                        /** CategoricalTransformation columnName */
-                                        columnName?: (string|null);
-                                    }
-
-                                    /** Represents a CategoricalTransformation. */
-                                    class CategoricalTransformation implements ICategoricalTransformation {
-
-                                        /**
-                                         * Constructs a new CategoricalTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation);
-
-                                        /** CategoricalTransformation columnName. */
-                                        public columnName: string;
-
-                                        /**
-                                         * Creates a new CategoricalTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns CategoricalTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
-
-                                        /**
-                                         * Encodes the specified CategoricalTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation.verify|verify} messages.
-                                         * @param message CategoricalTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified CategoricalTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation.verify|verify} messages.
-                                         * @param message CategoricalTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes a CategoricalTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns CategoricalTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
-
-                                        /**
-                                         * Decodes a CategoricalTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns CategoricalTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
-
-                                        /**
-                                         * Verifies a CategoricalTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates a CategoricalTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns CategoricalTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
-
-                                        /**
-                                         * Creates a plain object from a CategoricalTransformation message. Also converts values to other types if specified.
-                                         * @param message CategoricalTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this CategoricalTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-
-                                    /** Properties of a TimestampTransformation. */
-                                    interface ITimestampTransformation {
-
-                                        /** TimestampTransformation columnName */
-                                        columnName?: (string|null);
-
-                                        /** TimestampTransformation timeFormat */
-                                        timeFormat?: (string|null);
-
-                                        /** TimestampTransformation invalidValuesAllowed */
-                                        invalidValuesAllowed?: (boolean|null);
-                                    }
-
-                                    /** Represents a TimestampTransformation. */
-                                    class TimestampTransformation implements ITimestampTransformation {
-
-                                        /**
-                                         * Constructs a new TimestampTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation);
-
-                                        /** TimestampTransformation columnName. */
-                                        public columnName: string;
-
-                                        /** TimestampTransformation timeFormat. */
-                                        public timeFormat: string;
-
-                                        /** TimestampTransformation invalidValuesAllowed. */
-                                        public invalidValuesAllowed: boolean;
-
-                                        /**
-                                         * Creates a new TimestampTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns TimestampTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
-
-                                        /**
-                                         * Encodes the specified TimestampTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation.verify|verify} messages.
-                                         * @param message TimestampTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified TimestampTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation.verify|verify} messages.
-                                         * @param message TimestampTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes a TimestampTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns TimestampTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
-
-                                        /**
-                                         * Decodes a TimestampTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns TimestampTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
-
-                                        /**
-                                         * Verifies a TimestampTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates a TimestampTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns TimestampTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
-
-                                        /**
-                                         * Creates a plain object from a TimestampTransformation message. Also converts values to other types if specified.
-                                         * @param message TimestampTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this TimestampTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-
-                                    /** Properties of a TextTransformation. */
-                                    interface ITextTransformation {
-
-                                        /** TextTransformation columnName */
-                                        columnName?: (string|null);
-                                    }
-
-                                    /** Represents a TextTransformation. */
-                                    class TextTransformation implements ITextTransformation {
-
-                                        /**
-                                         * Constructs a new TextTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation);
-
-                                        /** TextTransformation columnName. */
-                                        public columnName: string;
-
-                                        /**
-                                         * Creates a new TextTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns TextTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
-
-                                        /**
-                                         * Encodes the specified TextTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation.verify|verify} messages.
-                                         * @param message TextTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified TextTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation.verify|verify} messages.
-                                         * @param message TextTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes a TextTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns TextTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
-
-                                        /**
-                                         * Decodes a TextTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns TextTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
-
-                                        /**
-                                         * Verifies a TextTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates a TextTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns TextTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
-
-                                        /**
-                                         * Creates a plain object from a TextTransformation message. Also converts values to other types if specified.
-                                         * @param message TextTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this TextTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-
-                                    /** Properties of a NumericArrayTransformation. */
-                                    interface INumericArrayTransformation {
-
-                                        /** NumericArrayTransformation columnName */
-                                        columnName?: (string|null);
-
-                                        /** NumericArrayTransformation invalidValuesAllowed */
-                                        invalidValuesAllowed?: (boolean|null);
-                                    }
-
-                                    /** Represents a NumericArrayTransformation. */
-                                    class NumericArrayTransformation implements INumericArrayTransformation {
-
-                                        /**
-                                         * Constructs a new NumericArrayTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation);
-
-                                        /** NumericArrayTransformation columnName. */
-                                        public columnName: string;
-
-                                        /** NumericArrayTransformation invalidValuesAllowed. */
-                                        public invalidValuesAllowed: boolean;
-
-                                        /**
-                                         * Creates a new NumericArrayTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns NumericArrayTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
-
-                                        /**
-                                         * Encodes the specified NumericArrayTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation.verify|verify} messages.
-                                         * @param message NumericArrayTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified NumericArrayTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation.verify|verify} messages.
-                                         * @param message NumericArrayTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes a NumericArrayTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns NumericArrayTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
-
-                                        /**
-                                         * Decodes a NumericArrayTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns NumericArrayTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
-
-                                        /**
-                                         * Verifies a NumericArrayTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates a NumericArrayTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns NumericArrayTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
-
-                                        /**
-                                         * Creates a plain object from a NumericArrayTransformation message. Also converts values to other types if specified.
-                                         * @param message NumericArrayTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this NumericArrayTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-
-                                    /** Properties of a CategoricalArrayTransformation. */
-                                    interface ICategoricalArrayTransformation {
-
-                                        /** CategoricalArrayTransformation columnName */
-                                        columnName?: (string|null);
-                                    }
-
-                                    /** Represents a CategoricalArrayTransformation. */
-                                    class CategoricalArrayTransformation implements ICategoricalArrayTransformation {
-
-                                        /**
-                                         * Constructs a new CategoricalArrayTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation);
-
-                                        /** CategoricalArrayTransformation columnName. */
-                                        public columnName: string;
-
-                                        /**
-                                         * Creates a new CategoricalArrayTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns CategoricalArrayTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
-
-                                        /**
-                                         * Encodes the specified CategoricalArrayTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation.verify|verify} messages.
-                                         * @param message CategoricalArrayTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified CategoricalArrayTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation.verify|verify} messages.
-                                         * @param message CategoricalArrayTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes a CategoricalArrayTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns CategoricalArrayTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
-
-                                        /**
-                                         * Decodes a CategoricalArrayTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns CategoricalArrayTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
-
-                                        /**
-                                         * Verifies a CategoricalArrayTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates a CategoricalArrayTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns CategoricalArrayTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
-
-                                        /**
-                                         * Creates a plain object from a CategoricalArrayTransformation message. Also converts values to other types if specified.
-                                         * @param message CategoricalArrayTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this CategoricalArrayTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-
-                                    /** Properties of a TextArrayTransformation. */
-                                    interface ITextArrayTransformation {
-
-                                        /** TextArrayTransformation columnName */
-                                        columnName?: (string|null);
-                                    }
-
-                                    /** Represents a TextArrayTransformation. */
-                                    class TextArrayTransformation implements ITextArrayTransformation {
-
-                                        /**
-                                         * Constructs a new TextArrayTransformation.
-                                         * @param [properties] Properties to set
-                                         */
-                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation);
-
-                                        /** TextArrayTransformation columnName. */
-                                        public columnName: string;
-
-                                        /**
-                                         * Creates a new TextArrayTransformation instance using the specified properties.
-                                         * @param [properties] Properties to set
-                                         * @returns TextArrayTransformation instance
-                                         */
-                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
-
-                                        /**
-                                         * Encodes the specified TextArrayTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation.verify|verify} messages.
-                                         * @param message TextArrayTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Encodes the specified TextArrayTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation.verify|verify} messages.
-                                         * @param message TextArrayTransformation message or plain object to encode
-                                         * @param [writer] Writer to encode to
-                                         * @returns Writer
-                                         */
-                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                        /**
-                                         * Decodes a TextArrayTransformation message from the specified reader or buffer.
-                                         * @param reader Reader or buffer to decode from
-                                         * @param [length] Message length if known beforehand
-                                         * @returns TextArrayTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
-
-                                        /**
-                                         * Decodes a TextArrayTransformation message from the specified reader or buffer, length delimited.
-                                         * @param reader Reader or buffer to decode from
-                                         * @returns TextArrayTransformation
-                                         * @throws {Error} If the payload is not a reader or valid buffer
-                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                         */
-                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
-
-                                        /**
-                                         * Verifies a TextArrayTransformation message.
-                                         * @param message Plain object to verify
-                                         * @returns `null` if valid, otherwise the reason why it is not
-                                         */
-                                        public static verify(message: { [k: string]: any }): (string|null);
-
-                                        /**
-                                         * Creates a TextArrayTransformation message from a plain object. Also converts values to their respective internal types.
-                                         * @param object Plain object
-                                         * @returns TextArrayTransformation
-                                         */
-                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
-
-                                        /**
-                                         * Creates a plain object from a TextArrayTransformation message. Also converts values to other types if specified.
-                                         * @param message TextArrayTransformation
-                                         * @param [options] Conversion options
-                                         * @returns Plain object
-                                         */
-                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                        /**
-                                         * Converts this TextArrayTransformation to JSON.
-                                         * @returns JSON object
-                                         */
-                                        public toJSON(): { [k: string]: any };
-                                    }
-                                }
-
-                                /** Properties of a Period. */
-                                interface IPeriod {
-
-                                    /** Period unit */
-                                    unit?: (string|null);
-
-                                    /** Period quantity */
-                                    quantity?: (number|Long|string|null);
-                                }
-
-                                /** Represents a Period. */
-                                class Period implements IPeriod {
-
-                                    /**
-                                     * Constructs a new Period.
-                                     * @param [properties] Properties to set
-                                     */
-                                    constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod);
-
-                                    /** Period unit. */
-                                    public unit: string;
-
-                                    /** Period quantity. */
-                                    public quantity: (number|Long|string);
-
-                                    /**
-                                     * Creates a new Period instance using the specified properties.
-                                     * @param [properties] Properties to set
-                                     * @returns Period instance
-                                     */
-                                    public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
-
-                                    /**
-                                     * Encodes the specified Period message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period.verify|verify} messages.
-                                     * @param message Period message or plain object to encode
-                                     * @param [writer] Writer to encode to
-                                     * @returns Writer
-                                     */
-                                    public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                    /**
-                                     * Encodes the specified Period message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period.verify|verify} messages.
-                                     * @param message Period message or plain object to encode
-                                     * @param [writer] Writer to encode to
-                                     * @returns Writer
-                                     */
-                                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                    /**
-                                     * Decodes a Period message from the specified reader or buffer.
-                                     * @param reader Reader or buffer to decode from
-                                     * @param [length] Message length if known beforehand
-                                     * @returns Period
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
-
-                                    /**
-                                     * Decodes a Period message from the specified reader or buffer, length delimited.
-                                     * @param reader Reader or buffer to decode from
-                                     * @returns Period
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
-
-                                    /**
-                                     * Verifies a Period message.
-                                     * @param message Plain object to verify
-                                     * @returns `null` if valid, otherwise the reason why it is not
-                                     */
-                                    public static verify(message: { [k: string]: any }): (string|null);
-
-                                    /**
-                                     * Creates a Period message from a plain object. Also converts values to their respective internal types.
-                                     * @param object Plain object
-                                     * @returns Period
-                                     */
-                                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
-
-                                    /**
-                                     * Creates a plain object from a Period message. Also converts values to other types if specified.
-                                     * @param message Period
-                                     * @param [options] Conversion options
-                                     * @returns Plain object
-                                     */
-                                    public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                    /**
-                                     * Converts this Period to JSON.
-                                     * @returns JSON object
-                                     */
-                                    public toJSON(): { [k: string]: any };
-                                }
-                            }
-
-                            /** Properties of an AutoMlForecastingMetadata. */
-                            interface IAutoMlForecastingMetadata {
-
-                                /** AutoMlForecastingMetadata trainCostMilliNodeHours */
-                                trainCostMilliNodeHours?: (number|Long|string|null);
-                            }
-
-                            /** Represents an AutoMlForecastingMetadata. */
-                            class AutoMlForecastingMetadata implements IAutoMlForecastingMetadata {
-
-                                /**
-                                 * Constructs a new AutoMlForecastingMetadata.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata);
-
-                                /** AutoMlForecastingMetadata trainCostMilliNodeHours. */
-                                public trainCostMilliNodeHours: (number|Long|string);
-
-                                /**
-                                 * Creates a new AutoMlForecastingMetadata instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns AutoMlForecastingMetadata instance
-                                 */
-                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
-
-                                /**
-                                 * Encodes the specified AutoMlForecastingMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata.verify|verify} messages.
-                                 * @param message AutoMlForecastingMetadata message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified AutoMlForecastingMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata.verify|verify} messages.
-                                 * @param message AutoMlForecastingMetadata message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes an AutoMlForecastingMetadata message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns AutoMlForecastingMetadata
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
-
-                                /**
-                                 * Decodes an AutoMlForecastingMetadata message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns AutoMlForecastingMetadata
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
-
-                                /**
-                                 * Verifies an AutoMlForecastingMetadata message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates an AutoMlForecastingMetadata message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns AutoMlForecastingMetadata
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
-
-                                /**
-                                 * Creates a plain object from an AutoMlForecastingMetadata message. Also converts values to other types if specified.
-                                 * @param message AutoMlForecastingMetadata
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this AutoMlForecastingMetadata to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-                            }
-
-                            /** Properties of an ExportEvaluatedDataItemsConfig. */
-                            interface IExportEvaluatedDataItemsConfig {
-
-                                /** ExportEvaluatedDataItemsConfig destinationBigqueryUri */
-                                destinationBigqueryUri?: (string|null);
-
-                                /** ExportEvaluatedDataItemsConfig overrideExistingTable */
-                                overrideExistingTable?: (boolean|null);
-                            }
-
-                            /** Represents an ExportEvaluatedDataItemsConfig. */
-                            class ExportEvaluatedDataItemsConfig implements IExportEvaluatedDataItemsConfig {
-
-                                /**
-                                 * Constructs a new ExportEvaluatedDataItemsConfig.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig);
-
-                                /** ExportEvaluatedDataItemsConfig destinationBigqueryUri. */
-                                public destinationBigqueryUri: string;
-
-                                /** ExportEvaluatedDataItemsConfig overrideExistingTable. */
-                                public overrideExistingTable: boolean;
-
-                                /**
-                                 * Creates a new ExportEvaluatedDataItemsConfig instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns ExportEvaluatedDataItemsConfig instance
-                                 */
-                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
-
-                                /**
-                                 * Encodes the specified ExportEvaluatedDataItemsConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig.verify|verify} messages.
-                                 * @param message ExportEvaluatedDataItemsConfig message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified ExportEvaluatedDataItemsConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig.verify|verify} messages.
-                                 * @param message ExportEvaluatedDataItemsConfig message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes an ExportEvaluatedDataItemsConfig message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns ExportEvaluatedDataItemsConfig
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
-
-                                /**
-                                 * Decodes an ExportEvaluatedDataItemsConfig message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns ExportEvaluatedDataItemsConfig
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
-
-                                /**
-                                 * Verifies an ExportEvaluatedDataItemsConfig message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates an ExportEvaluatedDataItemsConfig message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns ExportEvaluatedDataItemsConfig
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
-
-                                /**
-                                 * Creates a plain object from an ExportEvaluatedDataItemsConfig message. Also converts values to other types if specified.
-                                 * @param message ExportEvaluatedDataItemsConfig
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this ExportEvaluatedDataItemsConfig to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-                            }
 
                             /** Properties of an AutoMlImageClassification. */
                             interface IAutoMlImageClassification {
@@ -58881,7 +54600,8 @@ export namespace google {
                                 enum ModelType {
                                     MODEL_TYPE_UNSPECIFIED = 0,
                                     CLOUD_HIGH_ACCURACY_1 = 1,
-                                    CLOUD_LOW_ACCURACY_1 = 2
+                                    CLOUD_LOW_ACCURACY_1 = 2,
+                                    MOBILE_TF_LOW_LATENCY_1 = 3
                                 }
                             }
 
@@ -60209,6 +55929,102 @@ export namespace google {
                                 public toJSON(): { [k: string]: any };
                             }
 
+                            /** Properties of an ExportEvaluatedDataItemsConfig. */
+                            interface IExportEvaluatedDataItemsConfig {
+
+                                /** ExportEvaluatedDataItemsConfig destinationBigqueryUri */
+                                destinationBigqueryUri?: (string|null);
+
+                                /** ExportEvaluatedDataItemsConfig overrideExistingTable */
+                                overrideExistingTable?: (boolean|null);
+                            }
+
+                            /** Represents an ExportEvaluatedDataItemsConfig. */
+                            class ExportEvaluatedDataItemsConfig implements IExportEvaluatedDataItemsConfig {
+
+                                /**
+                                 * Constructs a new ExportEvaluatedDataItemsConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig);
+
+                                /** ExportEvaluatedDataItemsConfig destinationBigqueryUri. */
+                                public destinationBigqueryUri: string;
+
+                                /** ExportEvaluatedDataItemsConfig overrideExistingTable. */
+                                public overrideExistingTable: boolean;
+
+                                /**
+                                 * Creates a new ExportEvaluatedDataItemsConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ExportEvaluatedDataItemsConfig instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
+
+                                /**
+                                 * Encodes the specified ExportEvaluatedDataItemsConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig.verify|verify} messages.
+                                 * @param message ExportEvaluatedDataItemsConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ExportEvaluatedDataItemsConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig.verify|verify} messages.
+                                 * @param message ExportEvaluatedDataItemsConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ExportEvaluatedDataItemsConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ExportEvaluatedDataItemsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
+
+                                /**
+                                 * Decodes an ExportEvaluatedDataItemsConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ExportEvaluatedDataItemsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
+
+                                /**
+                                 * Verifies an ExportEvaluatedDataItemsConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ExportEvaluatedDataItemsConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ExportEvaluatedDataItemsConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig;
+
+                                /**
+                                 * Creates a plain object from an ExportEvaluatedDataItemsConfig message. Also converts values to other types if specified.
+                                 * @param message ExportEvaluatedDataItemsConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ExportEvaluatedDataItemsConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
                             /** Properties of an AutoMlTextClassification. */
                             interface IAutoMlTextClassification {
 
@@ -60743,6 +56559,1359 @@ export namespace google {
                                 public toJSON(): { [k: string]: any };
                             }
 
+                            /** Properties of an AutoMlForecasting. */
+                            interface IAutoMlForecasting {
+
+                                /** AutoMlForecasting inputs */
+                                inputs?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs|null);
+
+                                /** AutoMlForecasting metadata */
+                                metadata?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata|null);
+                            }
+
+                            /** Represents an AutoMlForecasting. */
+                            class AutoMlForecasting implements IAutoMlForecasting {
+
+                                /**
+                                 * Constructs a new AutoMlForecasting.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting);
+
+                                /** AutoMlForecasting inputs. */
+                                public inputs?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs|null);
+
+                                /** AutoMlForecasting metadata. */
+                                public metadata?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata|null);
+
+                                /**
+                                 * Creates a new AutoMlForecasting instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AutoMlForecasting instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
+
+                                /**
+                                 * Encodes the specified AutoMlForecasting message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting.verify|verify} messages.
+                                 * @param message AutoMlForecasting message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AutoMlForecasting message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting.verify|verify} messages.
+                                 * @param message AutoMlForecasting message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecasting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AutoMlForecasting message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AutoMlForecasting
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
+
+                                /**
+                                 * Decodes an AutoMlForecasting message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AutoMlForecasting
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
+
+                                /**
+                                 * Verifies an AutoMlForecasting message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AutoMlForecasting message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AutoMlForecasting
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting;
+
+                                /**
+                                 * Creates a plain object from an AutoMlForecasting message. Also converts values to other types if specified.
+                                 * @param message AutoMlForecasting
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecasting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AutoMlForecasting to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of an AutoMlForecastingInputs. */
+                            interface IAutoMlForecastingInputs {
+
+                                /** AutoMlForecastingInputs targetColumn */
+                                targetColumn?: (string|null);
+
+                                /** AutoMlForecastingInputs timeSeriesIdentifierColumn */
+                                timeSeriesIdentifierColumn?: (string|null);
+
+                                /** AutoMlForecastingInputs timeColumn */
+                                timeColumn?: (string|null);
+
+                                /** AutoMlForecastingInputs transformations */
+                                transformations?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation[]|null);
+
+                                /** AutoMlForecastingInputs optimizationObjective */
+                                optimizationObjective?: (string|null);
+
+                                /** AutoMlForecastingInputs trainBudgetMilliNodeHours */
+                                trainBudgetMilliNodeHours?: (number|Long|string|null);
+
+                                /** AutoMlForecastingInputs weightColumn */
+                                weightColumn?: (string|null);
+
+                                /** AutoMlForecastingInputs staticColumns */
+                                staticColumns?: (string[]|null);
+
+                                /** AutoMlForecastingInputs timeVariantPastOnlyColumns */
+                                timeVariantPastOnlyColumns?: (string[]|null);
+
+                                /** AutoMlForecastingInputs timeVariantPastAndFutureColumns */
+                                timeVariantPastAndFutureColumns?: (string[]|null);
+
+                                /** AutoMlForecastingInputs period */
+                                period?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod|null);
+
+                                /** AutoMlForecastingInputs forecastWindowStart */
+                                forecastWindowStart?: (number|Long|string|null);
+
+                                /** AutoMlForecastingInputs forecastWindowEnd */
+                                forecastWindowEnd?: (number|Long|string|null);
+
+                                /** AutoMlForecastingInputs pastHorizon */
+                                pastHorizon?: (number|Long|string|null);
+
+                                /** AutoMlForecastingInputs exportEvaluatedDataItemsConfig */
+                                exportEvaluatedDataItemsConfig?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig|null);
+
+                                /** AutoMlForecastingInputs quantiles */
+                                quantiles?: (number[]|null);
+
+                                /** AutoMlForecastingInputs validationOptions */
+                                validationOptions?: (string|null);
+                            }
+
+                            /** Represents an AutoMlForecastingInputs. */
+                            class AutoMlForecastingInputs implements IAutoMlForecastingInputs {
+
+                                /**
+                                 * Constructs a new AutoMlForecastingInputs.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs);
+
+                                /** AutoMlForecastingInputs targetColumn. */
+                                public targetColumn: string;
+
+                                /** AutoMlForecastingInputs timeSeriesIdentifierColumn. */
+                                public timeSeriesIdentifierColumn: string;
+
+                                /** AutoMlForecastingInputs timeColumn. */
+                                public timeColumn: string;
+
+                                /** AutoMlForecastingInputs transformations. */
+                                public transformations: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation[];
+
+                                /** AutoMlForecastingInputs optimizationObjective. */
+                                public optimizationObjective: string;
+
+                                /** AutoMlForecastingInputs trainBudgetMilliNodeHours. */
+                                public trainBudgetMilliNodeHours: (number|Long|string);
+
+                                /** AutoMlForecastingInputs weightColumn. */
+                                public weightColumn: string;
+
+                                /** AutoMlForecastingInputs staticColumns. */
+                                public staticColumns: string[];
+
+                                /** AutoMlForecastingInputs timeVariantPastOnlyColumns. */
+                                public timeVariantPastOnlyColumns: string[];
+
+                                /** AutoMlForecastingInputs timeVariantPastAndFutureColumns. */
+                                public timeVariantPastAndFutureColumns: string[];
+
+                                /** AutoMlForecastingInputs period. */
+                                public period?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod|null);
+
+                                /** AutoMlForecastingInputs forecastWindowStart. */
+                                public forecastWindowStart: (number|Long|string);
+
+                                /** AutoMlForecastingInputs forecastWindowEnd. */
+                                public forecastWindowEnd: (number|Long|string);
+
+                                /** AutoMlForecastingInputs pastHorizon. */
+                                public pastHorizon: (number|Long|string);
+
+                                /** AutoMlForecastingInputs exportEvaluatedDataItemsConfig. */
+                                public exportEvaluatedDataItemsConfig?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IExportEvaluatedDataItemsConfig|null);
+
+                                /** AutoMlForecastingInputs quantiles. */
+                                public quantiles: number[];
+
+                                /** AutoMlForecastingInputs validationOptions. */
+                                public validationOptions: string;
+
+                                /**
+                                 * Creates a new AutoMlForecastingInputs instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AutoMlForecastingInputs instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
+
+                                /**
+                                 * Encodes the specified AutoMlForecastingInputs message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.verify|verify} messages.
+                                 * @param message AutoMlForecastingInputs message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AutoMlForecastingInputs message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.verify|verify} messages.
+                                 * @param message AutoMlForecastingInputs message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingInputs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AutoMlForecastingInputs message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AutoMlForecastingInputs
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
+
+                                /**
+                                 * Decodes an AutoMlForecastingInputs message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AutoMlForecastingInputs
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
+
+                                /**
+                                 * Verifies an AutoMlForecastingInputs message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AutoMlForecastingInputs message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AutoMlForecastingInputs
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs;
+
+                                /**
+                                 * Creates a plain object from an AutoMlForecastingInputs message. Also converts values to other types if specified.
+                                 * @param message AutoMlForecastingInputs
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AutoMlForecastingInputs to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            namespace AutoMlForecastingInputs {
+
+                                /** Properties of a Transformation. */
+                                interface ITransformation {
+
+                                    /** Transformation auto */
+                                    auto?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation|null);
+
+                                    /** Transformation numeric */
+                                    numeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation|null);
+
+                                    /** Transformation categorical */
+                                    categorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation|null);
+
+                                    /** Transformation timestamp */
+                                    timestamp?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation|null);
+
+                                    /** Transformation text */
+                                    text?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation|null);
+
+                                    /** Transformation repeatedNumeric */
+                                    repeatedNumeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation|null);
+
+                                    /** Transformation repeatedCategorical */
+                                    repeatedCategorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation|null);
+
+                                    /** Transformation repeatedText */
+                                    repeatedText?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation|null);
+                                }
+
+                                /** Represents a Transformation. */
+                                class Transformation implements ITransformation {
+
+                                    /**
+                                     * Constructs a new Transformation.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation);
+
+                                    /** Transformation auto. */
+                                    public auto?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation|null);
+
+                                    /** Transformation numeric. */
+                                    public numeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation|null);
+
+                                    /** Transformation categorical. */
+                                    public categorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation|null);
+
+                                    /** Transformation timestamp. */
+                                    public timestamp?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation|null);
+
+                                    /** Transformation text. */
+                                    public text?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation|null);
+
+                                    /** Transformation repeatedNumeric. */
+                                    public repeatedNumeric?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation|null);
+
+                                    /** Transformation repeatedCategorical. */
+                                    public repeatedCategorical?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation|null);
+
+                                    /** Transformation repeatedText. */
+                                    public repeatedText?: (google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation|null);
+
+                                    /** Transformation transformationDetail. */
+                                    public transformationDetail?: ("auto"|"numeric"|"categorical"|"timestamp"|"text"|"repeatedNumeric"|"repeatedCategorical"|"repeatedText");
+
+                                    /**
+                                     * Creates a new Transformation instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns Transformation instance
+                                     */
+                                    public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
+
+                                    /**
+                                     * Encodes the specified Transformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.verify|verify} messages.
+                                     * @param message Transformation message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified Transformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.verify|verify} messages.
+                                     * @param message Transformation message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.ITransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a Transformation message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns Transformation
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
+
+                                    /**
+                                     * Decodes a Transformation message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns Transformation
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
+
+                                    /**
+                                     * Verifies a Transformation message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a Transformation message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns Transformation
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation;
+
+                                    /**
+                                     * Creates a plain object from a Transformation message. Also converts values to other types if specified.
+                                     * @param message Transformation
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this Transformation to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+                                }
+
+                                namespace Transformation {
+
+                                    /** Properties of an AutoTransformation. */
+                                    interface IAutoTransformation {
+
+                                        /** AutoTransformation columnName */
+                                        columnName?: (string|null);
+                                    }
+
+                                    /** Represents an AutoTransformation. */
+                                    class AutoTransformation implements IAutoTransformation {
+
+                                        /**
+                                         * Constructs a new AutoTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation);
+
+                                        /** AutoTransformation columnName. */
+                                        public columnName: string;
+
+                                        /**
+                                         * Creates a new AutoTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns AutoTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
+
+                                        /**
+                                         * Encodes the specified AutoTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation.verify|verify} messages.
+                                         * @param message AutoTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified AutoTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation.verify|verify} messages.
+                                         * @param message AutoTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.IAutoTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes an AutoTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns AutoTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
+
+                                        /**
+                                         * Decodes an AutoTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns AutoTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
+
+                                        /**
+                                         * Verifies an AutoTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates an AutoTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns AutoTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation;
+
+                                        /**
+                                         * Creates a plain object from an AutoTransformation message. Also converts values to other types if specified.
+                                         * @param message AutoTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.AutoTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this AutoTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+
+                                    /** Properties of a NumericTransformation. */
+                                    interface INumericTransformation {
+
+                                        /** NumericTransformation columnName */
+                                        columnName?: (string|null);
+
+                                        /** NumericTransformation invalidValuesAllowed */
+                                        invalidValuesAllowed?: (boolean|null);
+                                    }
+
+                                    /** Represents a NumericTransformation. */
+                                    class NumericTransformation implements INumericTransformation {
+
+                                        /**
+                                         * Constructs a new NumericTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation);
+
+                                        /** NumericTransformation columnName. */
+                                        public columnName: string;
+
+                                        /** NumericTransformation invalidValuesAllowed. */
+                                        public invalidValuesAllowed: boolean;
+
+                                        /**
+                                         * Creates a new NumericTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns NumericTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
+
+                                        /**
+                                         * Encodes the specified NumericTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation.verify|verify} messages.
+                                         * @param message NumericTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified NumericTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation.verify|verify} messages.
+                                         * @param message NumericTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a NumericTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns NumericTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
+
+                                        /**
+                                         * Decodes a NumericTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns NumericTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
+
+                                        /**
+                                         * Verifies a NumericTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a NumericTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns NumericTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation;
+
+                                        /**
+                                         * Creates a plain object from a NumericTransformation message. Also converts values to other types if specified.
+                                         * @param message NumericTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this NumericTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+
+                                    /** Properties of a CategoricalTransformation. */
+                                    interface ICategoricalTransformation {
+
+                                        /** CategoricalTransformation columnName */
+                                        columnName?: (string|null);
+                                    }
+
+                                    /** Represents a CategoricalTransformation. */
+                                    class CategoricalTransformation implements ICategoricalTransformation {
+
+                                        /**
+                                         * Constructs a new CategoricalTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation);
+
+                                        /** CategoricalTransformation columnName. */
+                                        public columnName: string;
+
+                                        /**
+                                         * Creates a new CategoricalTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns CategoricalTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
+
+                                        /**
+                                         * Encodes the specified CategoricalTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation.verify|verify} messages.
+                                         * @param message CategoricalTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified CategoricalTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation.verify|verify} messages.
+                                         * @param message CategoricalTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a CategoricalTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns CategoricalTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
+
+                                        /**
+                                         * Decodes a CategoricalTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns CategoricalTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
+
+                                        /**
+                                         * Verifies a CategoricalTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a CategoricalTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns CategoricalTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation;
+
+                                        /**
+                                         * Creates a plain object from a CategoricalTransformation message. Also converts values to other types if specified.
+                                         * @param message CategoricalTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this CategoricalTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+
+                                    /** Properties of a TimestampTransformation. */
+                                    interface ITimestampTransformation {
+
+                                        /** TimestampTransformation columnName */
+                                        columnName?: (string|null);
+
+                                        /** TimestampTransformation timeFormat */
+                                        timeFormat?: (string|null);
+
+                                        /** TimestampTransformation invalidValuesAllowed */
+                                        invalidValuesAllowed?: (boolean|null);
+                                    }
+
+                                    /** Represents a TimestampTransformation. */
+                                    class TimestampTransformation implements ITimestampTransformation {
+
+                                        /**
+                                         * Constructs a new TimestampTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation);
+
+                                        /** TimestampTransformation columnName. */
+                                        public columnName: string;
+
+                                        /** TimestampTransformation timeFormat. */
+                                        public timeFormat: string;
+
+                                        /** TimestampTransformation invalidValuesAllowed. */
+                                        public invalidValuesAllowed: boolean;
+
+                                        /**
+                                         * Creates a new TimestampTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns TimestampTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
+
+                                        /**
+                                         * Encodes the specified TimestampTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation.verify|verify} messages.
+                                         * @param message TimestampTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified TimestampTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation.verify|verify} messages.
+                                         * @param message TimestampTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITimestampTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a TimestampTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns TimestampTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
+
+                                        /**
+                                         * Decodes a TimestampTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns TimestampTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
+
+                                        /**
+                                         * Verifies a TimestampTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a TimestampTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns TimestampTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation;
+
+                                        /**
+                                         * Creates a plain object from a TimestampTransformation message. Also converts values to other types if specified.
+                                         * @param message TimestampTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TimestampTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this TimestampTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+
+                                    /** Properties of a TextTransformation. */
+                                    interface ITextTransformation {
+
+                                        /** TextTransformation columnName */
+                                        columnName?: (string|null);
+                                    }
+
+                                    /** Represents a TextTransformation. */
+                                    class TextTransformation implements ITextTransformation {
+
+                                        /**
+                                         * Constructs a new TextTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation);
+
+                                        /** TextTransformation columnName. */
+                                        public columnName: string;
+
+                                        /**
+                                         * Creates a new TextTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns TextTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
+
+                                        /**
+                                         * Encodes the specified TextTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation.verify|verify} messages.
+                                         * @param message TextTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified TextTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation.verify|verify} messages.
+                                         * @param message TextTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a TextTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns TextTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
+
+                                        /**
+                                         * Decodes a TextTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns TextTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
+
+                                        /**
+                                         * Verifies a TextTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a TextTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns TextTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation;
+
+                                        /**
+                                         * Creates a plain object from a TextTransformation message. Also converts values to other types if specified.
+                                         * @param message TextTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this TextTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+
+                                    /** Properties of a NumericArrayTransformation. */
+                                    interface INumericArrayTransformation {
+
+                                        /** NumericArrayTransformation columnName */
+                                        columnName?: (string|null);
+
+                                        /** NumericArrayTransformation invalidValuesAllowed */
+                                        invalidValuesAllowed?: (boolean|null);
+                                    }
+
+                                    /** Represents a NumericArrayTransformation. */
+                                    class NumericArrayTransformation implements INumericArrayTransformation {
+
+                                        /**
+                                         * Constructs a new NumericArrayTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation);
+
+                                        /** NumericArrayTransformation columnName. */
+                                        public columnName: string;
+
+                                        /** NumericArrayTransformation invalidValuesAllowed. */
+                                        public invalidValuesAllowed: boolean;
+
+                                        /**
+                                         * Creates a new NumericArrayTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns NumericArrayTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
+
+                                        /**
+                                         * Encodes the specified NumericArrayTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation.verify|verify} messages.
+                                         * @param message NumericArrayTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified NumericArrayTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation.verify|verify} messages.
+                                         * @param message NumericArrayTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.INumericArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a NumericArrayTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns NumericArrayTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
+
+                                        /**
+                                         * Decodes a NumericArrayTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns NumericArrayTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
+
+                                        /**
+                                         * Verifies a NumericArrayTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a NumericArrayTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns NumericArrayTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation;
+
+                                        /**
+                                         * Creates a plain object from a NumericArrayTransformation message. Also converts values to other types if specified.
+                                         * @param message NumericArrayTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.NumericArrayTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this NumericArrayTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+
+                                    /** Properties of a CategoricalArrayTransformation. */
+                                    interface ICategoricalArrayTransformation {
+
+                                        /** CategoricalArrayTransformation columnName */
+                                        columnName?: (string|null);
+                                    }
+
+                                    /** Represents a CategoricalArrayTransformation. */
+                                    class CategoricalArrayTransformation implements ICategoricalArrayTransformation {
+
+                                        /**
+                                         * Constructs a new CategoricalArrayTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation);
+
+                                        /** CategoricalArrayTransformation columnName. */
+                                        public columnName: string;
+
+                                        /**
+                                         * Creates a new CategoricalArrayTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns CategoricalArrayTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
+
+                                        /**
+                                         * Encodes the specified CategoricalArrayTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation.verify|verify} messages.
+                                         * @param message CategoricalArrayTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified CategoricalArrayTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation.verify|verify} messages.
+                                         * @param message CategoricalArrayTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ICategoricalArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a CategoricalArrayTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns CategoricalArrayTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
+
+                                        /**
+                                         * Decodes a CategoricalArrayTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns CategoricalArrayTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
+
+                                        /**
+                                         * Verifies a CategoricalArrayTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a CategoricalArrayTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns CategoricalArrayTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation;
+
+                                        /**
+                                         * Creates a plain object from a CategoricalArrayTransformation message. Also converts values to other types if specified.
+                                         * @param message CategoricalArrayTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.CategoricalArrayTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this CategoricalArrayTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+
+                                    /** Properties of a TextArrayTransformation. */
+                                    interface ITextArrayTransformation {
+
+                                        /** TextArrayTransformation columnName */
+                                        columnName?: (string|null);
+                                    }
+
+                                    /** Represents a TextArrayTransformation. */
+                                    class TextArrayTransformation implements ITextArrayTransformation {
+
+                                        /**
+                                         * Constructs a new TextArrayTransformation.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation);
+
+                                        /** TextArrayTransformation columnName. */
+                                        public columnName: string;
+
+                                        /**
+                                         * Creates a new TextArrayTransformation instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns TextArrayTransformation instance
+                                         */
+                                        public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
+
+                                        /**
+                                         * Encodes the specified TextArrayTransformation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation.verify|verify} messages.
+                                         * @param message TextArrayTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified TextArrayTransformation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation.verify|verify} messages.
+                                         * @param message TextArrayTransformation message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.ITextArrayTransformation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a TextArrayTransformation message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns TextArrayTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
+
+                                        /**
+                                         * Decodes a TextArrayTransformation message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns TextArrayTransformation
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
+
+                                        /**
+                                         * Verifies a TextArrayTransformation message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a TextArrayTransformation message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns TextArrayTransformation
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation;
+
+                                        /**
+                                         * Creates a plain object from a TextArrayTransformation message. Also converts values to other types if specified.
+                                         * @param message TextArrayTransformation
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Transformation.TextArrayTransformation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this TextArrayTransformation to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+                                    }
+                                }
+
+                                /** Properties of a Period. */
+                                interface IPeriod {
+
+                                    /** Period unit */
+                                    unit?: (string|null);
+
+                                    /** Period quantity */
+                                    quantity?: (number|Long|string|null);
+                                }
+
+                                /** Represents a Period. */
+                                class Period implements IPeriod {
+
+                                    /**
+                                     * Constructs a new Period.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod);
+
+                                    /** Period unit. */
+                                    public unit: string;
+
+                                    /** Period quantity. */
+                                    public quantity: (number|Long|string);
+
+                                    /**
+                                     * Creates a new Period instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns Period instance
+                                     */
+                                    public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
+
+                                    /**
+                                     * Encodes the specified Period message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period.verify|verify} messages.
+                                     * @param message Period message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified Period message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period.verify|verify} messages.
+                                     * @param message Period message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.IPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a Period message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns Period
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
+
+                                    /**
+                                     * Decodes a Period message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns Period
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
+
+                                    /**
+                                     * Verifies a Period message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a Period message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns Period
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period;
+
+                                    /**
+                                     * Creates a plain object from a Period message. Also converts values to other types if specified.
+                                     * @param message Period
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingInputs.Period, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this Period to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+                                }
+                            }
+
+                            /** Properties of an AutoMlForecastingMetadata. */
+                            interface IAutoMlForecastingMetadata {
+
+                                /** AutoMlForecastingMetadata trainCostMilliNodeHours */
+                                trainCostMilliNodeHours?: (number|Long|string|null);
+                            }
+
+                            /** Represents an AutoMlForecastingMetadata. */
+                            class AutoMlForecastingMetadata implements IAutoMlForecastingMetadata {
+
+                                /**
+                                 * Constructs a new AutoMlForecastingMetadata.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata);
+
+                                /** AutoMlForecastingMetadata trainCostMilliNodeHours. */
+                                public trainCostMilliNodeHours: (number|Long|string);
+
+                                /**
+                                 * Creates a new AutoMlForecastingMetadata instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AutoMlForecastingMetadata instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
+
+                                /**
+                                 * Encodes the specified AutoMlForecastingMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata.verify|verify} messages.
+                                 * @param message AutoMlForecastingMetadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AutoMlForecastingMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata.verify|verify} messages.
+                                 * @param message AutoMlForecastingMetadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlForecastingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AutoMlForecastingMetadata message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AutoMlForecastingMetadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
+
+                                /**
+                                 * Decodes an AutoMlForecastingMetadata message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AutoMlForecastingMetadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
+
+                                /**
+                                 * Verifies an AutoMlForecastingMetadata message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AutoMlForecastingMetadata message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AutoMlForecastingMetadata
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata;
+
+                                /**
+                                 * Creates a plain object from an AutoMlForecastingMetadata message. Also converts values to other types if specified.
+                                 * @param message AutoMlForecastingMetadata
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.AutoMlForecastingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AutoMlForecastingMetadata to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
                             /** Properties of an AutoMlVideoActionRecognition. */
                             interface IAutoMlVideoActionRecognition {
 
@@ -61119,7 +58288,8 @@ export namespace google {
                                 enum ModelType {
                                     MODEL_TYPE_UNSPECIFIED = 0,
                                     CLOUD = 1,
-                                    MOBILE_VERSATILE_1 = 2
+                                    MOBILE_VERSATILE_1 = 2,
+                                    MOBILE_JETSON_VERSATILE_1 = 3
                                 }
                             }
 

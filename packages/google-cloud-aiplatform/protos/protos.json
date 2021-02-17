@@ -12877,7 +12877,7 @@
                       "options": {
                         "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema;schema",
                         "java_multiple_files": true,
-                        "java_outer_classname": "SavedQueryMetadataProto",
+                        "java_outer_classname": "DatasetMetadataProto",
                         "java_package": "com.google.cloud.aiplatform.v1beta1.schema"
                       },
                       "nested": {
@@ -13352,427 +13352,6 @@
                             }
                           }
                         },
-                        "ImageClassificationPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "ImageObjectDetectionPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "ImageSegmentationPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "VideoClassificationPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "timeSegmentStart": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "timeSegmentEnd": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "VideoObjectTrackingPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "timeSegmentStart": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "timeSegmentEnd": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "VideoActionRecognitionPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "timeSegmentStart": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "timeSegmentEnd": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "TextClassificationPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "TextSentimentPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "TextExtractionPredictionInstance": {
-                          "fields": {
-                            "content": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "key": {
-                              "type": "string",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "ImageClassificationPredictionParams": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "maxPredictions": {
-                              "type": "int32",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "ImageObjectDetectionPredictionParams": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "maxPredictions": {
-                              "type": "int32",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "ImageSegmentationPredictionParams": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "VideoClassificationPredictionParams": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "maxPredictions": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "segmentClassification": {
-                              "type": "bool",
-                              "id": 3
-                            },
-                            "shotClassification": {
-                              "type": "bool",
-                              "id": 4
-                            },
-                            "oneSecIntervalClassification": {
-                              "type": "bool",
-                              "id": 5
-                            }
-                          }
-                        },
-                        "VideoObjectTrackingPredictionParams": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "maxPredictions": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "minBoundingBoxSize": {
-                              "type": "float",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "VideoActionRecognitionPredictionParams": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "maxPredictions": {
-                              "type": "int32",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "PredictionResult": {
-                          "oneofs": {
-                            "input": {
-                              "oneof": [
-                                "instance",
-                                "key"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "instance": {
-                              "type": "google.protobuf.Struct",
-                              "id": 1
-                            },
-                            "key": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "prediction": {
-                              "type": "google.protobuf.Value",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "TextSentimentPredictionResult": {
-                          "fields": {
-                            "instance": {
-                              "type": "TextSentimentPredictionInstance",
-                              "id": 1
-                            },
-                            "prediction": {
-                              "type": "Prediction",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "Prediction": {
-                              "fields": {
-                                "sentiment": {
-                                  "type": "int32",
-                                  "id": 1
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "ClassificationPredictionResult": {
-                          "fields": {
-                            "ids": {
-                              "rule": "repeated",
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "displayNames": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "confidences": {
-                              "rule": "repeated",
-                              "type": "float",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "ImageObjectDetectionPredictionResult": {
-                          "fields": {
-                            "ids": {
-                              "rule": "repeated",
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "displayNames": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "confidences": {
-                              "rule": "repeated",
-                              "type": "float",
-                              "id": 3
-                            },
-                            "bboxes": {
-                              "rule": "repeated",
-                              "type": "google.protobuf.ListValue",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "VideoClassificationPredictionResult": {
-                          "fields": {
-                            "id": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "type": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "timeSegmentStart": {
-                              "type": "google.protobuf.Duration",
-                              "id": 4
-                            },
-                            "timeSegmentEnd": {
-                              "type": "google.protobuf.Duration",
-                              "id": 5
-                            },
-                            "confidence": {
-                              "type": "google.protobuf.FloatValue",
-                              "id": 6
-                            }
-                          }
-                        },
-                        "VideoObjectTrackingPredictionResult": {
-                          "fields": {
-                            "id": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "timeSegmentStart": {
-                              "type": "google.protobuf.Duration",
-                              "id": 3
-                            },
-                            "timeSegmentEnd": {
-                              "type": "google.protobuf.Duration",
-                              "id": 4
-                            },
-                            "confidence": {
-                              "type": "google.protobuf.FloatValue",
-                              "id": 5
-                            },
-                            "frames": {
-                              "rule": "repeated",
-                              "type": "Frame",
-                              "id": 6
-                            }
-                          },
-                          "nested": {
-                            "Frame": {
-                              "fields": {
-                                "timeOffset": {
-                                  "type": "google.protobuf.Duration",
-                                  "id": 1
-                                },
-                                "xMin": {
-                                  "type": "google.protobuf.FloatValue",
-                                  "id": 2
-                                },
-                                "xMax": {
-                                  "type": "google.protobuf.FloatValue",
-                                  "id": 3
-                                },
-                                "yMin": {
-                                  "type": "google.protobuf.FloatValue",
-                                  "id": 4
-                                },
-                                "yMax": {
-                                  "type": "google.protobuf.FloatValue",
-                                  "id": 5
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "TextExtractionPredictionResult": {
-                          "fields": {
-                            "ids": {
-                              "rule": "repeated",
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "displayNames": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "textSegmentStartOffsets": {
-                              "rule": "repeated",
-                              "type": "int64",
-                              "id": 3
-                            },
-                            "textSegmentEndOffsets": {
-                              "rule": "repeated",
-                              "type": "int64",
-                              "id": 4
-                            },
-                            "confidences": {
-                              "rule": "repeated",
-                              "type": "float",
-                              "id": 5
-                            }
-                          }
-                        },
                         "predict": {
                           "nested": {
                             "instance": {
@@ -14069,11 +13648,11 @@
                                 "ImageSegmentationPredictionResult": {
                                   "fields": {
                                     "categoryMask": {
-                                      "type": "bytes",
+                                      "type": "string",
                                       "id": 1
                                     },
                                     "confidenceMask": {
-                                      "type": "bytes",
+                                      "type": "string",
                                       "id": 2
                                     }
                                   }
@@ -14139,23 +13718,9 @@
                                 },
                                 "TextSentimentPredictionResult": {
                                   "fields": {
-                                    "instance": {
-                                      "type": "google.cloud.aiplatform.v1beta1.schema.predict.instance.TextSentimentPredictionInstance",
+                                    "sentiment": {
+                                      "type": "int32",
                                       "id": 1
-                                    },
-                                    "prediction": {
-                                      "type": "Prediction",
-                                      "id": 2
-                                    }
-                                  },
-                                  "nested": {
-                                    "Prediction": {
-                                      "fields": {
-                                        "sentiment": {
-                                          "type": "int32",
-                                          "id": 1
-                                        }
-                                      }
                                     }
                                   }
                                 },
@@ -14286,31 +13851,6 @@
                             }
                           }
                         },
-                        "TextSentimentSavedQueryMetadata": {
-                          "fields": {
-                            "sentimentMax": {
-                              "type": "int32",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "VisualInspectionClassificationLabelSavedQueryMetadata": {
-                          "fields": {
-                            "multiLabel": {
-                              "type": "bool",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "VisualInspectionMaskSavedQueryMetadata": {
-                          "fields": {
-                            "colorMap": {
-                              "rule": "repeated",
-                              "type": "AnnotationSpecColor",
-                              "id": 2
-                            }
-                          }
-                        },
                         "trainingjob": {
                           "nested": {
                             "definition": {
@@ -14321,252 +13861,6 @@
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.trainingjob.definition"
                               },
                               "nested": {
-                                "AutoMlForecasting": {
-                                  "fields": {
-                                    "inputs": {
-                                      "type": "AutoMlForecastingInputs",
-                                      "id": 1
-                                    },
-                                    "metadata": {
-                                      "type": "AutoMlForecastingMetadata",
-                                      "id": 2
-                                    }
-                                  }
-                                },
-                                "AutoMlForecastingInputs": {
-                                  "fields": {
-                                    "targetColumn": {
-                                      "type": "string",
-                                      "id": 1
-                                    },
-                                    "timeSeriesIdentifierColumn": {
-                                      "type": "string",
-                                      "id": 2
-                                    },
-                                    "timeColumn": {
-                                      "type": "string",
-                                      "id": 3
-                                    },
-                                    "transformations": {
-                                      "rule": "repeated",
-                                      "type": "Transformation",
-                                      "id": 4
-                                    },
-                                    "optimizationObjective": {
-                                      "type": "string",
-                                      "id": 5
-                                    },
-                                    "trainBudgetMilliNodeHours": {
-                                      "type": "int64",
-                                      "id": 6
-                                    },
-                                    "weightColumn": {
-                                      "type": "string",
-                                      "id": 7
-                                    },
-                                    "staticColumns": {
-                                      "rule": "repeated",
-                                      "type": "string",
-                                      "id": 8
-                                    },
-                                    "timeVariantPastOnlyColumns": {
-                                      "rule": "repeated",
-                                      "type": "string",
-                                      "id": 9
-                                    },
-                                    "timeVariantPastAndFutureColumns": {
-                                      "rule": "repeated",
-                                      "type": "string",
-                                      "id": 10
-                                    },
-                                    "period": {
-                                      "type": "Period",
-                                      "id": 11
-                                    },
-                                    "forecastWindowStart": {
-                                      "type": "int64",
-                                      "id": 12
-                                    },
-                                    "forecastWindowEnd": {
-                                      "type": "int64",
-                                      "id": 13
-                                    },
-                                    "pastHorizon": {
-                                      "type": "int64",
-                                      "id": 14
-                                    },
-                                    "exportEvaluatedDataItemsConfig": {
-                                      "type": "ExportEvaluatedDataItemsConfig",
-                                      "id": 15
-                                    }
-                                  },
-                                  "nested": {
-                                    "Transformation": {
-                                      "oneofs": {
-                                        "transformationDetail": {
-                                          "oneof": [
-                                            "auto",
-                                            "numeric",
-                                            "categorical",
-                                            "timestamp",
-                                            "text",
-                                            "repeatedNumeric",
-                                            "repeatedCategorical",
-                                            "repeatedText"
-                                          ]
-                                        }
-                                      },
-                                      "fields": {
-                                        "auto": {
-                                          "type": "AutoTransformation",
-                                          "id": 1
-                                        },
-                                        "numeric": {
-                                          "type": "NumericTransformation",
-                                          "id": 2
-                                        },
-                                        "categorical": {
-                                          "type": "CategoricalTransformation",
-                                          "id": 3
-                                        },
-                                        "timestamp": {
-                                          "type": "TimestampTransformation",
-                                          "id": 4
-                                        },
-                                        "text": {
-                                          "type": "TextTransformation",
-                                          "id": 5
-                                        },
-                                        "repeatedNumeric": {
-                                          "type": "NumericArrayTransformation",
-                                          "id": 6
-                                        },
-                                        "repeatedCategorical": {
-                                          "type": "CategoricalArrayTransformation",
-                                          "id": 7
-                                        },
-                                        "repeatedText": {
-                                          "type": "TextArrayTransformation",
-                                          "id": 8
-                                        }
-                                      },
-                                      "nested": {
-                                        "AutoTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "NumericTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            },
-                                            "invalidValuesAllowed": {
-                                              "type": "bool",
-                                              "id": 2
-                                            }
-                                          }
-                                        },
-                                        "CategoricalTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "TimestampTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            },
-                                            "timeFormat": {
-                                              "type": "string",
-                                              "id": 2
-                                            },
-                                            "invalidValuesAllowed": {
-                                              "type": "bool",
-                                              "id": 3
-                                            }
-                                          }
-                                        },
-                                        "TextTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "NumericArrayTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            },
-                                            "invalidValuesAllowed": {
-                                              "type": "bool",
-                                              "id": 2
-                                            }
-                                          }
-                                        },
-                                        "CategoricalArrayTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "TextArrayTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "Period": {
-                                      "fields": {
-                                        "unit": {
-                                          "type": "string",
-                                          "id": 1
-                                        },
-                                        "quantity": {
-                                          "type": "int64",
-                                          "id": 2
-                                        }
-                                      }
-                                    }
-                                  }
-                                },
-                                "AutoMlForecastingMetadata": {
-                                  "fields": {
-                                    "trainCostMilliNodeHours": {
-                                      "type": "int64",
-                                      "id": 1
-                                    }
-                                  }
-                                },
-                                "ExportEvaluatedDataItemsConfig": {
-                                  "fields": {
-                                    "destinationBigqueryUri": {
-                                      "type": "string",
-                                      "id": 1
-                                    },
-                                    "overrideExistingTable": {
-                                      "type": "bool",
-                                      "id": 2
-                                    }
-                                  }
-                                },
                                 "AutoMlImageClassification": {
                                   "fields": {
                                     "inputs": {
@@ -14728,7 +14022,8 @@
                                       "values": {
                                         "MODEL_TYPE_UNSPECIFIED": 0,
                                         "CLOUD_HIGH_ACCURACY_1": 1,
-                                        "CLOUD_LOW_ACCURACY_1": 2
+                                        "CLOUD_LOW_ACCURACY_1": 2,
+                                        "MOBILE_TF_LOW_LATENCY_1": 3
                                       }
                                     }
                                   }
@@ -14961,6 +14256,18 @@
                                     }
                                   }
                                 },
+                                "ExportEvaluatedDataItemsConfig": {
+                                  "fields": {
+                                    "destinationBigqueryUri": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "overrideExistingTable": {
+                                      "type": "bool",
+                                      "id": 2
+                                    }
+                                  }
+                                },
                                 "AutoMlTextClassification": {
                                   "fields": {
                                     "inputs": {
@@ -15000,6 +14307,249 @@
                                   "fields": {
                                     "sentimentMax": {
                                       "type": "int32",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlForecasting": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlForecastingInputs",
+                                      "id": 1
+                                    },
+                                    "metadata": {
+                                      "type": "AutoMlForecastingMetadata",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "AutoMlForecastingInputs": {
+                                  "fields": {
+                                    "targetColumn": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "timeSeriesIdentifierColumn": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "timeColumn": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "transformations": {
+                                      "rule": "repeated",
+                                      "type": "Transformation",
+                                      "id": 4
+                                    },
+                                    "optimizationObjective": {
+                                      "type": "string",
+                                      "id": 5
+                                    },
+                                    "trainBudgetMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 6
+                                    },
+                                    "weightColumn": {
+                                      "type": "string",
+                                      "id": 7
+                                    },
+                                    "staticColumns": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 8
+                                    },
+                                    "timeVariantPastOnlyColumns": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 9
+                                    },
+                                    "timeVariantPastAndFutureColumns": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 10
+                                    },
+                                    "period": {
+                                      "type": "Period",
+                                      "id": 11
+                                    },
+                                    "forecastWindowStart": {
+                                      "type": "int64",
+                                      "id": 12
+                                    },
+                                    "forecastWindowEnd": {
+                                      "type": "int64",
+                                      "id": 13
+                                    },
+                                    "pastHorizon": {
+                                      "type": "int64",
+                                      "id": 14
+                                    },
+                                    "exportEvaluatedDataItemsConfig": {
+                                      "type": "ExportEvaluatedDataItemsConfig",
+                                      "id": 15
+                                    },
+                                    "quantiles": {
+                                      "rule": "repeated",
+                                      "type": "double",
+                                      "id": 16
+                                    },
+                                    "validationOptions": {
+                                      "type": "string",
+                                      "id": 17
+                                    }
+                                  },
+                                  "nested": {
+                                    "Transformation": {
+                                      "oneofs": {
+                                        "transformationDetail": {
+                                          "oneof": [
+                                            "auto",
+                                            "numeric",
+                                            "categorical",
+                                            "timestamp",
+                                            "text",
+                                            "repeatedNumeric",
+                                            "repeatedCategorical",
+                                            "repeatedText"
+                                          ]
+                                        }
+                                      },
+                                      "fields": {
+                                        "auto": {
+                                          "type": "AutoTransformation",
+                                          "id": 1
+                                        },
+                                        "numeric": {
+                                          "type": "NumericTransformation",
+                                          "id": 2
+                                        },
+                                        "categorical": {
+                                          "type": "CategoricalTransformation",
+                                          "id": 3
+                                        },
+                                        "timestamp": {
+                                          "type": "TimestampTransformation",
+                                          "id": 4
+                                        },
+                                        "text": {
+                                          "type": "TextTransformation",
+                                          "id": 5
+                                        },
+                                        "repeatedNumeric": {
+                                          "type": "NumericArrayTransformation",
+                                          "id": 6
+                                        },
+                                        "repeatedCategorical": {
+                                          "type": "CategoricalArrayTransformation",
+                                          "id": 7
+                                        },
+                                        "repeatedText": {
+                                          "type": "TextArrayTransformation",
+                                          "id": 8
+                                        }
+                                      },
+                                      "nested": {
+                                        "AutoTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "NumericTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            },
+                                            "invalidValuesAllowed": {
+                                              "type": "bool",
+                                              "id": 2
+                                            }
+                                          }
+                                        },
+                                        "CategoricalTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "TimestampTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            },
+                                            "timeFormat": {
+                                              "type": "string",
+                                              "id": 2
+                                            },
+                                            "invalidValuesAllowed": {
+                                              "type": "bool",
+                                              "id": 3
+                                            }
+                                          }
+                                        },
+                                        "TextTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "NumericArrayTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            },
+                                            "invalidValuesAllowed": {
+                                              "type": "bool",
+                                              "id": 2
+                                            }
+                                          }
+                                        },
+                                        "CategoricalArrayTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "TextArrayTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "Period": {
+                                      "fields": {
+                                        "unit": {
+                                          "type": "string",
+                                          "id": 1
+                                        },
+                                        "quantity": {
+                                          "type": "int64",
+                                          "id": 2
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlForecastingMetadata": {
+                                  "fields": {
+                                    "trainCostMilliNodeHours": {
+                                      "type": "int64",
                                       "id": 1
                                     }
                                   }
@@ -15049,7 +14599,8 @@
                                       "values": {
                                         "MODEL_TYPE_UNSPECIFIED": 0,
                                         "CLOUD": 1,
-                                        "MOBILE_VERSATILE_1": 2
+                                        "MOBILE_VERSATILE_1": 2,
+                                        "MOBILE_JETSON_VERSATILE_1": 3
                                       }
                                     }
                                   }
