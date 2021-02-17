@@ -3,23 +3,22 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-org-policy",
-        "sha": "47e6cbb3d069207a8049c6633adebfc944c27a8c"
+        "remote": "git@github.com:googleapis/nodejs-org-policy.git",
+        "sha": "e4747f7250d3ef8ea50c9d7422e7c8f2788435b2"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e8bc4471a88ac5f60defe3ed436f517174e59ba0",
-        "internalRef": "357800868"
+        "sha": "84174565b3a38e253ddffe146935f88218e29cef"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "f327d3b657a63ae4a8efd7f011a15eacae36b59c"
+        "sha": "d17674372e27fb8f23013935e794aa37502071aa"
       }
     }
   ],

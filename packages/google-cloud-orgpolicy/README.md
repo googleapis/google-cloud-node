@@ -5,13 +5,13 @@
 # [Organization Policy: Node.js Client](https://github.com/googleapis/nodejs-org-policy)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/undefined.svg)](https://www.npmjs.org/package/undefined)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/org-policy.svg)](https://www.npmjs.org/package/@google-cloud/org-policy)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-org-policy/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-org-policy)
 
 
 
 
-Orgpolicy client for Node.js
+Org policy client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install undefined
+npm install @google-cloud/org-policy
 ```
 
 
@@ -62,23 +62,23 @@ npm install undefined
 
 // remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
-const {OrgPolicyClient} = require('');
+const {OrgPolicyClient} = require('@google-cloud/org-policy');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
 // Creates a client
 // eslint-disable-next-line no-unused-vars
-const client = new {OrgPolicyClient}();
+const client = new OrgPolicyClient();
 
 //TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function listConstraints() {
+  const constraints = await client.listConstraints({
+    parent: `projects/${projectId}`,
+  });
+  console.info(constraints);
 }
-doSomething();
+listConstraints();
 
 ```
 
@@ -147,8 +147,8 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-org-policy/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/resource-manager/docs/organization-policy/overview
-[product-docs]: null
+[client-docs]: https://googleapis.dev/nodejs/org-policy/latest/index.html
+[product-docs]: https://cloud.google.com/resource-manager/docs/organization-policy/overview
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
