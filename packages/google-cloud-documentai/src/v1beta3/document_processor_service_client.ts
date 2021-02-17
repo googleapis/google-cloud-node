@@ -378,6 +378,10 @@ export class DocumentProcessorServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.documentai.v1beta3.Document} request.inlineDocument
+   *   An inline document proto.
+   * @param {google.cloud.documentai.v1beta3.RawDocument} request.rawDocument
+   *   A raw document content (bytes).
    * @param {string} request.name
    *   Required. The processor resource name.
    * @param {google.cloud.documentai.v1beta3.Document} request.document
@@ -486,6 +490,13 @@ export class DocumentProcessorServiceClient {
    *   The input config for each single document in the batch process.
    * @param {google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig} request.outputConfig
    *   The overall output config for batch process.
+   * @param {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} request.inputDocuments
+   *   The input documents for batch process.
+   * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig} request.documentOutputConfig
+   *   The overall output config for batch process.
+   * @param {boolean} request.skipHumanReview
+   *   Whether Human Review feature should be skipped for this request. Default to
+   *   false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -627,6 +638,8 @@ export class DocumentProcessorServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.documentai.v1beta3.Document} request.inlineDocument
+   *   An inline document proto.
    * @param {string} request.humanReviewConfig
    *   Required. The resource name of the HumanReviewConfig that the document will be
    *   reviewed with.

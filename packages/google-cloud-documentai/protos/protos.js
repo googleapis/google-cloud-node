@@ -22362,6 +22362,1473 @@
                         return BoundingPoly;
                     })();
     
+                    v1beta3.RawDocument = (function() {
+    
+                        /**
+                         * Properties of a RawDocument.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface IRawDocument
+                         * @property {Uint8Array|null} [content] RawDocument content
+                         * @property {string|null} [mimeType] RawDocument mimeType
+                         */
+    
+                        /**
+                         * Constructs a new RawDocument.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a RawDocument.
+                         * @implements IRawDocument
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.IRawDocument=} [properties] Properties to set
+                         */
+                        function RawDocument(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RawDocument content.
+                         * @member {Uint8Array} content
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @instance
+                         */
+                        RawDocument.prototype.content = $util.newBuffer([]);
+    
+                        /**
+                         * RawDocument mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @instance
+                         */
+                        RawDocument.prototype.mimeType = "";
+    
+                        /**
+                         * Creates a new RawDocument instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IRawDocument=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.RawDocument} RawDocument instance
+                         */
+                        RawDocument.create = function create(properties) {
+                            return new RawDocument(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RawDocument message. Does not implicitly {@link google.cloud.documentai.v1beta3.RawDocument.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IRawDocument} message RawDocument message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawDocument.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.content);
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mimeType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RawDocument message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.RawDocument.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IRawDocument} message RawDocument message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawDocument.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RawDocument message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.RawDocument} RawDocument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawDocument.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.RawDocument();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.content = reader.bytes();
+                                    break;
+                                case 2:
+                                    message.mimeType = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RawDocument message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.RawDocument} RawDocument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawDocument.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RawDocument message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RawDocument.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
+                                    return "content: buffer expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RawDocument message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.RawDocument} RawDocument
+                         */
+                        RawDocument.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.RawDocument)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.RawDocument();
+                            if (object.content != null)
+                                if (typeof object.content === "string")
+                                    $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
+                                else if (object.content.length)
+                                    message.content = object.content;
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RawDocument message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.RawDocument} message RawDocument
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RawDocument.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.content = "";
+                                else {
+                                    object.content = [];
+                                    if (options.bytes !== Array)
+                                        object.content = $util.newBuffer(object.content);
+                                }
+                                object.mimeType = "";
+                            }
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RawDocument to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.RawDocument
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RawDocument.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RawDocument;
+                    })();
+    
+                    v1beta3.GcsDocument = (function() {
+    
+                        /**
+                         * Properties of a GcsDocument.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface IGcsDocument
+                         * @property {string|null} [gcsUri] GcsDocument gcsUri
+                         * @property {string|null} [mimeType] GcsDocument mimeType
+                         */
+    
+                        /**
+                         * Constructs a new GcsDocument.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a GcsDocument.
+                         * @implements IGcsDocument
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocument=} [properties] Properties to set
+                         */
+                        function GcsDocument(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsDocument gcsUri.
+                         * @member {string} gcsUri
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @instance
+                         */
+                        GcsDocument.prototype.gcsUri = "";
+    
+                        /**
+                         * GcsDocument mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @instance
+                         */
+                        GcsDocument.prototype.mimeType = "";
+    
+                        /**
+                         * Creates a new GcsDocument instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocument=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocument} GcsDocument instance
+                         */
+                        GcsDocument.create = function create(properties) {
+                            return new GcsDocument(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsDocument message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocument.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocument} message GcsDocument message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsDocument.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcsUri);
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mimeType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsDocument message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocument.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocument} message GcsDocument message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsDocument.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsDocument message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocument} GcsDocument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsDocument.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.GcsDocument();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsUri = reader.string();
+                                    break;
+                                case 2:
+                                    message.mimeType = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsDocument message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocument} GcsDocument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsDocument.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsDocument message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsDocument.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
+                                if (!$util.isString(message.gcsUri))
+                                    return "gcsUri: string expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsDocument message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocument} GcsDocument
+                         */
+                        GcsDocument.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.GcsDocument)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.GcsDocument();
+                            if (object.gcsUri != null)
+                                message.gcsUri = String(object.gcsUri);
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsDocument message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.GcsDocument} message GcsDocument
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsDocument.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.gcsUri = "";
+                                object.mimeType = "";
+                            }
+                            if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
+                                object.gcsUri = message.gcsUri;
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsDocument to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocument
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsDocument.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsDocument;
+                    })();
+    
+                    v1beta3.GcsDocuments = (function() {
+    
+                        /**
+                         * Properties of a GcsDocuments.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface IGcsDocuments
+                         * @property {Array.<google.cloud.documentai.v1beta3.IGcsDocument>|null} [documents] GcsDocuments documents
+                         */
+    
+                        /**
+                         * Constructs a new GcsDocuments.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a GcsDocuments.
+                         * @implements IGcsDocuments
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocuments=} [properties] Properties to set
+                         */
+                        function GcsDocuments(properties) {
+                            this.documents = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsDocuments documents.
+                         * @member {Array.<google.cloud.documentai.v1beta3.IGcsDocument>} documents
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @instance
+                         */
+                        GcsDocuments.prototype.documents = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GcsDocuments instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocuments=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocuments} GcsDocuments instance
+                         */
+                        GcsDocuments.create = function create(properties) {
+                            return new GcsDocuments(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsDocuments message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocuments.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocuments} message GcsDocuments message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsDocuments.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.documents != null && message.documents.length)
+                                for (var i = 0; i < message.documents.length; ++i)
+                                    $root.google.cloud.documentai.v1beta3.GcsDocument.encode(message.documents[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsDocuments message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsDocuments.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsDocuments} message GcsDocuments message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsDocuments.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsDocuments message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocuments} GcsDocuments
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsDocuments.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.GcsDocuments();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.documents && message.documents.length))
+                                        message.documents = [];
+                                    message.documents.push($root.google.cloud.documentai.v1beta3.GcsDocument.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsDocuments message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocuments} GcsDocuments
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsDocuments.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsDocuments message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsDocuments.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.documents != null && message.hasOwnProperty("documents")) {
+                                if (!Array.isArray(message.documents))
+                                    return "documents: array expected";
+                                for (var i = 0; i < message.documents.length; ++i) {
+                                    var error = $root.google.cloud.documentai.v1beta3.GcsDocument.verify(message.documents[i]);
+                                    if (error)
+                                        return "documents." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsDocuments message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.GcsDocuments} GcsDocuments
+                         */
+                        GcsDocuments.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.GcsDocuments)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.GcsDocuments();
+                            if (object.documents) {
+                                if (!Array.isArray(object.documents))
+                                    throw TypeError(".google.cloud.documentai.v1beta3.GcsDocuments.documents: array expected");
+                                message.documents = [];
+                                for (var i = 0; i < object.documents.length; ++i) {
+                                    if (typeof object.documents[i] !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1beta3.GcsDocuments.documents: object expected");
+                                    message.documents[i] = $root.google.cloud.documentai.v1beta3.GcsDocument.fromObject(object.documents[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsDocuments message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.GcsDocuments} message GcsDocuments
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsDocuments.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.documents = [];
+                            if (message.documents && message.documents.length) {
+                                object.documents = [];
+                                for (var j = 0; j < message.documents.length; ++j)
+                                    object.documents[j] = $root.google.cloud.documentai.v1beta3.GcsDocument.toObject(message.documents[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsDocuments to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.GcsDocuments
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsDocuments.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsDocuments;
+                    })();
+    
+                    v1beta3.GcsPrefix = (function() {
+    
+                        /**
+                         * Properties of a GcsPrefix.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface IGcsPrefix
+                         * @property {string|null} [gcsUriPrefix] GcsPrefix gcsUriPrefix
+                         */
+    
+                        /**
+                         * Constructs a new GcsPrefix.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a GcsPrefix.
+                         * @implements IGcsPrefix
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.IGcsPrefix=} [properties] Properties to set
+                         */
+                        function GcsPrefix(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsPrefix gcsUriPrefix.
+                         * @member {string} gcsUriPrefix
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @instance
+                         */
+                        GcsPrefix.prototype.gcsUriPrefix = "";
+    
+                        /**
+                         * Creates a new GcsPrefix instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsPrefix=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.GcsPrefix} GcsPrefix instance
+                         */
+                        GcsPrefix.create = function create(properties) {
+                            return new GcsPrefix(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsPrefix message. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsPrefix.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsPrefix} message GcsPrefix message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsPrefix.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsUriPrefix != null && Object.hasOwnProperty.call(message, "gcsUriPrefix"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcsUriPrefix);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsPrefix message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GcsPrefix.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IGcsPrefix} message GcsPrefix message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsPrefix.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsPrefix message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.GcsPrefix} GcsPrefix
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsPrefix.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.GcsPrefix();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsUriPrefix = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsPrefix message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.GcsPrefix} GcsPrefix
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsPrefix.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsPrefix message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsPrefix.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.gcsUriPrefix != null && message.hasOwnProperty("gcsUriPrefix"))
+                                if (!$util.isString(message.gcsUriPrefix))
+                                    return "gcsUriPrefix: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsPrefix message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.GcsPrefix} GcsPrefix
+                         */
+                        GcsPrefix.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.GcsPrefix)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.GcsPrefix();
+                            if (object.gcsUriPrefix != null)
+                                message.gcsUriPrefix = String(object.gcsUriPrefix);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsPrefix message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.GcsPrefix} message GcsPrefix
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsPrefix.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.gcsUriPrefix = "";
+                            if (message.gcsUriPrefix != null && message.hasOwnProperty("gcsUriPrefix"))
+                                object.gcsUriPrefix = message.gcsUriPrefix;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsPrefix to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.GcsPrefix
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsPrefix.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsPrefix;
+                    })();
+    
+                    v1beta3.BatchDocumentsInputConfig = (function() {
+    
+                        /**
+                         * Properties of a BatchDocumentsInputConfig.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface IBatchDocumentsInputConfig
+                         * @property {google.cloud.documentai.v1beta3.IGcsPrefix|null} [gcsPrefix] BatchDocumentsInputConfig gcsPrefix
+                         * @property {google.cloud.documentai.v1beta3.IGcsDocuments|null} [gcsDocuments] BatchDocumentsInputConfig gcsDocuments
+                         */
+    
+                        /**
+                         * Constructs a new BatchDocumentsInputConfig.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a BatchDocumentsInputConfig.
+                         * @implements IBatchDocumentsInputConfig
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig=} [properties] Properties to set
+                         */
+                        function BatchDocumentsInputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchDocumentsInputConfig gcsPrefix.
+                         * @member {google.cloud.documentai.v1beta3.IGcsPrefix|null|undefined} gcsPrefix
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @instance
+                         */
+                        BatchDocumentsInputConfig.prototype.gcsPrefix = null;
+    
+                        /**
+                         * BatchDocumentsInputConfig gcsDocuments.
+                         * @member {google.cloud.documentai.v1beta3.IGcsDocuments|null|undefined} gcsDocuments
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @instance
+                         */
+                        BatchDocumentsInputConfig.prototype.gcsDocuments = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BatchDocumentsInputConfig source.
+                         * @member {"gcsPrefix"|"gcsDocuments"|undefined} source
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BatchDocumentsInputConfig.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsPrefix", "gcsDocuments"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BatchDocumentsInputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} BatchDocumentsInputConfig instance
+                         */
+                        BatchDocumentsInputConfig.create = function create(properties) {
+                            return new BatchDocumentsInputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDocumentsInputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig} message BatchDocumentsInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDocumentsInputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsPrefix != null && Object.hasOwnProperty.call(message, "gcsPrefix"))
+                                $root.google.cloud.documentai.v1beta3.GcsPrefix.encode(message.gcsPrefix, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.gcsDocuments != null && Object.hasOwnProperty.call(message, "gcsDocuments"))
+                                $root.google.cloud.documentai.v1beta3.GcsDocuments.encode(message.gcsDocuments, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDocumentsInputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig} message BatchDocumentsInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDocumentsInputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDocumentsInputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} BatchDocumentsInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDocumentsInputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsPrefix = $root.google.cloud.documentai.v1beta3.GcsPrefix.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.gcsDocuments = $root.google.cloud.documentai.v1beta3.GcsDocuments.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDocumentsInputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} BatchDocumentsInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDocumentsInputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDocumentsInputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDocumentsInputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsPrefix != null && message.hasOwnProperty("gcsPrefix")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.documentai.v1beta3.GcsPrefix.verify(message.gcsPrefix);
+                                    if (error)
+                                        return "gcsPrefix." + error;
+                                }
+                            }
+                            if (message.gcsDocuments != null && message.hasOwnProperty("gcsDocuments")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.documentai.v1beta3.GcsDocuments.verify(message.gcsDocuments);
+                                    if (error)
+                                        return "gcsDocuments." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDocumentsInputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} BatchDocumentsInputConfig
+                         */
+                        BatchDocumentsInputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig();
+                            if (object.gcsPrefix != null) {
+                                if (typeof object.gcsPrefix !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.gcsPrefix: object expected");
+                                message.gcsPrefix = $root.google.cloud.documentai.v1beta3.GcsPrefix.fromObject(object.gcsPrefix);
+                            }
+                            if (object.gcsDocuments != null) {
+                                if (typeof object.gcsDocuments !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.gcsDocuments: object expected");
+                                message.gcsDocuments = $root.google.cloud.documentai.v1beta3.GcsDocuments.fromObject(object.gcsDocuments);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDocumentsInputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} message BatchDocumentsInputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDocumentsInputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsPrefix != null && message.hasOwnProperty("gcsPrefix")) {
+                                object.gcsPrefix = $root.google.cloud.documentai.v1beta3.GcsPrefix.toObject(message.gcsPrefix, options);
+                                if (options.oneofs)
+                                    object.source = "gcsPrefix";
+                            }
+                            if (message.gcsDocuments != null && message.hasOwnProperty("gcsDocuments")) {
+                                object.gcsDocuments = $root.google.cloud.documentai.v1beta3.GcsDocuments.toObject(message.gcsDocuments, options);
+                                if (options.oneofs)
+                                    object.source = "gcsDocuments";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchDocumentsInputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.BatchDocumentsInputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDocumentsInputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchDocumentsInputConfig;
+                    })();
+    
+                    v1beta3.DocumentOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a DocumentOutputConfig.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface IDocumentOutputConfig
+                         * @property {google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig|null} [gcsOutputConfig] DocumentOutputConfig gcsOutputConfig
+                         */
+    
+                        /**
+                         * Constructs a new DocumentOutputConfig.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a DocumentOutputConfig.
+                         * @implements IDocumentOutputConfig
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.IDocumentOutputConfig=} [properties] Properties to set
+                         */
+                        function DocumentOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DocumentOutputConfig gcsOutputConfig.
+                         * @member {google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig|null|undefined} gcsOutputConfig
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @instance
+                         */
+                        DocumentOutputConfig.prototype.gcsOutputConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DocumentOutputConfig destination.
+                         * @member {"gcsOutputConfig"|undefined} destination
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DocumentOutputConfig.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsOutputConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DocumentOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IDocumentOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig} DocumentOutputConfig instance
+                         */
+                        DocumentOutputConfig.create = function create(properties) {
+                            return new DocumentOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentOutputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IDocumentOutputConfig} message DocumentOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsOutputConfig != null && Object.hasOwnProperty.call(message, "gcsOutputConfig"))
+                                $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.encode(message.gcsOutputConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentOutputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IDocumentOutputConfig} message DocumentOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DocumentOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig} DocumentOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.DocumentOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsOutputConfig = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DocumentOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig} DocumentOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DocumentOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DocumentOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsOutputConfig != null && message.hasOwnProperty("gcsOutputConfig")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.verify(message.gcsOutputConfig);
+                                    if (error)
+                                        return "gcsOutputConfig." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DocumentOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig} DocumentOutputConfig
+                         */
+                        DocumentOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.DocumentOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.DocumentOutputConfig();
+                            if (object.gcsOutputConfig != null) {
+                                if (typeof object.gcsOutputConfig !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.DocumentOutputConfig.gcsOutputConfig: object expected");
+                                message.gcsOutputConfig = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.fromObject(object.gcsOutputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DocumentOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig} message DocumentOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DocumentOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsOutputConfig != null && message.hasOwnProperty("gcsOutputConfig")) {
+                                object.gcsOutputConfig = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.toObject(message.gcsOutputConfig, options);
+                                if (options.oneofs)
+                                    object.destination = "gcsOutputConfig";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DocumentOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DocumentOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        DocumentOutputConfig.GcsOutputConfig = (function() {
+    
+                            /**
+                             * Properties of a GcsOutputConfig.
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                             * @interface IGcsOutputConfig
+                             * @property {string|null} [gcsUri] GcsOutputConfig gcsUri
+                             */
+    
+                            /**
+                             * Constructs a new GcsOutputConfig.
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig
+                             * @classdesc Represents a GcsOutputConfig.
+                             * @implements IGcsOutputConfig
+                             * @constructor
+                             * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig=} [properties] Properties to set
+                             */
+                            function GcsOutputConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GcsOutputConfig gcsUri.
+                             * @member {string} gcsUri
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @instance
+                             */
+                            GcsOutputConfig.prototype.gcsUri = "";
+    
+                            /**
+                             * Creates a new GcsOutputConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig=} [properties] Properties to set
+                             * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig} GcsOutputConfig instance
+                             */
+                            GcsOutputConfig.create = function create(properties) {
+                                return new GcsOutputConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GcsOutputConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig} message GcsOutputConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsOutputConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcsUri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GcsOutputConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig.IGcsOutputConfig} message GcsOutputConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GcsOutputConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig} GcsOutputConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsOutputConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.gcsUri = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GcsOutputConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig} GcsOutputConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GcsOutputConfig message.
+                             * @function verify
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GcsOutputConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
+                                    if (!$util.isString(message.gcsUri))
+                                        return "gcsUri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GcsOutputConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig} GcsOutputConfig
+                             */
+                            GcsOutputConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig)
+                                    return object;
+                                var message = new $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig();
+                                if (object.gcsUri != null)
+                                    message.gcsUri = String(object.gcsUri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GcsOutputConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @static
+                             * @param {google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig} message GcsOutputConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GcsOutputConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.gcsUri = "";
+                                if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
+                                    object.gcsUri = message.gcsUri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GcsOutputConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GcsOutputConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return GcsOutputConfig;
+                        })();
+    
+                        return DocumentOutputConfig;
+                    })();
+    
                     v1beta3.DocumentProcessorService = (function() {
     
                         /**
@@ -22502,6 +23969,8 @@
                          * Properties of a ProcessRequest.
                          * @memberof google.cloud.documentai.v1beta3
                          * @interface IProcessRequest
+                         * @property {google.cloud.documentai.v1beta3.IDocument|null} [inlineDocument] ProcessRequest inlineDocument
+                         * @property {google.cloud.documentai.v1beta3.IRawDocument|null} [rawDocument] ProcessRequest rawDocument
                          * @property {string|null} [name] ProcessRequest name
                          * @property {google.cloud.documentai.v1beta3.IDocument|null} [document] ProcessRequest document
                          * @property {boolean|null} [skipHumanReview] ProcessRequest skipHumanReview
@@ -22521,6 +23990,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ProcessRequest inlineDocument.
+                         * @member {google.cloud.documentai.v1beta3.IDocument|null|undefined} inlineDocument
+                         * @memberof google.cloud.documentai.v1beta3.ProcessRequest
+                         * @instance
+                         */
+                        ProcessRequest.prototype.inlineDocument = null;
+    
+                        /**
+                         * ProcessRequest rawDocument.
+                         * @member {google.cloud.documentai.v1beta3.IRawDocument|null|undefined} rawDocument
+                         * @memberof google.cloud.documentai.v1beta3.ProcessRequest
+                         * @instance
+                         */
+                        ProcessRequest.prototype.rawDocument = null;
     
                         /**
                          * ProcessRequest name.
@@ -22545,6 +24030,20 @@
                          * @instance
                          */
                         ProcessRequest.prototype.skipHumanReview = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ProcessRequest source.
+                         * @member {"inlineDocument"|"rawDocument"|undefined} source
+                         * @memberof google.cloud.documentai.v1beta3.ProcessRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ProcessRequest.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["inlineDocument", "rawDocument"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new ProcessRequest instance using the specified properties.
@@ -22576,6 +24075,10 @@
                                 $root.google.cloud.documentai.v1beta3.Document.encode(message.document, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.skipHumanReview != null && Object.hasOwnProperty.call(message, "skipHumanReview"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.skipHumanReview);
+                            if (message.inlineDocument != null && Object.hasOwnProperty.call(message, "inlineDocument"))
+                                $root.google.cloud.documentai.v1beta3.Document.encode(message.inlineDocument, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.rawDocument != null && Object.hasOwnProperty.call(message, "rawDocument"))
+                                $root.google.cloud.documentai.v1beta3.RawDocument.encode(message.rawDocument, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -22610,6 +24113,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 4:
+                                    message.inlineDocument = $root.google.cloud.documentai.v1beta3.Document.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.rawDocument = $root.google.cloud.documentai.v1beta3.RawDocument.decode(reader, reader.uint32());
+                                    break;
                                 case 1:
                                     message.name = reader.string();
                                     break;
@@ -22654,6 +24163,25 @@
                         ProcessRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.inlineDocument != null && message.hasOwnProperty("inlineDocument")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.documentai.v1beta3.Document.verify(message.inlineDocument);
+                                    if (error)
+                                        return "inlineDocument." + error;
+                                }
+                            }
+                            if (message.rawDocument != null && message.hasOwnProperty("rawDocument")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.documentai.v1beta3.RawDocument.verify(message.rawDocument);
+                                    if (error)
+                                        return "rawDocument." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -22680,6 +24208,16 @@
                             if (object instanceof $root.google.cloud.documentai.v1beta3.ProcessRequest)
                                 return object;
                             var message = new $root.google.cloud.documentai.v1beta3.ProcessRequest();
+                            if (object.inlineDocument != null) {
+                                if (typeof object.inlineDocument !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.ProcessRequest.inlineDocument: object expected");
+                                message.inlineDocument = $root.google.cloud.documentai.v1beta3.Document.fromObject(object.inlineDocument);
+                            }
+                            if (object.rawDocument != null) {
+                                if (typeof object.rawDocument !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.ProcessRequest.rawDocument: object expected");
+                                message.rawDocument = $root.google.cloud.documentai.v1beta3.RawDocument.fromObject(object.rawDocument);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.document != null) {
@@ -22716,6 +24254,16 @@
                                 object.document = $root.google.cloud.documentai.v1beta3.Document.toObject(message.document, options);
                             if (message.skipHumanReview != null && message.hasOwnProperty("skipHumanReview"))
                                 object.skipHumanReview = message.skipHumanReview;
+                            if (message.inlineDocument != null && message.hasOwnProperty("inlineDocument")) {
+                                object.inlineDocument = $root.google.cloud.documentai.v1beta3.Document.toObject(message.inlineDocument, options);
+                                if (options.oneofs)
+                                    object.source = "inlineDocument";
+                            }
+                            if (message.rawDocument != null && message.hasOwnProperty("rawDocument")) {
+                                object.rawDocument = $root.google.cloud.documentai.v1beta3.RawDocument.toObject(message.rawDocument, options);
+                                if (options.oneofs)
+                                    object.source = "rawDocument";
+                            }
                             return object;
                         };
     
@@ -22733,6 +24281,286 @@
                         return ProcessRequest;
                     })();
     
+                    v1beta3.HumanReviewStatus = (function() {
+    
+                        /**
+                         * Properties of a HumanReviewStatus.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface IHumanReviewStatus
+                         * @property {google.cloud.documentai.v1beta3.HumanReviewStatus.State|null} [state] HumanReviewStatus state
+                         * @property {string|null} [stateMessage] HumanReviewStatus stateMessage
+                         * @property {string|null} [humanReviewOperation] HumanReviewStatus humanReviewOperation
+                         */
+    
+                        /**
+                         * Constructs a new HumanReviewStatus.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a HumanReviewStatus.
+                         * @implements IHumanReviewStatus
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.IHumanReviewStatus=} [properties] Properties to set
+                         */
+                        function HumanReviewStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HumanReviewStatus state.
+                         * @member {google.cloud.documentai.v1beta3.HumanReviewStatus.State} state
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @instance
+                         */
+                        HumanReviewStatus.prototype.state = 0;
+    
+                        /**
+                         * HumanReviewStatus stateMessage.
+                         * @member {string} stateMessage
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @instance
+                         */
+                        HumanReviewStatus.prototype.stateMessage = "";
+    
+                        /**
+                         * HumanReviewStatus humanReviewOperation.
+                         * @member {string} humanReviewOperation
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @instance
+                         */
+                        HumanReviewStatus.prototype.humanReviewOperation = "";
+    
+                        /**
+                         * Creates a new HumanReviewStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IHumanReviewStatus=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.HumanReviewStatus} HumanReviewStatus instance
+                         */
+                        HumanReviewStatus.create = function create(properties) {
+                            return new HumanReviewStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HumanReviewStatus message. Does not implicitly {@link google.cloud.documentai.v1beta3.HumanReviewStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IHumanReviewStatus} message HumanReviewStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HumanReviewStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.stateMessage != null && Object.hasOwnProperty.call(message, "stateMessage"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.stateMessage);
+                            if (message.humanReviewOperation != null && Object.hasOwnProperty.call(message, "humanReviewOperation"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.humanReviewOperation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HumanReviewStatus message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.HumanReviewStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.IHumanReviewStatus} message HumanReviewStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HumanReviewStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HumanReviewStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.HumanReviewStatus} HumanReviewStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HumanReviewStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.HumanReviewStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.state = reader.int32();
+                                    break;
+                                case 2:
+                                    message.stateMessage = reader.string();
+                                    break;
+                                case 3:
+                                    message.humanReviewOperation = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HumanReviewStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.HumanReviewStatus} HumanReviewStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HumanReviewStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HumanReviewStatus message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HumanReviewStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
+                                if (!$util.isString(message.stateMessage))
+                                    return "stateMessage: string expected";
+                            if (message.humanReviewOperation != null && message.hasOwnProperty("humanReviewOperation"))
+                                if (!$util.isString(message.humanReviewOperation))
+                                    return "humanReviewOperation: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HumanReviewStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.HumanReviewStatus} HumanReviewStatus
+                         */
+                        HumanReviewStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.HumanReviewStatus)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.HumanReviewStatus();
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "SKIPPED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "VALIDATION_PASSED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "IN_PROGRESS":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ERROR":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.stateMessage != null)
+                                message.stateMessage = String(object.stateMessage);
+                            if (object.humanReviewOperation != null)
+                                message.humanReviewOperation = String(object.humanReviewOperation);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HumanReviewStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.HumanReviewStatus} message HumanReviewStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HumanReviewStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateMessage = "";
+                                object.humanReviewOperation = "";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.documentai.v1beta3.HumanReviewStatus.State[message.state] : message.state;
+                            if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
+                                object.stateMessage = message.stateMessage;
+                            if (message.humanReviewOperation != null && message.hasOwnProperty("humanReviewOperation"))
+                                object.humanReviewOperation = message.humanReviewOperation;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HumanReviewStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.HumanReviewStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HumanReviewStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.documentai.v1beta3.HumanReviewStatus.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} SKIPPED=1 SKIPPED value
+                         * @property {number} VALIDATION_PASSED=2 VALIDATION_PASSED value
+                         * @property {number} IN_PROGRESS=3 IN_PROGRESS value
+                         * @property {number} ERROR=4 ERROR value
+                         */
+                        HumanReviewStatus.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SKIPPED"] = 1;
+                            values[valuesById[2] = "VALIDATION_PASSED"] = 2;
+                            values[valuesById[3] = "IN_PROGRESS"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            return values;
+                        })();
+    
+                        return HumanReviewStatus;
+                    })();
+    
                     v1beta3.ProcessResponse = (function() {
     
                         /**
@@ -22741,6 +24569,7 @@
                          * @interface IProcessResponse
                          * @property {google.cloud.documentai.v1beta3.IDocument|null} [document] ProcessResponse document
                          * @property {string|null} [humanReviewOperation] ProcessResponse humanReviewOperation
+                         * @property {google.cloud.documentai.v1beta3.IHumanReviewStatus|null} [humanReviewStatus] ProcessResponse humanReviewStatus
                          */
     
                         /**
@@ -22775,6 +24604,14 @@
                         ProcessResponse.prototype.humanReviewOperation = "";
     
                         /**
+                         * ProcessResponse humanReviewStatus.
+                         * @member {google.cloud.documentai.v1beta3.IHumanReviewStatus|null|undefined} humanReviewStatus
+                         * @memberof google.cloud.documentai.v1beta3.ProcessResponse
+                         * @instance
+                         */
+                        ProcessResponse.prototype.humanReviewStatus = null;
+    
+                        /**
                          * Creates a new ProcessResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.documentai.v1beta3.ProcessResponse
@@ -22802,6 +24639,8 @@
                                 $root.google.cloud.documentai.v1beta3.Document.encode(message.document, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.humanReviewOperation != null && Object.hasOwnProperty.call(message, "humanReviewOperation"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.humanReviewOperation);
+                            if (message.humanReviewStatus != null && Object.hasOwnProperty.call(message, "humanReviewStatus"))
+                                $root.google.cloud.documentai.v1beta3.HumanReviewStatus.encode(message.humanReviewStatus, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -22841,6 +24680,9 @@
                                     break;
                                 case 2:
                                     message.humanReviewOperation = reader.string();
+                                    break;
+                                case 3:
+                                    message.humanReviewStatus = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -22885,6 +24727,11 @@
                             if (message.humanReviewOperation != null && message.hasOwnProperty("humanReviewOperation"))
                                 if (!$util.isString(message.humanReviewOperation))
                                     return "humanReviewOperation: string expected";
+                            if (message.humanReviewStatus != null && message.hasOwnProperty("humanReviewStatus")) {
+                                var error = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.verify(message.humanReviewStatus);
+                                if (error)
+                                    return "humanReviewStatus." + error;
+                            }
                             return null;
                         };
     
@@ -22907,6 +24754,11 @@
                             }
                             if (object.humanReviewOperation != null)
                                 message.humanReviewOperation = String(object.humanReviewOperation);
+                            if (object.humanReviewStatus != null) {
+                                if (typeof object.humanReviewStatus !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.ProcessResponse.humanReviewStatus: object expected");
+                                message.humanReviewStatus = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.fromObject(object.humanReviewStatus);
+                            }
                             return message;
                         };
     
@@ -22926,11 +24778,14 @@
                             if (options.defaults) {
                                 object.document = null;
                                 object.humanReviewOperation = "";
+                                object.humanReviewStatus = null;
                             }
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.documentai.v1beta3.Document.toObject(message.document, options);
                             if (message.humanReviewOperation != null && message.hasOwnProperty("humanReviewOperation"))
                                 object.humanReviewOperation = message.humanReviewOperation;
+                            if (message.humanReviewStatus != null && message.hasOwnProperty("humanReviewStatus"))
+                                object.humanReviewStatus = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.toObject(message.humanReviewStatus, options);
                             return object;
                         };
     
@@ -22957,6 +24812,9 @@
                          * @property {string|null} [name] BatchProcessRequest name
                          * @property {Array.<google.cloud.documentai.v1beta3.BatchProcessRequest.IBatchInputConfig>|null} [inputConfigs] BatchProcessRequest inputConfigs
                          * @property {google.cloud.documentai.v1beta3.BatchProcessRequest.IBatchOutputConfig|null} [outputConfig] BatchProcessRequest outputConfig
+                         * @property {google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig|null} [inputDocuments] BatchProcessRequest inputDocuments
+                         * @property {google.cloud.documentai.v1beta3.IDocumentOutputConfig|null} [documentOutputConfig] BatchProcessRequest documentOutputConfig
+                         * @property {boolean|null} [skipHumanReview] BatchProcessRequest skipHumanReview
                          */
     
                         /**
@@ -23000,6 +24858,30 @@
                         BatchProcessRequest.prototype.outputConfig = null;
     
                         /**
+                         * BatchProcessRequest inputDocuments.
+                         * @member {google.cloud.documentai.v1beta3.IBatchDocumentsInputConfig|null|undefined} inputDocuments
+                         * @memberof google.cloud.documentai.v1beta3.BatchProcessRequest
+                         * @instance
+                         */
+                        BatchProcessRequest.prototype.inputDocuments = null;
+    
+                        /**
+                         * BatchProcessRequest documentOutputConfig.
+                         * @member {google.cloud.documentai.v1beta3.IDocumentOutputConfig|null|undefined} documentOutputConfig
+                         * @memberof google.cloud.documentai.v1beta3.BatchProcessRequest
+                         * @instance
+                         */
+                        BatchProcessRequest.prototype.documentOutputConfig = null;
+    
+                        /**
+                         * BatchProcessRequest skipHumanReview.
+                         * @member {boolean} skipHumanReview
+                         * @memberof google.cloud.documentai.v1beta3.BatchProcessRequest
+                         * @instance
+                         */
+                        BatchProcessRequest.prototype.skipHumanReview = false;
+    
+                        /**
                          * Creates a new BatchProcessRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.documentai.v1beta3.BatchProcessRequest
@@ -23030,6 +24912,12 @@
                                     $root.google.cloud.documentai.v1beta3.BatchProcessRequest.BatchInputConfig.encode(message.inputConfigs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
                                 $root.google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig.encode(message.outputConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.skipHumanReview != null && Object.hasOwnProperty.call(message, "skipHumanReview"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.skipHumanReview);
+                            if (message.inputDocuments != null && Object.hasOwnProperty.call(message, "inputDocuments"))
+                                $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.encode(message.inputDocuments, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.documentOutputConfig != null && Object.hasOwnProperty.call(message, "documentOutputConfig"))
+                                $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.encode(message.documentOutputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -23074,6 +24962,15 @@
                                     break;
                                 case 3:
                                     message.outputConfig = $root.google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.inputDocuments = $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.documentOutputConfig = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.skipHumanReview = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -23127,6 +25024,19 @@
                                 if (error)
                                     return "outputConfig." + error;
                             }
+                            if (message.inputDocuments != null && message.hasOwnProperty("inputDocuments")) {
+                                var error = $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.verify(message.inputDocuments);
+                                if (error)
+                                    return "inputDocuments." + error;
+                            }
+                            if (message.documentOutputConfig != null && message.hasOwnProperty("documentOutputConfig")) {
+                                var error = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.verify(message.documentOutputConfig);
+                                if (error)
+                                    return "documentOutputConfig." + error;
+                            }
+                            if (message.skipHumanReview != null && message.hasOwnProperty("skipHumanReview"))
+                                if (typeof message.skipHumanReview !== "boolean")
+                                    return "skipHumanReview: boolean expected";
                             return null;
                         };
     
@@ -23159,6 +25069,18 @@
                                     throw TypeError(".google.cloud.documentai.v1beta3.BatchProcessRequest.outputConfig: object expected");
                                 message.outputConfig = $root.google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig.fromObject(object.outputConfig);
                             }
+                            if (object.inputDocuments != null) {
+                                if (typeof object.inputDocuments !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.BatchProcessRequest.inputDocuments: object expected");
+                                message.inputDocuments = $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.fromObject(object.inputDocuments);
+                            }
+                            if (object.documentOutputConfig != null) {
+                                if (typeof object.documentOutputConfig !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.BatchProcessRequest.documentOutputConfig: object expected");
+                                message.documentOutputConfig = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.fromObject(object.documentOutputConfig);
+                            }
+                            if (object.skipHumanReview != null)
+                                message.skipHumanReview = Boolean(object.skipHumanReview);
                             return message;
                         };
     
@@ -23180,6 +25102,9 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.outputConfig = null;
+                                object.skipHumanReview = false;
+                                object.inputDocuments = null;
+                                object.documentOutputConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -23190,6 +25115,12 @@
                             }
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
                                 object.outputConfig = $root.google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig.toObject(message.outputConfig, options);
+                            if (message.skipHumanReview != null && message.hasOwnProperty("skipHumanReview"))
+                                object.skipHumanReview = message.skipHumanReview;
+                            if (message.inputDocuments != null && message.hasOwnProperty("inputDocuments"))
+                                object.inputDocuments = $root.google.cloud.documentai.v1beta3.BatchDocumentsInputConfig.toObject(message.inputDocuments, options);
+                            if (message.documentOutputConfig != null && message.hasOwnProperty("documentOutputConfig"))
+                                object.documentOutputConfig = $root.google.cloud.documentai.v1beta3.DocumentOutputConfig.toObject(message.documentOutputConfig, options);
                             return object;
                         };
     
@@ -24117,6 +26048,7 @@
                              * @property {google.rpc.IStatus|null} [status] IndividualProcessStatus status
                              * @property {string|null} [outputGcsDestination] IndividualProcessStatus outputGcsDestination
                              * @property {string|null} [humanReviewOperation] IndividualProcessStatus humanReviewOperation
+                             * @property {google.cloud.documentai.v1beta3.IHumanReviewStatus|null} [humanReviewStatus] IndividualProcessStatus humanReviewStatus
                              */
     
                             /**
@@ -24167,6 +26099,14 @@
                             IndividualProcessStatus.prototype.humanReviewOperation = "";
     
                             /**
+                             * IndividualProcessStatus humanReviewStatus.
+                             * @member {google.cloud.documentai.v1beta3.IHumanReviewStatus|null|undefined} humanReviewStatus
+                             * @memberof google.cloud.documentai.v1beta3.BatchProcessMetadata.IndividualProcessStatus
+                             * @instance
+                             */
+                            IndividualProcessStatus.prototype.humanReviewStatus = null;
+    
+                            /**
                              * Creates a new IndividualProcessStatus instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.documentai.v1beta3.BatchProcessMetadata.IndividualProcessStatus
@@ -24198,6 +26138,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.outputGcsDestination);
                                 if (message.humanReviewOperation != null && Object.hasOwnProperty.call(message, "humanReviewOperation"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.humanReviewOperation);
+                                if (message.humanReviewStatus != null && Object.hasOwnProperty.call(message, "humanReviewStatus"))
+                                    $root.google.cloud.documentai.v1beta3.HumanReviewStatus.encode(message.humanReviewStatus, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -24243,6 +26185,9 @@
                                         break;
                                     case 4:
                                         message.humanReviewOperation = reader.string();
+                                        break;
+                                    case 5:
+                                        message.humanReviewStatus = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -24293,6 +26238,11 @@
                                 if (message.humanReviewOperation != null && message.hasOwnProperty("humanReviewOperation"))
                                     if (!$util.isString(message.humanReviewOperation))
                                         return "humanReviewOperation: string expected";
+                                if (message.humanReviewStatus != null && message.hasOwnProperty("humanReviewStatus")) {
+                                    var error = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.verify(message.humanReviewStatus);
+                                    if (error)
+                                        return "humanReviewStatus." + error;
+                                }
                                 return null;
                             };
     
@@ -24319,6 +26269,11 @@
                                     message.outputGcsDestination = String(object.outputGcsDestination);
                                 if (object.humanReviewOperation != null)
                                     message.humanReviewOperation = String(object.humanReviewOperation);
+                                if (object.humanReviewStatus != null) {
+                                    if (typeof object.humanReviewStatus !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1beta3.BatchProcessMetadata.IndividualProcessStatus.humanReviewStatus: object expected");
+                                    message.humanReviewStatus = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.fromObject(object.humanReviewStatus);
+                                }
                                 return message;
                             };
     
@@ -24340,6 +26295,7 @@
                                     object.status = null;
                                     object.outputGcsDestination = "";
                                     object.humanReviewOperation = "";
+                                    object.humanReviewStatus = null;
                                 }
                                 if (message.inputGcsSource != null && message.hasOwnProperty("inputGcsSource"))
                                     object.inputGcsSource = message.inputGcsSource;
@@ -24349,6 +26305,8 @@
                                     object.outputGcsDestination = message.outputGcsDestination;
                                 if (message.humanReviewOperation != null && message.hasOwnProperty("humanReviewOperation"))
                                     object.humanReviewOperation = message.humanReviewOperation;
+                                if (message.humanReviewStatus != null && message.hasOwnProperty("humanReviewStatus"))
+                                    object.humanReviewStatus = $root.google.cloud.documentai.v1beta3.HumanReviewStatus.toObject(message.humanReviewStatus, options);
                                 return object;
                             };
     
@@ -24399,6 +26357,7 @@
                          * Properties of a ReviewDocumentRequest.
                          * @memberof google.cloud.documentai.v1beta3
                          * @interface IReviewDocumentRequest
+                         * @property {google.cloud.documentai.v1beta3.IDocument|null} [inlineDocument] ReviewDocumentRequest inlineDocument
                          * @property {string|null} [humanReviewConfig] ReviewDocumentRequest humanReviewConfig
                          * @property {google.cloud.documentai.v1beta3.IDocument|null} [document] ReviewDocumentRequest document
                          */
@@ -24419,6 +26378,14 @@
                         }
     
                         /**
+                         * ReviewDocumentRequest inlineDocument.
+                         * @member {google.cloud.documentai.v1beta3.IDocument|null|undefined} inlineDocument
+                         * @memberof google.cloud.documentai.v1beta3.ReviewDocumentRequest
+                         * @instance
+                         */
+                        ReviewDocumentRequest.prototype.inlineDocument = null;
+    
+                        /**
                          * ReviewDocumentRequest humanReviewConfig.
                          * @member {string} humanReviewConfig
                          * @memberof google.cloud.documentai.v1beta3.ReviewDocumentRequest
@@ -24433,6 +26400,20 @@
                          * @instance
                          */
                         ReviewDocumentRequest.prototype.document = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ReviewDocumentRequest source.
+                         * @member {"inlineDocument"|undefined} source
+                         * @memberof google.cloud.documentai.v1beta3.ReviewDocumentRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ReviewDocumentRequest.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["inlineDocument"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new ReviewDocumentRequest instance using the specified properties.
@@ -24462,6 +26443,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.humanReviewConfig);
                             if (message.document != null && Object.hasOwnProperty.call(message, "document"))
                                 $root.google.cloud.documentai.v1beta3.Document.encode(message.document, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.inlineDocument != null && Object.hasOwnProperty.call(message, "inlineDocument"))
+                                $root.google.cloud.documentai.v1beta3.Document.encode(message.inlineDocument, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -24496,6 +26479,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 4:
+                                    message.inlineDocument = $root.google.cloud.documentai.v1beta3.Document.decode(reader, reader.uint32());
+                                    break;
                                 case 1:
                                     message.humanReviewConfig = reader.string();
                                     break;
@@ -24537,6 +26523,15 @@
                         ReviewDocumentRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.inlineDocument != null && message.hasOwnProperty("inlineDocument")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.documentai.v1beta3.Document.verify(message.inlineDocument);
+                                    if (error)
+                                        return "inlineDocument." + error;
+                                }
+                            }
                             if (message.humanReviewConfig != null && message.hasOwnProperty("humanReviewConfig"))
                                 if (!$util.isString(message.humanReviewConfig))
                                     return "humanReviewConfig: string expected";
@@ -24560,6 +26555,11 @@
                             if (object instanceof $root.google.cloud.documentai.v1beta3.ReviewDocumentRequest)
                                 return object;
                             var message = new $root.google.cloud.documentai.v1beta3.ReviewDocumentRequest();
+                            if (object.inlineDocument != null) {
+                                if (typeof object.inlineDocument !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.ReviewDocumentRequest.inlineDocument: object expected");
+                                message.inlineDocument = $root.google.cloud.documentai.v1beta3.Document.fromObject(object.inlineDocument);
+                            }
                             if (object.humanReviewConfig != null)
                                 message.humanReviewConfig = String(object.humanReviewConfig);
                             if (object.document != null) {
@@ -24591,6 +26591,11 @@
                                 object.humanReviewConfig = message.humanReviewConfig;
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.documentai.v1beta3.Document.toObject(message.document, options);
+                            if (message.inlineDocument != null && message.hasOwnProperty("inlineDocument")) {
+                                object.inlineDocument = $root.google.cloud.documentai.v1beta3.Document.toObject(message.inlineDocument, options);
+                                if (options.oneofs)
+                                    object.source = "inlineDocument";
+                            }
                             return object;
                         };
     
@@ -24805,6 +26810,7 @@
                          * @property {string|null} [stateMessage] ReviewDocumentOperationMetadata stateMessage
                          * @property {google.protobuf.ITimestamp|null} [createTime] ReviewDocumentOperationMetadata createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ReviewDocumentOperationMetadata updateTime
+                         * @property {google.cloud.documentai.v1beta3.ICommonOperationMetadata|null} [commonMetadata] ReviewDocumentOperationMetadata commonMetadata
                          */
     
                         /**
@@ -24855,6 +26861,14 @@
                         ReviewDocumentOperationMetadata.prototype.updateTime = null;
     
                         /**
+                         * ReviewDocumentOperationMetadata commonMetadata.
+                         * @member {google.cloud.documentai.v1beta3.ICommonOperationMetadata|null|undefined} commonMetadata
+                         * @memberof google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata
+                         * @instance
+                         */
+                        ReviewDocumentOperationMetadata.prototype.commonMetadata = null;
+    
+                        /**
                          * Creates a new ReviewDocumentOperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata
@@ -24886,6 +26900,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                $root.google.cloud.documentai.v1beta3.CommonOperationMetadata.encode(message.commonMetadata, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -24931,6 +26947,9 @@
                                     break;
                                 case 4:
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.commonMetadata = $root.google.cloud.documentai.v1beta3.CommonOperationMetadata.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -24992,6 +27011,11 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                                var error = $root.google.cloud.documentai.v1beta3.CommonOperationMetadata.verify(message.commonMetadata);
+                                if (error)
+                                    return "commonMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -25045,6 +27069,11 @@
                                     throw TypeError(".google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.commonMetadata != null) {
+                                if (typeof object.commonMetadata !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata.commonMetadata: object expected");
+                                message.commonMetadata = $root.google.cloud.documentai.v1beta3.CommonOperationMetadata.fromObject(object.commonMetadata);
+                            }
                             return message;
                         };
     
@@ -25066,6 +27095,7 @@
                                 object.stateMessage = "";
                                 object.createTime = null;
                                 object.updateTime = null;
+                                object.commonMetadata = null;
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata.State[message.state] : message.state;
@@ -25075,6 +27105,8 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                                object.commonMetadata = $root.google.cloud.documentai.v1beta3.CommonOperationMetadata.toObject(message.commonMetadata, options);
                             return object;
                         };
     
@@ -25112,6 +27144,325 @@
                         })();
     
                         return ReviewDocumentOperationMetadata;
+                    })();
+    
+                    v1beta3.CommonOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of a CommonOperationMetadata.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @interface ICommonOperationMetadata
+                         * @property {google.cloud.documentai.v1beta3.CommonOperationMetadata.State|null} [state] CommonOperationMetadata state
+                         * @property {string|null} [stateMessage] CommonOperationMetadata stateMessage
+                         * @property {google.protobuf.ITimestamp|null} [createTime] CommonOperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CommonOperationMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new CommonOperationMetadata.
+                         * @memberof google.cloud.documentai.v1beta3
+                         * @classdesc Represents a CommonOperationMetadata.
+                         * @implements ICommonOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.documentai.v1beta3.ICommonOperationMetadata=} [properties] Properties to set
+                         */
+                        function CommonOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CommonOperationMetadata state.
+                         * @member {google.cloud.documentai.v1beta3.CommonOperationMetadata.State} state
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @instance
+                         */
+                        CommonOperationMetadata.prototype.state = 0;
+    
+                        /**
+                         * CommonOperationMetadata stateMessage.
+                         * @member {string} stateMessage
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @instance
+                         */
+                        CommonOperationMetadata.prototype.stateMessage = "";
+    
+                        /**
+                         * CommonOperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @instance
+                         */
+                        CommonOperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * CommonOperationMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @instance
+                         */
+                        CommonOperationMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new CommonOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.ICommonOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.documentai.v1beta3.CommonOperationMetadata} CommonOperationMetadata instance
+                         */
+                        CommonOperationMetadata.create = function create(properties) {
+                            return new CommonOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CommonOperationMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.CommonOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.ICommonOperationMetadata} message CommonOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommonOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.stateMessage != null && Object.hasOwnProperty.call(message, "stateMessage"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.stateMessage);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CommonOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.CommonOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.ICommonOperationMetadata} message CommonOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CommonOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CommonOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.documentai.v1beta3.CommonOperationMetadata} CommonOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommonOperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.CommonOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.state = reader.int32();
+                                    break;
+                                case 2:
+                                    message.stateMessage = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CommonOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.documentai.v1beta3.CommonOperationMetadata} CommonOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CommonOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CommonOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CommonOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
+                                if (!$util.isString(message.stateMessage))
+                                    return "stateMessage: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CommonOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.documentai.v1beta3.CommonOperationMetadata} CommonOperationMetadata
+                         */
+                        CommonOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.documentai.v1beta3.CommonOperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.documentai.v1beta3.CommonOperationMetadata();
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "CANCELLING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "SUCCEEDED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.stateMessage != null)
+                                message.stateMessage = String(object.stateMessage);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.CommonOperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1beta3.CommonOperationMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CommonOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @static
+                         * @param {google.cloud.documentai.v1beta3.CommonOperationMetadata} message CommonOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CommonOperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateMessage = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.documentai.v1beta3.CommonOperationMetadata.State[message.state] : message.state;
+                            if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
+                                object.stateMessage = message.stateMessage;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CommonOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.documentai.v1beta3.CommonOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CommonOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.documentai.v1beta3.CommonOperationMetadata.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} CANCELLING=2 CANCELLING value
+                         * @property {number} SUCCEEDED=3 SUCCEEDED value
+                         * @property {number} FAILED=4 FAILED value
+                         * @property {number} CANCELLED=5 CANCELLED value
+                         */
+                        CommonOperationMetadata.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "CANCELLING"] = 2;
+                            values[valuesById[3] = "SUCCEEDED"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            values[valuesById[5] = "CANCELLED"] = 5;
+                            return values;
+                        })();
+    
+                        return CommonOperationMetadata;
                     })();
     
                     return v1beta3;

@@ -1881,6 +1881,92 @@
                         }
                       }
                     },
+                    "RawDocument": {
+                      "fields": {
+                        "content": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsDocument": {
+                      "fields": {
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsDocuments": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "GcsDocument",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsPrefix": {
+                      "fields": {
+                        "gcsUriPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchDocumentsInputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsPrefix",
+                            "gcsDocuments"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsPrefix": {
+                          "type": "GcsPrefix",
+                          "id": 1
+                        },
+                        "gcsDocuments": {
+                          "type": "GcsDocuments",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DocumentOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsOutputConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsOutputConfig": {
+                          "type": "GcsOutputConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "GcsOutputConfig": {
+                          "fields": {
+                            "gcsUri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
                     "DocumentProcessorService": {
                       "options": {
                         "(google.api.default_host)": "us-documentai.googleapis.com",
@@ -1966,7 +2052,23 @@
                       }
                     },
                     "ProcessRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "inlineDocument",
+                            "rawDocument"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "inlineDocument": {
+                          "type": "Document",
+                          "id": 4
+                        },
+                        "rawDocument": {
+                          "type": "RawDocument",
+                          "id": 5
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -1977,11 +2079,41 @@
                         },
                         "document": {
                           "type": "Document",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "skipHumanReview": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "HumanReviewStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateMessage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "humanReviewOperation": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "SKIPPED": 1,
+                            "VALIDATION_PASSED": 2,
+                            "IN_PROGRESS": 3,
+                            "ERROR": 4
+                          }
                         }
                       }
                     },
@@ -1993,7 +2125,14 @@
                         },
                         "humanReviewOperation": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "humanReviewStatus": {
+                          "type": "HumanReviewStatus",
+                          "id": 3
                         }
                       }
                     },
@@ -2010,15 +2149,36 @@
                         "inputConfigs": {
                           "rule": "repeated",
                           "type": "BatchInputConfig",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "outputConfig": {
                           "type": "BatchOutputConfig",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "inputDocuments": {
+                          "type": "BatchDocumentsInputConfig",
+                          "id": 5
+                        },
+                        "documentOutputConfig": {
+                          "type": "DocumentOutputConfig",
+                          "id": 6
+                        },
+                        "skipHumanReview": {
+                          "type": "bool",
+                          "id": 4
                         }
                       },
                       "nested": {
                         "BatchInputConfig": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "gcsSource": {
                               "type": "string",
@@ -2031,6 +2191,9 @@
                           }
                         },
                         "BatchOutputConfig": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "gcsDestination": {
                               "type": "string",
@@ -2084,7 +2247,14 @@
                             },
                             "humanReviewOperation": {
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "humanReviewStatus": {
+                              "type": "HumanReviewStatus",
+                              "id": 5
                             }
                           }
                         },
@@ -2102,7 +2272,18 @@
                       }
                     },
                     "ReviewDocumentRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "inlineDocument"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "inlineDocument": {
+                          "type": "Document",
+                          "id": 4
+                        },
                         "humanReviewConfig": {
                           "type": "string",
                           "id": 1,
@@ -2113,7 +2294,10 @@
                         },
                         "document": {
                           "type": "Document",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
@@ -2126,6 +2310,42 @@
                       }
                     },
                     "ReviewDocumentOperationMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateMessage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "CANCELLING": 2,
+                            "SUCCEEDED": 3,
+                            "FAILED": 4,
+                            "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "CommonOperationMetadata": {
                       "fields": {
                         "state": {
                           "type": "State",
