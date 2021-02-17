@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.3.0...v2.4.0) (2021-02-17)
+
+
+### Features
+
+* Update documentai/v1beta3 protos ([#152](https://www.github.com/googleapis/nodejs-document-ai/issues/152)) ([9e6b660](https://www.github.com/googleapis/nodejs-document-ai/commit/9e6b66000cc12a08c87924ab26ad9a482f03dbeb))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.2.2...v2.3.0) (2021-01-09)
 
 
