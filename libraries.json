@@ -818,6 +818,20 @@
     "support_documentation": "https://cloud.google.com/natural-language/docs/getting-support"
   },
   {
+    "name": "network-connectivity",
+    "name_pretty": "Network Connectivity Center",
+    "product_documentation": "https://cloud.google.com/network-connectivity/docs",
+    "client_documentation": "https://googleapis.dev/nodejs/network-connectivity/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-network-connectivity/issues",
+    "release_level": "alpha",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-network-connectivity",
+    "distribution_name": "@google-cloud/network-connectivity",
+    "api_id": "networkconnectivity.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/network-connectivity/docs"
+  },
+  {
     "name": "osconfig",
     "name_pretty": "OS Config API",
     "product_documentation": "https://cloud.google.com/compute/docs/os-patch-management",
