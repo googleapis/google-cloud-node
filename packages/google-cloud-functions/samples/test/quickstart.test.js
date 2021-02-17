@@ -20,20 +20,24 @@
 const path = require('path');
 const {assert} = require('chai');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
+const {before, describe, it} = require('mocha');
+const {CloudFunctionsServiceClient} = require('@google-cloud/functions');
+const client = new CloudFunctionsServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const project = process.env.GCLOUD_PROJECT;
-
 describe('Quickstart', () => {
+  let projectId;
+
+  before(async () => {
+    // eslint-disable-next-line no-unused-vars
+    projectId = await client.getProjectId();
+  });
+
   it('should run quickstart', async () => {
-    const stdout = execSync(
-      `node ./quickstart.js projects/${project}/locations/- 1 token`,
-      {cwd}
-    );
+    const stdout = execSync(`node ./quickstart.js ${projectId}`, {cwd});
     assert(stdout, stdout !== null);
   });
 });

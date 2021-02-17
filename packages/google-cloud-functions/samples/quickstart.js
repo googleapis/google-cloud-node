@@ -13,11 +13,7 @@
 
 'use strict';
 
-async function main(
-  project = 'projects/my-project/locations/-', // Get the functions for a project.
-  page_size = 1, //Max number of functions to return per call
-  page_token = 'token'
-) {
+async function main(projectId) {
   // [START cloud_nodejs_functions_quickstart]
   // Imports the Google Cloud client library
 
@@ -34,9 +30,7 @@ async function main(
   // project = 'my-project/*/locations/*' // Get the functions for a project.
   async function listFunctions() {
     const [functions] = await client.listFunctions({
-      parent: project,
-      pageSize: page_size,
-      pageToken: page_token,
+      parent: `projects/${projectId}/locations/-`,
     });
     console.info(functions);
   }

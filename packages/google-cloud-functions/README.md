@@ -72,9 +72,7 @@ const client = new CloudFunctionsServiceClient();
 // project = 'my-project/*/locations/*' // Get the functions for a project.
 async function listFunctions() {
   const [functions] = await client.listFunctions({
-    parent: project,
-    pageSize: page_size,
-    pageToken: page_token,
+    parent: `projects/${projectId}/locations/-`,
   });
   console.info(functions);
 }
