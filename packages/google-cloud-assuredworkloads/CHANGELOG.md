@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.2.0...v1.3.0) (2021-02-18)
+
+
+### Features
+
+* updated google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService service. Clients can now create workloads with US_REGIONAL_ACCESS compliance regime ([#32](https://www.github.com/googleapis/nodejs-assured-workloads/issues/32)) ([f395037](https://www.github.com/googleapis/nodejs-assured-workloads/commit/f395037279a3cda1a784bcab83dc65cd3b177b45))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.1.1...v1.2.0) (2021-01-09)
 
 
