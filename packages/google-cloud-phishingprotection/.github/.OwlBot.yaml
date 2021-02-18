@@ -16,13 +16,13 @@ docker:
 copy-dirs:
   - source: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/src/*
     dest: /src
-    strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/src
+    # strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/src
   - source: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/protos/google/cloud/phishingprotection/*
     dest: /protos/google/cloud
-    strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/protos/google/cloud/phishingprotection
+    # strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/protos/google/cloud/phishingprotection
   - source: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/test/*
     dest: /test
-    strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/test
+    # strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/test
   - source: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/system-test/*
     dest: /
-    strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/
+    # strip-prefix: /google/cloud/phishingprotection/*/phishingprotection-*-nodejs/
