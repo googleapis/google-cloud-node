@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.0...v2.3.1) (2021-02-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency natural to v3 ([#865](https://www.github.com/googleapis/nodejs-vision/issues/865)) ([38d9a1a](https://www.github.com/googleapis/nodejs-vision/commit/38d9a1a3ae9fe02b67135ecc3f56f6d3a53ac547))
+* **deps:** update dependency natural to v4 ([#870](https://www.github.com/googleapis/nodejs-vision/issues/870)) ([edfcb9e](https://www.github.com/googleapis/nodejs-vision/commit/edfcb9eed26145c1f72bfaaa3ee8e7a4d74630b3))
+* sync vision v1 protos to get extra FaceAnnotation Landmark Types ([#868](https://www.github.com/googleapis/nodejs-vision/issues/868)) ([4d45375](https://www.github.com/googleapis/nodejs-vision/commit/4d45375016aa12d0e8ea24525168e23590af47b4))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-vision/compare/v2.2.0...v2.3.0) (2021-01-06)
 
 
