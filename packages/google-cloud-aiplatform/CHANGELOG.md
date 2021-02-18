@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.4.0...v1.5.0) (2021-02-17)
+
+
+### Features
+
+* ImageSegmentationPredictionResult.category_mask field changed to string data type ([#76](https://www.github.com/googleapis/nodejs-ai-platform/issues/76)) ([ec47129](https://www.github.com/googleapis/nodejs-ai-platform/commit/ec471298fe3135165745175720173203fe8ff016))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.3.0...v1.4.0) (2021-02-12)
 
 
