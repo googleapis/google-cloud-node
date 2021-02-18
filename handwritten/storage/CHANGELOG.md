@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.8.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.7.4...v5.8.0) (2021-02-18)
+
+
+### Features
+
+* adds support workload identity federation ([#1404](https://www.github.com/googleapis/nodejs-storage/issues/1404)) ([7d3a3f1](https://www.github.com/googleapis/nodejs-storage/commit/7d3a3f148361e56cbcd4dc4c8fb178b75f9208bf))
+
 ### [5.7.4](https://www.github.com/googleapis/nodejs-storage/compare/v5.7.3...v5.7.4) (2021-02-01)
 
 
