@@ -1484,7 +1484,8 @@ export namespace google {
                         IL4 = 1,
                         CJIS = 2,
                         FEDRAMP_HIGH = 3,
-                        FEDRAMP_MODERATE = 4
+                        FEDRAMP_MODERATE = 4,
+                        US_REGIONAL_ACCESS = 5
                     }
                 }
 

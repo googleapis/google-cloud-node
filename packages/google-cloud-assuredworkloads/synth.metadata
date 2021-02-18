@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-assured-workloads.git",
-        "sha": "d92d12cbc6b076a9035490fc818cfd62368bf8cc"
+        "sha": "1fdf8f76f99de872a8ba152da6fad33d3eea5887"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
-        "internalRef": "345596855"
+        "sha": "56df28f70dbfddd90da3c4e38cce2ae3c81162e4",
+        "internalRef": "352973788"
       }
     },
     {

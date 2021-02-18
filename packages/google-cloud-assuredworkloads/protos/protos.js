@@ -1981,6 +1981,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -2097,6 +2098,10 @@
                             case "FEDRAMP_MODERATE":
                             case 4:
                                 message.complianceRegime = 4;
+                                break;
+                            case "US_REGIONAL_ACCESS":
+                            case 5:
+                                message.complianceRegime = 5;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -3488,6 +3493,7 @@
                          * @property {number} CJIS=2 CJIS value
                          * @property {number} FEDRAMP_HIGH=3 FEDRAMP_HIGH value
                          * @property {number} FEDRAMP_MODERATE=4 FEDRAMP_MODERATE value
+                         * @property {number} US_REGIONAL_ACCESS=5 US_REGIONAL_ACCESS value
                          */
                         Workload.ComplianceRegime = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3496,6 +3502,7 @@
                             values[valuesById[2] = "CJIS"] = 2;
                             values[valuesById[3] = "FEDRAMP_HIGH"] = 3;
                             values[valuesById[4] = "FEDRAMP_MODERATE"] = 4;
+                            values[valuesById[5] = "US_REGIONAL_ACCESS"] = 5;
                             return values;
                         })();
     
@@ -3694,6 +3701,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -3740,6 +3748,10 @@
                             case "FEDRAMP_MODERATE":
                             case 4:
                                 message.complianceRegime = 4;
+                                break;
+                            case "US_REGIONAL_ACCESS":
+                            case 5:
+                                message.complianceRegime = 5;
                                 break;
                             }
                             return message;
