@@ -2,11 +2,11 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Dataproc Metastore: Node.js Client](https://github.com/googleapis/nodejs-metastore)
+# [Dataproc Metastore: Node.js Client](https://github.com/googleapis/nodejs-dataproc-metastore)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/undefined.svg)](https://www.npmjs.org/package/undefined)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-metastore/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-metastore)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/dataproc-metastore.svg)](https://www.npmjs.org/package/@google-cloud/dataproc-metastore)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dataproc-metastore/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dataproc-metastore)
 
 
 
@@ -15,11 +15,11 @@ Metastore client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-metastore/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-dataproc-metastore/blob/master/CHANGELOG.md).
 
 * [Dataproc Metastore Node.js Client API Reference][client-docs]
 * [Dataproc Metastore Documentation][product-docs]
-* [github.com/googleapis/nodejs-metastore](https://github.com/googleapis/nodejs-metastore)
+* [github.com/googleapis/nodejs-dataproc-metastore](https://github.com/googleapis/nodejs-dataproc-metastore)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -51,34 +51,30 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install undefined
+npm install @google-cloud/dataproc-metastore
 ```
 
 
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {DataprocMetastoreClient} = require('');
+// Imports the Google Cloud client library
+const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
+// const location = 'my-location'
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {DataprocMetastoreClient}();
+const client = new DataprocMetastoreClient();
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function listServices() {
+  const [services] = await client.listServices({parent: `projects/${projectId}/locations/${location}`
+  });
+  console.info(services);
 }
-doSomething();
+listServices();
 
 ```
 
@@ -86,11 +82,11 @@ doSomething();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-metastore/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dataproc-metastore/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-metastore/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-metastore&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-dataproc-metastore/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc-metastore&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -133,7 +129,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-metastore/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-dataproc-metastore/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -145,7 +141,7 @@ to its template in this
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-metastore/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-dataproc-metastore/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/dataproc-metastore/docs
 [product-docs]: https://cloud.google.com/dataproc-metastore/

@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-metastore",
-        "sha": "c0c6a2292beac83385a0170df5121d13bde2ba59"
+        "remote": "git@github.com:googleapis/nodejs-dataproc-metastore.git",
+        "sha": "2789dc733c46b35b73147925f65de1228a74a087"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2e29020ce87808b810deb20e0925b7e26c5e72c1",
-        "internalRef": "353683381"
+        "sha": "5e27c5cafe0952f50ff81552526b3e3d333ef2c3",
+        "internalRef": "355488930"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "3816b080296d4d52975079fd26c110dd26ba25af"
+        "sha": "318e351e26ba65b2b3cfa3f61b3b64e3540c3525"
       }
     }
   ],
