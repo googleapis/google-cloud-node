@@ -13,31 +13,30 @@
 
 'use strict';
 
-async function main() {
+async function main(principal, fullResourceName, permission) {
   // [START nodejs_policy_troubleshooter_quickstart]
-  // Imports the Google Cloud client library
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
+  // Imports the Google Cloud client library
   const {IamCheckerClient} = require('@google-cloud/policy-troubleshooter');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {IamCheckerClient}();
+  const client = new IamCheckerClient();
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'Developer! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function troubelshootPolicy() {
+    const policy = await client.troubleshootIamPolicy({
+      accessTuple: {
+        principal,
+        fullResourceName,
+        permission,
+      },
+    });
+    console.log(policy);
   }
-  doSomething();
+
+  troubelshootPolicy();
   // [END nodejs_policy_troubleshooter_quickstart]
 }
 

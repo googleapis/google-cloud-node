@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-policy-troubleshooter",
-        "sha": "8e8c2e15ffed9278832df68ace50441167f9d723"
+        "remote": "git@github.com:googleapis/nodejs-policy-troubleshooter.git",
+        "sha": "4749c7fa902cd909f9b878c8f5554751998747a6"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "49e64a5a8eb24ab49a81049f3bb31df869515715",
-        "internalRef": "347844600"
+        "sha": "178d16d9f99ee85ffa65dff304f40324c35d0668",
+        "internalRef": "357260962"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "d73e8dea90af1b463a7f9d4a33244cf4612ada7c"
+        "sha": "b32c87d2c087fb2a841acc623ab540105de821af"
       }
     }
   ],

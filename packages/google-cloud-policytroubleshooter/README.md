@@ -60,23 +60,29 @@ npm install @google-cloud/policy-troubleshooter
 ```javascript
 // Imports the Google Cloud client library
 
-// remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
 const {IamCheckerClient} = require('@google-cloud/policy-troubleshooter');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
-// Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {IamCheckerClient}();
+const options = {
+  keyfilePath,
+  scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+};
 
-//TODO(library generator): write the actual function you will be testing
+// Creates a client
+const client = new IamCheckerClient(authenticate(options));
+
 async function doSomething() {
- console.log('Developer! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+  const policy = await client.troubleshootIamPolicy({
+    accessTuple: {
+      principal,
+      fullResourceName,
+      permission,
+    },
+  });
+  console.log(policy);
 }
 doSomething();
 
@@ -86,8 +92,7 @@ doSomething();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-policy-troubleshooter/tree/master/samples) directory. The samples' `README.md`
-has instructions for running the samples.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-policy-troubleshooter/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
