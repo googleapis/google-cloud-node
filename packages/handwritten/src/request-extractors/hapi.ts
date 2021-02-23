@@ -17,7 +17,7 @@ import * as is from 'is';
 import has = require('lodash.has');
 
 import {RequestInformationContainer} from '../classes/request-information-container';
-import * as hapi from 'hapi';
+import * as hapi from '@hapi/hapi';
 
 /**
  * This function is used to check for a pending status code on the response
@@ -34,8 +34,8 @@ function attemptToExtractStatusCode(req: hapi.Request) {
   if (has(req, 'response') && is.object(req.response)) {
     if (has(req.response, 'statusCode')) {
       return (req.response as hapi.ResponseObject).statusCode;
-    } else if (is.object((req.response as boom).output)) {
-      return (req.response as boom).output.statusCode;
+    } else if (is.object(((req.response as unknown) as boom).output)) {
+      return ((req.response as unknown) as boom).output.statusCode;
     }
   }
   return 0;

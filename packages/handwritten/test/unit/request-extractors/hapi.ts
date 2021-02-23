@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as hapi from 'hapi';
+import * as hapi from '@hapi/hapi';
 import {URL} from 'url';
 import {describe, it} from 'mocha';
 
