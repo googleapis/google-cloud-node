@@ -24,7 +24,7 @@ const packageJson = require('../../../package.json');
 
 import {RequestHandler} from '../google-apis/auth-client';
 import {Configuration} from '../configuration';
-import * as hapi from 'hapi';
+import * as hapi from '@hapi/hapi';
 
 /**
  * The Hapi error handler function serves simply to create an error message
@@ -112,7 +112,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
             if (
               is.object(request) &&
               request.response &&
-              (request.response as boom).isBoom
+              ((request.response as unknown) as boom).isBoom
             ) {
               // Cast to {} is necessary, as@types/hapi@16 incorrectly types
               // response as 'Response | null' instead of 'Response | Boom |
