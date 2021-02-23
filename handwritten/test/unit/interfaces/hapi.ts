@@ -24,7 +24,7 @@ import * as config from '../../../src/configuration';
 import {RequestHandler} from '../../../src/google-apis/auth-client';
 import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 import * as http from 'http';
-import * as hapi from 'hapi';
+import * as hapi from '@hapi/hapi';
 import * as boom from 'boom';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
