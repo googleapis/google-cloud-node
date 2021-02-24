@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-policy-troubleshooter.git",
-        "sha": "4749c7fa902cd909f9b878c8f5554751998747a6"
+        "remote": "https://github.com/googleapis/nodejs-policy-troubleshooter.git",
+        "sha": "a48c0b27a2e1d28a3f0f43faa8e4dbe595f73b81"
       }
     },
     {

@@ -58,23 +58,17 @@ npm install @google-cloud/policy-troubleshooter
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
 
-// eslint-disable-next-line node/no-missing-require
+// Imports the Google Cloud client library
 const {IamCheckerClient} = require('@google-cloud/policy-troubleshooter');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
-const options = {
-  keyfilePath,
-  scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-};
-
 // Creates a client
-const client = new IamCheckerClient(authenticate(options));
+const client = new IamCheckerClient();
 
-async function doSomething() {
+async function troubelshootPolicy() {
   const policy = await client.troubleshootIamPolicy({
     accessTuple: {
       principal,
@@ -84,7 +78,8 @@ async function doSomething() {
   });
   console.log(policy);
 }
-doSomething();
+
+troubelshootPolicy();
 
 ```
 
