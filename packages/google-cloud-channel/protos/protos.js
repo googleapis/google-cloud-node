@@ -4507,8 +4507,6 @@
                          * Properties of a TransferableSku.
                          * @memberof google.cloud.channel.v1
                          * @interface ITransferableSku
-                         * @property {google.protobuf.IBoolValue|null} [isCommitment] TransferableSku isCommitment
-                         * @property {google.protobuf.ITimestamp|null} [commitmentEndTimestamp] TransferableSku commitmentEndTimestamp
                          * @property {google.cloud.channel.v1.ITransferEligibility|null} [transferEligibility] TransferableSku transferEligibility
                          * @property {google.cloud.channel.v1.ISku|null} [sku] TransferableSku sku
                          */
@@ -4527,22 +4525,6 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
-    
-                        /**
-                         * TransferableSku isCommitment.
-                         * @member {google.protobuf.IBoolValue|null|undefined} isCommitment
-                         * @memberof google.cloud.channel.v1.TransferableSku
-                         * @instance
-                         */
-                        TransferableSku.prototype.isCommitment = null;
-    
-                        /**
-                         * TransferableSku commitmentEndTimestamp.
-                         * @member {google.protobuf.ITimestamp|null|undefined} commitmentEndTimestamp
-                         * @memberof google.cloud.channel.v1.TransferableSku
-                         * @instance
-                         */
-                        TransferableSku.prototype.commitmentEndTimestamp = null;
     
                         /**
                          * TransferableSku transferEligibility.
@@ -4584,10 +4566,6 @@
                         TransferableSku.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.isCommitment != null && Object.hasOwnProperty.call(message, "isCommitment"))
-                                $root.google.protobuf.BoolValue.encode(message.isCommitment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            if (message.commitmentEndTimestamp != null && Object.hasOwnProperty.call(message, "commitmentEndTimestamp"))
-                                $root.google.protobuf.Timestamp.encode(message.commitmentEndTimestamp, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.transferEligibility != null && Object.hasOwnProperty.call(message, "transferEligibility"))
                                 $root.google.cloud.channel.v1.TransferEligibility.encode(message.transferEligibility, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.sku != null && Object.hasOwnProperty.call(message, "sku"))
@@ -4626,12 +4604,6 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 6:
-                                    message.isCommitment = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
-                                    break;
-                                case 7:
-                                    message.commitmentEndTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
                                 case 9:
                                     message.transferEligibility = $root.google.cloud.channel.v1.TransferEligibility.decode(reader, reader.uint32());
                                     break;
@@ -4673,16 +4645,6 @@
                         TransferableSku.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.isCommitment != null && message.hasOwnProperty("isCommitment")) {
-                                var error = $root.google.protobuf.BoolValue.verify(message.isCommitment);
-                                if (error)
-                                    return "isCommitment." + error;
-                            }
-                            if (message.commitmentEndTimestamp != null && message.hasOwnProperty("commitmentEndTimestamp")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.commitmentEndTimestamp);
-                                if (error)
-                                    return "commitmentEndTimestamp." + error;
-                            }
                             if (message.transferEligibility != null && message.hasOwnProperty("transferEligibility")) {
                                 var error = $root.google.cloud.channel.v1.TransferEligibility.verify(message.transferEligibility);
                                 if (error)
@@ -4708,16 +4670,6 @@
                             if (object instanceof $root.google.cloud.channel.v1.TransferableSku)
                                 return object;
                             var message = new $root.google.cloud.channel.v1.TransferableSku();
-                            if (object.isCommitment != null) {
-                                if (typeof object.isCommitment !== "object")
-                                    throw TypeError(".google.cloud.channel.v1.TransferableSku.isCommitment: object expected");
-                                message.isCommitment = $root.google.protobuf.BoolValue.fromObject(object.isCommitment);
-                            }
-                            if (object.commitmentEndTimestamp != null) {
-                                if (typeof object.commitmentEndTimestamp !== "object")
-                                    throw TypeError(".google.cloud.channel.v1.TransferableSku.commitmentEndTimestamp: object expected");
-                                message.commitmentEndTimestamp = $root.google.protobuf.Timestamp.fromObject(object.commitmentEndTimestamp);
-                            }
                             if (object.transferEligibility != null) {
                                 if (typeof object.transferEligibility !== "object")
                                     throw TypeError(".google.cloud.channel.v1.TransferableSku.transferEligibility: object expected");
@@ -4745,15 +4697,9 @@
                                 options = {};
                             var object = {};
                             if (options.defaults) {
-                                object.isCommitment = null;
-                                object.commitmentEndTimestamp = null;
                                 object.transferEligibility = null;
                                 object.sku = null;
                             }
-                            if (message.isCommitment != null && message.hasOwnProperty("isCommitment"))
-                                object.isCommitment = $root.google.protobuf.BoolValue.toObject(message.isCommitment, options);
-                            if (message.commitmentEndTimestamp != null && message.hasOwnProperty("commitmentEndTimestamp"))
-                                object.commitmentEndTimestamp = $root.google.protobuf.Timestamp.toObject(message.commitmentEndTimestamp, options);
                             if (message.transferEligibility != null && message.hasOwnProperty("transferEligibility"))
                                 object.transferEligibility = $root.google.cloud.channel.v1.TransferEligibility.toObject(message.transferEligibility, options);
                             if (message.sku != null && message.hasOwnProperty("sku"))
@@ -15469,7 +15415,6 @@
                          * @interface ICreateChannelPartnerLinkRequest
                          * @property {string|null} [parent] CreateChannelPartnerLinkRequest parent
                          * @property {google.cloud.channel.v1.IChannelPartnerLink|null} [channelPartnerLink] CreateChannelPartnerLinkRequest channelPartnerLink
-                         * @property {string|null} [domain] CreateChannelPartnerLinkRequest domain
                          */
     
                         /**
@@ -15504,14 +15449,6 @@
                         CreateChannelPartnerLinkRequest.prototype.channelPartnerLink = null;
     
                         /**
-                         * CreateChannelPartnerLinkRequest domain.
-                         * @member {string} domain
-                         * @memberof google.cloud.channel.v1.CreateChannelPartnerLinkRequest
-                         * @instance
-                         */
-                        CreateChannelPartnerLinkRequest.prototype.domain = "";
-    
-                        /**
                          * Creates a new CreateChannelPartnerLinkRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.CreateChannelPartnerLinkRequest
@@ -15539,8 +15476,6 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                             if (message.channelPartnerLink != null && Object.hasOwnProperty.call(message, "channelPartnerLink"))
                                 $root.google.cloud.channel.v1.ChannelPartnerLink.encode(message.channelPartnerLink, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.domain);
                             return writer;
                         };
     
@@ -15580,9 +15515,6 @@
                                     break;
                                 case 2:
                                     message.channelPartnerLink = $root.google.cloud.channel.v1.ChannelPartnerLink.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.domain = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15627,9 +15559,6 @@
                                 if (error)
                                     return "channelPartnerLink." + error;
                             }
-                            if (message.domain != null && message.hasOwnProperty("domain"))
-                                if (!$util.isString(message.domain))
-                                    return "domain: string expected";
                             return null;
                         };
     
@@ -15652,8 +15581,6 @@
                                     throw TypeError(".google.cloud.channel.v1.CreateChannelPartnerLinkRequest.channelPartnerLink: object expected");
                                 message.channelPartnerLink = $root.google.cloud.channel.v1.ChannelPartnerLink.fromObject(object.channelPartnerLink);
                             }
-                            if (object.domain != null)
-                                message.domain = String(object.domain);
                             return message;
                         };
     
@@ -15673,14 +15600,11 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.channelPartnerLink = null;
-                                object.domain = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.channelPartnerLink != null && message.hasOwnProperty("channelPartnerLink"))
                                 object.channelPartnerLink = $root.google.cloud.channel.v1.ChannelPartnerLink.toObject(message.channelPartnerLink, options);
-                            if (message.domain != null && message.hasOwnProperty("domain"))
-                                object.domain = message.domain;
                             return object;
                         };
     

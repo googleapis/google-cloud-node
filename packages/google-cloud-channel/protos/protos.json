@@ -560,14 +560,6 @@
                     },
                     "TransferableSku": {
                       "fields": {
-                        "isCommitment": {
-                          "type": "google.protobuf.BoolValue",
-                          "id": 6
-                        },
-                        "commitmentEndTimestamp": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        },
                         "transferEligibility": {
                           "type": "TransferEligibility",
                           "id": 9
@@ -1997,13 +1989,6 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "domain": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

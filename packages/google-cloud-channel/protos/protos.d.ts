@@ -1708,12 +1708,6 @@ export namespace google {
                 /** Properties of a TransferableSku. */
                 interface ITransferableSku {
 
-                    /** TransferableSku isCommitment */
-                    isCommitment?: (google.protobuf.IBoolValue|null);
-
-                    /** TransferableSku commitmentEndTimestamp */
-                    commitmentEndTimestamp?: (google.protobuf.ITimestamp|null);
-
                     /** TransferableSku transferEligibility */
                     transferEligibility?: (google.cloud.channel.v1.ITransferEligibility|null);
 
@@ -1729,12 +1723,6 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.channel.v1.ITransferableSku);
-
-                    /** TransferableSku isCommitment. */
-                    public isCommitment?: (google.protobuf.IBoolValue|null);
-
-                    /** TransferableSku commitmentEndTimestamp. */
-                    public commitmentEndTimestamp?: (google.protobuf.ITimestamp|null);
 
                     /** TransferableSku transferEligibility. */
                     public transferEligibility?: (google.cloud.channel.v1.ITransferEligibility|null);
@@ -6404,9 +6392,6 @@ export namespace google {
 
                     /** CreateChannelPartnerLinkRequest channelPartnerLink */
                     channelPartnerLink?: (google.cloud.channel.v1.IChannelPartnerLink|null);
-
-                    /** CreateChannelPartnerLinkRequest domain */
-                    domain?: (string|null);
                 }
 
                 /** Represents a CreateChannelPartnerLinkRequest. */
@@ -6423,9 +6408,6 @@ export namespace google {
 
                     /** CreateChannelPartnerLinkRequest channelPartnerLink. */
                     public channelPartnerLink?: (google.cloud.channel.v1.IChannelPartnerLink|null);
-
-                    /** CreateChannelPartnerLinkRequest domain. */
-                    public domain: string;
 
                     /**
                      * Creates a new CreateChannelPartnerLinkRequest instance using the specified properties.
