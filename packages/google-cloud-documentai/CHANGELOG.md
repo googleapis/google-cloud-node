@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.4.0...v2.5.0) (2021-02-24)
+
+
+### Features
+
+* Update documentai/v1beta3 protos: add support for boolean normalized value ([#154](https://www.github.com/googleapis/nodejs-document-ai/issues/154)) ([4ae8c57](https://www.github.com/googleapis/nodejs-document-ai/commit/4ae8c572089cf607810a5e730a4e5807a495bcbc))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.3.0...v2.4.0) (2021-02-17)
 
 
