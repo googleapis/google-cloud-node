@@ -7120,6 +7120,9 @@ export namespace google {
                             /** NormalizedValue addressValue */
                             addressValue?: (google.type.IPostalAddress|null);
 
+                            /** NormalizedValue booleanValue */
+                            booleanValue?: (boolean|null);
+
                             /** NormalizedValue text */
                             text?: (string|null);
                         }
@@ -7145,11 +7148,14 @@ export namespace google {
                             /** NormalizedValue addressValue. */
                             public addressValue?: (google.type.IPostalAddress|null);
 
+                            /** NormalizedValue booleanValue. */
+                            public booleanValue: boolean;
+
                             /** NormalizedValue text. */
                             public text: string;
 
                             /** NormalizedValue structuredValue. */
-                            public structuredValue?: ("moneyValue"|"dateValue"|"datetimeValue"|"addressValue");
+                            public structuredValue?: ("moneyValue"|"dateValue"|"datetimeValue"|"addressValue"|"booleanValue");
 
                             /**
                              * Creates a new NormalizedValue instance using the specified properties.

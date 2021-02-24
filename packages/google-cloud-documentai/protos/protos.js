@@ -18458,6 +18458,7 @@
                                  * @property {google.type.IDate|null} [dateValue] NormalizedValue dateValue
                                  * @property {google.type.IDateTime|null} [datetimeValue] NormalizedValue datetimeValue
                                  * @property {google.type.IPostalAddress|null} [addressValue] NormalizedValue addressValue
+                                 * @property {boolean|null} [booleanValue] NormalizedValue booleanValue
                                  * @property {string|null} [text] NormalizedValue text
                                  */
     
@@ -18509,6 +18510,14 @@
                                 NormalizedValue.prototype.addressValue = null;
     
                                 /**
+                                 * NormalizedValue booleanValue.
+                                 * @member {boolean} booleanValue
+                                 * @memberof google.cloud.documentai.v1beta3.Document.Entity.NormalizedValue
+                                 * @instance
+                                 */
+                                NormalizedValue.prototype.booleanValue = false;
+    
+                                /**
                                  * NormalizedValue text.
                                  * @member {string} text
                                  * @memberof google.cloud.documentai.v1beta3.Document.Entity.NormalizedValue
@@ -18521,12 +18530,12 @@
     
                                 /**
                                  * NormalizedValue structuredValue.
-                                 * @member {"moneyValue"|"dateValue"|"datetimeValue"|"addressValue"|undefined} structuredValue
+                                 * @member {"moneyValue"|"dateValue"|"datetimeValue"|"addressValue"|"booleanValue"|undefined} structuredValue
                                  * @memberof google.cloud.documentai.v1beta3.Document.Entity.NormalizedValue
                                  * @instance
                                  */
                                 Object.defineProperty(NormalizedValue.prototype, "structuredValue", {
-                                    get: $util.oneOfGetter($oneOfFields = ["moneyValue", "dateValue", "datetimeValue", "addressValue"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["moneyValue", "dateValue", "datetimeValue", "addressValue", "booleanValue"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -18564,6 +18573,8 @@
                                         $root.google.type.DateTime.encode(message.datetimeValue, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                     if (message.addressValue != null && Object.hasOwnProperty.call(message, "addressValue"))
                                         $root.google.type.PostalAddress.encode(message.addressValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    if (message.booleanValue != null && Object.hasOwnProperty.call(message, "booleanValue"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.booleanValue);
                                     return writer;
                                 };
     
@@ -18609,6 +18620,9 @@
                                             break;
                                         case 5:
                                             message.addressValue = $root.google.type.PostalAddress.decode(reader, reader.uint32());
+                                            break;
+                                        case 6:
+                                            message.booleanValue = reader.bool();
                                             break;
                                         case 1:
                                             message.text = reader.string();
@@ -18687,6 +18701,13 @@
                                                 return "addressValue." + error;
                                         }
                                     }
+                                    if (message.booleanValue != null && message.hasOwnProperty("booleanValue")) {
+                                        if (properties.structuredValue === 1)
+                                            return "structuredValue: multiple values";
+                                        properties.structuredValue = 1;
+                                        if (typeof message.booleanValue !== "boolean")
+                                            return "booleanValue: boolean expected";
+                                    }
                                     if (message.text != null && message.hasOwnProperty("text"))
                                         if (!$util.isString(message.text))
                                             return "text: string expected";
@@ -18725,6 +18746,8 @@
                                             throw TypeError(".google.cloud.documentai.v1beta3.Document.Entity.NormalizedValue.addressValue: object expected");
                                         message.addressValue = $root.google.type.PostalAddress.fromObject(object.addressValue);
                                     }
+                                    if (object.booleanValue != null)
+                                        message.booleanValue = Boolean(object.booleanValue);
                                     if (object.text != null)
                                         message.text = String(object.text);
                                     return message;
@@ -18766,6 +18789,11 @@
                                         object.addressValue = $root.google.type.PostalAddress.toObject(message.addressValue, options);
                                         if (options.oneofs)
                                             object.structuredValue = "addressValue";
+                                    }
+                                    if (message.booleanValue != null && message.hasOwnProperty("booleanValue")) {
+                                        object.booleanValue = message.booleanValue;
+                                        if (options.oneofs)
+                                            object.structuredValue = "booleanValue";
                                     }
                                     return object;
                                 };

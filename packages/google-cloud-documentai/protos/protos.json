@@ -1534,7 +1534,10 @@
                             },
                             "id": {
                               "type": "string",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "normalizedValue": {
                               "type": "NormalizedValue",
@@ -1574,7 +1577,8 @@
                                     "moneyValue",
                                     "dateValue",
                                     "datetimeValue",
-                                    "addressValue"
+                                    "addressValue",
+                                    "booleanValue"
                                   ]
                                 }
                               },
@@ -1594,6 +1598,10 @@
                                 "addressValue": {
                                   "type": "google.type.PostalAddress",
                                   "id": 5
+                                },
+                                "booleanValue": {
+                                  "type": "bool",
+                                  "id": 6
                                 },
                                 "text": {
                                   "type": "string",
