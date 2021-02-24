@@ -1,1 +1,1 @@
-{"recurse":true,"skip":["https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":10}
+{"recurse":true,"skip":["https://codecov.io/gh/googleapis/","https://googleapis.dev/nodejs/org-policy/latest/index.html", "https://github.com/googleapis/nodejs-org-policy/blob/master/CHANGELOG.md", "www.googleapis.com","img.shields.io"],"silent":true,"concurrency":10}

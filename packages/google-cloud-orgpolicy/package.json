@@ -1,8 +1,8 @@
 {
-  "name": "undefined",
+  "name": "@google-cloud/org-policy",
   "version": "0.1.0",
-  "description": "Orgpolicy client for Node.js",
-  "repository": "googleapis/nodejs-orgpolicy",
+  "description": "Org policy client for Node.js",
+  "repository": "googleapis/nodejs-org-policy",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
