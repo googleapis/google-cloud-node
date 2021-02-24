@@ -292,11 +292,11 @@
     "name_pretty": "Dataproc Metastore",
     "product_documentation": "https://cloud.google.com/dataproc-metastore/",
     "client_documentation": "https://cloud.google.com/dataproc-metastore/docs",
-    "issue_tracker": "https://github.com/googleapis/nodejs-metastore/issues",
+    "issue_tracker": "https://github.com/googleapis/nodejs-dataproc-metastore/issues",
     "release_level": "BETA",
     "language": "nodejs",
-    "repo": "googleapis/nodejs-metastore",
-    "distribution_name": "",
+    "repo": "googleapis/nodejs-dataproc-metastore",
+    "distribution_name": "@google-cloud/dataproc-metastore",
     "api_id": "metastore.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/dataproc-metastore/"
@@ -830,6 +830,20 @@
     "api_id": "networkconnectivity.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/network-connectivity/docs"
+  },
+  {
+    "name": "orgpolicy",
+    "name_pretty": "Organization Policy",
+    "product_documentation": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
+    "client_documentation": "https://googleapis.dev/nodejs/org-policy/latest/index.html",
+    "issue_tracker": "https://github.com/googleapis/nodejs-org-policy/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-org-policy",
+    "distribution_name": "@google-cloud/org-policy",
+    "api_id": "orgpolicy.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
     "name": "osconfig",
