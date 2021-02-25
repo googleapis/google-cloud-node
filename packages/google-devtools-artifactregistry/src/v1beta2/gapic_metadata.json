@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.devtools.artifactregistry.v1beta2",
-  "libraryPackage": "artifactregistry",
+  "libraryPackage": "@google-cloud/artifact-registry",
   "services": {
     "ArtifactRegistry": {
       "clients": {

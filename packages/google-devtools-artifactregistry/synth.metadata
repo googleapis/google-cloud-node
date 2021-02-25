@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-artifact-registry.git",
-        "sha": "b33d4661cea3deae6e625c3b69faac179307aaa4"
+        "remote": "git@github.com:googleapis/nodejs-artifact-registry.git",
+        "sha": "d26e985a0d54a8ef51ce1d862d71007588a6fd9b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "16e91be3603953bcfc0f87aa369e3eb7d1b2cbaf",
-        "internalRef": "345608665"
+        "sha": "80fafbce83f1d95c3616c7b3f50504a4ad251bfd",
+        "internalRef": "359594504"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "318e351e26ba65b2b3cfa3f61b3b64e3540c3525"
+        "sha": "8c5628b86cfa8386de7b8fc1675e6b528b552d57"
       }
     }
   ],
