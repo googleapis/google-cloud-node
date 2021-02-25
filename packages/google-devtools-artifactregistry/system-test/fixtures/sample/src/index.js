@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const artifactregistry = require('artifactregistry');
+const artifactregistry = require('@google-cloud/artifact-registry');
 
 function main() {
   const artifactRegistryClient = new artifactregistry.ArtifactRegistryClient();
