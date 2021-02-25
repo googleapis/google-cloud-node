@@ -3,9 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "https://googleapis.dev",
-    "img.shields.io",
-    "https://cloud.google.com/bigquery/docs/dataqna"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10
