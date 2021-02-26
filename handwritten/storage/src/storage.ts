@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {GoogleAuthOptions, Metadata, Service} from '@google-cloud/common';
+import {Metadata, Service, ServiceOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 
@@ -45,11 +45,14 @@ export interface CreateBucketQuery {
   userProject: string;
 }
 
-export interface StorageOptions extends GoogleAuthOptions {
+export interface StorageOptions extends ServiceOptions {
   autoRetry?: boolean;
   maxRetries?: number;
+  /**
+   * **This option is deprecated.**
+   * @todo Remove in next major release.
+   */
   promise?: typeof Promise;
-  userAgent?: string;
   /**
    * The API endpoint of the service used to make requests.
    * Defaults to `storage.googleapis.com`.
@@ -370,8 +373,6 @@ export class Storage extends Service {
    * errors. We will exponentially backoff subsequent requests by default.
    * @property {number} [maxRetries=3] Maximum number of automatic retries
    *     attempted before returning the error.
-   * @property {Constructor} [promise] Custom promise module to use instead of
-   *     native Promises.
    * @property {string} [userAgent] The value to be prepended to the User-Agent
    *     header in API requests.
    */
@@ -412,6 +413,8 @@ export class Storage extends Service {
 
     const config = {
       apiEndpoint: options.apiEndpoint!,
+      autoRetry: options.autoRetry,
+      maxRetries: options.maxRetries,
       baseUrl,
       customEndpoint,
       projectIdRequired: false,

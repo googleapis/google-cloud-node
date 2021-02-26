@@ -169,6 +169,26 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.apiEndpoint, `${apiEndpoint}`);
     });
 
+    it('should propagate autoRetry', () => {
+      const autoRetry = false;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        autoRetry,
+      });
+      const calledWith = storage.calledWith_[0];
+      assert.strictEqual(calledWith.autoRetry, autoRetry);
+    });
+
+    it('should propagate maxRetries', () => {
+      const maxRetries = 10;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        maxRetries,
+      });
+      const calledWith = storage.calledWith_[0];
+      assert.strictEqual(calledWith.maxRetries, maxRetries);
+    });
+
     it('should set customEndpoint to true when using apiEndpoint', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
