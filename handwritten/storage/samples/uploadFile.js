@@ -35,8 +35,8 @@ function main(
     // Uploads a local file to the bucket
     await storage.bucket(bucketName).upload(filename, {
       // By setting the option `destination`, you can change the name of the
-      destination: destination,
       // object you are uploading to a bucket.
+      destination: destination,
       metadata: {
         // Enable long-lived HTTP caching headers
         // Use only if the contents of the file will never change
