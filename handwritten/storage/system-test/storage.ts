@@ -2810,6 +2810,27 @@ describe('storage', () => {
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 
+    it('should copy an existing file and overwrite metadata', async () => {
+      const opts = {
+        destination: 'CloudLogo',
+        metadata: {
+          metadata: {
+            originalProperty: 'true',
+          },
+        },
+      };
+      const [file] = await bucket.upload(FILES.logo.path, opts);
+      const copyOpts = {metadata: {newProperty: 'true'}};
+      const [copiedFile] = await file.copy('CloudLogoCopy', copyOpts);
+      const [metadata] = await copiedFile.getMetadata();
+      assert.strictEqual(
+        typeof metadata.metadata.originalProperty,
+        'undefined'
+      );
+      assert.strictEqual(metadata.metadata.newProperty, 'true');
+      await Promise.all([file.delete, copiedFile.delete()]);
+    });
+
     it('should respect predefined Acl at file#copy', async () => {
       const opts = {destination: 'CloudLogo'};
       const [file] = await bucket.upload(FILES.logo.path, opts);
