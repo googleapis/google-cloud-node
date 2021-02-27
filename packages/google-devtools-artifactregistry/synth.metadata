@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-artifact-registry.git",
-        "sha": "d26e985a0d54a8ef51ce1d862d71007588a6fd9b"
+        "remote": "https://github.com/googleapis/nodejs-artifact-registry.git",
+        "sha": "1036a7e7decab1f9238e75086b180f76755e0dfd"
       }
     },
     {
