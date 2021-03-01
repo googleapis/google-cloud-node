@@ -60,6 +60,7 @@ s.copy(
     excludes=[
         ".kokoro/continuous/node12/samples-test.cfg",
         ".kokoro/presubmit/node12/samples-test.cfg",
+        "src/index.ts",
     ],
 )
 
