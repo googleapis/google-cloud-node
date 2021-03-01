@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/game-servers/",
   "client_documentation": "https://googleapis.dev/nodejs/game-servers/latest",
   "issue_tracker": "",
-  "release_level": "beta",
+  "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-game-servers",
   "distribution_name": "@google-cloud/game-servers",
