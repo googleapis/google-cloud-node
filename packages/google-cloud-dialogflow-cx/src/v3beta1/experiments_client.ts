@@ -41,8 +41,7 @@ import * as gapicConfig from './experiments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing
- *  {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiments}.
+ *  Service for managing {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiments}.
  * @class
  * @memberof v3beta1
  */
@@ -409,15 +408,13 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Retrieves the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
+   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -511,15 +508,12 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Creates an {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment} in
-   * the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
+   * Creates an {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment} in the specified {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Agent|Agent} to create
-   *   an {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} for.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Agent|Agent} to create an {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} for.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Experiment} request.experiment
@@ -616,8 +610,7 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Updates the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
+   * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -717,14 +710,12 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Deletes the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
+   * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to delete.
+   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to delete.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
    * @param {object} [options]
@@ -819,9 +810,8 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Starts the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only
-   * changes the state of experiment from PENDING to RUNNING.
+   * Starts the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only changes the state of
+   * experiment from PENDING to RUNNING.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -921,9 +911,8 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Stops the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only
-   * changes the state of experiment from RUNNING to DONE.
+   * Stops the specified {@link google.cloud.dialogflow.cx.v3beta1.Experiment|Experiment}. This rpc only changes the state of
+   * experiment from RUNNING to DONE.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1021,16 +1010,14 @@ export class ExperimentsClient {
     >
   ): void;
   /**
-   * Returns the list of all experiments in the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
+   * Returns the list of all experiments in the specified {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
-   *   to list all environments for. Format: `projects/<Project
-   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *   ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1099,10 +1086,9 @@ export class ExperimentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
-   *   to list all environments for. Format: `projects/<Project
-   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *   ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1149,10 +1135,9 @@ export class ExperimentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
-   *   to list all environments for. Format: `projects/<Project
-   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *   ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
