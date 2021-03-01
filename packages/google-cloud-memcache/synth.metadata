@@ -3,23 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-memcache.git",
-        "sha": "105dc474f33479cca0888116a9d63a4f9abc59ac"
+        "remote": "git@github.com:googleapis/nodejs-memcache.git",
+        "sha": "5ce7bfd3950eb62f000ba862b72df9349546ef8d"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d99d5d592f3d1d5526511c90120b1e9ab3ce6e17",
-        "internalRef": "354148500"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
+        "sha": "d1ec8a4330fdc131e49637ed34bb031695a89060",
+        "internalRef": "360235141"
       }
     }
   ],
