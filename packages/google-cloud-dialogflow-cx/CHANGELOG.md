@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.2.0...v2.3.0) (2021-03-01)
+
+
+### Features
+
+* Add new Experiment service docs: minor doc update on redact field in intent.proto and page.proto ([63933cd](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/63933cdbb447795d879de3826e651ebf85baf973))
+* Add new Experiment service docs: minor doc update on redact field in intent.proto and page.proto ([63933cd](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/63933cdbb447795d879de3826e651ebf85baf973))
+* added support for test cases and agent validation ([#53](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/53)) ([63933cd](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/63933cdbb447795d879de3826e651ebf85baf973))
+* **docs:** promote to ga ([#63](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/63)) ([38acf82](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/38acf8247319392efebe865b1d1aafa2939e726e))
+* supports SentimentAnalysisResult in webhook request docs: minor updates in wording ([#62](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/62)) ([1e167ab](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/1e167ab90b17b33ba5cd6e01787f764c01310f48))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.1.0...v2.2.0) (2021-01-09)
 
 
