@@ -75,6 +75,34 @@ export namespace google {
                     public listTables(request: google.area120.tables.v1alpha1.IListTablesRequest): Promise<google.area120.tables.v1alpha1.ListTablesResponse>;
 
                     /**
+                     * Calls GetWorkspace.
+                     * @param request GetWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Workspace
+                     */
+                    public getWorkspace(request: google.area120.tables.v1alpha1.IGetWorkspaceRequest, callback: google.area120.tables.v1alpha1.TablesService.GetWorkspaceCallback): void;
+
+                    /**
+                     * Calls GetWorkspace.
+                     * @param request GetWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkspace(request: google.area120.tables.v1alpha1.IGetWorkspaceRequest): Promise<google.area120.tables.v1alpha1.Workspace>;
+
+                    /**
+                     * Calls ListWorkspaces.
+                     * @param request ListWorkspacesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkspacesResponse
+                     */
+                    public listWorkspaces(request: google.area120.tables.v1alpha1.IListWorkspacesRequest, callback: google.area120.tables.v1alpha1.TablesService.ListWorkspacesCallback): void;
+
+                    /**
+                     * Calls ListWorkspaces.
+                     * @param request ListWorkspacesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkspaces(request: google.area120.tables.v1alpha1.IListWorkspacesRequest): Promise<google.area120.tables.v1alpha1.ListWorkspacesResponse>;
+
+                    /**
                      * Calls GetRow.
                      * @param request GetRowRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Row
@@ -171,6 +199,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteRow(request: google.area120.tables.v1alpha1.IDeleteRowRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls BatchDeleteRows.
+                     * @param request BatchDeleteRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public batchDeleteRows(request: google.area120.tables.v1alpha1.IBatchDeleteRowsRequest, callback: google.area120.tables.v1alpha1.TablesService.BatchDeleteRowsCallback): void;
+
+                    /**
+                     * Calls BatchDeleteRows.
+                     * @param request BatchDeleteRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchDeleteRows(request: google.area120.tables.v1alpha1.IBatchDeleteRowsRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace TablesService {
@@ -188,6 +230,20 @@ export namespace google {
                      * @param [response] ListTablesResponse
                      */
                     type ListTablesCallback = (error: (Error|null), response?: google.area120.tables.v1alpha1.ListTablesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#getWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Workspace
+                     */
+                    type GetWorkspaceCallback = (error: (Error|null), response?: google.area120.tables.v1alpha1.Workspace) => void;
+
+                    /**
+                     * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#listWorkspaces}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkspacesResponse
+                     */
+                    type ListWorkspacesCallback = (error: (Error|null), response?: google.area120.tables.v1alpha1.ListWorkspacesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#getRow}.
@@ -237,6 +293,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteRowCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#batchDeleteRows}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type BatchDeleteRowsCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a GetTableRequest. */
@@ -521,6 +584,288 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a GetWorkspaceRequest. */
+                interface IGetWorkspaceRequest {
+
+                    /** GetWorkspaceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWorkspaceRequest. */
+                class GetWorkspaceRequest implements IGetWorkspaceRequest {
+
+                    /**
+                     * Constructs a new GetWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.IGetWorkspaceRequest);
+
+                    /** GetWorkspaceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.IGetWorkspaceRequest): google.area120.tables.v1alpha1.GetWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified GetWorkspaceRequest message. Does not implicitly {@link google.area120.tables.v1alpha1.GetWorkspaceRequest.verify|verify} messages.
+                     * @param message GetWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.IGetWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWorkspaceRequest message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.GetWorkspaceRequest.verify|verify} messages.
+                     * @param message GetWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.IGetWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.GetWorkspaceRequest;
+
+                    /**
+                     * Decodes a GetWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.GetWorkspaceRequest;
+
+                    /**
+                     * Verifies a GetWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.GetWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a GetWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message GetWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.GetWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListWorkspacesRequest. */
+                interface IListWorkspacesRequest {
+
+                    /** ListWorkspacesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWorkspacesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListWorkspacesRequest. */
+                class ListWorkspacesRequest implements IListWorkspacesRequest {
+
+                    /**
+                     * Constructs a new ListWorkspacesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.IListWorkspacesRequest);
+
+                    /** ListWorkspacesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWorkspacesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListWorkspacesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkspacesRequest instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.IListWorkspacesRequest): google.area120.tables.v1alpha1.ListWorkspacesRequest;
+
+                    /**
+                     * Encodes the specified ListWorkspacesRequest message. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesRequest.verify|verify} messages.
+                     * @param message ListWorkspacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.IListWorkspacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkspacesRequest message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesRequest.verify|verify} messages.
+                     * @param message ListWorkspacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.IListWorkspacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkspacesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkspacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.ListWorkspacesRequest;
+
+                    /**
+                     * Decodes a ListWorkspacesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkspacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.ListWorkspacesRequest;
+
+                    /**
+                     * Verifies a ListWorkspacesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkspacesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkspacesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.ListWorkspacesRequest;
+
+                    /**
+                     * Creates a plain object from a ListWorkspacesRequest message. Also converts values to other types if specified.
+                     * @param message ListWorkspacesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.ListWorkspacesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkspacesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListWorkspacesResponse. */
+                interface IListWorkspacesResponse {
+
+                    /** ListWorkspacesResponse workspaces */
+                    workspaces?: (google.area120.tables.v1alpha1.IWorkspace[]|null);
+
+                    /** ListWorkspacesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListWorkspacesResponse. */
+                class ListWorkspacesResponse implements IListWorkspacesResponse {
+
+                    /**
+                     * Constructs a new ListWorkspacesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.IListWorkspacesResponse);
+
+                    /** ListWorkspacesResponse workspaces. */
+                    public workspaces: google.area120.tables.v1alpha1.IWorkspace[];
+
+                    /** ListWorkspacesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListWorkspacesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkspacesResponse instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.IListWorkspacesResponse): google.area120.tables.v1alpha1.ListWorkspacesResponse;
+
+                    /**
+                     * Encodes the specified ListWorkspacesResponse message. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesResponse.verify|verify} messages.
+                     * @param message ListWorkspacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.IListWorkspacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkspacesResponse message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesResponse.verify|verify} messages.
+                     * @param message ListWorkspacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.IListWorkspacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkspacesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkspacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.ListWorkspacesResponse;
+
+                    /**
+                     * Decodes a ListWorkspacesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkspacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.ListWorkspacesResponse;
+
+                    /**
+                     * Verifies a ListWorkspacesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkspacesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkspacesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.ListWorkspacesResponse;
+
+                    /**
+                     * Creates a plain object from a ListWorkspacesResponse message. Also converts values to other types if specified.
+                     * @param message ListWorkspacesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.ListWorkspacesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkspacesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a GetRowRequest. */
                 interface IGetRowRequest {
 
@@ -631,6 +976,9 @@ export namespace google {
 
                     /** ListRowsRequest view */
                     view?: (google.area120.tables.v1alpha1.View|keyof typeof google.area120.tables.v1alpha1.View|null);
+
+                    /** ListRowsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListRowsRequest. */
@@ -653,6 +1001,9 @@ export namespace google {
 
                     /** ListRowsRequest view. */
                     public view: (google.area120.tables.v1alpha1.View|keyof typeof google.area120.tables.v1alpha1.View);
+
+                    /** ListRowsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListRowsRequest instance using the specified properties.
@@ -1487,6 +1838,102 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a BatchDeleteRowsRequest. */
+                interface IBatchDeleteRowsRequest {
+
+                    /** BatchDeleteRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchDeleteRowsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchDeleteRowsRequest. */
+                class BatchDeleteRowsRequest implements IBatchDeleteRowsRequest {
+
+                    /**
+                     * Constructs a new BatchDeleteRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.IBatchDeleteRowsRequest);
+
+                    /** BatchDeleteRowsRequest parent. */
+                    public parent: string;
+
+                    /** BatchDeleteRowsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchDeleteRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDeleteRowsRequest instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.IBatchDeleteRowsRequest): google.area120.tables.v1alpha1.BatchDeleteRowsRequest;
+
+                    /**
+                     * Encodes the specified BatchDeleteRowsRequest message. Does not implicitly {@link google.area120.tables.v1alpha1.BatchDeleteRowsRequest.verify|verify} messages.
+                     * @param message BatchDeleteRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.IBatchDeleteRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDeleteRowsRequest message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.BatchDeleteRowsRequest.verify|verify} messages.
+                     * @param message BatchDeleteRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.IBatchDeleteRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDeleteRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDeleteRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.BatchDeleteRowsRequest;
+
+                    /**
+                     * Decodes a BatchDeleteRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDeleteRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.BatchDeleteRowsRequest;
+
+                    /**
+                     * Verifies a BatchDeleteRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDeleteRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDeleteRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.BatchDeleteRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchDeleteRowsRequest message. Also converts values to other types if specified.
+                     * @param message BatchDeleteRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.BatchDeleteRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDeleteRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Table. */
                 interface ITable {
 
@@ -1600,6 +2047,15 @@ export namespace google {
 
                     /** ColumnDescription id */
                     id?: (string|null);
+
+                    /** ColumnDescription labels */
+                    labels?: (google.area120.tables.v1alpha1.ILabeledItem[]|null);
+
+                    /** ColumnDescription relationshipDetails */
+                    relationshipDetails?: (google.area120.tables.v1alpha1.IRelationshipDetails|null);
+
+                    /** ColumnDescription lookupDetails */
+                    lookupDetails?: (google.area120.tables.v1alpha1.ILookupDetails|null);
                 }
 
                 /** Represents a ColumnDescription. */
@@ -1619,6 +2075,15 @@ export namespace google {
 
                     /** ColumnDescription id. */
                     public id: string;
+
+                    /** ColumnDescription labels. */
+                    public labels: google.area120.tables.v1alpha1.ILabeledItem[];
+
+                    /** ColumnDescription relationshipDetails. */
+                    public relationshipDetails?: (google.area120.tables.v1alpha1.IRelationshipDetails|null);
+
+                    /** ColumnDescription lookupDetails. */
+                    public lookupDetails?: (google.area120.tables.v1alpha1.ILookupDetails|null);
 
                     /**
                      * Creates a new ColumnDescription instance using the specified properties.
@@ -1686,6 +2151,288 @@ export namespace google {
 
                     /**
                      * Converts this ColumnDescription to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LabeledItem. */
+                interface ILabeledItem {
+
+                    /** LabeledItem name */
+                    name?: (string|null);
+
+                    /** LabeledItem id */
+                    id?: (string|null);
+                }
+
+                /** Represents a LabeledItem. */
+                class LabeledItem implements ILabeledItem {
+
+                    /**
+                     * Constructs a new LabeledItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.ILabeledItem);
+
+                    /** LabeledItem name. */
+                    public name: string;
+
+                    /** LabeledItem id. */
+                    public id: string;
+
+                    /**
+                     * Creates a new LabeledItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LabeledItem instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.ILabeledItem): google.area120.tables.v1alpha1.LabeledItem;
+
+                    /**
+                     * Encodes the specified LabeledItem message. Does not implicitly {@link google.area120.tables.v1alpha1.LabeledItem.verify|verify} messages.
+                     * @param message LabeledItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.ILabeledItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LabeledItem message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.LabeledItem.verify|verify} messages.
+                     * @param message LabeledItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.ILabeledItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LabeledItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LabeledItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.LabeledItem;
+
+                    /**
+                     * Decodes a LabeledItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LabeledItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.LabeledItem;
+
+                    /**
+                     * Verifies a LabeledItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LabeledItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LabeledItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.LabeledItem;
+
+                    /**
+                     * Creates a plain object from a LabeledItem message. Also converts values to other types if specified.
+                     * @param message LabeledItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.LabeledItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LabeledItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RelationshipDetails. */
+                interface IRelationshipDetails {
+
+                    /** RelationshipDetails linkedTable */
+                    linkedTable?: (string|null);
+                }
+
+                /** Represents a RelationshipDetails. */
+                class RelationshipDetails implements IRelationshipDetails {
+
+                    /**
+                     * Constructs a new RelationshipDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.IRelationshipDetails);
+
+                    /** RelationshipDetails linkedTable. */
+                    public linkedTable: string;
+
+                    /**
+                     * Creates a new RelationshipDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RelationshipDetails instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.IRelationshipDetails): google.area120.tables.v1alpha1.RelationshipDetails;
+
+                    /**
+                     * Encodes the specified RelationshipDetails message. Does not implicitly {@link google.area120.tables.v1alpha1.RelationshipDetails.verify|verify} messages.
+                     * @param message RelationshipDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.IRelationshipDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RelationshipDetails message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.RelationshipDetails.verify|verify} messages.
+                     * @param message RelationshipDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.IRelationshipDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RelationshipDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RelationshipDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.RelationshipDetails;
+
+                    /**
+                     * Decodes a RelationshipDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RelationshipDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.RelationshipDetails;
+
+                    /**
+                     * Verifies a RelationshipDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RelationshipDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RelationshipDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.RelationshipDetails;
+
+                    /**
+                     * Creates a plain object from a RelationshipDetails message. Also converts values to other types if specified.
+                     * @param message RelationshipDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.RelationshipDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RelationshipDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LookupDetails. */
+                interface ILookupDetails {
+
+                    /** LookupDetails relationshipColumn */
+                    relationshipColumn?: (string|null);
+
+                    /** LookupDetails relationshipColumnId */
+                    relationshipColumnId?: (string|null);
+                }
+
+                /** Represents a LookupDetails. */
+                class LookupDetails implements ILookupDetails {
+
+                    /**
+                     * Constructs a new LookupDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.ILookupDetails);
+
+                    /** LookupDetails relationshipColumn. */
+                    public relationshipColumn: string;
+
+                    /** LookupDetails relationshipColumnId. */
+                    public relationshipColumnId: string;
+
+                    /**
+                     * Creates a new LookupDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LookupDetails instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.ILookupDetails): google.area120.tables.v1alpha1.LookupDetails;
+
+                    /**
+                     * Encodes the specified LookupDetails message. Does not implicitly {@link google.area120.tables.v1alpha1.LookupDetails.verify|verify} messages.
+                     * @param message LookupDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.ILookupDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LookupDetails message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.LookupDetails.verify|verify} messages.
+                     * @param message LookupDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.ILookupDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LookupDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LookupDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.LookupDetails;
+
+                    /**
+                     * Decodes a LookupDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LookupDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.LookupDetails;
+
+                    /**
+                     * Verifies a LookupDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LookupDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LookupDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.LookupDetails;
+
+                    /**
+                     * Creates a plain object from a LookupDetails message. Also converts values to other types if specified.
+                     * @param message LookupDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.LookupDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LookupDetails to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -1782,6 +2529,108 @@ export namespace google {
 
                     /**
                      * Converts this Row to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Workspace. */
+                interface IWorkspace {
+
+                    /** Workspace name */
+                    name?: (string|null);
+
+                    /** Workspace displayName */
+                    displayName?: (string|null);
+
+                    /** Workspace tables */
+                    tables?: (google.area120.tables.v1alpha1.ITable[]|null);
+                }
+
+                /** Represents a Workspace. */
+                class Workspace implements IWorkspace {
+
+                    /**
+                     * Constructs a new Workspace.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.area120.tables.v1alpha1.IWorkspace);
+
+                    /** Workspace name. */
+                    public name: string;
+
+                    /** Workspace displayName. */
+                    public displayName: string;
+
+                    /** Workspace tables. */
+                    public tables: google.area120.tables.v1alpha1.ITable[];
+
+                    /**
+                     * Creates a new Workspace instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Workspace instance
+                     */
+                    public static create(properties?: google.area120.tables.v1alpha1.IWorkspace): google.area120.tables.v1alpha1.Workspace;
+
+                    /**
+                     * Encodes the specified Workspace message. Does not implicitly {@link google.area120.tables.v1alpha1.Workspace.verify|verify} messages.
+                     * @param message Workspace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.area120.tables.v1alpha1.IWorkspace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Workspace message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.Workspace.verify|verify} messages.
+                     * @param message Workspace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.area120.tables.v1alpha1.IWorkspace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Workspace message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Workspace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.area120.tables.v1alpha1.Workspace;
+
+                    /**
+                     * Decodes a Workspace message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Workspace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.area120.tables.v1alpha1.Workspace;
+
+                    /**
+                     * Verifies a Workspace message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Workspace message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Workspace
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.area120.tables.v1alpha1.Workspace;
+
+                    /**
+                     * Creates a plain object from a Workspace message. Also converts values to other types if specified.
+                     * @param message Workspace
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.area120.tables.v1alpha1.Workspace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Workspace to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

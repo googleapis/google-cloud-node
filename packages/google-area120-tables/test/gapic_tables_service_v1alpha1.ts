@@ -305,6 +305,118 @@ describe('v1alpha1.TablesServiceClient', () => {
     });
   });
 
+  describe('getWorkspace', () => {
+    it('invokes getWorkspace without error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.Workspace()
+      );
+      client.innerApiCalls.getWorkspace = stubSimpleCall(expectedResponse);
+      const [response] = await client.getWorkspace(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getWorkspace as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getWorkspace without error using callback', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.Workspace()
+      );
+      client.innerApiCalls.getWorkspace = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getWorkspace(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.area120.tables.v1alpha1.IWorkspace | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getWorkspace as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getWorkspace with error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getWorkspace = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getWorkspace(request), expectedError);
+      assert(
+        (client.innerApiCalls.getWorkspace as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('getRow', () => {
     it('invokes getRow without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
@@ -968,6 +1080,118 @@ describe('v1alpha1.TablesServiceClient', () => {
     });
   });
 
+  describe('batchDeleteRows', () => {
+    it('invokes batchDeleteRows without error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.batchDeleteRows = stubSimpleCall(expectedResponse);
+      const [response] = await client.batchDeleteRows(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchDeleteRows as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchDeleteRows without error using callback', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.batchDeleteRows = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeleteRows(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchDeleteRows as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes batchDeleteRows with error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteRows = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.batchDeleteRows(request), expectedError);
+      assert(
+        (client.innerApiCalls.batchDeleteRows as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('listTables', () => {
     it('invokes listTables without error', async () => {
       const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
@@ -1219,6 +1443,260 @@ describe('v1alpha1.TablesServiceClient', () => {
         (client.descriptors.page.listTables.asyncIterate as SinonStub).getCall(
           0
         ).args[1],
+        request
+      );
+    });
+  });
+
+  describe('listWorkspaces', () => {
+    it('invokes listWorkspaces without error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+      ];
+      client.innerApiCalls.listWorkspaces = stubSimpleCall(expectedResponse);
+      const [response] = await client.listWorkspaces(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listWorkspaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listWorkspaces without error using callback', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
+      );
+      const expectedOptions = {};
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+      ];
+      client.innerApiCalls.listWorkspaces = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.listWorkspaces(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.area120.tables.v1alpha1.IWorkspace[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listWorkspaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listWorkspaces with error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
+      );
+      const expectedOptions = {};
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listWorkspaces = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listWorkspaces(request), expectedError);
+      assert(
+        (client.innerApiCalls.listWorkspaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listWorkspacesStream without error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+      ];
+      client.descriptors.page.listWorkspaces.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.listWorkspacesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.area120.tables.v1alpha1.Workspace[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.area120.tables.v1alpha1.Workspace) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listWorkspaces.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listWorkspaces, request)
+      );
+    });
+
+    it('invokes listWorkspacesStream with error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listWorkspaces.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listWorkspacesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.area120.tables.v1alpha1.Workspace[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.area120.tables.v1alpha1.Workspace) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listWorkspaces.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listWorkspaces, request)
+      );
+    });
+
+    it('uses async iteration with listWorkspaces without error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+        generateSampleMessage(
+          new protos.google.area120.tables.v1alpha1.Workspace()
+        ),
+      ];
+      client.descriptors.page.listWorkspaces.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.area120.tables.v1alpha1.IWorkspace[] = [];
+      const iterable = client.listWorkspacesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listWorkspaces
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listWorkspaces with error', async () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listWorkspaces.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listWorkspacesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.area120.tables.v1alpha1.IWorkspace[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listWorkspaces
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
     });
@@ -1585,6 +2063,44 @@ describe('v1alpha1.TablesServiceClient', () => {
         assert.strictEqual(result, 'tableValue');
         assert(
           (client.pathTemplates.tablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('workspace', () => {
+      const fakePath = '/rendered/path/workspace';
+      const expectedParameters = {
+        workspace: 'workspaceValue',
+      };
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.workspacePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.workspacePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('workspacePath', () => {
+        const result = client.workspacePath('workspaceValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.workspacePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchWorkspaceFromWorkspaceName', () => {
+        const result = client.matchWorkspaceFromWorkspaceName(fakePath);
+        assert.strictEqual(result, 'workspaceValue');
+        assert(
+          (client.pathTemplates.workspacePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

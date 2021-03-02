@@ -49,6 +49,10 @@ const version = require('../../../package.json').version;
  *
  *  - Each Table has a collection of {@link google.area120.tables.v1alpha1.Row|Row}
  *    resources, named `tables/* /rows/*`
+ *
+ *  - The API has a collection of
+ *    {@link google.area120.tables.v1alpha1.Workspace|Workspace}
+ *    resources, named `workspaces/*`.
  * @class
  * @memberof v1alpha1
  */
@@ -177,6 +181,9 @@ export class TablesServiceClient {
         'tables/{table}/rows/{row}'
       ),
       tablePathTemplate: new this._gaxModule.PathTemplate('tables/{table}'),
+      workspacePathTemplate: new this._gaxModule.PathTemplate(
+        'workspaces/{workspace}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -187,6 +194,11 @@ export class TablesServiceClient {
         'pageToken',
         'nextPageToken',
         'tables'
+      ),
+      listWorkspaces: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'workspaces'
       ),
       listRows: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -243,6 +255,8 @@ export class TablesServiceClient {
     const tablesServiceStubMethods = [
       'getTable',
       'listTables',
+      'getWorkspace',
+      'listWorkspaces',
       'getRow',
       'listRows',
       'createRow',
@@ -250,6 +264,7 @@ export class TablesServiceClient {
       'updateRow',
       'batchUpdateRows',
       'deleteRow',
+      'batchDeleteRows',
     ];
     for (const methodName of tablesServiceStubMethods) {
       const callPromise = this.tablesServiceStub.then(
@@ -315,6 +330,7 @@ export class TablesServiceClient {
       'https://www.googleapis.com/auth/drive.readonly',
       'https://www.googleapis.com/auth/spreadsheets',
       'https://www.googleapis.com/auth/spreadsheets.readonly',
+      'https://www.googleapis.com/auth/tables',
     ];
   }
 
@@ -423,6 +439,99 @@ export class TablesServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.getTable(request, options, callback);
+  }
+  getWorkspace(
+    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.area120.tables.v1alpha1.IWorkspace,
+      protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getWorkspace(
+    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.area120.tables.v1alpha1.IWorkspace,
+      | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getWorkspace(
+    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+    callback: Callback<
+      protos.google.area120.tables.v1alpha1.IWorkspace,
+      | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the workspace to retrieve.
+   *   Format: workspaces/{workspace}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Workspace]{@link google.area120.tables.v1alpha1.Workspace}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getWorkspace(request);
+   */
+  getWorkspace(
+    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.area120.tables.v1alpha1.IWorkspace,
+          | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.area120.tables.v1alpha1.IWorkspace,
+      | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.area120.tables.v1alpha1.IWorkspace,
+      protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.getWorkspace(request, options, callback);
   }
   getRow(
     request: protos.google.area120.tables.v1alpha1.IGetRowRequest,
@@ -996,6 +1105,104 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteRow(request, options, callback);
   }
+  batchDeleteRows(
+    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  batchDeleteRows(
+    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteRows(
+    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes multiple rows.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent table shared by all rows being deleted.
+   *   Format: tables/{table}
+   * @param {string[]} request.names
+   *   Required. The names of the rows to delete. All rows must belong to the parent table
+   *   or else the entire batch will fail. A maximum of 500 rows can be deleted
+   *   in a batch.
+   *   Format: tables/{table}/rows/{row}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.batchDeleteRows(request);
+   */
+  batchDeleteRows(
+    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.batchDeleteRows(request, options, callback);
+  }
 
   listTables(
     request: protos.google.area120.tables.v1alpha1.IListTablesRequest,
@@ -1188,6 +1395,197 @@ export class TablesServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.ITable>;
   }
+  listWorkspaces(
+    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.area120.tables.v1alpha1.IWorkspace[],
+      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
+      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+    ]
+  >;
+  listWorkspaces(
+    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      | null
+      | undefined,
+      protos.google.area120.tables.v1alpha1.IWorkspace
+    >
+  ): void;
+  listWorkspaces(
+    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    callback: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      | null
+      | undefined,
+      protos.google.area120.tables.v1alpha1.IWorkspace
+    >
+  ): void;
+  /**
+   * Lists workspaces for the user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of workspaces to return. The service may return fewer
+   *   than this value.
+   *
+   *   If unspecified, at most 10 workspaces are returned. The maximum value is
+   *   25; values above 25 are coerced to 25.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkspaces` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListWorkspaces` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Workspace]{@link google.area120.tables.v1alpha1.Workspace}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkspacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listWorkspaces(
+    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+          | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+          | null
+          | undefined,
+          protos.google.area120.tables.v1alpha1.IWorkspace
+        >,
+    callback?: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+      | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      | null
+      | undefined,
+      protos.google.area120.tables.v1alpha1.IWorkspace
+    >
+  ): Promise<
+    [
+      protos.google.area120.tables.v1alpha1.IWorkspace[],
+      protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
+      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    this.initialize();
+    return this.innerApiCalls.listWorkspaces(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of workspaces to return. The service may return fewer
+   *   than this value.
+   *
+   *   If unspecified, at most 10 workspaces are returned. The maximum value is
+   *   25; values above 25 are coerced to 25.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkspaces` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListWorkspaces` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Workspace]{@link google.area120.tables.v1alpha1.Workspace} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWorkspacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listWorkspacesStream(
+    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listWorkspaces.createStream(
+      this.innerApiCalls.listWorkspaces as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listWorkspaces`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of workspaces to return. The service may return fewer
+   *   than this value.
+   *
+   *   If unspecified, at most 10 workspaces are returned. The maximum value is
+   *   25; values above 25 are coerced to 25.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkspaces` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListWorkspaces` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Workspace]{@link google.area120.tables.v1alpha1.Workspace}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listWorkspacesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listWorkspacesAsync(
+    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace> {
+    request = request || {};
+    options = options || {};
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listWorkspaces.asyncIterate(
+      this.innerApiCalls['listWorkspaces'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace>;
+  }
   listRows(
     request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
     options?: CallOptions
@@ -1242,6 +1640,10 @@ export class TablesServiceClient {
    * @param {google.area120.tables.v1alpha1.View} [request.view]
    *   Optional. Column key to use for values in the row.
    *   Defaults to user entered name.
+   * @param {string} [request.filter]
+   *   Optional. Raw text query to search for in rows of the table.
+   *   Special characters must be escaped. Logical operators and field specific
+   *   filtering not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1322,6 +1724,10 @@ export class TablesServiceClient {
    * @param {google.area120.tables.v1alpha1.View} [request.view]
    *   Optional. Column key to use for values in the row.
    *   Defaults to user entered name.
+   * @param {string} [request.filter]
+   *   Optional. Raw text query to search for in rows of the table.
+   *   Special characters must be escaped. Logical operators and field specific
+   *   filtering not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1380,6 +1786,10 @@ export class TablesServiceClient {
    * @param {google.area120.tables.v1alpha1.View} [request.view]
    *   Optional. Column key to use for values in the row.
    *   Defaults to user entered name.
+   * @param {string} [request.filter]
+   *   Optional. Raw text query to search for in rows of the table.
+   *   Special characters must be escaped. Logical operators and field specific
+   *   filtering not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1479,6 +1889,30 @@ export class TablesServiceClient {
    */
   matchTableFromTableName(tableName: string) {
     return this.pathTemplates.tablePathTemplate.match(tableName).table;
+  }
+
+  /**
+   * Return a fully-qualified workspace resource name string.
+   *
+   * @param {string} workspace
+   * @returns {string} Resource name string.
+   */
+  workspacePath(workspace: string) {
+    return this.pathTemplates.workspacePathTemplate.render({
+      workspace: workspace,
+    });
+  }
+
+  /**
+   * Parse the workspace from Workspace resource.
+   *
+   * @param {string} workspaceName
+   *   A fully-qualified path representing Workspace resource.
+   * @returns {string} A string representing the workspace.
+   */
+  matchWorkspaceFromWorkspaceName(workspaceName: string) {
+    return this.pathTemplates.workspacePathTemplate.match(workspaceName)
+      .workspace;
   }
 
   /**

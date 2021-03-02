@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-area120-tables.git",
-        "sha": "9bf57c3152b720a35fb16bd6ec2c0f971d3067ab"
+        "sha": "b5cd1c965382af3ac5dd175ffd4075b674326926"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d189e871205fea665a9648f7c4676f027495ccaf",
-        "internalRef": "345596855"
+        "sha": "151bfbae10c02f51f07972097b3f72812738dcb9",
+        "internalRef": "358406243"
       }
     },
     {

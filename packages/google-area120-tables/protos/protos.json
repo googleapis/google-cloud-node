@@ -17,7 +17,7 @@
                     "TablesService": {
                       "options": {
                         "(google.api.default_host)": "area120tables.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/drive.file,https://www.googleapis.com/auth/drive.readonly,https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/spreadsheets.readonly"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/drive.file,https://www.googleapis.com/auth/drive.readonly,https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/spreadsheets.readonly,https://www.googleapis.com/auth/tables"
                       },
                       "methods": {
                         "GetTable": {
@@ -48,6 +48,38 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1alpha1/tables"
+                              }
+                            }
+                          ]
+                        },
+                        "GetWorkspace": {
+                          "requestType": "GetWorkspaceRequest",
+                          "responseType": "Workspace",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha1/{name=workspaces/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/{name=workspaces/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListWorkspaces": {
+                          "requestType": "ListWorkspacesRequest",
+                          "responseType": "ListWorkspacesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha1/workspaces"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/workspaces"
                               }
                             }
                           ]
@@ -177,6 +209,22 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "BatchDeleteRows": {
+                          "requestType": "BatchDeleteRowsRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha1/{parent=tables/*}/rows:batchDelete",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha1/{parent=tables/*}/rows:batchDelete",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -186,7 +234,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "area120tables.googleapis.com/Table"
                           }
                         }
                       }
@@ -216,13 +265,51 @@
                         }
                       }
                     },
+                    "GetWorkspaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "area120tables.googleapis.com/Workspace"
+                          }
+                        }
+                      }
+                    },
+                    "ListWorkspacesRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListWorkspacesResponse": {
+                      "fields": {
+                        "workspaces": {
+                          "rule": "repeated",
+                          "type": "Workspace",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "GetRowRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "area120tables.googleapis.com/Row"
                           }
                         },
                         "view": {
@@ -254,6 +341,13 @@
                         "view": {
                           "type": "View",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -388,6 +482,27 @@
                         }
                       }
                     },
+                    "BatchDeleteRowsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "area120tables.googleapis.com/Table"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "area120tables.googleapis.com/Row"
+                          }
+                        }
+                      }
+                    },
                     "Table": {
                       "options": {
                         "(google.api.resource).type": "area120tables.googleapis.com/Table",
@@ -422,6 +537,60 @@
                         "id": {
                           "type": "string",
                           "id": 3
+                        },
+                        "labels": {
+                          "rule": "repeated",
+                          "type": "LabeledItem",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "relationshipDetails": {
+                          "type": "RelationshipDetails",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lookupDetails": {
+                          "type": "LookupDetails",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "LabeledItem": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RelationshipDetails": {
+                      "fields": {
+                        "linkedTable": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LookupDetails": {
+                      "fields": {
+                        "relationshipColumn": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "relationshipColumnId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -439,6 +608,27 @@
                           "keyType": "string",
                           "type": "google.protobuf.Value",
                           "id": 2
+                        }
+                      }
+                    },
+                    "Workspace": {
+                      "options": {
+                        "(google.api.resource).type": "area120tables.googleapis.com/Workspace",
+                        "(google.api.resource).pattern": "workspaces/{workspace}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "tables": {
+                          "rule": "repeated",
+                          "type": "Table",
+                          "id": 3
                         }
                       }
                     },

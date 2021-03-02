@@ -15,6 +15,11 @@
                 "getTable"
               ]
             },
+            "GetWorkspace": {
+              "methods": [
+                "getWorkspace"
+              ]
+            },
             "GetRow": {
               "methods": [
                 "getRow"
@@ -45,11 +50,23 @@
                 "deleteRow"
               ]
             },
+            "BatchDeleteRows": {
+              "methods": [
+                "batchDeleteRows"
+              ]
+            },
             "ListTables": {
               "methods": [
                 "listTables",
                 "listTablesStream",
                 "listTablesAsync"
+              ]
+            },
+            "ListWorkspaces": {
+              "methods": [
+                "listWorkspaces",
+                "listWorkspacesStream",
+                "listWorkspacesAsync"
               ]
             },
             "ListRows": {
@@ -69,6 +86,11 @@
                 "getTable"
               ]
             },
+            "GetWorkspace": {
+              "methods": [
+                "getWorkspace"
+              ]
+            },
             "GetRow": {
               "methods": [
                 "getRow"
@@ -99,11 +121,23 @@
                 "deleteRow"
               ]
             },
+            "BatchDeleteRows": {
+              "methods": [
+                "batchDeleteRows"
+              ]
+            },
             "ListTables": {
               "methods": [
                 "listTables",
                 "listTablesStream",
                 "listTablesAsync"
+              ]
+            },
+            "ListWorkspaces": {
+              "methods": [
+                "listWorkspaces",
+                "listWorkspacesStream",
+                "listWorkspacesAsync"
               ]
             },
             "ListRows": {

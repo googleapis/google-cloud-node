@@ -165,6 +165,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#getWorkspace}.
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @typedef GetWorkspaceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.area120.tables.v1alpha1.Workspace} [response] Workspace
+                         */
+    
+                        /**
+                         * Calls GetWorkspace.
+                         * @function getWorkspace
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @instance
+                         * @param {google.area120.tables.v1alpha1.IGetWorkspaceRequest} request GetWorkspaceRequest message or plain object
+                         * @param {google.area120.tables.v1alpha1.TablesService.GetWorkspaceCallback} callback Node-style callback called with the error, if any, and Workspace
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TablesService.prototype.getWorkspace = function getWorkspace(request, callback) {
+                            return this.rpcCall(getWorkspace, $root.google.area120.tables.v1alpha1.GetWorkspaceRequest, $root.google.area120.tables.v1alpha1.Workspace, request, callback);
+                        }, "name", { value: "GetWorkspace" });
+    
+                        /**
+                         * Calls GetWorkspace.
+                         * @function getWorkspace
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @instance
+                         * @param {google.area120.tables.v1alpha1.IGetWorkspaceRequest} request GetWorkspaceRequest message or plain object
+                         * @returns {Promise<google.area120.tables.v1alpha1.Workspace>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#listWorkspaces}.
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @typedef ListWorkspacesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.area120.tables.v1alpha1.ListWorkspacesResponse} [response] ListWorkspacesResponse
+                         */
+    
+                        /**
+                         * Calls ListWorkspaces.
+                         * @function listWorkspaces
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @instance
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesRequest} request ListWorkspacesRequest message or plain object
+                         * @param {google.area120.tables.v1alpha1.TablesService.ListWorkspacesCallback} callback Node-style callback called with the error, if any, and ListWorkspacesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TablesService.prototype.listWorkspaces = function listWorkspaces(request, callback) {
+                            return this.rpcCall(listWorkspaces, $root.google.area120.tables.v1alpha1.ListWorkspacesRequest, $root.google.area120.tables.v1alpha1.ListWorkspacesResponse, request, callback);
+                        }, "name", { value: "ListWorkspaces" });
+    
+                        /**
+                         * Calls ListWorkspaces.
+                         * @function listWorkspaces
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @instance
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesRequest} request ListWorkspacesRequest message or plain object
+                         * @returns {Promise<google.area120.tables.v1alpha1.ListWorkspacesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#getRow}.
                          * @memberof google.area120.tables.v1alpha1.TablesService
                          * @typedef GetRowCallback
@@ -391,6 +457,39 @@
                          * @memberof google.area120.tables.v1alpha1.TablesService
                          * @instance
                          * @param {google.area120.tables.v1alpha1.IDeleteRowRequest} request DeleteRowRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.area120.tables.v1alpha1.TablesService#batchDeleteRows}.
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @typedef BatchDeleteRowsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls BatchDeleteRows.
+                         * @function batchDeleteRows
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @instance
+                         * @param {google.area120.tables.v1alpha1.IBatchDeleteRowsRequest} request BatchDeleteRowsRequest message or plain object
+                         * @param {google.area120.tables.v1alpha1.TablesService.BatchDeleteRowsCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TablesService.prototype.batchDeleteRows = function batchDeleteRows(request, callback) {
+                            return this.rpcCall(batchDeleteRows, $root.google.area120.tables.v1alpha1.BatchDeleteRowsRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "BatchDeleteRows" });
+    
+                        /**
+                         * Calls BatchDeleteRows.
+                         * @function batchDeleteRows
+                         * @memberof google.area120.tables.v1alpha1.TablesService
+                         * @instance
+                         * @param {google.area120.tables.v1alpha1.IBatchDeleteRowsRequest} request BatchDeleteRowsRequest message or plain object
                          * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
@@ -1026,6 +1125,634 @@
                         return ListTablesResponse;
                     })();
     
+                    v1alpha1.GetWorkspaceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWorkspaceRequest.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface IGetWorkspaceRequest
+                         * @property {string|null} [name] GetWorkspaceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetWorkspaceRequest.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a GetWorkspaceRequest.
+                         * @implements IGetWorkspaceRequest
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.IGetWorkspaceRequest=} [properties] Properties to set
+                         */
+                        function GetWorkspaceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWorkspaceRequest name.
+                         * @member {string} name
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @instance
+                         */
+                        GetWorkspaceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetWorkspaceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IGetWorkspaceRequest=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.GetWorkspaceRequest} GetWorkspaceRequest instance
+                         */
+                        GetWorkspaceRequest.create = function create(properties) {
+                            return new GetWorkspaceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkspaceRequest message. Does not implicitly {@link google.area120.tables.v1alpha1.GetWorkspaceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IGetWorkspaceRequest} message GetWorkspaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkspaceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkspaceRequest message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.GetWorkspaceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IGetWorkspaceRequest} message GetWorkspaceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkspaceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWorkspaceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.GetWorkspaceRequest} GetWorkspaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkspaceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.GetWorkspaceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWorkspaceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.GetWorkspaceRequest} GetWorkspaceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkspaceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWorkspaceRequest message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWorkspaceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.GetWorkspaceRequest} GetWorkspaceRequest
+                         */
+                        GetWorkspaceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.GetWorkspaceRequest)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.GetWorkspaceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWorkspaceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.GetWorkspaceRequest} message GetWorkspaceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWorkspaceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWorkspaceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.GetWorkspaceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWorkspaceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetWorkspaceRequest;
+                    })();
+    
+                    v1alpha1.ListWorkspacesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWorkspacesRequest.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface IListWorkspacesRequest
+                         * @property {number|null} [pageSize] ListWorkspacesRequest pageSize
+                         * @property {string|null} [pageToken] ListWorkspacesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkspacesRequest.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a ListWorkspacesRequest.
+                         * @implements IListWorkspacesRequest
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesRequest=} [properties] Properties to set
+                         */
+                        function ListWorkspacesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkspacesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @instance
+                         */
+                        ListWorkspacesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWorkspacesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @instance
+                         */
+                        ListWorkspacesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkspacesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesRequest=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesRequest} ListWorkspacesRequest instance
+                         */
+                        ListWorkspacesRequest.create = function create(properties) {
+                            return new ListWorkspacesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkspacesRequest message. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesRequest} message ListWorkspacesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkspacesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkspacesRequest message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesRequest} message ListWorkspacesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkspacesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkspacesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesRequest} ListWorkspacesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkspacesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.ListWorkspacesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 2:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkspacesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesRequest} ListWorkspacesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkspacesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkspacesRequest message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkspacesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkspacesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesRequest} ListWorkspacesRequest
+                         */
+                        ListWorkspacesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.ListWorkspacesRequest)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.ListWorkspacesRequest();
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkspacesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ListWorkspacesRequest} message ListWorkspacesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkspacesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkspacesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkspacesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListWorkspacesRequest;
+                    })();
+    
+                    v1alpha1.ListWorkspacesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWorkspacesResponse.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface IListWorkspacesResponse
+                         * @property {Array.<google.area120.tables.v1alpha1.IWorkspace>|null} [workspaces] ListWorkspacesResponse workspaces
+                         * @property {string|null} [nextPageToken] ListWorkspacesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkspacesResponse.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a ListWorkspacesResponse.
+                         * @implements IListWorkspacesResponse
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesResponse=} [properties] Properties to set
+                         */
+                        function ListWorkspacesResponse(properties) {
+                            this.workspaces = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkspacesResponse workspaces.
+                         * @member {Array.<google.area120.tables.v1alpha1.IWorkspace>} workspaces
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @instance
+                         */
+                        ListWorkspacesResponse.prototype.workspaces = $util.emptyArray;
+    
+                        /**
+                         * ListWorkspacesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @instance
+                         */
+                        ListWorkspacesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkspacesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesResponse=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesResponse} ListWorkspacesResponse instance
+                         */
+                        ListWorkspacesResponse.create = function create(properties) {
+                            return new ListWorkspacesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkspacesResponse message. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesResponse} message ListWorkspacesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkspacesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workspaces != null && message.workspaces.length)
+                                for (var i = 0; i < message.workspaces.length; ++i)
+                                    $root.google.area120.tables.v1alpha1.Workspace.encode(message.workspaces[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkspacesResponse message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.ListWorkspacesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IListWorkspacesResponse} message ListWorkspacesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkspacesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkspacesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesResponse} ListWorkspacesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkspacesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.ListWorkspacesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.workspaces && message.workspaces.length))
+                                        message.workspaces = [];
+                                    message.workspaces.push($root.google.area120.tables.v1alpha1.Workspace.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkspacesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesResponse} ListWorkspacesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkspacesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkspacesResponse message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkspacesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workspaces != null && message.hasOwnProperty("workspaces")) {
+                                if (!Array.isArray(message.workspaces))
+                                    return "workspaces: array expected";
+                                for (var i = 0; i < message.workspaces.length; ++i) {
+                                    var error = $root.google.area120.tables.v1alpha1.Workspace.verify(message.workspaces[i]);
+                                    if (error)
+                                        return "workspaces." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkspacesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.ListWorkspacesResponse} ListWorkspacesResponse
+                         */
+                        ListWorkspacesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.ListWorkspacesResponse)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.ListWorkspacesResponse();
+                            if (object.workspaces) {
+                                if (!Array.isArray(object.workspaces))
+                                    throw TypeError(".google.area120.tables.v1alpha1.ListWorkspacesResponse.workspaces: array expected");
+                                message.workspaces = [];
+                                for (var i = 0; i < object.workspaces.length; ++i) {
+                                    if (typeof object.workspaces[i] !== "object")
+                                        throw TypeError(".google.area120.tables.v1alpha1.ListWorkspacesResponse.workspaces: object expected");
+                                    message.workspaces[i] = $root.google.area120.tables.v1alpha1.Workspace.fromObject(object.workspaces[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkspacesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ListWorkspacesResponse} message ListWorkspacesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkspacesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.workspaces = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workspaces && message.workspaces.length) {
+                                object.workspaces = [];
+                                for (var j = 0; j < message.workspaces.length; ++j)
+                                    object.workspaces[j] = $root.google.area120.tables.v1alpha1.Workspace.toObject(message.workspaces[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkspacesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.ListWorkspacesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkspacesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListWorkspacesResponse;
+                    })();
+    
                     v1alpha1.GetRowRequest = (function() {
     
                         /**
@@ -1259,6 +1986,7 @@
                          * @property {number|null} [pageSize] ListRowsRequest pageSize
                          * @property {string|null} [pageToken] ListRowsRequest pageToken
                          * @property {google.area120.tables.v1alpha1.View|null} [view] ListRowsRequest view
+                         * @property {string|null} [filter] ListRowsRequest filter
                          */
     
                         /**
@@ -1309,6 +2037,14 @@
                         ListRowsRequest.prototype.view = 0;
     
                         /**
+                         * ListRowsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.area120.tables.v1alpha1.ListRowsRequest
+                         * @instance
+                         */
+                        ListRowsRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListRowsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.area120.tables.v1alpha1.ListRowsRequest
@@ -1340,6 +2076,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.view != null && Object.hasOwnProperty.call(message, "view"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.view);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
                             return writer;
                         };
     
@@ -1385,6 +2123,9 @@
                                     break;
                                 case 4:
                                     message.view = reader.int32();
+                                    break;
+                                case 5:
+                                    message.filter = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1438,6 +2179,9 @@
                                 case 1:
                                     break;
                                 }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -1469,6 +2213,8 @@
                                 message.view = 1;
                                 break;
                             }
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -1490,6 +2236,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.view = options.enums === String ? "VIEW_UNSPECIFIED" : 0;
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -1499,6 +2246,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.view != null && message.hasOwnProperty("view"))
                                 object.view = options.enums === String ? $root.google.area120.tables.v1alpha1.View[message.view] : message.view;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -3317,6 +4066,232 @@
                         return DeleteRowRequest;
                     })();
     
+                    v1alpha1.BatchDeleteRowsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchDeleteRowsRequest.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface IBatchDeleteRowsRequest
+                         * @property {string|null} [parent] BatchDeleteRowsRequest parent
+                         * @property {Array.<string>|null} [names] BatchDeleteRowsRequest names
+                         */
+    
+                        /**
+                         * Constructs a new BatchDeleteRowsRequest.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a BatchDeleteRowsRequest.
+                         * @implements IBatchDeleteRowsRequest
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.IBatchDeleteRowsRequest=} [properties] Properties to set
+                         */
+                        function BatchDeleteRowsRequest(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchDeleteRowsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @instance
+                         */
+                        BatchDeleteRowsRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchDeleteRowsRequest names.
+                         * @member {Array.<string>} names
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @instance
+                         */
+                        BatchDeleteRowsRequest.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchDeleteRowsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IBatchDeleteRowsRequest=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.BatchDeleteRowsRequest} BatchDeleteRowsRequest instance
+                         */
+                        BatchDeleteRowsRequest.create = function create(properties) {
+                            return new BatchDeleteRowsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeleteRowsRequest message. Does not implicitly {@link google.area120.tables.v1alpha1.BatchDeleteRowsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IBatchDeleteRowsRequest} message BatchDeleteRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeleteRowsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDeleteRowsRequest message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.BatchDeleteRowsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IBatchDeleteRowsRequest} message BatchDeleteRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDeleteRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDeleteRowsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.BatchDeleteRowsRequest} BatchDeleteRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeleteRowsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.BatchDeleteRowsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.names && message.names.length))
+                                        message.names = [];
+                                    message.names.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDeleteRowsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.BatchDeleteRowsRequest} BatchDeleteRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDeleteRowsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDeleteRowsRequest message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDeleteRowsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDeleteRowsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.BatchDeleteRowsRequest} BatchDeleteRowsRequest
+                         */
+                        BatchDeleteRowsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.BatchDeleteRowsRequest)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.BatchDeleteRowsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.area120.tables.v1alpha1.BatchDeleteRowsRequest.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDeleteRowsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.BatchDeleteRowsRequest} message BatchDeleteRowsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDeleteRowsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchDeleteRowsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.BatchDeleteRowsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDeleteRowsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchDeleteRowsRequest;
+                    })();
+    
                     v1alpha1.Table = (function() {
     
                         /**
@@ -3580,6 +4555,9 @@
                          * @property {string|null} [name] ColumnDescription name
                          * @property {string|null} [dataType] ColumnDescription dataType
                          * @property {string|null} [id] ColumnDescription id
+                         * @property {Array.<google.area120.tables.v1alpha1.ILabeledItem>|null} [labels] ColumnDescription labels
+                         * @property {google.area120.tables.v1alpha1.IRelationshipDetails|null} [relationshipDetails] ColumnDescription relationshipDetails
+                         * @property {google.area120.tables.v1alpha1.ILookupDetails|null} [lookupDetails] ColumnDescription lookupDetails
                          */
     
                         /**
@@ -3591,6 +4569,7 @@
                          * @param {google.area120.tables.v1alpha1.IColumnDescription=} [properties] Properties to set
                          */
                         function ColumnDescription(properties) {
+                            this.labels = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3622,6 +4601,30 @@
                         ColumnDescription.prototype.id = "";
     
                         /**
+                         * ColumnDescription labels.
+                         * @member {Array.<google.area120.tables.v1alpha1.ILabeledItem>} labels
+                         * @memberof google.area120.tables.v1alpha1.ColumnDescription
+                         * @instance
+                         */
+                        ColumnDescription.prototype.labels = $util.emptyArray;
+    
+                        /**
+                         * ColumnDescription relationshipDetails.
+                         * @member {google.area120.tables.v1alpha1.IRelationshipDetails|null|undefined} relationshipDetails
+                         * @memberof google.area120.tables.v1alpha1.ColumnDescription
+                         * @instance
+                         */
+                        ColumnDescription.prototype.relationshipDetails = null;
+    
+                        /**
+                         * ColumnDescription lookupDetails.
+                         * @member {google.area120.tables.v1alpha1.ILookupDetails|null|undefined} lookupDetails
+                         * @memberof google.area120.tables.v1alpha1.ColumnDescription
+                         * @instance
+                         */
+                        ColumnDescription.prototype.lookupDetails = null;
+    
+                        /**
                          * Creates a new ColumnDescription instance using the specified properties.
                          * @function create
                          * @memberof google.area120.tables.v1alpha1.ColumnDescription
@@ -3651,6 +4654,13 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataType);
                             if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.id);
+                            if (message.labels != null && message.labels.length)
+                                for (var i = 0; i < message.labels.length; ++i)
+                                    $root.google.area120.tables.v1alpha1.LabeledItem.encode(message.labels[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.relationshipDetails != null && Object.hasOwnProperty.call(message, "relationshipDetails"))
+                                $root.google.area120.tables.v1alpha1.RelationshipDetails.encode(message.relationshipDetails, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.lookupDetails != null && Object.hasOwnProperty.call(message, "lookupDetails"))
+                                $root.google.area120.tables.v1alpha1.LookupDetails.encode(message.lookupDetails, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -3693,6 +4703,17 @@
                                     break;
                                 case 3:
                                     message.id = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.labels && message.labels.length))
+                                        message.labels = [];
+                                    message.labels.push($root.google.area120.tables.v1alpha1.LabeledItem.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.relationshipDetails = $root.google.area120.tables.v1alpha1.RelationshipDetails.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.lookupDetails = $root.google.area120.tables.v1alpha1.LookupDetails.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3738,6 +4759,25 @@
                             if (message.id != null && message.hasOwnProperty("id"))
                                 if (!$util.isString(message.id))
                                     return "id: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!Array.isArray(message.labels))
+                                    return "labels: array expected";
+                                for (var i = 0; i < message.labels.length; ++i) {
+                                    var error = $root.google.area120.tables.v1alpha1.LabeledItem.verify(message.labels[i]);
+                                    if (error)
+                                        return "labels." + error;
+                                }
+                            }
+                            if (message.relationshipDetails != null && message.hasOwnProperty("relationshipDetails")) {
+                                var error = $root.google.area120.tables.v1alpha1.RelationshipDetails.verify(message.relationshipDetails);
+                                if (error)
+                                    return "relationshipDetails." + error;
+                            }
+                            if (message.lookupDetails != null && message.hasOwnProperty("lookupDetails")) {
+                                var error = $root.google.area120.tables.v1alpha1.LookupDetails.verify(message.lookupDetails);
+                                if (error)
+                                    return "lookupDetails." + error;
+                            }
                             return null;
                         };
     
@@ -3759,6 +4799,26 @@
                                 message.dataType = String(object.dataType);
                             if (object.id != null)
                                 message.id = String(object.id);
+                            if (object.labels) {
+                                if (!Array.isArray(object.labels))
+                                    throw TypeError(".google.area120.tables.v1alpha1.ColumnDescription.labels: array expected");
+                                message.labels = [];
+                                for (var i = 0; i < object.labels.length; ++i) {
+                                    if (typeof object.labels[i] !== "object")
+                                        throw TypeError(".google.area120.tables.v1alpha1.ColumnDescription.labels: object expected");
+                                    message.labels[i] = $root.google.area120.tables.v1alpha1.LabeledItem.fromObject(object.labels[i]);
+                                }
+                            }
+                            if (object.relationshipDetails != null) {
+                                if (typeof object.relationshipDetails !== "object")
+                                    throw TypeError(".google.area120.tables.v1alpha1.ColumnDescription.relationshipDetails: object expected");
+                                message.relationshipDetails = $root.google.area120.tables.v1alpha1.RelationshipDetails.fromObject(object.relationshipDetails);
+                            }
+                            if (object.lookupDetails != null) {
+                                if (typeof object.lookupDetails !== "object")
+                                    throw TypeError(".google.area120.tables.v1alpha1.ColumnDescription.lookupDetails: object expected");
+                                message.lookupDetails = $root.google.area120.tables.v1alpha1.LookupDetails.fromObject(object.lookupDetails);
+                            }
                             return message;
                         };
     
@@ -3775,10 +4835,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.labels = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.dataType = "";
                                 object.id = "";
+                                object.relationshipDetails = null;
+                                object.lookupDetails = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3786,6 +4850,15 @@
                                 object.dataType = message.dataType;
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
+                            if (message.labels && message.labels.length) {
+                                object.labels = [];
+                                for (var j = 0; j < message.labels.length; ++j)
+                                    object.labels[j] = $root.google.area120.tables.v1alpha1.LabeledItem.toObject(message.labels[j], options);
+                            }
+                            if (message.relationshipDetails != null && message.hasOwnProperty("relationshipDetails"))
+                                object.relationshipDetails = $root.google.area120.tables.v1alpha1.RelationshipDetails.toObject(message.relationshipDetails, options);
+                            if (message.lookupDetails != null && message.hasOwnProperty("lookupDetails"))
+                                object.lookupDetails = $root.google.area120.tables.v1alpha1.LookupDetails.toObject(message.lookupDetails, options);
                             return object;
                         };
     
@@ -3801,6 +4874,613 @@
                         };
     
                         return ColumnDescription;
+                    })();
+    
+                    v1alpha1.LabeledItem = (function() {
+    
+                        /**
+                         * Properties of a LabeledItem.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface ILabeledItem
+                         * @property {string|null} [name] LabeledItem name
+                         * @property {string|null} [id] LabeledItem id
+                         */
+    
+                        /**
+                         * Constructs a new LabeledItem.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a LabeledItem.
+                         * @implements ILabeledItem
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.ILabeledItem=} [properties] Properties to set
+                         */
+                        function LabeledItem(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LabeledItem name.
+                         * @member {string} name
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @instance
+                         */
+                        LabeledItem.prototype.name = "";
+    
+                        /**
+                         * LabeledItem id.
+                         * @member {string} id
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @instance
+                         */
+                        LabeledItem.prototype.id = "";
+    
+                        /**
+                         * Creates a new LabeledItem instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ILabeledItem=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.LabeledItem} LabeledItem instance
+                         */
+                        LabeledItem.create = function create(properties) {
+                            return new LabeledItem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LabeledItem message. Does not implicitly {@link google.area120.tables.v1alpha1.LabeledItem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ILabeledItem} message LabeledItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LabeledItem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LabeledItem message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.LabeledItem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ILabeledItem} message LabeledItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LabeledItem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LabeledItem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.LabeledItem} LabeledItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LabeledItem.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.LabeledItem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.id = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LabeledItem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.LabeledItem} LabeledItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LabeledItem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LabeledItem message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LabeledItem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LabeledItem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.LabeledItem} LabeledItem
+                         */
+                        LabeledItem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.LabeledItem)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.LabeledItem();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LabeledItem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.LabeledItem} message LabeledItem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LabeledItem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.id = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LabeledItem to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.LabeledItem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LabeledItem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LabeledItem;
+                    })();
+    
+                    v1alpha1.RelationshipDetails = (function() {
+    
+                        /**
+                         * Properties of a RelationshipDetails.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface IRelationshipDetails
+                         * @property {string|null} [linkedTable] RelationshipDetails linkedTable
+                         */
+    
+                        /**
+                         * Constructs a new RelationshipDetails.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a RelationshipDetails.
+                         * @implements IRelationshipDetails
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.IRelationshipDetails=} [properties] Properties to set
+                         */
+                        function RelationshipDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelationshipDetails linkedTable.
+                         * @member {string} linkedTable
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @instance
+                         */
+                        RelationshipDetails.prototype.linkedTable = "";
+    
+                        /**
+                         * Creates a new RelationshipDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IRelationshipDetails=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.RelationshipDetails} RelationshipDetails instance
+                         */
+                        RelationshipDetails.create = function create(properties) {
+                            return new RelationshipDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelationshipDetails message. Does not implicitly {@link google.area120.tables.v1alpha1.RelationshipDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IRelationshipDetails} message RelationshipDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelationshipDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.linkedTable != null && Object.hasOwnProperty.call(message, "linkedTable"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.linkedTable);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelationshipDetails message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.RelationshipDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IRelationshipDetails} message RelationshipDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelationshipDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelationshipDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.RelationshipDetails} RelationshipDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelationshipDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.RelationshipDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.linkedTable = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelationshipDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.RelationshipDetails} RelationshipDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelationshipDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelationshipDetails message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelationshipDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.linkedTable != null && message.hasOwnProperty("linkedTable"))
+                                if (!$util.isString(message.linkedTable))
+                                    return "linkedTable: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelationshipDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.RelationshipDetails} RelationshipDetails
+                         */
+                        RelationshipDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.RelationshipDetails)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.RelationshipDetails();
+                            if (object.linkedTable != null)
+                                message.linkedTable = String(object.linkedTable);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelationshipDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.RelationshipDetails} message RelationshipDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelationshipDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.linkedTable = "";
+                            if (message.linkedTable != null && message.hasOwnProperty("linkedTable"))
+                                object.linkedTable = message.linkedTable;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelationshipDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.RelationshipDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelationshipDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelationshipDetails;
+                    })();
+    
+                    v1alpha1.LookupDetails = (function() {
+    
+                        /**
+                         * Properties of a LookupDetails.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface ILookupDetails
+                         * @property {string|null} [relationshipColumn] LookupDetails relationshipColumn
+                         * @property {string|null} [relationshipColumnId] LookupDetails relationshipColumnId
+                         */
+    
+                        /**
+                         * Constructs a new LookupDetails.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a LookupDetails.
+                         * @implements ILookupDetails
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.ILookupDetails=} [properties] Properties to set
+                         */
+                        function LookupDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookupDetails relationshipColumn.
+                         * @member {string} relationshipColumn
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @instance
+                         */
+                        LookupDetails.prototype.relationshipColumn = "";
+    
+                        /**
+                         * LookupDetails relationshipColumnId.
+                         * @member {string} relationshipColumnId
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @instance
+                         */
+                        LookupDetails.prototype.relationshipColumnId = "";
+    
+                        /**
+                         * Creates a new LookupDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ILookupDetails=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.LookupDetails} LookupDetails instance
+                         */
+                        LookupDetails.create = function create(properties) {
+                            return new LookupDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookupDetails message. Does not implicitly {@link google.area120.tables.v1alpha1.LookupDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ILookupDetails} message LookupDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookupDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relationshipColumn != null && Object.hasOwnProperty.call(message, "relationshipColumn"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.relationshipColumn);
+                            if (message.relationshipColumnId != null && Object.hasOwnProperty.call(message, "relationshipColumnId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.relationshipColumnId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookupDetails message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.LookupDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.ILookupDetails} message LookupDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookupDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookupDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.LookupDetails} LookupDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookupDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.LookupDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.relationshipColumn = reader.string();
+                                    break;
+                                case 2:
+                                    message.relationshipColumnId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookupDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.LookupDetails} LookupDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookupDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookupDetails message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookupDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relationshipColumn != null && message.hasOwnProperty("relationshipColumn"))
+                                if (!$util.isString(message.relationshipColumn))
+                                    return "relationshipColumn: string expected";
+                            if (message.relationshipColumnId != null && message.hasOwnProperty("relationshipColumnId"))
+                                if (!$util.isString(message.relationshipColumnId))
+                                    return "relationshipColumnId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookupDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.LookupDetails} LookupDetails
+                         */
+                        LookupDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.LookupDetails)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.LookupDetails();
+                            if (object.relationshipColumn != null)
+                                message.relationshipColumn = String(object.relationshipColumn);
+                            if (object.relationshipColumnId != null)
+                                message.relationshipColumnId = String(object.relationshipColumnId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookupDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.LookupDetails} message LookupDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookupDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.relationshipColumn = "";
+                                object.relationshipColumnId = "";
+                            }
+                            if (message.relationshipColumn != null && message.hasOwnProperty("relationshipColumn"))
+                                object.relationshipColumn = message.relationshipColumn;
+                            if (message.relationshipColumnId != null && message.hasOwnProperty("relationshipColumnId"))
+                                object.relationshipColumnId = message.relationshipColumnId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookupDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.LookupDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookupDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LookupDetails;
                     })();
     
                     v1alpha1.Row = (function() {
@@ -4053,6 +5733,260 @@
                         };
     
                         return Row;
+                    })();
+    
+                    v1alpha1.Workspace = (function() {
+    
+                        /**
+                         * Properties of a Workspace.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @interface IWorkspace
+                         * @property {string|null} [name] Workspace name
+                         * @property {string|null} [displayName] Workspace displayName
+                         * @property {Array.<google.area120.tables.v1alpha1.ITable>|null} [tables] Workspace tables
+                         */
+    
+                        /**
+                         * Constructs a new Workspace.
+                         * @memberof google.area120.tables.v1alpha1
+                         * @classdesc Represents a Workspace.
+                         * @implements IWorkspace
+                         * @constructor
+                         * @param {google.area120.tables.v1alpha1.IWorkspace=} [properties] Properties to set
+                         */
+                        function Workspace(properties) {
+                            this.tables = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Workspace name.
+                         * @member {string} name
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @instance
+                         */
+                        Workspace.prototype.name = "";
+    
+                        /**
+                         * Workspace displayName.
+                         * @member {string} displayName
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @instance
+                         */
+                        Workspace.prototype.displayName = "";
+    
+                        /**
+                         * Workspace tables.
+                         * @member {Array.<google.area120.tables.v1alpha1.ITable>} tables
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @instance
+                         */
+                        Workspace.prototype.tables = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Workspace instance using the specified properties.
+                         * @function create
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IWorkspace=} [properties] Properties to set
+                         * @returns {google.area120.tables.v1alpha1.Workspace} Workspace instance
+                         */
+                        Workspace.create = function create(properties) {
+                            return new Workspace(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Workspace message. Does not implicitly {@link google.area120.tables.v1alpha1.Workspace.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IWorkspace} message Workspace message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Workspace.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.tables != null && message.tables.length)
+                                for (var i = 0; i < message.tables.length; ++i)
+                                    $root.google.area120.tables.v1alpha1.Table.encode(message.tables[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Workspace message, length delimited. Does not implicitly {@link google.area120.tables.v1alpha1.Workspace.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.IWorkspace} message Workspace message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Workspace.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Workspace message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.area120.tables.v1alpha1.Workspace} Workspace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Workspace.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.area120.tables.v1alpha1.Workspace();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.tables && message.tables.length))
+                                        message.tables = [];
+                                    message.tables.push($root.google.area120.tables.v1alpha1.Table.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Workspace message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.area120.tables.v1alpha1.Workspace} Workspace
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Workspace.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Workspace message.
+                         * @function verify
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Workspace.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.tables != null && message.hasOwnProperty("tables")) {
+                                if (!Array.isArray(message.tables))
+                                    return "tables: array expected";
+                                for (var i = 0; i < message.tables.length; ++i) {
+                                    var error = $root.google.area120.tables.v1alpha1.Table.verify(message.tables[i]);
+                                    if (error)
+                                        return "tables." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Workspace message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.area120.tables.v1alpha1.Workspace} Workspace
+                         */
+                        Workspace.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.area120.tables.v1alpha1.Workspace)
+                                return object;
+                            var message = new $root.google.area120.tables.v1alpha1.Workspace();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.tables) {
+                                if (!Array.isArray(object.tables))
+                                    throw TypeError(".google.area120.tables.v1alpha1.Workspace.tables: array expected");
+                                message.tables = [];
+                                for (var i = 0; i < object.tables.length; ++i) {
+                                    if (typeof object.tables[i] !== "object")
+                                        throw TypeError(".google.area120.tables.v1alpha1.Workspace.tables: object expected");
+                                    message.tables[i] = $root.google.area120.tables.v1alpha1.Table.fromObject(object.tables[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Workspace message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @static
+                         * @param {google.area120.tables.v1alpha1.Workspace} message Workspace
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Workspace.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tables = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.tables && message.tables.length) {
+                                object.tables = [];
+                                for (var j = 0; j < message.tables.length; ++j)
+                                    object.tables[j] = $root.google.area120.tables.v1alpha1.Table.toObject(message.tables[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Workspace to JSON.
+                         * @function toJSON
+                         * @memberof google.area120.tables.v1alpha1.Workspace
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Workspace.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Workspace;
                     })();
     
                     /**
