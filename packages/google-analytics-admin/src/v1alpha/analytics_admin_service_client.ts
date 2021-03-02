@@ -683,9 +683,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The account to update.
    *   The account's `name` field is used to identify the account.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1163,9 +1163,9 @@ export class AnalyticsAdminServiceClient {
    *   The property's `name` field is used to identify the property to be
    *   updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2264,9 +2264,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The web stream to update.
    *   The `name` field is used to identify the web stream to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2672,9 +2672,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The iOS app stream to update.
    *   The `name` field is used to identify the iOS app stream to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2771,7 +2771,15 @@ export class AnalyticsAdminServiceClient {
     >
   ): void;
   /**
-   * Creates an iOS app data stream with the specified location and attributes.
+   * Creates an iOS app stream with the specified location and attributes.
+   *
+   * Note that an iOS app stream must be linked to a Firebase app to receive
+   * traffic.
+   *
+   * To create a working app stream, make sure your property is linked to a
+   * Firebase project. Then, use the Firebase API to create a Firebase app,
+   * which will also create an appropriate data stream in Analytics (may take up
+   * to 24 hours).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3092,9 +3100,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The android app stream to update.
    *   The `name` field is used to identify the android app stream to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3191,7 +3199,15 @@ export class AnalyticsAdminServiceClient {
     >
   ): void;
   /**
-   * Creates an android app stream with the specified location and attributes.
+   * Creates an Android app stream with the specified location and attributes.
+   *
+   * Note that an Android app stream must be linked to a Firebase app to receive
+   * traffic.
+   *
+   * To create a working app stream, make sure your property is linked to a
+   * Firebase project. Then, use the Firebase API to create a Firebase app,
+   * which will also create an appropriate data stream in Analytics (may take up
+   * to 24 hours).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3413,9 +3429,9 @@ export class AnalyticsAdminServiceClient {
    *   Required. The settings to update.
    *   The `name` field is used to identify the settings to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3623,9 +3639,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.FirebaseLink} request.firebaseLink
    *   Required. The Firebase link to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4026,9 +4042,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.GoogleAdsLink} request.googleAdsLink
    *   The GoogleAdsLink to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
