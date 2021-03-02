@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.1.0...v1.2.0) (2021-03-02)
+
+
+### Features
+
+* Added ListWorkspaces, GetWorkspace, BatchDeleteRows APIs. ([#34](https://www.github.com/googleapis/nodejs-area120-tables/issues/34)) ([e9094fd](https://www.github.com/googleapis/nodejs-area120-tables/commit/e9094fda635c2ade5e72212bd7f10698eaf9a939))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.0.2...v1.1.0) (2021-01-09)
 
 
