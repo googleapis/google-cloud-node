@@ -25,6 +25,7 @@ function main(
   const storage = new Storage();
   // Creates a client from a Google service account key.
   // const storage = new Storage({keyFilename: "key.json"});
+  // For more information on ways to initialize Storage, please see https://googleapis.dev/nodejs/storage/latest/Storage.html
 
   /**
    * TODO(developer): Uncomment these variables before running the sample.
