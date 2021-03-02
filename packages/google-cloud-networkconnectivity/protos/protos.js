@@ -774,6 +774,7 @@
                          * @property {string|null} [description] Hub description
                          * @property {Array.<string>|null} [spokes] Hub spokes
                          * @property {string|null} [uniqueId] Hub uniqueId
+                         * @property {google.cloud.networkconnectivity.v1alpha1.State|null} [state] Hub state
                          */
     
                         /**
@@ -850,6 +851,14 @@
                         Hub.prototype.uniqueId = "";
     
                         /**
+                         * Hub state.
+                         * @member {google.cloud.networkconnectivity.v1alpha1.State} state
+                         * @memberof google.cloud.networkconnectivity.v1alpha1.Hub
+                         * @instance
+                         */
+                        Hub.prototype.state = 0;
+    
+                        /**
                          * Creates a new Hub instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkconnectivity.v1alpha1.Hub
@@ -889,6 +898,8 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.spokes[i]);
                             if (message.uniqueId != null && Object.hasOwnProperty.call(message, "uniqueId"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.uniqueId);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
                             return writer;
                         };
     
@@ -965,6 +976,9 @@
                                 case 8:
                                     message.uniqueId = reader.string();
                                     break;
+                                case 9:
+                                    message.state = reader.int32();
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1034,6 +1048,16 @@
                             if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
                                 if (!$util.isString(message.uniqueId))
                                     return "uniqueId: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1079,6 +1103,24 @@
                             }
                             if (object.uniqueId != null)
                                 message.uniqueId = String(object.uniqueId);
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1105,6 +1147,7 @@
                                 object.updateTime = null;
                                 object.description = "";
                                 object.uniqueId = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1127,6 +1170,8 @@
                             }
                             if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
                                 object.uniqueId = message.uniqueId;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1alpha1.State[message.state] : message.state;
                             return object;
                         };
     
@@ -1160,6 +1205,7 @@
                          * @property {Array.<string>|null} [linkedInterconnectAttachments] Spoke linkedInterconnectAttachments
                          * @property {Array.<google.cloud.networkconnectivity.v1alpha1.IRouterApplianceInstance>|null} [linkedRouterApplianceInstances] Spoke linkedRouterApplianceInstances
                          * @property {string|null} [uniqueId] Spoke uniqueId
+                         * @property {google.cloud.networkconnectivity.v1alpha1.State|null} [state] Spoke state
                          */
     
                         /**
@@ -1262,6 +1308,14 @@
                         Spoke.prototype.uniqueId = "";
     
                         /**
+                         * Spoke state.
+                         * @member {google.cloud.networkconnectivity.v1alpha1.State} state
+                         * @memberof google.cloud.networkconnectivity.v1alpha1.Spoke
+                         * @instance
+                         */
+                        Spoke.prototype.state = 0;
+    
+                        /**
                          * Creates a new Spoke instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkconnectivity.v1alpha1.Spoke
@@ -1309,6 +1363,8 @@
                             if (message.linkedRouterApplianceInstances != null && message.linkedRouterApplianceInstances.length)
                                 for (var i = 0; i < message.linkedRouterApplianceInstances.length; ++i)
                                     $root.google.cloud.networkconnectivity.v1alpha1.RouterApplianceInstance.encode(message.linkedRouterApplianceInstances[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.state);
                             return writer;
                         };
     
@@ -1398,6 +1454,9 @@
                                 case 11:
                                     message.uniqueId = reader.string();
                                     break;
+                                case 15:
+                                    message.state = reader.int32();
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1486,6 +1545,16 @@
                             if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
                                 if (!$util.isString(message.uniqueId))
                                     return "uniqueId: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1550,6 +1619,24 @@
                             }
                             if (object.uniqueId != null)
                                 message.uniqueId = String(object.uniqueId);
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1580,6 +1667,7 @@
                                 object.description = "";
                                 object.hub = "";
                                 object.uniqueId = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1614,6 +1702,8 @@
                                 for (var j = 0; j < message.linkedRouterApplianceInstances.length; ++j)
                                     object.linkedRouterApplianceInstances[j] = $root.google.cloud.networkconnectivity.v1alpha1.RouterApplianceInstance.toObject(message.linkedRouterApplianceInstances[j], options);
                             }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1alpha1.State[message.state] : message.state;
                             return object;
                         };
     
@@ -4749,6 +4839,24 @@
                         };
     
                         return RouterApplianceInstance;
+                    })();
+    
+                    /**
+                     * State enum.
+                     * @name google.cloud.networkconnectivity.v1alpha1.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} CREATING=1 CREATING value
+                     * @property {number} ACTIVE=2 ACTIVE value
+                     * @property {number} DELETING=3 DELETING value
+                     */
+                    v1alpha1.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATING"] = 1;
+                        values[valuesById[2] = "ACTIVE"] = 2;
+                        values[valuesById[3] = "DELETING"] = 3;
+                        return values;
                     })();
     
                     return v1alpha1;

@@ -409,6 +409,9 @@ export namespace google {
 
                     /** Hub uniqueId */
                     uniqueId?: (string|null);
+
+                    /** Hub state */
+                    state?: (google.cloud.networkconnectivity.v1alpha1.State|keyof typeof google.cloud.networkconnectivity.v1alpha1.State|null);
                 }
 
                 /** Represents a Hub. */
@@ -440,6 +443,9 @@ export namespace google {
 
                     /** Hub uniqueId. */
                     public uniqueId: string;
+
+                    /** Hub state. */
+                    public state: (google.cloud.networkconnectivity.v1alpha1.State|keyof typeof google.cloud.networkconnectivity.v1alpha1.State);
 
                     /**
                      * Creates a new Hub instance using the specified properties.
@@ -544,6 +550,9 @@ export namespace google {
 
                     /** Spoke uniqueId */
                     uniqueId?: (string|null);
+
+                    /** Spoke state */
+                    state?: (google.cloud.networkconnectivity.v1alpha1.State|keyof typeof google.cloud.networkconnectivity.v1alpha1.State|null);
                 }
 
                 /** Represents a Spoke. */
@@ -584,6 +593,9 @@ export namespace google {
 
                     /** Spoke uniqueId. */
                     public uniqueId: string;
+
+                    /** Spoke state. */
+                    public state: (google.cloud.networkconnectivity.v1alpha1.State|keyof typeof google.cloud.networkconnectivity.v1alpha1.State);
 
                     /**
                      * Creates a new Spoke instance using the specified properties.
@@ -1980,6 +1992,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    CREATING = 1,
+                    ACTIVE = 2,
+                    DELETING = 3
                 }
             }
         }

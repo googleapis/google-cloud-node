@@ -42,9 +42,10 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  Connectivity Hub is a hub-and-spoke abstraction for network connectivity
- *  management in Google Cloud. The Hub aims to reduce operational complexity
- *  through a simple, centralized connectivity management model.
+ *  Network Connectivity Center is a hub-and-spoke abstraction for
+ *  network connectivity management in Google Cloud. It reduces
+ *  operational complexity through a simple, centralized connectivity management
+ *  model.
  * @class
  * @memberof v1alpha1
  */

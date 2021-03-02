@@ -72,7 +72,8 @@ const {HubServiceClient} = require('@google-cloud/network-connectivity');
 const client = new HubServiceClient();
 
 async function listNetworkHubs() {
-  const [hubs] = await client.listHubs({parent: `projects/${projectId}/locations/${location}`
+  const [hubs] = await client.listHubs({
+    parent: `projects/${projectId}/locations/${location}`,
   });
   console.info(hubs);
 }

@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-network-connectivity.git",
-        "sha": "c1d7ea0d5ae0b2f816c340d46b508a6eb33e7d83"
+        "remote": "https://github.com/googleapis/nodejs-network-connectivity.git",
+        "sha": "08e8e848e2d8749a66c12efd85d5cf4054bba16a"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "13b6ba5e35620d15a97ae0f8c38be0c0ff1c2d42",
-        "internalRef": "355397730"
+        "sha": "bb17e41ec1e9f1197520560bc13cc5da24e04e6f",
+        "internalRef": "355768365"
       }
     },
     {
@@ -27,7 +27,7 @@
     {
       "client": {
         "source": "googleapis",
-        "apiName": "network-connectivity",
+        "apiName": "networkconnectivity",
         "apiVersion": "v1alpha1",
         "language": "nodejs",
         "generator": "bazel"
