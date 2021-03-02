@@ -1,5 +1,5 @@
 {
-  "name": "orgpolicy",
+  "name": "org-policy",
   "name_pretty": "Organization Policy",
   "product_documentation": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
   "client_documentation": "https://googleapis.dev/nodejs/org-policy/latest/index.html",
