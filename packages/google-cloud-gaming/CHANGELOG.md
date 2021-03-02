@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.2.0...v2.3.0) (2021-03-01)
+
+
+### Features
+
+* **docs:** update release level to ga ([#147](https://www.github.com/googleapis/nodejs-game-servers/issues/147)) ([0449362](https://www.github.com/googleapis/nodejs-game-servers/commit/0449362aeeead608517e76390813ed7a9c1962c5))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.1.2...v2.2.0) (2021-01-09)
 
 
