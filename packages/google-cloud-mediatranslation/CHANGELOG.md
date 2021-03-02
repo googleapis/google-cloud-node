@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.2.2...v2.2.3) (2021-02-04)
+
+
+### Bug Fixes
+
+* Added check to see if stream has been destroyed before writing result… ([#107](https://www.github.com/googleapis/nodejs-media-translation/issues/107)) ([5922538](https://www.github.com/googleapis/nodejs-media-translation/commit/592253836803d0ee6002a6e4c4d8a48d219f5d92))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.2.1...v2.2.2) (2020-11-25)
 
 
