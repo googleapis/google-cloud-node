@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.0.2...v1.1.0) (2021-02-14)
+
+
+### Features
+
+* Update Membership API v1beta1 proto ([#15](https://www.github.com/googleapis/nodejs-gke-hub/issues/15)) ([878ce5a](https://www.github.com/googleapis/nodejs-gke-hub/commit/878ce5a99d85b1a9fab55f8b935ad310bc451513))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.0.1...v1.0.2) (2021-02-09)
 
 
