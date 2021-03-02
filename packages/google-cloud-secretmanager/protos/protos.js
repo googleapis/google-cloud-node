@@ -76,6 +76,7 @@
                          * @property {google.cloud.secretmanager.v1.IReplication|null} [replication] Secret replication
                          * @property {google.protobuf.ITimestamp|null} [createTime] Secret createTime
                          * @property {Object.<string,string>|null} [labels] Secret labels
+                         * @property {Array.<google.cloud.secretmanager.v1.ITopic>|null} [topics] Secret topics
                          * @property {google.protobuf.ITimestamp|null} [expireTime] Secret expireTime
                          * @property {google.protobuf.IDuration|null} [ttl] Secret ttl
                          */
@@ -90,6 +91,7 @@
                          */
                         function Secret(properties) {
                             this.labels = {};
+                            this.topics = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -127,6 +129,14 @@
                          * @instance
                          */
                         Secret.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Secret topics.
+                         * @member {Array.<google.cloud.secretmanager.v1.ITopic>} topics
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.topics = $util.emptyArray;
     
                         /**
                          * Secret expireTime.
@@ -191,6 +201,9 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.topics != null && message.topics.length)
+                                for (var i = 0; i < message.topics.length; ++i)
+                                    $root.google.cloud.secretmanager.v1.Topic.encode(message.topics[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
                                 $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
@@ -260,6 +273,11 @@
                                     }
                                     message.labels[key] = value;
                                     break;
+                                case 5:
+                                    if (!(message.topics && message.topics.length))
+                                        message.topics = [];
+                                    message.topics.push($root.google.cloud.secretmanager.v1.Topic.decode(reader, reader.uint32()));
+                                    break;
                                 case 6:
                                     message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
@@ -323,6 +341,15 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.topics != null && message.hasOwnProperty("topics")) {
+                                if (!Array.isArray(message.topics))
+                                    return "topics: array expected";
+                                for (var i = 0; i < message.topics.length; ++i) {
+                                    var error = $root.google.cloud.secretmanager.v1.Topic.verify(message.topics[i]);
+                                    if (error)
+                                        return "topics." + error;
+                                }
+                            }
                             if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
                                 properties.expiration = 1;
                                 {
@@ -375,6 +402,16 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.topics) {
+                                if (!Array.isArray(object.topics))
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.topics: array expected");
+                                message.topics = [];
+                                for (var i = 0; i < object.topics.length; ++i) {
+                                    if (typeof object.topics[i] !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1.Secret.topics: object expected");
+                                    message.topics[i] = $root.google.cloud.secretmanager.v1.Topic.fromObject(object.topics[i]);
+                                }
+                            }
                             if (object.expireTime != null) {
                                 if (typeof object.expireTime !== "object")
                                     throw TypeError(".google.cloud.secretmanager.v1.Secret.expireTime: object expected");
@@ -401,6 +438,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.topics = [];
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -419,6 +458,11 @@
                                 object.labels = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.topics && message.topics.length) {
+                                object.topics = [];
+                                for (var j = 0; j < message.topics.length; ++j)
+                                    object.topics[j] = $root.google.cloud.secretmanager.v1.Topic.toObject(message.topics[j], options);
                             }
                             if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
                                 object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
@@ -2871,6 +2915,193 @@
                         };
     
                         return CustomerManagedEncryptionStatus;
+                    })();
+    
+                    v1.Topic = (function() {
+    
+                        /**
+                         * Properties of a Topic.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @interface ITopic
+                         * @property {string|null} [name] Topic name
+                         */
+    
+                        /**
+                         * Constructs a new Topic.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @classdesc Represents a Topic.
+                         * @implements ITopic
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1.ITopic=} [properties] Properties to set
+                         */
+                        function Topic(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Topic name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @instance
+                         */
+                        Topic.prototype.name = "";
+    
+                        /**
+                         * Creates a new Topic instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ITopic=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1.Topic} Topic instance
+                         */
+                        Topic.create = function create(properties) {
+                            return new Topic(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Topic message. Does not implicitly {@link google.cloud.secretmanager.v1.Topic.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ITopic} message Topic message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Topic.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Topic message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.Topic.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.ITopic} message Topic message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Topic.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Topic message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1.Topic} Topic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Topic.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.Topic();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Topic message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1.Topic} Topic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Topic.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Topic message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Topic.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Topic message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1.Topic} Topic
+                         */
+                        Topic.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1.Topic)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1.Topic();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Topic message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.Topic} message Topic
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Topic.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Topic to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1.Topic
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Topic.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Topic;
                     })();
     
                     v1.SecretPayload = (function() {

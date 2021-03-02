@@ -59,6 +59,14 @@
                           "type": "string",
                           "id": 4
                         },
+                        "topics": {
+                          "rule": "repeated",
+                          "type": "Topic",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "expireTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 6,
@@ -266,6 +274,21 @@
                     "CustomerManagedEncryptionStatus": {
                       "fields": {
                         "kmsKeyVersionName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Topic": {
+                      "options": {
+                        "(google.api.resource).type": "pubsub.googleapis.com/Topic",
+                        "(google.api.resource).pattern": "projects/{project}/topics/{topic}"
+                      },
+                      "fields": {
+                        "name": {
                           "type": "string",
                           "id": 1,
                           "options": {

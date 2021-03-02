@@ -181,6 +181,9 @@ export class SecretManagerServiceClient {
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
       ),
+      topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -2128,6 +2131,42 @@ export class SecretManagerServiceClient {
   matchSecretVersionFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret_version;
+  }
+
+  /**
+   * Return a fully-qualified topic resource name string.
+   *
+   * @param {string} project
+   * @param {string} topic
+   * @returns {string} Resource name string.
+   */
+  topicPath(project: string, topic: string) {
+    return this.pathTemplates.topicPathTemplate.render({
+      project: project,
+      topic: topic,
+    });
+  }
+
+  /**
+   * Parse the project from Topic resource.
+   *
+   * @param {string} topicName
+   *   A fully-qualified path representing Topic resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTopicName(topicName: string) {
+    return this.pathTemplates.topicPathTemplate.match(topicName).project;
+  }
+
+  /**
+   * Parse the topic from Topic resource.
+   *
+   * @param {string} topicName
+   *   A fully-qualified path representing Topic resource.
+   * @returns {string} A string representing the topic.
+   */
+  matchTopicFromTopicName(topicName: string) {
+    return this.pathTemplates.topicPathTemplate.match(topicName).topic;
   }
 
   /**

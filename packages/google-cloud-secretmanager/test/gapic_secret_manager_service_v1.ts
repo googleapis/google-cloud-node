@@ -2565,5 +2565,56 @@ describe('v1.SecretManagerServiceClient', () => {
         );
       });
     });
+
+    describe('topic', () => {
+      const fakePath = '/rendered/path/topic';
+      const expectedParameters = {
+        project: 'projectValue',
+        topic: 'topicValue',
+      };
+      const client = new secretmanagerserviceModule.v1.SecretManagerServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.topicPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.topicPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('topicPath', () => {
+        const result = client.topicPath('projectValue', 'topicValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.topicPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTopicName', () => {
+        const result = client.matchProjectFromTopicName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.topicPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTopicFromTopicName', () => {
+        const result = client.matchTopicFromTopicName(fakePath);
+        assert.strictEqual(result, 'topicValue');
+        assert(
+          (client.pathTemplates.topicPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });
