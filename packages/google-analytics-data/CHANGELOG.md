@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.1.0...v2.2.0) (2021-03-02)
+
+
+### Features
+
+* add v1beta1 to nodejs-analytics-data ([#60](https://www.github.com/googleapis/nodejs-analytics-data/issues/60)) ([ffe0395](https://www.github.com/googleapis/nodejs-analytics-data/commit/ffe0395c4b1a648e38dbeaa2b47e4588c34eda82))
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-auth-library to v7 ([#58](https://www.github.com/googleapis/nodejs-analytics-data/issues/58)) ([77002d8](https://www.github.com/googleapis/nodejs-analytics-data/commit/77002d877d4c353864d0a55f1247855e80e42fab))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.0.0...v2.1.0) (2021-01-09)
 
 
