@@ -2434,6 +2434,9 @@ export namespace google {
 
                     /** Plan trialPeriod */
                     trialPeriod?: (google.cloud.channel.v1.IPeriod|null);
+
+                    /** Plan billingAccount */
+                    billingAccount?: (string|null);
                 }
 
                 /** Represents a Plan. */
@@ -2456,6 +2459,9 @@ export namespace google {
 
                     /** Plan trialPeriod. */
                     public trialPeriod?: (google.cloud.channel.v1.IPeriod|null);
+
+                    /** Plan billingAccount. */
+                    public billingAccount: string;
 
                     /**
                      * Creates a new Plan instance using the specified properties.

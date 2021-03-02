@@ -726,8 +726,9 @@ export class CloudChannelServiceClient {
    * Return Value:
    * List of {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources for the domain.
    * List may be empty.
+   *
    * Note: in the v1alpha1 version of the API, a NOT_FOUND error is returned if
-   * no {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resource match the domain.
+   * no {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources match the domain.
    *
    * @param {Object} request
    *   The request object that will be sent.

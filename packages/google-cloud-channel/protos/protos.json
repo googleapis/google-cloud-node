@@ -773,6 +773,10 @@
                         "trialPeriod": {
                           "type": "Period",
                           "id": 4
+                        },
+                        "billingAccount": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },

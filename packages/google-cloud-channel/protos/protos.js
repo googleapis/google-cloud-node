@@ -6446,6 +6446,7 @@
                          * @property {google.cloud.channel.v1.PaymentType|null} [paymentType] Plan paymentType
                          * @property {google.cloud.channel.v1.IPeriod|null} [paymentCycle] Plan paymentCycle
                          * @property {google.cloud.channel.v1.IPeriod|null} [trialPeriod] Plan trialPeriod
+                         * @property {string|null} [billingAccount] Plan billingAccount
                          */
     
                         /**
@@ -6496,6 +6497,14 @@
                         Plan.prototype.trialPeriod = null;
     
                         /**
+                         * Plan billingAccount.
+                         * @member {string} billingAccount
+                         * @memberof google.cloud.channel.v1.Plan
+                         * @instance
+                         */
+                        Plan.prototype.billingAccount = "";
+    
+                        /**
                          * Creates a new Plan instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.Plan
@@ -6527,6 +6536,8 @@
                                 $root.google.cloud.channel.v1.Period.encode(message.paymentCycle, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.trialPeriod != null && Object.hasOwnProperty.call(message, "trialPeriod"))
                                 $root.google.cloud.channel.v1.Period.encode(message.trialPeriod, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.billingAccount);
                             return writer;
                         };
     
@@ -6572,6 +6583,9 @@
                                     break;
                                 case 4:
                                     message.trialPeriod = $root.google.cloud.channel.v1.Period.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.billingAccount = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6639,6 +6653,9 @@
                                 if (error)
                                     return "trialPeriod." + error;
                             }
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                if (!$util.isString(message.billingAccount))
+                                    return "billingAccount: string expected";
                             return null;
                         };
     
@@ -6704,6 +6721,8 @@
                                     throw TypeError(".google.cloud.channel.v1.Plan.trialPeriod: object expected");
                                 message.trialPeriod = $root.google.cloud.channel.v1.Period.fromObject(object.trialPeriod);
                             }
+                            if (object.billingAccount != null)
+                                message.billingAccount = String(object.billingAccount);
                             return message;
                         };
     
@@ -6725,6 +6744,7 @@
                                 object.paymentType = options.enums === String ? "PAYMENT_TYPE_UNSPECIFIED" : 0;
                                 object.paymentCycle = null;
                                 object.trialPeriod = null;
+                                object.billingAccount = "";
                             }
                             if (message.paymentPlan != null && message.hasOwnProperty("paymentPlan"))
                                 object.paymentPlan = options.enums === String ? $root.google.cloud.channel.v1.PaymentPlan[message.paymentPlan] : message.paymentPlan;
@@ -6734,6 +6754,8 @@
                                 object.paymentCycle = $root.google.cloud.channel.v1.Period.toObject(message.paymentCycle, options);
                             if (message.trialPeriod != null && message.hasOwnProperty("trialPeriod"))
                                 object.trialPeriod = $root.google.cloud.channel.v1.Period.toObject(message.trialPeriod, options);
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                object.billingAccount = message.billingAccount;
                             return object;
                         };
     
