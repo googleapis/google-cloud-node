@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.1.0...v3.2.0) (2021-03-02)
+
+
+### Features
+
+* **docs:** indicate library is ga ([#287](https://www.github.com/googleapis/nodejs-talent/issues/287)) ([5051732](https://www.github.com/googleapis/nodejs-talent/commit/5051732b4467ba33ecd44de1ef79cc5b655c7f36))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.0.2...v3.1.0) (2021-01-09)
 
 
