@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.8.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.0...v5.8.1) (2021-03-02)
+
+
+### Bug Fixes
+
+* deprecate `options.promise` and sync options with Service ([#1391](https://www.github.com/googleapis/nodejs-storage/issues/1391)) ([59cfe27](https://www.github.com/googleapis/nodejs-storage/commit/59cfe272de16c41e9c768953a25677294f520cc7))
+* **types:** support metadata override in file.copy() ([#1406](https://www.github.com/googleapis/nodejs-storage/issues/1406)) ([dda6d30](https://www.github.com/googleapis/nodejs-storage/commit/dda6d305638a07cbca188e459544393d8624f4f0))
+
 ## [5.8.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.7.4...v5.8.0) (2021-02-18)
 
 
