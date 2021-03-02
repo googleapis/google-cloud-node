@@ -13975,6 +13975,13669 @@
                     return v1alpha;
                 })();
     
+                data.v1beta = (function() {
+    
+                    /**
+                     * Namespace v1beta.
+                     * @memberof google.analytics.data
+                     * @namespace
+                     */
+                    var v1beta = {};
+    
+                    v1beta.BetaAnalyticsData = (function() {
+    
+                        /**
+                         * Constructs a new BetaAnalyticsData service.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a BetaAnalyticsData
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function BetaAnalyticsData(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (BetaAnalyticsData.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = BetaAnalyticsData;
+    
+                        /**
+                         * Creates new BetaAnalyticsData service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {BetaAnalyticsData} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        BetaAnalyticsData.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runReport}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef RunReportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.RunReportResponse} [response] RunReportResponse
+                         */
+    
+                        /**
+                         * Calls RunReport.
+                         * @function runReport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IRunReportRequest} request RunReportRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.RunReportCallback} callback Node-style callback called with the error, if any, and RunReportResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.runReport = function runReport(request, callback) {
+                            return this.rpcCall(runReport, $root.google.analytics.data.v1beta.RunReportRequest, $root.google.analytics.data.v1beta.RunReportResponse, request, callback);
+                        }, "name", { value: "RunReport" });
+    
+                        /**
+                         * Calls RunReport.
+                         * @function runReport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IRunReportRequest} request RunReportRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.RunReportResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runPivotReport}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef RunPivotReportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.RunPivotReportResponse} [response] RunPivotReportResponse
+                         */
+    
+                        /**
+                         * Calls RunPivotReport.
+                         * @function runPivotReport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IRunPivotReportRequest} request RunPivotReportRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.RunPivotReportCallback} callback Node-style callback called with the error, if any, and RunPivotReportResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.runPivotReport = function runPivotReport(request, callback) {
+                            return this.rpcCall(runPivotReport, $root.google.analytics.data.v1beta.RunPivotReportRequest, $root.google.analytics.data.v1beta.RunPivotReportResponse, request, callback);
+                        }, "name", { value: "RunPivotReport" });
+    
+                        /**
+                         * Calls RunPivotReport.
+                         * @function runPivotReport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IRunPivotReportRequest} request RunPivotReportRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.RunPivotReportResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#batchRunReports}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef BatchRunReportsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.BatchRunReportsResponse} [response] BatchRunReportsResponse
+                         */
+    
+                        /**
+                         * Calls BatchRunReports.
+                         * @function batchRunReports
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsRequest} request BatchRunReportsRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.BatchRunReportsCallback} callback Node-style callback called with the error, if any, and BatchRunReportsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.batchRunReports = function batchRunReports(request, callback) {
+                            return this.rpcCall(batchRunReports, $root.google.analytics.data.v1beta.BatchRunReportsRequest, $root.google.analytics.data.v1beta.BatchRunReportsResponse, request, callback);
+                        }, "name", { value: "BatchRunReports" });
+    
+                        /**
+                         * Calls BatchRunReports.
+                         * @function batchRunReports
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsRequest} request BatchRunReportsRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.BatchRunReportsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#batchRunPivotReports}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef BatchRunPivotReportsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.BatchRunPivotReportsResponse} [response] BatchRunPivotReportsResponse
+                         */
+    
+                        /**
+                         * Calls BatchRunPivotReports.
+                         * @function batchRunPivotReports
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsRequest} request BatchRunPivotReportsRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.BatchRunPivotReportsCallback} callback Node-style callback called with the error, if any, and BatchRunPivotReportsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.batchRunPivotReports = function batchRunPivotReports(request, callback) {
+                            return this.rpcCall(batchRunPivotReports, $root.google.analytics.data.v1beta.BatchRunPivotReportsRequest, $root.google.analytics.data.v1beta.BatchRunPivotReportsResponse, request, callback);
+                        }, "name", { value: "BatchRunPivotReports" });
+    
+                        /**
+                         * Calls BatchRunPivotReports.
+                         * @function batchRunPivotReports
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsRequest} request BatchRunPivotReportsRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.BatchRunPivotReportsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#getMetadata}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef GetMetadataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.Metadata} [response] Metadata
+                         */
+    
+                        /**
+                         * Calls GetMetadata.
+                         * @function getMetadata
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IGetMetadataRequest} request GetMetadataRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.GetMetadataCallback} callback Node-style callback called with the error, if any, and Metadata
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.getMetadata = function getMetadata(request, callback) {
+                            return this.rpcCall(getMetadata, $root.google.analytics.data.v1beta.GetMetadataRequest, $root.google.analytics.data.v1beta.Metadata, request, callback);
+                        }, "name", { value: "GetMetadata" });
+    
+                        /**
+                         * Calls GetMetadata.
+                         * @function getMetadata
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IGetMetadataRequest} request GetMetadataRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.Metadata>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runRealtimeReport}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef RunRealtimeReportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.RunRealtimeReportResponse} [response] RunRealtimeReportResponse
+                         */
+    
+                        /**
+                         * Calls RunRealtimeReport.
+                         * @function runRealtimeReport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportRequest} request RunRealtimeReportRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.RunRealtimeReportCallback} callback Node-style callback called with the error, if any, and RunRealtimeReportResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.runRealtimeReport = function runRealtimeReport(request, callback) {
+                            return this.rpcCall(runRealtimeReport, $root.google.analytics.data.v1beta.RunRealtimeReportRequest, $root.google.analytics.data.v1beta.RunRealtimeReportResponse, request, callback);
+                        }, "name", { value: "RunRealtimeReport" });
+    
+                        /**
+                         * Calls RunRealtimeReport.
+                         * @function runRealtimeReport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportRequest} request RunRealtimeReportRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.RunRealtimeReportResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return BetaAnalyticsData;
+                    })();
+    
+                    v1beta.Metadata = (function() {
+    
+                        /**
+                         * Properties of a Metadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IMetadata
+                         * @property {string|null} [name] Metadata name
+                         * @property {Array.<google.analytics.data.v1beta.IDimensionMetadata>|null} [dimensions] Metadata dimensions
+                         * @property {Array.<google.analytics.data.v1beta.IMetricMetadata>|null} [metrics] Metadata metrics
+                         */
+    
+                        /**
+                         * Constructs a new Metadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a Metadata.
+                         * @implements IMetadata
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IMetadata=} [properties] Properties to set
+                         */
+                        function Metadata(properties) {
+                            this.dimensions = [];
+                            this.metrics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Metadata name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @instance
+                         */
+                        Metadata.prototype.name = "";
+    
+                        /**
+                         * Metadata dimensions.
+                         * @member {Array.<google.analytics.data.v1beta.IDimensionMetadata>} dimensions
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @instance
+                         */
+                        Metadata.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * Metadata metrics.
+                         * @member {Array.<google.analytics.data.v1beta.IMetricMetadata>} metrics
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @instance
+                         */
+                        Metadata.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Metadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetadata=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.Metadata} Metadata instance
+                         */
+                        Metadata.create = function create(properties) {
+                            return new Metadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Metadata message. Does not implicitly {@link google.analytics.data.v1beta.Metadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetadata} message Metadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1beta.DimensionMetadata.encode(message.dimensions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.analytics.data.v1beta.MetricMetadata.encode(message.metrics[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Metadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetadata} message Metadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Metadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.Metadata} Metadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Metadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    message.name = reader.string();
+                                    break;
+                                case 1:
+                                    if (!(message.dimensions && message.dimensions.length))
+                                        message.dimensions = [];
+                                    message.dimensions.push($root.google.analytics.data.v1beta.DimensionMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.analytics.data.v1beta.MetricMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.Metadata} Metadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Metadata message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Metadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DimensionMetadata.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.MetricMetadata.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.Metadata} Metadata
+                         */
+                        Metadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.Metadata)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.Metadata();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1beta.Metadata.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Metadata.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1beta.DimensionMetadata.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.analytics.data.v1beta.Metadata.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Metadata.metrics: object expected");
+                                    message.metrics[i] = $root.google.analytics.data.v1beta.MetricMetadata.fromObject(object.metrics[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.Metadata} message Metadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Metadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.metrics = [];
+                            }
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1beta.DimensionMetadata.toObject(message.dimensions[j], options);
+                            }
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.analytics.data.v1beta.MetricMetadata.toObject(message.metrics[j], options);
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Metadata to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.Metadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Metadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Metadata;
+                    })();
+    
+                    v1beta.RunReportRequest = (function() {
+    
+                        /**
+                         * Properties of a RunReportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IRunReportRequest
+                         * @property {string|null} [property] RunReportRequest property
+                         * @property {Array.<google.analytics.data.v1beta.IDimension>|null} [dimensions] RunReportRequest dimensions
+                         * @property {Array.<google.analytics.data.v1beta.IMetric>|null} [metrics] RunReportRequest metrics
+                         * @property {Array.<google.analytics.data.v1beta.IDateRange>|null} [dateRanges] RunReportRequest dateRanges
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [dimensionFilter] RunReportRequest dimensionFilter
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [metricFilter] RunReportRequest metricFilter
+                         * @property {number|null} [pageSize] RunReportRequest pageSize
+                         * @property {string|null} [pageToken] RunReportRequest pageToken
+                         * @property {Array.<google.analytics.data.v1beta.MetricAggregation>|null} [metricAggregations] RunReportRequest metricAggregations
+                         * @property {Array.<google.analytics.data.v1beta.IOrderBy>|null} [orderBys] RunReportRequest orderBys
+                         * @property {string|null} [currencyCode] RunReportRequest currencyCode
+                         * @property {google.analytics.data.v1beta.ICohortSpec|null} [cohortSpec] RunReportRequest cohortSpec
+                         * @property {boolean|null} [keepEmptyRows] RunReportRequest keepEmptyRows
+                         * @property {boolean|null} [returnPropertyQuota] RunReportRequest returnPropertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunReportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a RunReportRequest.
+                         * @implements IRunReportRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IRunReportRequest=} [properties] Properties to set
+                         */
+                        function RunReportRequest(properties) {
+                            this.dimensions = [];
+                            this.metrics = [];
+                            this.dateRanges = [];
+                            this.metricAggregations = [];
+                            this.orderBys = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunReportRequest property.
+                         * @member {string} property
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.property = "";
+    
+                        /**
+                         * RunReportRequest dimensions.
+                         * @member {Array.<google.analytics.data.v1beta.IDimension>} dimensions
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * RunReportRequest metrics.
+                         * @member {Array.<google.analytics.data.v1beta.IMetric>} metrics
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * RunReportRequest dateRanges.
+                         * @member {Array.<google.analytics.data.v1beta.IDateRange>} dateRanges
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.dateRanges = $util.emptyArray;
+    
+                        /**
+                         * RunReportRequest dimensionFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} dimensionFilter
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.dimensionFilter = null;
+    
+                        /**
+                         * RunReportRequest metricFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} metricFilter
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.metricFilter = null;
+    
+                        /**
+                         * RunReportRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * RunReportRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.pageToken = "";
+    
+                        /**
+                         * RunReportRequest metricAggregations.
+                         * @member {Array.<google.analytics.data.v1beta.MetricAggregation>} metricAggregations
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.metricAggregations = $util.emptyArray;
+    
+                        /**
+                         * RunReportRequest orderBys.
+                         * @member {Array.<google.analytics.data.v1beta.IOrderBy>} orderBys
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.orderBys = $util.emptyArray;
+    
+                        /**
+                         * RunReportRequest currencyCode.
+                         * @member {string} currencyCode
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.currencyCode = "";
+    
+                        /**
+                         * RunReportRequest cohortSpec.
+                         * @member {google.analytics.data.v1beta.ICohortSpec|null|undefined} cohortSpec
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.cohortSpec = null;
+    
+                        /**
+                         * RunReportRequest keepEmptyRows.
+                         * @member {boolean} keepEmptyRows
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.keepEmptyRows = false;
+    
+                        /**
+                         * RunReportRequest returnPropertyQuota.
+                         * @member {boolean} returnPropertyQuota
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         */
+                        RunReportRequest.prototype.returnPropertyQuota = false;
+    
+                        /**
+                         * Creates a new RunReportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunReportRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.RunReportRequest} RunReportRequest instance
+                         */
+                        RunReportRequest.create = function create(properties) {
+                            return new RunReportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportRequest message. Does not implicitly {@link google.analytics.data.v1beta.RunReportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunReportRequest} message RunReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1beta.Dimension.encode(message.dimensions[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.analytics.data.v1beta.Metric.encode(message.metrics[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.dateRanges != null && message.dateRanges.length)
+                                for (var i = 0; i < message.dateRanges.length; ++i)
+                                    $root.google.analytics.data.v1beta.DateRange.encode(message.dateRanges[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.dimensionFilter != null && Object.hasOwnProperty.call(message, "dimensionFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.dimensionFilter, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.metricFilter != null && Object.hasOwnProperty.call(message, "metricFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.metricFilter, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.pageToken);
+                            if (message.metricAggregations != null && message.metricAggregations.length) {
+                                writer.uint32(/* id 9, wireType 2 =*/74).fork();
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    writer.int32(message.metricAggregations[i]);
+                                writer.ldelim();
+                            }
+                            if (message.orderBys != null && message.orderBys.length)
+                                for (var i = 0; i < message.orderBys.length; ++i)
+                                    $root.google.analytics.data.v1beta.OrderBy.encode(message.orderBys[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.currencyCode);
+                            if (message.cohortSpec != null && Object.hasOwnProperty.call(message, "cohortSpec"))
+                                $root.google.analytics.data.v1beta.CohortSpec.encode(message.cohortSpec, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.keepEmptyRows != null && Object.hasOwnProperty.call(message, "keepEmptyRows"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.keepEmptyRows);
+                            if (message.returnPropertyQuota != null && Object.hasOwnProperty.call(message, "returnPropertyQuota"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.returnPropertyQuota);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunReportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunReportRequest} message RunReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunReportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.RunReportRequest} RunReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.RunReportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.dimensions && message.dimensions.length))
+                                        message.dimensions = [];
+                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.dateRanges && message.dateRanges.length))
+                                        message.dateRanges = [];
+                                    message.dateRanges.push($root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 8:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 9:
+                                    if (!(message.metricAggregations && message.metricAggregations.length))
+                                        message.metricAggregations = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.metricAggregations.push(reader.int32());
+                                    } else
+                                        message.metricAggregations.push(reader.int32());
+                                    break;
+                                case 10:
+                                    if (!(message.orderBys && message.orderBys.length))
+                                        message.orderBys = [];
+                                    message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
+                                    break;
+                                case 11:
+                                    message.currencyCode = reader.string();
+                                    break;
+                                case 12:
+                                    message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.keepEmptyRows = reader.bool();
+                                    break;
+                                case 14:
+                                    message.returnPropertyQuota = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunReportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.RunReportRequest} RunReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunReportRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunReportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Dimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Metric.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            if (message.dateRanges != null && message.hasOwnProperty("dateRanges")) {
+                                if (!Array.isArray(message.dateRanges))
+                                    return "dateRanges: array expected";
+                                for (var i = 0; i < message.dateRanges.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DateRange.verify(message.dateRanges[i]);
+                                    if (error)
+                                        return "dateRanges." + error;
+                                }
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.dimensionFilter);
+                                if (error)
+                                    return "dimensionFilter." + error;
+                            }
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.metricFilter);
+                                if (error)
+                                    return "metricFilter." + error;
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.metricAggregations != null && message.hasOwnProperty("metricAggregations")) {
+                                if (!Array.isArray(message.metricAggregations))
+                                    return "metricAggregations: array expected";
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    switch (message.metricAggregations[i]) {
+                                    default:
+                                        return "metricAggregations: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 5:
+                                    case 6:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            if (message.orderBys != null && message.hasOwnProperty("orderBys")) {
+                                if (!Array.isArray(message.orderBys))
+                                    return "orderBys: array expected";
+                                for (var i = 0; i < message.orderBys.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.OrderBy.verify(message.orderBys[i]);
+                                    if (error)
+                                        return "orderBys." + error;
+                                }
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                if (!$util.isString(message.currencyCode))
+                                    return "currencyCode: string expected";
+                            if (message.cohortSpec != null && message.hasOwnProperty("cohortSpec")) {
+                                var error = $root.google.analytics.data.v1beta.CohortSpec.verify(message.cohortSpec);
+                                if (error)
+                                    return "cohortSpec." + error;
+                            }
+                            if (message.keepEmptyRows != null && message.hasOwnProperty("keepEmptyRows"))
+                                if (typeof message.keepEmptyRows !== "boolean")
+                                    return "keepEmptyRows: boolean expected";
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                if (typeof message.returnPropertyQuota !== "boolean")
+                                    return "returnPropertyQuota: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunReportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.RunReportRequest} RunReportRequest
+                         */
+                        RunReportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.RunReportRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.RunReportRequest();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportRequest.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1beta.Dimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportRequest.metrics: object expected");
+                                    message.metrics[i] = $root.google.analytics.data.v1beta.Metric.fromObject(object.metrics[i]);
+                                }
+                            }
+                            if (object.dateRanges) {
+                                if (!Array.isArray(object.dateRanges))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.dateRanges: array expected");
+                                message.dateRanges = [];
+                                for (var i = 0; i < object.dateRanges.length; ++i) {
+                                    if (typeof object.dateRanges[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportRequest.dateRanges: object expected");
+                                    message.dateRanges[i] = $root.google.analytics.data.v1beta.DateRange.fromObject(object.dateRanges[i]);
+                                }
+                            }
+                            if (object.dimensionFilter != null) {
+                                if (typeof object.dimensionFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.dimensionFilter: object expected");
+                                message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.dimensionFilter);
+                            }
+                            if (object.metricFilter != null) {
+                                if (typeof object.metricFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.metricFilter: object expected");
+                                message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.metricFilter);
+                            }
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.metricAggregations) {
+                                if (!Array.isArray(object.metricAggregations))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.metricAggregations: array expected");
+                                message.metricAggregations = [];
+                                for (var i = 0; i < object.metricAggregations.length; ++i)
+                                    switch (object.metricAggregations[i]) {
+                                    default:
+                                    case "METRIC_AGGREGATION_UNSPECIFIED":
+                                    case 0:
+                                        message.metricAggregations[i] = 0;
+                                        break;
+                                    case "TOTAL":
+                                    case 1:
+                                        message.metricAggregations[i] = 1;
+                                        break;
+                                    case "MINIMUM":
+                                    case 5:
+                                        message.metricAggregations[i] = 5;
+                                        break;
+                                    case "MAXIMUM":
+                                    case 6:
+                                        message.metricAggregations[i] = 6;
+                                        break;
+                                    case "COUNT":
+                                    case 4:
+                                        message.metricAggregations[i] = 4;
+                                        break;
+                                    }
+                            }
+                            if (object.orderBys) {
+                                if (!Array.isArray(object.orderBys))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.orderBys: array expected");
+                                message.orderBys = [];
+                                for (var i = 0; i < object.orderBys.length; ++i) {
+                                    if (typeof object.orderBys[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportRequest.orderBys: object expected");
+                                    message.orderBys[i] = $root.google.analytics.data.v1beta.OrderBy.fromObject(object.orderBys[i]);
+                                }
+                            }
+                            if (object.currencyCode != null)
+                                message.currencyCode = String(object.currencyCode);
+                            if (object.cohortSpec != null) {
+                                if (typeof object.cohortSpec !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportRequest.cohortSpec: object expected");
+                                message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.fromObject(object.cohortSpec);
+                            }
+                            if (object.keepEmptyRows != null)
+                                message.keepEmptyRows = Boolean(object.keepEmptyRows);
+                            if (object.returnPropertyQuota != null)
+                                message.returnPropertyQuota = Boolean(object.returnPropertyQuota);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunReportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.RunReportRequest} message RunReportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunReportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.metrics = [];
+                                object.dateRanges = [];
+                                object.metricAggregations = [];
+                                object.orderBys = [];
+                            }
+                            if (options.defaults) {
+                                object.property = "";
+                                object.dimensionFilter = null;
+                                object.metricFilter = null;
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.currencyCode = "";
+                                object.cohortSpec = null;
+                                object.keepEmptyRows = false;
+                                object.returnPropertyQuota = false;
+                            }
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1beta.Dimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.analytics.data.v1beta.Metric.toObject(message.metrics[j], options);
+                            }
+                            if (message.dateRanges && message.dateRanges.length) {
+                                object.dateRanges = [];
+                                for (var j = 0; j < message.dateRanges.length; ++j)
+                                    object.dateRanges[j] = $root.google.analytics.data.v1beta.DateRange.toObject(message.dateRanges[j], options);
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter"))
+                                object.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.dimensionFilter, options);
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter"))
+                                object.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.metricFilter, options);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.metricAggregations && message.metricAggregations.length) {
+                                object.metricAggregations = [];
+                                for (var j = 0; j < message.metricAggregations.length; ++j)
+                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
+                            }
+                            if (message.orderBys && message.orderBys.length) {
+                                object.orderBys = [];
+                                for (var j = 0; j < message.orderBys.length; ++j)
+                                    object.orderBys[j] = $root.google.analytics.data.v1beta.OrderBy.toObject(message.orderBys[j], options);
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                object.currencyCode = message.currencyCode;
+                            if (message.cohortSpec != null && message.hasOwnProperty("cohortSpec"))
+                                object.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.toObject(message.cohortSpec, options);
+                            if (message.keepEmptyRows != null && message.hasOwnProperty("keepEmptyRows"))
+                                object.keepEmptyRows = message.keepEmptyRows;
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                object.returnPropertyQuota = message.returnPropertyQuota;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunReportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.RunReportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunReportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunReportRequest;
+                    })();
+    
+                    v1beta.RunReportResponse = (function() {
+    
+                        /**
+                         * Properties of a RunReportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IRunReportResponse
+                         * @property {Array.<google.analytics.data.v1beta.IDimensionHeader>|null} [dimensionHeaders] RunReportResponse dimensionHeaders
+                         * @property {Array.<google.analytics.data.v1beta.IMetricHeader>|null} [metricHeaders] RunReportResponse metricHeaders
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [rows] RunReportResponse rows
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [totals] RunReportResponse totals
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [maximums] RunReportResponse maximums
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [minimums] RunReportResponse minimums
+                         * @property {string|null} [nextPageToken] RunReportResponse nextPageToken
+                         * @property {number|null} [totalSize] RunReportResponse totalSize
+                         * @property {google.analytics.data.v1beta.IResponseMetaData|null} [metadata] RunReportResponse metadata
+                         * @property {google.analytics.data.v1beta.IPropertyQuota|null} [propertyQuota] RunReportResponse propertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunReportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a RunReportResponse.
+                         * @implements IRunReportResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IRunReportResponse=} [properties] Properties to set
+                         */
+                        function RunReportResponse(properties) {
+                            this.dimensionHeaders = [];
+                            this.metricHeaders = [];
+                            this.rows = [];
+                            this.totals = [];
+                            this.maximums = [];
+                            this.minimums = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunReportResponse dimensionHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IDimensionHeader>} dimensionHeaders
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.dimensionHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunReportResponse metricHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IMetricHeader>} metricHeaders
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.metricHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunReportResponse rows.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} rows
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * RunReportResponse totals.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} totals
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.totals = $util.emptyArray;
+    
+                        /**
+                         * RunReportResponse maximums.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} maximums
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.maximums = $util.emptyArray;
+    
+                        /**
+                         * RunReportResponse minimums.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} minimums
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.minimums = $util.emptyArray;
+    
+                        /**
+                         * RunReportResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * RunReportResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * RunReportResponse metadata.
+                         * @member {google.analytics.data.v1beta.IResponseMetaData|null|undefined} metadata
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.metadata = null;
+    
+                        /**
+                         * RunReportResponse propertyQuota.
+                         * @member {google.analytics.data.v1beta.IPropertyQuota|null|undefined} propertyQuota
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.propertyQuota = null;
+    
+                        /**
+                         * Creates a new RunReportResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunReportResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.RunReportResponse} RunReportResponse instance
+                         */
+                        RunReportResponse.create = function create(properties) {
+                            return new RunReportResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportResponse message. Does not implicitly {@link google.analytics.data.v1beta.RunReportResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunReportResponse} message RunReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionHeaders != null && message.dimensionHeaders.length)
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.DimensionHeader.encode(message.dimensionHeaders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metricHeaders != null && message.metricHeaders.length)
+                                for (var i = 0; i < message.metricHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.MetricHeader.encode(message.metricHeaders[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.rows[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.totals != null && message.totals.length)
+                                for (var i = 0; i < message.totals.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.totals[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.maximums != null && message.maximums.length)
+                                for (var i = 0; i < message.maximums.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.maximums[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.minimums != null && message.minimums.length)
+                                for (var i = 0; i < message.minimums.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.minimums[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.totalSize);
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                $root.google.analytics.data.v1beta.ResponseMetaData.encode(message.metadata, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.propertyQuota != null && Object.hasOwnProperty.call(message, "propertyQuota"))
+                                $root.google.analytics.data.v1beta.PropertyQuota.encode(message.propertyQuota, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunReportResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunReportResponse} message RunReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunReportResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.RunReportResponse} RunReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.RunReportResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                        message.dimensionHeaders = [];
+                                    message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.metricHeaders && message.metricHeaders.length))
+                                        message.metricHeaders = [];
+                                    message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.rows && message.rows.length))
+                                        message.rows = [];
+                                    message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.totals && message.totals.length))
+                                        message.totals = [];
+                                    message.totals.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    if (!(message.maximums && message.maximums.length))
+                                        message.maximums = [];
+                                    message.maximums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    if (!(message.minimums && message.minimums.length))
+                                        message.minimums = [];
+                                    message.minimums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 7:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 8:
+                                    message.totalSize = reader.int32();
+                                    break;
+                                case 9:
+                                    message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunReportResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.RunReportResponse} RunReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunReportResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunReportResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionHeaders != null && message.hasOwnProperty("dimensionHeaders")) {
+                                if (!Array.isArray(message.dimensionHeaders))
+                                    return "dimensionHeaders: array expected";
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DimensionHeader.verify(message.dimensionHeaders[i]);
+                                    if (error)
+                                        return "dimensionHeaders." + error;
+                                }
+                            }
+                            if (message.metricHeaders != null && message.hasOwnProperty("metricHeaders")) {
+                                if (!Array.isArray(message.metricHeaders))
+                                    return "metricHeaders: array expected";
+                                for (var i = 0; i < message.metricHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.MetricHeader.verify(message.metricHeaders[i]);
+                                    if (error)
+                                        return "metricHeaders." + error;
+                                }
+                            }
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            if (message.totals != null && message.hasOwnProperty("totals")) {
+                                if (!Array.isArray(message.totals))
+                                    return "totals: array expected";
+                                for (var i = 0; i < message.totals.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.totals[i]);
+                                    if (error)
+                                        return "totals." + error;
+                                }
+                            }
+                            if (message.maximums != null && message.hasOwnProperty("maximums")) {
+                                if (!Array.isArray(message.maximums))
+                                    return "maximums: array expected";
+                                for (var i = 0; i < message.maximums.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.maximums[i]);
+                                    if (error)
+                                        return "maximums." + error;
+                                }
+                            }
+                            if (message.minimums != null && message.hasOwnProperty("minimums")) {
+                                if (!Array.isArray(message.minimums))
+                                    return "minimums: array expected";
+                                for (var i = 0; i < message.minimums.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.minimums[i]);
+                                    if (error)
+                                        return "minimums." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                var error = $root.google.analytics.data.v1beta.ResponseMetaData.verify(message.metadata);
+                                if (error)
+                                    return "metadata." + error;
+                            }
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota")) {
+                                var error = $root.google.analytics.data.v1beta.PropertyQuota.verify(message.propertyQuota);
+                                if (error)
+                                    return "propertyQuota." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunReportResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.RunReportResponse} RunReportResponse
+                         */
+                        RunReportResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.RunReportResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.RunReportResponse();
+                            if (object.dimensionHeaders) {
+                                if (!Array.isArray(object.dimensionHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.dimensionHeaders: array expected");
+                                message.dimensionHeaders = [];
+                                for (var i = 0; i < object.dimensionHeaders.length; ++i) {
+                                    if (typeof object.dimensionHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportResponse.dimensionHeaders: object expected");
+                                    message.dimensionHeaders[i] = $root.google.analytics.data.v1beta.DimensionHeader.fromObject(object.dimensionHeaders[i]);
+                                }
+                            }
+                            if (object.metricHeaders) {
+                                if (!Array.isArray(object.metricHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.metricHeaders: array expected");
+                                message.metricHeaders = [];
+                                for (var i = 0; i < object.metricHeaders.length; ++i) {
+                                    if (typeof object.metricHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportResponse.metricHeaders: object expected");
+                                    message.metricHeaders[i] = $root.google.analytics.data.v1beta.MetricHeader.fromObject(object.metricHeaders[i]);
+                                }
+                            }
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportResponse.rows: object expected");
+                                    message.rows[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.rows[i]);
+                                }
+                            }
+                            if (object.totals) {
+                                if (!Array.isArray(object.totals))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.totals: array expected");
+                                message.totals = [];
+                                for (var i = 0; i < object.totals.length; ++i) {
+                                    if (typeof object.totals[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportResponse.totals: object expected");
+                                    message.totals[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.totals[i]);
+                                }
+                            }
+                            if (object.maximums) {
+                                if (!Array.isArray(object.maximums))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.maximums: array expected");
+                                message.maximums = [];
+                                for (var i = 0; i < object.maximums.length; ++i) {
+                                    if (typeof object.maximums[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportResponse.maximums: object expected");
+                                    message.maximums[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.maximums[i]);
+                                }
+                            }
+                            if (object.minimums) {
+                                if (!Array.isArray(object.minimums))
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.minimums: array expected");
+                                message.minimums = [];
+                                for (var i = 0; i < object.minimums.length; ++i) {
+                                    if (typeof object.minimums[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunReportResponse.minimums: object expected");
+                                    message.minimums[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.minimums[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            if (object.metadata != null) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.metadata: object expected");
+                                message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.fromObject(object.metadata);
+                            }
+                            if (object.propertyQuota != null) {
+                                if (typeof object.propertyQuota !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunReportResponse.propertyQuota: object expected");
+                                message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.fromObject(object.propertyQuota);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunReportResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.RunReportResponse} message RunReportResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunReportResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensionHeaders = [];
+                                object.metricHeaders = [];
+                                object.rows = [];
+                                object.totals = [];
+                                object.maximums = [];
+                                object.minimums = [];
+                            }
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                                object.metadata = null;
+                                object.propertyQuota = null;
+                            }
+                            if (message.dimensionHeaders && message.dimensionHeaders.length) {
+                                object.dimensionHeaders = [];
+                                for (var j = 0; j < message.dimensionHeaders.length; ++j)
+                                    object.dimensionHeaders[j] = $root.google.analytics.data.v1beta.DimensionHeader.toObject(message.dimensionHeaders[j], options);
+                            }
+                            if (message.metricHeaders && message.metricHeaders.length) {
+                                object.metricHeaders = [];
+                                for (var j = 0; j < message.metricHeaders.length; ++j)
+                                    object.metricHeaders[j] = $root.google.analytics.data.v1beta.MetricHeader.toObject(message.metricHeaders[j], options);
+                            }
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.analytics.data.v1beta.Row.toObject(message.rows[j], options);
+                            }
+                            if (message.totals && message.totals.length) {
+                                object.totals = [];
+                                for (var j = 0; j < message.totals.length; ++j)
+                                    object.totals[j] = $root.google.analytics.data.v1beta.Row.toObject(message.totals[j], options);
+                            }
+                            if (message.maximums && message.maximums.length) {
+                                object.maximums = [];
+                                for (var j = 0; j < message.maximums.length; ++j)
+                                    object.maximums[j] = $root.google.analytics.data.v1beta.Row.toObject(message.maximums[j], options);
+                            }
+                            if (message.minimums && message.minimums.length) {
+                                object.minimums = [];
+                                for (var j = 0; j < message.minimums.length; ++j)
+                                    object.minimums[j] = $root.google.analytics.data.v1beta.Row.toObject(message.minimums[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                object.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.toObject(message.metadata, options);
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota"))
+                                object.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.toObject(message.propertyQuota, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunReportResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunReportResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunReportResponse;
+                    })();
+    
+                    v1beta.RunPivotReportRequest = (function() {
+    
+                        /**
+                         * Properties of a RunPivotReportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IRunPivotReportRequest
+                         * @property {string|null} [property] RunPivotReportRequest property
+                         * @property {Array.<google.analytics.data.v1beta.IDimension>|null} [dimensions] RunPivotReportRequest dimensions
+                         * @property {Array.<google.analytics.data.v1beta.IMetric>|null} [metrics] RunPivotReportRequest metrics
+                         * @property {Array.<google.analytics.data.v1beta.IDateRange>|null} [dateRanges] RunPivotReportRequest dateRanges
+                         * @property {Array.<google.analytics.data.v1beta.IPivot>|null} [pivots] RunPivotReportRequest pivots
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [dimensionFilter] RunPivotReportRequest dimensionFilter
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [metricFilter] RunPivotReportRequest metricFilter
+                         * @property {string|null} [currencyCode] RunPivotReportRequest currencyCode
+                         * @property {google.analytics.data.v1beta.ICohortSpec|null} [cohortSpec] RunPivotReportRequest cohortSpec
+                         * @property {boolean|null} [keepEmptyRows] RunPivotReportRequest keepEmptyRows
+                         * @property {boolean|null} [returnPropertyQuota] RunPivotReportRequest returnPropertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunPivotReportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a RunPivotReportRequest.
+                         * @implements IRunPivotReportRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IRunPivotReportRequest=} [properties] Properties to set
+                         */
+                        function RunPivotReportRequest(properties) {
+                            this.dimensions = [];
+                            this.metrics = [];
+                            this.dateRanges = [];
+                            this.pivots = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunPivotReportRequest property.
+                         * @member {string} property
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.property = "";
+    
+                        /**
+                         * RunPivotReportRequest dimensions.
+                         * @member {Array.<google.analytics.data.v1beta.IDimension>} dimensions
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportRequest metrics.
+                         * @member {Array.<google.analytics.data.v1beta.IMetric>} metrics
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportRequest dateRanges.
+                         * @member {Array.<google.analytics.data.v1beta.IDateRange>} dateRanges
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.dateRanges = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportRequest pivots.
+                         * @member {Array.<google.analytics.data.v1beta.IPivot>} pivots
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.pivots = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportRequest dimensionFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} dimensionFilter
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.dimensionFilter = null;
+    
+                        /**
+                         * RunPivotReportRequest metricFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} metricFilter
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.metricFilter = null;
+    
+                        /**
+                         * RunPivotReportRequest currencyCode.
+                         * @member {string} currencyCode
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.currencyCode = "";
+    
+                        /**
+                         * RunPivotReportRequest cohortSpec.
+                         * @member {google.analytics.data.v1beta.ICohortSpec|null|undefined} cohortSpec
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.cohortSpec = null;
+    
+                        /**
+                         * RunPivotReportRequest keepEmptyRows.
+                         * @member {boolean} keepEmptyRows
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.keepEmptyRows = false;
+    
+                        /**
+                         * RunPivotReportRequest returnPropertyQuota.
+                         * @member {boolean} returnPropertyQuota
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         */
+                        RunPivotReportRequest.prototype.returnPropertyQuota = false;
+    
+                        /**
+                         * Creates a new RunPivotReportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunPivotReportRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.RunPivotReportRequest} RunPivotReportRequest instance
+                         */
+                        RunPivotReportRequest.create = function create(properties) {
+                            return new RunPivotReportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunPivotReportRequest message. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunPivotReportRequest} message RunPivotReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunPivotReportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1beta.Dimension.encode(message.dimensions[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.analytics.data.v1beta.Metric.encode(message.metrics[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.dateRanges != null && message.dateRanges.length)
+                                for (var i = 0; i < message.dateRanges.length; ++i)
+                                    $root.google.analytics.data.v1beta.DateRange.encode(message.dateRanges[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.pivots != null && message.pivots.length)
+                                for (var i = 0; i < message.pivots.length; ++i)
+                                    $root.google.analytics.data.v1beta.Pivot.encode(message.pivots[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.dimensionFilter != null && Object.hasOwnProperty.call(message, "dimensionFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.dimensionFilter, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.metricFilter != null && Object.hasOwnProperty.call(message, "metricFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.metricFilter, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.currencyCode);
+                            if (message.cohortSpec != null && Object.hasOwnProperty.call(message, "cohortSpec"))
+                                $root.google.analytics.data.v1beta.CohortSpec.encode(message.cohortSpec, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.keepEmptyRows != null && Object.hasOwnProperty.call(message, "keepEmptyRows"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.keepEmptyRows);
+                            if (message.returnPropertyQuota != null && Object.hasOwnProperty.call(message, "returnPropertyQuota"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.returnPropertyQuota);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunPivotReportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunPivotReportRequest} message RunPivotReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunPivotReportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunPivotReportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.RunPivotReportRequest} RunPivotReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunPivotReportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.RunPivotReportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.dimensions && message.dimensions.length))
+                                        message.dimensions = [];
+                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.dateRanges && message.dateRanges.length))
+                                        message.dateRanges = [];
+                                    message.dateRanges.push($root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    if (!(message.pivots && message.pivots.length))
+                                        message.pivots = [];
+                                    message.pivots.push($root.google.analytics.data.v1beta.Pivot.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.currencyCode = reader.string();
+                                    break;
+                                case 9:
+                                    message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.keepEmptyRows = reader.bool();
+                                    break;
+                                case 11:
+                                    message.returnPropertyQuota = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunPivotReportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.RunPivotReportRequest} RunPivotReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunPivotReportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunPivotReportRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunPivotReportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Dimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Metric.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            if (message.dateRanges != null && message.hasOwnProperty("dateRanges")) {
+                                if (!Array.isArray(message.dateRanges))
+                                    return "dateRanges: array expected";
+                                for (var i = 0; i < message.dateRanges.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DateRange.verify(message.dateRanges[i]);
+                                    if (error)
+                                        return "dateRanges." + error;
+                                }
+                            }
+                            if (message.pivots != null && message.hasOwnProperty("pivots")) {
+                                if (!Array.isArray(message.pivots))
+                                    return "pivots: array expected";
+                                for (var i = 0; i < message.pivots.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Pivot.verify(message.pivots[i]);
+                                    if (error)
+                                        return "pivots." + error;
+                                }
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.dimensionFilter);
+                                if (error)
+                                    return "dimensionFilter." + error;
+                            }
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.metricFilter);
+                                if (error)
+                                    return "metricFilter." + error;
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                if (!$util.isString(message.currencyCode))
+                                    return "currencyCode: string expected";
+                            if (message.cohortSpec != null && message.hasOwnProperty("cohortSpec")) {
+                                var error = $root.google.analytics.data.v1beta.CohortSpec.verify(message.cohortSpec);
+                                if (error)
+                                    return "cohortSpec." + error;
+                            }
+                            if (message.keepEmptyRows != null && message.hasOwnProperty("keepEmptyRows"))
+                                if (typeof message.keepEmptyRows !== "boolean")
+                                    return "keepEmptyRows: boolean expected";
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                if (typeof message.returnPropertyQuota !== "boolean")
+                                    return "returnPropertyQuota: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunPivotReportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.RunPivotReportRequest} RunPivotReportRequest
+                         */
+                        RunPivotReportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.RunPivotReportRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.RunPivotReportRequest();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1beta.Dimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.metrics: object expected");
+                                    message.metrics[i] = $root.google.analytics.data.v1beta.Metric.fromObject(object.metrics[i]);
+                                }
+                            }
+                            if (object.dateRanges) {
+                                if (!Array.isArray(object.dateRanges))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.dateRanges: array expected");
+                                message.dateRanges = [];
+                                for (var i = 0; i < object.dateRanges.length; ++i) {
+                                    if (typeof object.dateRanges[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.dateRanges: object expected");
+                                    message.dateRanges[i] = $root.google.analytics.data.v1beta.DateRange.fromObject(object.dateRanges[i]);
+                                }
+                            }
+                            if (object.pivots) {
+                                if (!Array.isArray(object.pivots))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.pivots: array expected");
+                                message.pivots = [];
+                                for (var i = 0; i < object.pivots.length; ++i) {
+                                    if (typeof object.pivots[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.pivots: object expected");
+                                    message.pivots[i] = $root.google.analytics.data.v1beta.Pivot.fromObject(object.pivots[i]);
+                                }
+                            }
+                            if (object.dimensionFilter != null) {
+                                if (typeof object.dimensionFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.dimensionFilter: object expected");
+                                message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.dimensionFilter);
+                            }
+                            if (object.metricFilter != null) {
+                                if (typeof object.metricFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.metricFilter: object expected");
+                                message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.metricFilter);
+                            }
+                            if (object.currencyCode != null)
+                                message.currencyCode = String(object.currencyCode);
+                            if (object.cohortSpec != null) {
+                                if (typeof object.cohortSpec !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportRequest.cohortSpec: object expected");
+                                message.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.fromObject(object.cohortSpec);
+                            }
+                            if (object.keepEmptyRows != null)
+                                message.keepEmptyRows = Boolean(object.keepEmptyRows);
+                            if (object.returnPropertyQuota != null)
+                                message.returnPropertyQuota = Boolean(object.returnPropertyQuota);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunPivotReportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.RunPivotReportRequest} message RunPivotReportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunPivotReportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.metrics = [];
+                                object.dateRanges = [];
+                                object.pivots = [];
+                            }
+                            if (options.defaults) {
+                                object.property = "";
+                                object.dimensionFilter = null;
+                                object.metricFilter = null;
+                                object.currencyCode = "";
+                                object.cohortSpec = null;
+                                object.keepEmptyRows = false;
+                                object.returnPropertyQuota = false;
+                            }
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1beta.Dimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.analytics.data.v1beta.Metric.toObject(message.metrics[j], options);
+                            }
+                            if (message.dateRanges && message.dateRanges.length) {
+                                object.dateRanges = [];
+                                for (var j = 0; j < message.dateRanges.length; ++j)
+                                    object.dateRanges[j] = $root.google.analytics.data.v1beta.DateRange.toObject(message.dateRanges[j], options);
+                            }
+                            if (message.pivots && message.pivots.length) {
+                                object.pivots = [];
+                                for (var j = 0; j < message.pivots.length; ++j)
+                                    object.pivots[j] = $root.google.analytics.data.v1beta.Pivot.toObject(message.pivots[j], options);
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter"))
+                                object.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.dimensionFilter, options);
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter"))
+                                object.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.metricFilter, options);
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                object.currencyCode = message.currencyCode;
+                            if (message.cohortSpec != null && message.hasOwnProperty("cohortSpec"))
+                                object.cohortSpec = $root.google.analytics.data.v1beta.CohortSpec.toObject(message.cohortSpec, options);
+                            if (message.keepEmptyRows != null && message.hasOwnProperty("keepEmptyRows"))
+                                object.keepEmptyRows = message.keepEmptyRows;
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                object.returnPropertyQuota = message.returnPropertyQuota;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunPivotReportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.RunPivotReportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunPivotReportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunPivotReportRequest;
+                    })();
+    
+                    v1beta.RunPivotReportResponse = (function() {
+    
+                        /**
+                         * Properties of a RunPivotReportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IRunPivotReportResponse
+                         * @property {Array.<google.analytics.data.v1beta.IPivotHeader>|null} [pivotHeaders] RunPivotReportResponse pivotHeaders
+                         * @property {Array.<google.analytics.data.v1beta.IDimensionHeader>|null} [dimensionHeaders] RunPivotReportResponse dimensionHeaders
+                         * @property {Array.<google.analytics.data.v1beta.IMetricHeader>|null} [metricHeaders] RunPivotReportResponse metricHeaders
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [rows] RunPivotReportResponse rows
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [aggregates] RunPivotReportResponse aggregates
+                         * @property {google.analytics.data.v1beta.IResponseMetaData|null} [metadata] RunPivotReportResponse metadata
+                         * @property {google.analytics.data.v1beta.IPropertyQuota|null} [propertyQuota] RunPivotReportResponse propertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunPivotReportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a RunPivotReportResponse.
+                         * @implements IRunPivotReportResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IRunPivotReportResponse=} [properties] Properties to set
+                         */
+                        function RunPivotReportResponse(properties) {
+                            this.pivotHeaders = [];
+                            this.dimensionHeaders = [];
+                            this.metricHeaders = [];
+                            this.rows = [];
+                            this.aggregates = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunPivotReportResponse pivotHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IPivotHeader>} pivotHeaders
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.pivotHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportResponse dimensionHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IDimensionHeader>} dimensionHeaders
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.dimensionHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportResponse metricHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IMetricHeader>} metricHeaders
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.metricHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportResponse rows.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} rows
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportResponse aggregates.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} aggregates
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.aggregates = $util.emptyArray;
+    
+                        /**
+                         * RunPivotReportResponse metadata.
+                         * @member {google.analytics.data.v1beta.IResponseMetaData|null|undefined} metadata
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.metadata = null;
+    
+                        /**
+                         * RunPivotReportResponse propertyQuota.
+                         * @member {google.analytics.data.v1beta.IPropertyQuota|null|undefined} propertyQuota
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.propertyQuota = null;
+    
+                        /**
+                         * Creates a new RunPivotReportResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunPivotReportResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.RunPivotReportResponse} RunPivotReportResponse instance
+                         */
+                        RunPivotReportResponse.create = function create(properties) {
+                            return new RunPivotReportResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunPivotReportResponse message. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunPivotReportResponse} message RunPivotReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunPivotReportResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pivotHeaders != null && message.pivotHeaders.length)
+                                for (var i = 0; i < message.pivotHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.PivotHeader.encode(message.pivotHeaders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.dimensionHeaders != null && message.dimensionHeaders.length)
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.DimensionHeader.encode(message.dimensionHeaders[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.metricHeaders != null && message.metricHeaders.length)
+                                for (var i = 0; i < message.metricHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.MetricHeader.encode(message.metricHeaders[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.rows[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.aggregates != null && message.aggregates.length)
+                                for (var i = 0; i < message.aggregates.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.aggregates[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                $root.google.analytics.data.v1beta.ResponseMetaData.encode(message.metadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.propertyQuota != null && Object.hasOwnProperty.call(message, "propertyQuota"))
+                                $root.google.analytics.data.v1beta.PropertyQuota.encode(message.propertyQuota, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunPivotReportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunPivotReportResponse} message RunPivotReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunPivotReportResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunPivotReportResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.RunPivotReportResponse} RunPivotReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunPivotReportResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.RunPivotReportResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.pivotHeaders && message.pivotHeaders.length))
+                                        message.pivotHeaders = [];
+                                    message.pivotHeaders.push($root.google.analytics.data.v1beta.PivotHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                        message.dimensionHeaders = [];
+                                    message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.metricHeaders && message.metricHeaders.length))
+                                        message.metricHeaders = [];
+                                    message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.rows && message.rows.length))
+                                        message.rows = [];
+                                    message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    if (!(message.aggregates && message.aggregates.length))
+                                        message.aggregates = [];
+                                    message.aggregates.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunPivotReportResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.RunPivotReportResponse} RunPivotReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunPivotReportResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunPivotReportResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunPivotReportResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pivotHeaders != null && message.hasOwnProperty("pivotHeaders")) {
+                                if (!Array.isArray(message.pivotHeaders))
+                                    return "pivotHeaders: array expected";
+                                for (var i = 0; i < message.pivotHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.PivotHeader.verify(message.pivotHeaders[i]);
+                                    if (error)
+                                        return "pivotHeaders." + error;
+                                }
+                            }
+                            if (message.dimensionHeaders != null && message.hasOwnProperty("dimensionHeaders")) {
+                                if (!Array.isArray(message.dimensionHeaders))
+                                    return "dimensionHeaders: array expected";
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DimensionHeader.verify(message.dimensionHeaders[i]);
+                                    if (error)
+                                        return "dimensionHeaders." + error;
+                                }
+                            }
+                            if (message.metricHeaders != null && message.hasOwnProperty("metricHeaders")) {
+                                if (!Array.isArray(message.metricHeaders))
+                                    return "metricHeaders: array expected";
+                                for (var i = 0; i < message.metricHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.MetricHeader.verify(message.metricHeaders[i]);
+                                    if (error)
+                                        return "metricHeaders." + error;
+                                }
+                            }
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            if (message.aggregates != null && message.hasOwnProperty("aggregates")) {
+                                if (!Array.isArray(message.aggregates))
+                                    return "aggregates: array expected";
+                                for (var i = 0; i < message.aggregates.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.aggregates[i]);
+                                    if (error)
+                                        return "aggregates." + error;
+                                }
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                var error = $root.google.analytics.data.v1beta.ResponseMetaData.verify(message.metadata);
+                                if (error)
+                                    return "metadata." + error;
+                            }
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota")) {
+                                var error = $root.google.analytics.data.v1beta.PropertyQuota.verify(message.propertyQuota);
+                                if (error)
+                                    return "propertyQuota." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunPivotReportResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.RunPivotReportResponse} RunPivotReportResponse
+                         */
+                        RunPivotReportResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.RunPivotReportResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.RunPivotReportResponse();
+                            if (object.pivotHeaders) {
+                                if (!Array.isArray(object.pivotHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.pivotHeaders: array expected");
+                                message.pivotHeaders = [];
+                                for (var i = 0; i < object.pivotHeaders.length; ++i) {
+                                    if (typeof object.pivotHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.pivotHeaders: object expected");
+                                    message.pivotHeaders[i] = $root.google.analytics.data.v1beta.PivotHeader.fromObject(object.pivotHeaders[i]);
+                                }
+                            }
+                            if (object.dimensionHeaders) {
+                                if (!Array.isArray(object.dimensionHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.dimensionHeaders: array expected");
+                                message.dimensionHeaders = [];
+                                for (var i = 0; i < object.dimensionHeaders.length; ++i) {
+                                    if (typeof object.dimensionHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.dimensionHeaders: object expected");
+                                    message.dimensionHeaders[i] = $root.google.analytics.data.v1beta.DimensionHeader.fromObject(object.dimensionHeaders[i]);
+                                }
+                            }
+                            if (object.metricHeaders) {
+                                if (!Array.isArray(object.metricHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.metricHeaders: array expected");
+                                message.metricHeaders = [];
+                                for (var i = 0; i < object.metricHeaders.length; ++i) {
+                                    if (typeof object.metricHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.metricHeaders: object expected");
+                                    message.metricHeaders[i] = $root.google.analytics.data.v1beta.MetricHeader.fromObject(object.metricHeaders[i]);
+                                }
+                            }
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.rows: object expected");
+                                    message.rows[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.rows[i]);
+                                }
+                            }
+                            if (object.aggregates) {
+                                if (!Array.isArray(object.aggregates))
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.aggregates: array expected");
+                                message.aggregates = [];
+                                for (var i = 0; i < object.aggregates.length; ++i) {
+                                    if (typeof object.aggregates[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.aggregates: object expected");
+                                    message.aggregates[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.aggregates[i]);
+                                }
+                            }
+                            if (object.metadata != null) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.metadata: object expected");
+                                message.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.fromObject(object.metadata);
+                            }
+                            if (object.propertyQuota != null) {
+                                if (typeof object.propertyQuota !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.propertyQuota: object expected");
+                                message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.fromObject(object.propertyQuota);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunPivotReportResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.RunPivotReportResponse} message RunPivotReportResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunPivotReportResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.pivotHeaders = [];
+                                object.dimensionHeaders = [];
+                                object.metricHeaders = [];
+                                object.rows = [];
+                                object.aggregates = [];
+                            }
+                            if (options.defaults) {
+                                object.metadata = null;
+                                object.propertyQuota = null;
+                            }
+                            if (message.pivotHeaders && message.pivotHeaders.length) {
+                                object.pivotHeaders = [];
+                                for (var j = 0; j < message.pivotHeaders.length; ++j)
+                                    object.pivotHeaders[j] = $root.google.analytics.data.v1beta.PivotHeader.toObject(message.pivotHeaders[j], options);
+                            }
+                            if (message.dimensionHeaders && message.dimensionHeaders.length) {
+                                object.dimensionHeaders = [];
+                                for (var j = 0; j < message.dimensionHeaders.length; ++j)
+                                    object.dimensionHeaders[j] = $root.google.analytics.data.v1beta.DimensionHeader.toObject(message.dimensionHeaders[j], options);
+                            }
+                            if (message.metricHeaders && message.metricHeaders.length) {
+                                object.metricHeaders = [];
+                                for (var j = 0; j < message.metricHeaders.length; ++j)
+                                    object.metricHeaders[j] = $root.google.analytics.data.v1beta.MetricHeader.toObject(message.metricHeaders[j], options);
+                            }
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.analytics.data.v1beta.Row.toObject(message.rows[j], options);
+                            }
+                            if (message.aggregates && message.aggregates.length) {
+                                object.aggregates = [];
+                                for (var j = 0; j < message.aggregates.length; ++j)
+                                    object.aggregates[j] = $root.google.analytics.data.v1beta.Row.toObject(message.aggregates[j], options);
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                object.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.toObject(message.metadata, options);
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota"))
+                                object.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.toObject(message.propertyQuota, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunPivotReportResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunPivotReportResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunPivotReportResponse;
+                    })();
+    
+                    v1beta.BatchRunReportsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchRunReportsRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IBatchRunReportsRequest
+                         * @property {string|null} [property] BatchRunReportsRequest property
+                         * @property {Array.<google.analytics.data.v1beta.IRunReportRequest>|null} [requests] BatchRunReportsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BatchRunReportsRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a BatchRunReportsRequest.
+                         * @implements IBatchRunReportsRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsRequest=} [properties] Properties to set
+                         */
+                        function BatchRunReportsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchRunReportsRequest property.
+                         * @member {string} property
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @instance
+                         */
+                        BatchRunReportsRequest.prototype.property = "";
+    
+                        /**
+                         * BatchRunReportsRequest requests.
+                         * @member {Array.<google.analytics.data.v1beta.IRunReportRequest>} requests
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @instance
+                         */
+                        BatchRunReportsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchRunReportsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsRequest} BatchRunReportsRequest instance
+                         */
+                        BatchRunReportsRequest.create = function create(properties) {
+                            return new BatchRunReportsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunReportsRequest message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsRequest} message BatchRunReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunReportsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.analytics.data.v1beta.RunReportRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunReportsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsRequest} message BatchRunReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunReportsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchRunReportsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsRequest} BatchRunReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunReportsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.BatchRunReportsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.requests && message.requests.length))
+                                        message.requests = [];
+                                    message.requests.push($root.google.analytics.data.v1beta.RunReportRequest.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchRunReportsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsRequest} BatchRunReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunReportsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchRunReportsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchRunReportsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.RunReportRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchRunReportsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsRequest} BatchRunReportsRequest
+                         */
+                        BatchRunReportsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.BatchRunReportsRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.BatchRunReportsRequest();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.analytics.data.v1beta.BatchRunReportsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.BatchRunReportsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.analytics.data.v1beta.RunReportRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchRunReportsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.BatchRunReportsRequest} message BatchRunReportsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchRunReportsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.property = "";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.analytics.data.v1beta.RunReportRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchRunReportsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchRunReportsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchRunReportsRequest;
+                    })();
+    
+                    v1beta.BatchRunReportsResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchRunReportsResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IBatchRunReportsResponse
+                         * @property {Array.<google.analytics.data.v1beta.IRunReportResponse>|null} [reports] BatchRunReportsResponse reports
+                         */
+    
+                        /**
+                         * Constructs a new BatchRunReportsResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a BatchRunReportsResponse.
+                         * @implements IBatchRunReportsResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsResponse=} [properties] Properties to set
+                         */
+                        function BatchRunReportsResponse(properties) {
+                            this.reports = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchRunReportsResponse reports.
+                         * @member {Array.<google.analytics.data.v1beta.IRunReportResponse>} reports
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @instance
+                         */
+                        BatchRunReportsResponse.prototype.reports = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchRunReportsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsResponse} BatchRunReportsResponse instance
+                         */
+                        BatchRunReportsResponse.create = function create(properties) {
+                            return new BatchRunReportsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunReportsResponse message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsResponse} message BatchRunReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunReportsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reports != null && message.reports.length)
+                                for (var i = 0; i < message.reports.length; ++i)
+                                    $root.google.analytics.data.v1beta.RunReportResponse.encode(message.reports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunReportsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunReportsResponse} message BatchRunReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunReportsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchRunReportsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsResponse} BatchRunReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunReportsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.BatchRunReportsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.reports && message.reports.length))
+                                        message.reports = [];
+                                    message.reports.push($root.google.analytics.data.v1beta.RunReportResponse.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchRunReportsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsResponse} BatchRunReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunReportsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchRunReportsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchRunReportsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reports != null && message.hasOwnProperty("reports")) {
+                                if (!Array.isArray(message.reports))
+                                    return "reports: array expected";
+                                for (var i = 0; i < message.reports.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.RunReportResponse.verify(message.reports[i]);
+                                    if (error)
+                                        return "reports." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchRunReportsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.BatchRunReportsResponse} BatchRunReportsResponse
+                         */
+                        BatchRunReportsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.BatchRunReportsResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.BatchRunReportsResponse();
+                            if (object.reports) {
+                                if (!Array.isArray(object.reports))
+                                    throw TypeError(".google.analytics.data.v1beta.BatchRunReportsResponse.reports: array expected");
+                                message.reports = [];
+                                for (var i = 0; i < object.reports.length; ++i) {
+                                    if (typeof object.reports[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.BatchRunReportsResponse.reports: object expected");
+                                    message.reports[i] = $root.google.analytics.data.v1beta.RunReportResponse.fromObject(object.reports[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchRunReportsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.BatchRunReportsResponse} message BatchRunReportsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchRunReportsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.reports = [];
+                            if (message.reports && message.reports.length) {
+                                object.reports = [];
+                                for (var j = 0; j < message.reports.length; ++j)
+                                    object.reports[j] = $root.google.analytics.data.v1beta.RunReportResponse.toObject(message.reports[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchRunReportsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchRunReportsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchRunReportsResponse;
+                    })();
+    
+                    v1beta.BatchRunPivotReportsRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchRunPivotReportsRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IBatchRunPivotReportsRequest
+                         * @property {string|null} [property] BatchRunPivotReportsRequest property
+                         * @property {Array.<google.analytics.data.v1beta.IRunPivotReportRequest>|null} [requests] BatchRunPivotReportsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BatchRunPivotReportsRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a BatchRunPivotReportsRequest.
+                         * @implements IBatchRunPivotReportsRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsRequest=} [properties] Properties to set
+                         */
+                        function BatchRunPivotReportsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchRunPivotReportsRequest property.
+                         * @member {string} property
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @instance
+                         */
+                        BatchRunPivotReportsRequest.prototype.property = "";
+    
+                        /**
+                         * BatchRunPivotReportsRequest requests.
+                         * @member {Array.<google.analytics.data.v1beta.IRunPivotReportRequest>} requests
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @instance
+                         */
+                        BatchRunPivotReportsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchRunPivotReportsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsRequest} BatchRunPivotReportsRequest instance
+                         */
+                        BatchRunPivotReportsRequest.create = function create(properties) {
+                            return new BatchRunPivotReportsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunPivotReportsRequest message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsRequest} message BatchRunPivotReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunPivotReportsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.analytics.data.v1beta.RunPivotReportRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunPivotReportsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsRequest} message BatchRunPivotReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunPivotReportsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchRunPivotReportsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsRequest} BatchRunPivotReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunPivotReportsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.BatchRunPivotReportsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.requests && message.requests.length))
+                                        message.requests = [];
+                                    message.requests.push($root.google.analytics.data.v1beta.RunPivotReportRequest.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchRunPivotReportsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsRequest} BatchRunPivotReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunPivotReportsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchRunPivotReportsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchRunPivotReportsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.RunPivotReportRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchRunPivotReportsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsRequest} BatchRunPivotReportsRequest
+                         */
+                        BatchRunPivotReportsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.BatchRunPivotReportsRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.BatchRunPivotReportsRequest();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.analytics.data.v1beta.BatchRunPivotReportsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.BatchRunPivotReportsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.analytics.data.v1beta.RunPivotReportRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchRunPivotReportsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.BatchRunPivotReportsRequest} message BatchRunPivotReportsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchRunPivotReportsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.property = "";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.analytics.data.v1beta.RunPivotReportRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchRunPivotReportsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchRunPivotReportsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchRunPivotReportsRequest;
+                    })();
+    
+                    v1beta.BatchRunPivotReportsResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchRunPivotReportsResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IBatchRunPivotReportsResponse
+                         * @property {Array.<google.analytics.data.v1beta.IRunPivotReportResponse>|null} [pivotReports] BatchRunPivotReportsResponse pivotReports
+                         */
+    
+                        /**
+                         * Constructs a new BatchRunPivotReportsResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a BatchRunPivotReportsResponse.
+                         * @implements IBatchRunPivotReportsResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsResponse=} [properties] Properties to set
+                         */
+                        function BatchRunPivotReportsResponse(properties) {
+                            this.pivotReports = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchRunPivotReportsResponse pivotReports.
+                         * @member {Array.<google.analytics.data.v1beta.IRunPivotReportResponse>} pivotReports
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @instance
+                         */
+                        BatchRunPivotReportsResponse.prototype.pivotReports = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchRunPivotReportsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsResponse} BatchRunPivotReportsResponse instance
+                         */
+                        BatchRunPivotReportsResponse.create = function create(properties) {
+                            return new BatchRunPivotReportsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunPivotReportsResponse message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsResponse} message BatchRunPivotReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunPivotReportsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pivotReports != null && message.pivotReports.length)
+                                for (var i = 0; i < message.pivotReports.length; ++i)
+                                    $root.google.analytics.data.v1beta.RunPivotReportResponse.encode(message.pivotReports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRunPivotReportsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IBatchRunPivotReportsResponse} message BatchRunPivotReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRunPivotReportsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchRunPivotReportsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsResponse} BatchRunPivotReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunPivotReportsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.BatchRunPivotReportsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.pivotReports && message.pivotReports.length))
+                                        message.pivotReports = [];
+                                    message.pivotReports.push($root.google.analytics.data.v1beta.RunPivotReportResponse.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchRunPivotReportsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsResponse} BatchRunPivotReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRunPivotReportsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchRunPivotReportsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchRunPivotReportsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pivotReports != null && message.hasOwnProperty("pivotReports")) {
+                                if (!Array.isArray(message.pivotReports))
+                                    return "pivotReports: array expected";
+                                for (var i = 0; i < message.pivotReports.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.RunPivotReportResponse.verify(message.pivotReports[i]);
+                                    if (error)
+                                        return "pivotReports." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchRunPivotReportsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.BatchRunPivotReportsResponse} BatchRunPivotReportsResponse
+                         */
+                        BatchRunPivotReportsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.BatchRunPivotReportsResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.BatchRunPivotReportsResponse();
+                            if (object.pivotReports) {
+                                if (!Array.isArray(object.pivotReports))
+                                    throw TypeError(".google.analytics.data.v1beta.BatchRunPivotReportsResponse.pivotReports: array expected");
+                                message.pivotReports = [];
+                                for (var i = 0; i < object.pivotReports.length; ++i) {
+                                    if (typeof object.pivotReports[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.BatchRunPivotReportsResponse.pivotReports: object expected");
+                                    message.pivotReports[i] = $root.google.analytics.data.v1beta.RunPivotReportResponse.fromObject(object.pivotReports[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchRunPivotReportsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.BatchRunPivotReportsResponse} message BatchRunPivotReportsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchRunPivotReportsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.pivotReports = [];
+                            if (message.pivotReports && message.pivotReports.length) {
+                                object.pivotReports = [];
+                                for (var j = 0; j < message.pivotReports.length; ++j)
+                                    object.pivotReports[j] = $root.google.analytics.data.v1beta.RunPivotReportResponse.toObject(message.pivotReports[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchRunPivotReportsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchRunPivotReportsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchRunPivotReportsResponse;
+                    })();
+    
+                    v1beta.GetMetadataRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMetadataRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IGetMetadataRequest
+                         * @property {string|null} [name] GetMetadataRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMetadataRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a GetMetadataRequest.
+                         * @implements IGetMetadataRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IGetMetadataRequest=} [properties] Properties to set
+                         */
+                        function GetMetadataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMetadataRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @instance
+                         */
+                        GetMetadataRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMetadataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IGetMetadataRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.GetMetadataRequest} GetMetadataRequest instance
+                         */
+                        GetMetadataRequest.create = function create(properties) {
+                            return new GetMetadataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMetadataRequest message. Does not implicitly {@link google.analytics.data.v1beta.GetMetadataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IGetMetadataRequest} message GetMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMetadataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMetadataRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.GetMetadataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IGetMetadataRequest} message GetMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMetadataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMetadataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.GetMetadataRequest} GetMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMetadataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.GetMetadataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMetadataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.GetMetadataRequest} GetMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMetadataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMetadataRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMetadataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.GetMetadataRequest} GetMetadataRequest
+                         */
+                        GetMetadataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.GetMetadataRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.GetMetadataRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMetadataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.GetMetadataRequest} message GetMetadataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMetadataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMetadataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.GetMetadataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMetadataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetMetadataRequest;
+                    })();
+    
+                    v1beta.RunRealtimeReportRequest = (function() {
+    
+                        /**
+                         * Properties of a RunRealtimeReportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IRunRealtimeReportRequest
+                         * @property {string|null} [property] RunRealtimeReportRequest property
+                         * @property {Array.<google.analytics.data.v1beta.IDimension>|null} [dimensions] RunRealtimeReportRequest dimensions
+                         * @property {Array.<google.analytics.data.v1beta.IMetric>|null} [metrics] RunRealtimeReportRequest metrics
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [dimensionFilter] RunRealtimeReportRequest dimensionFilter
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [metricFilter] RunRealtimeReportRequest metricFilter
+                         * @property {number|null} [pageSize] RunRealtimeReportRequest pageSize
+                         * @property {Array.<google.analytics.data.v1beta.MetricAggregation>|null} [metricAggregations] RunRealtimeReportRequest metricAggregations
+                         * @property {Array.<google.analytics.data.v1beta.IOrderBy>|null} [orderBys] RunRealtimeReportRequest orderBys
+                         * @property {boolean|null} [returnPropertyQuota] RunRealtimeReportRequest returnPropertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunRealtimeReportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a RunRealtimeReportRequest.
+                         * @implements IRunRealtimeReportRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportRequest=} [properties] Properties to set
+                         */
+                        function RunRealtimeReportRequest(properties) {
+                            this.dimensions = [];
+                            this.metrics = [];
+                            this.metricAggregations = [];
+                            this.orderBys = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunRealtimeReportRequest property.
+                         * @member {string} property
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.property = "";
+    
+                        /**
+                         * RunRealtimeReportRequest dimensions.
+                         * @member {Array.<google.analytics.data.v1beta.IDimension>} dimensions
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest metrics.
+                         * @member {Array.<google.analytics.data.v1beta.IMetric>} metrics
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest dimensionFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} dimensionFilter
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.dimensionFilter = null;
+    
+                        /**
+                         * RunRealtimeReportRequest metricFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} metricFilter
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.metricFilter = null;
+    
+                        /**
+                         * RunRealtimeReportRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * RunRealtimeReportRequest metricAggregations.
+                         * @member {Array.<google.analytics.data.v1beta.MetricAggregation>} metricAggregations
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.metricAggregations = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest orderBys.
+                         * @member {Array.<google.analytics.data.v1beta.IOrderBy>} orderBys
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.orderBys = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportRequest returnPropertyQuota.
+                         * @member {boolean} returnPropertyQuota
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.returnPropertyQuota = false;
+    
+                        /**
+                         * Creates a new RunRealtimeReportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportRequest} RunRealtimeReportRequest instance
+                         */
+                        RunRealtimeReportRequest.create = function create(properties) {
+                            return new RunRealtimeReportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportRequest message. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportRequest} message RunRealtimeReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1beta.Dimension.encode(message.dimensions[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.analytics.data.v1beta.Metric.encode(message.metrics[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.dimensionFilter != null && Object.hasOwnProperty.call(message, "dimensionFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.dimensionFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.metricFilter != null && Object.hasOwnProperty.call(message, "metricFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.metricFilter, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.pageSize);
+                            if (message.metricAggregations != null && message.metricAggregations.length) {
+                                writer.uint32(/* id 7, wireType 2 =*/58).fork();
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    writer.int32(message.metricAggregations[i]);
+                                writer.ldelim();
+                            }
+                            if (message.orderBys != null && message.orderBys.length)
+                                for (var i = 0; i < message.orderBys.length; ++i)
+                                    $root.google.analytics.data.v1beta.OrderBy.encode(message.orderBys[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.returnPropertyQuota != null && Object.hasOwnProperty.call(message, "returnPropertyQuota"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.returnPropertyQuota);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportRequest} message RunRealtimeReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportRequest} RunRealtimeReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.RunRealtimeReportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.dimensions && message.dimensions.length))
+                                        message.dimensions = [];
+                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 7:
+                                    if (!(message.metricAggregations && message.metricAggregations.length))
+                                        message.metricAggregations = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.metricAggregations.push(reader.int32());
+                                    } else
+                                        message.metricAggregations.push(reader.int32());
+                                    break;
+                                case 8:
+                                    if (!(message.orderBys && message.orderBys.length))
+                                        message.orderBys = [];
+                                    message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
+                                    break;
+                                case 9:
+                                    message.returnPropertyQuota = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportRequest} RunRealtimeReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunRealtimeReportRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunRealtimeReportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Dimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Metric.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.dimensionFilter);
+                                if (error)
+                                    return "dimensionFilter." + error;
+                            }
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.metricFilter);
+                                if (error)
+                                    return "metricFilter." + error;
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.metricAggregations != null && message.hasOwnProperty("metricAggregations")) {
+                                if (!Array.isArray(message.metricAggregations))
+                                    return "metricAggregations: array expected";
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    switch (message.metricAggregations[i]) {
+                                    default:
+                                        return "metricAggregations: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 5:
+                                    case 6:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            if (message.orderBys != null && message.hasOwnProperty("orderBys")) {
+                                if (!Array.isArray(message.orderBys))
+                                    return "orderBys: array expected";
+                                for (var i = 0; i < message.orderBys.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.OrderBy.verify(message.orderBys[i]);
+                                    if (error)
+                                        return "orderBys." + error;
+                                }
+                            }
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                if (typeof message.returnPropertyQuota !== "boolean")
+                                    return "returnPropertyQuota: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunRealtimeReportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportRequest} RunRealtimeReportRequest
+                         */
+                        RunRealtimeReportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.RunRealtimeReportRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.RunRealtimeReportRequest();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1beta.Dimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.metrics: object expected");
+                                    message.metrics[i] = $root.google.analytics.data.v1beta.Metric.fromObject(object.metrics[i]);
+                                }
+                            }
+                            if (object.dimensionFilter != null) {
+                                if (typeof object.dimensionFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.dimensionFilter: object expected");
+                                message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.dimensionFilter);
+                            }
+                            if (object.metricFilter != null) {
+                                if (typeof object.metricFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.metricFilter: object expected");
+                                message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.metricFilter);
+                            }
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.metricAggregations) {
+                                if (!Array.isArray(object.metricAggregations))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.metricAggregations: array expected");
+                                message.metricAggregations = [];
+                                for (var i = 0; i < object.metricAggregations.length; ++i)
+                                    switch (object.metricAggregations[i]) {
+                                    default:
+                                    case "METRIC_AGGREGATION_UNSPECIFIED":
+                                    case 0:
+                                        message.metricAggregations[i] = 0;
+                                        break;
+                                    case "TOTAL":
+                                    case 1:
+                                        message.metricAggregations[i] = 1;
+                                        break;
+                                    case "MINIMUM":
+                                    case 5:
+                                        message.metricAggregations[i] = 5;
+                                        break;
+                                    case "MAXIMUM":
+                                    case 6:
+                                        message.metricAggregations[i] = 6;
+                                        break;
+                                    case "COUNT":
+                                    case 4:
+                                        message.metricAggregations[i] = 4;
+                                        break;
+                                    }
+                            }
+                            if (object.orderBys) {
+                                if (!Array.isArray(object.orderBys))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.orderBys: array expected");
+                                message.orderBys = [];
+                                for (var i = 0; i < object.orderBys.length; ++i) {
+                                    if (typeof object.orderBys[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.orderBys: object expected");
+                                    message.orderBys[i] = $root.google.analytics.data.v1beta.OrderBy.fromObject(object.orderBys[i]);
+                                }
+                            }
+                            if (object.returnPropertyQuota != null)
+                                message.returnPropertyQuota = Boolean(object.returnPropertyQuota);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunRealtimeReportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.RunRealtimeReportRequest} message RunRealtimeReportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunRealtimeReportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.metrics = [];
+                                object.metricAggregations = [];
+                                object.orderBys = [];
+                            }
+                            if (options.defaults) {
+                                object.property = "";
+                                object.dimensionFilter = null;
+                                object.metricFilter = null;
+                                object.pageSize = 0;
+                                object.returnPropertyQuota = false;
+                            }
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1beta.Dimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.analytics.data.v1beta.Metric.toObject(message.metrics[j], options);
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter"))
+                                object.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.dimensionFilter, options);
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter"))
+                                object.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.metricFilter, options);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.metricAggregations && message.metricAggregations.length) {
+                                object.metricAggregations = [];
+                                for (var j = 0; j < message.metricAggregations.length; ++j)
+                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
+                            }
+                            if (message.orderBys && message.orderBys.length) {
+                                object.orderBys = [];
+                                for (var j = 0; j < message.orderBys.length; ++j)
+                                    object.orderBys[j] = $root.google.analytics.data.v1beta.OrderBy.toObject(message.orderBys[j], options);
+                            }
+                            if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
+                                object.returnPropertyQuota = message.returnPropertyQuota;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunRealtimeReportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunRealtimeReportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunRealtimeReportRequest;
+                    })();
+    
+                    v1beta.RunRealtimeReportResponse = (function() {
+    
+                        /**
+                         * Properties of a RunRealtimeReportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IRunRealtimeReportResponse
+                         * @property {Array.<google.analytics.data.v1beta.IDimensionHeader>|null} [dimensionHeaders] RunRealtimeReportResponse dimensionHeaders
+                         * @property {Array.<google.analytics.data.v1beta.IMetricHeader>|null} [metricHeaders] RunRealtimeReportResponse metricHeaders
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [rows] RunRealtimeReportResponse rows
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [totals] RunRealtimeReportResponse totals
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [maximums] RunRealtimeReportResponse maximums
+                         * @property {Array.<google.analytics.data.v1beta.IRow>|null} [minimums] RunRealtimeReportResponse minimums
+                         * @property {number|null} [totalSize] RunRealtimeReportResponse totalSize
+                         * @property {google.analytics.data.v1beta.IPropertyQuota|null} [propertyQuota] RunRealtimeReportResponse propertyQuota
+                         */
+    
+                        /**
+                         * Constructs a new RunRealtimeReportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a RunRealtimeReportResponse.
+                         * @implements IRunRealtimeReportResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportResponse=} [properties] Properties to set
+                         */
+                        function RunRealtimeReportResponse(properties) {
+                            this.dimensionHeaders = [];
+                            this.metricHeaders = [];
+                            this.rows = [];
+                            this.totals = [];
+                            this.maximums = [];
+                            this.minimums = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunRealtimeReportResponse dimensionHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IDimensionHeader>} dimensionHeaders
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.dimensionHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse metricHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IMetricHeader>} metricHeaders
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.metricHeaders = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse rows.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} rows
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse totals.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} totals
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.totals = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse maximums.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} maximums
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.maximums = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse minimums.
+                         * @member {Array.<google.analytics.data.v1beta.IRow>} minimums
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.minimums = $util.emptyArray;
+    
+                        /**
+                         * RunRealtimeReportResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * RunRealtimeReportResponse propertyQuota.
+                         * @member {google.analytics.data.v1beta.IPropertyQuota|null|undefined} propertyQuota
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.propertyQuota = null;
+    
+                        /**
+                         * Creates a new RunRealtimeReportResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportResponse} RunRealtimeReportResponse instance
+                         */
+                        RunRealtimeReportResponse.create = function create(properties) {
+                            return new RunRealtimeReportResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportResponse message. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportResponse} message RunRealtimeReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionHeaders != null && message.dimensionHeaders.length)
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.DimensionHeader.encode(message.dimensionHeaders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metricHeaders != null && message.metricHeaders.length)
+                                for (var i = 0; i < message.metricHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.MetricHeader.encode(message.metricHeaders[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.rows[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.totals != null && message.totals.length)
+                                for (var i = 0; i < message.totals.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.totals[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.maximums != null && message.maximums.length)
+                                for (var i = 0; i < message.maximums.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.maximums[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.minimums != null && message.minimums.length)
+                                for (var i = 0; i < message.minimums.length; ++i)
+                                    $root.google.analytics.data.v1beta.Row.encode(message.minimums[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.totalSize);
+                            if (message.propertyQuota != null && Object.hasOwnProperty.call(message, "propertyQuota"))
+                                $root.google.analytics.data.v1beta.PropertyQuota.encode(message.propertyQuota, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunRealtimeReportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRunRealtimeReportResponse} message RunRealtimeReportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunRealtimeReportResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportResponse} RunRealtimeReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.RunRealtimeReportResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dimensionHeaders && message.dimensionHeaders.length))
+                                        message.dimensionHeaders = [];
+                                    message.dimensionHeaders.push($root.google.analytics.data.v1beta.DimensionHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.metricHeaders && message.metricHeaders.length))
+                                        message.metricHeaders = [];
+                                    message.metricHeaders.push($root.google.analytics.data.v1beta.MetricHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.rows && message.rows.length))
+                                        message.rows = [];
+                                    message.rows.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.totals && message.totals.length))
+                                        message.totals = [];
+                                    message.totals.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    if (!(message.maximums && message.maximums.length))
+                                        message.maximums = [];
+                                    message.maximums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    if (!(message.minimums && message.minimums.length))
+                                        message.minimums = [];
+                                    message.minimums.push($root.google.analytics.data.v1beta.Row.decode(reader, reader.uint32()));
+                                    break;
+                                case 7:
+                                    message.totalSize = reader.int32();
+                                    break;
+                                case 8:
+                                    message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunRealtimeReportResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportResponse} RunRealtimeReportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunRealtimeReportResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunRealtimeReportResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunRealtimeReportResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionHeaders != null && message.hasOwnProperty("dimensionHeaders")) {
+                                if (!Array.isArray(message.dimensionHeaders))
+                                    return "dimensionHeaders: array expected";
+                                for (var i = 0; i < message.dimensionHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DimensionHeader.verify(message.dimensionHeaders[i]);
+                                    if (error)
+                                        return "dimensionHeaders." + error;
+                                }
+                            }
+                            if (message.metricHeaders != null && message.hasOwnProperty("metricHeaders")) {
+                                if (!Array.isArray(message.metricHeaders))
+                                    return "metricHeaders: array expected";
+                                for (var i = 0; i < message.metricHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.MetricHeader.verify(message.metricHeaders[i]);
+                                    if (error)
+                                        return "metricHeaders." + error;
+                                }
+                            }
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            if (message.totals != null && message.hasOwnProperty("totals")) {
+                                if (!Array.isArray(message.totals))
+                                    return "totals: array expected";
+                                for (var i = 0; i < message.totals.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.totals[i]);
+                                    if (error)
+                                        return "totals." + error;
+                                }
+                            }
+                            if (message.maximums != null && message.hasOwnProperty("maximums")) {
+                                if (!Array.isArray(message.maximums))
+                                    return "maximums: array expected";
+                                for (var i = 0; i < message.maximums.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.maximums[i]);
+                                    if (error)
+                                        return "maximums." + error;
+                                }
+                            }
+                            if (message.minimums != null && message.hasOwnProperty("minimums")) {
+                                if (!Array.isArray(message.minimums))
+                                    return "minimums: array expected";
+                                for (var i = 0; i < message.minimums.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Row.verify(message.minimums[i]);
+                                    if (error)
+                                        return "minimums." + error;
+                                }
+                            }
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota")) {
+                                var error = $root.google.analytics.data.v1beta.PropertyQuota.verify(message.propertyQuota);
+                                if (error)
+                                    return "propertyQuota." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunRealtimeReportResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.RunRealtimeReportResponse} RunRealtimeReportResponse
+                         */
+                        RunRealtimeReportResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.RunRealtimeReportResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.RunRealtimeReportResponse();
+                            if (object.dimensionHeaders) {
+                                if (!Array.isArray(object.dimensionHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.dimensionHeaders: array expected");
+                                message.dimensionHeaders = [];
+                                for (var i = 0; i < object.dimensionHeaders.length; ++i) {
+                                    if (typeof object.dimensionHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.dimensionHeaders: object expected");
+                                    message.dimensionHeaders[i] = $root.google.analytics.data.v1beta.DimensionHeader.fromObject(object.dimensionHeaders[i]);
+                                }
+                            }
+                            if (object.metricHeaders) {
+                                if (!Array.isArray(object.metricHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.metricHeaders: array expected");
+                                message.metricHeaders = [];
+                                for (var i = 0; i < object.metricHeaders.length; ++i) {
+                                    if (typeof object.metricHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.metricHeaders: object expected");
+                                    message.metricHeaders[i] = $root.google.analytics.data.v1beta.MetricHeader.fromObject(object.metricHeaders[i]);
+                                }
+                            }
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.rows: object expected");
+                                    message.rows[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.rows[i]);
+                                }
+                            }
+                            if (object.totals) {
+                                if (!Array.isArray(object.totals))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.totals: array expected");
+                                message.totals = [];
+                                for (var i = 0; i < object.totals.length; ++i) {
+                                    if (typeof object.totals[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.totals: object expected");
+                                    message.totals[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.totals[i]);
+                                }
+                            }
+                            if (object.maximums) {
+                                if (!Array.isArray(object.maximums))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.maximums: array expected");
+                                message.maximums = [];
+                                for (var i = 0; i < object.maximums.length; ++i) {
+                                    if (typeof object.maximums[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.maximums: object expected");
+                                    message.maximums[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.maximums[i]);
+                                }
+                            }
+                            if (object.minimums) {
+                                if (!Array.isArray(object.minimums))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.minimums: array expected");
+                                message.minimums = [];
+                                for (var i = 0; i < object.minimums.length; ++i) {
+                                    if (typeof object.minimums[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.minimums: object expected");
+                                    message.minimums[i] = $root.google.analytics.data.v1beta.Row.fromObject(object.minimums[i]);
+                                }
+                            }
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            if (object.propertyQuota != null) {
+                                if (typeof object.propertyQuota !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.propertyQuota: object expected");
+                                message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.fromObject(object.propertyQuota);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunRealtimeReportResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.RunRealtimeReportResponse} message RunRealtimeReportResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunRealtimeReportResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensionHeaders = [];
+                                object.metricHeaders = [];
+                                object.rows = [];
+                                object.totals = [];
+                                object.maximums = [];
+                                object.minimums = [];
+                            }
+                            if (options.defaults) {
+                                object.totalSize = 0;
+                                object.propertyQuota = null;
+                            }
+                            if (message.dimensionHeaders && message.dimensionHeaders.length) {
+                                object.dimensionHeaders = [];
+                                for (var j = 0; j < message.dimensionHeaders.length; ++j)
+                                    object.dimensionHeaders[j] = $root.google.analytics.data.v1beta.DimensionHeader.toObject(message.dimensionHeaders[j], options);
+                            }
+                            if (message.metricHeaders && message.metricHeaders.length) {
+                                object.metricHeaders = [];
+                                for (var j = 0; j < message.metricHeaders.length; ++j)
+                                    object.metricHeaders[j] = $root.google.analytics.data.v1beta.MetricHeader.toObject(message.metricHeaders[j], options);
+                            }
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.analytics.data.v1beta.Row.toObject(message.rows[j], options);
+                            }
+                            if (message.totals && message.totals.length) {
+                                object.totals = [];
+                                for (var j = 0; j < message.totals.length; ++j)
+                                    object.totals[j] = $root.google.analytics.data.v1beta.Row.toObject(message.totals[j], options);
+                            }
+                            if (message.maximums && message.maximums.length) {
+                                object.maximums = [];
+                                for (var j = 0; j < message.maximums.length; ++j)
+                                    object.maximums[j] = $root.google.analytics.data.v1beta.Row.toObject(message.maximums[j], options);
+                            }
+                            if (message.minimums && message.minimums.length) {
+                                object.minimums = [];
+                                for (var j = 0; j < message.minimums.length; ++j)
+                                    object.minimums[j] = $root.google.analytics.data.v1beta.Row.toObject(message.minimums[j], options);
+                            }
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota"))
+                                object.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.toObject(message.propertyQuota, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunRealtimeReportResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunRealtimeReportResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RunRealtimeReportResponse;
+                    })();
+    
+                    v1beta.DateRange = (function() {
+    
+                        /**
+                         * Properties of a DateRange.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IDateRange
+                         * @property {string|null} [startDate] DateRange startDate
+                         * @property {string|null} [endDate] DateRange endDate
+                         * @property {string|null} [name] DateRange name
+                         */
+    
+                        /**
+                         * Constructs a new DateRange.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a DateRange.
+                         * @implements IDateRange
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IDateRange=} [properties] Properties to set
+                         */
+                        function DateRange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DateRange startDate.
+                         * @member {string} startDate
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @instance
+                         */
+                        DateRange.prototype.startDate = "";
+    
+                        /**
+                         * DateRange endDate.
+                         * @member {string} endDate
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @instance
+                         */
+                        DateRange.prototype.endDate = "";
+    
+                        /**
+                         * DateRange name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @instance
+                         */
+                        DateRange.prototype.name = "";
+    
+                        /**
+                         * Creates a new DateRange instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDateRange=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.DateRange} DateRange instance
+                         */
+                        DateRange.create = function create(properties) {
+                            return new DateRange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DateRange message. Does not implicitly {@link google.analytics.data.v1beta.DateRange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDateRange} message DateRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DateRange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.startDate);
+                            if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.endDate);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DateRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DateRange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDateRange} message DateRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DateRange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DateRange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.DateRange} DateRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DateRange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DateRange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.startDate = reader.string();
+                                    break;
+                                case 2:
+                                    message.endDate = reader.string();
+                                    break;
+                                case 3:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DateRange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.DateRange} DateRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DateRange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DateRange message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DateRange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startDate != null && message.hasOwnProperty("startDate"))
+                                if (!$util.isString(message.startDate))
+                                    return "startDate: string expected";
+                            if (message.endDate != null && message.hasOwnProperty("endDate"))
+                                if (!$util.isString(message.endDate))
+                                    return "endDate: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DateRange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.DateRange} DateRange
+                         */
+                        DateRange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.DateRange)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.DateRange();
+                            if (object.startDate != null)
+                                message.startDate = String(object.startDate);
+                            if (object.endDate != null)
+                                message.endDate = String(object.endDate);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DateRange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.DateRange} message DateRange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DateRange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startDate = "";
+                                object.endDate = "";
+                                object.name = "";
+                            }
+                            if (message.startDate != null && message.hasOwnProperty("startDate"))
+                                object.startDate = message.startDate;
+                            if (message.endDate != null && message.hasOwnProperty("endDate"))
+                                object.endDate = message.endDate;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DateRange to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.DateRange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DateRange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DateRange;
+                    })();
+    
+                    v1beta.Dimension = (function() {
+    
+                        /**
+                         * Properties of a Dimension.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IDimension
+                         * @property {string|null} [name] Dimension name
+                         * @property {google.analytics.data.v1beta.IDimensionExpression|null} [dimensionExpression] Dimension dimensionExpression
+                         */
+    
+                        /**
+                         * Constructs a new Dimension.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a Dimension.
+                         * @implements IDimension
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IDimension=} [properties] Properties to set
+                         */
+                        function Dimension(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Dimension name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @instance
+                         */
+                        Dimension.prototype.name = "";
+    
+                        /**
+                         * Dimension dimensionExpression.
+                         * @member {google.analytics.data.v1beta.IDimensionExpression|null|undefined} dimensionExpression
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @instance
+                         */
+                        Dimension.prototype.dimensionExpression = null;
+    
+                        /**
+                         * Creates a new Dimension instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimension=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.Dimension} Dimension instance
+                         */
+                        Dimension.create = function create(properties) {
+                            return new Dimension(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Dimension message. Does not implicitly {@link google.analytics.data.v1beta.Dimension.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimension} message Dimension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dimension.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dimensionExpression != null && Object.hasOwnProperty.call(message, "dimensionExpression"))
+                                $root.google.analytics.data.v1beta.DimensionExpression.encode(message.dimensionExpression, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Dimension message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Dimension.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimension} message Dimension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dimension.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Dimension message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.Dimension} Dimension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dimension.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Dimension();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.dimensionExpression = $root.google.analytics.data.v1beta.DimensionExpression.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Dimension message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.Dimension} Dimension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dimension.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Dimension message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Dimension.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dimensionExpression != null && message.hasOwnProperty("dimensionExpression")) {
+                                var error = $root.google.analytics.data.v1beta.DimensionExpression.verify(message.dimensionExpression);
+                                if (error)
+                                    return "dimensionExpression." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Dimension message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.Dimension} Dimension
+                         */
+                        Dimension.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.Dimension)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.Dimension();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dimensionExpression != null) {
+                                if (typeof object.dimensionExpression !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.Dimension.dimensionExpression: object expected");
+                                message.dimensionExpression = $root.google.analytics.data.v1beta.DimensionExpression.fromObject(object.dimensionExpression);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Dimension message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.Dimension} message Dimension
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Dimension.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.dimensionExpression = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.dimensionExpression != null && message.hasOwnProperty("dimensionExpression"))
+                                object.dimensionExpression = $root.google.analytics.data.v1beta.DimensionExpression.toObject(message.dimensionExpression, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Dimension to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.Dimension
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Dimension.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Dimension;
+                    })();
+    
+                    v1beta.DimensionExpression = (function() {
+    
+                        /**
+                         * Properties of a DimensionExpression.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IDimensionExpression
+                         * @property {google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null} [lowerCase] DimensionExpression lowerCase
+                         * @property {google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null} [upperCase] DimensionExpression upperCase
+                         * @property {google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression|null} [concatenate] DimensionExpression concatenate
+                         */
+    
+                        /**
+                         * Constructs a new DimensionExpression.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a DimensionExpression.
+                         * @implements IDimensionExpression
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IDimensionExpression=} [properties] Properties to set
+                         */
+                        function DimensionExpression(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DimensionExpression lowerCase.
+                         * @member {google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null|undefined} lowerCase
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @instance
+                         */
+                        DimensionExpression.prototype.lowerCase = null;
+    
+                        /**
+                         * DimensionExpression upperCase.
+                         * @member {google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null|undefined} upperCase
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @instance
+                         */
+                        DimensionExpression.prototype.upperCase = null;
+    
+                        /**
+                         * DimensionExpression concatenate.
+                         * @member {google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression|null|undefined} concatenate
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @instance
+                         */
+                        DimensionExpression.prototype.concatenate = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DimensionExpression oneExpression.
+                         * @member {"lowerCase"|"upperCase"|"concatenate"|undefined} oneExpression
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @instance
+                         */
+                        Object.defineProperty(DimensionExpression.prototype, "oneExpression", {
+                            get: $util.oneOfGetter($oneOfFields = ["lowerCase", "upperCase", "concatenate"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DimensionExpression instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionExpression=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.DimensionExpression} DimensionExpression instance
+                         */
+                        DimensionExpression.create = function create(properties) {
+                            return new DimensionExpression(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionExpression message. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionExpression} message DimensionExpression message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionExpression.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lowerCase != null && Object.hasOwnProperty.call(message, "lowerCase"))
+                                $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.encode(message.lowerCase, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.upperCase != null && Object.hasOwnProperty.call(message, "upperCase"))
+                                $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.encode(message.upperCase, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.concatenate != null && Object.hasOwnProperty.call(message, "concatenate"))
+                                $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.encode(message.concatenate, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionExpression} message DimensionExpression message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionExpression.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DimensionExpression message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.DimensionExpression} DimensionExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionExpression.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DimensionExpression();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.lowerCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.upperCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.concatenate = $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DimensionExpression message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.DimensionExpression} DimensionExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionExpression.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DimensionExpression message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DimensionExpression.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.lowerCase != null && message.hasOwnProperty("lowerCase")) {
+                                properties.oneExpression = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.verify(message.lowerCase);
+                                    if (error)
+                                        return "lowerCase." + error;
+                                }
+                            }
+                            if (message.upperCase != null && message.hasOwnProperty("upperCase")) {
+                                if (properties.oneExpression === 1)
+                                    return "oneExpression: multiple values";
+                                properties.oneExpression = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.verify(message.upperCase);
+                                    if (error)
+                                        return "upperCase." + error;
+                                }
+                            }
+                            if (message.concatenate != null && message.hasOwnProperty("concatenate")) {
+                                if (properties.oneExpression === 1)
+                                    return "oneExpression: multiple values";
+                                properties.oneExpression = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.verify(message.concatenate);
+                                    if (error)
+                                        return "concatenate." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DimensionExpression message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.DimensionExpression} DimensionExpression
+                         */
+                        DimensionExpression.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.DimensionExpression)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.DimensionExpression();
+                            if (object.lowerCase != null) {
+                                if (typeof object.lowerCase !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.DimensionExpression.lowerCase: object expected");
+                                message.lowerCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.fromObject(object.lowerCase);
+                            }
+                            if (object.upperCase != null) {
+                                if (typeof object.upperCase !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.DimensionExpression.upperCase: object expected");
+                                message.upperCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.fromObject(object.upperCase);
+                            }
+                            if (object.concatenate != null) {
+                                if (typeof object.concatenate !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.DimensionExpression.concatenate: object expected");
+                                message.concatenate = $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.fromObject(object.concatenate);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DimensionExpression message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.DimensionExpression} message DimensionExpression
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DimensionExpression.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.lowerCase != null && message.hasOwnProperty("lowerCase")) {
+                                object.lowerCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.toObject(message.lowerCase, options);
+                                if (options.oneofs)
+                                    object.oneExpression = "lowerCase";
+                            }
+                            if (message.upperCase != null && message.hasOwnProperty("upperCase")) {
+                                object.upperCase = $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression.toObject(message.upperCase, options);
+                                if (options.oneofs)
+                                    object.oneExpression = "upperCase";
+                            }
+                            if (message.concatenate != null && message.hasOwnProperty("concatenate")) {
+                                object.concatenate = $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.toObject(message.concatenate, options);
+                                if (options.oneofs)
+                                    object.oneExpression = "concatenate";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DimensionExpression to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.DimensionExpression
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DimensionExpression.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        DimensionExpression.CaseExpression = (function() {
+    
+                            /**
+                             * Properties of a CaseExpression.
+                             * @memberof google.analytics.data.v1beta.DimensionExpression
+                             * @interface ICaseExpression
+                             * @property {string|null} [dimensionName] CaseExpression dimensionName
+                             */
+    
+                            /**
+                             * Constructs a new CaseExpression.
+                             * @memberof google.analytics.data.v1beta.DimensionExpression
+                             * @classdesc Represents a CaseExpression.
+                             * @implements ICaseExpression
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.DimensionExpression.ICaseExpression=} [properties] Properties to set
+                             */
+                            function CaseExpression(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CaseExpression dimensionName.
+                             * @member {string} dimensionName
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @instance
+                             */
+                            CaseExpression.prototype.dimensionName = "";
+    
+                            /**
+                             * Creates a new CaseExpression instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.ICaseExpression=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.CaseExpression} CaseExpression instance
+                             */
+                            CaseExpression.create = function create(properties) {
+                                return new CaseExpression(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CaseExpression message. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.CaseExpression.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.ICaseExpression} message CaseExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CaseExpression.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dimensionName != null && Object.hasOwnProperty.call(message, "dimensionName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dimensionName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CaseExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.CaseExpression.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.ICaseExpression} message CaseExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CaseExpression.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CaseExpression message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.CaseExpression} CaseExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CaseExpression.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.dimensionName = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CaseExpression message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.CaseExpression} CaseExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CaseExpression.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CaseExpression message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CaseExpression.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                    if (!$util.isString(message.dimensionName))
+                                        return "dimensionName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CaseExpression message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.CaseExpression} CaseExpression
+                             */
+                            CaseExpression.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.DimensionExpression.CaseExpression();
+                                if (object.dimensionName != null)
+                                    message.dimensionName = String(object.dimensionName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CaseExpression message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.CaseExpression} message CaseExpression
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CaseExpression.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.dimensionName = "";
+                                if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                    object.dimensionName = message.dimensionName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CaseExpression to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.CaseExpression
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CaseExpression.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return CaseExpression;
+                        })();
+    
+                        DimensionExpression.ConcatenateExpression = (function() {
+    
+                            /**
+                             * Properties of a ConcatenateExpression.
+                             * @memberof google.analytics.data.v1beta.DimensionExpression
+                             * @interface IConcatenateExpression
+                             * @property {Array.<string>|null} [dimensionNames] ConcatenateExpression dimensionNames
+                             * @property {string|null} [delimiter] ConcatenateExpression delimiter
+                             */
+    
+                            /**
+                             * Constructs a new ConcatenateExpression.
+                             * @memberof google.analytics.data.v1beta.DimensionExpression
+                             * @classdesc Represents a ConcatenateExpression.
+                             * @implements IConcatenateExpression
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression=} [properties] Properties to set
+                             */
+                            function ConcatenateExpression(properties) {
+                                this.dimensionNames = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConcatenateExpression dimensionNames.
+                             * @member {Array.<string>} dimensionNames
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @instance
+                             */
+                            ConcatenateExpression.prototype.dimensionNames = $util.emptyArray;
+    
+                            /**
+                             * ConcatenateExpression delimiter.
+                             * @member {string} delimiter
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @instance
+                             */
+                            ConcatenateExpression.prototype.delimiter = "";
+    
+                            /**
+                             * Creates a new ConcatenateExpression instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression} ConcatenateExpression instance
+                             */
+                            ConcatenateExpression.create = function create(properties) {
+                                return new ConcatenateExpression(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConcatenateExpression message. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression} message ConcatenateExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConcatenateExpression.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dimensionNames != null && message.dimensionNames.length)
+                                    for (var i = 0; i < message.dimensionNames.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.dimensionNames[i]);
+                                if (message.delimiter != null && Object.hasOwnProperty.call(message, "delimiter"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.delimiter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConcatenateExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression} message ConcatenateExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConcatenateExpression.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConcatenateExpression message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression} ConcatenateExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConcatenateExpression.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.dimensionNames && message.dimensionNames.length))
+                                            message.dimensionNames = [];
+                                        message.dimensionNames.push(reader.string());
+                                        break;
+                                    case 2:
+                                        message.delimiter = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConcatenateExpression message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression} ConcatenateExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConcatenateExpression.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConcatenateExpression message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConcatenateExpression.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dimensionNames != null && message.hasOwnProperty("dimensionNames")) {
+                                    if (!Array.isArray(message.dimensionNames))
+                                        return "dimensionNames: array expected";
+                                    for (var i = 0; i < message.dimensionNames.length; ++i)
+                                        if (!$util.isString(message.dimensionNames[i]))
+                                            return "dimensionNames: string[] expected";
+                                }
+                                if (message.delimiter != null && message.hasOwnProperty("delimiter"))
+                                    if (!$util.isString(message.delimiter))
+                                        return "delimiter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConcatenateExpression message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression} ConcatenateExpression
+                             */
+                            ConcatenateExpression.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression();
+                                if (object.dimensionNames) {
+                                    if (!Array.isArray(object.dimensionNames))
+                                        throw TypeError(".google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.dimensionNames: array expected");
+                                    message.dimensionNames = [];
+                                    for (var i = 0; i < object.dimensionNames.length; ++i)
+                                        message.dimensionNames[i] = String(object.dimensionNames[i]);
+                                }
+                                if (object.delimiter != null)
+                                    message.delimiter = String(object.delimiter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConcatenateExpression message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @static
+                             * @param {google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression} message ConcatenateExpression
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConcatenateExpression.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dimensionNames = [];
+                                if (options.defaults)
+                                    object.delimiter = "";
+                                if (message.dimensionNames && message.dimensionNames.length) {
+                                    object.dimensionNames = [];
+                                    for (var j = 0; j < message.dimensionNames.length; ++j)
+                                        object.dimensionNames[j] = message.dimensionNames[j];
+                                }
+                                if (message.delimiter != null && message.hasOwnProperty("delimiter"))
+                                    object.delimiter = message.delimiter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConcatenateExpression to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConcatenateExpression.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ConcatenateExpression;
+                        })();
+    
+                        return DimensionExpression;
+                    })();
+    
+                    v1beta.Metric = (function() {
+    
+                        /**
+                         * Properties of a Metric.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IMetric
+                         * @property {string|null} [name] Metric name
+                         * @property {string|null} [expression] Metric expression
+                         * @property {boolean|null} [invisible] Metric invisible
+                         */
+    
+                        /**
+                         * Constructs a new Metric.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a Metric.
+                         * @implements IMetric
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IMetric=} [properties] Properties to set
+                         */
+                        function Metric(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Metric name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @instance
+                         */
+                        Metric.prototype.name = "";
+    
+                        /**
+                         * Metric expression.
+                         * @member {string} expression
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @instance
+                         */
+                        Metric.prototype.expression = "";
+    
+                        /**
+                         * Metric invisible.
+                         * @member {boolean} invisible
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @instance
+                         */
+                        Metric.prototype.invisible = false;
+    
+                        /**
+                         * Creates a new Metric instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetric=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.Metric} Metric instance
+                         */
+                        Metric.create = function create(properties) {
+                            return new Metric(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Metric message. Does not implicitly {@link google.analytics.data.v1beta.Metric.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetric} message Metric message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metric.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.expression);
+                            if (message.invisible != null && Object.hasOwnProperty.call(message, "invisible"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.invisible);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Metric.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetric} message Metric message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metric.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Metric message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.Metric} Metric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metric.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Metric();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.expression = reader.string();
+                                    break;
+                                case 3:
+                                    message.invisible = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Metric message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.Metric} Metric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metric.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Metric message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Metric.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.expression != null && message.hasOwnProperty("expression"))
+                                if (!$util.isString(message.expression))
+                                    return "expression: string expected";
+                            if (message.invisible != null && message.hasOwnProperty("invisible"))
+                                if (typeof message.invisible !== "boolean")
+                                    return "invisible: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Metric message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.Metric} Metric
+                         */
+                        Metric.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.Metric)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.Metric();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.expression != null)
+                                message.expression = String(object.expression);
+                            if (object.invisible != null)
+                                message.invisible = Boolean(object.invisible);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Metric message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @static
+                         * @param {google.analytics.data.v1beta.Metric} message Metric
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Metric.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.expression = "";
+                                object.invisible = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.expression != null && message.hasOwnProperty("expression"))
+                                object.expression = message.expression;
+                            if (message.invisible != null && message.hasOwnProperty("invisible"))
+                                object.invisible = message.invisible;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Metric to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.Metric
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Metric.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Metric;
+                    })();
+    
+                    v1beta.FilterExpression = (function() {
+    
+                        /**
+                         * Properties of a FilterExpression.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IFilterExpression
+                         * @property {google.analytics.data.v1beta.IFilterExpressionList|null} [andGroup] FilterExpression andGroup
+                         * @property {google.analytics.data.v1beta.IFilterExpressionList|null} [orGroup] FilterExpression orGroup
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [notExpression] FilterExpression notExpression
+                         * @property {google.analytics.data.v1beta.IFilter|null} [filter] FilterExpression filter
+                         */
+    
+                        /**
+                         * Constructs a new FilterExpression.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a FilterExpression.
+                         * @implements IFilterExpression
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IFilterExpression=} [properties] Properties to set
+                         */
+                        function FilterExpression(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FilterExpression andGroup.
+                         * @member {google.analytics.data.v1beta.IFilterExpressionList|null|undefined} andGroup
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @instance
+                         */
+                        FilterExpression.prototype.andGroup = null;
+    
+                        /**
+                         * FilterExpression orGroup.
+                         * @member {google.analytics.data.v1beta.IFilterExpressionList|null|undefined} orGroup
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @instance
+                         */
+                        FilterExpression.prototype.orGroup = null;
+    
+                        /**
+                         * FilterExpression notExpression.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} notExpression
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @instance
+                         */
+                        FilterExpression.prototype.notExpression = null;
+    
+                        /**
+                         * FilterExpression filter.
+                         * @member {google.analytics.data.v1beta.IFilter|null|undefined} filter
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @instance
+                         */
+                        FilterExpression.prototype.filter = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FilterExpression expr.
+                         * @member {"andGroup"|"orGroup"|"notExpression"|"filter"|undefined} expr
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @instance
+                         */
+                        Object.defineProperty(FilterExpression.prototype, "expr", {
+                            get: $util.oneOfGetter($oneOfFields = ["andGroup", "orGroup", "notExpression", "filter"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FilterExpression instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilterExpression=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.FilterExpression} FilterExpression instance
+                         */
+                        FilterExpression.create = function create(properties) {
+                            return new FilterExpression(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FilterExpression message. Does not implicitly {@link google.analytics.data.v1beta.FilterExpression.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilterExpression} message FilterExpression message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterExpression.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.andGroup != null && Object.hasOwnProperty.call(message, "andGroup"))
+                                $root.google.analytics.data.v1beta.FilterExpressionList.encode(message.andGroup, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.orGroup != null && Object.hasOwnProperty.call(message, "orGroup"))
+                                $root.google.analytics.data.v1beta.FilterExpressionList.encode(message.orGroup, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.notExpression != null && Object.hasOwnProperty.call(message, "notExpression"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.notExpression, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                $root.google.analytics.data.v1beta.Filter.encode(message.filter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FilterExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.FilterExpression.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilterExpression} message FilterExpression message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterExpression.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FilterExpression message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.FilterExpression} FilterExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterExpression.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.FilterExpression();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.andGroup = $root.google.analytics.data.v1beta.FilterExpressionList.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.orGroup = $root.google.analytics.data.v1beta.FilterExpressionList.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.notExpression = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.filter = $root.google.analytics.data.v1beta.Filter.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FilterExpression message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.FilterExpression} FilterExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterExpression.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FilterExpression message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FilterExpression.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.andGroup != null && message.hasOwnProperty("andGroup")) {
+                                properties.expr = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.FilterExpressionList.verify(message.andGroup);
+                                    if (error)
+                                        return "andGroup." + error;
+                                }
+                            }
+                            if (message.orGroup != null && message.hasOwnProperty("orGroup")) {
+                                if (properties.expr === 1)
+                                    return "expr: multiple values";
+                                properties.expr = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.FilterExpressionList.verify(message.orGroup);
+                                    if (error)
+                                        return "orGroup." + error;
+                                }
+                            }
+                            if (message.notExpression != null && message.hasOwnProperty("notExpression")) {
+                                if (properties.expr === 1)
+                                    return "expr: multiple values";
+                                properties.expr = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.notExpression);
+                                    if (error)
+                                        return "notExpression." + error;
+                                }
+                            }
+                            if (message.filter != null && message.hasOwnProperty("filter")) {
+                                if (properties.expr === 1)
+                                    return "expr: multiple values";
+                                properties.expr = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.Filter.verify(message.filter);
+                                    if (error)
+                                        return "filter." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FilterExpression message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.FilterExpression} FilterExpression
+                         */
+                        FilterExpression.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.FilterExpression)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.FilterExpression();
+                            if (object.andGroup != null) {
+                                if (typeof object.andGroup !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.FilterExpression.andGroup: object expected");
+                                message.andGroup = $root.google.analytics.data.v1beta.FilterExpressionList.fromObject(object.andGroup);
+                            }
+                            if (object.orGroup != null) {
+                                if (typeof object.orGroup !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.FilterExpression.orGroup: object expected");
+                                message.orGroup = $root.google.analytics.data.v1beta.FilterExpressionList.fromObject(object.orGroup);
+                            }
+                            if (object.notExpression != null) {
+                                if (typeof object.notExpression !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.FilterExpression.notExpression: object expected");
+                                message.notExpression = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.notExpression);
+                            }
+                            if (object.filter != null) {
+                                if (typeof object.filter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.FilterExpression.filter: object expected");
+                                message.filter = $root.google.analytics.data.v1beta.Filter.fromObject(object.filter);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FilterExpression message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @static
+                         * @param {google.analytics.data.v1beta.FilterExpression} message FilterExpression
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FilterExpression.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.andGroup != null && message.hasOwnProperty("andGroup")) {
+                                object.andGroup = $root.google.analytics.data.v1beta.FilterExpressionList.toObject(message.andGroup, options);
+                                if (options.oneofs)
+                                    object.expr = "andGroup";
+                            }
+                            if (message.orGroup != null && message.hasOwnProperty("orGroup")) {
+                                object.orGroup = $root.google.analytics.data.v1beta.FilterExpressionList.toObject(message.orGroup, options);
+                                if (options.oneofs)
+                                    object.expr = "orGroup";
+                            }
+                            if (message.notExpression != null && message.hasOwnProperty("notExpression")) {
+                                object.notExpression = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.notExpression, options);
+                                if (options.oneofs)
+                                    object.expr = "notExpression";
+                            }
+                            if (message.filter != null && message.hasOwnProperty("filter")) {
+                                object.filter = $root.google.analytics.data.v1beta.Filter.toObject(message.filter, options);
+                                if (options.oneofs)
+                                    object.expr = "filter";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FilterExpression to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.FilterExpression
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FilterExpression.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return FilterExpression;
+                    })();
+    
+                    v1beta.FilterExpressionList = (function() {
+    
+                        /**
+                         * Properties of a FilterExpressionList.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IFilterExpressionList
+                         * @property {Array.<google.analytics.data.v1beta.IFilterExpression>|null} [expressions] FilterExpressionList expressions
+                         */
+    
+                        /**
+                         * Constructs a new FilterExpressionList.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a FilterExpressionList.
+                         * @implements IFilterExpressionList
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IFilterExpressionList=} [properties] Properties to set
+                         */
+                        function FilterExpressionList(properties) {
+                            this.expressions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FilterExpressionList expressions.
+                         * @member {Array.<google.analytics.data.v1beta.IFilterExpression>} expressions
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @instance
+                         */
+                        FilterExpressionList.prototype.expressions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FilterExpressionList instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilterExpressionList=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.FilterExpressionList} FilterExpressionList instance
+                         */
+                        FilterExpressionList.create = function create(properties) {
+                            return new FilterExpressionList(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FilterExpressionList message. Does not implicitly {@link google.analytics.data.v1beta.FilterExpressionList.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilterExpressionList} message FilterExpressionList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterExpressionList.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.expressions != null && message.expressions.length)
+                                for (var i = 0; i < message.expressions.length; ++i)
+                                    $root.google.analytics.data.v1beta.FilterExpression.encode(message.expressions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FilterExpressionList message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.FilterExpressionList.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilterExpressionList} message FilterExpressionList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterExpressionList.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FilterExpressionList message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.FilterExpressionList} FilterExpressionList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterExpressionList.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.FilterExpressionList();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.expressions && message.expressions.length))
+                                        message.expressions = [];
+                                    message.expressions.push($root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FilterExpressionList message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.FilterExpressionList} FilterExpressionList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterExpressionList.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FilterExpressionList message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FilterExpressionList.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.expressions != null && message.hasOwnProperty("expressions")) {
+                                if (!Array.isArray(message.expressions))
+                                    return "expressions: array expected";
+                                for (var i = 0; i < message.expressions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.expressions[i]);
+                                    if (error)
+                                        return "expressions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FilterExpressionList message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.FilterExpressionList} FilterExpressionList
+                         */
+                        FilterExpressionList.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.FilterExpressionList)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.FilterExpressionList();
+                            if (object.expressions) {
+                                if (!Array.isArray(object.expressions))
+                                    throw TypeError(".google.analytics.data.v1beta.FilterExpressionList.expressions: array expected");
+                                message.expressions = [];
+                                for (var i = 0; i < object.expressions.length; ++i) {
+                                    if (typeof object.expressions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.FilterExpressionList.expressions: object expected");
+                                    message.expressions[i] = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.expressions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FilterExpressionList message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @static
+                         * @param {google.analytics.data.v1beta.FilterExpressionList} message FilterExpressionList
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FilterExpressionList.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.expressions = [];
+                            if (message.expressions && message.expressions.length) {
+                                object.expressions = [];
+                                for (var j = 0; j < message.expressions.length; ++j)
+                                    object.expressions[j] = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.expressions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FilterExpressionList to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.FilterExpressionList
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FilterExpressionList.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return FilterExpressionList;
+                    })();
+    
+                    v1beta.Filter = (function() {
+    
+                        /**
+                         * Properties of a Filter.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IFilter
+                         * @property {string|null} [fieldName] Filter fieldName
+                         * @property {google.analytics.data.v1beta.Filter.IStringFilter|null} [stringFilter] Filter stringFilter
+                         * @property {google.analytics.data.v1beta.Filter.IInListFilter|null} [inListFilter] Filter inListFilter
+                         * @property {google.analytics.data.v1beta.Filter.INumericFilter|null} [numericFilter] Filter numericFilter
+                         * @property {google.analytics.data.v1beta.Filter.IBetweenFilter|null} [betweenFilter] Filter betweenFilter
+                         */
+    
+                        /**
+                         * Constructs a new Filter.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a Filter.
+                         * @implements IFilter
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IFilter=} [properties] Properties to set
+                         */
+                        function Filter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Filter fieldName.
+                         * @member {string} fieldName
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @instance
+                         */
+                        Filter.prototype.fieldName = "";
+    
+                        /**
+                         * Filter stringFilter.
+                         * @member {google.analytics.data.v1beta.Filter.IStringFilter|null|undefined} stringFilter
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @instance
+                         */
+                        Filter.prototype.stringFilter = null;
+    
+                        /**
+                         * Filter inListFilter.
+                         * @member {google.analytics.data.v1beta.Filter.IInListFilter|null|undefined} inListFilter
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @instance
+                         */
+                        Filter.prototype.inListFilter = null;
+    
+                        /**
+                         * Filter numericFilter.
+                         * @member {google.analytics.data.v1beta.Filter.INumericFilter|null|undefined} numericFilter
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @instance
+                         */
+                        Filter.prototype.numericFilter = null;
+    
+                        /**
+                         * Filter betweenFilter.
+                         * @member {google.analytics.data.v1beta.Filter.IBetweenFilter|null|undefined} betweenFilter
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @instance
+                         */
+                        Filter.prototype.betweenFilter = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Filter oneFilter.
+                         * @member {"stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter"|undefined} oneFilter
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @instance
+                         */
+                        Object.defineProperty(Filter.prototype, "oneFilter", {
+                            get: $util.oneOfGetter($oneOfFields = ["stringFilter", "inListFilter", "numericFilter", "betweenFilter"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Filter instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilter=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.Filter} Filter instance
+                         */
+                        Filter.create = function create(properties) {
+                            return new Filter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Filter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilter} message Filter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Filter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.fieldName != null && Object.hasOwnProperty.call(message, "fieldName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.fieldName);
+                            if (message.stringFilter != null && Object.hasOwnProperty.call(message, "stringFilter"))
+                                $root.google.analytics.data.v1beta.Filter.StringFilter.encode(message.stringFilter, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.inListFilter != null && Object.hasOwnProperty.call(message, "inListFilter"))
+                                $root.google.analytics.data.v1beta.Filter.InListFilter.encode(message.inListFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.numericFilter != null && Object.hasOwnProperty.call(message, "numericFilter"))
+                                $root.google.analytics.data.v1beta.Filter.NumericFilter.encode(message.numericFilter, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.betweenFilter != null && Object.hasOwnProperty.call(message, "betweenFilter"))
+                                $root.google.analytics.data.v1beta.Filter.BetweenFilter.encode(message.betweenFilter, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {google.analytics.data.v1beta.IFilter} message Filter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Filter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.Filter} Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Filter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Filter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.fieldName = reader.string();
+                                    break;
+                                case 3:
+                                    message.stringFilter = $root.google.analytics.data.v1beta.Filter.StringFilter.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.inListFilter = $root.google.analytics.data.v1beta.Filter.InListFilter.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.numericFilter = $root.google.analytics.data.v1beta.Filter.NumericFilter.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.betweenFilter = $root.google.analytics.data.v1beta.Filter.BetweenFilter.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.Filter} Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Filter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Filter message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Filter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.fieldName != null && message.hasOwnProperty("fieldName"))
+                                if (!$util.isString(message.fieldName))
+                                    return "fieldName: string expected";
+                            if (message.stringFilter != null && message.hasOwnProperty("stringFilter")) {
+                                properties.oneFilter = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.Filter.StringFilter.verify(message.stringFilter);
+                                    if (error)
+                                        return "stringFilter." + error;
+                                }
+                            }
+                            if (message.inListFilter != null && message.hasOwnProperty("inListFilter")) {
+                                if (properties.oneFilter === 1)
+                                    return "oneFilter: multiple values";
+                                properties.oneFilter = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.Filter.InListFilter.verify(message.inListFilter);
+                                    if (error)
+                                        return "inListFilter." + error;
+                                }
+                            }
+                            if (message.numericFilter != null && message.hasOwnProperty("numericFilter")) {
+                                if (properties.oneFilter === 1)
+                                    return "oneFilter: multiple values";
+                                properties.oneFilter = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.Filter.NumericFilter.verify(message.numericFilter);
+                                    if (error)
+                                        return "numericFilter." + error;
+                                }
+                            }
+                            if (message.betweenFilter != null && message.hasOwnProperty("betweenFilter")) {
+                                if (properties.oneFilter === 1)
+                                    return "oneFilter: multiple values";
+                                properties.oneFilter = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.Filter.BetweenFilter.verify(message.betweenFilter);
+                                    if (error)
+                                        return "betweenFilter." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.Filter} Filter
+                         */
+                        Filter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.Filter)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.Filter();
+                            if (object.fieldName != null)
+                                message.fieldName = String(object.fieldName);
+                            if (object.stringFilter != null) {
+                                if (typeof object.stringFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.Filter.stringFilter: object expected");
+                                message.stringFilter = $root.google.analytics.data.v1beta.Filter.StringFilter.fromObject(object.stringFilter);
+                            }
+                            if (object.inListFilter != null) {
+                                if (typeof object.inListFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.Filter.inListFilter: object expected");
+                                message.inListFilter = $root.google.analytics.data.v1beta.Filter.InListFilter.fromObject(object.inListFilter);
+                            }
+                            if (object.numericFilter != null) {
+                                if (typeof object.numericFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.Filter.numericFilter: object expected");
+                                message.numericFilter = $root.google.analytics.data.v1beta.Filter.NumericFilter.fromObject(object.numericFilter);
+                            }
+                            if (object.betweenFilter != null) {
+                                if (typeof object.betweenFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.Filter.betweenFilter: object expected");
+                                message.betweenFilter = $root.google.analytics.data.v1beta.Filter.BetweenFilter.fromObject(object.betweenFilter);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @static
+                         * @param {google.analytics.data.v1beta.Filter} message Filter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Filter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.fieldName = "";
+                            if (message.fieldName != null && message.hasOwnProperty("fieldName"))
+                                object.fieldName = message.fieldName;
+                            if (message.stringFilter != null && message.hasOwnProperty("stringFilter")) {
+                                object.stringFilter = $root.google.analytics.data.v1beta.Filter.StringFilter.toObject(message.stringFilter, options);
+                                if (options.oneofs)
+                                    object.oneFilter = "stringFilter";
+                            }
+                            if (message.inListFilter != null && message.hasOwnProperty("inListFilter")) {
+                                object.inListFilter = $root.google.analytics.data.v1beta.Filter.InListFilter.toObject(message.inListFilter, options);
+                                if (options.oneofs)
+                                    object.oneFilter = "inListFilter";
+                            }
+                            if (message.numericFilter != null && message.hasOwnProperty("numericFilter")) {
+                                object.numericFilter = $root.google.analytics.data.v1beta.Filter.NumericFilter.toObject(message.numericFilter, options);
+                                if (options.oneofs)
+                                    object.oneFilter = "numericFilter";
+                            }
+                            if (message.betweenFilter != null && message.hasOwnProperty("betweenFilter")) {
+                                object.betweenFilter = $root.google.analytics.data.v1beta.Filter.BetweenFilter.toObject(message.betweenFilter, options);
+                                if (options.oneofs)
+                                    object.oneFilter = "betweenFilter";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Filter to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.Filter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Filter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        Filter.StringFilter = (function() {
+    
+                            /**
+                             * Properties of a StringFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @interface IStringFilter
+                             * @property {google.analytics.data.v1beta.Filter.StringFilter.MatchType|null} [matchType] StringFilter matchType
+                             * @property {string|null} [value] StringFilter value
+                             * @property {boolean|null} [caseSensitive] StringFilter caseSensitive
+                             */
+    
+                            /**
+                             * Constructs a new StringFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @classdesc Represents a StringFilter.
+                             * @implements IStringFilter
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.Filter.IStringFilter=} [properties] Properties to set
+                             */
+                            function StringFilter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StringFilter matchType.
+                             * @member {google.analytics.data.v1beta.Filter.StringFilter.MatchType} matchType
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @instance
+                             */
+                            StringFilter.prototype.matchType = 0;
+    
+                            /**
+                             * StringFilter value.
+                             * @member {string} value
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @instance
+                             */
+                            StringFilter.prototype.value = "";
+    
+                            /**
+                             * StringFilter caseSensitive.
+                             * @member {boolean} caseSensitive
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @instance
+                             */
+                            StringFilter.prototype.caseSensitive = false;
+    
+                            /**
+                             * Creates a new StringFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IStringFilter=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.Filter.StringFilter} StringFilter instance
+                             */
+                            StringFilter.create = function create(properties) {
+                                return new StringFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StringFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.StringFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IStringFilter} message StringFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StringFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.matchType != null && Object.hasOwnProperty.call(message, "matchType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.matchType);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                if (message.caseSensitive != null && Object.hasOwnProperty.call(message, "caseSensitive"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.caseSensitive);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StringFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.StringFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IStringFilter} message StringFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StringFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StringFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.Filter.StringFilter} StringFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StringFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Filter.StringFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.matchType = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.value = reader.string();
+                                        break;
+                                    case 3:
+                                        message.caseSensitive = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StringFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.Filter.StringFilter} StringFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StringFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StringFilter message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StringFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.matchType != null && message.hasOwnProperty("matchType"))
+                                    switch (message.matchType) {
+                                    default:
+                                        return "matchType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    if (typeof message.caseSensitive !== "boolean")
+                                        return "caseSensitive: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StringFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.Filter.StringFilter} StringFilter
+                             */
+                            StringFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.Filter.StringFilter)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.Filter.StringFilter();
+                                switch (object.matchType) {
+                                case "MATCH_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.matchType = 0;
+                                    break;
+                                case "EXACT":
+                                case 1:
+                                    message.matchType = 1;
+                                    break;
+                                case "BEGINS_WITH":
+                                case 2:
+                                    message.matchType = 2;
+                                    break;
+                                case "ENDS_WITH":
+                                case 3:
+                                    message.matchType = 3;
+                                    break;
+                                case "CONTAINS":
+                                case 4:
+                                    message.matchType = 4;
+                                    break;
+                                case "FULL_REGEXP":
+                                case 5:
+                                    message.matchType = 5;
+                                    break;
+                                case "PARTIAL_REGEXP":
+                                case 6:
+                                    message.matchType = 6;
+                                    break;
+                                }
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                if (object.caseSensitive != null)
+                                    message.caseSensitive = Boolean(object.caseSensitive);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StringFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.StringFilter} message StringFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StringFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.matchType = options.enums === String ? "MATCH_TYPE_UNSPECIFIED" : 0;
+                                    object.value = "";
+                                    object.caseSensitive = false;
+                                }
+                                if (message.matchType != null && message.hasOwnProperty("matchType"))
+                                    object.matchType = options.enums === String ? $root.google.analytics.data.v1beta.Filter.StringFilter.MatchType[message.matchType] : message.matchType;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    object.caseSensitive = message.caseSensitive;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StringFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.Filter.StringFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StringFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * MatchType enum.
+                             * @name google.analytics.data.v1beta.Filter.StringFilter.MatchType
+                             * @enum {number}
+                             * @property {number} MATCH_TYPE_UNSPECIFIED=0 MATCH_TYPE_UNSPECIFIED value
+                             * @property {number} EXACT=1 EXACT value
+                             * @property {number} BEGINS_WITH=2 BEGINS_WITH value
+                             * @property {number} ENDS_WITH=3 ENDS_WITH value
+                             * @property {number} CONTAINS=4 CONTAINS value
+                             * @property {number} FULL_REGEXP=5 FULL_REGEXP value
+                             * @property {number} PARTIAL_REGEXP=6 PARTIAL_REGEXP value
+                             */
+                            StringFilter.MatchType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "MATCH_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "EXACT"] = 1;
+                                values[valuesById[2] = "BEGINS_WITH"] = 2;
+                                values[valuesById[3] = "ENDS_WITH"] = 3;
+                                values[valuesById[4] = "CONTAINS"] = 4;
+                                values[valuesById[5] = "FULL_REGEXP"] = 5;
+                                values[valuesById[6] = "PARTIAL_REGEXP"] = 6;
+                                return values;
+                            })();
+    
+                            return StringFilter;
+                        })();
+    
+                        Filter.InListFilter = (function() {
+    
+                            /**
+                             * Properties of an InListFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @interface IInListFilter
+                             * @property {Array.<string>|null} [values] InListFilter values
+                             * @property {boolean|null} [caseSensitive] InListFilter caseSensitive
+                             */
+    
+                            /**
+                             * Constructs a new InListFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @classdesc Represents an InListFilter.
+                             * @implements IInListFilter
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.Filter.IInListFilter=} [properties] Properties to set
+                             */
+                            function InListFilter(properties) {
+                                this.values = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InListFilter values.
+                             * @member {Array.<string>} values
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @instance
+                             */
+                            InListFilter.prototype.values = $util.emptyArray;
+    
+                            /**
+                             * InListFilter caseSensitive.
+                             * @member {boolean} caseSensitive
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @instance
+                             */
+                            InListFilter.prototype.caseSensitive = false;
+    
+                            /**
+                             * Creates a new InListFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IInListFilter=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.Filter.InListFilter} InListFilter instance
+                             */
+                            InListFilter.create = function create(properties) {
+                                return new InListFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InListFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.InListFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IInListFilter} message InListFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InListFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.values != null && message.values.length)
+                                    for (var i = 0; i < message.values.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.values[i]);
+                                if (message.caseSensitive != null && Object.hasOwnProperty.call(message, "caseSensitive"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.caseSensitive);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InListFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.InListFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IInListFilter} message InListFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InListFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InListFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.Filter.InListFilter} InListFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InListFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Filter.InListFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push(reader.string());
+                                        break;
+                                    case 2:
+                                        message.caseSensitive = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InListFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.Filter.InListFilter} InListFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InListFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InListFilter message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InListFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.values != null && message.hasOwnProperty("values")) {
+                                    if (!Array.isArray(message.values))
+                                        return "values: array expected";
+                                    for (var i = 0; i < message.values.length; ++i)
+                                        if (!$util.isString(message.values[i]))
+                                            return "values: string[] expected";
+                                }
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    if (typeof message.caseSensitive !== "boolean")
+                                        return "caseSensitive: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InListFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.Filter.InListFilter} InListFilter
+                             */
+                            InListFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.Filter.InListFilter)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.Filter.InListFilter();
+                                if (object.values) {
+                                    if (!Array.isArray(object.values))
+                                        throw TypeError(".google.analytics.data.v1beta.Filter.InListFilter.values: array expected");
+                                    message.values = [];
+                                    for (var i = 0; i < object.values.length; ++i)
+                                        message.values[i] = String(object.values[i]);
+                                }
+                                if (object.caseSensitive != null)
+                                    message.caseSensitive = Boolean(object.caseSensitive);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InListFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.InListFilter} message InListFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InListFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.values = [];
+                                if (options.defaults)
+                                    object.caseSensitive = false;
+                                if (message.values && message.values.length) {
+                                    object.values = [];
+                                    for (var j = 0; j < message.values.length; ++j)
+                                        object.values[j] = message.values[j];
+                                }
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    object.caseSensitive = message.caseSensitive;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InListFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.Filter.InListFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InListFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return InListFilter;
+                        })();
+    
+                        Filter.NumericFilter = (function() {
+    
+                            /**
+                             * Properties of a NumericFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @interface INumericFilter
+                             * @property {google.analytics.data.v1beta.Filter.NumericFilter.Operation|null} [operation] NumericFilter operation
+                             * @property {google.analytics.data.v1beta.INumericValue|null} [value] NumericFilter value
+                             */
+    
+                            /**
+                             * Constructs a new NumericFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @classdesc Represents a NumericFilter.
+                             * @implements INumericFilter
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.Filter.INumericFilter=} [properties] Properties to set
+                             */
+                            function NumericFilter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NumericFilter operation.
+                             * @member {google.analytics.data.v1beta.Filter.NumericFilter.Operation} operation
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @instance
+                             */
+                            NumericFilter.prototype.operation = 0;
+    
+                            /**
+                             * NumericFilter value.
+                             * @member {google.analytics.data.v1beta.INumericValue|null|undefined} value
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @instance
+                             */
+                            NumericFilter.prototype.value = null;
+    
+                            /**
+                             * Creates a new NumericFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.INumericFilter=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.Filter.NumericFilter} NumericFilter instance
+                             */
+                            NumericFilter.create = function create(properties) {
+                                return new NumericFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NumericFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.NumericFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.INumericFilter} message NumericFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NumericFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.operation);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    $root.google.analytics.data.v1beta.NumericValue.encode(message.value, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NumericFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.NumericFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.INumericFilter} message NumericFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NumericFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NumericFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.Filter.NumericFilter} NumericFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NumericFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Filter.NumericFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.operation = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.value = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NumericFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.Filter.NumericFilter} NumericFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NumericFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NumericFilter message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NumericFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.operation != null && message.hasOwnProperty("operation"))
+                                    switch (message.operation) {
+                                    default:
+                                        return "operation: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                if (message.value != null && message.hasOwnProperty("value")) {
+                                    var error = $root.google.analytics.data.v1beta.NumericValue.verify(message.value);
+                                    if (error)
+                                        return "value." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NumericFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.Filter.NumericFilter} NumericFilter
+                             */
+                            NumericFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.Filter.NumericFilter)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.Filter.NumericFilter();
+                                switch (object.operation) {
+                                case "OPERATION_UNSPECIFIED":
+                                case 0:
+                                    message.operation = 0;
+                                    break;
+                                case "EQUAL":
+                                case 1:
+                                    message.operation = 1;
+                                    break;
+                                case "LESS_THAN":
+                                case 2:
+                                    message.operation = 2;
+                                    break;
+                                case "LESS_THAN_OR_EQUAL":
+                                case 3:
+                                    message.operation = 3;
+                                    break;
+                                case "GREATER_THAN":
+                                case 4:
+                                    message.operation = 4;
+                                    break;
+                                case "GREATER_THAN_OR_EQUAL":
+                                case 5:
+                                    message.operation = 5;
+                                    break;
+                                }
+                                if (object.value != null) {
+                                    if (typeof object.value !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Filter.NumericFilter.value: object expected");
+                                    message.value = $root.google.analytics.data.v1beta.NumericValue.fromObject(object.value);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NumericFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.NumericFilter} message NumericFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NumericFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.operation = options.enums === String ? "OPERATION_UNSPECIFIED" : 0;
+                                    object.value = null;
+                                }
+                                if (message.operation != null && message.hasOwnProperty("operation"))
+                                    object.operation = options.enums === String ? $root.google.analytics.data.v1beta.Filter.NumericFilter.Operation[message.operation] : message.operation;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = $root.google.analytics.data.v1beta.NumericValue.toObject(message.value, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NumericFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.Filter.NumericFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NumericFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Operation enum.
+                             * @name google.analytics.data.v1beta.Filter.NumericFilter.Operation
+                             * @enum {number}
+                             * @property {number} OPERATION_UNSPECIFIED=0 OPERATION_UNSPECIFIED value
+                             * @property {number} EQUAL=1 EQUAL value
+                             * @property {number} LESS_THAN=2 LESS_THAN value
+                             * @property {number} LESS_THAN_OR_EQUAL=3 LESS_THAN_OR_EQUAL value
+                             * @property {number} GREATER_THAN=4 GREATER_THAN value
+                             * @property {number} GREATER_THAN_OR_EQUAL=5 GREATER_THAN_OR_EQUAL value
+                             */
+                            NumericFilter.Operation = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "OPERATION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "EQUAL"] = 1;
+                                values[valuesById[2] = "LESS_THAN"] = 2;
+                                values[valuesById[3] = "LESS_THAN_OR_EQUAL"] = 3;
+                                values[valuesById[4] = "GREATER_THAN"] = 4;
+                                values[valuesById[5] = "GREATER_THAN_OR_EQUAL"] = 5;
+                                return values;
+                            })();
+    
+                            return NumericFilter;
+                        })();
+    
+                        Filter.BetweenFilter = (function() {
+    
+                            /**
+                             * Properties of a BetweenFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @interface IBetweenFilter
+                             * @property {google.analytics.data.v1beta.INumericValue|null} [fromValue] BetweenFilter fromValue
+                             * @property {google.analytics.data.v1beta.INumericValue|null} [toValue] BetweenFilter toValue
+                             */
+    
+                            /**
+                             * Constructs a new BetweenFilter.
+                             * @memberof google.analytics.data.v1beta.Filter
+                             * @classdesc Represents a BetweenFilter.
+                             * @implements IBetweenFilter
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.Filter.IBetweenFilter=} [properties] Properties to set
+                             */
+                            function BetweenFilter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BetweenFilter fromValue.
+                             * @member {google.analytics.data.v1beta.INumericValue|null|undefined} fromValue
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @instance
+                             */
+                            BetweenFilter.prototype.fromValue = null;
+    
+                            /**
+                             * BetweenFilter toValue.
+                             * @member {google.analytics.data.v1beta.INumericValue|null|undefined} toValue
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @instance
+                             */
+                            BetweenFilter.prototype.toValue = null;
+    
+                            /**
+                             * Creates a new BetweenFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IBetweenFilter=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.Filter.BetweenFilter} BetweenFilter instance
+                             */
+                            BetweenFilter.create = function create(properties) {
+                                return new BetweenFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BetweenFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.BetweenFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IBetweenFilter} message BetweenFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BetweenFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.fromValue != null && Object.hasOwnProperty.call(message, "fromValue"))
+                                    $root.google.analytics.data.v1beta.NumericValue.encode(message.fromValue, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.toValue != null && Object.hasOwnProperty.call(message, "toValue"))
+                                    $root.google.analytics.data.v1beta.NumericValue.encode(message.toValue, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BetweenFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.BetweenFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.IBetweenFilter} message BetweenFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BetweenFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BetweenFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.Filter.BetweenFilter} BetweenFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BetweenFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Filter.BetweenFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.fromValue = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.toValue = $root.google.analytics.data.v1beta.NumericValue.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BetweenFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.Filter.BetweenFilter} BetweenFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BetweenFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BetweenFilter message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BetweenFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.fromValue != null && message.hasOwnProperty("fromValue")) {
+                                    var error = $root.google.analytics.data.v1beta.NumericValue.verify(message.fromValue);
+                                    if (error)
+                                        return "fromValue." + error;
+                                }
+                                if (message.toValue != null && message.hasOwnProperty("toValue")) {
+                                    var error = $root.google.analytics.data.v1beta.NumericValue.verify(message.toValue);
+                                    if (error)
+                                        return "toValue." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BetweenFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.Filter.BetweenFilter} BetweenFilter
+                             */
+                            BetweenFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.Filter.BetweenFilter)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.Filter.BetweenFilter();
+                                if (object.fromValue != null) {
+                                    if (typeof object.fromValue !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Filter.BetweenFilter.fromValue: object expected");
+                                    message.fromValue = $root.google.analytics.data.v1beta.NumericValue.fromObject(object.fromValue);
+                                }
+                                if (object.toValue != null) {
+                                    if (typeof object.toValue !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Filter.BetweenFilter.toValue: object expected");
+                                    message.toValue = $root.google.analytics.data.v1beta.NumericValue.fromObject(object.toValue);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BetweenFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @static
+                             * @param {google.analytics.data.v1beta.Filter.BetweenFilter} message BetweenFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BetweenFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.fromValue = null;
+                                    object.toValue = null;
+                                }
+                                if (message.fromValue != null && message.hasOwnProperty("fromValue"))
+                                    object.fromValue = $root.google.analytics.data.v1beta.NumericValue.toObject(message.fromValue, options);
+                                if (message.toValue != null && message.hasOwnProperty("toValue"))
+                                    object.toValue = $root.google.analytics.data.v1beta.NumericValue.toObject(message.toValue, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BetweenFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.Filter.BetweenFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BetweenFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return BetweenFilter;
+                        })();
+    
+                        return Filter;
+                    })();
+    
+                    v1beta.OrderBy = (function() {
+    
+                        /**
+                         * Properties of an OrderBy.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IOrderBy
+                         * @property {google.analytics.data.v1beta.OrderBy.IMetricOrderBy|null} [metric] OrderBy metric
+                         * @property {google.analytics.data.v1beta.OrderBy.IDimensionOrderBy|null} [dimension] OrderBy dimension
+                         * @property {google.analytics.data.v1beta.OrderBy.IPivotOrderBy|null} [pivot] OrderBy pivot
+                         * @property {boolean|null} [desc] OrderBy desc
+                         */
+    
+                        /**
+                         * Constructs a new OrderBy.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents an OrderBy.
+                         * @implements IOrderBy
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IOrderBy=} [properties] Properties to set
+                         */
+                        function OrderBy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OrderBy metric.
+                         * @member {google.analytics.data.v1beta.OrderBy.IMetricOrderBy|null|undefined} metric
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @instance
+                         */
+                        OrderBy.prototype.metric = null;
+    
+                        /**
+                         * OrderBy dimension.
+                         * @member {google.analytics.data.v1beta.OrderBy.IDimensionOrderBy|null|undefined} dimension
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @instance
+                         */
+                        OrderBy.prototype.dimension = null;
+    
+                        /**
+                         * OrderBy pivot.
+                         * @member {google.analytics.data.v1beta.OrderBy.IPivotOrderBy|null|undefined} pivot
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @instance
+                         */
+                        OrderBy.prototype.pivot = null;
+    
+                        /**
+                         * OrderBy desc.
+                         * @member {boolean} desc
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @instance
+                         */
+                        OrderBy.prototype.desc = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * OrderBy oneOrderBy.
+                         * @member {"metric"|"dimension"|"pivot"|undefined} oneOrderBy
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @instance
+                         */
+                        Object.defineProperty(OrderBy.prototype, "oneOrderBy", {
+                            get: $util.oneOfGetter($oneOfFields = ["metric", "dimension", "pivot"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new OrderBy instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {google.analytics.data.v1beta.IOrderBy=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.OrderBy} OrderBy instance
+                         */
+                        OrderBy.create = function create(properties) {
+                            return new OrderBy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {google.analytics.data.v1beta.IOrderBy} message OrderBy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OrderBy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metric != null && Object.hasOwnProperty.call(message, "metric"))
+                                $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy.encode(message.metric, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.dimension != null && Object.hasOwnProperty.call(message, "dimension"))
+                                $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.encode(message.dimension, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.pivot != null && Object.hasOwnProperty.call(message, "pivot"))
+                                $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.encode(message.pivot, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.desc != null && Object.hasOwnProperty.call(message, "desc"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.desc);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {google.analytics.data.v1beta.IOrderBy} message OrderBy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OrderBy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OrderBy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.OrderBy} OrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OrderBy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.OrderBy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.metric = $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.dimension = $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.pivot = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.desc = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OrderBy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.OrderBy} OrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OrderBy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OrderBy message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OrderBy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.metric != null && message.hasOwnProperty("metric")) {
+                                properties.oneOrderBy = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy.verify(message.metric);
+                                    if (error)
+                                        return "metric." + error;
+                                }
+                            }
+                            if (message.dimension != null && message.hasOwnProperty("dimension")) {
+                                if (properties.oneOrderBy === 1)
+                                    return "oneOrderBy: multiple values";
+                                properties.oneOrderBy = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.verify(message.dimension);
+                                    if (error)
+                                        return "dimension." + error;
+                                }
+                            }
+                            if (message.pivot != null && message.hasOwnProperty("pivot")) {
+                                if (properties.oneOrderBy === 1)
+                                    return "oneOrderBy: multiple values";
+                                properties.oneOrderBy = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.verify(message.pivot);
+                                    if (error)
+                                        return "pivot." + error;
+                                }
+                            }
+                            if (message.desc != null && message.hasOwnProperty("desc"))
+                                if (typeof message.desc !== "boolean")
+                                    return "desc: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OrderBy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.OrderBy} OrderBy
+                         */
+                        OrderBy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.OrderBy)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.OrderBy();
+                            if (object.metric != null) {
+                                if (typeof object.metric !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.OrderBy.metric: object expected");
+                                message.metric = $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy.fromObject(object.metric);
+                            }
+                            if (object.dimension != null) {
+                                if (typeof object.dimension !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.OrderBy.dimension: object expected");
+                                message.dimension = $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.fromObject(object.dimension);
+                            }
+                            if (object.pivot != null) {
+                                if (typeof object.pivot !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.OrderBy.pivot: object expected");
+                                message.pivot = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.fromObject(object.pivot);
+                            }
+                            if (object.desc != null)
+                                message.desc = Boolean(object.desc);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OrderBy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @static
+                         * @param {google.analytics.data.v1beta.OrderBy} message OrderBy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OrderBy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.desc = false;
+                            if (message.metric != null && message.hasOwnProperty("metric")) {
+                                object.metric = $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy.toObject(message.metric, options);
+                                if (options.oneofs)
+                                    object.oneOrderBy = "metric";
+                            }
+                            if (message.dimension != null && message.hasOwnProperty("dimension")) {
+                                object.dimension = $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.toObject(message.dimension, options);
+                                if (options.oneofs)
+                                    object.oneOrderBy = "dimension";
+                            }
+                            if (message.pivot != null && message.hasOwnProperty("pivot")) {
+                                object.pivot = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.toObject(message.pivot, options);
+                                if (options.oneofs)
+                                    object.oneOrderBy = "pivot";
+                            }
+                            if (message.desc != null && message.hasOwnProperty("desc"))
+                                object.desc = message.desc;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OrderBy to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.OrderBy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OrderBy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        OrderBy.MetricOrderBy = (function() {
+    
+                            /**
+                             * Properties of a MetricOrderBy.
+                             * @memberof google.analytics.data.v1beta.OrderBy
+                             * @interface IMetricOrderBy
+                             * @property {string|null} [metricName] MetricOrderBy metricName
+                             */
+    
+                            /**
+                             * Constructs a new MetricOrderBy.
+                             * @memberof google.analytics.data.v1beta.OrderBy
+                             * @classdesc Represents a MetricOrderBy.
+                             * @implements IMetricOrderBy
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.OrderBy.IMetricOrderBy=} [properties] Properties to set
+                             */
+                            function MetricOrderBy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MetricOrderBy metricName.
+                             * @member {string} metricName
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @instance
+                             */
+                            MetricOrderBy.prototype.metricName = "";
+    
+                            /**
+                             * Creates a new MetricOrderBy instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IMetricOrderBy=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.OrderBy.MetricOrderBy} MetricOrderBy instance
+                             */
+                            MetricOrderBy.create = function create(properties) {
+                                return new MetricOrderBy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MetricOrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.MetricOrderBy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IMetricOrderBy} message MetricOrderBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetricOrderBy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.metricName != null && Object.hasOwnProperty.call(message, "metricName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.metricName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MetricOrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.MetricOrderBy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IMetricOrderBy} message MetricOrderBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetricOrderBy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MetricOrderBy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.OrderBy.MetricOrderBy} MetricOrderBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetricOrderBy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.metricName = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MetricOrderBy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.OrderBy.MetricOrderBy} MetricOrderBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetricOrderBy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MetricOrderBy message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MetricOrderBy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.metricName != null && message.hasOwnProperty("metricName"))
+                                    if (!$util.isString(message.metricName))
+                                        return "metricName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MetricOrderBy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.OrderBy.MetricOrderBy} MetricOrderBy
+                             */
+                            MetricOrderBy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.OrderBy.MetricOrderBy();
+                                if (object.metricName != null)
+                                    message.metricName = String(object.metricName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MetricOrderBy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.MetricOrderBy} message MetricOrderBy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MetricOrderBy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.metricName = "";
+                                if (message.metricName != null && message.hasOwnProperty("metricName"))
+                                    object.metricName = message.metricName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MetricOrderBy to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.OrderBy.MetricOrderBy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MetricOrderBy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return MetricOrderBy;
+                        })();
+    
+                        OrderBy.DimensionOrderBy = (function() {
+    
+                            /**
+                             * Properties of a DimensionOrderBy.
+                             * @memberof google.analytics.data.v1beta.OrderBy
+                             * @interface IDimensionOrderBy
+                             * @property {string|null} [dimensionName] DimensionOrderBy dimensionName
+                             * @property {google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType|null} [orderType] DimensionOrderBy orderType
+                             */
+    
+                            /**
+                             * Constructs a new DimensionOrderBy.
+                             * @memberof google.analytics.data.v1beta.OrderBy
+                             * @classdesc Represents a DimensionOrderBy.
+                             * @implements IDimensionOrderBy
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.OrderBy.IDimensionOrderBy=} [properties] Properties to set
+                             */
+                            function DimensionOrderBy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DimensionOrderBy dimensionName.
+                             * @member {string} dimensionName
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @instance
+                             */
+                            DimensionOrderBy.prototype.dimensionName = "";
+    
+                            /**
+                             * DimensionOrderBy orderType.
+                             * @member {google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType} orderType
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @instance
+                             */
+                            DimensionOrderBy.prototype.orderType = 0;
+    
+                            /**
+                             * Creates a new DimensionOrderBy instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IDimensionOrderBy=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.OrderBy.DimensionOrderBy} DimensionOrderBy instance
+                             */
+                            DimensionOrderBy.create = function create(properties) {
+                                return new DimensionOrderBy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DimensionOrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.DimensionOrderBy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IDimensionOrderBy} message DimensionOrderBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DimensionOrderBy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dimensionName != null && Object.hasOwnProperty.call(message, "dimensionName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dimensionName);
+                                if (message.orderType != null && Object.hasOwnProperty.call(message, "orderType"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.orderType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DimensionOrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.DimensionOrderBy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IDimensionOrderBy} message DimensionOrderBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DimensionOrderBy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DimensionOrderBy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.OrderBy.DimensionOrderBy} DimensionOrderBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DimensionOrderBy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.dimensionName = reader.string();
+                                        break;
+                                    case 2:
+                                        message.orderType = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DimensionOrderBy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.OrderBy.DimensionOrderBy} DimensionOrderBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DimensionOrderBy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DimensionOrderBy message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DimensionOrderBy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                    if (!$util.isString(message.dimensionName))
+                                        return "dimensionName: string expected";
+                                if (message.orderType != null && message.hasOwnProperty("orderType"))
+                                    switch (message.orderType) {
+                                    default:
+                                        return "orderType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DimensionOrderBy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.OrderBy.DimensionOrderBy} DimensionOrderBy
+                             */
+                            DimensionOrderBy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy();
+                                if (object.dimensionName != null)
+                                    message.dimensionName = String(object.dimensionName);
+                                switch (object.orderType) {
+                                case "ORDER_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.orderType = 0;
+                                    break;
+                                case "ALPHANUMERIC":
+                                case 1:
+                                    message.orderType = 1;
+                                    break;
+                                case "CASE_INSENSITIVE_ALPHANUMERIC":
+                                case 2:
+                                    message.orderType = 2;
+                                    break;
+                                case "NUMERIC":
+                                case 3:
+                                    message.orderType = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DimensionOrderBy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.DimensionOrderBy} message DimensionOrderBy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DimensionOrderBy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.dimensionName = "";
+                                    object.orderType = options.enums === String ? "ORDER_TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                    object.dimensionName = message.dimensionName;
+                                if (message.orderType != null && message.hasOwnProperty("orderType"))
+                                    object.orderType = options.enums === String ? $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType[message.orderType] : message.orderType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DimensionOrderBy to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.OrderBy.DimensionOrderBy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DimensionOrderBy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * OrderType enum.
+                             * @name google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType
+                             * @enum {number}
+                             * @property {number} ORDER_TYPE_UNSPECIFIED=0 ORDER_TYPE_UNSPECIFIED value
+                             * @property {number} ALPHANUMERIC=1 ALPHANUMERIC value
+                             * @property {number} CASE_INSENSITIVE_ALPHANUMERIC=2 CASE_INSENSITIVE_ALPHANUMERIC value
+                             * @property {number} NUMERIC=3 NUMERIC value
+                             */
+                            DimensionOrderBy.OrderType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ORDER_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ALPHANUMERIC"] = 1;
+                                values[valuesById[2] = "CASE_INSENSITIVE_ALPHANUMERIC"] = 2;
+                                values[valuesById[3] = "NUMERIC"] = 3;
+                                return values;
+                            })();
+    
+                            return DimensionOrderBy;
+                        })();
+    
+                        OrderBy.PivotOrderBy = (function() {
+    
+                            /**
+                             * Properties of a PivotOrderBy.
+                             * @memberof google.analytics.data.v1beta.OrderBy
+                             * @interface IPivotOrderBy
+                             * @property {string|null} [metricName] PivotOrderBy metricName
+                             * @property {Array.<google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection>|null} [pivotSelections] PivotOrderBy pivotSelections
+                             */
+    
+                            /**
+                             * Constructs a new PivotOrderBy.
+                             * @memberof google.analytics.data.v1beta.OrderBy
+                             * @classdesc Represents a PivotOrderBy.
+                             * @implements IPivotOrderBy
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.OrderBy.IPivotOrderBy=} [properties] Properties to set
+                             */
+                            function PivotOrderBy(properties) {
+                                this.pivotSelections = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PivotOrderBy metricName.
+                             * @member {string} metricName
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @instance
+                             */
+                            PivotOrderBy.prototype.metricName = "";
+    
+                            /**
+                             * PivotOrderBy pivotSelections.
+                             * @member {Array.<google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection>} pivotSelections
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @instance
+                             */
+                            PivotOrderBy.prototype.pivotSelections = $util.emptyArray;
+    
+                            /**
+                             * Creates a new PivotOrderBy instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IPivotOrderBy=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy} PivotOrderBy instance
+                             */
+                            PivotOrderBy.create = function create(properties) {
+                                return new PivotOrderBy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PivotOrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IPivotOrderBy} message PivotOrderBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PivotOrderBy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.metricName != null && Object.hasOwnProperty.call(message, "metricName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.metricName);
+                                if (message.pivotSelections != null && message.pivotSelections.length)
+                                    for (var i = 0; i < message.pivotSelections.length; ++i)
+                                        $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.encode(message.pivotSelections[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PivotOrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.IPivotOrderBy} message PivotOrderBy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PivotOrderBy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PivotOrderBy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy} PivotOrderBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PivotOrderBy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.metricName = reader.string();
+                                        break;
+                                    case 2:
+                                        if (!(message.pivotSelections && message.pivotSelections.length))
+                                            message.pivotSelections = [];
+                                        message.pivotSelections.push($root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PivotOrderBy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy} PivotOrderBy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PivotOrderBy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PivotOrderBy message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PivotOrderBy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.metricName != null && message.hasOwnProperty("metricName"))
+                                    if (!$util.isString(message.metricName))
+                                        return "metricName: string expected";
+                                if (message.pivotSelections != null && message.hasOwnProperty("pivotSelections")) {
+                                    if (!Array.isArray(message.pivotSelections))
+                                        return "pivotSelections: array expected";
+                                    for (var i = 0; i < message.pivotSelections.length; ++i) {
+                                        var error = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.verify(message.pivotSelections[i]);
+                                        if (error)
+                                            return "pivotSelections." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PivotOrderBy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy} PivotOrderBy
+                             */
+                            PivotOrderBy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy();
+                                if (object.metricName != null)
+                                    message.metricName = String(object.metricName);
+                                if (object.pivotSelections) {
+                                    if (!Array.isArray(object.pivotSelections))
+                                        throw TypeError(".google.analytics.data.v1beta.OrderBy.PivotOrderBy.pivotSelections: array expected");
+                                    message.pivotSelections = [];
+                                    for (var i = 0; i < object.pivotSelections.length; ++i) {
+                                        if (typeof object.pivotSelections[i] !== "object")
+                                            throw TypeError(".google.analytics.data.v1beta.OrderBy.PivotOrderBy.pivotSelections: object expected");
+                                        message.pivotSelections[i] = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.fromObject(object.pivotSelections[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PivotOrderBy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @static
+                             * @param {google.analytics.data.v1beta.OrderBy.PivotOrderBy} message PivotOrderBy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PivotOrderBy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.pivotSelections = [];
+                                if (options.defaults)
+                                    object.metricName = "";
+                                if (message.metricName != null && message.hasOwnProperty("metricName"))
+                                    object.metricName = message.metricName;
+                                if (message.pivotSelections && message.pivotSelections.length) {
+                                    object.pivotSelections = [];
+                                    for (var j = 0; j < message.pivotSelections.length; ++j)
+                                        object.pivotSelections[j] = $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.toObject(message.pivotSelections[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PivotOrderBy to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PivotOrderBy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            PivotOrderBy.PivotSelection = (function() {
+    
+                                /**
+                                 * Properties of a PivotSelection.
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                                 * @interface IPivotSelection
+                                 * @property {string|null} [dimensionName] PivotSelection dimensionName
+                                 * @property {string|null} [dimensionValue] PivotSelection dimensionValue
+                                 */
+    
+                                /**
+                                 * Constructs a new PivotSelection.
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy
+                                 * @classdesc Represents a PivotSelection.
+                                 * @implements IPivotSelection
+                                 * @constructor
+                                 * @param {google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection=} [properties] Properties to set
+                                 */
+                                function PivotSelection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PivotSelection dimensionName.
+                                 * @member {string} dimensionName
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @instance
+                                 */
+                                PivotSelection.prototype.dimensionName = "";
+    
+                                /**
+                                 * PivotSelection dimensionValue.
+                                 * @member {string} dimensionValue
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @instance
+                                 */
+                                PivotSelection.prototype.dimensionValue = "";
+    
+                                /**
+                                 * Creates a new PivotSelection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection=} [properties] Properties to set
+                                 * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection} PivotSelection instance
+                                 */
+                                PivotSelection.create = function create(properties) {
+                                    return new PivotSelection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PivotSelection message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection} message PivotSelection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PivotSelection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.dimensionName != null && Object.hasOwnProperty.call(message, "dimensionName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.dimensionName);
+                                    if (message.dimensionValue != null && Object.hasOwnProperty.call(message, "dimensionValue"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.dimensionValue);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PivotSelection message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection} message PivotSelection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PivotSelection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PivotSelection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection} PivotSelection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PivotSelection.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.dimensionName = reader.string();
+                                            break;
+                                        case 2:
+                                            message.dimensionValue = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PivotSelection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection} PivotSelection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PivotSelection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PivotSelection message.
+                                 * @function verify
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PivotSelection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                        if (!$util.isString(message.dimensionName))
+                                            return "dimensionName: string expected";
+                                    if (message.dimensionValue != null && message.hasOwnProperty("dimensionValue"))
+                                        if (!$util.isString(message.dimensionValue))
+                                            return "dimensionValue: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PivotSelection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection} PivotSelection
+                                 */
+                                PivotSelection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection)
+                                        return object;
+                                    var message = new $root.google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection();
+                                    if (object.dimensionName != null)
+                                        message.dimensionName = String(object.dimensionName);
+                                    if (object.dimensionValue != null)
+                                        message.dimensionValue = String(object.dimensionValue);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PivotSelection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection} message PivotSelection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PivotSelection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.dimensionName = "";
+                                        object.dimensionValue = "";
+                                    }
+                                    if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                        object.dimensionName = message.dimensionName;
+                                    if (message.dimensionValue != null && message.hasOwnProperty("dimensionValue"))
+                                        object.dimensionValue = message.dimensionValue;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PivotSelection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PivotSelection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return PivotSelection;
+                            })();
+    
+                            return PivotOrderBy;
+                        })();
+    
+                        return OrderBy;
+                    })();
+    
+                    v1beta.Pivot = (function() {
+    
+                        /**
+                         * Properties of a Pivot.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IPivot
+                         * @property {Array.<string>|null} [fieldNames] Pivot fieldNames
+                         * @property {Array.<google.analytics.data.v1beta.IOrderBy>|null} [orderBys] Pivot orderBys
+                         * @property {number|Long|null} [offset] Pivot offset
+                         * @property {number|Long|null} [limit] Pivot limit
+                         * @property {Array.<google.analytics.data.v1beta.MetricAggregation>|null} [metricAggregations] Pivot metricAggregations
+                         */
+    
+                        /**
+                         * Constructs a new Pivot.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a Pivot.
+                         * @implements IPivot
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IPivot=} [properties] Properties to set
+                         */
+                        function Pivot(properties) {
+                            this.fieldNames = [];
+                            this.orderBys = [];
+                            this.metricAggregations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Pivot fieldNames.
+                         * @member {Array.<string>} fieldNames
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @instance
+                         */
+                        Pivot.prototype.fieldNames = $util.emptyArray;
+    
+                        /**
+                         * Pivot orderBys.
+                         * @member {Array.<google.analytics.data.v1beta.IOrderBy>} orderBys
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @instance
+                         */
+                        Pivot.prototype.orderBys = $util.emptyArray;
+    
+                        /**
+                         * Pivot offset.
+                         * @member {number|Long} offset
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @instance
+                         */
+                        Pivot.prototype.offset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Pivot limit.
+                         * @member {number|Long} limit
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @instance
+                         */
+                        Pivot.prototype.limit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Pivot metricAggregations.
+                         * @member {Array.<google.analytics.data.v1beta.MetricAggregation>} metricAggregations
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @instance
+                         */
+                        Pivot.prototype.metricAggregations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Pivot instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivot=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.Pivot} Pivot instance
+                         */
+                        Pivot.create = function create(properties) {
+                            return new Pivot(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Pivot message. Does not implicitly {@link google.analytics.data.v1beta.Pivot.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivot} message Pivot message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Pivot.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.fieldNames != null && message.fieldNames.length)
+                                for (var i = 0; i < message.fieldNames.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.fieldNames[i]);
+                            if (message.orderBys != null && message.orderBys.length)
+                                for (var i = 0; i < message.orderBys.length; ++i)
+                                    $root.google.analytics.data.v1beta.OrderBy.encode(message.orderBys[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.offset);
+                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.limit);
+                            if (message.metricAggregations != null && message.metricAggregations.length) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    writer.int32(message.metricAggregations[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Pivot message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Pivot.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivot} message Pivot message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Pivot.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Pivot message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.Pivot} Pivot
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Pivot.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Pivot();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.fieldNames && message.fieldNames.length))
+                                        message.fieldNames = [];
+                                    message.fieldNames.push(reader.string());
+                                    break;
+                                case 2:
+                                    if (!(message.orderBys && message.orderBys.length))
+                                        message.orderBys = [];
+                                    message.orderBys.push($root.google.analytics.data.v1beta.OrderBy.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    message.offset = reader.int64();
+                                    break;
+                                case 4:
+                                    message.limit = reader.int64();
+                                    break;
+                                case 5:
+                                    if (!(message.metricAggregations && message.metricAggregations.length))
+                                        message.metricAggregations = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.metricAggregations.push(reader.int32());
+                                    } else
+                                        message.metricAggregations.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Pivot message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.Pivot} Pivot
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Pivot.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Pivot message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Pivot.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.fieldNames != null && message.hasOwnProperty("fieldNames")) {
+                                if (!Array.isArray(message.fieldNames))
+                                    return "fieldNames: array expected";
+                                for (var i = 0; i < message.fieldNames.length; ++i)
+                                    if (!$util.isString(message.fieldNames[i]))
+                                        return "fieldNames: string[] expected";
+                            }
+                            if (message.orderBys != null && message.hasOwnProperty("orderBys")) {
+                                if (!Array.isArray(message.orderBys))
+                                    return "orderBys: array expected";
+                                for (var i = 0; i < message.orderBys.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.OrderBy.verify(message.orderBys[i]);
+                                    if (error)
+                                        return "orderBys." + error;
+                                }
+                            }
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (!$util.isInteger(message.offset) && !(message.offset && $util.isInteger(message.offset.low) && $util.isInteger(message.offset.high)))
+                                    return "offset: integer|Long expected";
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (!$util.isInteger(message.limit) && !(message.limit && $util.isInteger(message.limit.low) && $util.isInteger(message.limit.high)))
+                                    return "limit: integer|Long expected";
+                            if (message.metricAggregations != null && message.hasOwnProperty("metricAggregations")) {
+                                if (!Array.isArray(message.metricAggregations))
+                                    return "metricAggregations: array expected";
+                                for (var i = 0; i < message.metricAggregations.length; ++i)
+                                    switch (message.metricAggregations[i]) {
+                                    default:
+                                        return "metricAggregations: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 5:
+                                    case 6:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Pivot message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.Pivot} Pivot
+                         */
+                        Pivot.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.Pivot)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.Pivot();
+                            if (object.fieldNames) {
+                                if (!Array.isArray(object.fieldNames))
+                                    throw TypeError(".google.analytics.data.v1beta.Pivot.fieldNames: array expected");
+                                message.fieldNames = [];
+                                for (var i = 0; i < object.fieldNames.length; ++i)
+                                    message.fieldNames[i] = String(object.fieldNames[i]);
+                            }
+                            if (object.orderBys) {
+                                if (!Array.isArray(object.orderBys))
+                                    throw TypeError(".google.analytics.data.v1beta.Pivot.orderBys: array expected");
+                                message.orderBys = [];
+                                for (var i = 0; i < object.orderBys.length; ++i) {
+                                    if (typeof object.orderBys[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Pivot.orderBys: object expected");
+                                    message.orderBys[i] = $root.google.analytics.data.v1beta.OrderBy.fromObject(object.orderBys[i]);
+                                }
+                            }
+                            if (object.offset != null)
+                                if ($util.Long)
+                                    (message.offset = $util.Long.fromValue(object.offset)).unsigned = false;
+                                else if (typeof object.offset === "string")
+                                    message.offset = parseInt(object.offset, 10);
+                                else if (typeof object.offset === "number")
+                                    message.offset = object.offset;
+                                else if (typeof object.offset === "object")
+                                    message.offset = new $util.LongBits(object.offset.low >>> 0, object.offset.high >>> 0).toNumber();
+                            if (object.limit != null)
+                                if ($util.Long)
+                                    (message.limit = $util.Long.fromValue(object.limit)).unsigned = false;
+                                else if (typeof object.limit === "string")
+                                    message.limit = parseInt(object.limit, 10);
+                                else if (typeof object.limit === "number")
+                                    message.limit = object.limit;
+                                else if (typeof object.limit === "object")
+                                    message.limit = new $util.LongBits(object.limit.low >>> 0, object.limit.high >>> 0).toNumber();
+                            if (object.metricAggregations) {
+                                if (!Array.isArray(object.metricAggregations))
+                                    throw TypeError(".google.analytics.data.v1beta.Pivot.metricAggregations: array expected");
+                                message.metricAggregations = [];
+                                for (var i = 0; i < object.metricAggregations.length; ++i)
+                                    switch (object.metricAggregations[i]) {
+                                    default:
+                                    case "METRIC_AGGREGATION_UNSPECIFIED":
+                                    case 0:
+                                        message.metricAggregations[i] = 0;
+                                        break;
+                                    case "TOTAL":
+                                    case 1:
+                                        message.metricAggregations[i] = 1;
+                                        break;
+                                    case "MINIMUM":
+                                    case 5:
+                                        message.metricAggregations[i] = 5;
+                                        break;
+                                    case "MAXIMUM":
+                                    case 6:
+                                        message.metricAggregations[i] = 6;
+                                        break;
+                                    case "COUNT":
+                                    case 4:
+                                        message.metricAggregations[i] = 4;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Pivot message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @static
+                         * @param {google.analytics.data.v1beta.Pivot} message Pivot
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Pivot.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.fieldNames = [];
+                                object.orderBys = [];
+                                object.metricAggregations = [];
+                            }
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.offset = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.limit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.limit = options.longs === String ? "0" : 0;
+                            }
+                            if (message.fieldNames && message.fieldNames.length) {
+                                object.fieldNames = [];
+                                for (var j = 0; j < message.fieldNames.length; ++j)
+                                    object.fieldNames[j] = message.fieldNames[j];
+                            }
+                            if (message.orderBys && message.orderBys.length) {
+                                object.orderBys = [];
+                                for (var j = 0; j < message.orderBys.length; ++j)
+                                    object.orderBys[j] = $root.google.analytics.data.v1beta.OrderBy.toObject(message.orderBys[j], options);
+                            }
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (typeof message.offset === "number")
+                                    object.offset = options.longs === String ? String(message.offset) : message.offset;
+                                else
+                                    object.offset = options.longs === String ? $util.Long.prototype.toString.call(message.offset) : options.longs === Number ? new $util.LongBits(message.offset.low >>> 0, message.offset.high >>> 0).toNumber() : message.offset;
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (typeof message.limit === "number")
+                                    object.limit = options.longs === String ? String(message.limit) : message.limit;
+                                else
+                                    object.limit = options.longs === String ? $util.Long.prototype.toString.call(message.limit) : options.longs === Number ? new $util.LongBits(message.limit.low >>> 0, message.limit.high >>> 0).toNumber() : message.limit;
+                            if (message.metricAggregations && message.metricAggregations.length) {
+                                object.metricAggregations = [];
+                                for (var j = 0; j < message.metricAggregations.length; ++j)
+                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Pivot to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.Pivot
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Pivot.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Pivot;
+                    })();
+    
+                    v1beta.CohortSpec = (function() {
+    
+                        /**
+                         * Properties of a CohortSpec.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ICohortSpec
+                         * @property {Array.<google.analytics.data.v1beta.ICohort>|null} [cohorts] CohortSpec cohorts
+                         * @property {google.analytics.data.v1beta.ICohortsRange|null} [cohortsRange] CohortSpec cohortsRange
+                         * @property {google.analytics.data.v1beta.ICohortReportSettings|null} [cohortReportSettings] CohortSpec cohortReportSettings
+                         */
+    
+                        /**
+                         * Constructs a new CohortSpec.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a CohortSpec.
+                         * @implements ICohortSpec
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ICohortSpec=} [properties] Properties to set
+                         */
+                        function CohortSpec(properties) {
+                            this.cohorts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CohortSpec cohorts.
+                         * @member {Array.<google.analytics.data.v1beta.ICohort>} cohorts
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @instance
+                         */
+                        CohortSpec.prototype.cohorts = $util.emptyArray;
+    
+                        /**
+                         * CohortSpec cohortsRange.
+                         * @member {google.analytics.data.v1beta.ICohortsRange|null|undefined} cohortsRange
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @instance
+                         */
+                        CohortSpec.prototype.cohortsRange = null;
+    
+                        /**
+                         * CohortSpec cohortReportSettings.
+                         * @member {google.analytics.data.v1beta.ICohortReportSettings|null|undefined} cohortReportSettings
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @instance
+                         */
+                        CohortSpec.prototype.cohortReportSettings = null;
+    
+                        /**
+                         * Creates a new CohortSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortSpec=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.CohortSpec} CohortSpec instance
+                         */
+                        CohortSpec.create = function create(properties) {
+                            return new CohortSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CohortSpec message. Does not implicitly {@link google.analytics.data.v1beta.CohortSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortSpec} message CohortSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CohortSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cohorts != null && message.cohorts.length)
+                                for (var i = 0; i < message.cohorts.length; ++i)
+                                    $root.google.analytics.data.v1beta.Cohort.encode(message.cohorts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.cohortsRange != null && Object.hasOwnProperty.call(message, "cohortsRange"))
+                                $root.google.analytics.data.v1beta.CohortsRange.encode(message.cohortsRange, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.cohortReportSettings != null && Object.hasOwnProperty.call(message, "cohortReportSettings"))
+                                $root.google.analytics.data.v1beta.CohortReportSettings.encode(message.cohortReportSettings, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CohortSpec message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CohortSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortSpec} message CohortSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CohortSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CohortSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.CohortSpec} CohortSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CohortSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.CohortSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.cohorts && message.cohorts.length))
+                                        message.cohorts = [];
+                                    message.cohorts.push($root.google.analytics.data.v1beta.Cohort.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.cohortsRange = $root.google.analytics.data.v1beta.CohortsRange.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.cohortReportSettings = $root.google.analytics.data.v1beta.CohortReportSettings.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CohortSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.CohortSpec} CohortSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CohortSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CohortSpec message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CohortSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.cohorts != null && message.hasOwnProperty("cohorts")) {
+                                if (!Array.isArray(message.cohorts))
+                                    return "cohorts: array expected";
+                                for (var i = 0; i < message.cohorts.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Cohort.verify(message.cohorts[i]);
+                                    if (error)
+                                        return "cohorts." + error;
+                                }
+                            }
+                            if (message.cohortsRange != null && message.hasOwnProperty("cohortsRange")) {
+                                var error = $root.google.analytics.data.v1beta.CohortsRange.verify(message.cohortsRange);
+                                if (error)
+                                    return "cohortsRange." + error;
+                            }
+                            if (message.cohortReportSettings != null && message.hasOwnProperty("cohortReportSettings")) {
+                                var error = $root.google.analytics.data.v1beta.CohortReportSettings.verify(message.cohortReportSettings);
+                                if (error)
+                                    return "cohortReportSettings." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CohortSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.CohortSpec} CohortSpec
+                         */
+                        CohortSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.CohortSpec)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.CohortSpec();
+                            if (object.cohorts) {
+                                if (!Array.isArray(object.cohorts))
+                                    throw TypeError(".google.analytics.data.v1beta.CohortSpec.cohorts: array expected");
+                                message.cohorts = [];
+                                for (var i = 0; i < object.cohorts.length; ++i) {
+                                    if (typeof object.cohorts[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.CohortSpec.cohorts: object expected");
+                                    message.cohorts[i] = $root.google.analytics.data.v1beta.Cohort.fromObject(object.cohorts[i]);
+                                }
+                            }
+                            if (object.cohortsRange != null) {
+                                if (typeof object.cohortsRange !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.CohortSpec.cohortsRange: object expected");
+                                message.cohortsRange = $root.google.analytics.data.v1beta.CohortsRange.fromObject(object.cohortsRange);
+                            }
+                            if (object.cohortReportSettings != null) {
+                                if (typeof object.cohortReportSettings !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.CohortSpec.cohortReportSettings: object expected");
+                                message.cohortReportSettings = $root.google.analytics.data.v1beta.CohortReportSettings.fromObject(object.cohortReportSettings);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CohortSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @static
+                         * @param {google.analytics.data.v1beta.CohortSpec} message CohortSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CohortSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.cohorts = [];
+                            if (options.defaults) {
+                                object.cohortsRange = null;
+                                object.cohortReportSettings = null;
+                            }
+                            if (message.cohorts && message.cohorts.length) {
+                                object.cohorts = [];
+                                for (var j = 0; j < message.cohorts.length; ++j)
+                                    object.cohorts[j] = $root.google.analytics.data.v1beta.Cohort.toObject(message.cohorts[j], options);
+                            }
+                            if (message.cohortsRange != null && message.hasOwnProperty("cohortsRange"))
+                                object.cohortsRange = $root.google.analytics.data.v1beta.CohortsRange.toObject(message.cohortsRange, options);
+                            if (message.cohortReportSettings != null && message.hasOwnProperty("cohortReportSettings"))
+                                object.cohortReportSettings = $root.google.analytics.data.v1beta.CohortReportSettings.toObject(message.cohortReportSettings, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CohortSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.CohortSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CohortSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CohortSpec;
+                    })();
+    
+                    v1beta.Cohort = (function() {
+    
+                        /**
+                         * Properties of a Cohort.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ICohort
+                         * @property {string|null} [name] Cohort name
+                         * @property {string|null} [dimension] Cohort dimension
+                         * @property {google.analytics.data.v1beta.IDateRange|null} [dateRange] Cohort dateRange
+                         */
+    
+                        /**
+                         * Constructs a new Cohort.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a Cohort.
+                         * @implements ICohort
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ICohort=} [properties] Properties to set
+                         */
+                        function Cohort(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Cohort name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @instance
+                         */
+                        Cohort.prototype.name = "";
+    
+                        /**
+                         * Cohort dimension.
+                         * @member {string} dimension
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @instance
+                         */
+                        Cohort.prototype.dimension = "";
+    
+                        /**
+                         * Cohort dateRange.
+                         * @member {google.analytics.data.v1beta.IDateRange|null|undefined} dateRange
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @instance
+                         */
+                        Cohort.prototype.dateRange = null;
+    
+                        /**
+                         * Creates a new Cohort instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohort=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.Cohort} Cohort instance
+                         */
+                        Cohort.create = function create(properties) {
+                            return new Cohort(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Cohort message. Does not implicitly {@link google.analytics.data.v1beta.Cohort.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohort} message Cohort message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cohort.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dimension != null && Object.hasOwnProperty.call(message, "dimension"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dimension);
+                            if (message.dateRange != null && Object.hasOwnProperty.call(message, "dateRange"))
+                                $root.google.analytics.data.v1beta.DateRange.encode(message.dateRange, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Cohort message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Cohort.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohort} message Cohort message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cohort.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Cohort message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.Cohort} Cohort
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cohort.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Cohort();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.dimension = reader.string();
+                                    break;
+                                case 3:
+                                    message.dateRange = $root.google.analytics.data.v1beta.DateRange.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Cohort message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.Cohort} Cohort
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cohort.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Cohort message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Cohort.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dimension != null && message.hasOwnProperty("dimension"))
+                                if (!$util.isString(message.dimension))
+                                    return "dimension: string expected";
+                            if (message.dateRange != null && message.hasOwnProperty("dateRange")) {
+                                var error = $root.google.analytics.data.v1beta.DateRange.verify(message.dateRange);
+                                if (error)
+                                    return "dateRange." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Cohort message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.Cohort} Cohort
+                         */
+                        Cohort.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.Cohort)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.Cohort();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dimension != null)
+                                message.dimension = String(object.dimension);
+                            if (object.dateRange != null) {
+                                if (typeof object.dateRange !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.Cohort.dateRange: object expected");
+                                message.dateRange = $root.google.analytics.data.v1beta.DateRange.fromObject(object.dateRange);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Cohort message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @static
+                         * @param {google.analytics.data.v1beta.Cohort} message Cohort
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Cohort.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.dimension = "";
+                                object.dateRange = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.dimension != null && message.hasOwnProperty("dimension"))
+                                object.dimension = message.dimension;
+                            if (message.dateRange != null && message.hasOwnProperty("dateRange"))
+                                object.dateRange = $root.google.analytics.data.v1beta.DateRange.toObject(message.dateRange, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Cohort to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.Cohort
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Cohort.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Cohort;
+                    })();
+    
+                    v1beta.CohortsRange = (function() {
+    
+                        /**
+                         * Properties of a CohortsRange.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ICohortsRange
+                         * @property {google.analytics.data.v1beta.CohortsRange.Granularity|null} [granularity] CohortsRange granularity
+                         * @property {number|null} [startOffset] CohortsRange startOffset
+                         * @property {number|null} [endOffset] CohortsRange endOffset
+                         */
+    
+                        /**
+                         * Constructs a new CohortsRange.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a CohortsRange.
+                         * @implements ICohortsRange
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ICohortsRange=} [properties] Properties to set
+                         */
+                        function CohortsRange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CohortsRange granularity.
+                         * @member {google.analytics.data.v1beta.CohortsRange.Granularity} granularity
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @instance
+                         */
+                        CohortsRange.prototype.granularity = 0;
+    
+                        /**
+                         * CohortsRange startOffset.
+                         * @member {number} startOffset
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @instance
+                         */
+                        CohortsRange.prototype.startOffset = 0;
+    
+                        /**
+                         * CohortsRange endOffset.
+                         * @member {number} endOffset
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @instance
+                         */
+                        CohortsRange.prototype.endOffset = 0;
+    
+                        /**
+                         * Creates a new CohortsRange instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortsRange=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.CohortsRange} CohortsRange instance
+                         */
+                        CohortsRange.create = function create(properties) {
+                            return new CohortsRange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CohortsRange message. Does not implicitly {@link google.analytics.data.v1beta.CohortsRange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortsRange} message CohortsRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CohortsRange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.granularity != null && Object.hasOwnProperty.call(message, "granularity"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.granularity);
+                            if (message.startOffset != null && Object.hasOwnProperty.call(message, "startOffset"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.startOffset);
+                            if (message.endOffset != null && Object.hasOwnProperty.call(message, "endOffset"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.endOffset);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CohortsRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CohortsRange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortsRange} message CohortsRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CohortsRange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CohortsRange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.CohortsRange} CohortsRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CohortsRange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.CohortsRange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.granularity = reader.int32();
+                                    break;
+                                case 2:
+                                    message.startOffset = reader.int32();
+                                    break;
+                                case 3:
+                                    message.endOffset = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CohortsRange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.CohortsRange} CohortsRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CohortsRange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CohortsRange message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CohortsRange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.granularity != null && message.hasOwnProperty("granularity"))
+                                switch (message.granularity) {
+                                default:
+                                    return "granularity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                                if (!$util.isInteger(message.startOffset))
+                                    return "startOffset: integer expected";
+                            if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                                if (!$util.isInteger(message.endOffset))
+                                    return "endOffset: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CohortsRange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.CohortsRange} CohortsRange
+                         */
+                        CohortsRange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.CohortsRange)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.CohortsRange();
+                            switch (object.granularity) {
+                            case "GRANULARITY_UNSPECIFIED":
+                            case 0:
+                                message.granularity = 0;
+                                break;
+                            case "DAILY":
+                            case 1:
+                                message.granularity = 1;
+                                break;
+                            case "WEEKLY":
+                            case 2:
+                                message.granularity = 2;
+                                break;
+                            case "MONTHLY":
+                            case 3:
+                                message.granularity = 3;
+                                break;
+                            }
+                            if (object.startOffset != null)
+                                message.startOffset = object.startOffset | 0;
+                            if (object.endOffset != null)
+                                message.endOffset = object.endOffset | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CohortsRange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.CohortsRange} message CohortsRange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CohortsRange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.granularity = options.enums === String ? "GRANULARITY_UNSPECIFIED" : 0;
+                                object.startOffset = 0;
+                                object.endOffset = 0;
+                            }
+                            if (message.granularity != null && message.hasOwnProperty("granularity"))
+                                object.granularity = options.enums === String ? $root.google.analytics.data.v1beta.CohortsRange.Granularity[message.granularity] : message.granularity;
+                            if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                                object.startOffset = message.startOffset;
+                            if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                                object.endOffset = message.endOffset;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CohortsRange to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.CohortsRange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CohortsRange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Granularity enum.
+                         * @name google.analytics.data.v1beta.CohortsRange.Granularity
+                         * @enum {number}
+                         * @property {number} GRANULARITY_UNSPECIFIED=0 GRANULARITY_UNSPECIFIED value
+                         * @property {number} DAILY=1 DAILY value
+                         * @property {number} WEEKLY=2 WEEKLY value
+                         * @property {number} MONTHLY=3 MONTHLY value
+                         */
+                        CohortsRange.Granularity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GRANULARITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DAILY"] = 1;
+                            values[valuesById[2] = "WEEKLY"] = 2;
+                            values[valuesById[3] = "MONTHLY"] = 3;
+                            return values;
+                        })();
+    
+                        return CohortsRange;
+                    })();
+    
+                    v1beta.CohortReportSettings = (function() {
+    
+                        /**
+                         * Properties of a CohortReportSettings.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ICohortReportSettings
+                         * @property {boolean|null} [accumulate] CohortReportSettings accumulate
+                         */
+    
+                        /**
+                         * Constructs a new CohortReportSettings.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a CohortReportSettings.
+                         * @implements ICohortReportSettings
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ICohortReportSettings=} [properties] Properties to set
+                         */
+                        function CohortReportSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CohortReportSettings accumulate.
+                         * @member {boolean} accumulate
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @instance
+                         */
+                        CohortReportSettings.prototype.accumulate = false;
+    
+                        /**
+                         * Creates a new CohortReportSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortReportSettings=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.CohortReportSettings} CohortReportSettings instance
+                         */
+                        CohortReportSettings.create = function create(properties) {
+                            return new CohortReportSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CohortReportSettings message. Does not implicitly {@link google.analytics.data.v1beta.CohortReportSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortReportSettings} message CohortReportSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CohortReportSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accumulate != null && Object.hasOwnProperty.call(message, "accumulate"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.accumulate);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CohortReportSettings message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CohortReportSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICohortReportSettings} message CohortReportSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CohortReportSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CohortReportSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.CohortReportSettings} CohortReportSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CohortReportSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.CohortReportSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.accumulate = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CohortReportSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.CohortReportSettings} CohortReportSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CohortReportSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CohortReportSettings message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CohortReportSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accumulate != null && message.hasOwnProperty("accumulate"))
+                                if (typeof message.accumulate !== "boolean")
+                                    return "accumulate: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CohortReportSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.CohortReportSettings} CohortReportSettings
+                         */
+                        CohortReportSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.CohortReportSettings)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.CohortReportSettings();
+                            if (object.accumulate != null)
+                                message.accumulate = Boolean(object.accumulate);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CohortReportSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @static
+                         * @param {google.analytics.data.v1beta.CohortReportSettings} message CohortReportSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CohortReportSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.accumulate = false;
+                            if (message.accumulate != null && message.hasOwnProperty("accumulate"))
+                                object.accumulate = message.accumulate;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CohortReportSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.CohortReportSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CohortReportSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CohortReportSettings;
+                    })();
+    
+                    v1beta.ResponseMetaData = (function() {
+    
+                        /**
+                         * Properties of a ResponseMetaData.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IResponseMetaData
+                         * @property {boolean|null} [dataLossFromOtherRow] ResponseMetaData dataLossFromOtherRow
+                         */
+    
+                        /**
+                         * Constructs a new ResponseMetaData.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a ResponseMetaData.
+                         * @implements IResponseMetaData
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IResponseMetaData=} [properties] Properties to set
+                         */
+                        function ResponseMetaData(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResponseMetaData dataLossFromOtherRow.
+                         * @member {boolean} dataLossFromOtherRow
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        ResponseMetaData.prototype.dataLossFromOtherRow = false;
+    
+                        /**
+                         * Creates a new ResponseMetaData instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {google.analytics.data.v1beta.IResponseMetaData=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.ResponseMetaData} ResponseMetaData instance
+                         */
+                        ResponseMetaData.create = function create(properties) {
+                            return new ResponseMetaData(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResponseMetaData message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {google.analytics.data.v1beta.IResponseMetaData} message ResponseMetaData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResponseMetaData.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataLossFromOtherRow != null && Object.hasOwnProperty.call(message, "dataLossFromOtherRow"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.dataLossFromOtherRow);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResponseMetaData message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {google.analytics.data.v1beta.IResponseMetaData} message ResponseMetaData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResponseMetaData.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResponseMetaData message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.ResponseMetaData} ResponseMetaData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResponseMetaData.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.ResponseMetaData();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    message.dataLossFromOtherRow = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResponseMetaData message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.ResponseMetaData} ResponseMetaData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResponseMetaData.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResponseMetaData message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResponseMetaData.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataLossFromOtherRow != null && message.hasOwnProperty("dataLossFromOtherRow"))
+                                if (typeof message.dataLossFromOtherRow !== "boolean")
+                                    return "dataLossFromOtherRow: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResponseMetaData message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.ResponseMetaData} ResponseMetaData
+                         */
+                        ResponseMetaData.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.ResponseMetaData)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.ResponseMetaData();
+                            if (object.dataLossFromOtherRow != null)
+                                message.dataLossFromOtherRow = Boolean(object.dataLossFromOtherRow);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResponseMetaData message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @static
+                         * @param {google.analytics.data.v1beta.ResponseMetaData} message ResponseMetaData
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResponseMetaData.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.dataLossFromOtherRow = false;
+                            if (message.dataLossFromOtherRow != null && message.hasOwnProperty("dataLossFromOtherRow"))
+                                object.dataLossFromOtherRow = message.dataLossFromOtherRow;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResponseMetaData to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResponseMetaData.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResponseMetaData;
+                    })();
+    
+                    v1beta.DimensionHeader = (function() {
+    
+                        /**
+                         * Properties of a DimensionHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IDimensionHeader
+                         * @property {string|null} [name] DimensionHeader name
+                         */
+    
+                        /**
+                         * Constructs a new DimensionHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a DimensionHeader.
+                         * @implements IDimensionHeader
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IDimensionHeader=} [properties] Properties to set
+                         */
+                        function DimensionHeader(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DimensionHeader name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @instance
+                         */
+                        DimensionHeader.prototype.name = "";
+    
+                        /**
+                         * Creates a new DimensionHeader instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionHeader=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.DimensionHeader} DimensionHeader instance
+                         */
+                        DimensionHeader.create = function create(properties) {
+                            return new DimensionHeader(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionHeader message. Does not implicitly {@link google.analytics.data.v1beta.DimensionHeader.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionHeader} message DimensionHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionHeader.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionHeader.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionHeader} message DimensionHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionHeader.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DimensionHeader message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.DimensionHeader} DimensionHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionHeader.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DimensionHeader();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DimensionHeader message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.DimensionHeader} DimensionHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionHeader.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DimensionHeader message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DimensionHeader.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DimensionHeader message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.DimensionHeader} DimensionHeader
+                         */
+                        DimensionHeader.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.DimensionHeader)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.DimensionHeader();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DimensionHeader message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.DimensionHeader} message DimensionHeader
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DimensionHeader.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DimensionHeader to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.DimensionHeader
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DimensionHeader.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DimensionHeader;
+                    })();
+    
+                    v1beta.MetricHeader = (function() {
+    
+                        /**
+                         * Properties of a MetricHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IMetricHeader
+                         * @property {string|null} [name] MetricHeader name
+                         * @property {google.analytics.data.v1beta.MetricType|null} [type] MetricHeader type
+                         */
+    
+                        /**
+                         * Constructs a new MetricHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a MetricHeader.
+                         * @implements IMetricHeader
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IMetricHeader=} [properties] Properties to set
+                         */
+                        function MetricHeader(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetricHeader name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @instance
+                         */
+                        MetricHeader.prototype.name = "";
+    
+                        /**
+                         * MetricHeader type.
+                         * @member {google.analytics.data.v1beta.MetricType} type
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @instance
+                         */
+                        MetricHeader.prototype.type = 0;
+    
+                        /**
+                         * Creates a new MetricHeader instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricHeader=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.MetricHeader} MetricHeader instance
+                         */
+                        MetricHeader.create = function create(properties) {
+                            return new MetricHeader(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetricHeader message. Does not implicitly {@link google.analytics.data.v1beta.MetricHeader.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricHeader} message MetricHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricHeader.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetricHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricHeader.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricHeader} message MetricHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricHeader.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetricHeader message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.MetricHeader} MetricHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricHeader.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.MetricHeader();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.type = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetricHeader message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.MetricHeader} MetricHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricHeader.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetricHeader message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetricHeader.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetricHeader message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.MetricHeader} MetricHeader
+                         */
+                        MetricHeader.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.MetricHeader)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.MetricHeader();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.type) {
+                            case "METRIC_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_INTEGER":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_FLOAT":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "TYPE_SECONDS":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "TYPE_MILLISECONDS":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_MINUTES":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_HOURS":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_STANDARD":
+                            case 8:
+                                message.type = 8;
+                                break;
+                            case "TYPE_CURRENCY":
+                            case 9:
+                                message.type = 9;
+                                break;
+                            case "TYPE_FEET":
+                            case 10:
+                                message.type = 10;
+                                break;
+                            case "TYPE_MILES":
+                            case 11:
+                                message.type = 11;
+                                break;
+                            case "TYPE_METERS":
+                            case 12:
+                                message.type = 12;
+                                break;
+                            case "TYPE_KILOMETERS":
+                            case 13:
+                                message.type = 13;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetricHeader message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.MetricHeader} message MetricHeader
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetricHeader.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.type = options.enums === String ? "METRIC_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.analytics.data.v1beta.MetricType[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetricHeader to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.MetricHeader
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetricHeader.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetricHeader;
+                    })();
+    
+                    v1beta.PivotHeader = (function() {
+    
+                        /**
+                         * Properties of a PivotHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IPivotHeader
+                         * @property {Array.<google.analytics.data.v1beta.IPivotDimensionHeader>|null} [pivotDimensionHeaders] PivotHeader pivotDimensionHeaders
+                         * @property {number|null} [rowCount] PivotHeader rowCount
+                         */
+    
+                        /**
+                         * Constructs a new PivotHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a PivotHeader.
+                         * @implements IPivotHeader
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IPivotHeader=} [properties] Properties to set
+                         */
+                        function PivotHeader(properties) {
+                            this.pivotDimensionHeaders = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PivotHeader pivotDimensionHeaders.
+                         * @member {Array.<google.analytics.data.v1beta.IPivotDimensionHeader>} pivotDimensionHeaders
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @instance
+                         */
+                        PivotHeader.prototype.pivotDimensionHeaders = $util.emptyArray;
+    
+                        /**
+                         * PivotHeader rowCount.
+                         * @member {number} rowCount
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @instance
+                         */
+                        PivotHeader.prototype.rowCount = 0;
+    
+                        /**
+                         * Creates a new PivotHeader instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivotHeader=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.PivotHeader} PivotHeader instance
+                         */
+                        PivotHeader.create = function create(properties) {
+                            return new PivotHeader(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PivotHeader message. Does not implicitly {@link google.analytics.data.v1beta.PivotHeader.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivotHeader} message PivotHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PivotHeader.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pivotDimensionHeaders != null && message.pivotDimensionHeaders.length)
+                                for (var i = 0; i < message.pivotDimensionHeaders.length; ++i)
+                                    $root.google.analytics.data.v1beta.PivotDimensionHeader.encode(message.pivotDimensionHeaders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rowCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PivotHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.PivotHeader.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivotHeader} message PivotHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PivotHeader.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PivotHeader message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.PivotHeader} PivotHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PivotHeader.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.PivotHeader();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.pivotDimensionHeaders && message.pivotDimensionHeaders.length))
+                                        message.pivotDimensionHeaders = [];
+                                    message.pivotDimensionHeaders.push($root.google.analytics.data.v1beta.PivotDimensionHeader.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.rowCount = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PivotHeader message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.PivotHeader} PivotHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PivotHeader.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PivotHeader message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PivotHeader.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pivotDimensionHeaders != null && message.hasOwnProperty("pivotDimensionHeaders")) {
+                                if (!Array.isArray(message.pivotDimensionHeaders))
+                                    return "pivotDimensionHeaders: array expected";
+                                for (var i = 0; i < message.pivotDimensionHeaders.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.PivotDimensionHeader.verify(message.pivotDimensionHeaders[i]);
+                                    if (error)
+                                        return "pivotDimensionHeaders." + error;
+                                }
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                if (!$util.isInteger(message.rowCount))
+                                    return "rowCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PivotHeader message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.PivotHeader} PivotHeader
+                         */
+                        PivotHeader.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.PivotHeader)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.PivotHeader();
+                            if (object.pivotDimensionHeaders) {
+                                if (!Array.isArray(object.pivotDimensionHeaders))
+                                    throw TypeError(".google.analytics.data.v1beta.PivotHeader.pivotDimensionHeaders: array expected");
+                                message.pivotDimensionHeaders = [];
+                                for (var i = 0; i < object.pivotDimensionHeaders.length; ++i) {
+                                    if (typeof object.pivotDimensionHeaders[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.PivotHeader.pivotDimensionHeaders: object expected");
+                                    message.pivotDimensionHeaders[i] = $root.google.analytics.data.v1beta.PivotDimensionHeader.fromObject(object.pivotDimensionHeaders[i]);
+                                }
+                            }
+                            if (object.rowCount != null)
+                                message.rowCount = object.rowCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PivotHeader message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.PivotHeader} message PivotHeader
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PivotHeader.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.pivotDimensionHeaders = [];
+                            if (options.defaults)
+                                object.rowCount = 0;
+                            if (message.pivotDimensionHeaders && message.pivotDimensionHeaders.length) {
+                                object.pivotDimensionHeaders = [];
+                                for (var j = 0; j < message.pivotDimensionHeaders.length; ++j)
+                                    object.pivotDimensionHeaders[j] = $root.google.analytics.data.v1beta.PivotDimensionHeader.toObject(message.pivotDimensionHeaders[j], options);
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                object.rowCount = message.rowCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PivotHeader to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.PivotHeader
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PivotHeader.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PivotHeader;
+                    })();
+    
+                    v1beta.PivotDimensionHeader = (function() {
+    
+                        /**
+                         * Properties of a PivotDimensionHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IPivotDimensionHeader
+                         * @property {Array.<google.analytics.data.v1beta.IDimensionValue>|null} [dimensionValues] PivotDimensionHeader dimensionValues
+                         */
+    
+                        /**
+                         * Constructs a new PivotDimensionHeader.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a PivotDimensionHeader.
+                         * @implements IPivotDimensionHeader
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IPivotDimensionHeader=} [properties] Properties to set
+                         */
+                        function PivotDimensionHeader(properties) {
+                            this.dimensionValues = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PivotDimensionHeader dimensionValues.
+                         * @member {Array.<google.analytics.data.v1beta.IDimensionValue>} dimensionValues
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @instance
+                         */
+                        PivotDimensionHeader.prototype.dimensionValues = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PivotDimensionHeader instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivotDimensionHeader=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.PivotDimensionHeader} PivotDimensionHeader instance
+                         */
+                        PivotDimensionHeader.create = function create(properties) {
+                            return new PivotDimensionHeader(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PivotDimensionHeader message. Does not implicitly {@link google.analytics.data.v1beta.PivotDimensionHeader.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivotDimensionHeader} message PivotDimensionHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PivotDimensionHeader.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionValues != null && message.dimensionValues.length)
+                                for (var i = 0; i < message.dimensionValues.length; ++i)
+                                    $root.google.analytics.data.v1beta.DimensionValue.encode(message.dimensionValues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PivotDimensionHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.PivotDimensionHeader.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPivotDimensionHeader} message PivotDimensionHeader message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PivotDimensionHeader.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PivotDimensionHeader message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.PivotDimensionHeader} PivotDimensionHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PivotDimensionHeader.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.PivotDimensionHeader();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dimensionValues && message.dimensionValues.length))
+                                        message.dimensionValues = [];
+                                    message.dimensionValues.push($root.google.analytics.data.v1beta.DimensionValue.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PivotDimensionHeader message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.PivotDimensionHeader} PivotDimensionHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PivotDimensionHeader.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PivotDimensionHeader message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PivotDimensionHeader.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionValues != null && message.hasOwnProperty("dimensionValues")) {
+                                if (!Array.isArray(message.dimensionValues))
+                                    return "dimensionValues: array expected";
+                                for (var i = 0; i < message.dimensionValues.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DimensionValue.verify(message.dimensionValues[i]);
+                                    if (error)
+                                        return "dimensionValues." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PivotDimensionHeader message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.PivotDimensionHeader} PivotDimensionHeader
+                         */
+                        PivotDimensionHeader.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.PivotDimensionHeader)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.PivotDimensionHeader();
+                            if (object.dimensionValues) {
+                                if (!Array.isArray(object.dimensionValues))
+                                    throw TypeError(".google.analytics.data.v1beta.PivotDimensionHeader.dimensionValues: array expected");
+                                message.dimensionValues = [];
+                                for (var i = 0; i < object.dimensionValues.length; ++i) {
+                                    if (typeof object.dimensionValues[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.PivotDimensionHeader.dimensionValues: object expected");
+                                    message.dimensionValues[i] = $root.google.analytics.data.v1beta.DimensionValue.fromObject(object.dimensionValues[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PivotDimensionHeader message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @static
+                         * @param {google.analytics.data.v1beta.PivotDimensionHeader} message PivotDimensionHeader
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PivotDimensionHeader.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dimensionValues = [];
+                            if (message.dimensionValues && message.dimensionValues.length) {
+                                object.dimensionValues = [];
+                                for (var j = 0; j < message.dimensionValues.length; ++j)
+                                    object.dimensionValues[j] = $root.google.analytics.data.v1beta.DimensionValue.toObject(message.dimensionValues[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PivotDimensionHeader to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.PivotDimensionHeader
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PivotDimensionHeader.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PivotDimensionHeader;
+                    })();
+    
+                    v1beta.Row = (function() {
+    
+                        /**
+                         * Properties of a Row.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IRow
+                         * @property {Array.<google.analytics.data.v1beta.IDimensionValue>|null} [dimensionValues] Row dimensionValues
+                         * @property {Array.<google.analytics.data.v1beta.IMetricValue>|null} [metricValues] Row metricValues
+                         */
+    
+                        /**
+                         * Constructs a new Row.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a Row.
+                         * @implements IRow
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IRow=} [properties] Properties to set
+                         */
+                        function Row(properties) {
+                            this.dimensionValues = [];
+                            this.metricValues = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Row dimensionValues.
+                         * @member {Array.<google.analytics.data.v1beta.IDimensionValue>} dimensionValues
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @instance
+                         */
+                        Row.prototype.dimensionValues = $util.emptyArray;
+    
+                        /**
+                         * Row metricValues.
+                         * @member {Array.<google.analytics.data.v1beta.IMetricValue>} metricValues
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @instance
+                         */
+                        Row.prototype.metricValues = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Row instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRow=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.Row} Row instance
+                         */
+                        Row.create = function create(properties) {
+                            return new Row(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Row message. Does not implicitly {@link google.analytics.data.v1beta.Row.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRow} message Row message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Row.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionValues != null && message.dimensionValues.length)
+                                for (var i = 0; i < message.dimensionValues.length; ++i)
+                                    $root.google.analytics.data.v1beta.DimensionValue.encode(message.dimensionValues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metricValues != null && message.metricValues.length)
+                                for (var i = 0; i < message.metricValues.length; ++i)
+                                    $root.google.analytics.data.v1beta.MetricValue.encode(message.metricValues[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Row message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Row.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {google.analytics.data.v1beta.IRow} message Row message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Row.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Row message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.Row} Row
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Row.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.Row();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dimensionValues && message.dimensionValues.length))
+                                        message.dimensionValues = [];
+                                    message.dimensionValues.push($root.google.analytics.data.v1beta.DimensionValue.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.metricValues && message.metricValues.length))
+                                        message.metricValues = [];
+                                    message.metricValues.push($root.google.analytics.data.v1beta.MetricValue.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Row message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.Row} Row
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Row.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Row message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Row.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionValues != null && message.hasOwnProperty("dimensionValues")) {
+                                if (!Array.isArray(message.dimensionValues))
+                                    return "dimensionValues: array expected";
+                                for (var i = 0; i < message.dimensionValues.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DimensionValue.verify(message.dimensionValues[i]);
+                                    if (error)
+                                        return "dimensionValues." + error;
+                                }
+                            }
+                            if (message.metricValues != null && message.hasOwnProperty("metricValues")) {
+                                if (!Array.isArray(message.metricValues))
+                                    return "metricValues: array expected";
+                                for (var i = 0; i < message.metricValues.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.MetricValue.verify(message.metricValues[i]);
+                                    if (error)
+                                        return "metricValues." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Row message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.Row} Row
+                         */
+                        Row.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.Row)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.Row();
+                            if (object.dimensionValues) {
+                                if (!Array.isArray(object.dimensionValues))
+                                    throw TypeError(".google.analytics.data.v1beta.Row.dimensionValues: array expected");
+                                message.dimensionValues = [];
+                                for (var i = 0; i < object.dimensionValues.length; ++i) {
+                                    if (typeof object.dimensionValues[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Row.dimensionValues: object expected");
+                                    message.dimensionValues[i] = $root.google.analytics.data.v1beta.DimensionValue.fromObject(object.dimensionValues[i]);
+                                }
+                            }
+                            if (object.metricValues) {
+                                if (!Array.isArray(object.metricValues))
+                                    throw TypeError(".google.analytics.data.v1beta.Row.metricValues: array expected");
+                                message.metricValues = [];
+                                for (var i = 0; i < object.metricValues.length; ++i) {
+                                    if (typeof object.metricValues[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.Row.metricValues: object expected");
+                                    message.metricValues[i] = $root.google.analytics.data.v1beta.MetricValue.fromObject(object.metricValues[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Row message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @static
+                         * @param {google.analytics.data.v1beta.Row} message Row
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Row.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensionValues = [];
+                                object.metricValues = [];
+                            }
+                            if (message.dimensionValues && message.dimensionValues.length) {
+                                object.dimensionValues = [];
+                                for (var j = 0; j < message.dimensionValues.length; ++j)
+                                    object.dimensionValues[j] = $root.google.analytics.data.v1beta.DimensionValue.toObject(message.dimensionValues[j], options);
+                            }
+                            if (message.metricValues && message.metricValues.length) {
+                                object.metricValues = [];
+                                for (var j = 0; j < message.metricValues.length; ++j)
+                                    object.metricValues[j] = $root.google.analytics.data.v1beta.MetricValue.toObject(message.metricValues[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Row to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.Row
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Row.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Row;
+                    })();
+    
+                    v1beta.DimensionValue = (function() {
+    
+                        /**
+                         * Properties of a DimensionValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IDimensionValue
+                         * @property {string|null} [value] DimensionValue value
+                         */
+    
+                        /**
+                         * Constructs a new DimensionValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a DimensionValue.
+                         * @implements IDimensionValue
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IDimensionValue=} [properties] Properties to set
+                         */
+                        function DimensionValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DimensionValue value.
+                         * @member {string} value
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @instance
+                         */
+                        DimensionValue.prototype.value = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DimensionValue oneValue.
+                         * @member {"value"|undefined} oneValue
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @instance
+                         */
+                        Object.defineProperty(DimensionValue.prototype, "oneValue", {
+                            get: $util.oneOfGetter($oneOfFields = ["value"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DimensionValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionValue=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.DimensionValue} DimensionValue instance
+                         */
+                        DimensionValue.create = function create(properties) {
+                            return new DimensionValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionValue message. Does not implicitly {@link google.analytics.data.v1beta.DimensionValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionValue} message DimensionValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionValue} message DimensionValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DimensionValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.DimensionValue} DimensionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionValue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DimensionValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DimensionValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.DimensionValue} DimensionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DimensionValue message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DimensionValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                properties.oneValue = 1;
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DimensionValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.DimensionValue} DimensionValue
+                         */
+                        DimensionValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.DimensionValue)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.DimensionValue();
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DimensionValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.DimensionValue} message DimensionValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DimensionValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                object.value = message.value;
+                                if (options.oneofs)
+                                    object.oneValue = "value";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DimensionValue to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.DimensionValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DimensionValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DimensionValue;
+                    })();
+    
+                    v1beta.MetricValue = (function() {
+    
+                        /**
+                         * Properties of a MetricValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IMetricValue
+                         * @property {string|null} [value] MetricValue value
+                         */
+    
+                        /**
+                         * Constructs a new MetricValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a MetricValue.
+                         * @implements IMetricValue
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IMetricValue=} [properties] Properties to set
+                         */
+                        function MetricValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetricValue value.
+                         * @member {string} value
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @instance
+                         */
+                        MetricValue.prototype.value = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MetricValue oneValue.
+                         * @member {"value"|undefined} oneValue
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @instance
+                         */
+                        Object.defineProperty(MetricValue.prototype, "oneValue", {
+                            get: $util.oneOfGetter($oneOfFields = ["value"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MetricValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricValue=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.MetricValue} MetricValue instance
+                         */
+                        MetricValue.create = function create(properties) {
+                            return new MetricValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetricValue message. Does not implicitly {@link google.analytics.data.v1beta.MetricValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricValue} message MetricValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetricValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricValue} message MetricValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetricValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.MetricValue} MetricValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricValue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.MetricValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.value = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetricValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.MetricValue} MetricValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetricValue message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetricValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                properties.oneValue = 1;
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetricValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.MetricValue} MetricValue
+                         */
+                        MetricValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.MetricValue)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.MetricValue();
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetricValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.MetricValue} message MetricValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetricValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                object.value = message.value;
+                                if (options.oneofs)
+                                    object.oneValue = "value";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetricValue to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.MetricValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetricValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetricValue;
+                    })();
+    
+                    v1beta.NumericValue = (function() {
+    
+                        /**
+                         * Properties of a NumericValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface INumericValue
+                         * @property {number|Long|null} [int64Value] NumericValue int64Value
+                         * @property {number|null} [doubleValue] NumericValue doubleValue
+                         */
+    
+                        /**
+                         * Constructs a new NumericValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a NumericValue.
+                         * @implements INumericValue
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.INumericValue=} [properties] Properties to set
+                         */
+                        function NumericValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NumericValue int64Value.
+                         * @member {number|Long} int64Value
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @instance
+                         */
+                        NumericValue.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * NumericValue doubleValue.
+                         * @member {number} doubleValue
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @instance
+                         */
+                        NumericValue.prototype.doubleValue = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * NumericValue oneValue.
+                         * @member {"int64Value"|"doubleValue"|undefined} oneValue
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @instance
+                         */
+                        Object.defineProperty(NumericValue.prototype, "oneValue", {
+                            get: $util.oneOfGetter($oneOfFields = ["int64Value", "doubleValue"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new NumericValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.INumericValue=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.NumericValue} NumericValue instance
+                         */
+                        NumericValue.create = function create(properties) {
+                            return new NumericValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NumericValue message. Does not implicitly {@link google.analytics.data.v1beta.NumericValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.INumericValue} message NumericValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NumericValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.int64Value != null && Object.hasOwnProperty.call(message, "int64Value"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.int64Value);
+                            if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.doubleValue);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NumericValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.NumericValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.INumericValue} message NumericValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NumericValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NumericValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.NumericValue} NumericValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NumericValue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.NumericValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.int64Value = reader.int64();
+                                    break;
+                                case 2:
+                                    message.doubleValue = reader.double();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NumericValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.NumericValue} NumericValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NumericValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NumericValue message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NumericValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.int64Value != null && message.hasOwnProperty("int64Value")) {
+                                properties.oneValue = 1;
+                                if (!$util.isInteger(message.int64Value) && !(message.int64Value && $util.isInteger(message.int64Value.low) && $util.isInteger(message.int64Value.high)))
+                                    return "int64Value: integer|Long expected";
+                            }
+                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
+                                if (properties.oneValue === 1)
+                                    return "oneValue: multiple values";
+                                properties.oneValue = 1;
+                                if (typeof message.doubleValue !== "number")
+                                    return "doubleValue: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NumericValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.NumericValue} NumericValue
+                         */
+                        NumericValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.NumericValue)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.NumericValue();
+                            if (object.int64Value != null)
+                                if ($util.Long)
+                                    (message.int64Value = $util.Long.fromValue(object.int64Value)).unsigned = false;
+                                else if (typeof object.int64Value === "string")
+                                    message.int64Value = parseInt(object.int64Value, 10);
+                                else if (typeof object.int64Value === "number")
+                                    message.int64Value = object.int64Value;
+                                else if (typeof object.int64Value === "object")
+                                    message.int64Value = new $util.LongBits(object.int64Value.low >>> 0, object.int64Value.high >>> 0).toNumber();
+                            if (object.doubleValue != null)
+                                message.doubleValue = Number(object.doubleValue);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NumericValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.NumericValue} message NumericValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NumericValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.int64Value != null && message.hasOwnProperty("int64Value")) {
+                                if (typeof message.int64Value === "number")
+                                    object.int64Value = options.longs === String ? String(message.int64Value) : message.int64Value;
+                                else
+                                    object.int64Value = options.longs === String ? $util.Long.prototype.toString.call(message.int64Value) : options.longs === Number ? new $util.LongBits(message.int64Value.low >>> 0, message.int64Value.high >>> 0).toNumber() : message.int64Value;
+                                if (options.oneofs)
+                                    object.oneValue = "int64Value";
+                            }
+                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
+                                object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
+                                if (options.oneofs)
+                                    object.oneValue = "doubleValue";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NumericValue to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.NumericValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NumericValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return NumericValue;
+                    })();
+    
+                    v1beta.PropertyQuota = (function() {
+    
+                        /**
+                         * Properties of a PropertyQuota.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IPropertyQuota
+                         * @property {google.analytics.data.v1beta.IQuotaStatus|null} [tokensPerDay] PropertyQuota tokensPerDay
+                         * @property {google.analytics.data.v1beta.IQuotaStatus|null} [tokensPerHour] PropertyQuota tokensPerHour
+                         * @property {google.analytics.data.v1beta.IQuotaStatus|null} [concurrentRequests] PropertyQuota concurrentRequests
+                         * @property {google.analytics.data.v1beta.IQuotaStatus|null} [serverErrorsPerProjectPerHour] PropertyQuota serverErrorsPerProjectPerHour
+                         */
+    
+                        /**
+                         * Constructs a new PropertyQuota.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a PropertyQuota.
+                         * @implements IPropertyQuota
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IPropertyQuota=} [properties] Properties to set
+                         */
+                        function PropertyQuota(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PropertyQuota tokensPerDay.
+                         * @member {google.analytics.data.v1beta.IQuotaStatus|null|undefined} tokensPerDay
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @instance
+                         */
+                        PropertyQuota.prototype.tokensPerDay = null;
+    
+                        /**
+                         * PropertyQuota tokensPerHour.
+                         * @member {google.analytics.data.v1beta.IQuotaStatus|null|undefined} tokensPerHour
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @instance
+                         */
+                        PropertyQuota.prototype.tokensPerHour = null;
+    
+                        /**
+                         * PropertyQuota concurrentRequests.
+                         * @member {google.analytics.data.v1beta.IQuotaStatus|null|undefined} concurrentRequests
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @instance
+                         */
+                        PropertyQuota.prototype.concurrentRequests = null;
+    
+                        /**
+                         * PropertyQuota serverErrorsPerProjectPerHour.
+                         * @member {google.analytics.data.v1beta.IQuotaStatus|null|undefined} serverErrorsPerProjectPerHour
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @instance
+                         */
+                        PropertyQuota.prototype.serverErrorsPerProjectPerHour = null;
+    
+                        /**
+                         * Creates a new PropertyQuota instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPropertyQuota=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.PropertyQuota} PropertyQuota instance
+                         */
+                        PropertyQuota.create = function create(properties) {
+                            return new PropertyQuota(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PropertyQuota message. Does not implicitly {@link google.analytics.data.v1beta.PropertyQuota.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPropertyQuota} message PropertyQuota message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertyQuota.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tokensPerDay != null && Object.hasOwnProperty.call(message, "tokensPerDay"))
+                                $root.google.analytics.data.v1beta.QuotaStatus.encode(message.tokensPerDay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.tokensPerHour != null && Object.hasOwnProperty.call(message, "tokensPerHour"))
+                                $root.google.analytics.data.v1beta.QuotaStatus.encode(message.tokensPerHour, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.concurrentRequests != null && Object.hasOwnProperty.call(message, "concurrentRequests"))
+                                $root.google.analytics.data.v1beta.QuotaStatus.encode(message.concurrentRequests, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.serverErrorsPerProjectPerHour != null && Object.hasOwnProperty.call(message, "serverErrorsPerProjectPerHour"))
+                                $root.google.analytics.data.v1beta.QuotaStatus.encode(message.serverErrorsPerProjectPerHour, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PropertyQuota message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.PropertyQuota.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {google.analytics.data.v1beta.IPropertyQuota} message PropertyQuota message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertyQuota.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PropertyQuota message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.PropertyQuota} PropertyQuota
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertyQuota.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.PropertyQuota();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.tokensPerDay = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.tokensPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.concurrentRequests = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PropertyQuota message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.PropertyQuota} PropertyQuota
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertyQuota.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PropertyQuota message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PropertyQuota.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tokensPerDay != null && message.hasOwnProperty("tokensPerDay")) {
+                                var error = $root.google.analytics.data.v1beta.QuotaStatus.verify(message.tokensPerDay);
+                                if (error)
+                                    return "tokensPerDay." + error;
+                            }
+                            if (message.tokensPerHour != null && message.hasOwnProperty("tokensPerHour")) {
+                                var error = $root.google.analytics.data.v1beta.QuotaStatus.verify(message.tokensPerHour);
+                                if (error)
+                                    return "tokensPerHour." + error;
+                            }
+                            if (message.concurrentRequests != null && message.hasOwnProperty("concurrentRequests")) {
+                                var error = $root.google.analytics.data.v1beta.QuotaStatus.verify(message.concurrentRequests);
+                                if (error)
+                                    return "concurrentRequests." + error;
+                            }
+                            if (message.serverErrorsPerProjectPerHour != null && message.hasOwnProperty("serverErrorsPerProjectPerHour")) {
+                                var error = $root.google.analytics.data.v1beta.QuotaStatus.verify(message.serverErrorsPerProjectPerHour);
+                                if (error)
+                                    return "serverErrorsPerProjectPerHour." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PropertyQuota message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.PropertyQuota} PropertyQuota
+                         */
+                        PropertyQuota.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.PropertyQuota)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.PropertyQuota();
+                            if (object.tokensPerDay != null) {
+                                if (typeof object.tokensPerDay !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.PropertyQuota.tokensPerDay: object expected");
+                                message.tokensPerDay = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.tokensPerDay);
+                            }
+                            if (object.tokensPerHour != null) {
+                                if (typeof object.tokensPerHour !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.PropertyQuota.tokensPerHour: object expected");
+                                message.tokensPerHour = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.tokensPerHour);
+                            }
+                            if (object.concurrentRequests != null) {
+                                if (typeof object.concurrentRequests !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.PropertyQuota.concurrentRequests: object expected");
+                                message.concurrentRequests = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.concurrentRequests);
+                            }
+                            if (object.serverErrorsPerProjectPerHour != null) {
+                                if (typeof object.serverErrorsPerProjectPerHour !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.PropertyQuota.serverErrorsPerProjectPerHour: object expected");
+                                message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.serverErrorsPerProjectPerHour);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PropertyQuota message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @static
+                         * @param {google.analytics.data.v1beta.PropertyQuota} message PropertyQuota
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PropertyQuota.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.tokensPerDay = null;
+                                object.tokensPerHour = null;
+                                object.concurrentRequests = null;
+                                object.serverErrorsPerProjectPerHour = null;
+                            }
+                            if (message.tokensPerDay != null && message.hasOwnProperty("tokensPerDay"))
+                                object.tokensPerDay = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.tokensPerDay, options);
+                            if (message.tokensPerHour != null && message.hasOwnProperty("tokensPerHour"))
+                                object.tokensPerHour = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.tokensPerHour, options);
+                            if (message.concurrentRequests != null && message.hasOwnProperty("concurrentRequests"))
+                                object.concurrentRequests = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.concurrentRequests, options);
+                            if (message.serverErrorsPerProjectPerHour != null && message.hasOwnProperty("serverErrorsPerProjectPerHour"))
+                                object.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.serverErrorsPerProjectPerHour, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PropertyQuota to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PropertyQuota.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PropertyQuota;
+                    })();
+    
+                    v1beta.QuotaStatus = (function() {
+    
+                        /**
+                         * Properties of a QuotaStatus.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IQuotaStatus
+                         * @property {number|null} [consumed] QuotaStatus consumed
+                         * @property {number|null} [remaining] QuotaStatus remaining
+                         */
+    
+                        /**
+                         * Constructs a new QuotaStatus.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a QuotaStatus.
+                         * @implements IQuotaStatus
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IQuotaStatus=} [properties] Properties to set
+                         */
+                        function QuotaStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaStatus consumed.
+                         * @member {number} consumed
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @instance
+                         */
+                        QuotaStatus.prototype.consumed = 0;
+    
+                        /**
+                         * QuotaStatus remaining.
+                         * @member {number} remaining
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @instance
+                         */
+                        QuotaStatus.prototype.remaining = 0;
+    
+                        /**
+                         * Creates a new QuotaStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQuotaStatus=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.QuotaStatus} QuotaStatus instance
+                         */
+                        QuotaStatus.create = function create(properties) {
+                            return new QuotaStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaStatus message. Does not implicitly {@link google.analytics.data.v1beta.QuotaStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQuotaStatus} message QuotaStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.consumed != null && Object.hasOwnProperty.call(message, "consumed"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.consumed);
+                            if (message.remaining != null && Object.hasOwnProperty.call(message, "remaining"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.remaining);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaStatus message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.QuotaStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQuotaStatus} message QuotaStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.QuotaStatus} QuotaStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.QuotaStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.consumed = reader.int32();
+                                    break;
+                                case 2:
+                                    message.remaining = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.QuotaStatus} QuotaStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaStatus message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.consumed != null && message.hasOwnProperty("consumed"))
+                                if (!$util.isInteger(message.consumed))
+                                    return "consumed: integer expected";
+                            if (message.remaining != null && message.hasOwnProperty("remaining"))
+                                if (!$util.isInteger(message.remaining))
+                                    return "remaining: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.QuotaStatus} QuotaStatus
+                         */
+                        QuotaStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.QuotaStatus)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.QuotaStatus();
+                            if (object.consumed != null)
+                                message.consumed = object.consumed | 0;
+                            if (object.remaining != null)
+                                message.remaining = object.remaining | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @static
+                         * @param {google.analytics.data.v1beta.QuotaStatus} message QuotaStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.consumed = 0;
+                                object.remaining = 0;
+                            }
+                            if (message.consumed != null && message.hasOwnProperty("consumed"))
+                                object.consumed = message.consumed;
+                            if (message.remaining != null && message.hasOwnProperty("remaining"))
+                                object.remaining = message.remaining;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return QuotaStatus;
+                    })();
+    
+                    v1beta.DimensionMetadata = (function() {
+    
+                        /**
+                         * Properties of a DimensionMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IDimensionMetadata
+                         * @property {string|null} [apiName] DimensionMetadata apiName
+                         * @property {string|null} [uiName] DimensionMetadata uiName
+                         * @property {string|null} [description] DimensionMetadata description
+                         * @property {Array.<string>|null} [deprecatedApiNames] DimensionMetadata deprecatedApiNames
+                         * @property {boolean|null} [customDefinition] DimensionMetadata customDefinition
+                         */
+    
+                        /**
+                         * Constructs a new DimensionMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a DimensionMetadata.
+                         * @implements IDimensionMetadata
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IDimensionMetadata=} [properties] Properties to set
+                         */
+                        function DimensionMetadata(properties) {
+                            this.deprecatedApiNames = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DimensionMetadata apiName.
+                         * @member {string} apiName
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @instance
+                         */
+                        DimensionMetadata.prototype.apiName = "";
+    
+                        /**
+                         * DimensionMetadata uiName.
+                         * @member {string} uiName
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @instance
+                         */
+                        DimensionMetadata.prototype.uiName = "";
+    
+                        /**
+                         * DimensionMetadata description.
+                         * @member {string} description
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @instance
+                         */
+                        DimensionMetadata.prototype.description = "";
+    
+                        /**
+                         * DimensionMetadata deprecatedApiNames.
+                         * @member {Array.<string>} deprecatedApiNames
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @instance
+                         */
+                        DimensionMetadata.prototype.deprecatedApiNames = $util.emptyArray;
+    
+                        /**
+                         * DimensionMetadata customDefinition.
+                         * @member {boolean} customDefinition
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @instance
+                         */
+                        DimensionMetadata.prototype.customDefinition = false;
+    
+                        /**
+                         * Creates a new DimensionMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionMetadata=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.DimensionMetadata} DimensionMetadata instance
+                         */
+                        DimensionMetadata.create = function create(properties) {
+                            return new DimensionMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionMetadata message. Does not implicitly {@link google.analytics.data.v1beta.DimensionMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionMetadata} message DimensionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.apiName != null && Object.hasOwnProperty.call(message, "apiName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.apiName);
+                            if (message.uiName != null && Object.hasOwnProperty.call(message, "uiName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uiName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.deprecatedApiNames != null && message.deprecatedApiNames.length)
+                                for (var i = 0; i < message.deprecatedApiNames.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.deprecatedApiNames[i]);
+                            if (message.customDefinition != null && Object.hasOwnProperty.call(message, "customDefinition"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.customDefinition);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionMetadata} message DimensionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DimensionMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.DimensionMetadata} DimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DimensionMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.apiName = reader.string();
+                                    break;
+                                case 2:
+                                    message.uiName = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.deprecatedApiNames && message.deprecatedApiNames.length))
+                                        message.deprecatedApiNames = [];
+                                    message.deprecatedApiNames.push(reader.string());
+                                    break;
+                                case 5:
+                                    message.customDefinition = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DimensionMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.DimensionMetadata} DimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DimensionMetadata message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DimensionMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.apiName != null && message.hasOwnProperty("apiName"))
+                                if (!$util.isString(message.apiName))
+                                    return "apiName: string expected";
+                            if (message.uiName != null && message.hasOwnProperty("uiName"))
+                                if (!$util.isString(message.uiName))
+                                    return "uiName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.deprecatedApiNames != null && message.hasOwnProperty("deprecatedApiNames")) {
+                                if (!Array.isArray(message.deprecatedApiNames))
+                                    return "deprecatedApiNames: array expected";
+                                for (var i = 0; i < message.deprecatedApiNames.length; ++i)
+                                    if (!$util.isString(message.deprecatedApiNames[i]))
+                                        return "deprecatedApiNames: string[] expected";
+                            }
+                            if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
+                                if (typeof message.customDefinition !== "boolean")
+                                    return "customDefinition: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DimensionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.DimensionMetadata} DimensionMetadata
+                         */
+                        DimensionMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.DimensionMetadata)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.DimensionMetadata();
+                            if (object.apiName != null)
+                                message.apiName = String(object.apiName);
+                            if (object.uiName != null)
+                                message.uiName = String(object.uiName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.deprecatedApiNames) {
+                                if (!Array.isArray(object.deprecatedApiNames))
+                                    throw TypeError(".google.analytics.data.v1beta.DimensionMetadata.deprecatedApiNames: array expected");
+                                message.deprecatedApiNames = [];
+                                for (var i = 0; i < object.deprecatedApiNames.length; ++i)
+                                    message.deprecatedApiNames[i] = String(object.deprecatedApiNames[i]);
+                            }
+                            if (object.customDefinition != null)
+                                message.customDefinition = Boolean(object.customDefinition);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DimensionMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.DimensionMetadata} message DimensionMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DimensionMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.deprecatedApiNames = [];
+                            if (options.defaults) {
+                                object.apiName = "";
+                                object.uiName = "";
+                                object.description = "";
+                                object.customDefinition = false;
+                            }
+                            if (message.apiName != null && message.hasOwnProperty("apiName"))
+                                object.apiName = message.apiName;
+                            if (message.uiName != null && message.hasOwnProperty("uiName"))
+                                object.uiName = message.uiName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.deprecatedApiNames && message.deprecatedApiNames.length) {
+                                object.deprecatedApiNames = [];
+                                for (var j = 0; j < message.deprecatedApiNames.length; ++j)
+                                    object.deprecatedApiNames[j] = message.deprecatedApiNames[j];
+                            }
+                            if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
+                                object.customDefinition = message.customDefinition;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DimensionMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DimensionMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DimensionMetadata;
+                    })();
+    
+                    v1beta.MetricMetadata = (function() {
+    
+                        /**
+                         * Properties of a MetricMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IMetricMetadata
+                         * @property {string|null} [apiName] MetricMetadata apiName
+                         * @property {string|null} [uiName] MetricMetadata uiName
+                         * @property {string|null} [description] MetricMetadata description
+                         * @property {Array.<string>|null} [deprecatedApiNames] MetricMetadata deprecatedApiNames
+                         * @property {google.analytics.data.v1beta.MetricType|null} [type] MetricMetadata type
+                         * @property {string|null} [expression] MetricMetadata expression
+                         * @property {boolean|null} [customDefinition] MetricMetadata customDefinition
+                         */
+    
+                        /**
+                         * Constructs a new MetricMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a MetricMetadata.
+                         * @implements IMetricMetadata
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IMetricMetadata=} [properties] Properties to set
+                         */
+                        function MetricMetadata(properties) {
+                            this.deprecatedApiNames = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetricMetadata apiName.
+                         * @member {string} apiName
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.apiName = "";
+    
+                        /**
+                         * MetricMetadata uiName.
+                         * @member {string} uiName
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.uiName = "";
+    
+                        /**
+                         * MetricMetadata description.
+                         * @member {string} description
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.description = "";
+    
+                        /**
+                         * MetricMetadata deprecatedApiNames.
+                         * @member {Array.<string>} deprecatedApiNames
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.deprecatedApiNames = $util.emptyArray;
+    
+                        /**
+                         * MetricMetadata type.
+                         * @member {google.analytics.data.v1beta.MetricType} type
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.type = 0;
+    
+                        /**
+                         * MetricMetadata expression.
+                         * @member {string} expression
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.expression = "";
+    
+                        /**
+                         * MetricMetadata customDefinition.
+                         * @member {boolean} customDefinition
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.customDefinition = false;
+    
+                        /**
+                         * Creates a new MetricMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricMetadata=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.MetricMetadata} MetricMetadata instance
+                         */
+                        MetricMetadata.create = function create(properties) {
+                            return new MetricMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetricMetadata message. Does not implicitly {@link google.analytics.data.v1beta.MetricMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricMetadata} message MetricMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.apiName != null && Object.hasOwnProperty.call(message, "apiName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.apiName);
+                            if (message.uiName != null && Object.hasOwnProperty.call(message, "uiName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uiName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.deprecatedApiNames != null && message.deprecatedApiNames.length)
+                                for (var i = 0; i < message.deprecatedApiNames.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.deprecatedApiNames[i]);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
+                            if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.expression);
+                            if (message.customDefinition != null && Object.hasOwnProperty.call(message, "customDefinition"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.customDefinition);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetricMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricMetadata} message MetricMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetricMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.MetricMetadata} MetricMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.MetricMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.apiName = reader.string();
+                                    break;
+                                case 2:
+                                    message.uiName = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.deprecatedApiNames && message.deprecatedApiNames.length))
+                                        message.deprecatedApiNames = [];
+                                    message.deprecatedApiNames.push(reader.string());
+                                    break;
+                                case 5:
+                                    message.type = reader.int32();
+                                    break;
+                                case 6:
+                                    message.expression = reader.string();
+                                    break;
+                                case 7:
+                                    message.customDefinition = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetricMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.MetricMetadata} MetricMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetricMetadata message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetricMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.apiName != null && message.hasOwnProperty("apiName"))
+                                if (!$util.isString(message.apiName))
+                                    return "apiName: string expected";
+                            if (message.uiName != null && message.hasOwnProperty("uiName"))
+                                if (!$util.isString(message.uiName))
+                                    return "uiName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.deprecatedApiNames != null && message.hasOwnProperty("deprecatedApiNames")) {
+                                if (!Array.isArray(message.deprecatedApiNames))
+                                    return "deprecatedApiNames: array expected";
+                                for (var i = 0; i < message.deprecatedApiNames.length; ++i)
+                                    if (!$util.isString(message.deprecatedApiNames[i]))
+                                        return "deprecatedApiNames: string[] expected";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                    break;
+                                }
+                            if (message.expression != null && message.hasOwnProperty("expression"))
+                                if (!$util.isString(message.expression))
+                                    return "expression: string expected";
+                            if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
+                                if (typeof message.customDefinition !== "boolean")
+                                    return "customDefinition: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetricMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.MetricMetadata} MetricMetadata
+                         */
+                        MetricMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.MetricMetadata)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.MetricMetadata();
+                            if (object.apiName != null)
+                                message.apiName = String(object.apiName);
+                            if (object.uiName != null)
+                                message.uiName = String(object.uiName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.deprecatedApiNames) {
+                                if (!Array.isArray(object.deprecatedApiNames))
+                                    throw TypeError(".google.analytics.data.v1beta.MetricMetadata.deprecatedApiNames: array expected");
+                                message.deprecatedApiNames = [];
+                                for (var i = 0; i < object.deprecatedApiNames.length; ++i)
+                                    message.deprecatedApiNames[i] = String(object.deprecatedApiNames[i]);
+                            }
+                            switch (object.type) {
+                            case "METRIC_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TYPE_INTEGER":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "TYPE_FLOAT":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "TYPE_SECONDS":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "TYPE_MILLISECONDS":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "TYPE_MINUTES":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            case "TYPE_HOURS":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            case "TYPE_STANDARD":
+                            case 8:
+                                message.type = 8;
+                                break;
+                            case "TYPE_CURRENCY":
+                            case 9:
+                                message.type = 9;
+                                break;
+                            case "TYPE_FEET":
+                            case 10:
+                                message.type = 10;
+                                break;
+                            case "TYPE_MILES":
+                            case 11:
+                                message.type = 11;
+                                break;
+                            case "TYPE_METERS":
+                            case 12:
+                                message.type = 12;
+                                break;
+                            case "TYPE_KILOMETERS":
+                            case 13:
+                                message.type = 13;
+                                break;
+                            }
+                            if (object.expression != null)
+                                message.expression = String(object.expression);
+                            if (object.customDefinition != null)
+                                message.customDefinition = Boolean(object.customDefinition);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetricMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.MetricMetadata} message MetricMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetricMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.deprecatedApiNames = [];
+                            if (options.defaults) {
+                                object.apiName = "";
+                                object.uiName = "";
+                                object.description = "";
+                                object.type = options.enums === String ? "METRIC_TYPE_UNSPECIFIED" : 0;
+                                object.expression = "";
+                                object.customDefinition = false;
+                            }
+                            if (message.apiName != null && message.hasOwnProperty("apiName"))
+                                object.apiName = message.apiName;
+                            if (message.uiName != null && message.hasOwnProperty("uiName"))
+                                object.uiName = message.uiName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.deprecatedApiNames && message.deprecatedApiNames.length) {
+                                object.deprecatedApiNames = [];
+                                for (var j = 0; j < message.deprecatedApiNames.length; ++j)
+                                    object.deprecatedApiNames[j] = message.deprecatedApiNames[j];
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.analytics.data.v1beta.MetricType[message.type] : message.type;
+                            if (message.expression != null && message.hasOwnProperty("expression"))
+                                object.expression = message.expression;
+                            if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
+                                object.customDefinition = message.customDefinition;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetricMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetricMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetricMetadata;
+                    })();
+    
+                    /**
+                     * MetricAggregation enum.
+                     * @name google.analytics.data.v1beta.MetricAggregation
+                     * @enum {number}
+                     * @property {number} METRIC_AGGREGATION_UNSPECIFIED=0 METRIC_AGGREGATION_UNSPECIFIED value
+                     * @property {number} TOTAL=1 TOTAL value
+                     * @property {number} MINIMUM=5 MINIMUM value
+                     * @property {number} MAXIMUM=6 MAXIMUM value
+                     * @property {number} COUNT=4 COUNT value
+                     */
+                    v1beta.MetricAggregation = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "METRIC_AGGREGATION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TOTAL"] = 1;
+                        values[valuesById[5] = "MINIMUM"] = 5;
+                        values[valuesById[6] = "MAXIMUM"] = 6;
+                        values[valuesById[4] = "COUNT"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * MetricType enum.
+                     * @name google.analytics.data.v1beta.MetricType
+                     * @enum {number}
+                     * @property {number} METRIC_TYPE_UNSPECIFIED=0 METRIC_TYPE_UNSPECIFIED value
+                     * @property {number} TYPE_INTEGER=1 TYPE_INTEGER value
+                     * @property {number} TYPE_FLOAT=2 TYPE_FLOAT value
+                     * @property {number} TYPE_SECONDS=4 TYPE_SECONDS value
+                     * @property {number} TYPE_MILLISECONDS=5 TYPE_MILLISECONDS value
+                     * @property {number} TYPE_MINUTES=6 TYPE_MINUTES value
+                     * @property {number} TYPE_HOURS=7 TYPE_HOURS value
+                     * @property {number} TYPE_STANDARD=8 TYPE_STANDARD value
+                     * @property {number} TYPE_CURRENCY=9 TYPE_CURRENCY value
+                     * @property {number} TYPE_FEET=10 TYPE_FEET value
+                     * @property {number} TYPE_MILES=11 TYPE_MILES value
+                     * @property {number} TYPE_METERS=12 TYPE_METERS value
+                     * @property {number} TYPE_KILOMETERS=13 TYPE_KILOMETERS value
+                     */
+                    v1beta.MetricType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "METRIC_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TYPE_INTEGER"] = 1;
+                        values[valuesById[2] = "TYPE_FLOAT"] = 2;
+                        values[valuesById[4] = "TYPE_SECONDS"] = 4;
+                        values[valuesById[5] = "TYPE_MILLISECONDS"] = 5;
+                        values[valuesById[6] = "TYPE_MINUTES"] = 6;
+                        values[valuesById[7] = "TYPE_HOURS"] = 7;
+                        values[valuesById[8] = "TYPE_STANDARD"] = 8;
+                        values[valuesById[9] = "TYPE_CURRENCY"] = 9;
+                        values[valuesById[10] = "TYPE_FEET"] = 10;
+                        values[valuesById[11] = "TYPE_MILES"] = 11;
+                        values[valuesById[12] = "TYPE_METERS"] = 12;
+                        values[valuesById[13] = "TYPE_KILOMETERS"] = 13;
+                        return values;
+                    })();
+    
+                    return v1beta;
+                })();
+    
                 return data;
             })();
     
@@ -14904,7 +28567,6 @@
              * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
              * @property {number} INPUT_ONLY=4 INPUT_ONLY value
              * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -14914,7 +28576,6 @@
                 values[valuesById[3] = "OUTPUT_ONLY"] = 3;
                 values[valuesById[4] = "INPUT_ONLY"] = 4;
                 values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 return values;
             })();
     
@@ -14930,7 +28591,6 @@
                  * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
                  * @property {string|null} [plural] ResourceDescriptor plural
                  * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
                  */
     
                 /**
@@ -14943,7 +28603,6 @@
                  */
                 function ResourceDescriptor(properties) {
                     this.pattern = [];
-                    this.style = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -14999,14 +28658,6 @@
                 ResourceDescriptor.prototype.singular = "";
     
                 /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
                  * Creates a new ResourceDescriptor instance using the specified properties.
                  * @function create
                  * @memberof google.api.ResourceDescriptor
@@ -15043,12 +28694,6 @@
                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
                     if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
                     return writer;
                 };
     
@@ -15102,16 +28747,6 @@
                             break;
                         case 6:
                             message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
-                                    message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -15176,18 +28811,6 @@
                     if (message.singular != null && message.hasOwnProperty("singular"))
                         if (!$util.isString(message.singular))
                             return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
                     return null;
                 };
     
@@ -15232,23 +28855,6 @@
                         message.plural = String(object.plural);
                     if (object.singular != null)
                         message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
                     return message;
                 };
     
@@ -15265,10 +28871,8 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults) {
+                    if (options.arrays || options.defaults)
                         object.pattern = [];
-                        object.style = [];
-                    }
                     if (options.defaults) {
                         object.type = "";
                         object.nameField = "";
@@ -15291,11 +28895,6 @@
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
                         object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
                     return object;
                 };
     
@@ -15323,20 +28922,6 @@
                     values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
                     values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
                     values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
                     return values;
                 })();
     
@@ -21082,7 +34667,6 @@
                             case 3:
                             case 4:
                             case 5:
-                            case 6:
                                 break;
                             }
                     }
@@ -21182,10 +34766,6 @@
                             case "IMMUTABLE":
                             case 5:
                                 message[".google.api.fieldBehavior"][i] = 5;
-                                break;
-                            case "UNORDERED_LIST":
-                            case 6:
-                                message[".google.api.fieldBehavior"][i] = 6;
                                 break;
                             }
                     }
