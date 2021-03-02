@@ -70,7 +70,8 @@ const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore');
 const client = new DataprocMetastoreClient();
 
 async function listServices() {
-  const [services] = await client.listServices({parent: `projects/${projectId}/locations/${location}`
+  const [services] = await client.listServices({
+    parent: `projects/${projectId}/locations/${location}`,
   });
   console.info(services);
 }
