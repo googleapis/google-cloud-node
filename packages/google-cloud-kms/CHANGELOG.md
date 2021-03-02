@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.0...v2.3.1) (2021-02-12)
+
+
+### Bug Fixes
+
+* do not retry on 13 INTERNAL ([#418](https://www.github.com/googleapis/nodejs-kms/issues/418)) ([3f6014a](https://www.github.com/googleapis/nodejs-kms/commit/3f6014ac2cbd6988fd400d076ad46920d3039d5c))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.2.0...v2.3.0) (2021-01-08)
 
 
