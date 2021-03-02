@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.0.0...v1.1.0) (2021-03-02)
+
+
+### Features
+
+* **docs:** promote to ga ([#18](https://www.github.com/googleapis/nodejs-retail/issues/18)) ([e54b324](https://www.github.com/googleapis/nodejs-retail/commit/e54b32404d2de0cb6b460e9ca0cada6bd0e5b856))
+
 ## 1.0.0 (2021-01-13)
 
 
