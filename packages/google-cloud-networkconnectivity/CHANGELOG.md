@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.0.0...v1.1.0) (2021-03-02)
+
+
+### Features
+
+* Add state field in resources docs: Minor changes ([#11](https://www.github.com/googleapis/nodejs-network-connectivity/issues/11)) ([22193b9](https://www.github.com/googleapis/nodejs-network-connectivity/commit/22193b9cb8e767f0b93a17c353f4cb1b38acf317))
+
 ## 1.0.0 (2021-02-16)
 
 
