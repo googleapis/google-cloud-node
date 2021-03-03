@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.4.0...v3.5.0) (2021-03-02)
+
+
+### Features
+
+* added topic field to Secret ([#207](https://www.github.com/googleapis/nodejs-secret-manager/issues/207)) ([26f975a](https://www.github.com/googleapis/nodejs-secret-manager/commit/26f975a47eebe66e6c657f5589373cd4b61ded85))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.3.0...v3.4.0) (2021-01-21)
 
 
