@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'BetaAnalyticsData',
-    filename: './beta-analytics-data.js',
+    library: 'AlphaAnalyticsData',
+    filename: './alpha-analytics-data.js',
   },
   node: {
     child_process: 'empty',

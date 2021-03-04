@@ -16,17 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BetaAnalyticsDataClient} from '@google-analytics/data';
+import {AlphaAnalyticsDataClient} from '@google-analytics/data';
 
 // check that the client class type name can be used
-function doStuffWithBetaAnalyticsDataClient(client: BetaAnalyticsDataClient) {
+function doStuffWithAlphaAnalyticsDataClient(client: AlphaAnalyticsDataClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const betaAnalyticsDataClient = new BetaAnalyticsDataClient();
-  doStuffWithBetaAnalyticsDataClient(betaAnalyticsDataClient);
+  const alphaAnalyticsDataClient = new AlphaAnalyticsDataClient();
+  doStuffWithAlphaAnalyticsDataClient(alphaAnalyticsDataClient);
 }
 
 main();

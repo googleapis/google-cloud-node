@@ -20,7 +20,7 @@
 const data = require('@google-analytics/data');
 
 function main() {
-  const betaAnalyticsDataClient = new data.BetaAnalyticsDataClient();
+  const alphaAnalyticsDataClient = new data.AlphaAnalyticsDataClient();
 }
 
 main();
