@@ -23,5 +23,7 @@ deep-copy-regex:
     rm-dest: /document/.*
   - source: /google/cloud/documentai/.*/documentai-.*-nodejs/test/(.*)
     dest: /test/$1
+    rm-dest: /test/$1
   - source: /google/cloud/documentai/.*/documentai-.*-nodejs/system-test/(.*)
     dest: /system-test/$1
+    rm-dest: /system-test/$1
