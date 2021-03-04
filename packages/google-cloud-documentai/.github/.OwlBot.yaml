@@ -15,15 +15,19 @@ docker:
   image: gcr.io/repo-automation-bots/owlbot-nodejs:latest
 
 deep-copy-regex:
+  # Source Code:
   - source: /google/cloud/documentai/.*/documentai-.*-nodejs/src/(.*)
     dest: /src/$1
     rm-dest: /src/.*
-  - source: /google/cloud/documentai/.*/documentai-.*-nodejs/protos/google/cloud/document/(.*)
-    dest: /document/$1
-    rm-dest: /document/.*
+  # Protos:
+  - source: /google/cloud/documentai/.*/documentai-.*-nodejs/protos/google/cloud/documentai/(.*)
+    dest: /protos/google/cloud/documentai/$1
+    rm-dest: /protos/google/cloud/documentai/*
+  # Unit tests:
   - source: /google/cloud/documentai/.*/documentai-.*-nodejs/test/(.*)
     dest: /test/$1
     rm-dest: /test/$1
+  # TypeScript integration tests:
   - source: /google/cloud/documentai/.*/documentai-.*-nodejs/system-test/(.*)
     dest: /system-test/$1
     rm-dest: /system-test/$1
