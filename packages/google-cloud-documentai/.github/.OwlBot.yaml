@@ -1,0 +1,27 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+docker:
+  image: gcr.io/repo-automation-bots/owlbot-nodejs:latest
+
+deep-copy-regex:
+  - source: /google/cloud/documentai/.*/documentai-.*-nodejs/src/(.*)
+    dest: /src/$1
+    rm-dest: /src/.*
+  - source: /google/cloud/documentai/.*/documentai-.*-nodejs/protos/google/cloud/document/(.*)
+    dest: /document/$1
+    rm-dest: /document/.*
+  - source: /google/cloud/documentai/.*/documentai-.*-nodejs/test/(.*)
+    dest: /test/$1
+  - source: /google/cloud/documentai/.*/documentai-.*-nodejs/system-test/(.*)
+    dest: /system-test/$1
