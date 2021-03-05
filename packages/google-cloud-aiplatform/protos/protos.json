@@ -13724,22 +13724,6 @@
                                     }
                                   }
                                 },
-                                "TimeSeriesForecastingPredictionResult": {
-                                  "fields": {
-                                    "value": {
-                                      "type": "float",
-                                      "id": 1
-                                    },
-                                    "lowerBound": {
-                                      "type": "float",
-                                      "id": 2
-                                    },
-                                    "upperBound": {
-                                      "type": "float",
-                                      "id": 3
-                                    }
-                                  }
-                                },
                                 "VideoActionRecognitionPredictionResult": {
                                   "fields": {
                                     "id": {
@@ -14311,249 +14295,6 @@
                                     }
                                   }
                                 },
-                                "AutoMlForecasting": {
-                                  "fields": {
-                                    "inputs": {
-                                      "type": "AutoMlForecastingInputs",
-                                      "id": 1
-                                    },
-                                    "metadata": {
-                                      "type": "AutoMlForecastingMetadata",
-                                      "id": 2
-                                    }
-                                  }
-                                },
-                                "AutoMlForecastingInputs": {
-                                  "fields": {
-                                    "targetColumn": {
-                                      "type": "string",
-                                      "id": 1
-                                    },
-                                    "timeSeriesIdentifierColumn": {
-                                      "type": "string",
-                                      "id": 2
-                                    },
-                                    "timeColumn": {
-                                      "type": "string",
-                                      "id": 3
-                                    },
-                                    "transformations": {
-                                      "rule": "repeated",
-                                      "type": "Transformation",
-                                      "id": 4
-                                    },
-                                    "optimizationObjective": {
-                                      "type": "string",
-                                      "id": 5
-                                    },
-                                    "trainBudgetMilliNodeHours": {
-                                      "type": "int64",
-                                      "id": 6
-                                    },
-                                    "weightColumn": {
-                                      "type": "string",
-                                      "id": 7
-                                    },
-                                    "staticColumns": {
-                                      "rule": "repeated",
-                                      "type": "string",
-                                      "id": 8
-                                    },
-                                    "timeVariantPastOnlyColumns": {
-                                      "rule": "repeated",
-                                      "type": "string",
-                                      "id": 9
-                                    },
-                                    "timeVariantPastAndFutureColumns": {
-                                      "rule": "repeated",
-                                      "type": "string",
-                                      "id": 10
-                                    },
-                                    "period": {
-                                      "type": "Period",
-                                      "id": 11
-                                    },
-                                    "forecastWindowStart": {
-                                      "type": "int64",
-                                      "id": 12
-                                    },
-                                    "forecastWindowEnd": {
-                                      "type": "int64",
-                                      "id": 13
-                                    },
-                                    "pastHorizon": {
-                                      "type": "int64",
-                                      "id": 14
-                                    },
-                                    "exportEvaluatedDataItemsConfig": {
-                                      "type": "ExportEvaluatedDataItemsConfig",
-                                      "id": 15
-                                    },
-                                    "quantiles": {
-                                      "rule": "repeated",
-                                      "type": "double",
-                                      "id": 16
-                                    },
-                                    "validationOptions": {
-                                      "type": "string",
-                                      "id": 17
-                                    }
-                                  },
-                                  "nested": {
-                                    "Transformation": {
-                                      "oneofs": {
-                                        "transformationDetail": {
-                                          "oneof": [
-                                            "auto",
-                                            "numeric",
-                                            "categorical",
-                                            "timestamp",
-                                            "text",
-                                            "repeatedNumeric",
-                                            "repeatedCategorical",
-                                            "repeatedText"
-                                          ]
-                                        }
-                                      },
-                                      "fields": {
-                                        "auto": {
-                                          "type": "AutoTransformation",
-                                          "id": 1
-                                        },
-                                        "numeric": {
-                                          "type": "NumericTransformation",
-                                          "id": 2
-                                        },
-                                        "categorical": {
-                                          "type": "CategoricalTransformation",
-                                          "id": 3
-                                        },
-                                        "timestamp": {
-                                          "type": "TimestampTransformation",
-                                          "id": 4
-                                        },
-                                        "text": {
-                                          "type": "TextTransformation",
-                                          "id": 5
-                                        },
-                                        "repeatedNumeric": {
-                                          "type": "NumericArrayTransformation",
-                                          "id": 6
-                                        },
-                                        "repeatedCategorical": {
-                                          "type": "CategoricalArrayTransformation",
-                                          "id": 7
-                                        },
-                                        "repeatedText": {
-                                          "type": "TextArrayTransformation",
-                                          "id": 8
-                                        }
-                                      },
-                                      "nested": {
-                                        "AutoTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "NumericTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            },
-                                            "invalidValuesAllowed": {
-                                              "type": "bool",
-                                              "id": 2
-                                            }
-                                          }
-                                        },
-                                        "CategoricalTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "TimestampTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            },
-                                            "timeFormat": {
-                                              "type": "string",
-                                              "id": 2
-                                            },
-                                            "invalidValuesAllowed": {
-                                              "type": "bool",
-                                              "id": 3
-                                            }
-                                          }
-                                        },
-                                        "TextTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "NumericArrayTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            },
-                                            "invalidValuesAllowed": {
-                                              "type": "bool",
-                                              "id": 2
-                                            }
-                                          }
-                                        },
-                                        "CategoricalArrayTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        },
-                                        "TextArrayTransformation": {
-                                          "fields": {
-                                            "columnName": {
-                                              "type": "string",
-                                              "id": 1
-                                            }
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "Period": {
-                                      "fields": {
-                                        "unit": {
-                                          "type": "string",
-                                          "id": 1
-                                        },
-                                        "quantity": {
-                                          "type": "int64",
-                                          "id": 2
-                                        }
-                                      }
-                                    }
-                                  }
-                                },
-                                "AutoMlForecastingMetadata": {
-                                  "fields": {
-                                    "trainCostMilliNodeHours": {
-                                      "type": "int64",
-                                      "id": 1
-                                    }
-                                  }
-                                },
                                 "AutoMlVideoActionRecognition": {
                                   "fields": {
                                     "inputs": {
@@ -15008,7 +14749,8 @@
                 "REQUIRED": 2,
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
               }
             },
             "resourceReference": {
@@ -15053,6 +14795,11 @@
                 "singular": {
                   "type": "string",
                   "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
                 }
               },
               "nested": {
@@ -15061,6 +14808,12 @@
                     "HISTORY_UNSPECIFIED": 0,
                     "ORIGINALLY_SINGLE_PATTERN": 1,
                     "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
                   }
                 }
               }
@@ -15097,7 +14850,7 @@
         },
         "protobuf": {
           "options": {
-            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
             "java_package": "com.google.protobuf",
             "java_outer_classname": "DescriptorProtos",
             "csharp_namespace": "Google.Protobuf.Reflection",
