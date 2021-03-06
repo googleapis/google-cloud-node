@@ -30,7 +30,7 @@ for version in versions:
   name, 
   version,
   bazel_target=f"//google/cloud/apigateway/{version}:apigateway-{version}-nodejs")
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=['package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
