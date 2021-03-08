@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.1...v2.0.2) (2021-03-07)
+
+
+### Bug Fixes
+
+* add `https://www.googleapis.com/auth/analytics.edit` OAuth2 scope to the list of acceptable scopes for all read only methods of the Admin API docs: update the documentation of the `update_mask` field used by Update() methods ([#81](https://www.github.com/googleapis/nodejs-analytics-admin/issues/81)) ([655a893](https://www.github.com/googleapis/nodejs-analytics-admin/commit/655a893e8c89a9a18b32db256df2ba28adafc948))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.0...v2.0.1) (2021-02-09)
 
 
