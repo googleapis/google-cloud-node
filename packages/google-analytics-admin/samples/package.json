@@ -5,7 +5,7 @@
   "author": "Google LLC",
   "repository": "googleapis/nodejs-analytics-admin",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "files": [
     "*.js"
@@ -18,7 +18,7 @@
     "google-auth-library": "^7.0.0",
     "google-gax": "^2.6.3",
     "http": "0.0.1-security",
-    "open": "^7.1.0",
+    "open": "^8.0.0",
     "server-destroy": "^1.0.1"
   },
   "devDependencies": {
