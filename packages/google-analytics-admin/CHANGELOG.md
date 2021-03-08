@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.2...v2.0.3) (2021-03-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency open to v8 ([#83](https://www.github.com/googleapis/nodejs-analytics-admin/issues/83)) ([e8643f6](https://www.github.com/googleapis/nodejs-analytics-admin/commit/e8643f61c5135f03ff75a4bc3361a4cfc8e2b97d))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.1...v2.0.2) (2021-03-07)
 
 
