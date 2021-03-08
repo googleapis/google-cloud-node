@@ -93,7 +93,8 @@ describe('RequestHandler', () => {
     }
   });
 
-  it('should not request OAuth2 token if key is provided', done => {
+  it('should not request OAuth2 token if key is provided', function (done) {
+    this.timeout(8000);
     const config: ConfigurationOptions = {
       reportMode: 'always',
       key: 'key',
@@ -107,7 +108,7 @@ describe('RequestHandler', () => {
       },
       done
     );
-  }).timeout(8000);
+  });
 
   it('should not issue a warning if disabled and can communicate with the API', done => {
     process.env.NODE_ENV = 'production';
