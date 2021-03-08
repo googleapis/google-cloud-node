@@ -36,7 +36,7 @@ for version in versions:
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=['v1beta1'])
-s.copy(templates, excludes=[])
+s.copy(templates, excludes=[".github/CODEOWNERS"])
 
 node.postprocess_gapic_library()
 
