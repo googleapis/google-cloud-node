@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.0...v2.4.1) (2021-03-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mathjs to v9 ([#482](https://www.github.com/googleapis/nodejs-automl/issues/482)) ([8917ce3](https://www.github.com/googleapis/nodejs-automl/commit/8917ce3d6ed53e94113ed5aa5a42f918a4531a40))
+* Wrote inputs as string to facilitate parsing ([#480](https://www.github.com/googleapis/nodejs-automl/issues/480)) ([3d9aa88](https://www.github.com/googleapis/nodejs-automl/commit/3d9aa8899dd39041cf45a5c298d7cc010ca8d020))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.3.1...v2.4.0) (2021-01-09)
 
 
