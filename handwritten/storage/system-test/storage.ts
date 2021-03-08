@@ -2993,6 +2993,19 @@ describe('storage', () => {
 
     let accessId: string;
 
+    const delay = async (test: Mocha.Context, accessId: string) => {
+      const retries = test.currentRetry();
+      if (retries === 0) return; // no retry on the first failure.
+      // see: https://cloud.google.com/storage/docs/exponential-backoff:
+      const ms = Math.pow(2, retries) * 500 + Math.random() * 1000;
+      return new Promise(done => {
+        console.info(
+          `retrying "${test.title}" with accessId ${accessId} in ${ms}ms`
+        );
+        setTimeout(done, ms);
+      });
+    };
+
     before(async () => {
       await deleteStaleHmacKeys(SERVICE_ACCOUNT, HMAC_PROJECT!);
       if (SECOND_SERVICE_ACCOUNT) {
@@ -3017,7 +3030,9 @@ describe('storage', () => {
       assert(typeof metadata.updated === 'string');
     });
 
-    it('should get metadata for an HMAC key', async () => {
+    it('should get metadata for an HMAC key', async function () {
+      this.retries(3);
+      delay(this, accessId);
       const hmacKey = storage.hmacKey(accessId, {projectId: HMAC_PROJECT});
       const [metadata] = await hmacKey.getMetadata();
       assert.strictEqual(metadata.accessId, accessId);
@@ -3888,6 +3903,12 @@ describe('storage', () => {
         })
         .map(hmacKey =>
           limit(async () => {
+            console.info(
+              `Will delete HMAC key with access id ${hmacKey.metadata?.accessId} and service account email ${hmacKey.metadata?.serviceAccountEmail}.`
+            );
+            console.info(
+              `This key was created on ${hmacKey.metadata?.timeCreated} which is earlier than ${old}.`
+            );
             await hmacKey.setMetadata({state: 'INACTIVE'});
             await hmacKey.delete();
           })

@@ -20,7 +20,7 @@ const {before, after, describe, it} = require('mocha');
 const cp = require('child_process');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
+const pLimit = require('p-limit');
 const storage = new Storage();
 const SERVICE_ACCOUNT_EMAIL = process.env.HMAC_KEY_TEST_SERVICE_ACCOUNT;
 const SERVICE_ACCOUNT_PROJECT = process.env.HMAC_PROJECT;
@@ -29,14 +29,14 @@ describe('HMAC SA Key samples', () => {
   let hmacKey;
 
   before(async () => {
-    await cleanUpHmacKeys(SERVICE_ACCOUNT_EMAIL, SERVICE_ACCOUNT_PROJECT);
+    await deleteStaleHmacKeys(SERVICE_ACCOUNT_EMAIL, SERVICE_ACCOUNT_PROJECT);
     [hmacKey] = await storage.createHmacKey(SERVICE_ACCOUNT_EMAIL, {
       projectId: SERVICE_ACCOUNT_PROJECT,
     });
   });
 
   after(async () => {
-    await cleanUpHmacKeys(SERVICE_ACCOUNT_EMAIL, SERVICE_ACCOUNT_PROJECT);
+    await deleteStaleHmacKeys(SERVICE_ACCOUNT_EMAIL, SERVICE_ACCOUNT_PROJECT);
   });
 
   it('should create an HMAC Key', async () => {
@@ -87,17 +87,36 @@ describe('HMAC SA Key samples', () => {
   });
 });
 
-async function cleanUpHmacKeys(serviceAccountEmail, projectId) {
+/*
+ * Delete HMAC Keys older than 1 hour
+ */
+async function deleteStaleHmacKeys(serviceAccountEmail, projectId) {
+  const old = new Date();
+  old.setHours(old.getHours() - 1);
   // list all HMAC keys for the given service account.
   const [hmacKeys] = await storage.getHmacKeys({
+    serviceAccountEmail,
     projectId,
-    serviceAccountEmail: serviceAccountEmail,
   });
-  // deactivate and delete the key
-  for (const hmacKey of hmacKeys) {
-    if (hmacKey.metadata.state === 'ACTIVE') {
-      await hmacKey.setMetadata({state: 'INACTIVE'});
-    }
-    await hmacKey.delete();
-  }
+
+  const limit = pLimit(10);
+  await Promise.all(
+    hmacKeys
+      .filter(hmacKey => {
+        const hmacKeyCreated = new Date(hmacKey.metadata.timeCreated);
+        return hmacKey.metadata.state !== 'DELETED' && hmacKeyCreated < old;
+      })
+      .map(hmacKey =>
+        limit(async () => {
+          console.info(
+            `Will delete HMAC key with access id ${hmacKey.metadata.accessId} and service account email ${hmacKey.metadata.serviceAccountEmail}`
+          );
+          console.info(
+            `This key was created on ${hmacKey.metadata.timeCreated} which is earlier than ${old}`
+          );
+          await hmacKey.setMetadata({state: 'INACTIVE'});
+          await hmacKey.delete();
+        })
+      )
+  );
 }
