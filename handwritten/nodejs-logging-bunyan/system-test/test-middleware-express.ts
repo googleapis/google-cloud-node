@@ -38,7 +38,8 @@ describe('express middleware', () => {
   });
 
   describe('global logger', () => {
-    it('should properly write log entries', async () => {
+    it('should properly write log entries', async function () {
+      this.timeout(TEST_TIMEOUT);
       const LOG_MESSAGE = `unique log message ${uuid.v4()}`;
       logger.info(LOG_MESSAGE);
 
@@ -48,11 +49,12 @@ describe('express middleware', () => {
       const entries = (await log.getEntries({pageSize: 1}))[0];
       assert.strictEqual(entries.length, 1);
       assert.strictEqual(LOG_MESSAGE, entries[0].data.message);
-    }).timeout(TEST_TIMEOUT);
+    });
   });
 
   describe('request logging middleware', () => {
-    it('should write request correlated log entries', done => {
+    it('should write request correlated log entries', function (done) {
+      this.timeout(TEST_TIMEOUT);
       const LOG_MESSAGE = `correlated log message ${uuid.v4()}`;
       const fakeRequest = {headers: {fake: 'header'}};
       const fakeResponse = {};
@@ -76,6 +78,6 @@ describe('express middleware', () => {
       // Call middleware with mocks.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       mw(fakeRequest as any, fakeResponse as any, next);
-    }).timeout(TEST_TIMEOUT);
+    });
   });
 });
