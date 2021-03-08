@@ -31,7 +31,8 @@ const LOG_NAME = `winston-system-test-${uuid.v4()}`;
 
 describe(__filename, () => {
   describe('global logger', () => {
-    it('should properly write log entries', async () => {
+    it('should properly write log entries', async function () {
+      this.timeout(TEST_TIMEOUT);
       const logger = winston.createLogger();
       await elb.makeMiddleware(logger, {
         logName: LOG_NAME,
@@ -47,11 +48,12 @@ describe(__filename, () => {
       const entries = (await log.getEntries({pageSize: 1}))[0];
       assert.strictEqual(entries.length, 1);
       assert.strictEqual(LOG_MESSAGE, entries[0].data.message);
-    }).timeout(TEST_TIMEOUT);
+    });
   });
 
   describe('request logging middleware', () => {
-    it('should write request correlated log entries', () => {
+    it('should write request correlated log entries', function () {
+      this.timeout(TEST_TIMEOUT);
       // eslint-disable-next-line no-async-promise-executor
       return new Promise(async resolve => {
         const logger = winston.createLogger();
@@ -113,6 +115,6 @@ describe(__filename, () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mw(fakeRequest as any, fakeResponse as any, next);
       });
-    }).timeout(TEST_TIMEOUT);
+    });
   });
 });
