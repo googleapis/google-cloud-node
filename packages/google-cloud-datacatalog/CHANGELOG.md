@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.3...v2.2.0) (2021-03-07)
+
+
+### Features
+
+* **samples:** add samples ([#229](https://www.github.com/googleapis/nodejs-datacatalog/issues/229)) ([fd8a249](https://www.github.com/googleapis/nodejs-datacatalog/commit/fd8a2496013db9737dbd21c30fc412c24a5956d8))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.2...v2.1.3) (2020-11-07)
 
 
