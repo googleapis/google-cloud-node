@@ -75,6 +75,34 @@ export namespace google {
                     public importEntities(request: google.datastore.admin.v1.IImportEntitiesRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls CreateIndex.
+                     * @param request CreateIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createIndex(request: google.datastore.admin.v1.ICreateIndexRequest, callback: google.datastore.admin.v1.DatastoreAdmin.CreateIndexCallback): void;
+
+                    /**
+                     * Calls CreateIndex.
+                     * @param request CreateIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createIndex(request: google.datastore.admin.v1.ICreateIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteIndex.
+                     * @param request DeleteIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteIndex(request: google.datastore.admin.v1.IDeleteIndexRequest, callback: google.datastore.admin.v1.DatastoreAdmin.DeleteIndexCallback): void;
+
+                    /**
+                     * Calls DeleteIndex.
+                     * @param request DeleteIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIndex(request: google.datastore.admin.v1.IDeleteIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GetIndex.
                      * @param request GetIndexRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Index
@@ -118,6 +146,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ImportEntitiesCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#createIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#deleteIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#getIndex}.
@@ -261,15 +303,6 @@ export namespace google {
                         FAILED = 6,
                         CANCELLED = 7
                     }
-                }
-
-                /** OperationType enum. */
-                enum OperationType {
-                    OPERATION_TYPE_UNSPECIFIED = 0,
-                    EXPORT_ENTITIES = 1,
-                    IMPORT_ENTITIES = 2,
-                    CREATE_INDEX = 3,
-                    DELETE_INDEX = 4
                 }
 
                 /** Properties of a Progress. */
@@ -788,6 +821,15 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** OperationType enum. */
+                enum OperationType {
+                    OPERATION_TYPE_UNSPECIFIED = 0,
+                    EXPORT_ENTITIES = 1,
+                    IMPORT_ENTITIES = 2,
+                    CREATE_INDEX = 3,
+                    DELETE_INDEX = 4
+                }
+
                 /** Properties of an ImportEntitiesMetadata. */
                 interface IImportEntitiesMetadata {
 
@@ -993,6 +1035,198 @@ export namespace google {
 
                     /**
                      * Converts this EntityFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateIndexRequest. */
+                interface ICreateIndexRequest {
+
+                    /** CreateIndexRequest projectId */
+                    projectId?: (string|null);
+
+                    /** CreateIndexRequest index */
+                    index?: (google.datastore.admin.v1.IIndex|null);
+                }
+
+                /** Represents a CreateIndexRequest. */
+                class CreateIndexRequest implements ICreateIndexRequest {
+
+                    /**
+                     * Constructs a new CreateIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.ICreateIndexRequest);
+
+                    /** CreateIndexRequest projectId. */
+                    public projectId: string;
+
+                    /** CreateIndexRequest index. */
+                    public index?: (google.datastore.admin.v1.IIndex|null);
+
+                    /**
+                     * Creates a new CreateIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateIndexRequest instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.ICreateIndexRequest): google.datastore.admin.v1.CreateIndexRequest;
+
+                    /**
+                     * Encodes the specified CreateIndexRequest message. Does not implicitly {@link google.datastore.admin.v1.CreateIndexRequest.verify|verify} messages.
+                     * @param message CreateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.ICreateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateIndexRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.CreateIndexRequest.verify|verify} messages.
+                     * @param message CreateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.ICreateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.CreateIndexRequest;
+
+                    /**
+                     * Decodes a CreateIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.CreateIndexRequest;
+
+                    /**
+                     * Verifies a CreateIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.CreateIndexRequest;
+
+                    /**
+                     * Creates a plain object from a CreateIndexRequest message. Also converts values to other types if specified.
+                     * @param message CreateIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.CreateIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteIndexRequest. */
+                interface IDeleteIndexRequest {
+
+                    /** DeleteIndexRequest projectId */
+                    projectId?: (string|null);
+
+                    /** DeleteIndexRequest indexId */
+                    indexId?: (string|null);
+                }
+
+                /** Represents a DeleteIndexRequest. */
+                class DeleteIndexRequest implements IDeleteIndexRequest {
+
+                    /**
+                     * Constructs a new DeleteIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.datastore.admin.v1.IDeleteIndexRequest);
+
+                    /** DeleteIndexRequest projectId. */
+                    public projectId: string;
+
+                    /** DeleteIndexRequest indexId. */
+                    public indexId: string;
+
+                    /**
+                     * Creates a new DeleteIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteIndexRequest instance
+                     */
+                    public static create(properties?: google.datastore.admin.v1.IDeleteIndexRequest): google.datastore.admin.v1.DeleteIndexRequest;
+
+                    /**
+                     * Encodes the specified DeleteIndexRequest message. Does not implicitly {@link google.datastore.admin.v1.DeleteIndexRequest.verify|verify} messages.
+                     * @param message DeleteIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.datastore.admin.v1.IDeleteIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteIndexRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.DeleteIndexRequest.verify|verify} messages.
+                     * @param message DeleteIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.datastore.admin.v1.IDeleteIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.admin.v1.DeleteIndexRequest;
+
+                    /**
+                     * Decodes a DeleteIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.admin.v1.DeleteIndexRequest;
+
+                    /**
+                     * Verifies a DeleteIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.datastore.admin.v1.DeleteIndexRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteIndexRequest message. Also converts values to other types if specified.
+                     * @param message DeleteIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.datastore.admin.v1.DeleteIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteIndexRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -6091,8 +6325,7 @@ export namespace google {
             REQUIRED = 2,
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6
+            IMMUTABLE = 5
         }
     }
 

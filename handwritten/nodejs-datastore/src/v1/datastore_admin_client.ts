@@ -262,6 +262,18 @@ export class DatastoreAdminClient {
     const importEntitiesMetadata = protoFilesRoot.lookup(
       '.google.datastore.admin.v1.ImportEntitiesMetadata'
     ) as gax.protobuf.Type;
+    const createIndexResponse = protoFilesRoot.lookup(
+      '.google.datastore.admin.v1.Index'
+    ) as gax.protobuf.Type;
+    const createIndexMetadata = protoFilesRoot.lookup(
+      '.google.datastore.admin.v1.IndexOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteIndexResponse = protoFilesRoot.lookup(
+      '.google.datastore.admin.v1.Index'
+    ) as gax.protobuf.Type;
+    const deleteIndexMetadata = protoFilesRoot.lookup(
+      '.google.datastore.admin.v1.IndexOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       exportEntities: new this._gaxModule.LongrunningDescriptor(
@@ -273,6 +285,16 @@ export class DatastoreAdminClient {
         this.operationsClient,
         importEntitiesResponse.decode.bind(importEntitiesResponse),
         importEntitiesMetadata.decode.bind(importEntitiesMetadata)
+      ),
+      createIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createIndexResponse.decode.bind(createIndexResponse),
+        createIndexMetadata.decode.bind(createIndexMetadata)
+      ),
+      deleteIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteIndexResponse.decode.bind(deleteIndexResponse),
+        deleteIndexMetadata.decode.bind(deleteIndexMetadata)
       ),
     };
 
@@ -324,6 +346,8 @@ export class DatastoreAdminClient {
     const datastoreAdminStubMethods = [
       'exportEntities',
       'importEntities',
+      'createIndex',
+      'deleteIndex',
       'getIndex',
       'listIndexes',
     ];
@@ -837,6 +861,317 @@ export class DatastoreAdminClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.datastore.admin.v1.ImportEntitiesMetadata
+    >;
+  }
+  createIndex(
+    request: protos.google.datastore.admin.v1.ICreateIndexRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createIndex(
+    request: protos.google.datastore.admin.v1.ICreateIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createIndex(
+    request: protos.google.datastore.admin.v1.ICreateIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates the specified index.
+   * A newly created index's initial state is `CREATING`. On completion of the
+   * returned {@link google.longrunning.Operation|google.longrunning.Operation}, the state will be `READY`.
+   * If the index already exists, the call will return an `ALREADY_EXISTS`
+   * status.
+   *
+   * During index creation, the process could result in an error, in which
+   * case the index will move to the `ERROR` state. The process can be recovered
+   * by fixing the data that caused the error, removing the index with
+   * {@link google.datastore.admin.v1.DatastoreAdmin.DeleteIndex|delete}, then
+   * re-creating the index with [create]
+   * [google.datastore.admin.v1.DatastoreAdmin.CreateIndex].
+   *
+   * Indexes with a single property cannot be created.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Project ID against which to make the request.
+   * @param {google.datastore.admin.v1.Index} request.index
+   *   The index to create. The name and state fields are output only and will be
+   *   ignored. Single property indexes cannot be created or deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createIndex(request);
+   * const [response] = await operation.promise();
+   */
+  createIndex(
+    request: protos.google.datastore.admin.v1.ICreateIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.datastore.admin.v1.IIndex,
+            protos.google.datastore.admin.v1.IIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.createIndex(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateIndexProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkCreateIndexProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.datastore.admin.v1.Index,
+      protos.google.datastore.admin.v1.IndexOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createIndex,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.datastore.admin.v1.Index,
+      protos.google.datastore.admin.v1.IndexOperationMetadata
+    >;
+  }
+  deleteIndex(
+    request: protos.google.datastore.admin.v1.IDeleteIndexRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteIndex(
+    request: protos.google.datastore.admin.v1.IDeleteIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteIndex(
+    request: protos.google.datastore.admin.v1.IDeleteIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes an existing index.
+   * An index can only be deleted if it is in a `READY` or `ERROR` state. On
+   * successful execution of the request, the index will be in a `DELETING`
+   * {@link google.datastore.admin.v1.Index.State|state}. And on completion of the
+   * returned {@link google.longrunning.Operation|google.longrunning.Operation}, the index will be removed.
+   *
+   * During index deletion, the process could result in an error, in which
+   * case the index will move to the `ERROR` state. The process can be recovered
+   * by fixing the data that caused the error, followed by calling
+   * {@link google.datastore.admin.v1.DatastoreAdmin.DeleteIndex|delete} again.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Project ID against which to make the request.
+   * @param {string} request.indexId
+   *   The resource ID of the index to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteIndex(request);
+   * const [response] = await operation.promise();
+   */
+  deleteIndex(
+    request: protos.google.datastore.admin.v1.IDeleteIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.datastore.admin.v1.IIndex,
+            protos.google.datastore.admin.v1.IIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.datastore.admin.v1.IIndex,
+        protos.google.datastore.admin.v1.IIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.deleteIndex(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteIndexProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteIndexProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.datastore.admin.v1.Index,
+      protos.google.datastore.admin.v1.IndexOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteIndex,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.datastore.admin.v1.Index,
+      protos.google.datastore.admin.v1.IndexOperationMetadata
     >;
   }
   listIndexes(
