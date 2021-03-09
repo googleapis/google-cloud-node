@@ -60,7 +60,6 @@ export default {
   PredictionServiceClient,
   SpecialistPoolServiceClient,
 };
-
 import * as protos from '../protos/protos';
 export {protos};
 
