@@ -32,7 +32,7 @@
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile-protos && npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test --timeout 600000",
