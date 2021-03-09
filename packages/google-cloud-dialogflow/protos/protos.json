@@ -690,14 +690,6 @@
                         }
                       }
                     },
-                    "SsmlVoiceGender": {
-                      "values": {
-                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                        "SSML_VOICE_GENDER_MALE": 1,
-                        "SSML_VOICE_GENDER_FEMALE": 2,
-                        "SSML_VOICE_GENDER_NEUTRAL": 3
-                      }
-                    },
                     "SynthesizeSpeechConfig": {
                       "fields": {
                         "speakingRate": {
@@ -721,6 +713,14 @@
                           "type": "VoiceSelectionParams",
                           "id": 4
                         }
+                      }
+                    },
+                    "SsmlVoiceGender": {
+                      "values": {
+                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                        "SSML_VOICE_GENDER_MALE": 1,
+                        "SSML_VOICE_GENDER_FEMALE": 2,
+                        "SSML_VOICE_GENDER_NEUTRAL": 3
                       }
                     },
                     "OutputAudioConfig": {
@@ -1802,12 +1802,16 @@
                           "responseType": "ListIntentsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/agent}/intents",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/agent/environments/*}/intents",
                             "(google.api.method_signature)": "parent,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*/agent}/intents"
+                                "get": "/v2/{parent=projects/*/agent}/intents",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/agent/environments/*}/intents"
+                                }
                               }
                             },
                             {
@@ -4738,14 +4742,6 @@
                         }
                       }
                     },
-                    "SsmlVoiceGender": {
-                      "values": {
-                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                        "SSML_VOICE_GENDER_MALE": 1,
-                        "SSML_VOICE_GENDER_FEMALE": 2,
-                        "SSML_VOICE_GENDER_NEUTRAL": 3
-                      }
-                    },
                     "SynthesizeSpeechConfig": {
                       "fields": {
                         "speakingRate": {
@@ -4771,6 +4767,14 @@
                         }
                       }
                     },
+                    "SsmlVoiceGender": {
+                      "values": {
+                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                        "SSML_VOICE_GENDER_MALE": 1,
+                        "SSML_VOICE_GENDER_FEMALE": 2,
+                        "SSML_VOICE_GENDER_NEUTRAL": 3
+                      }
+                    },
                     "OutputAudioConfig": {
                       "fields": {
                         "audioEncoding": {
@@ -4790,14 +4794,6 @@
                         }
                       }
                     },
-                    "OutputAudioEncoding": {
-                      "values": {
-                        "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
-                        "OUTPUT_AUDIO_ENCODING_MP3": 2,
-                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3
-                      }
-                    },
                     "TelephonyDtmfEvents": {
                       "fields": {
                         "dtmfEvents": {
@@ -4805,6 +4801,14 @@
                           "type": "TelephonyDtmf",
                           "id": 1
                         }
+                      }
+                    },
+                    "OutputAudioEncoding": {
+                      "values": {
+                        "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
+                        "OUTPUT_AUDIO_ENCODING_MP3": 2,
+                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3
                       }
                     },
                     "TelephonyDtmf": {
@@ -6368,16 +6372,21 @@
                           "responseType": "ListIntentsResponse",
                           "options": {
                             "(google.api.http).get": "/v2beta1/{parent=projects/*/agent}/intents",
-                            "(google.api.http).additional_bindings.get": "/v2beta1/{parent=projects/*/locations/*/agent}/intents",
+                            "(google.api.http).additional_bindings.get": "/v2beta1/{parent=projects/*/agent/environments/*}/intents",
                             "(google.api.method_signature)": "parent,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2beta1/{parent=projects/*/agent}/intents",
-                                "additional_bindings": {
-                                  "get": "/v2beta1/{parent=projects/*/locations/*/agent}/intents"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2beta1/{parent=projects/*/locations/*/agent}/intents"
+                                  },
+                                  {
+                                    "get": "/v2beta1/{parent=projects/*/agent/environments/*}/intents"
+                                  }
+                                ]
                               }
                             },
                             {
