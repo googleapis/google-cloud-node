@@ -13,6 +13,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "IndexProto",
                     "java_package": "com.google.datastore.admin.v1",
+                    "php_namespace": "Google\\Cloud\\Datastore\\Admin\\V1",
                     "ruby_package": "Google::Cloud::Datastore::Admin::V1"
                   },
                   "nested": {
@@ -74,6 +75,52 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "ImportEntitiesMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateIndex": {
+                          "requestType": "CreateIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project_id}/indexes",
+                            "(google.api.http).body": "index",
+                            "(google.longrunning.operation_info).response_type": "Index",
+                            "(google.longrunning.operation_info).metadata_type": "IndexOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/indexes",
+                                "body": "index"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Index",
+                                "metadata_type": "IndexOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteIndex": {
+                          "requestType": "DeleteIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/projects/{project_id}/indexes/{index_id}",
+                            "(google.longrunning.operation_info).response_type": "Index",
+                            "(google.longrunning.operation_info).metadata_type": "IndexOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/projects/{project_id}/indexes/{index_id}"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Index",
+                                "metadata_type": "IndexOperationMetadata"
                               }
                             }
                           ]
@@ -145,15 +192,6 @@
                             "CANCELLED": 7
                           }
                         }
-                      }
-                    },
-                    "OperationType": {
-                      "values": {
-                        "OPERATION_TYPE_UNSPECIFIED": 0,
-                        "EXPORT_ENTITIES": 1,
-                        "IMPORT_ENTITIES": 2,
-                        "CREATE_INDEX": 3,
-                        "DELETE_INDEX": 4
                       }
                     },
                     "Progress": {
@@ -254,6 +292,15 @@
                         }
                       }
                     },
+                    "OperationType": {
+                      "values": {
+                        "OPERATION_TYPE_UNSPECIFIED": 0,
+                        "EXPORT_ENTITIES": 1,
+                        "IMPORT_ENTITIES": 2,
+                        "CREATE_INDEX": 3,
+                        "DELETE_INDEX": 4
+                      }
+                    },
                     "ImportEntitiesMetadata": {
                       "fields": {
                         "common": {
@@ -289,6 +336,30 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "CreateIndexRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "index": {
+                          "type": "Index",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeleteIndexRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "indexId": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1509,15 +1580,14 @@
                 "REQUIRED": 2,
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
+                "IMMUTABLE": 5
               }
             }
           }
         },
         "protobuf": {
           "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
             "java_package": "com.google.protobuf",
             "java_outer_classname": "DescriptorProtos",
             "csharp_namespace": "Google.Protobuf.Reflection",

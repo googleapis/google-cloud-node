@@ -165,6 +165,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#createIndex}.
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @typedef CreateIndexCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateIndex.
+                         * @function createIndex
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.ICreateIndexRequest} request CreateIndexRequest message or plain object
+                         * @param {google.datastore.admin.v1.DatastoreAdmin.CreateIndexCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DatastoreAdmin.prototype.createIndex = function createIndex(request, callback) {
+                            return this.rpcCall(createIndex, $root.google.datastore.admin.v1.CreateIndexRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateIndex" });
+    
+                        /**
+                         * Calls CreateIndex.
+                         * @function createIndex
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.ICreateIndexRequest} request CreateIndexRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#deleteIndex}.
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @typedef DeleteIndexCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteIndex.
+                         * @function deleteIndex
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IDeleteIndexRequest} request DeleteIndexRequest message or plain object
+                         * @param {google.datastore.admin.v1.DatastoreAdmin.DeleteIndexCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DatastoreAdmin.prototype.deleteIndex = function deleteIndex(request, callback) {
+                            return this.rpcCall(deleteIndex, $root.google.datastore.admin.v1.DeleteIndexRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteIndex" });
+    
+                        /**
+                         * Calls DeleteIndex.
+                         * @function deleteIndex
+                         * @memberof google.datastore.admin.v1.DatastoreAdmin
+                         * @instance
+                         * @param {google.datastore.admin.v1.IDeleteIndexRequest} request DeleteIndexRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.datastore.admin.v1.DatastoreAdmin#getIndex}.
                          * @memberof google.datastore.admin.v1.DatastoreAdmin
                          * @typedef GetIndexCallback
@@ -650,26 +716,6 @@
                         })();
     
                         return CommonMetadata;
-                    })();
-    
-                    /**
-                     * OperationType enum.
-                     * @name google.datastore.admin.v1.OperationType
-                     * @enum {number}
-                     * @property {number} OPERATION_TYPE_UNSPECIFIED=0 OPERATION_TYPE_UNSPECIFIED value
-                     * @property {number} EXPORT_ENTITIES=1 EXPORT_ENTITIES value
-                     * @property {number} IMPORT_ENTITIES=2 IMPORT_ENTITIES value
-                     * @property {number} CREATE_INDEX=3 CREATE_INDEX value
-                     * @property {number} DELETE_INDEX=4 DELETE_INDEX value
-                     */
-                    v1.OperationType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "OPERATION_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "EXPORT_ENTITIES"] = 1;
-                        values[valuesById[2] = "IMPORT_ENTITIES"] = 2;
-                        values[valuesById[3] = "CREATE_INDEX"] = 3;
-                        values[valuesById[4] = "DELETE_INDEX"] = 4;
-                        return values;
                     })();
     
                     v1.Progress = (function() {
@@ -1983,6 +2029,26 @@
                         return ExportEntitiesMetadata;
                     })();
     
+                    /**
+                     * OperationType enum.
+                     * @name google.datastore.admin.v1.OperationType
+                     * @enum {number}
+                     * @property {number} OPERATION_TYPE_UNSPECIFIED=0 OPERATION_TYPE_UNSPECIFIED value
+                     * @property {number} EXPORT_ENTITIES=1 EXPORT_ENTITIES value
+                     * @property {number} IMPORT_ENTITIES=2 IMPORT_ENTITIES value
+                     * @property {number} CREATE_INDEX=3 CREATE_INDEX value
+                     * @property {number} DELETE_INDEX=4 DELETE_INDEX value
+                     */
+                    v1.OperationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EXPORT_ENTITIES"] = 1;
+                        values[valuesById[2] = "IMPORT_ENTITIES"] = 2;
+                        values[valuesById[3] = "CREATE_INDEX"] = 3;
+                        values[valuesById[4] = "DELETE_INDEX"] = 4;
+                        return values;
+                    })();
+    
                     v1.ImportEntitiesMetadata = (function() {
     
                         /**
@@ -2519,6 +2585,431 @@
                         };
     
                         return EntityFilter;
+                    })();
+    
+                    v1.CreateIndexRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateIndexRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @interface ICreateIndexRequest
+                         * @property {string|null} [projectId] CreateIndexRequest projectId
+                         * @property {google.datastore.admin.v1.IIndex|null} [index] CreateIndexRequest index
+                         */
+    
+                        /**
+                         * Constructs a new CreateIndexRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a CreateIndexRequest.
+                         * @implements ICreateIndexRequest
+                         * @constructor
+                         * @param {google.datastore.admin.v1.ICreateIndexRequest=} [properties] Properties to set
+                         */
+                        function CreateIndexRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateIndexRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @instance
+                         */
+                        CreateIndexRequest.prototype.projectId = "";
+    
+                        /**
+                         * CreateIndexRequest index.
+                         * @member {google.datastore.admin.v1.IIndex|null|undefined} index
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @instance
+                         */
+                        CreateIndexRequest.prototype.index = null;
+    
+                        /**
+                         * Creates a new CreateIndexRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.ICreateIndexRequest=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.CreateIndexRequest} CreateIndexRequest instance
+                         */
+                        CreateIndexRequest.create = function create(properties) {
+                            return new CreateIndexRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateIndexRequest message. Does not implicitly {@link google.datastore.admin.v1.CreateIndexRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.ICreateIndexRequest} message CreateIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateIndexRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                                $root.google.datastore.admin.v1.Index.encode(message.index, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateIndexRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.CreateIndexRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.ICreateIndexRequest} message CreateIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateIndexRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateIndexRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.CreateIndexRequest} CreateIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateIndexRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.CreateIndexRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.index = $root.google.datastore.admin.v1.Index.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateIndexRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.CreateIndexRequest} CreateIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateIndexRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateIndexRequest message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateIndexRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.index != null && message.hasOwnProperty("index")) {
+                                var error = $root.google.datastore.admin.v1.Index.verify(message.index);
+                                if (error)
+                                    return "index." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.CreateIndexRequest} CreateIndexRequest
+                         */
+                        CreateIndexRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.CreateIndexRequest)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.CreateIndexRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.index != null) {
+                                if (typeof object.index !== "object")
+                                    throw TypeError(".google.datastore.admin.v1.CreateIndexRequest.index: object expected");
+                                message.index = $root.google.datastore.admin.v1.Index.fromObject(object.index);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateIndexRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.CreateIndexRequest} message CreateIndexRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateIndexRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.index = null;
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.index != null && message.hasOwnProperty("index"))
+                                object.index = $root.google.datastore.admin.v1.Index.toObject(message.index, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateIndexRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.CreateIndexRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateIndexRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateIndexRequest;
+                    })();
+    
+                    v1.DeleteIndexRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteIndexRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @interface IDeleteIndexRequest
+                         * @property {string|null} [projectId] DeleteIndexRequest projectId
+                         * @property {string|null} [indexId] DeleteIndexRequest indexId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteIndexRequest.
+                         * @memberof google.datastore.admin.v1
+                         * @classdesc Represents a DeleteIndexRequest.
+                         * @implements IDeleteIndexRequest
+                         * @constructor
+                         * @param {google.datastore.admin.v1.IDeleteIndexRequest=} [properties] Properties to set
+                         */
+                        function DeleteIndexRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteIndexRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @instance
+                         */
+                        DeleteIndexRequest.prototype.projectId = "";
+    
+                        /**
+                         * DeleteIndexRequest indexId.
+                         * @member {string} indexId
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @instance
+                         */
+                        DeleteIndexRequest.prototype.indexId = "";
+    
+                        /**
+                         * Creates a new DeleteIndexRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IDeleteIndexRequest=} [properties] Properties to set
+                         * @returns {google.datastore.admin.v1.DeleteIndexRequest} DeleteIndexRequest instance
+                         */
+                        DeleteIndexRequest.create = function create(properties) {
+                            return new DeleteIndexRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteIndexRequest message. Does not implicitly {@link google.datastore.admin.v1.DeleteIndexRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IDeleteIndexRequest} message DeleteIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteIndexRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.indexId != null && Object.hasOwnProperty.call(message, "indexId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.indexId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteIndexRequest message, length delimited. Does not implicitly {@link google.datastore.admin.v1.DeleteIndexRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.IDeleteIndexRequest} message DeleteIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteIndexRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteIndexRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.admin.v1.DeleteIndexRequest} DeleteIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteIndexRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.admin.v1.DeleteIndexRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.indexId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteIndexRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.admin.v1.DeleteIndexRequest} DeleteIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteIndexRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteIndexRequest message.
+                         * @function verify
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteIndexRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                if (!$util.isString(message.indexId))
+                                    return "indexId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteIndexRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.admin.v1.DeleteIndexRequest} DeleteIndexRequest
+                         */
+                        DeleteIndexRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.admin.v1.DeleteIndexRequest)
+                                return object;
+                            var message = new $root.google.datastore.admin.v1.DeleteIndexRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.indexId != null)
+                                message.indexId = String(object.indexId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteIndexRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @static
+                         * @param {google.datastore.admin.v1.DeleteIndexRequest} message DeleteIndexRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteIndexRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.indexId = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.indexId != null && message.hasOwnProperty("indexId"))
+                                object.indexId = message.indexId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteIndexRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.admin.v1.DeleteIndexRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteIndexRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteIndexRequest;
                     })();
     
                     v1.GetIndexRequest = (function() {
@@ -15242,7 +15733,6 @@
              * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
              * @property {number} INPUT_ONLY=4 INPUT_ONLY value
              * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -15252,7 +15742,6 @@
                 values[valuesById[3] = "OUTPUT_ONLY"] = 3;
                 values[valuesById[4] = "INPUT_ONLY"] = 4;
                 values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 return values;
             })();
     
@@ -20700,7 +21189,6 @@
                             case 3:
                             case 4:
                             case 5:
-                            case 6:
                                 break;
                             }
                     }
@@ -20795,10 +21283,6 @@
                             case "IMMUTABLE":
                             case 5:
                                 message[".google.api.fieldBehavior"][i] = 5;
-                                break;
-                            case "UNORDERED_LIST":
-                            case 6:
-                                message[".google.api.fieldBehavior"][i] = 6;
                                 break;
                             }
                     }
