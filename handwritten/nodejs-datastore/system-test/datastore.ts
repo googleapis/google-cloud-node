@@ -36,7 +36,7 @@ describe('Datastore', () => {
     return keyObject;
   };
 
-  const {indexes: DECLARED_INDEXES} = yaml.safeLoad(
+  const {indexes: DECLARED_INDEXES} = yaml.load(
     readFileSync(path.join(__dirname, 'data', 'index.yaml'), 'utf8')
   ) as {indexes: google.datastore.admin.v1.IIndex[]};
 
