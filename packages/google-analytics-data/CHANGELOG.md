@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.2.1...v2.3.0) (2021-03-11)
+
+
+### Features
+
+* add v1beta surface (issues fixed) ([#69](https://www.github.com/googleapis/nodejs-analytics-data/issues/69)) ([44005ca](https://www.github.com/googleapis/nodejs-analytics-data/commit/44005cadb55e2e7695205af8977f3966dc53024c))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.2.0...v2.2.1) (2021-03-04)
 
 
