@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
 gapic = gcp.GAPICBazel()
-versions = ['v1alpha']
+versions = ['v1alpha', 'v1beta']
 for version in versions:
   library = gapic.node_library(
     'analyticsdata',
@@ -35,7 +35,7 @@ for version in versions:
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location='build/src', versions=['v1alpha'])
+    source_location='build/src', versions=['v1alpha', 'v1beta'], default_version='v1beta')
 s.copy(templates, excludes=[])
 
 node.postprocess_gapic_library()

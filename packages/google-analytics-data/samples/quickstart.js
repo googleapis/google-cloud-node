@@ -52,17 +52,15 @@ function main(propertyId = 'YOUR-GA4-PROPERTY-ID') {
   // propertyId = 'YOUR-GA4-PROPERTY-ID';
 
   // Imports the Google Analytics Data API client library.
-  const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
+  const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
   // Creates a client.
-  const analyticsDataClient = new AlphaAnalyticsDataClient();
+  const analyticsDataClient = new BetaAnalyticsDataClient();
 
   // Runs a simple report.
   async function runReport() {
     const [response] = await analyticsDataClient.runReport({
-      entity: {
-        propertyId: propertyId,
-      },
+      property: 'properties/' + propertyId,
       dateRanges: [
         {
           startDate: '2020-03-31',

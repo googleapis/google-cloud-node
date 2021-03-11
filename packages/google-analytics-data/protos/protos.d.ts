@@ -5360,6 +5360,5248 @@ export namespace google {
                     TYPE_KILOMETERS = 13
                 }
             }
+
+            /** Namespace v1beta. */
+            namespace v1beta {
+
+                /** Represents a BetaAnalyticsData */
+                class BetaAnalyticsData extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new BetaAnalyticsData service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new BetaAnalyticsData service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): BetaAnalyticsData;
+
+                    /**
+                     * Calls RunReport.
+                     * @param request RunReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RunReportResponse
+                     */
+                    public runReport(request: google.analytics.data.v1beta.IRunReportRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.RunReportCallback): void;
+
+                    /**
+                     * Calls RunReport.
+                     * @param request RunReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runReport(request: google.analytics.data.v1beta.IRunReportRequest): Promise<google.analytics.data.v1beta.RunReportResponse>;
+
+                    /**
+                     * Calls RunPivotReport.
+                     * @param request RunPivotReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RunPivotReportResponse
+                     */
+                    public runPivotReport(request: google.analytics.data.v1beta.IRunPivotReportRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.RunPivotReportCallback): void;
+
+                    /**
+                     * Calls RunPivotReport.
+                     * @param request RunPivotReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runPivotReport(request: google.analytics.data.v1beta.IRunPivotReportRequest): Promise<google.analytics.data.v1beta.RunPivotReportResponse>;
+
+                    /**
+                     * Calls BatchRunReports.
+                     * @param request BatchRunReportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchRunReportsResponse
+                     */
+                    public batchRunReports(request: google.analytics.data.v1beta.IBatchRunReportsRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.BatchRunReportsCallback): void;
+
+                    /**
+                     * Calls BatchRunReports.
+                     * @param request BatchRunReportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchRunReports(request: google.analytics.data.v1beta.IBatchRunReportsRequest): Promise<google.analytics.data.v1beta.BatchRunReportsResponse>;
+
+                    /**
+                     * Calls BatchRunPivotReports.
+                     * @param request BatchRunPivotReportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchRunPivotReportsResponse
+                     */
+                    public batchRunPivotReports(request: google.analytics.data.v1beta.IBatchRunPivotReportsRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.BatchRunPivotReportsCallback): void;
+
+                    /**
+                     * Calls BatchRunPivotReports.
+                     * @param request BatchRunPivotReportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchRunPivotReports(request: google.analytics.data.v1beta.IBatchRunPivotReportsRequest): Promise<google.analytics.data.v1beta.BatchRunPivotReportsResponse>;
+
+                    /**
+                     * Calls GetMetadata.
+                     * @param request GetMetadataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Metadata
+                     */
+                    public getMetadata(request: google.analytics.data.v1beta.IGetMetadataRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.GetMetadataCallback): void;
+
+                    /**
+                     * Calls GetMetadata.
+                     * @param request GetMetadataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMetadata(request: google.analytics.data.v1beta.IGetMetadataRequest): Promise<google.analytics.data.v1beta.Metadata>;
+
+                    /**
+                     * Calls RunRealtimeReport.
+                     * @param request RunRealtimeReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RunRealtimeReportResponse
+                     */
+                    public runRealtimeReport(request: google.analytics.data.v1beta.IRunRealtimeReportRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.RunRealtimeReportCallback): void;
+
+                    /**
+                     * Calls RunRealtimeReport.
+                     * @param request RunRealtimeReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runRealtimeReport(request: google.analytics.data.v1beta.IRunRealtimeReportRequest): Promise<google.analytics.data.v1beta.RunRealtimeReportResponse>;
+                }
+
+                namespace BetaAnalyticsData {
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runReport}.
+                     * @param error Error, if any
+                     * @param [response] RunReportResponse
+                     */
+                    type RunReportCallback = (error: (Error|null), response?: google.analytics.data.v1beta.RunReportResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runPivotReport}.
+                     * @param error Error, if any
+                     * @param [response] RunPivotReportResponse
+                     */
+                    type RunPivotReportCallback = (error: (Error|null), response?: google.analytics.data.v1beta.RunPivotReportResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#batchRunReports}.
+                     * @param error Error, if any
+                     * @param [response] BatchRunReportsResponse
+                     */
+                    type BatchRunReportsCallback = (error: (Error|null), response?: google.analytics.data.v1beta.BatchRunReportsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#batchRunPivotReports}.
+                     * @param error Error, if any
+                     * @param [response] BatchRunPivotReportsResponse
+                     */
+                    type BatchRunPivotReportsCallback = (error: (Error|null), response?: google.analytics.data.v1beta.BatchRunPivotReportsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#getMetadata}.
+                     * @param error Error, if any
+                     * @param [response] Metadata
+                     */
+                    type GetMetadataCallback = (error: (Error|null), response?: google.analytics.data.v1beta.Metadata) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#runRealtimeReport}.
+                     * @param error Error, if any
+                     * @param [response] RunRealtimeReportResponse
+                     */
+                    type RunRealtimeReportCallback = (error: (Error|null), response?: google.analytics.data.v1beta.RunRealtimeReportResponse) => void;
+                }
+
+                /** Properties of a Metadata. */
+                interface IMetadata {
+
+                    /** Metadata name */
+                    name?: (string|null);
+
+                    /** Metadata dimensions */
+                    dimensions?: (google.analytics.data.v1beta.IDimensionMetadata[]|null);
+
+                    /** Metadata metrics */
+                    metrics?: (google.analytics.data.v1beta.IMetricMetadata[]|null);
+                }
+
+                /** Represents a Metadata. */
+                class Metadata implements IMetadata {
+
+                    /**
+                     * Constructs a new Metadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IMetadata);
+
+                    /** Metadata name. */
+                    public name: string;
+
+                    /** Metadata dimensions. */
+                    public dimensions: google.analytics.data.v1beta.IDimensionMetadata[];
+
+                    /** Metadata metrics. */
+                    public metrics: google.analytics.data.v1beta.IMetricMetadata[];
+
+                    /**
+                     * Creates a new Metadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Metadata instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IMetadata): google.analytics.data.v1beta.Metadata;
+
+                    /**
+                     * Encodes the specified Metadata message. Does not implicitly {@link google.analytics.data.v1beta.Metadata.verify|verify} messages.
+                     * @param message Metadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Metadata.verify|verify} messages.
+                     * @param message Metadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Metadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Metadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Metadata;
+
+                    /**
+                     * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Metadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Metadata;
+
+                    /**
+                     * Verifies a Metadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Metadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Metadata;
+
+                    /**
+                     * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                     * @param message Metadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Metadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Metadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RunReportRequest. */
+                interface IRunReportRequest {
+
+                    /** RunReportRequest property */
+                    property?: (string|null);
+
+                    /** RunReportRequest dimensions */
+                    dimensions?: (google.analytics.data.v1beta.IDimension[]|null);
+
+                    /** RunReportRequest metrics */
+                    metrics?: (google.analytics.data.v1beta.IMetric[]|null);
+
+                    /** RunReportRequest dateRanges */
+                    dateRanges?: (google.analytics.data.v1beta.IDateRange[]|null);
+
+                    /** RunReportRequest dimensionFilter */
+                    dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunReportRequest metricFilter */
+                    metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunReportRequest offset */
+                    offset?: (number|Long|string|null);
+
+                    /** RunReportRequest limit */
+                    limit?: (number|Long|string|null);
+
+                    /** RunReportRequest metricAggregations */
+                    metricAggregations?: (google.analytics.data.v1beta.MetricAggregation[]|null);
+
+                    /** RunReportRequest orderBys */
+                    orderBys?: (google.analytics.data.v1beta.IOrderBy[]|null);
+
+                    /** RunReportRequest currencyCode */
+                    currencyCode?: (string|null);
+
+                    /** RunReportRequest cohortSpec */
+                    cohortSpec?: (google.analytics.data.v1beta.ICohortSpec|null);
+
+                    /** RunReportRequest keepEmptyRows */
+                    keepEmptyRows?: (boolean|null);
+
+                    /** RunReportRequest returnPropertyQuota */
+                    returnPropertyQuota?: (boolean|null);
+                }
+
+                /** Represents a RunReportRequest. */
+                class RunReportRequest implements IRunReportRequest {
+
+                    /**
+                     * Constructs a new RunReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IRunReportRequest);
+
+                    /** RunReportRequest property. */
+                    public property: string;
+
+                    /** RunReportRequest dimensions. */
+                    public dimensions: google.analytics.data.v1beta.IDimension[];
+
+                    /** RunReportRequest metrics. */
+                    public metrics: google.analytics.data.v1beta.IMetric[];
+
+                    /** RunReportRequest dateRanges. */
+                    public dateRanges: google.analytics.data.v1beta.IDateRange[];
+
+                    /** RunReportRequest dimensionFilter. */
+                    public dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunReportRequest metricFilter. */
+                    public metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunReportRequest offset. */
+                    public offset: (number|Long|string);
+
+                    /** RunReportRequest limit. */
+                    public limit: (number|Long|string);
+
+                    /** RunReportRequest metricAggregations. */
+                    public metricAggregations: google.analytics.data.v1beta.MetricAggregation[];
+
+                    /** RunReportRequest orderBys. */
+                    public orderBys: google.analytics.data.v1beta.IOrderBy[];
+
+                    /** RunReportRequest currencyCode. */
+                    public currencyCode: string;
+
+                    /** RunReportRequest cohortSpec. */
+                    public cohortSpec?: (google.analytics.data.v1beta.ICohortSpec|null);
+
+                    /** RunReportRequest keepEmptyRows. */
+                    public keepEmptyRows: boolean;
+
+                    /** RunReportRequest returnPropertyQuota. */
+                    public returnPropertyQuota: boolean;
+
+                    /**
+                     * Creates a new RunReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunReportRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IRunReportRequest): google.analytics.data.v1beta.RunReportRequest;
+
+                    /**
+                     * Encodes the specified RunReportRequest message. Does not implicitly {@link google.analytics.data.v1beta.RunReportRequest.verify|verify} messages.
+                     * @param message RunReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IRunReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunReportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunReportRequest.verify|verify} messages.
+                     * @param message RunReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IRunReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.RunReportRequest;
+
+                    /**
+                     * Decodes a RunReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.RunReportRequest;
+
+                    /**
+                     * Verifies a RunReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.RunReportRequest;
+
+                    /**
+                     * Creates a plain object from a RunReportRequest message. Also converts values to other types if specified.
+                     * @param message RunReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.RunReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RunReportResponse. */
+                interface IRunReportResponse {
+
+                    /** RunReportResponse dimensionHeaders */
+                    dimensionHeaders?: (google.analytics.data.v1beta.IDimensionHeader[]|null);
+
+                    /** RunReportResponse metricHeaders */
+                    metricHeaders?: (google.analytics.data.v1beta.IMetricHeader[]|null);
+
+                    /** RunReportResponse rows */
+                    rows?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunReportResponse totals */
+                    totals?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunReportResponse maximums */
+                    maximums?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunReportResponse minimums */
+                    minimums?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunReportResponse rowCount */
+                    rowCount?: (number|null);
+
+                    /** RunReportResponse metadata */
+                    metadata?: (google.analytics.data.v1beta.IResponseMetaData|null);
+
+                    /** RunReportResponse propertyQuota */
+                    propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+                }
+
+                /** Represents a RunReportResponse. */
+                class RunReportResponse implements IRunReportResponse {
+
+                    /**
+                     * Constructs a new RunReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IRunReportResponse);
+
+                    /** RunReportResponse dimensionHeaders. */
+                    public dimensionHeaders: google.analytics.data.v1beta.IDimensionHeader[];
+
+                    /** RunReportResponse metricHeaders. */
+                    public metricHeaders: google.analytics.data.v1beta.IMetricHeader[];
+
+                    /** RunReportResponse rows. */
+                    public rows: google.analytics.data.v1beta.IRow[];
+
+                    /** RunReportResponse totals. */
+                    public totals: google.analytics.data.v1beta.IRow[];
+
+                    /** RunReportResponse maximums. */
+                    public maximums: google.analytics.data.v1beta.IRow[];
+
+                    /** RunReportResponse minimums. */
+                    public minimums: google.analytics.data.v1beta.IRow[];
+
+                    /** RunReportResponse rowCount. */
+                    public rowCount: number;
+
+                    /** RunReportResponse metadata. */
+                    public metadata?: (google.analytics.data.v1beta.IResponseMetaData|null);
+
+                    /** RunReportResponse propertyQuota. */
+                    public propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /**
+                     * Creates a new RunReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunReportResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IRunReportResponse): google.analytics.data.v1beta.RunReportResponse;
+
+                    /**
+                     * Encodes the specified RunReportResponse message. Does not implicitly {@link google.analytics.data.v1beta.RunReportResponse.verify|verify} messages.
+                     * @param message RunReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IRunReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunReportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunReportResponse.verify|verify} messages.
+                     * @param message RunReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IRunReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.RunReportResponse;
+
+                    /**
+                     * Decodes a RunReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.RunReportResponse;
+
+                    /**
+                     * Verifies a RunReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.RunReportResponse;
+
+                    /**
+                     * Creates a plain object from a RunReportResponse message. Also converts values to other types if specified.
+                     * @param message RunReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.RunReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RunPivotReportRequest. */
+                interface IRunPivotReportRequest {
+
+                    /** RunPivotReportRequest property */
+                    property?: (string|null);
+
+                    /** RunPivotReportRequest dimensions */
+                    dimensions?: (google.analytics.data.v1beta.IDimension[]|null);
+
+                    /** RunPivotReportRequest metrics */
+                    metrics?: (google.analytics.data.v1beta.IMetric[]|null);
+
+                    /** RunPivotReportRequest dateRanges */
+                    dateRanges?: (google.analytics.data.v1beta.IDateRange[]|null);
+
+                    /** RunPivotReportRequest pivots */
+                    pivots?: (google.analytics.data.v1beta.IPivot[]|null);
+
+                    /** RunPivotReportRequest dimensionFilter */
+                    dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunPivotReportRequest metricFilter */
+                    metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunPivotReportRequest currencyCode */
+                    currencyCode?: (string|null);
+
+                    /** RunPivotReportRequest cohortSpec */
+                    cohortSpec?: (google.analytics.data.v1beta.ICohortSpec|null);
+
+                    /** RunPivotReportRequest keepEmptyRows */
+                    keepEmptyRows?: (boolean|null);
+
+                    /** RunPivotReportRequest returnPropertyQuota */
+                    returnPropertyQuota?: (boolean|null);
+                }
+
+                /** Represents a RunPivotReportRequest. */
+                class RunPivotReportRequest implements IRunPivotReportRequest {
+
+                    /**
+                     * Constructs a new RunPivotReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IRunPivotReportRequest);
+
+                    /** RunPivotReportRequest property. */
+                    public property: string;
+
+                    /** RunPivotReportRequest dimensions. */
+                    public dimensions: google.analytics.data.v1beta.IDimension[];
+
+                    /** RunPivotReportRequest metrics. */
+                    public metrics: google.analytics.data.v1beta.IMetric[];
+
+                    /** RunPivotReportRequest dateRanges. */
+                    public dateRanges: google.analytics.data.v1beta.IDateRange[];
+
+                    /** RunPivotReportRequest pivots. */
+                    public pivots: google.analytics.data.v1beta.IPivot[];
+
+                    /** RunPivotReportRequest dimensionFilter. */
+                    public dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunPivotReportRequest metricFilter. */
+                    public metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunPivotReportRequest currencyCode. */
+                    public currencyCode: string;
+
+                    /** RunPivotReportRequest cohortSpec. */
+                    public cohortSpec?: (google.analytics.data.v1beta.ICohortSpec|null);
+
+                    /** RunPivotReportRequest keepEmptyRows. */
+                    public keepEmptyRows: boolean;
+
+                    /** RunPivotReportRequest returnPropertyQuota. */
+                    public returnPropertyQuota: boolean;
+
+                    /**
+                     * Creates a new RunPivotReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPivotReportRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IRunPivotReportRequest): google.analytics.data.v1beta.RunPivotReportRequest;
+
+                    /**
+                     * Encodes the specified RunPivotReportRequest message. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportRequest.verify|verify} messages.
+                     * @param message RunPivotReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IRunPivotReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPivotReportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportRequest.verify|verify} messages.
+                     * @param message RunPivotReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IRunPivotReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPivotReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPivotReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.RunPivotReportRequest;
+
+                    /**
+                     * Decodes a RunPivotReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPivotReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.RunPivotReportRequest;
+
+                    /**
+                     * Verifies a RunPivotReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPivotReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPivotReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.RunPivotReportRequest;
+
+                    /**
+                     * Creates a plain object from a RunPivotReportRequest message. Also converts values to other types if specified.
+                     * @param message RunPivotReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.RunPivotReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPivotReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RunPivotReportResponse. */
+                interface IRunPivotReportResponse {
+
+                    /** RunPivotReportResponse pivotHeaders */
+                    pivotHeaders?: (google.analytics.data.v1beta.IPivotHeader[]|null);
+
+                    /** RunPivotReportResponse dimensionHeaders */
+                    dimensionHeaders?: (google.analytics.data.v1beta.IDimensionHeader[]|null);
+
+                    /** RunPivotReportResponse metricHeaders */
+                    metricHeaders?: (google.analytics.data.v1beta.IMetricHeader[]|null);
+
+                    /** RunPivotReportResponse rows */
+                    rows?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunPivotReportResponse aggregates */
+                    aggregates?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunPivotReportResponse metadata */
+                    metadata?: (google.analytics.data.v1beta.IResponseMetaData|null);
+
+                    /** RunPivotReportResponse propertyQuota */
+                    propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+                }
+
+                /** Represents a RunPivotReportResponse. */
+                class RunPivotReportResponse implements IRunPivotReportResponse {
+
+                    /**
+                     * Constructs a new RunPivotReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IRunPivotReportResponse);
+
+                    /** RunPivotReportResponse pivotHeaders. */
+                    public pivotHeaders: google.analytics.data.v1beta.IPivotHeader[];
+
+                    /** RunPivotReportResponse dimensionHeaders. */
+                    public dimensionHeaders: google.analytics.data.v1beta.IDimensionHeader[];
+
+                    /** RunPivotReportResponse metricHeaders. */
+                    public metricHeaders: google.analytics.data.v1beta.IMetricHeader[];
+
+                    /** RunPivotReportResponse rows. */
+                    public rows: google.analytics.data.v1beta.IRow[];
+
+                    /** RunPivotReportResponse aggregates. */
+                    public aggregates: google.analytics.data.v1beta.IRow[];
+
+                    /** RunPivotReportResponse metadata. */
+                    public metadata?: (google.analytics.data.v1beta.IResponseMetaData|null);
+
+                    /** RunPivotReportResponse propertyQuota. */
+                    public propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /**
+                     * Creates a new RunPivotReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPivotReportResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IRunPivotReportResponse): google.analytics.data.v1beta.RunPivotReportResponse;
+
+                    /**
+                     * Encodes the specified RunPivotReportResponse message. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportResponse.verify|verify} messages.
+                     * @param message RunPivotReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IRunPivotReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPivotReportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunPivotReportResponse.verify|verify} messages.
+                     * @param message RunPivotReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IRunPivotReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPivotReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPivotReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.RunPivotReportResponse;
+
+                    /**
+                     * Decodes a RunPivotReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPivotReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.RunPivotReportResponse;
+
+                    /**
+                     * Verifies a RunPivotReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPivotReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPivotReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.RunPivotReportResponse;
+
+                    /**
+                     * Creates a plain object from a RunPivotReportResponse message. Also converts values to other types if specified.
+                     * @param message RunPivotReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.RunPivotReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPivotReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchRunReportsRequest. */
+                interface IBatchRunReportsRequest {
+
+                    /** BatchRunReportsRequest property */
+                    property?: (string|null);
+
+                    /** BatchRunReportsRequest requests */
+                    requests?: (google.analytics.data.v1beta.IRunReportRequest[]|null);
+                }
+
+                /** Represents a BatchRunReportsRequest. */
+                class BatchRunReportsRequest implements IBatchRunReportsRequest {
+
+                    /**
+                     * Constructs a new BatchRunReportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IBatchRunReportsRequest);
+
+                    /** BatchRunReportsRequest property. */
+                    public property: string;
+
+                    /** BatchRunReportsRequest requests. */
+                    public requests: google.analytics.data.v1beta.IRunReportRequest[];
+
+                    /**
+                     * Creates a new BatchRunReportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRunReportsRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IBatchRunReportsRequest): google.analytics.data.v1beta.BatchRunReportsRequest;
+
+                    /**
+                     * Encodes the specified BatchRunReportsRequest message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsRequest.verify|verify} messages.
+                     * @param message BatchRunReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IBatchRunReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRunReportsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsRequest.verify|verify} messages.
+                     * @param message BatchRunReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IBatchRunReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRunReportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRunReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.BatchRunReportsRequest;
+
+                    /**
+                     * Decodes a BatchRunReportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRunReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.BatchRunReportsRequest;
+
+                    /**
+                     * Verifies a BatchRunReportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRunReportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRunReportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.BatchRunReportsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchRunReportsRequest message. Also converts values to other types if specified.
+                     * @param message BatchRunReportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.BatchRunReportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRunReportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchRunReportsResponse. */
+                interface IBatchRunReportsResponse {
+
+                    /** BatchRunReportsResponse reports */
+                    reports?: (google.analytics.data.v1beta.IRunReportResponse[]|null);
+                }
+
+                /** Represents a BatchRunReportsResponse. */
+                class BatchRunReportsResponse implements IBatchRunReportsResponse {
+
+                    /**
+                     * Constructs a new BatchRunReportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IBatchRunReportsResponse);
+
+                    /** BatchRunReportsResponse reports. */
+                    public reports: google.analytics.data.v1beta.IRunReportResponse[];
+
+                    /**
+                     * Creates a new BatchRunReportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRunReportsResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IBatchRunReportsResponse): google.analytics.data.v1beta.BatchRunReportsResponse;
+
+                    /**
+                     * Encodes the specified BatchRunReportsResponse message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsResponse.verify|verify} messages.
+                     * @param message BatchRunReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IBatchRunReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRunReportsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunReportsResponse.verify|verify} messages.
+                     * @param message BatchRunReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IBatchRunReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRunReportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRunReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.BatchRunReportsResponse;
+
+                    /**
+                     * Decodes a BatchRunReportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRunReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.BatchRunReportsResponse;
+
+                    /**
+                     * Verifies a BatchRunReportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRunReportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRunReportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.BatchRunReportsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchRunReportsResponse message. Also converts values to other types if specified.
+                     * @param message BatchRunReportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.BatchRunReportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRunReportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchRunPivotReportsRequest. */
+                interface IBatchRunPivotReportsRequest {
+
+                    /** BatchRunPivotReportsRequest property */
+                    property?: (string|null);
+
+                    /** BatchRunPivotReportsRequest requests */
+                    requests?: (google.analytics.data.v1beta.IRunPivotReportRequest[]|null);
+                }
+
+                /** Represents a BatchRunPivotReportsRequest. */
+                class BatchRunPivotReportsRequest implements IBatchRunPivotReportsRequest {
+
+                    /**
+                     * Constructs a new BatchRunPivotReportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IBatchRunPivotReportsRequest);
+
+                    /** BatchRunPivotReportsRequest property. */
+                    public property: string;
+
+                    /** BatchRunPivotReportsRequest requests. */
+                    public requests: google.analytics.data.v1beta.IRunPivotReportRequest[];
+
+                    /**
+                     * Creates a new BatchRunPivotReportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRunPivotReportsRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IBatchRunPivotReportsRequest): google.analytics.data.v1beta.BatchRunPivotReportsRequest;
+
+                    /**
+                     * Encodes the specified BatchRunPivotReportsRequest message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsRequest.verify|verify} messages.
+                     * @param message BatchRunPivotReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IBatchRunPivotReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRunPivotReportsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsRequest.verify|verify} messages.
+                     * @param message BatchRunPivotReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IBatchRunPivotReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRunPivotReportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRunPivotReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.BatchRunPivotReportsRequest;
+
+                    /**
+                     * Decodes a BatchRunPivotReportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRunPivotReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.BatchRunPivotReportsRequest;
+
+                    /**
+                     * Verifies a BatchRunPivotReportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRunPivotReportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRunPivotReportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.BatchRunPivotReportsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchRunPivotReportsRequest message. Also converts values to other types if specified.
+                     * @param message BatchRunPivotReportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.BatchRunPivotReportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRunPivotReportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchRunPivotReportsResponse. */
+                interface IBatchRunPivotReportsResponse {
+
+                    /** BatchRunPivotReportsResponse pivotReports */
+                    pivotReports?: (google.analytics.data.v1beta.IRunPivotReportResponse[]|null);
+                }
+
+                /** Represents a BatchRunPivotReportsResponse. */
+                class BatchRunPivotReportsResponse implements IBatchRunPivotReportsResponse {
+
+                    /**
+                     * Constructs a new BatchRunPivotReportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IBatchRunPivotReportsResponse);
+
+                    /** BatchRunPivotReportsResponse pivotReports. */
+                    public pivotReports: google.analytics.data.v1beta.IRunPivotReportResponse[];
+
+                    /**
+                     * Creates a new BatchRunPivotReportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRunPivotReportsResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IBatchRunPivotReportsResponse): google.analytics.data.v1beta.BatchRunPivotReportsResponse;
+
+                    /**
+                     * Encodes the specified BatchRunPivotReportsResponse message. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsResponse.verify|verify} messages.
+                     * @param message BatchRunPivotReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IBatchRunPivotReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRunPivotReportsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.BatchRunPivotReportsResponse.verify|verify} messages.
+                     * @param message BatchRunPivotReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IBatchRunPivotReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRunPivotReportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRunPivotReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.BatchRunPivotReportsResponse;
+
+                    /**
+                     * Decodes a BatchRunPivotReportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRunPivotReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.BatchRunPivotReportsResponse;
+
+                    /**
+                     * Verifies a BatchRunPivotReportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRunPivotReportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRunPivotReportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.BatchRunPivotReportsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchRunPivotReportsResponse message. Also converts values to other types if specified.
+                     * @param message BatchRunPivotReportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.BatchRunPivotReportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRunPivotReportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetMetadataRequest. */
+                interface IGetMetadataRequest {
+
+                    /** GetMetadataRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMetadataRequest. */
+                class GetMetadataRequest implements IGetMetadataRequest {
+
+                    /**
+                     * Constructs a new GetMetadataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IGetMetadataRequest);
+
+                    /** GetMetadataRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMetadataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMetadataRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IGetMetadataRequest): google.analytics.data.v1beta.GetMetadataRequest;
+
+                    /**
+                     * Encodes the specified GetMetadataRequest message. Does not implicitly {@link google.analytics.data.v1beta.GetMetadataRequest.verify|verify} messages.
+                     * @param message GetMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IGetMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMetadataRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.GetMetadataRequest.verify|verify} messages.
+                     * @param message GetMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IGetMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMetadataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.GetMetadataRequest;
+
+                    /**
+                     * Decodes a GetMetadataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.GetMetadataRequest;
+
+                    /**
+                     * Verifies a GetMetadataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMetadataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.GetMetadataRequest;
+
+                    /**
+                     * Creates a plain object from a GetMetadataRequest message. Also converts values to other types if specified.
+                     * @param message GetMetadataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.GetMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMetadataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RunRealtimeReportRequest. */
+                interface IRunRealtimeReportRequest {
+
+                    /** RunRealtimeReportRequest property */
+                    property?: (string|null);
+
+                    /** RunRealtimeReportRequest dimensions */
+                    dimensions?: (google.analytics.data.v1beta.IDimension[]|null);
+
+                    /** RunRealtimeReportRequest metrics */
+                    metrics?: (google.analytics.data.v1beta.IMetric[]|null);
+
+                    /** RunRealtimeReportRequest dimensionFilter */
+                    dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunRealtimeReportRequest metricFilter */
+                    metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunRealtimeReportRequest limit */
+                    limit?: (number|Long|string|null);
+
+                    /** RunRealtimeReportRequest metricAggregations */
+                    metricAggregations?: (google.analytics.data.v1beta.MetricAggregation[]|null);
+
+                    /** RunRealtimeReportRequest orderBys */
+                    orderBys?: (google.analytics.data.v1beta.IOrderBy[]|null);
+
+                    /** RunRealtimeReportRequest returnPropertyQuota */
+                    returnPropertyQuota?: (boolean|null);
+                }
+
+                /** Represents a RunRealtimeReportRequest. */
+                class RunRealtimeReportRequest implements IRunRealtimeReportRequest {
+
+                    /**
+                     * Constructs a new RunRealtimeReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IRunRealtimeReportRequest);
+
+                    /** RunRealtimeReportRequest property. */
+                    public property: string;
+
+                    /** RunRealtimeReportRequest dimensions. */
+                    public dimensions: google.analytics.data.v1beta.IDimension[];
+
+                    /** RunRealtimeReportRequest metrics. */
+                    public metrics: google.analytics.data.v1beta.IMetric[];
+
+                    /** RunRealtimeReportRequest dimensionFilter. */
+                    public dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunRealtimeReportRequest metricFilter. */
+                    public metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** RunRealtimeReportRequest limit. */
+                    public limit: (number|Long|string);
+
+                    /** RunRealtimeReportRequest metricAggregations. */
+                    public metricAggregations: google.analytics.data.v1beta.MetricAggregation[];
+
+                    /** RunRealtimeReportRequest orderBys. */
+                    public orderBys: google.analytics.data.v1beta.IOrderBy[];
+
+                    /** RunRealtimeReportRequest returnPropertyQuota. */
+                    public returnPropertyQuota: boolean;
+
+                    /**
+                     * Creates a new RunRealtimeReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunRealtimeReportRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IRunRealtimeReportRequest): google.analytics.data.v1beta.RunRealtimeReportRequest;
+
+                    /**
+                     * Encodes the specified RunRealtimeReportRequest message. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportRequest.verify|verify} messages.
+                     * @param message RunRealtimeReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IRunRealtimeReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunRealtimeReportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportRequest.verify|verify} messages.
+                     * @param message RunRealtimeReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IRunRealtimeReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunRealtimeReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunRealtimeReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.RunRealtimeReportRequest;
+
+                    /**
+                     * Decodes a RunRealtimeReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunRealtimeReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.RunRealtimeReportRequest;
+
+                    /**
+                     * Verifies a RunRealtimeReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunRealtimeReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunRealtimeReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.RunRealtimeReportRequest;
+
+                    /**
+                     * Creates a plain object from a RunRealtimeReportRequest message. Also converts values to other types if specified.
+                     * @param message RunRealtimeReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.RunRealtimeReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunRealtimeReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RunRealtimeReportResponse. */
+                interface IRunRealtimeReportResponse {
+
+                    /** RunRealtimeReportResponse dimensionHeaders */
+                    dimensionHeaders?: (google.analytics.data.v1beta.IDimensionHeader[]|null);
+
+                    /** RunRealtimeReportResponse metricHeaders */
+                    metricHeaders?: (google.analytics.data.v1beta.IMetricHeader[]|null);
+
+                    /** RunRealtimeReportResponse rows */
+                    rows?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunRealtimeReportResponse totals */
+                    totals?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunRealtimeReportResponse maximums */
+                    maximums?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunRealtimeReportResponse minimums */
+                    minimums?: (google.analytics.data.v1beta.IRow[]|null);
+
+                    /** RunRealtimeReportResponse rowCount */
+                    rowCount?: (number|null);
+
+                    /** RunRealtimeReportResponse propertyQuota */
+                    propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+                }
+
+                /** Represents a RunRealtimeReportResponse. */
+                class RunRealtimeReportResponse implements IRunRealtimeReportResponse {
+
+                    /**
+                     * Constructs a new RunRealtimeReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IRunRealtimeReportResponse);
+
+                    /** RunRealtimeReportResponse dimensionHeaders. */
+                    public dimensionHeaders: google.analytics.data.v1beta.IDimensionHeader[];
+
+                    /** RunRealtimeReportResponse metricHeaders. */
+                    public metricHeaders: google.analytics.data.v1beta.IMetricHeader[];
+
+                    /** RunRealtimeReportResponse rows. */
+                    public rows: google.analytics.data.v1beta.IRow[];
+
+                    /** RunRealtimeReportResponse totals. */
+                    public totals: google.analytics.data.v1beta.IRow[];
+
+                    /** RunRealtimeReportResponse maximums. */
+                    public maximums: google.analytics.data.v1beta.IRow[];
+
+                    /** RunRealtimeReportResponse minimums. */
+                    public minimums: google.analytics.data.v1beta.IRow[];
+
+                    /** RunRealtimeReportResponse rowCount. */
+                    public rowCount: number;
+
+                    /** RunRealtimeReportResponse propertyQuota. */
+                    public propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /**
+                     * Creates a new RunRealtimeReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunRealtimeReportResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IRunRealtimeReportResponse): google.analytics.data.v1beta.RunRealtimeReportResponse;
+
+                    /**
+                     * Encodes the specified RunRealtimeReportResponse message. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportResponse.verify|verify} messages.
+                     * @param message RunRealtimeReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IRunRealtimeReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunRealtimeReportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.RunRealtimeReportResponse.verify|verify} messages.
+                     * @param message RunRealtimeReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IRunRealtimeReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunRealtimeReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunRealtimeReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.RunRealtimeReportResponse;
+
+                    /**
+                     * Decodes a RunRealtimeReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunRealtimeReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.RunRealtimeReportResponse;
+
+                    /**
+                     * Verifies a RunRealtimeReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunRealtimeReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunRealtimeReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.RunRealtimeReportResponse;
+
+                    /**
+                     * Creates a plain object from a RunRealtimeReportResponse message. Also converts values to other types if specified.
+                     * @param message RunRealtimeReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.RunRealtimeReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunRealtimeReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DateRange. */
+                interface IDateRange {
+
+                    /** DateRange startDate */
+                    startDate?: (string|null);
+
+                    /** DateRange endDate */
+                    endDate?: (string|null);
+
+                    /** DateRange name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DateRange. */
+                class DateRange implements IDateRange {
+
+                    /**
+                     * Constructs a new DateRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IDateRange);
+
+                    /** DateRange startDate. */
+                    public startDate: string;
+
+                    /** DateRange endDate. */
+                    public endDate: string;
+
+                    /** DateRange name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DateRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DateRange instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IDateRange): google.analytics.data.v1beta.DateRange;
+
+                    /**
+                     * Encodes the specified DateRange message. Does not implicitly {@link google.analytics.data.v1beta.DateRange.verify|verify} messages.
+                     * @param message DateRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DateRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DateRange.verify|verify} messages.
+                     * @param message DateRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DateRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DateRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DateRange;
+
+                    /**
+                     * Decodes a DateRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DateRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DateRange;
+
+                    /**
+                     * Verifies a DateRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DateRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DateRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DateRange;
+
+                    /**
+                     * Creates a plain object from a DateRange message. Also converts values to other types if specified.
+                     * @param message DateRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.DateRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DateRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Dimension. */
+                interface IDimension {
+
+                    /** Dimension name */
+                    name?: (string|null);
+
+                    /** Dimension dimensionExpression */
+                    dimensionExpression?: (google.analytics.data.v1beta.IDimensionExpression|null);
+                }
+
+                /** Represents a Dimension. */
+                class Dimension implements IDimension {
+
+                    /**
+                     * Constructs a new Dimension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IDimension);
+
+                    /** Dimension name. */
+                    public name: string;
+
+                    /** Dimension dimensionExpression. */
+                    public dimensionExpression?: (google.analytics.data.v1beta.IDimensionExpression|null);
+
+                    /**
+                     * Creates a new Dimension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Dimension instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IDimension): google.analytics.data.v1beta.Dimension;
+
+                    /**
+                     * Encodes the specified Dimension message. Does not implicitly {@link google.analytics.data.v1beta.Dimension.verify|verify} messages.
+                     * @param message Dimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Dimension message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Dimension.verify|verify} messages.
+                     * @param message Dimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Dimension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Dimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Dimension;
+
+                    /**
+                     * Decodes a Dimension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Dimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Dimension;
+
+                    /**
+                     * Verifies a Dimension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Dimension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Dimension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Dimension;
+
+                    /**
+                     * Creates a plain object from a Dimension message. Also converts values to other types if specified.
+                     * @param message Dimension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Dimension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Dimension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DimensionExpression. */
+                interface IDimensionExpression {
+
+                    /** DimensionExpression lowerCase */
+                    lowerCase?: (google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null);
+
+                    /** DimensionExpression upperCase */
+                    upperCase?: (google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null);
+
+                    /** DimensionExpression concatenate */
+                    concatenate?: (google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression|null);
+                }
+
+                /** Represents a DimensionExpression. */
+                class DimensionExpression implements IDimensionExpression {
+
+                    /**
+                     * Constructs a new DimensionExpression.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IDimensionExpression);
+
+                    /** DimensionExpression lowerCase. */
+                    public lowerCase?: (google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null);
+
+                    /** DimensionExpression upperCase. */
+                    public upperCase?: (google.analytics.data.v1beta.DimensionExpression.ICaseExpression|null);
+
+                    /** DimensionExpression concatenate. */
+                    public concatenate?: (google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression|null);
+
+                    /** DimensionExpression oneExpression. */
+                    public oneExpression?: ("lowerCase"|"upperCase"|"concatenate");
+
+                    /**
+                     * Creates a new DimensionExpression instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DimensionExpression instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IDimensionExpression): google.analytics.data.v1beta.DimensionExpression;
+
+                    /**
+                     * Encodes the specified DimensionExpression message. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.verify|verify} messages.
+                     * @param message DimensionExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IDimensionExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DimensionExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.verify|verify} messages.
+                     * @param message DimensionExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IDimensionExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DimensionExpression message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DimensionExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DimensionExpression;
+
+                    /**
+                     * Decodes a DimensionExpression message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DimensionExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DimensionExpression;
+
+                    /**
+                     * Verifies a DimensionExpression message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DimensionExpression message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DimensionExpression
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DimensionExpression;
+
+                    /**
+                     * Creates a plain object from a DimensionExpression message. Also converts values to other types if specified.
+                     * @param message DimensionExpression
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.DimensionExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DimensionExpression to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DimensionExpression {
+
+                    /** Properties of a CaseExpression. */
+                    interface ICaseExpression {
+
+                        /** CaseExpression dimensionName */
+                        dimensionName?: (string|null);
+                    }
+
+                    /** Represents a CaseExpression. */
+                    class CaseExpression implements ICaseExpression {
+
+                        /**
+                         * Constructs a new CaseExpression.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.DimensionExpression.ICaseExpression);
+
+                        /** CaseExpression dimensionName. */
+                        public dimensionName: string;
+
+                        /**
+                         * Creates a new CaseExpression instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CaseExpression instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.DimensionExpression.ICaseExpression): google.analytics.data.v1beta.DimensionExpression.CaseExpression;
+
+                        /**
+                         * Encodes the specified CaseExpression message. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.CaseExpression.verify|verify} messages.
+                         * @param message CaseExpression message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.DimensionExpression.ICaseExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CaseExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.CaseExpression.verify|verify} messages.
+                         * @param message CaseExpression message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.DimensionExpression.ICaseExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CaseExpression message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CaseExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DimensionExpression.CaseExpression;
+
+                        /**
+                         * Decodes a CaseExpression message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CaseExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DimensionExpression.CaseExpression;
+
+                        /**
+                         * Verifies a CaseExpression message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CaseExpression message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CaseExpression
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DimensionExpression.CaseExpression;
+
+                        /**
+                         * Creates a plain object from a CaseExpression message. Also converts values to other types if specified.
+                         * @param message CaseExpression
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.DimensionExpression.CaseExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CaseExpression to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ConcatenateExpression. */
+                    interface IConcatenateExpression {
+
+                        /** ConcatenateExpression dimensionNames */
+                        dimensionNames?: (string[]|null);
+
+                        /** ConcatenateExpression delimiter */
+                        delimiter?: (string|null);
+                    }
+
+                    /** Represents a ConcatenateExpression. */
+                    class ConcatenateExpression implements IConcatenateExpression {
+
+                        /**
+                         * Constructs a new ConcatenateExpression.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression);
+
+                        /** ConcatenateExpression dimensionNames. */
+                        public dimensionNames: string[];
+
+                        /** ConcatenateExpression delimiter. */
+                        public delimiter: string;
+
+                        /**
+                         * Creates a new ConcatenateExpression instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConcatenateExpression instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression): google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression;
+
+                        /**
+                         * Encodes the specified ConcatenateExpression message. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.verify|verify} messages.
+                         * @param message ConcatenateExpression message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConcatenateExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression.verify|verify} messages.
+                         * @param message ConcatenateExpression message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.DimensionExpression.IConcatenateExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConcatenateExpression message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConcatenateExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression;
+
+                        /**
+                         * Decodes a ConcatenateExpression message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConcatenateExpression
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression;
+
+                        /**
+                         * Verifies a ConcatenateExpression message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConcatenateExpression message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConcatenateExpression
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression;
+
+                        /**
+                         * Creates a plain object from a ConcatenateExpression message. Also converts values to other types if specified.
+                         * @param message ConcatenateExpression
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.DimensionExpression.ConcatenateExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConcatenateExpression to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a Metric. */
+                interface IMetric {
+
+                    /** Metric name */
+                    name?: (string|null);
+
+                    /** Metric expression */
+                    expression?: (string|null);
+
+                    /** Metric invisible */
+                    invisible?: (boolean|null);
+                }
+
+                /** Represents a Metric. */
+                class Metric implements IMetric {
+
+                    /**
+                     * Constructs a new Metric.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IMetric);
+
+                    /** Metric name. */
+                    public name: string;
+
+                    /** Metric expression. */
+                    public expression: string;
+
+                    /** Metric invisible. */
+                    public invisible: boolean;
+
+                    /**
+                     * Creates a new Metric instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Metric instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IMetric): google.analytics.data.v1beta.Metric;
+
+                    /**
+                     * Encodes the specified Metric message. Does not implicitly {@link google.analytics.data.v1beta.Metric.verify|verify} messages.
+                     * @param message Metric message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Metric.verify|verify} messages.
+                     * @param message Metric message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Metric message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Metric
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Metric;
+
+                    /**
+                     * Decodes a Metric message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Metric
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Metric;
+
+                    /**
+                     * Verifies a Metric message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Metric message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Metric
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Metric;
+
+                    /**
+                     * Creates a plain object from a Metric message. Also converts values to other types if specified.
+                     * @param message Metric
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Metric, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Metric to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FilterExpression. */
+                interface IFilterExpression {
+
+                    /** FilterExpression andGroup */
+                    andGroup?: (google.analytics.data.v1beta.IFilterExpressionList|null);
+
+                    /** FilterExpression orGroup */
+                    orGroup?: (google.analytics.data.v1beta.IFilterExpressionList|null);
+
+                    /** FilterExpression notExpression */
+                    notExpression?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** FilterExpression filter */
+                    filter?: (google.analytics.data.v1beta.IFilter|null);
+                }
+
+                /** Represents a FilterExpression. */
+                class FilterExpression implements IFilterExpression {
+
+                    /**
+                     * Constructs a new FilterExpression.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IFilterExpression);
+
+                    /** FilterExpression andGroup. */
+                    public andGroup?: (google.analytics.data.v1beta.IFilterExpressionList|null);
+
+                    /** FilterExpression orGroup. */
+                    public orGroup?: (google.analytics.data.v1beta.IFilterExpressionList|null);
+
+                    /** FilterExpression notExpression. */
+                    public notExpression?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** FilterExpression filter. */
+                    public filter?: (google.analytics.data.v1beta.IFilter|null);
+
+                    /** FilterExpression expr. */
+                    public expr?: ("andGroup"|"orGroup"|"notExpression"|"filter");
+
+                    /**
+                     * Creates a new FilterExpression instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilterExpression instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IFilterExpression): google.analytics.data.v1beta.FilterExpression;
+
+                    /**
+                     * Encodes the specified FilterExpression message. Does not implicitly {@link google.analytics.data.v1beta.FilterExpression.verify|verify} messages.
+                     * @param message FilterExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IFilterExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilterExpression message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.FilterExpression.verify|verify} messages.
+                     * @param message FilterExpression message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IFilterExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilterExpression message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilterExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.FilterExpression;
+
+                    /**
+                     * Decodes a FilterExpression message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilterExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.FilterExpression;
+
+                    /**
+                     * Verifies a FilterExpression message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilterExpression message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilterExpression
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.FilterExpression;
+
+                    /**
+                     * Creates a plain object from a FilterExpression message. Also converts values to other types if specified.
+                     * @param message FilterExpression
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.FilterExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilterExpression to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FilterExpressionList. */
+                interface IFilterExpressionList {
+
+                    /** FilterExpressionList expressions */
+                    expressions?: (google.analytics.data.v1beta.IFilterExpression[]|null);
+                }
+
+                /** Represents a FilterExpressionList. */
+                class FilterExpressionList implements IFilterExpressionList {
+
+                    /**
+                     * Constructs a new FilterExpressionList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IFilterExpressionList);
+
+                    /** FilterExpressionList expressions. */
+                    public expressions: google.analytics.data.v1beta.IFilterExpression[];
+
+                    /**
+                     * Creates a new FilterExpressionList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilterExpressionList instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IFilterExpressionList): google.analytics.data.v1beta.FilterExpressionList;
+
+                    /**
+                     * Encodes the specified FilterExpressionList message. Does not implicitly {@link google.analytics.data.v1beta.FilterExpressionList.verify|verify} messages.
+                     * @param message FilterExpressionList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IFilterExpressionList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilterExpressionList message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.FilterExpressionList.verify|verify} messages.
+                     * @param message FilterExpressionList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IFilterExpressionList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilterExpressionList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilterExpressionList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.FilterExpressionList;
+
+                    /**
+                     * Decodes a FilterExpressionList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilterExpressionList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.FilterExpressionList;
+
+                    /**
+                     * Verifies a FilterExpressionList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilterExpressionList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilterExpressionList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.FilterExpressionList;
+
+                    /**
+                     * Creates a plain object from a FilterExpressionList message. Also converts values to other types if specified.
+                     * @param message FilterExpressionList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.FilterExpressionList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilterExpressionList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Filter. */
+                interface IFilter {
+
+                    /** Filter fieldName */
+                    fieldName?: (string|null);
+
+                    /** Filter stringFilter */
+                    stringFilter?: (google.analytics.data.v1beta.Filter.IStringFilter|null);
+
+                    /** Filter inListFilter */
+                    inListFilter?: (google.analytics.data.v1beta.Filter.IInListFilter|null);
+
+                    /** Filter numericFilter */
+                    numericFilter?: (google.analytics.data.v1beta.Filter.INumericFilter|null);
+
+                    /** Filter betweenFilter */
+                    betweenFilter?: (google.analytics.data.v1beta.Filter.IBetweenFilter|null);
+                }
+
+                /** Represents a Filter. */
+                class Filter implements IFilter {
+
+                    /**
+                     * Constructs a new Filter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IFilter);
+
+                    /** Filter fieldName. */
+                    public fieldName: string;
+
+                    /** Filter stringFilter. */
+                    public stringFilter?: (google.analytics.data.v1beta.Filter.IStringFilter|null);
+
+                    /** Filter inListFilter. */
+                    public inListFilter?: (google.analytics.data.v1beta.Filter.IInListFilter|null);
+
+                    /** Filter numericFilter. */
+                    public numericFilter?: (google.analytics.data.v1beta.Filter.INumericFilter|null);
+
+                    /** Filter betweenFilter. */
+                    public betweenFilter?: (google.analytics.data.v1beta.Filter.IBetweenFilter|null);
+
+                    /** Filter oneFilter. */
+                    public oneFilter?: ("stringFilter"|"inListFilter"|"numericFilter"|"betweenFilter");
+
+                    /**
+                     * Creates a new Filter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Filter instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IFilter): google.analytics.data.v1beta.Filter;
+
+                    /**
+                     * Encodes the specified Filter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.verify|verify} messages.
+                     * @param message Filter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.verify|verify} messages.
+                     * @param message Filter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Filter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Filter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Filter;
+
+                    /**
+                     * Decodes a Filter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Filter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Filter;
+
+                    /**
+                     * Verifies a Filter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Filter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Filter;
+
+                    /**
+                     * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                     * @param message Filter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Filter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Filter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Filter {
+
+                    /** Properties of a StringFilter. */
+                    interface IStringFilter {
+
+                        /** StringFilter matchType */
+                        matchType?: (google.analytics.data.v1beta.Filter.StringFilter.MatchType|keyof typeof google.analytics.data.v1beta.Filter.StringFilter.MatchType|null);
+
+                        /** StringFilter value */
+                        value?: (string|null);
+
+                        /** StringFilter caseSensitive */
+                        caseSensitive?: (boolean|null);
+                    }
+
+                    /** Represents a StringFilter. */
+                    class StringFilter implements IStringFilter {
+
+                        /**
+                         * Constructs a new StringFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.Filter.IStringFilter);
+
+                        /** StringFilter matchType. */
+                        public matchType: (google.analytics.data.v1beta.Filter.StringFilter.MatchType|keyof typeof google.analytics.data.v1beta.Filter.StringFilter.MatchType);
+
+                        /** StringFilter value. */
+                        public value: string;
+
+                        /** StringFilter caseSensitive. */
+                        public caseSensitive: boolean;
+
+                        /**
+                         * Creates a new StringFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StringFilter instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.Filter.IStringFilter): google.analytics.data.v1beta.Filter.StringFilter;
+
+                        /**
+                         * Encodes the specified StringFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.StringFilter.verify|verify} messages.
+                         * @param message StringFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.Filter.IStringFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StringFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.StringFilter.verify|verify} messages.
+                         * @param message StringFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.Filter.IStringFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StringFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StringFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Filter.StringFilter;
+
+                        /**
+                         * Decodes a StringFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StringFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Filter.StringFilter;
+
+                        /**
+                         * Verifies a StringFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StringFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StringFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Filter.StringFilter;
+
+                        /**
+                         * Creates a plain object from a StringFilter message. Also converts values to other types if specified.
+                         * @param message StringFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.Filter.StringFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StringFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace StringFilter {
+
+                        /** MatchType enum. */
+                        enum MatchType {
+                            MATCH_TYPE_UNSPECIFIED = 0,
+                            EXACT = 1,
+                            BEGINS_WITH = 2,
+                            ENDS_WITH = 3,
+                            CONTAINS = 4,
+                            FULL_REGEXP = 5,
+                            PARTIAL_REGEXP = 6
+                        }
+                    }
+
+                    /** Properties of an InListFilter. */
+                    interface IInListFilter {
+
+                        /** InListFilter values */
+                        values?: (string[]|null);
+
+                        /** InListFilter caseSensitive */
+                        caseSensitive?: (boolean|null);
+                    }
+
+                    /** Represents an InListFilter. */
+                    class InListFilter implements IInListFilter {
+
+                        /**
+                         * Constructs a new InListFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.Filter.IInListFilter);
+
+                        /** InListFilter values. */
+                        public values: string[];
+
+                        /** InListFilter caseSensitive. */
+                        public caseSensitive: boolean;
+
+                        /**
+                         * Creates a new InListFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InListFilter instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.Filter.IInListFilter): google.analytics.data.v1beta.Filter.InListFilter;
+
+                        /**
+                         * Encodes the specified InListFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.InListFilter.verify|verify} messages.
+                         * @param message InListFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.Filter.IInListFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InListFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.InListFilter.verify|verify} messages.
+                         * @param message InListFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.Filter.IInListFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InListFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InListFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Filter.InListFilter;
+
+                        /**
+                         * Decodes an InListFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InListFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Filter.InListFilter;
+
+                        /**
+                         * Verifies an InListFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InListFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InListFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Filter.InListFilter;
+
+                        /**
+                         * Creates a plain object from an InListFilter message. Also converts values to other types if specified.
+                         * @param message InListFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.Filter.InListFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InListFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a NumericFilter. */
+                    interface INumericFilter {
+
+                        /** NumericFilter operation */
+                        operation?: (google.analytics.data.v1beta.Filter.NumericFilter.Operation|keyof typeof google.analytics.data.v1beta.Filter.NumericFilter.Operation|null);
+
+                        /** NumericFilter value */
+                        value?: (google.analytics.data.v1beta.INumericValue|null);
+                    }
+
+                    /** Represents a NumericFilter. */
+                    class NumericFilter implements INumericFilter {
+
+                        /**
+                         * Constructs a new NumericFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.Filter.INumericFilter);
+
+                        /** NumericFilter operation. */
+                        public operation: (google.analytics.data.v1beta.Filter.NumericFilter.Operation|keyof typeof google.analytics.data.v1beta.Filter.NumericFilter.Operation);
+
+                        /** NumericFilter value. */
+                        public value?: (google.analytics.data.v1beta.INumericValue|null);
+
+                        /**
+                         * Creates a new NumericFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NumericFilter instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.Filter.INumericFilter): google.analytics.data.v1beta.Filter.NumericFilter;
+
+                        /**
+                         * Encodes the specified NumericFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.NumericFilter.verify|verify} messages.
+                         * @param message NumericFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.Filter.INumericFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NumericFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.NumericFilter.verify|verify} messages.
+                         * @param message NumericFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.Filter.INumericFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NumericFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NumericFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Filter.NumericFilter;
+
+                        /**
+                         * Decodes a NumericFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NumericFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Filter.NumericFilter;
+
+                        /**
+                         * Verifies a NumericFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NumericFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NumericFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Filter.NumericFilter;
+
+                        /**
+                         * Creates a plain object from a NumericFilter message. Also converts values to other types if specified.
+                         * @param message NumericFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.Filter.NumericFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NumericFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace NumericFilter {
+
+                        /** Operation enum. */
+                        enum Operation {
+                            OPERATION_UNSPECIFIED = 0,
+                            EQUAL = 1,
+                            LESS_THAN = 2,
+                            LESS_THAN_OR_EQUAL = 3,
+                            GREATER_THAN = 4,
+                            GREATER_THAN_OR_EQUAL = 5
+                        }
+                    }
+
+                    /** Properties of a BetweenFilter. */
+                    interface IBetweenFilter {
+
+                        /** BetweenFilter fromValue */
+                        fromValue?: (google.analytics.data.v1beta.INumericValue|null);
+
+                        /** BetweenFilter toValue */
+                        toValue?: (google.analytics.data.v1beta.INumericValue|null);
+                    }
+
+                    /** Represents a BetweenFilter. */
+                    class BetweenFilter implements IBetweenFilter {
+
+                        /**
+                         * Constructs a new BetweenFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.Filter.IBetweenFilter);
+
+                        /** BetweenFilter fromValue. */
+                        public fromValue?: (google.analytics.data.v1beta.INumericValue|null);
+
+                        /** BetweenFilter toValue. */
+                        public toValue?: (google.analytics.data.v1beta.INumericValue|null);
+
+                        /**
+                         * Creates a new BetweenFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BetweenFilter instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.Filter.IBetweenFilter): google.analytics.data.v1beta.Filter.BetweenFilter;
+
+                        /**
+                         * Encodes the specified BetweenFilter message. Does not implicitly {@link google.analytics.data.v1beta.Filter.BetweenFilter.verify|verify} messages.
+                         * @param message BetweenFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.Filter.IBetweenFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BetweenFilter message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Filter.BetweenFilter.verify|verify} messages.
+                         * @param message BetweenFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.Filter.IBetweenFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BetweenFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BetweenFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Filter.BetweenFilter;
+
+                        /**
+                         * Decodes a BetweenFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BetweenFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Filter.BetweenFilter;
+
+                        /**
+                         * Verifies a BetweenFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BetweenFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BetweenFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Filter.BetweenFilter;
+
+                        /**
+                         * Creates a plain object from a BetweenFilter message. Also converts values to other types if specified.
+                         * @param message BetweenFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.Filter.BetweenFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BetweenFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of an OrderBy. */
+                interface IOrderBy {
+
+                    /** OrderBy metric */
+                    metric?: (google.analytics.data.v1beta.OrderBy.IMetricOrderBy|null);
+
+                    /** OrderBy dimension */
+                    dimension?: (google.analytics.data.v1beta.OrderBy.IDimensionOrderBy|null);
+
+                    /** OrderBy pivot */
+                    pivot?: (google.analytics.data.v1beta.OrderBy.IPivotOrderBy|null);
+
+                    /** OrderBy desc */
+                    desc?: (boolean|null);
+                }
+
+                /** Represents an OrderBy. */
+                class OrderBy implements IOrderBy {
+
+                    /**
+                     * Constructs a new OrderBy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IOrderBy);
+
+                    /** OrderBy metric. */
+                    public metric?: (google.analytics.data.v1beta.OrderBy.IMetricOrderBy|null);
+
+                    /** OrderBy dimension. */
+                    public dimension?: (google.analytics.data.v1beta.OrderBy.IDimensionOrderBy|null);
+
+                    /** OrderBy pivot. */
+                    public pivot?: (google.analytics.data.v1beta.OrderBy.IPivotOrderBy|null);
+
+                    /** OrderBy desc. */
+                    public desc: boolean;
+
+                    /** OrderBy oneOrderBy. */
+                    public oneOrderBy?: ("metric"|"dimension"|"pivot");
+
+                    /**
+                     * Creates a new OrderBy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OrderBy instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IOrderBy): google.analytics.data.v1beta.OrderBy;
+
+                    /**
+                     * Encodes the specified OrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.verify|verify} messages.
+                     * @param message OrderBy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.verify|verify} messages.
+                     * @param message OrderBy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OrderBy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OrderBy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.OrderBy;
+
+                    /**
+                     * Decodes an OrderBy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OrderBy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.OrderBy;
+
+                    /**
+                     * Verifies an OrderBy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OrderBy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OrderBy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.OrderBy;
+
+                    /**
+                     * Creates a plain object from an OrderBy message. Also converts values to other types if specified.
+                     * @param message OrderBy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.OrderBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OrderBy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace OrderBy {
+
+                    /** Properties of a MetricOrderBy. */
+                    interface IMetricOrderBy {
+
+                        /** MetricOrderBy metricName */
+                        metricName?: (string|null);
+                    }
+
+                    /** Represents a MetricOrderBy. */
+                    class MetricOrderBy implements IMetricOrderBy {
+
+                        /**
+                         * Constructs a new MetricOrderBy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.OrderBy.IMetricOrderBy);
+
+                        /** MetricOrderBy metricName. */
+                        public metricName: string;
+
+                        /**
+                         * Creates a new MetricOrderBy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MetricOrderBy instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.OrderBy.IMetricOrderBy): google.analytics.data.v1beta.OrderBy.MetricOrderBy;
+
+                        /**
+                         * Encodes the specified MetricOrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.MetricOrderBy.verify|verify} messages.
+                         * @param message MetricOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.OrderBy.IMetricOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MetricOrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.MetricOrderBy.verify|verify} messages.
+                         * @param message MetricOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.OrderBy.IMetricOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MetricOrderBy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MetricOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.OrderBy.MetricOrderBy;
+
+                        /**
+                         * Decodes a MetricOrderBy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MetricOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.OrderBy.MetricOrderBy;
+
+                        /**
+                         * Verifies a MetricOrderBy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MetricOrderBy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MetricOrderBy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.OrderBy.MetricOrderBy;
+
+                        /**
+                         * Creates a plain object from a MetricOrderBy message. Also converts values to other types if specified.
+                         * @param message MetricOrderBy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.OrderBy.MetricOrderBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MetricOrderBy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DimensionOrderBy. */
+                    interface IDimensionOrderBy {
+
+                        /** DimensionOrderBy dimensionName */
+                        dimensionName?: (string|null);
+
+                        /** DimensionOrderBy orderType */
+                        orderType?: (google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType|keyof typeof google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType|null);
+                    }
+
+                    /** Represents a DimensionOrderBy. */
+                    class DimensionOrderBy implements IDimensionOrderBy {
+
+                        /**
+                         * Constructs a new DimensionOrderBy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.OrderBy.IDimensionOrderBy);
+
+                        /** DimensionOrderBy dimensionName. */
+                        public dimensionName: string;
+
+                        /** DimensionOrderBy orderType. */
+                        public orderType: (google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType|keyof typeof google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType);
+
+                        /**
+                         * Creates a new DimensionOrderBy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DimensionOrderBy instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.OrderBy.IDimensionOrderBy): google.analytics.data.v1beta.OrderBy.DimensionOrderBy;
+
+                        /**
+                         * Encodes the specified DimensionOrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.DimensionOrderBy.verify|verify} messages.
+                         * @param message DimensionOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.OrderBy.IDimensionOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DimensionOrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.DimensionOrderBy.verify|verify} messages.
+                         * @param message DimensionOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.OrderBy.IDimensionOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DimensionOrderBy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DimensionOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.OrderBy.DimensionOrderBy;
+
+                        /**
+                         * Decodes a DimensionOrderBy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DimensionOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.OrderBy.DimensionOrderBy;
+
+                        /**
+                         * Verifies a DimensionOrderBy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DimensionOrderBy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DimensionOrderBy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.OrderBy.DimensionOrderBy;
+
+                        /**
+                         * Creates a plain object from a DimensionOrderBy message. Also converts values to other types if specified.
+                         * @param message DimensionOrderBy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.OrderBy.DimensionOrderBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DimensionOrderBy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace DimensionOrderBy {
+
+                        /** OrderType enum. */
+                        enum OrderType {
+                            ORDER_TYPE_UNSPECIFIED = 0,
+                            ALPHANUMERIC = 1,
+                            CASE_INSENSITIVE_ALPHANUMERIC = 2,
+                            NUMERIC = 3
+                        }
+                    }
+
+                    /** Properties of a PivotOrderBy. */
+                    interface IPivotOrderBy {
+
+                        /** PivotOrderBy metricName */
+                        metricName?: (string|null);
+
+                        /** PivotOrderBy pivotSelections */
+                        pivotSelections?: (google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection[]|null);
+                    }
+
+                    /** Represents a PivotOrderBy. */
+                    class PivotOrderBy implements IPivotOrderBy {
+
+                        /**
+                         * Constructs a new PivotOrderBy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.OrderBy.IPivotOrderBy);
+
+                        /** PivotOrderBy metricName. */
+                        public metricName: string;
+
+                        /** PivotOrderBy pivotSelections. */
+                        public pivotSelections: google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection[];
+
+                        /**
+                         * Creates a new PivotOrderBy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PivotOrderBy instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.OrderBy.IPivotOrderBy): google.analytics.data.v1beta.OrderBy.PivotOrderBy;
+
+                        /**
+                         * Encodes the specified PivotOrderBy message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.verify|verify} messages.
+                         * @param message PivotOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.OrderBy.IPivotOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PivotOrderBy message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.verify|verify} messages.
+                         * @param message PivotOrderBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.OrderBy.IPivotOrderBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PivotOrderBy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PivotOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.OrderBy.PivotOrderBy;
+
+                        /**
+                         * Decodes a PivotOrderBy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PivotOrderBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.OrderBy.PivotOrderBy;
+
+                        /**
+                         * Verifies a PivotOrderBy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PivotOrderBy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PivotOrderBy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.OrderBy.PivotOrderBy;
+
+                        /**
+                         * Creates a plain object from a PivotOrderBy message. Also converts values to other types if specified.
+                         * @param message PivotOrderBy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.OrderBy.PivotOrderBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PivotOrderBy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace PivotOrderBy {
+
+                        /** Properties of a PivotSelection. */
+                        interface IPivotSelection {
+
+                            /** PivotSelection dimensionName */
+                            dimensionName?: (string|null);
+
+                            /** PivotSelection dimensionValue */
+                            dimensionValue?: (string|null);
+                        }
+
+                        /** Represents a PivotSelection. */
+                        class PivotSelection implements IPivotSelection {
+
+                            /**
+                             * Constructs a new PivotSelection.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection);
+
+                            /** PivotSelection dimensionName. */
+                            public dimensionName: string;
+
+                            /** PivotSelection dimensionValue. */
+                            public dimensionValue: string;
+
+                            /**
+                             * Creates a new PivotSelection instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PivotSelection instance
+                             */
+                            public static create(properties?: google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection): google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection;
+
+                            /**
+                             * Encodes the specified PivotSelection message. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.verify|verify} messages.
+                             * @param message PivotSelection message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PivotSelection message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection.verify|verify} messages.
+                             * @param message PivotSelection message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.analytics.data.v1beta.OrderBy.PivotOrderBy.IPivotSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PivotSelection message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PivotSelection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection;
+
+                            /**
+                             * Decodes a PivotSelection message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PivotSelection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection;
+
+                            /**
+                             * Verifies a PivotSelection message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PivotSelection message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PivotSelection
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection;
+
+                            /**
+                             * Creates a plain object from a PivotSelection message. Also converts values to other types if specified.
+                             * @param message PivotSelection
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.analytics.data.v1beta.OrderBy.PivotOrderBy.PivotSelection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PivotSelection to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+                }
+
+                /** Properties of a Pivot. */
+                interface IPivot {
+
+                    /** Pivot fieldNames */
+                    fieldNames?: (string[]|null);
+
+                    /** Pivot orderBys */
+                    orderBys?: (google.analytics.data.v1beta.IOrderBy[]|null);
+
+                    /** Pivot offset */
+                    offset?: (number|Long|string|null);
+
+                    /** Pivot limit */
+                    limit?: (number|Long|string|null);
+
+                    /** Pivot metricAggregations */
+                    metricAggregations?: (google.analytics.data.v1beta.MetricAggregation[]|null);
+                }
+
+                /** Represents a Pivot. */
+                class Pivot implements IPivot {
+
+                    /**
+                     * Constructs a new Pivot.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IPivot);
+
+                    /** Pivot fieldNames. */
+                    public fieldNames: string[];
+
+                    /** Pivot orderBys. */
+                    public orderBys: google.analytics.data.v1beta.IOrderBy[];
+
+                    /** Pivot offset. */
+                    public offset: (number|Long|string);
+
+                    /** Pivot limit. */
+                    public limit: (number|Long|string);
+
+                    /** Pivot metricAggregations. */
+                    public metricAggregations: google.analytics.data.v1beta.MetricAggregation[];
+
+                    /**
+                     * Creates a new Pivot instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Pivot instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IPivot): google.analytics.data.v1beta.Pivot;
+
+                    /**
+                     * Encodes the specified Pivot message. Does not implicitly {@link google.analytics.data.v1beta.Pivot.verify|verify} messages.
+                     * @param message Pivot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IPivot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Pivot message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Pivot.verify|verify} messages.
+                     * @param message Pivot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IPivot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Pivot message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Pivot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Pivot;
+
+                    /**
+                     * Decodes a Pivot message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Pivot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Pivot;
+
+                    /**
+                     * Verifies a Pivot message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Pivot message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Pivot
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Pivot;
+
+                    /**
+                     * Creates a plain object from a Pivot message. Also converts values to other types if specified.
+                     * @param message Pivot
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Pivot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Pivot to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CohortSpec. */
+                interface ICohortSpec {
+
+                    /** CohortSpec cohorts */
+                    cohorts?: (google.analytics.data.v1beta.ICohort[]|null);
+
+                    /** CohortSpec cohortsRange */
+                    cohortsRange?: (google.analytics.data.v1beta.ICohortsRange|null);
+
+                    /** CohortSpec cohortReportSettings */
+                    cohortReportSettings?: (google.analytics.data.v1beta.ICohortReportSettings|null);
+                }
+
+                /** Represents a CohortSpec. */
+                class CohortSpec implements ICohortSpec {
+
+                    /**
+                     * Constructs a new CohortSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ICohortSpec);
+
+                    /** CohortSpec cohorts. */
+                    public cohorts: google.analytics.data.v1beta.ICohort[];
+
+                    /** CohortSpec cohortsRange. */
+                    public cohortsRange?: (google.analytics.data.v1beta.ICohortsRange|null);
+
+                    /** CohortSpec cohortReportSettings. */
+                    public cohortReportSettings?: (google.analytics.data.v1beta.ICohortReportSettings|null);
+
+                    /**
+                     * Creates a new CohortSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CohortSpec instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ICohortSpec): google.analytics.data.v1beta.CohortSpec;
+
+                    /**
+                     * Encodes the specified CohortSpec message. Does not implicitly {@link google.analytics.data.v1beta.CohortSpec.verify|verify} messages.
+                     * @param message CohortSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ICohortSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CohortSpec message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CohortSpec.verify|verify} messages.
+                     * @param message CohortSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ICohortSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CohortSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CohortSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.CohortSpec;
+
+                    /**
+                     * Decodes a CohortSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CohortSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.CohortSpec;
+
+                    /**
+                     * Verifies a CohortSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CohortSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CohortSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.CohortSpec;
+
+                    /**
+                     * Creates a plain object from a CohortSpec message. Also converts values to other types if specified.
+                     * @param message CohortSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.CohortSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CohortSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Cohort. */
+                interface ICohort {
+
+                    /** Cohort name */
+                    name?: (string|null);
+
+                    /** Cohort dimension */
+                    dimension?: (string|null);
+
+                    /** Cohort dateRange */
+                    dateRange?: (google.analytics.data.v1beta.IDateRange|null);
+                }
+
+                /** Represents a Cohort. */
+                class Cohort implements ICohort {
+
+                    /**
+                     * Constructs a new Cohort.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ICohort);
+
+                    /** Cohort name. */
+                    public name: string;
+
+                    /** Cohort dimension. */
+                    public dimension: string;
+
+                    /** Cohort dateRange. */
+                    public dateRange?: (google.analytics.data.v1beta.IDateRange|null);
+
+                    /**
+                     * Creates a new Cohort instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Cohort instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ICohort): google.analytics.data.v1beta.Cohort;
+
+                    /**
+                     * Encodes the specified Cohort message. Does not implicitly {@link google.analytics.data.v1beta.Cohort.verify|verify} messages.
+                     * @param message Cohort message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ICohort, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Cohort message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Cohort.verify|verify} messages.
+                     * @param message Cohort message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ICohort, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Cohort message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Cohort
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Cohort;
+
+                    /**
+                     * Decodes a Cohort message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Cohort
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Cohort;
+
+                    /**
+                     * Verifies a Cohort message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Cohort message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Cohort
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Cohort;
+
+                    /**
+                     * Creates a plain object from a Cohort message. Also converts values to other types if specified.
+                     * @param message Cohort
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Cohort, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Cohort to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CohortsRange. */
+                interface ICohortsRange {
+
+                    /** CohortsRange granularity */
+                    granularity?: (google.analytics.data.v1beta.CohortsRange.Granularity|keyof typeof google.analytics.data.v1beta.CohortsRange.Granularity|null);
+
+                    /** CohortsRange startOffset */
+                    startOffset?: (number|null);
+
+                    /** CohortsRange endOffset */
+                    endOffset?: (number|null);
+                }
+
+                /** Represents a CohortsRange. */
+                class CohortsRange implements ICohortsRange {
+
+                    /**
+                     * Constructs a new CohortsRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ICohortsRange);
+
+                    /** CohortsRange granularity. */
+                    public granularity: (google.analytics.data.v1beta.CohortsRange.Granularity|keyof typeof google.analytics.data.v1beta.CohortsRange.Granularity);
+
+                    /** CohortsRange startOffset. */
+                    public startOffset: number;
+
+                    /** CohortsRange endOffset. */
+                    public endOffset: number;
+
+                    /**
+                     * Creates a new CohortsRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CohortsRange instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ICohortsRange): google.analytics.data.v1beta.CohortsRange;
+
+                    /**
+                     * Encodes the specified CohortsRange message. Does not implicitly {@link google.analytics.data.v1beta.CohortsRange.verify|verify} messages.
+                     * @param message CohortsRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ICohortsRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CohortsRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CohortsRange.verify|verify} messages.
+                     * @param message CohortsRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ICohortsRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CohortsRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CohortsRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.CohortsRange;
+
+                    /**
+                     * Decodes a CohortsRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CohortsRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.CohortsRange;
+
+                    /**
+                     * Verifies a CohortsRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CohortsRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CohortsRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.CohortsRange;
+
+                    /**
+                     * Creates a plain object from a CohortsRange message. Also converts values to other types if specified.
+                     * @param message CohortsRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.CohortsRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CohortsRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CohortsRange {
+
+                    /** Granularity enum. */
+                    enum Granularity {
+                        GRANULARITY_UNSPECIFIED = 0,
+                        DAILY = 1,
+                        WEEKLY = 2,
+                        MONTHLY = 3
+                    }
+                }
+
+                /** Properties of a CohortReportSettings. */
+                interface ICohortReportSettings {
+
+                    /** CohortReportSettings accumulate */
+                    accumulate?: (boolean|null);
+                }
+
+                /** Represents a CohortReportSettings. */
+                class CohortReportSettings implements ICohortReportSettings {
+
+                    /**
+                     * Constructs a new CohortReportSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ICohortReportSettings);
+
+                    /** CohortReportSettings accumulate. */
+                    public accumulate: boolean;
+
+                    /**
+                     * Creates a new CohortReportSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CohortReportSettings instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ICohortReportSettings): google.analytics.data.v1beta.CohortReportSettings;
+
+                    /**
+                     * Encodes the specified CohortReportSettings message. Does not implicitly {@link google.analytics.data.v1beta.CohortReportSettings.verify|verify} messages.
+                     * @param message CohortReportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ICohortReportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CohortReportSettings message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CohortReportSettings.verify|verify} messages.
+                     * @param message CohortReportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ICohortReportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CohortReportSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CohortReportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.CohortReportSettings;
+
+                    /**
+                     * Decodes a CohortReportSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CohortReportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.CohortReportSettings;
+
+                    /**
+                     * Verifies a CohortReportSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CohortReportSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CohortReportSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.CohortReportSettings;
+
+                    /**
+                     * Creates a plain object from a CohortReportSettings message. Also converts values to other types if specified.
+                     * @param message CohortReportSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.CohortReportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CohortReportSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ResponseMetaData. */
+                interface IResponseMetaData {
+
+                    /** ResponseMetaData dataLossFromOtherRow */
+                    dataLossFromOtherRow?: (boolean|null);
+                }
+
+                /** Represents a ResponseMetaData. */
+                class ResponseMetaData implements IResponseMetaData {
+
+                    /**
+                     * Constructs a new ResponseMetaData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IResponseMetaData);
+
+                    /** ResponseMetaData dataLossFromOtherRow. */
+                    public dataLossFromOtherRow: boolean;
+
+                    /**
+                     * Creates a new ResponseMetaData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResponseMetaData instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IResponseMetaData): google.analytics.data.v1beta.ResponseMetaData;
+
+                    /**
+                     * Encodes the specified ResponseMetaData message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.verify|verify} messages.
+                     * @param message ResponseMetaData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IResponseMetaData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResponseMetaData message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.verify|verify} messages.
+                     * @param message ResponseMetaData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IResponseMetaData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResponseMetaData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResponseMetaData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ResponseMetaData;
+
+                    /**
+                     * Decodes a ResponseMetaData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResponseMetaData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ResponseMetaData;
+
+                    /**
+                     * Verifies a ResponseMetaData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResponseMetaData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResponseMetaData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ResponseMetaData;
+
+                    /**
+                     * Creates a plain object from a ResponseMetaData message. Also converts values to other types if specified.
+                     * @param message ResponseMetaData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.ResponseMetaData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResponseMetaData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DimensionHeader. */
+                interface IDimensionHeader {
+
+                    /** DimensionHeader name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DimensionHeader. */
+                class DimensionHeader implements IDimensionHeader {
+
+                    /**
+                     * Constructs a new DimensionHeader.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IDimensionHeader);
+
+                    /** DimensionHeader name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DimensionHeader instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DimensionHeader instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IDimensionHeader): google.analytics.data.v1beta.DimensionHeader;
+
+                    /**
+                     * Encodes the specified DimensionHeader message. Does not implicitly {@link google.analytics.data.v1beta.DimensionHeader.verify|verify} messages.
+                     * @param message DimensionHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IDimensionHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DimensionHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionHeader.verify|verify} messages.
+                     * @param message DimensionHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IDimensionHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DimensionHeader message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DimensionHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DimensionHeader;
+
+                    /**
+                     * Decodes a DimensionHeader message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DimensionHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DimensionHeader;
+
+                    /**
+                     * Verifies a DimensionHeader message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DimensionHeader message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DimensionHeader
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DimensionHeader;
+
+                    /**
+                     * Creates a plain object from a DimensionHeader message. Also converts values to other types if specified.
+                     * @param message DimensionHeader
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.DimensionHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DimensionHeader to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetricHeader. */
+                interface IMetricHeader {
+
+                    /** MetricHeader name */
+                    name?: (string|null);
+
+                    /** MetricHeader type */
+                    type?: (google.analytics.data.v1beta.MetricType|keyof typeof google.analytics.data.v1beta.MetricType|null);
+                }
+
+                /** Represents a MetricHeader. */
+                class MetricHeader implements IMetricHeader {
+
+                    /**
+                     * Constructs a new MetricHeader.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IMetricHeader);
+
+                    /** MetricHeader name. */
+                    public name: string;
+
+                    /** MetricHeader type. */
+                    public type: (google.analytics.data.v1beta.MetricType|keyof typeof google.analytics.data.v1beta.MetricType);
+
+                    /**
+                     * Creates a new MetricHeader instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetricHeader instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IMetricHeader): google.analytics.data.v1beta.MetricHeader;
+
+                    /**
+                     * Encodes the specified MetricHeader message. Does not implicitly {@link google.analytics.data.v1beta.MetricHeader.verify|verify} messages.
+                     * @param message MetricHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IMetricHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetricHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricHeader.verify|verify} messages.
+                     * @param message MetricHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IMetricHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetricHeader message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetricHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.MetricHeader;
+
+                    /**
+                     * Decodes a MetricHeader message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetricHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.MetricHeader;
+
+                    /**
+                     * Verifies a MetricHeader message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetricHeader message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetricHeader
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.MetricHeader;
+
+                    /**
+                     * Creates a plain object from a MetricHeader message. Also converts values to other types if specified.
+                     * @param message MetricHeader
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.MetricHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetricHeader to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PivotHeader. */
+                interface IPivotHeader {
+
+                    /** PivotHeader pivotDimensionHeaders */
+                    pivotDimensionHeaders?: (google.analytics.data.v1beta.IPivotDimensionHeader[]|null);
+
+                    /** PivotHeader rowCount */
+                    rowCount?: (number|null);
+                }
+
+                /** Represents a PivotHeader. */
+                class PivotHeader implements IPivotHeader {
+
+                    /**
+                     * Constructs a new PivotHeader.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IPivotHeader);
+
+                    /** PivotHeader pivotDimensionHeaders. */
+                    public pivotDimensionHeaders: google.analytics.data.v1beta.IPivotDimensionHeader[];
+
+                    /** PivotHeader rowCount. */
+                    public rowCount: number;
+
+                    /**
+                     * Creates a new PivotHeader instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PivotHeader instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IPivotHeader): google.analytics.data.v1beta.PivotHeader;
+
+                    /**
+                     * Encodes the specified PivotHeader message. Does not implicitly {@link google.analytics.data.v1beta.PivotHeader.verify|verify} messages.
+                     * @param message PivotHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IPivotHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PivotHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.PivotHeader.verify|verify} messages.
+                     * @param message PivotHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IPivotHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PivotHeader message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PivotHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.PivotHeader;
+
+                    /**
+                     * Decodes a PivotHeader message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PivotHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.PivotHeader;
+
+                    /**
+                     * Verifies a PivotHeader message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PivotHeader message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PivotHeader
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.PivotHeader;
+
+                    /**
+                     * Creates a plain object from a PivotHeader message. Also converts values to other types if specified.
+                     * @param message PivotHeader
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.PivotHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PivotHeader to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PivotDimensionHeader. */
+                interface IPivotDimensionHeader {
+
+                    /** PivotDimensionHeader dimensionValues */
+                    dimensionValues?: (google.analytics.data.v1beta.IDimensionValue[]|null);
+                }
+
+                /** Represents a PivotDimensionHeader. */
+                class PivotDimensionHeader implements IPivotDimensionHeader {
+
+                    /**
+                     * Constructs a new PivotDimensionHeader.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IPivotDimensionHeader);
+
+                    /** PivotDimensionHeader dimensionValues. */
+                    public dimensionValues: google.analytics.data.v1beta.IDimensionValue[];
+
+                    /**
+                     * Creates a new PivotDimensionHeader instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PivotDimensionHeader instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IPivotDimensionHeader): google.analytics.data.v1beta.PivotDimensionHeader;
+
+                    /**
+                     * Encodes the specified PivotDimensionHeader message. Does not implicitly {@link google.analytics.data.v1beta.PivotDimensionHeader.verify|verify} messages.
+                     * @param message PivotDimensionHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IPivotDimensionHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PivotDimensionHeader message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.PivotDimensionHeader.verify|verify} messages.
+                     * @param message PivotDimensionHeader message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IPivotDimensionHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PivotDimensionHeader message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PivotDimensionHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.PivotDimensionHeader;
+
+                    /**
+                     * Decodes a PivotDimensionHeader message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PivotDimensionHeader
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.PivotDimensionHeader;
+
+                    /**
+                     * Verifies a PivotDimensionHeader message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PivotDimensionHeader message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PivotDimensionHeader
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.PivotDimensionHeader;
+
+                    /**
+                     * Creates a plain object from a PivotDimensionHeader message. Also converts values to other types if specified.
+                     * @param message PivotDimensionHeader
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.PivotDimensionHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PivotDimensionHeader to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Row. */
+                interface IRow {
+
+                    /** Row dimensionValues */
+                    dimensionValues?: (google.analytics.data.v1beta.IDimensionValue[]|null);
+
+                    /** Row metricValues */
+                    metricValues?: (google.analytics.data.v1beta.IMetricValue[]|null);
+                }
+
+                /** Represents a Row. */
+                class Row implements IRow {
+
+                    /**
+                     * Constructs a new Row.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IRow);
+
+                    /** Row dimensionValues. */
+                    public dimensionValues: google.analytics.data.v1beta.IDimensionValue[];
+
+                    /** Row metricValues. */
+                    public metricValues: google.analytics.data.v1beta.IMetricValue[];
+
+                    /**
+                     * Creates a new Row instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Row instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IRow): google.analytics.data.v1beta.Row;
+
+                    /**
+                     * Encodes the specified Row message. Does not implicitly {@link google.analytics.data.v1beta.Row.verify|verify} messages.
+                     * @param message Row message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Row message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Row.verify|verify} messages.
+                     * @param message Row message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Row message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Row
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Row;
+
+                    /**
+                     * Decodes a Row message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Row
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Row;
+
+                    /**
+                     * Verifies a Row message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Row message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Row
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Row;
+
+                    /**
+                     * Creates a plain object from a Row message. Also converts values to other types if specified.
+                     * @param message Row
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Row, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Row to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DimensionValue. */
+                interface IDimensionValue {
+
+                    /** DimensionValue value */
+                    value?: (string|null);
+                }
+
+                /** Represents a DimensionValue. */
+                class DimensionValue implements IDimensionValue {
+
+                    /**
+                     * Constructs a new DimensionValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IDimensionValue);
+
+                    /** DimensionValue value. */
+                    public value: string;
+
+                    /** DimensionValue oneValue. */
+                    public oneValue?: "value";
+
+                    /**
+                     * Creates a new DimensionValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DimensionValue instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IDimensionValue): google.analytics.data.v1beta.DimensionValue;
+
+                    /**
+                     * Encodes the specified DimensionValue message. Does not implicitly {@link google.analytics.data.v1beta.DimensionValue.verify|verify} messages.
+                     * @param message DimensionValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IDimensionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DimensionValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionValue.verify|verify} messages.
+                     * @param message DimensionValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IDimensionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DimensionValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DimensionValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DimensionValue;
+
+                    /**
+                     * Decodes a DimensionValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DimensionValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DimensionValue;
+
+                    /**
+                     * Verifies a DimensionValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DimensionValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DimensionValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DimensionValue;
+
+                    /**
+                     * Creates a plain object from a DimensionValue message. Also converts values to other types if specified.
+                     * @param message DimensionValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.DimensionValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DimensionValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetricValue. */
+                interface IMetricValue {
+
+                    /** MetricValue value */
+                    value?: (string|null);
+                }
+
+                /** Represents a MetricValue. */
+                class MetricValue implements IMetricValue {
+
+                    /**
+                     * Constructs a new MetricValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IMetricValue);
+
+                    /** MetricValue value. */
+                    public value: string;
+
+                    /** MetricValue oneValue. */
+                    public oneValue?: "value";
+
+                    /**
+                     * Creates a new MetricValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetricValue instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IMetricValue): google.analytics.data.v1beta.MetricValue;
+
+                    /**
+                     * Encodes the specified MetricValue message. Does not implicitly {@link google.analytics.data.v1beta.MetricValue.verify|verify} messages.
+                     * @param message MetricValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IMetricValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetricValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricValue.verify|verify} messages.
+                     * @param message MetricValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IMetricValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetricValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetricValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.MetricValue;
+
+                    /**
+                     * Decodes a MetricValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetricValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.MetricValue;
+
+                    /**
+                     * Verifies a MetricValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetricValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetricValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.MetricValue;
+
+                    /**
+                     * Creates a plain object from a MetricValue message. Also converts values to other types if specified.
+                     * @param message MetricValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.MetricValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetricValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a NumericValue. */
+                interface INumericValue {
+
+                    /** NumericValue int64Value */
+                    int64Value?: (number|Long|string|null);
+
+                    /** NumericValue doubleValue */
+                    doubleValue?: (number|null);
+                }
+
+                /** Represents a NumericValue. */
+                class NumericValue implements INumericValue {
+
+                    /**
+                     * Constructs a new NumericValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.INumericValue);
+
+                    /** NumericValue int64Value. */
+                    public int64Value: (number|Long|string);
+
+                    /** NumericValue doubleValue. */
+                    public doubleValue: number;
+
+                    /** NumericValue oneValue. */
+                    public oneValue?: ("int64Value"|"doubleValue");
+
+                    /**
+                     * Creates a new NumericValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NumericValue instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.INumericValue): google.analytics.data.v1beta.NumericValue;
+
+                    /**
+                     * Encodes the specified NumericValue message. Does not implicitly {@link google.analytics.data.v1beta.NumericValue.verify|verify} messages.
+                     * @param message NumericValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.INumericValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NumericValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.NumericValue.verify|verify} messages.
+                     * @param message NumericValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.INumericValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NumericValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NumericValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.NumericValue;
+
+                    /**
+                     * Decodes a NumericValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NumericValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.NumericValue;
+
+                    /**
+                     * Verifies a NumericValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NumericValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NumericValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.NumericValue;
+
+                    /**
+                     * Creates a plain object from a NumericValue message. Also converts values to other types if specified.
+                     * @param message NumericValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.NumericValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NumericValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PropertyQuota. */
+                interface IPropertyQuota {
+
+                    /** PropertyQuota tokensPerDay */
+                    tokensPerDay?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota tokensPerHour */
+                    tokensPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota concurrentRequests */
+                    concurrentRequests?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota serverErrorsPerProjectPerHour */
+                    serverErrorsPerProjectPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+                }
+
+                /** Represents a PropertyQuota. */
+                class PropertyQuota implements IPropertyQuota {
+
+                    /**
+                     * Constructs a new PropertyQuota.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IPropertyQuota);
+
+                    /** PropertyQuota tokensPerDay. */
+                    public tokensPerDay?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota tokensPerHour. */
+                    public tokensPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota concurrentRequests. */
+                    public concurrentRequests?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota serverErrorsPerProjectPerHour. */
+                    public serverErrorsPerProjectPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /**
+                     * Creates a new PropertyQuota instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PropertyQuota instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IPropertyQuota): google.analytics.data.v1beta.PropertyQuota;
+
+                    /**
+                     * Encodes the specified PropertyQuota message. Does not implicitly {@link google.analytics.data.v1beta.PropertyQuota.verify|verify} messages.
+                     * @param message PropertyQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IPropertyQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PropertyQuota message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.PropertyQuota.verify|verify} messages.
+                     * @param message PropertyQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IPropertyQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PropertyQuota message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PropertyQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.PropertyQuota;
+
+                    /**
+                     * Decodes a PropertyQuota message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PropertyQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.PropertyQuota;
+
+                    /**
+                     * Verifies a PropertyQuota message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PropertyQuota message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PropertyQuota
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.PropertyQuota;
+
+                    /**
+                     * Creates a plain object from a PropertyQuota message. Also converts values to other types if specified.
+                     * @param message PropertyQuota
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.PropertyQuota, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PropertyQuota to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a QuotaStatus. */
+                interface IQuotaStatus {
+
+                    /** QuotaStatus consumed */
+                    consumed?: (number|null);
+
+                    /** QuotaStatus remaining */
+                    remaining?: (number|null);
+                }
+
+                /** Represents a QuotaStatus. */
+                class QuotaStatus implements IQuotaStatus {
+
+                    /**
+                     * Constructs a new QuotaStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IQuotaStatus);
+
+                    /** QuotaStatus consumed. */
+                    public consumed: number;
+
+                    /** QuotaStatus remaining. */
+                    public remaining: number;
+
+                    /**
+                     * Creates a new QuotaStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaStatus instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IQuotaStatus): google.analytics.data.v1beta.QuotaStatus;
+
+                    /**
+                     * Encodes the specified QuotaStatus message. Does not implicitly {@link google.analytics.data.v1beta.QuotaStatus.verify|verify} messages.
+                     * @param message QuotaStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IQuotaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaStatus message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.QuotaStatus.verify|verify} messages.
+                     * @param message QuotaStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IQuotaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.QuotaStatus;
+
+                    /**
+                     * Decodes a QuotaStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.QuotaStatus;
+
+                    /**
+                     * Verifies a QuotaStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.QuotaStatus;
+
+                    /**
+                     * Creates a plain object from a QuotaStatus message. Also converts values to other types if specified.
+                     * @param message QuotaStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.QuotaStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DimensionMetadata. */
+                interface IDimensionMetadata {
+
+                    /** DimensionMetadata apiName */
+                    apiName?: (string|null);
+
+                    /** DimensionMetadata uiName */
+                    uiName?: (string|null);
+
+                    /** DimensionMetadata description */
+                    description?: (string|null);
+
+                    /** DimensionMetadata deprecatedApiNames */
+                    deprecatedApiNames?: (string[]|null);
+
+                    /** DimensionMetadata customDefinition */
+                    customDefinition?: (boolean|null);
+                }
+
+                /** Represents a DimensionMetadata. */
+                class DimensionMetadata implements IDimensionMetadata {
+
+                    /**
+                     * Constructs a new DimensionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IDimensionMetadata);
+
+                    /** DimensionMetadata apiName. */
+                    public apiName: string;
+
+                    /** DimensionMetadata uiName. */
+                    public uiName: string;
+
+                    /** DimensionMetadata description. */
+                    public description: string;
+
+                    /** DimensionMetadata deprecatedApiNames. */
+                    public deprecatedApiNames: string[];
+
+                    /** DimensionMetadata customDefinition. */
+                    public customDefinition: boolean;
+
+                    /**
+                     * Creates a new DimensionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DimensionMetadata instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IDimensionMetadata): google.analytics.data.v1beta.DimensionMetadata;
+
+                    /**
+                     * Encodes the specified DimensionMetadata message. Does not implicitly {@link google.analytics.data.v1beta.DimensionMetadata.verify|verify} messages.
+                     * @param message DimensionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DimensionMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionMetadata.verify|verify} messages.
+                     * @param message DimensionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DimensionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DimensionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DimensionMetadata;
+
+                    /**
+                     * Decodes a DimensionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DimensionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DimensionMetadata;
+
+                    /**
+                     * Verifies a DimensionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DimensionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DimensionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DimensionMetadata;
+
+                    /**
+                     * Creates a plain object from a DimensionMetadata message. Also converts values to other types if specified.
+                     * @param message DimensionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.DimensionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DimensionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetricMetadata. */
+                interface IMetricMetadata {
+
+                    /** MetricMetadata apiName */
+                    apiName?: (string|null);
+
+                    /** MetricMetadata uiName */
+                    uiName?: (string|null);
+
+                    /** MetricMetadata description */
+                    description?: (string|null);
+
+                    /** MetricMetadata deprecatedApiNames */
+                    deprecatedApiNames?: (string[]|null);
+
+                    /** MetricMetadata type */
+                    type?: (google.analytics.data.v1beta.MetricType|keyof typeof google.analytics.data.v1beta.MetricType|null);
+
+                    /** MetricMetadata expression */
+                    expression?: (string|null);
+
+                    /** MetricMetadata customDefinition */
+                    customDefinition?: (boolean|null);
+                }
+
+                /** Represents a MetricMetadata. */
+                class MetricMetadata implements IMetricMetadata {
+
+                    /**
+                     * Constructs a new MetricMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IMetricMetadata);
+
+                    /** MetricMetadata apiName. */
+                    public apiName: string;
+
+                    /** MetricMetadata uiName. */
+                    public uiName: string;
+
+                    /** MetricMetadata description. */
+                    public description: string;
+
+                    /** MetricMetadata deprecatedApiNames. */
+                    public deprecatedApiNames: string[];
+
+                    /** MetricMetadata type. */
+                    public type: (google.analytics.data.v1beta.MetricType|keyof typeof google.analytics.data.v1beta.MetricType);
+
+                    /** MetricMetadata expression. */
+                    public expression: string;
+
+                    /** MetricMetadata customDefinition. */
+                    public customDefinition: boolean;
+
+                    /**
+                     * Creates a new MetricMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetricMetadata instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IMetricMetadata): google.analytics.data.v1beta.MetricMetadata;
+
+                    /**
+                     * Encodes the specified MetricMetadata message. Does not implicitly {@link google.analytics.data.v1beta.MetricMetadata.verify|verify} messages.
+                     * @param message MetricMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IMetricMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetricMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricMetadata.verify|verify} messages.
+                     * @param message MetricMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IMetricMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetricMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetricMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.MetricMetadata;
+
+                    /**
+                     * Decodes a MetricMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetricMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.MetricMetadata;
+
+                    /**
+                     * Verifies a MetricMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetricMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetricMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.MetricMetadata;
+
+                    /**
+                     * Creates a plain object from a MetricMetadata message. Also converts values to other types if specified.
+                     * @param message MetricMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.MetricMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetricMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** MetricAggregation enum. */
+                enum MetricAggregation {
+                    METRIC_AGGREGATION_UNSPECIFIED = 0,
+                    TOTAL = 1,
+                    MINIMUM = 5,
+                    MAXIMUM = 6,
+                    COUNT = 4
+                }
+
+                /** MetricType enum. */
+                enum MetricType {
+                    METRIC_TYPE_UNSPECIFIED = 0,
+                    TYPE_INTEGER = 1,
+                    TYPE_FLOAT = 2,
+                    TYPE_SECONDS = 4,
+                    TYPE_MILLISECONDS = 5,
+                    TYPE_MINUTES = 6,
+                    TYPE_HOURS = 7,
+                    TYPE_STANDARD = 8,
+                    TYPE_CURRENCY = 9,
+                    TYPE_FEET = 10,
+                    TYPE_MILES = 11,
+                    TYPE_METERS = 12,
+                    TYPE_KILOMETERS = 13
+                }
+            }
         }
     }
 
@@ -5712,8 +10954,7 @@ export namespace google {
             REQUIRED = 2,
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6
+            IMMUTABLE = 5
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -5736,9 +10977,6 @@ export namespace google {
 
             /** ResourceDescriptor singular */
             singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
         }
 
         /** Represents a ResourceDescriptor. */
@@ -5767,9 +11005,6 @@ export namespace google {
 
             /** ResourceDescriptor singular. */
             public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
 
             /**
              * Creates a new ResourceDescriptor instance using the specified properties.
@@ -5849,12 +11084,6 @@ export namespace google {
                 HISTORY_UNSPECIFIED = 0,
                 ORIGINALLY_SINGLE_PATTERN = 1,
                 FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
             }
         }
 
