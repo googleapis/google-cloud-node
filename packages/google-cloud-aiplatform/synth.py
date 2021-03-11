@@ -49,9 +49,7 @@ for version in versions:
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location="build/src",
-    versions=versions,
-    default_version=default_version,
+    source_location="build/src"
 )
 # We override the default sample configuration with a custom
 # environment file:
