@@ -512,7 +512,7 @@
                     "cc_enable_arenas": true,
                     "go_package": "google.golang.org/genproto/googleapis/cloud/speech/v1p1beta1;speech",
                     "java_multiple_files": true,
-                    "java_outer_classname": "SpeechResourceProto",
+                    "java_outer_classname": "SpeechAdaptationProto",
                     "java_package": "com.google.cloud.speech.v1p1beta1",
                     "objc_class_prefix": "GCS"
                   },
@@ -1136,10 +1136,393 @@
                           "type": "PhraseSet",
                           "id": 1
                         },
+                        "phraseSetReferences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
                         "customClasses": {
                           "rule": "repeated",
                           "type": "CustomClass",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Adaptation": {
+                      "options": {
+                        "(google.api.default_host)": "speech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreatePhraseSet": {
+                          "requestType": "CreatePhraseSetRequest",
+                          "responseType": "PhraseSet",
+                          "options": {
+                            "(google.api.http).post": "/v1p1beta1/{parent=projects/*/locations/*}/phraseSets",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,phrase_set,phrase_set_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=projects/*/locations/*}/phraseSets",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,phrase_set,phrase_set_id"
+                            }
+                          ]
+                        },
+                        "GetPhraseSet": {
+                          "requestType": "GetPhraseSetRequest",
+                          "responseType": "PhraseSet",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/{name=projects/*/locations/*/phraseSets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{name=projects/*/locations/*/phraseSets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListPhraseSet": {
+                          "requestType": "ListPhraseSetRequest",
+                          "responseType": "ListPhraseSetResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/{parent=projects/*/locations/*}/phraseSets",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{parent=projects/*/locations/*}/phraseSets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdatePhraseSet": {
+                          "requestType": "UpdatePhraseSetRequest",
+                          "responseType": "PhraseSet",
+                          "options": {
+                            "(google.api.http).patch": "/v1p1beta1/{phrase_set.name=projects/*/locations/*/phraseSets/*}",
+                            "(google.api.http).body": "phrase_set"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p1beta1/{phrase_set.name=projects/*/locations/*/phraseSets/*}",
+                                "body": "phrase_set"
+                              }
+                            }
+                          ]
+                        },
+                        "DeletePhraseSet": {
+                          "requestType": "DeletePhraseSetRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1p1beta1/{name=projects/*/locations/*/phraseSets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1p1beta1/{name=projects/*/locations/*/phraseSets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateCustomClass": {
+                          "requestType": "CreateCustomClassRequest",
+                          "responseType": "CustomClass",
+                          "options": {
+                            "(google.api.http).post": "/v1p1beta1/{parent=projects/*/locations/*}/customClasses",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,custom_class,custom_class_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1p1beta1/{parent=projects/*/locations/*}/customClasses",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,custom_class,custom_class_id"
+                            }
+                          ]
+                        },
+                        "GetCustomClass": {
+                          "requestType": "GetCustomClassRequest",
+                          "responseType": "CustomClass",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/{name=projects/*/locations/*/customClasses/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{name=projects/*/locations/*/customClasses/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListCustomClasses": {
+                          "requestType": "ListCustomClassesRequest",
+                          "responseType": "ListCustomClassesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/{parent=projects/*/locations/*}/customClasses",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1p1beta1/{parent=projects/*/locations/*}/customClasses"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateCustomClass": {
+                          "requestType": "UpdateCustomClassRequest",
+                          "responseType": "CustomClass",
+                          "options": {
+                            "(google.api.http).patch": "/v1p1beta1/{custom_class.name=projects/*/locations/*/customClasses/*}",
+                            "(google.api.http).body": "custom_class"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1p1beta1/{custom_class.name=projects/*/locations/*/customClasses/*}",
+                                "body": "custom_class"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCustomClass": {
+                          "requestType": "DeleteCustomClassRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1p1beta1/{name=projects/*/locations/*/customClasses/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1p1beta1/{name=projects/*/locations/*/customClasses/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreatePhraseSetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "speech.googleapis.com/PhraseSet"
+                          }
+                        },
+                        "phraseSetId": {
+                          "type": "string",
                           "id": 2
+                        },
+                        "phraseSet": {
+                          "type": "PhraseSet",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdatePhraseSetRequest": {
+                      "fields": {
+                        "phraseSet": {
+                          "type": "PhraseSet",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetPhraseSetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "speech.googleapis.com/PhraseSet"
+                          }
+                        }
+                      }
+                    },
+                    "ListPhraseSetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "speech.googleapis.com/PhraseSet"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListPhraseSetResponse": {
+                      "fields": {
+                        "phraseSets": {
+                          "rule": "repeated",
+                          "type": "PhraseSet",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeletePhraseSetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "speech.googleapis.com/PhraseSet"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCustomClassRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "speech.googleapis.com/CustomClass"
+                          }
+                        },
+                        "customClassId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "customClass": {
+                          "type": "CustomClass",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCustomClassRequest": {
+                      "fields": {
+                        "customClass": {
+                          "type": "CustomClass",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetCustomClassRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "speech.googleapis.com/CustomClass"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomClassesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "speech.googleapis.com/CustomClass"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListCustomClassesResponse": {
+                      "fields": {
+                        "customClasses": {
+                          "rule": "repeated",
+                          "type": "CustomClass",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteCustomClassRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "speech.googleapis.com/CustomClass"
+                          }
                         }
                       }
                     }
@@ -1275,8 +1658,7 @@
                 "REQUIRED": 2,
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
+                "IMMUTABLE": 5
               }
             },
             "resourceReference": {
@@ -1321,11 +1703,6 @@
                 "singular": {
                   "type": "string",
                   "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
                 }
               },
               "nested": {
@@ -1334,12 +1711,6 @@
                     "HISTORY_UNSPECIFIED": 0,
                     "ORIGINALLY_SINGLE_PATTERN": 1,
                     "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
                   }
                 }
               }
@@ -1360,7 +1731,7 @@
         },
         "protobuf": {
           "options": {
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
             "java_package": "com.google.protobuf",
             "java_outer_classname": "DescriptorProtos",
             "csharp_namespace": "Google.Protobuf.Reflection",
@@ -2289,6 +2660,15 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }
