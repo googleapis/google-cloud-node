@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-iam-credentials.git",
-        "sha": "35822076619e72972d2d6d50670af7a0542933ce"
+        "sha": "6ed92311c1da5a9ff3bfe9a9f7893a465f442daa"
       }
     },
     {
