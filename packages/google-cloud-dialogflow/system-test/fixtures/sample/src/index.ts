@@ -18,10 +18,16 @@
 
 import {
   AgentsClient,
+  AnswerRecordsClient,
   ContextsClient,
+  ConversationProfilesClient,
+  ConversationsClient,
+  DocumentsClient,
   EntityTypesClient,
   EnvironmentsClient,
   IntentsClient,
+  KnowledgeBasesClient,
+  ParticipantsClient,
   SessionEntityTypesClient,
   SessionsClient,
 } from '@google-cloud/dialogflow';
@@ -30,7 +36,21 @@ import {
 function doStuffWithAgentsClient(client: AgentsClient) {
   client.close();
 }
+function doStuffWithAnswerRecordsClient(client: AnswerRecordsClient) {
+  client.close();
+}
 function doStuffWithContextsClient(client: ContextsClient) {
+  client.close();
+}
+function doStuffWithConversationProfilesClient(
+  client: ConversationProfilesClient
+) {
+  client.close();
+}
+function doStuffWithConversationsClient(client: ConversationsClient) {
+  client.close();
+}
+function doStuffWithDocumentsClient(client: DocumentsClient) {
   client.close();
 }
 function doStuffWithEntityTypesClient(client: EntityTypesClient) {
@@ -40,6 +60,12 @@ function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {
   client.close();
 }
 function doStuffWithIntentsClient(client: IntentsClient) {
+  client.close();
+}
+function doStuffWithKnowledgeBasesClient(client: KnowledgeBasesClient) {
+  client.close();
+}
+function doStuffWithParticipantsClient(client: ParticipantsClient) {
   client.close();
 }
 function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
@@ -54,8 +80,20 @@ function main() {
   const agentsClient = new AgentsClient();
   doStuffWithAgentsClient(agentsClient);
   // check that the client instance can be created
+  const answerRecordsClient = new AnswerRecordsClient();
+  doStuffWithAnswerRecordsClient(answerRecordsClient);
+  // check that the client instance can be created
   const contextsClient = new ContextsClient();
   doStuffWithContextsClient(contextsClient);
+  // check that the client instance can be created
+  const conversationProfilesClient = new ConversationProfilesClient();
+  doStuffWithConversationProfilesClient(conversationProfilesClient);
+  // check that the client instance can be created
+  const conversationsClient = new ConversationsClient();
+  doStuffWithConversationsClient(conversationsClient);
+  // check that the client instance can be created
+  const documentsClient = new DocumentsClient();
+  doStuffWithDocumentsClient(documentsClient);
   // check that the client instance can be created
   const entityTypesClient = new EntityTypesClient();
   doStuffWithEntityTypesClient(entityTypesClient);
@@ -65,6 +103,12 @@ function main() {
   // check that the client instance can be created
   const intentsClient = new IntentsClient();
   doStuffWithIntentsClient(intentsClient);
+  // check that the client instance can be created
+  const knowledgeBasesClient = new KnowledgeBasesClient();
+  doStuffWithKnowledgeBasesClient(knowledgeBasesClient);
+  // check that the client instance can be created
+  const participantsClient = new ParticipantsClient();
+  doStuffWithParticipantsClient(participantsClient);
   // check that the client instance can be created
   const sessionEntityTypesClient = new SessionEntityTypesClient();
   doStuffWithSessionEntityTypesClient(sessionEntityTypesClient);

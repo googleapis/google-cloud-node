@@ -193,6 +193,54 @@ export class EnvironmentsClient {
       projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
+      projectAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/answerRecords/{answer_record}'
+      ),
+      projectConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversations/{conversation}'
+      ),
+      projectConversationCallMatcherPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversations/{conversation}/callMatchers/{call_matcher}'
+      ),
+      projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversations/{conversation}/messages/{message}'
+      ),
+      projectConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversations/{conversation}/participants/{participant}'
+      ),
+      projectConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversationProfiles/{conversation_profile}'
+      ),
+      projectKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}'
+      ),
+      projectKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
+      projectLocationAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/answerRecords/{answer_record}'
+      ),
+      projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}'
+      ),
+      projectLocationConversationCallMatcherPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}/callMatchers/{call_matcher}'
+      ),
+      projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
+      ),
+      projectLocationConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
+      ),
+      projectLocationConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
+      ),
+      projectLocationKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
+      ),
+      projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1032,6 +1080,1042 @@ export class EnvironmentsClient {
     return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
       projectAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAnswerRecord resource name string.
+   *
+   * @param {string} project
+   * @param {string} answer_record
+   * @returns {string} Resource name string.
+   */
+  projectAnswerRecordPath(project: string, answerRecord: string) {
+    return this.pathTemplates.projectAnswerRecordPathTemplate.render({
+      project: project,
+      answer_record: answerRecord,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAnswerRecord resource.
+   *
+   * @param {string} projectAnswerRecordName
+   *   A fully-qualified path representing project_answer_record resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAnswerRecordName(projectAnswerRecordName: string) {
+    return this.pathTemplates.projectAnswerRecordPathTemplate.match(
+      projectAnswerRecordName
+    ).project;
+  }
+
+  /**
+   * Parse the answer_record from ProjectAnswerRecord resource.
+   *
+   * @param {string} projectAnswerRecordName
+   *   A fully-qualified path representing project_answer_record resource.
+   * @returns {string} A string representing the answer_record.
+   */
+  matchAnswerRecordFromProjectAnswerRecordName(
+    projectAnswerRecordName: string
+  ) {
+    return this.pathTemplates.projectAnswerRecordPathTemplate.match(
+      projectAnswerRecordName
+    ).answer_record;
+  }
+
+  /**
+   * Return a fully-qualified projectConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectConversationPath(project: string, conversation: string) {
+    return this.pathTemplates.projectConversationPathTemplate.render({
+      project: project,
+      conversation: conversation,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConversation resource.
+   *
+   * @param {string} projectConversationName
+   *   A fully-qualified path representing project_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationName(projectConversationName: string) {
+    return this.pathTemplates.projectConversationPathTemplate.match(
+      projectConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation from ProjectConversation resource.
+   *
+   * @param {string} projectConversationName
+   *   A fully-qualified path representing project_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectConversationName(
+    projectConversationName: string
+  ) {
+    return this.pathTemplates.projectConversationPathTemplate.match(
+      projectConversationName
+    ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationCallMatcher resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation
+   * @param {string} call_matcher
+   * @returns {string} Resource name string.
+   */
+  projectConversationCallMatcherPath(
+    project: string,
+    conversation: string,
+    callMatcher: string
+  ) {
+    return this.pathTemplates.projectConversationCallMatcherPathTemplate.render(
+      {
+        project: project,
+        conversation: conversation,
+        call_matcher: callMatcher,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectConversationCallMatcher resource.
+   *
+   * @param {string} projectConversationCallMatcherName
+   *   A fully-qualified path representing project_conversation_call_matcher resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationCallMatcherName(
+    projectConversationCallMatcherName: string
+  ) {
+    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
+      projectConversationCallMatcherName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation from ProjectConversationCallMatcher resource.
+   *
+   * @param {string} projectConversationCallMatcherName
+   *   A fully-qualified path representing project_conversation_call_matcher resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectConversationCallMatcherName(
+    projectConversationCallMatcherName: string
+  ) {
+    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
+      projectConversationCallMatcherName
+    ).conversation;
+  }
+
+  /**
+   * Parse the call_matcher from ProjectConversationCallMatcher resource.
+   *
+   * @param {string} projectConversationCallMatcherName
+   *   A fully-qualified path representing project_conversation_call_matcher resource.
+   * @returns {string} A string representing the call_matcher.
+   */
+  matchCallMatcherFromProjectConversationCallMatcherName(
+    projectConversationCallMatcherName: string
+  ) {
+    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
+      projectConversationCallMatcherName
+    ).call_matcher;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationMessage resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation
+   * @param {string} message
+   * @returns {string} Resource name string.
+   */
+  projectConversationMessagePath(
+    project: string,
+    conversation: string,
+    message: string
+  ) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.render({
+      project: project,
+      conversation: conversation,
+      message: message,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConversationMessage resource.
+   *
+   * @param {string} projectConversationMessageName
+   *   A fully-qualified path representing project_conversation_message resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationMessageName(
+    projectConversationMessageName: string
+  ) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(
+      projectConversationMessageName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation from ProjectConversationMessage resource.
+   *
+   * @param {string} projectConversationMessageName
+   *   A fully-qualified path representing project_conversation_message resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectConversationMessageName(
+    projectConversationMessageName: string
+  ) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(
+      projectConversationMessageName
+    ).conversation;
+  }
+
+  /**
+   * Parse the message from ProjectConversationMessage resource.
+   *
+   * @param {string} projectConversationMessageName
+   *   A fully-qualified path representing project_conversation_message resource.
+   * @returns {string} A string representing the message.
+   */
+  matchMessageFromProjectConversationMessageName(
+    projectConversationMessageName: string
+  ) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(
+      projectConversationMessageName
+    ).message;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationParticipant resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation
+   * @param {string} participant
+   * @returns {string} Resource name string.
+   */
+  projectConversationParticipantPath(
+    project: string,
+    conversation: string,
+    participant: string
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.render(
+      {
+        project: project,
+        conversation: conversation,
+        participant: participant,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectConversationParticipant resource.
+   *
+   * @param {string} projectConversationParticipantName
+   *   A fully-qualified path representing project_conversation_participant resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationParticipantName(
+    projectConversationParticipantName: string
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
+      projectConversationParticipantName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation from ProjectConversationParticipant resource.
+   *
+   * @param {string} projectConversationParticipantName
+   *   A fully-qualified path representing project_conversation_participant resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectConversationParticipantName(
+    projectConversationParticipantName: string
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
+      projectConversationParticipantName
+    ).conversation;
+  }
+
+  /**
+   * Parse the participant from ProjectConversationParticipant resource.
+   *
+   * @param {string} projectConversationParticipantName
+   *   A fully-qualified path representing project_conversation_participant resource.
+   * @returns {string} A string representing the participant.
+   */
+  matchParticipantFromProjectConversationParticipantName(
+    projectConversationParticipantName: string
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
+      projectConversationParticipantName
+    ).participant;
+  }
+
+  /**
+   * Return a fully-qualified projectConversationProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation_profile
+   * @returns {string} Resource name string.
+   */
+  projectConversationProfilePath(project: string, conversationProfile: string) {
+    return this.pathTemplates.projectConversationProfilePathTemplate.render({
+      project: project,
+      conversation_profile: conversationProfile,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConversationProfile resource.
+   *
+   * @param {string} projectConversationProfileName
+   *   A fully-qualified path representing project_conversation_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationProfileName(
+    projectConversationProfileName: string
+  ) {
+    return this.pathTemplates.projectConversationProfilePathTemplate.match(
+      projectConversationProfileName
+    ).project;
+  }
+
+  /**
+   * Parse the conversation_profile from ProjectConversationProfile resource.
+   *
+   * @param {string} projectConversationProfileName
+   *   A fully-qualified path representing project_conversation_profile resource.
+   * @returns {string} A string representing the conversation_profile.
+   */
+  matchConversationProfileFromProjectConversationProfileName(
+    projectConversationProfileName: string
+  ) {
+    return this.pathTemplates.projectConversationProfilePathTemplate.match(
+      projectConversationProfileName
+    ).conversation_profile;
+  }
+
+  /**
+   * Return a fully-qualified projectKnowledgeBase resource name string.
+   *
+   * @param {string} project
+   * @param {string} knowledge_base
+   * @returns {string} Resource name string.
+   */
+  projectKnowledgeBasePath(project: string, knowledgeBase: string) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.render({
+      project: project,
+      knowledge_base: knowledgeBase,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectKnowledgeBase resource.
+   *
+   * @param {string} projectKnowledgeBaseName
+   *   A fully-qualified path representing project_knowledge_base resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectKnowledgeBaseName(projectKnowledgeBaseName: string) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
+      projectKnowledgeBaseName
+    ).project;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectKnowledgeBase resource.
+   *
+   * @param {string} projectKnowledgeBaseName
+   *   A fully-qualified path representing project_knowledge_base resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectKnowledgeBaseName(
+    projectKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
+      projectKnowledgeBaseName
+    ).knowledge_base;
+  }
+
+  /**
+   * Return a fully-qualified projectKnowledgeBaseDocument resource name string.
+   *
+   * @param {string} project
+   * @param {string} knowledge_base
+   * @param {string} document
+   * @returns {string} Resource name string.
+   */
+  projectKnowledgeBaseDocumentPath(
+    project: string,
+    knowledgeBase: string,
+    document: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.render({
+      project: project,
+      knowledge_base: knowledgeBase,
+      document: document,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_knowledge_base_document resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName
+    ).project;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_knowledge_base_document resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName
+    ).knowledge_base;
+  }
+
+  /**
+   * Parse the document from ProjectKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_knowledge_base_document resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName
+    ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAnswerRecord resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} answer_record
+   * @returns {string} Resource name string.
+   */
+  projectLocationAnswerRecordPath(
+    project: string,
+    location: string,
+    answerRecord: string
+  ) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.render({
+      project: project,
+      location: location,
+      answer_record: answerRecord,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAnswerRecord resource.
+   *
+   * @param {string} projectLocationAnswerRecordName
+   *   A fully-qualified path representing project_location_answer_record resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAnswerRecordName(
+    projectLocationAnswerRecordName: string
+  ) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
+      projectLocationAnswerRecordName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAnswerRecord resource.
+   *
+   * @param {string} projectLocationAnswerRecordName
+   *   A fully-qualified path representing project_location_answer_record resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAnswerRecordName(
+    projectLocationAnswerRecordName: string
+  ) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
+      projectLocationAnswerRecordName
+    ).location;
+  }
+
+  /**
+   * Parse the answer_record from ProjectLocationAnswerRecord resource.
+   *
+   * @param {string} projectLocationAnswerRecordName
+   *   A fully-qualified path representing project_location_answer_record resource.
+   * @returns {string} A string representing the answer_record.
+   */
+  matchAnswerRecordFromProjectLocationAnswerRecordName(
+    projectLocationAnswerRecordName: string
+  ) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
+      projectLocationAnswerRecordName
+    ).answer_record;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationPath(
+    project: string,
+    location: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.render({
+      project: project,
+      location: location,
+      conversation: conversation,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversation resource.
+   *
+   * @param {string} projectLocationConversationName
+   *   A fully-qualified path representing project_location_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationName(
+    projectLocationConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationPathTemplate.match(
+      projectLocationConversationName
+    ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationCallMatcher resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @param {string} call_matcher
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationCallMatcherPath(
+    project: string,
+    location: string,
+    conversation: string,
+    callMatcher: string
+  ) {
+    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        call_matcher: callMatcher,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationCallMatcher resource.
+   *
+   * @param {string} projectLocationConversationCallMatcherName
+   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationCallMatcherName(
+    projectLocationConversationCallMatcherName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
+      projectLocationConversationCallMatcherName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationCallMatcher resource.
+   *
+   * @param {string} projectLocationConversationCallMatcherName
+   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationCallMatcherName(
+    projectLocationConversationCallMatcherName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
+      projectLocationConversationCallMatcherName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversationCallMatcher resource.
+   *
+   * @param {string} projectLocationConversationCallMatcherName
+   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationCallMatcherName(
+    projectLocationConversationCallMatcherName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
+      projectLocationConversationCallMatcherName
+    ).conversation;
+  }
+
+  /**
+   * Parse the call_matcher from ProjectLocationConversationCallMatcher resource.
+   *
+   * @param {string} projectLocationConversationCallMatcherName
+   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
+   * @returns {string} A string representing the call_matcher.
+   */
+  matchCallMatcherFromProjectLocationConversationCallMatcherName(
+    projectLocationConversationCallMatcherName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
+      projectLocationConversationCallMatcherName
+    ).call_matcher;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationMessage resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @param {string} message
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationMessagePath(
+    project: string,
+    location: string,
+    conversation: string,
+    message: string
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        message: message,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationMessage resource.
+   *
+   * @param {string} projectLocationConversationMessageName
+   *   A fully-qualified path representing project_location_conversation_message resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationMessage resource.
+   *
+   * @param {string} projectLocationConversationMessageName
+   *   A fully-qualified path representing project_location_conversation_message resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversationMessage resource.
+   *
+   * @param {string} projectLocationConversationMessageName
+   *   A fully-qualified path representing project_location_conversation_message resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName
+    ).conversation;
+  }
+
+  /**
+   * Parse the message from ProjectLocationConversationMessage resource.
+   *
+   * @param {string} projectLocationConversationMessageName
+   *   A fully-qualified path representing project_location_conversation_message resource.
+   * @returns {string} A string representing the message.
+   */
+  matchMessageFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName
+    ).message;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationParticipant resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @param {string} participant
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationParticipantPath(
+    project: string,
+    location: string,
+    conversation: string,
+    participant: string
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        participant: participant,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationParticipant resource.
+   *
+   * @param {string} projectLocationConversationParticipantName
+   *   A fully-qualified path representing project_location_conversation_participant resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationParticipant resource.
+   *
+   * @param {string} projectLocationConversationParticipantName
+   *   A fully-qualified path representing project_location_conversation_participant resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversationParticipant resource.
+   *
+   * @param {string} projectLocationConversationParticipantName
+   *   A fully-qualified path representing project_location_conversation_participant resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName
+    ).conversation;
+  }
+
+  /**
+   * Parse the participant from ProjectLocationConversationParticipant resource.
+   *
+   * @param {string} projectLocationConversationParticipantName
+   *   A fully-qualified path representing project_location_conversation_participant resource.
+   * @returns {string} A string representing the participant.
+   */
+  matchParticipantFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName
+    ).participant;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversationProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation_profile
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationProfilePath(
+    project: string,
+    location: string,
+    conversationProfile: string
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_profile: conversationProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversationProfile resource.
+   *
+   * @param {string} projectLocationConversationProfileName
+   *   A fully-qualified path representing project_location_conversation_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationProfileName(
+    projectLocationConversationProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
+      projectLocationConversationProfileName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversationProfile resource.
+   *
+   * @param {string} projectLocationConversationProfileName
+   *   A fully-qualified path representing project_location_conversation_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationProfileName(
+    projectLocationConversationProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
+      projectLocationConversationProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the conversation_profile from ProjectLocationConversationProfile resource.
+   *
+   * @param {string} projectLocationConversationProfileName
+   *   A fully-qualified path representing project_location_conversation_profile resource.
+   * @returns {string} A string representing the conversation_profile.
+   */
+  matchConversationProfileFromProjectLocationConversationProfileName(
+    projectLocationConversationProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
+      projectLocationConversationProfileName
+    ).conversation_profile;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationKnowledgeBase resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} knowledge_base
+   * @returns {string} Resource name string.
+   */
+  projectLocationKnowledgeBasePath(
+    project: string,
+    location: string,
+    knowledgeBase: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.render({
+      project: project,
+      location: location,
+      knowledge_base: knowledgeBase,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationKnowledgeBase resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseName
+   *   A fully-qualified path representing project_location_knowledge_base resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationKnowledgeBase resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseName
+   *   A fully-qualified path representing project_location_knowledge_base resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName
+    ).location;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectLocationKnowledgeBase resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseName
+   *   A fully-qualified path representing project_location_knowledge_base resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName
+    ).knowledge_base;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationKnowledgeBaseDocument resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} knowledge_base
+   * @param {string} document
+   * @returns {string} Resource name string.
+   */
+  projectLocationKnowledgeBaseDocumentPath(
+    project: string,
+    location: string,
+    knowledgeBase: string,
+    document: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        knowledge_base: knowledgeBase,
+        document: document,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).location;
+  }
+
+  /**
+   * Parse the knowledge_base from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).knowledge_base;
+  }
+
+  /**
+   * Parse the document from ProjectLocationKnowledgeBaseDocument resource.
+   *
+   * @param {string} projectLocationKnowledgeBaseDocumentName
+   *   A fully-qualified path representing project_location_knowledge_base_document resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName
+    ).document;
   }
 
   /**

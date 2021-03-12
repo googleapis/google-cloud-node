@@ -113,6 +113,54 @@
         }
       }
     },
+    "AnswerRecords": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AnswerRecordsClient",
+          "rpcs": {
+            "GetAnswerRecord": {
+              "methods": [
+                "getAnswerRecord"
+              ]
+            },
+            "UpdateAnswerRecord": {
+              "methods": [
+                "updateAnswerRecord"
+              ]
+            },
+            "ListAnswerRecords": {
+              "methods": [
+                "listAnswerRecords",
+                "listAnswerRecordsStream",
+                "listAnswerRecordsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AnswerRecordsClient",
+          "rpcs": {
+            "GetAnswerRecord": {
+              "methods": [
+                "getAnswerRecord"
+              ]
+            },
+            "UpdateAnswerRecord": {
+              "methods": [
+                "updateAnswerRecord"
+              ]
+            },
+            "ListAnswerRecords": {
+              "methods": [
+                "listAnswerRecords",
+                "listAnswerRecordsStream",
+                "listAnswerRecordsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Contexts": {
       "clients": {
         "grpc": {
@@ -191,6 +239,190 @@
         }
       }
     },
+    "ConversationProfiles": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversationProfilesClient",
+          "rpcs": {
+            "GetConversationProfile": {
+              "methods": [
+                "getConversationProfile"
+              ]
+            },
+            "CreateConversationProfile": {
+              "methods": [
+                "createConversationProfile"
+              ]
+            },
+            "UpdateConversationProfile": {
+              "methods": [
+                "updateConversationProfile"
+              ]
+            },
+            "DeleteConversationProfile": {
+              "methods": [
+                "deleteConversationProfile"
+              ]
+            },
+            "ListConversationProfiles": {
+              "methods": [
+                "listConversationProfiles",
+                "listConversationProfilesStream",
+                "listConversationProfilesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversationProfilesClient",
+          "rpcs": {
+            "GetConversationProfile": {
+              "methods": [
+                "getConversationProfile"
+              ]
+            },
+            "CreateConversationProfile": {
+              "methods": [
+                "createConversationProfile"
+              ]
+            },
+            "UpdateConversationProfile": {
+              "methods": [
+                "updateConversationProfile"
+              ]
+            },
+            "DeleteConversationProfile": {
+              "methods": [
+                "deleteConversationProfile"
+              ]
+            },
+            "ListConversationProfiles": {
+              "methods": [
+                "listConversationProfiles",
+                "listConversationProfilesStream",
+                "listConversationProfilesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Conversations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversationsClient",
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "createConversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "CompleteConversation": {
+              "methods": [
+                "completeConversation"
+              ]
+            },
+            "CreateCallMatcher": {
+              "methods": [
+                "createCallMatcher"
+              ]
+            },
+            "DeleteCallMatcher": {
+              "methods": [
+                "deleteCallMatcher"
+              ]
+            },
+            "BatchCreateMessages": {
+              "methods": [
+                "batchCreateMessages"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            },
+            "ListCallMatchers": {
+              "methods": [
+                "listCallMatchers",
+                "listCallMatchersStream",
+                "listCallMatchersAsync"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "listMessages",
+                "listMessagesStream",
+                "listMessagesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversationsClient",
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "createConversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "CompleteConversation": {
+              "methods": [
+                "completeConversation"
+              ]
+            },
+            "CreateCallMatcher": {
+              "methods": [
+                "createCallMatcher"
+              ]
+            },
+            "DeleteCallMatcher": {
+              "methods": [
+                "deleteCallMatcher"
+              ]
+            },
+            "BatchCreateMessages": {
+              "methods": [
+                "batchCreateMessages"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            },
+            "ListCallMatchers": {
+              "methods": [
+                "listCallMatchers",
+                "listCallMatchersStream",
+                "listCallMatchersAsync"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "listMessages",
+                "listMessagesStream",
+                "listMessagesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Documents": {
       "clients": {
         "grpc": {
@@ -204,6 +436,11 @@
             "CreateDocument": {
               "methods": [
                 "createDocument"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
               ]
             },
             "DeleteDocument": {
@@ -241,6 +478,11 @@
             "CreateDocument": {
               "methods": [
                 "createDocument"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
               ]
             },
             "DeleteDocument": {
@@ -565,6 +807,133 @@
                 "listKnowledgeBases",
                 "listKnowledgeBasesStream",
                 "listKnowledgeBasesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Participants": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ParticipantsClient",
+          "rpcs": {
+            "CreateParticipant": {
+              "methods": [
+                "createParticipant"
+              ]
+            },
+            "GetParticipant": {
+              "methods": [
+                "getParticipant"
+              ]
+            },
+            "UpdateParticipant": {
+              "methods": [
+                "updateParticipant"
+              ]
+            },
+            "AnalyzeContent": {
+              "methods": [
+                "analyzeContent"
+              ]
+            },
+            "SuggestArticles": {
+              "methods": [
+                "suggestArticles"
+              ]
+            },
+            "SuggestFaqAnswers": {
+              "methods": [
+                "suggestFaqAnswers"
+              ]
+            },
+            "SuggestSmartReplies": {
+              "methods": [
+                "suggestSmartReplies"
+              ]
+            },
+            "CompileSuggestion": {
+              "methods": [
+                "compileSuggestion"
+              ]
+            },
+            "StreamingAnalyzeContent": {
+              "methods": [
+                "streamingAnalyzeContent"
+              ]
+            },
+            "ListParticipants": {
+              "methods": [
+                "listParticipants",
+                "listParticipantsStream",
+                "listParticipantsAsync"
+              ]
+            },
+            "ListSuggestions": {
+              "methods": [
+                "listSuggestions",
+                "listSuggestionsStream",
+                "listSuggestionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ParticipantsClient",
+          "rpcs": {
+            "CreateParticipant": {
+              "methods": [
+                "createParticipant"
+              ]
+            },
+            "GetParticipant": {
+              "methods": [
+                "getParticipant"
+              ]
+            },
+            "UpdateParticipant": {
+              "methods": [
+                "updateParticipant"
+              ]
+            },
+            "AnalyzeContent": {
+              "methods": [
+                "analyzeContent"
+              ]
+            },
+            "SuggestArticles": {
+              "methods": [
+                "suggestArticles"
+              ]
+            },
+            "SuggestFaqAnswers": {
+              "methods": [
+                "suggestFaqAnswers"
+              ]
+            },
+            "SuggestSmartReplies": {
+              "methods": [
+                "suggestSmartReplies"
+              ]
+            },
+            "CompileSuggestion": {
+              "methods": [
+                "compileSuggestion"
+              ]
+            },
+            "ListParticipants": {
+              "methods": [
+                "listParticipants",
+                "listParticipantsStream",
+                "listParticipantsAsync"
+              ]
+            },
+            "ListSuggestions": {
+              "methods": [
+                "listSuggestions",
+                "listSuggestionsStream",
+                "listSuggestionsAsync"
               ]
             }
           }

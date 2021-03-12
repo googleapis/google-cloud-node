@@ -21,14 +21,26 @@ import * as v2beta1 from './v2beta1';
 
 const AgentsClient = v2.AgentsClient;
 type AgentsClient = v2.AgentsClient;
+const AnswerRecordsClient = v2.AnswerRecordsClient;
+type AnswerRecordsClient = v2.AnswerRecordsClient;
 const ContextsClient = v2.ContextsClient;
 type ContextsClient = v2.ContextsClient;
+const ConversationProfilesClient = v2.ConversationProfilesClient;
+type ConversationProfilesClient = v2.ConversationProfilesClient;
+const ConversationsClient = v2.ConversationsClient;
+type ConversationsClient = v2.ConversationsClient;
+const DocumentsClient = v2.DocumentsClient;
+type DocumentsClient = v2.DocumentsClient;
 const EntityTypesClient = v2.EntityTypesClient;
 type EntityTypesClient = v2.EntityTypesClient;
 const EnvironmentsClient = v2.EnvironmentsClient;
 type EnvironmentsClient = v2.EnvironmentsClient;
 const IntentsClient = v2.IntentsClient;
 type IntentsClient = v2.IntentsClient;
+const KnowledgeBasesClient = v2.KnowledgeBasesClient;
+type KnowledgeBasesClient = v2.KnowledgeBasesClient;
+const ParticipantsClient = v2.ParticipantsClient;
+type ParticipantsClient = v2.ParticipantsClient;
 const SessionEntityTypesClient = v2.SessionEntityTypesClient;
 type SessionEntityTypesClient = v2.SessionEntityTypesClient;
 const SessionsClient = v2.SessionsClient;
@@ -38,10 +50,16 @@ export {
   v2,
   v2beta1,
   AgentsClient,
+  AnswerRecordsClient,
   ContextsClient,
+  ConversationProfilesClient,
+  ConversationsClient,
+  DocumentsClient,
   EntityTypesClient,
   EnvironmentsClient,
   IntentsClient,
+  KnowledgeBasesClient,
+  ParticipantsClient,
   SessionEntityTypesClient,
   SessionsClient,
 };
@@ -49,10 +67,16 @@ export default {
   v2,
   v2beta1,
   AgentsClient,
+  AnswerRecordsClient,
   ContextsClient,
+  ConversationProfilesClient,
+  ConversationsClient,
+  DocumentsClient,
   EntityTypesClient,
   EnvironmentsClient,
   IntentsClient,
+  KnowledgeBasesClient,
+  ParticipantsClient,
   SessionEntityTypesClient,
   SessionsClient,
 };
