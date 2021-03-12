@@ -415,6 +415,9 @@ export namespace google {
 
                     /** Service metadataManagementActivity */
                     metadataManagementActivity?: (google.cloud.metastore.v1alpha.IMetadataManagementActivity|null);
+
+                    /** Service releaseChannel */
+                    releaseChannel?: (google.cloud.metastore.v1alpha.Service.ReleaseChannel|keyof typeof google.cloud.metastore.v1alpha.Service.ReleaseChannel|null);
                 }
 
                 /** Represents a Service. */
@@ -473,6 +476,9 @@ export namespace google {
 
                     /** Service metadataManagementActivity. */
                     public metadataManagementActivity?: (google.cloud.metastore.v1alpha.IMetadataManagementActivity|null);
+
+                    /** Service releaseChannel. */
+                    public releaseChannel: (google.cloud.metastore.v1alpha.Service.ReleaseChannel|keyof typeof google.cloud.metastore.v1alpha.Service.ReleaseChannel);
 
                     /** Service metastoreConfig. */
                     public metastoreConfig?: "hiveMetastoreConfig";
@@ -567,6 +573,13 @@ export namespace google {
                         TIER_UNSPECIFIED = 0,
                         DEVELOPER = 1,
                         ENTERPRISE = 3
+                    }
+
+                    /** ReleaseChannel enum. */
+                    enum ReleaseChannel {
+                        RELEASE_CHANNEL_UNSPECIFIED = 0,
+                        CANARY = 1,
+                        STABLE = 2
                     }
                 }
 

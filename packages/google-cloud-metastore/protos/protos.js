@@ -618,6 +618,7 @@
                          * @property {google.cloud.metastore.v1alpha.IMaintenanceWindow|null} [maintenanceWindow] Service maintenanceWindow
                          * @property {string|null} [uid] Service uid
                          * @property {google.cloud.metastore.v1alpha.IMetadataManagementActivity|null} [metadataManagementActivity] Service metadataManagementActivity
+                         * @property {google.cloud.metastore.v1alpha.Service.ReleaseChannel|null} [releaseChannel] Service releaseChannel
                          */
     
                         /**
@@ -764,6 +765,14 @@
                          */
                         Service.prototype.metadataManagementActivity = null;
     
+                        /**
+                         * Service releaseChannel.
+                         * @member {google.cloud.metastore.v1alpha.Service.ReleaseChannel} releaseChannel
+                         * @memberof google.cloud.metastore.v1alpha.Service
+                         * @instance
+                         */
+                        Service.prototype.releaseChannel = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -835,6 +844,8 @@
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.uid);
                             if (message.metadataManagementActivity != null && Object.hasOwnProperty.call(message, "metadataManagementActivity"))
                                 $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.encode(message.metadataManagementActivity, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.releaseChannel != null && Object.hasOwnProperty.call(message, "releaseChannel"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.releaseChannel);
                             return writer;
                         };
     
@@ -935,6 +946,9 @@
                                     break;
                                 case 17:
                                     message.metadataManagementActivity = $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.decode(reader, reader.uint32());
+                                    break;
+                                case 19:
+                                    message.releaseChannel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1057,6 +1071,15 @@
                                 if (error)
                                     return "metadataManagementActivity." + error;
                             }
+                            if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
+                                switch (message.releaseChannel) {
+                                default:
+                                    return "releaseChannel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1171,6 +1194,20 @@
                                     throw TypeError(".google.cloud.metastore.v1alpha.Service.metadataManagementActivity: object expected");
                                 message.metadataManagementActivity = $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.fromObject(object.metadataManagementActivity);
                             }
+                            switch (object.releaseChannel) {
+                            case "RELEASE_CHANNEL_UNSPECIFIED":
+                            case 0:
+                                message.releaseChannel = 0;
+                                break;
+                            case "CANARY":
+                            case 1:
+                                message.releaseChannel = 1;
+                                break;
+                            case "STABLE":
+                            case 2:
+                                message.releaseChannel = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1204,6 +1241,7 @@
                                 object.maintenanceWindow = null;
                                 object.uid = "";
                                 object.metadataManagementActivity = null;
+                                object.releaseChannel = options.enums === String ? "RELEASE_CHANNEL_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1244,6 +1282,8 @@
                                 object.uid = message.uid;
                             if (message.metadataManagementActivity != null && message.hasOwnProperty("metadataManagementActivity"))
                                 object.metadataManagementActivity = $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.toObject(message.metadataManagementActivity, options);
+                            if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
+                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
                             return object;
                         };
     
@@ -1297,6 +1337,22 @@
                             values[valuesById[0] = "TIER_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DEVELOPER"] = 1;
                             values[valuesById[3] = "ENTERPRISE"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * ReleaseChannel enum.
+                         * @name google.cloud.metastore.v1alpha.Service.ReleaseChannel
+                         * @enum {number}
+                         * @property {number} RELEASE_CHANNEL_UNSPECIFIED=0 RELEASE_CHANNEL_UNSPECIFIED value
+                         * @property {number} CANARY=1 CANARY value
+                         * @property {number} STABLE=2 STABLE value
+                         */
+                        Service.ReleaseChannel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RELEASE_CHANNEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CANARY"] = 1;
+                            values[valuesById[2] = "STABLE"] = 2;
                             return values;
                         })();
     
@@ -1552,7 +1608,7 @@
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enabled);
                             return writer;
                         };
     
@@ -1587,7 +1643,7 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1:
+                                case 2:
                                     message.enabled = reader.bool();
                                     break;
                                 default:

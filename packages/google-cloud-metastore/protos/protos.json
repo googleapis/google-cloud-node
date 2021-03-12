@@ -484,6 +484,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "releaseChannel": {
+                          "type": "ReleaseChannel",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -505,6 +512,13 @@
                             "DEVELOPER": 1,
                             "ENTERPRISE": 3
                           }
+                        },
+                        "ReleaseChannel": {
+                          "values": {
+                            "RELEASE_CHANNEL_UNSPECIFIED": 0,
+                            "CANARY": 1,
+                            "STABLE": 2
+                          }
                         }
                       }
                     },
@@ -520,7 +534,7 @@
                       "fields": {
                         "enabled": {
                           "type": "bool",
-                          "id": 1
+                          "id": 2
                         }
                       }
                     },
