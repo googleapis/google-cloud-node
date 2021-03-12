@@ -1529,6 +1529,9 @@
                                 }
                               }
                             },
+                            "EndInteraction": {
+                              "fields": {}
+                            },
                             "PlayAudio": {
                               "fields": {
                                 "audioUri": {
@@ -1546,9 +1549,6 @@
                                   }
                                 }
                               }
-                            },
-                            "EndInteraction": {
-                              "fields": {}
                             },
                             "MixedAudio": {
                               "fields": {
@@ -1772,14 +1772,6 @@
                             }
                           }
                         },
-                        "SsmlVoiceGender": {
-                          "values": {
-                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                            "SSML_VOICE_GENDER_MALE": 1,
-                            "SSML_VOICE_GENDER_FEMALE": 2,
-                            "SSML_VOICE_GENDER_NEUTRAL": 3
-                          }
-                        },
                         "OutputAudioConfig": {
                           "fields": {
                             "audioEncoding": {
@@ -1797,6 +1789,14 @@
                               "type": "SynthesizeSpeechConfig",
                               "id": 3
                             }
+                          }
+                        },
+                        "SsmlVoiceGender": {
+                          "values": {
+                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                            "SSML_VOICE_GENDER_MALE": 1,
+                            "SSML_VOICE_GENDER_FEMALE": 2,
+                            "SSML_VOICE_GENDER_NEUTRAL": 3
                           }
                         },
                         "OutputAudioEncoding": {
@@ -4480,7 +4480,7 @@
                               "requestType": "RunTestCaseRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3/projects/*/locations/*/agents/*/testCases:run",
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*/testCases/*}:run",
                                 "(google.api.http).body": "*",
                                 "(google.longrunning.operation_info).response_type": "RunTestCaseResponse",
                                 "(google.longrunning.operation_info).metadata_type": "RunTestCaseMetadata"
@@ -4488,7 +4488,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3/projects/*/locations/*/agents/*/testCases:run",
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*/testCases/*}:run",
                                     "body": "*"
                                   }
                                 },
@@ -4866,6 +4866,52 @@
                             }
                           }
                         },
+                        "TransitionRouteGroupCoverage": {
+                          "fields": {
+                            "coverages": {
+                              "rule": "repeated",
+                              "type": "Coverage",
+                              "id": 1
+                            },
+                            "coverageScore": {
+                              "type": "float",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Coverage": {
+                              "fields": {
+                                "routeGroup": {
+                                  "type": "TransitionRouteGroup",
+                                  "id": 1
+                                },
+                                "transitions": {
+                                  "rule": "repeated",
+                                  "type": "Transition",
+                                  "id": 2
+                                },
+                                "coverageScore": {
+                                  "type": "float",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "Transition": {
+                                  "fields": {
+                                    "transitionRoute": {
+                                      "type": "TransitionRoute",
+                                      "id": 1
+                                    },
+                                    "covered": {
+                                      "type": "bool",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "IntentCoverage": {
                           "fields": {
                             "intents": {
@@ -4919,7 +4965,8 @@
                               "values": {
                                 "COVERAGE_TYPE_UNSPECIFIED": 0,
                                 "INTENT": 1,
-                                "PAGE_TRANSITION": 2
+                                "PAGE_TRANSITION": 2,
+                                "TRANSITION_ROUTE_GROUP": 3
                               }
                             }
                           }
@@ -4929,7 +4976,8 @@
                             "coverageType": {
                               "oneof": [
                                 "intentCoverage",
-                                "transitionCoverage"
+                                "transitionCoverage",
+                                "routeGroupCoverage"
                               ]
                             }
                           },
@@ -4948,6 +4996,10 @@
                             "transitionCoverage": {
                               "type": "TransitionCoverage",
                               "id": 4
+                            },
+                            "routeGroupCoverage": {
+                              "type": "TransitionRouteGroupCoverage",
+                              "id": 6
                             }
                           }
                         },
@@ -6179,6 +6231,10 @@
                             "payload": {
                               "type": "google.protobuf.Struct",
                               "id": 8
+                            },
+                            "sentimentAnalysisResult": {
+                              "type": "SentimentAnalysisResult",
+                              "id": 9
                             }
                           },
                           "nested": {
@@ -6225,6 +6281,18 @@
                                       "id": 2
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "SentimentAnalysisResult": {
+                              "fields": {
+                                "score": {
+                                  "type": "float",
+                                  "id": 1
+                                },
+                                "magnitude": {
+                                  "type": "float",
+                                  "id": 2
                                 }
                               }
                             }
@@ -8406,14 +8474,6 @@
                             }
                           }
                         },
-                        "SsmlVoiceGender": {
-                          "values": {
-                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                            "SSML_VOICE_GENDER_MALE": 1,
-                            "SSML_VOICE_GENDER_FEMALE": 2,
-                            "SSML_VOICE_GENDER_NEUTRAL": 3
-                          }
-                        },
                         "OutputAudioConfig": {
                           "fields": {
                             "audioEncoding": {
@@ -8431,6 +8491,14 @@
                               "type": "SynthesizeSpeechConfig",
                               "id": 3
                             }
+                          }
+                        },
+                        "SsmlVoiceGender": {
+                          "values": {
+                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                            "SSML_VOICE_GENDER_MALE": 1,
+                            "SSML_VOICE_GENDER_FEMALE": 2,
+                            "SSML_VOICE_GENDER_NEUTRAL": 3
                           }
                         },
                         "OutputAudioEncoding": {
@@ -10141,6 +10209,10 @@
                               "type": "google.protobuf.Struct",
                               "id": 5
                             },
+                            "disableWebhook": {
+                              "type": "bool",
+                              "id": 7
+                            },
                             "analyzeQueryTextSentiment": {
                               "type": "bool",
                               "id": 8
@@ -10848,7 +10920,7 @@
                               "requestType": "RunTestCaseRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
-                                "(google.api.http).post": "/v3beta1/projects/*/locations/*/agents/*/testCases:run",
+                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/testCases/*}:run",
                                 "(google.api.http).body": "*",
                                 "(google.longrunning.operation_info).response_type": "RunTestCaseResponse",
                                 "(google.longrunning.operation_info).metadata_type": "RunTestCaseMetadata"
@@ -10856,7 +10928,7 @@
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "post": "/v3beta1/projects/*/locations/*/agents/*/testCases:run",
+                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/testCases/*}:run",
                                     "body": "*"
                                   }
                                 },
@@ -11234,6 +11306,52 @@
                             }
                           }
                         },
+                        "TransitionRouteGroupCoverage": {
+                          "fields": {
+                            "coverages": {
+                              "rule": "repeated",
+                              "type": "Coverage",
+                              "id": 1
+                            },
+                            "coverageScore": {
+                              "type": "float",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Coverage": {
+                              "fields": {
+                                "routeGroup": {
+                                  "type": "TransitionRouteGroup",
+                                  "id": 1
+                                },
+                                "transitions": {
+                                  "rule": "repeated",
+                                  "type": "Transition",
+                                  "id": 2
+                                },
+                                "coverageScore": {
+                                  "type": "float",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "Transition": {
+                                  "fields": {
+                                    "transitionRoute": {
+                                      "type": "TransitionRoute",
+                                      "id": 1
+                                    },
+                                    "covered": {
+                                      "type": "bool",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "IntentCoverage": {
                           "fields": {
                             "intents": {
@@ -11287,7 +11405,8 @@
                               "values": {
                                 "COVERAGE_TYPE_UNSPECIFIED": 0,
                                 "INTENT": 1,
-                                "PAGE_TRANSITION": 2
+                                "PAGE_TRANSITION": 2,
+                                "TRANSITION_ROUTE_GROUP": 3
                               }
                             }
                           }
@@ -11297,7 +11416,8 @@
                             "coverageType": {
                               "oneof": [
                                 "intentCoverage",
-                                "transitionCoverage"
+                                "transitionCoverage",
+                                "routeGroupCoverage"
                               ]
                             }
                           },
@@ -11316,6 +11436,10 @@
                             "transitionCoverage": {
                               "type": "TransitionCoverage",
                               "id": 4
+                            },
+                            "routeGroupCoverage": {
+                              "type": "TransitionRouteGroupCoverage",
+                              "id": 6
                             }
                           }
                         },

@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -388,6 +388,9 @@ message QueryParameters {
   //     -   Else: parameter value
   google.protobuf.Struct parameters = 5;
 
+  // Whether to disable webhook calls for this request.
+  bool disable_webhook = 7;
+
   // Configures whether sentiment analysis should be performed. If not
   // provided, sentiment analysis is not performed.
   bool analyze_query_text_sentiment = 8;
@@ -433,9 +436,9 @@ message QueryInput {
   }
 
   // Required. The language of the input. See [Language
-  // Support](https://cloud.google.com/dialogflow/docs/reference/language) for a
-  // list of the currently supported language codes. Note that queries in the
-  // same session do not necessarily need to specify the same language.
+  // Support](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+  // for a list of the currently supported language codes. Note that queries in
+  // the same session do not necessarily need to specify the same language.
   string language_code = 4 [(google.api.field_behavior) = REQUIRED];
 }
 
@@ -462,7 +465,7 @@ message QueryResult {
 
   // The language that was triggered during intent detection.
   // See [Language
-  // Support](https://cloud.google.com/dialogflow/docs/reference/language)
+  // Support](https://cloud.google.com/dialogflow/cx/docs/reference/language)
   // for a list of the currently supported language codes.
   string language_code = 2;
 

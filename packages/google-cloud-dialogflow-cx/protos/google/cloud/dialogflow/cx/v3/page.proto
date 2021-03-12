@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -150,6 +150,9 @@ message Page {
   //     [transition route groups][google.cloud.dialogflow.cx.v3.Page.transition_route_groups] with intent
   //     specified.
   // *   TransitionRoutes defined in flow with intent specified.
+  // *   TransitionRoutes defined in the
+  //     [transition route groups][google.cloud.dialogflow.cx.v3.Flow.transition_route_groups] with intent
+  //     specified.
   // *   TransitionRoutes defined in the page with only condition specified.
   // *   TransitionRoutes defined in the
   //     [transition route groups][google.cloud.dialogflow.cx.v3.Page.transition_route_groups] with only
@@ -383,7 +386,7 @@ message ListPagesRequest {
   //
   // If not specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
   // are supported.
   // Note: languages must be enabled in the agent before they can be used.
   string language_code = 2;
@@ -431,7 +434,7 @@ message GetPageRequest {
   //
   // If not specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
   // are supported.
   // Note: languages must be enabled in the agent before they can be used.
   string language_code = 2;
@@ -463,7 +466,7 @@ message CreatePageRequest {
   //
   // If not specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
   // are supported.
   // Note: languages must be enabled in the agent before they can be used.
   string language_code = 3;
@@ -485,7 +488,7 @@ message UpdatePageRequest {
   //
   // If not specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
   // are supported.
   // Note: languages must be enabled in the agent before they can be used.
   string language_code = 2;

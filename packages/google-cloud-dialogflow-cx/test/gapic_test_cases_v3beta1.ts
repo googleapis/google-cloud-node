@@ -801,7 +801,15 @@ describe('v3beta1.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.RunTestCaseRequest()
       );
-      const expectedOptions = {};
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -825,7 +833,15 @@ describe('v3beta1.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.RunTestCaseRequest()
       );
-      const expectedOptions = {};
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -872,7 +888,15 @@ describe('v3beta1.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.RunTestCaseRequest()
       );
-      const expectedOptions = {};
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.runTestCase = stubLongRunningCall(
         undefined,
@@ -895,7 +919,15 @@ describe('v3beta1.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.RunTestCaseRequest()
       );
-      const expectedOptions = {};
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.runTestCase = stubLongRunningCall(
         undefined,

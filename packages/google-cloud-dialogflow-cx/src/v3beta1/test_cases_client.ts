@@ -1053,6 +1053,13 @@ export class TestCasesClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
     this.initialize();
     return this.innerApiCalls.runTestCase(request, options, callback);
   }
