@@ -11905,7 +11905,6 @@
                          * @property {Array.<google.cloud.documentai.v1beta3.Document.IPage>|null} [pages] Document pages
                          * @property {Array.<google.cloud.documentai.v1beta3.Document.IEntity>|null} [entities] Document entities
                          * @property {Array.<google.cloud.documentai.v1beta3.Document.IEntityRelation>|null} [entityRelations] Document entityRelations
-                         * @property {Array.<google.cloud.documentai.v1beta3.Document.ITranslation>|null} [translations] Document translations
                          * @property {Array.<google.cloud.documentai.v1beta3.Document.ITextChange>|null} [textChanges] Document textChanges
                          * @property {google.cloud.documentai.v1beta3.Document.IShardInfo|null} [shardInfo] Document shardInfo
                          * @property {google.rpc.IStatus|null} [error] Document error
@@ -11925,7 +11924,6 @@
                             this.pages = [];
                             this.entities = [];
                             this.entityRelations = [];
-                            this.translations = [];
                             this.textChanges = [];
                             this.revisions = [];
                             if (properties)
@@ -11997,14 +11995,6 @@
                          * @instance
                          */
                         Document.prototype.entityRelations = $util.emptyArray;
-    
-                        /**
-                         * Document translations.
-                         * @member {Array.<google.cloud.documentai.v1beta3.Document.ITranslation>} translations
-                         * @memberof google.cloud.documentai.v1beta3.Document
-                         * @instance
-                         */
-                        Document.prototype.translations = $util.emptyArray;
     
                         /**
                          * Document textChanges.
@@ -12100,9 +12090,6 @@
                                 $root.google.cloud.documentai.v1beta3.Document.ShardInfo.encode(message.shardInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.error != null && Object.hasOwnProperty.call(message, "error"))
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                            if (message.translations != null && message.translations.length)
-                                for (var i = 0; i < message.translations.length; ++i)
-                                    $root.google.cloud.documentai.v1beta3.Document.Translation.encode(message.translations[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.revisions != null && message.revisions.length)
                                 for (var i = 0; i < message.revisions.length; ++i)
                                     $root.google.cloud.documentai.v1beta3.Document.Revision.encode(message.revisions[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
@@ -12174,11 +12161,6 @@
                                     if (!(message.entityRelations && message.entityRelations.length))
                                         message.entityRelations = [];
                                     message.entityRelations.push($root.google.cloud.documentai.v1beta3.Document.EntityRelation.decode(reader, reader.uint32()));
-                                    break;
-                                case 12:
-                                    if (!(message.translations && message.translations.length))
-                                        message.translations = [];
-                                    message.translations.push($root.google.cloud.documentai.v1beta3.Document.Translation.decode(reader, reader.uint32()));
                                     break;
                                 case 14:
                                     if (!(message.textChanges && message.textChanges.length))
@@ -12286,15 +12268,6 @@
                                         return "entityRelations." + error;
                                 }
                             }
-                            if (message.translations != null && message.hasOwnProperty("translations")) {
-                                if (!Array.isArray(message.translations))
-                                    return "translations: array expected";
-                                for (var i = 0; i < message.translations.length; ++i) {
-                                    var error = $root.google.cloud.documentai.v1beta3.Document.Translation.verify(message.translations[i]);
-                                    if (error)
-                                        return "translations." + error;
-                                }
-                            }
                             if (message.textChanges != null && message.hasOwnProperty("textChanges")) {
                                 if (!Array.isArray(message.textChanges))
                                     return "textChanges: array expected";
@@ -12389,16 +12362,6 @@
                                     message.entityRelations[i] = $root.google.cloud.documentai.v1beta3.Document.EntityRelation.fromObject(object.entityRelations[i]);
                                 }
                             }
-                            if (object.translations) {
-                                if (!Array.isArray(object.translations))
-                                    throw TypeError(".google.cloud.documentai.v1beta3.Document.translations: array expected");
-                                message.translations = [];
-                                for (var i = 0; i < object.translations.length; ++i) {
-                                    if (typeof object.translations[i] !== "object")
-                                        throw TypeError(".google.cloud.documentai.v1beta3.Document.translations: object expected");
-                                    message.translations[i] = $root.google.cloud.documentai.v1beta3.Document.Translation.fromObject(object.translations[i]);
-                                }
-                            }
                             if (object.textChanges) {
                                 if (!Array.isArray(object.textChanges))
                                     throw TypeError(".google.cloud.documentai.v1beta3.Document.textChanges: array expected");
@@ -12450,7 +12413,6 @@
                                 object.pages = [];
                                 object.entities = [];
                                 object.entityRelations = [];
-                                object.translations = [];
                                 object.revisions = [];
                                 object.textChanges = [];
                             }
@@ -12498,11 +12460,6 @@
                                 object.shardInfo = $root.google.cloud.documentai.v1beta3.Document.ShardInfo.toObject(message.shardInfo, options);
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
-                            if (message.translations && message.translations.length) {
-                                object.translations = [];
-                                for (var j = 0; j < message.translations.length; ++j)
-                                    object.translations[j] = $root.google.cloud.documentai.v1beta3.Document.Translation.toObject(message.translations[j], options);
-                            }
                             if (message.revisions && message.revisions.length) {
                                 object.revisions = [];
                                 for (var j = 0; j < message.revisions.length; ++j)
@@ -19045,287 +19002,6 @@
                             };
     
                             return EntityRelation;
-                        })();
-    
-                        Document.Translation = (function() {
-    
-                            /**
-                             * Properties of a Translation.
-                             * @memberof google.cloud.documentai.v1beta3.Document
-                             * @interface ITranslation
-                             * @property {google.cloud.documentai.v1beta3.Document.ITextAnchor|null} [textAnchor] Translation textAnchor
-                             * @property {string|null} [languageCode] Translation languageCode
-                             * @property {string|null} [translatedText] Translation translatedText
-                             * @property {Array.<google.cloud.documentai.v1beta3.Document.IProvenance>|null} [provenance] Translation provenance
-                             */
-    
-                            /**
-                             * Constructs a new Translation.
-                             * @memberof google.cloud.documentai.v1beta3.Document
-                             * @classdesc Represents a Translation.
-                             * @implements ITranslation
-                             * @constructor
-                             * @param {google.cloud.documentai.v1beta3.Document.ITranslation=} [properties] Properties to set
-                             */
-                            function Translation(properties) {
-                                this.provenance = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Translation textAnchor.
-                             * @member {google.cloud.documentai.v1beta3.Document.ITextAnchor|null|undefined} textAnchor
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @instance
-                             */
-                            Translation.prototype.textAnchor = null;
-    
-                            /**
-                             * Translation languageCode.
-                             * @member {string} languageCode
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @instance
-                             */
-                            Translation.prototype.languageCode = "";
-    
-                            /**
-                             * Translation translatedText.
-                             * @member {string} translatedText
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @instance
-                             */
-                            Translation.prototype.translatedText = "";
-    
-                            /**
-                             * Translation provenance.
-                             * @member {Array.<google.cloud.documentai.v1beta3.Document.IProvenance>} provenance
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @instance
-                             */
-                            Translation.prototype.provenance = $util.emptyArray;
-    
-                            /**
-                             * Creates a new Translation instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {google.cloud.documentai.v1beta3.Document.ITranslation=} [properties] Properties to set
-                             * @returns {google.cloud.documentai.v1beta3.Document.Translation} Translation instance
-                             */
-                            Translation.create = function create(properties) {
-                                return new Translation(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Translation message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.Translation.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {google.cloud.documentai.v1beta3.Document.ITranslation} message Translation message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Translation.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.textAnchor != null && Object.hasOwnProperty.call(message, "textAnchor"))
-                                    $root.google.cloud.documentai.v1beta3.Document.TextAnchor.encode(message.textAnchor, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
-                                if (message.translatedText != null && Object.hasOwnProperty.call(message, "translatedText"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.translatedText);
-                                if (message.provenance != null && message.provenance.length)
-                                    for (var i = 0; i < message.provenance.length; ++i)
-                                        $root.google.cloud.documentai.v1beta3.Document.Provenance.encode(message.provenance[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Translation message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.Translation.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {google.cloud.documentai.v1beta3.Document.ITranslation} message Translation message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Translation.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Translation message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.documentai.v1beta3.Document.Translation} Translation
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Translation.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1beta3.Document.Translation();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.textAnchor = $root.google.cloud.documentai.v1beta3.Document.TextAnchor.decode(reader, reader.uint32());
-                                        break;
-                                    case 2:
-                                        message.languageCode = reader.string();
-                                        break;
-                                    case 3:
-                                        message.translatedText = reader.string();
-                                        break;
-                                    case 4:
-                                        if (!(message.provenance && message.provenance.length))
-                                            message.provenance = [];
-                                        message.provenance.push($root.google.cloud.documentai.v1beta3.Document.Provenance.decode(reader, reader.uint32()));
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Translation message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.documentai.v1beta3.Document.Translation} Translation
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Translation.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Translation message.
-                             * @function verify
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Translation.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.textAnchor != null && message.hasOwnProperty("textAnchor")) {
-                                    var error = $root.google.cloud.documentai.v1beta3.Document.TextAnchor.verify(message.textAnchor);
-                                    if (error)
-                                        return "textAnchor." + error;
-                                }
-                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                                    if (!$util.isString(message.languageCode))
-                                        return "languageCode: string expected";
-                                if (message.translatedText != null && message.hasOwnProperty("translatedText"))
-                                    if (!$util.isString(message.translatedText))
-                                        return "translatedText: string expected";
-                                if (message.provenance != null && message.hasOwnProperty("provenance")) {
-                                    if (!Array.isArray(message.provenance))
-                                        return "provenance: array expected";
-                                    for (var i = 0; i < message.provenance.length; ++i) {
-                                        var error = $root.google.cloud.documentai.v1beta3.Document.Provenance.verify(message.provenance[i]);
-                                        if (error)
-                                            return "provenance." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Translation message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.documentai.v1beta3.Document.Translation} Translation
-                             */
-                            Translation.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.documentai.v1beta3.Document.Translation)
-                                    return object;
-                                var message = new $root.google.cloud.documentai.v1beta3.Document.Translation();
-                                if (object.textAnchor != null) {
-                                    if (typeof object.textAnchor !== "object")
-                                        throw TypeError(".google.cloud.documentai.v1beta3.Document.Translation.textAnchor: object expected");
-                                    message.textAnchor = $root.google.cloud.documentai.v1beta3.Document.TextAnchor.fromObject(object.textAnchor);
-                                }
-                                if (object.languageCode != null)
-                                    message.languageCode = String(object.languageCode);
-                                if (object.translatedText != null)
-                                    message.translatedText = String(object.translatedText);
-                                if (object.provenance) {
-                                    if (!Array.isArray(object.provenance))
-                                        throw TypeError(".google.cloud.documentai.v1beta3.Document.Translation.provenance: array expected");
-                                    message.provenance = [];
-                                    for (var i = 0; i < object.provenance.length; ++i) {
-                                        if (typeof object.provenance[i] !== "object")
-                                            throw TypeError(".google.cloud.documentai.v1beta3.Document.Translation.provenance: object expected");
-                                        message.provenance[i] = $root.google.cloud.documentai.v1beta3.Document.Provenance.fromObject(object.provenance[i]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Translation message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @static
-                             * @param {google.cloud.documentai.v1beta3.Document.Translation} message Translation
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Translation.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.provenance = [];
-                                if (options.defaults) {
-                                    object.textAnchor = null;
-                                    object.languageCode = "";
-                                    object.translatedText = "";
-                                }
-                                if (message.textAnchor != null && message.hasOwnProperty("textAnchor"))
-                                    object.textAnchor = $root.google.cloud.documentai.v1beta3.Document.TextAnchor.toObject(message.textAnchor, options);
-                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                                    object.languageCode = message.languageCode;
-                                if (message.translatedText != null && message.hasOwnProperty("translatedText"))
-                                    object.translatedText = message.translatedText;
-                                if (message.provenance && message.provenance.length) {
-                                    object.provenance = [];
-                                    for (var j = 0; j < message.provenance.length; ++j)
-                                        object.provenance[j] = $root.google.cloud.documentai.v1beta3.Document.Provenance.toObject(message.provenance[j], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Translation to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.documentai.v1beta3.Document.Translation
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Translation.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            return Translation;
                         })();
     
                         Document.TextAnchor = (function() {

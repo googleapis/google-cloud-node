@@ -1057,11 +1057,6 @@
                           "type": "EntityRelation",
                           "id": 8
                         },
-                        "translations": {
-                          "rule": "repeated",
-                          "type": "Translation",
-                          "id": 12
-                        },
                         "textChanges": {
                           "rule": "repeated",
                           "type": "TextChange",
@@ -1627,27 +1622,6 @@
                             "relation": {
                               "type": "string",
                               "id": 3
-                            }
-                          }
-                        },
-                        "Translation": {
-                          "fields": {
-                            "textAnchor": {
-                              "type": "TextAnchor",
-                              "id": 1
-                            },
-                            "languageCode": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "translatedText": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "provenance": {
-                              "rule": "repeated",
-                              "type": "Provenance",
-                              "id": 4
                             }
                           }
                         },
