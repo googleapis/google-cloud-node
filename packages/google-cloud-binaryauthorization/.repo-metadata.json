@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/binary-authorization/",
   "client_documentation": "https://googleapis.dev/nodejs/binaryauthorization/latest/",
   "issue_tracker": "https://github.com/googleapis/nodejs-binary-authorization/issues",
-  "release_level": "GA",
+  "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/nodejs-binary-authorization",
   "distribution_name": "@google-cloud/binary-authorization",
