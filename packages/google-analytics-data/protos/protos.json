@@ -26,7 +26,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:runReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:runReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "RunPivotReport": {
                           "requestType": "RunPivotReportRequest",
@@ -34,7 +42,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:runPivotReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:runPivotReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "BatchRunReports": {
                           "requestType": "BatchRunReportsRequest",
@@ -42,7 +58,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:batchRunReports",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:batchRunReports",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "BatchRunPivotReports": {
                           "requestType": "BatchRunPivotReportsRequest",
@@ -50,7 +74,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha:batchRunPivotReports",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha:batchRunPivotReports",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetMetadata": {
                           "requestType": "GetMetadataRequest",
@@ -58,7 +90,17 @@
                           "options": {
                             "(google.api.http).get": "/v1alpha/{name=properties/*/metadata}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/metadata}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RunRealtimeReport": {
                           "requestType": "RunRealtimeReportRequest",
@@ -66,7 +108,15 @@
                           "options": {
                             "(google.api.http).post": "/v1alpha/{property=properties/*}:runRealtimeReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{property=properties/*}:runRealtimeReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1126,7 +1176,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{property=properties/*}:runReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{property=properties/*}:runReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "RunPivotReport": {
                           "requestType": "RunPivotReportRequest",
@@ -1134,7 +1192,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{property=properties/*}:runPivotReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{property=properties/*}:runPivotReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "BatchRunReports": {
                           "requestType": "BatchRunReportsRequest",
@@ -1142,7 +1208,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{property=properties/*}:batchRunReports",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{property=properties/*}:batchRunReports",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "BatchRunPivotReports": {
                           "requestType": "BatchRunPivotReportsRequest",
@@ -1150,7 +1224,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{property=properties/*}:batchRunPivotReports",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{property=properties/*}:batchRunPivotReports",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         },
                         "GetMetadata": {
                           "requestType": "GetMetadataRequest",
@@ -1158,7 +1240,17 @@
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=properties/*/metadata}",
                             "(google.api.method_signature)": "name"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=properties/*/metadata}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "RunRealtimeReport": {
                           "requestType": "RunRealtimeReportRequest",
@@ -1166,7 +1258,15 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{property=properties/*}:runRealtimeReport",
                             "(google.api.http).body": "*"
-                          }
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{property=properties/*}:runRealtimeReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2323,7 +2423,8 @@
                 "REQUIRED": 2,
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
               }
             },
             "resourceReference": {
@@ -2368,6 +2469,11 @@
                 "singular": {
                   "type": "string",
                   "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
                 }
               },
               "nested": {
@@ -2376,6 +2482,12 @@
                     "HISTORY_UNSPECIFIED": 0,
                     "ORIGINALLY_SINGLE_PATTERN": 1,
                     "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
                   }
                 }
               }
@@ -2396,7 +2508,7 @@
         },
         "protobuf": {
           "options": {
-            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
             "java_package": "com.google.protobuf",
             "java_outer_classname": "DescriptorProtos",
             "csharp_namespace": "Google.Protobuf.Reflection",

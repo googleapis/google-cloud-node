@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-analytics-data.git",
-        "sha": "b6cfbb6f66409da4af3ae1f7f3d47823fbfdbae0"
+        "remote": "https://github.com/googleapis/nodejs-analytics-data.git",
+        "sha": "678dcff7a3143ea917cda091b533e48fcb90d04c"
       }
     },
     {

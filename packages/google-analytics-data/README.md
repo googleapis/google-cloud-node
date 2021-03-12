@@ -72,9 +72,7 @@ const analyticsDataClient = new BetaAnalyticsDataClient();
 // Runs a simple report.
 async function runReport() {
   const [response] = await analyticsDataClient.runReport({
-    entity: {
-      propertyId: propertyId,
-    },
+    property: 'properties/' + propertyId,
     dateRanges: [
       {
         startDate: '2020-03-31',
