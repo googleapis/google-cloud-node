@@ -10118,6 +10118,10067 @@
                     return v1alpha;
                 })();
     
+                metastore.v1beta = (function() {
+    
+                    /**
+                     * Namespace v1beta.
+                     * @memberof google.cloud.metastore
+                     * @namespace
+                     */
+                    var v1beta = {};
+    
+                    v1beta.DataprocMetastore = (function() {
+    
+                        /**
+                         * Constructs a new DataprocMetastore service.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a DataprocMetastore
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function DataprocMetastore(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (DataprocMetastore.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DataprocMetastore;
+    
+                        /**
+                         * Creates new DataprocMetastore service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {DataprocMetastore} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        DataprocMetastore.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#listServices}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef ListServicesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.metastore.v1beta.ListServicesResponse} [response] ListServicesResponse
+                         */
+    
+                        /**
+                         * Calls ListServices.
+                         * @function listServices
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IListServicesRequest} request ListServicesRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.ListServicesCallback} callback Node-style callback called with the error, if any, and ListServicesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.listServices = function listServices(request, callback) {
+                            return this.rpcCall(listServices, $root.google.cloud.metastore.v1beta.ListServicesRequest, $root.google.cloud.metastore.v1beta.ListServicesResponse, request, callback);
+                        }, "name", { value: "ListServices" });
+    
+                        /**
+                         * Calls ListServices.
+                         * @function listServices
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IListServicesRequest} request ListServicesRequest message or plain object
+                         * @returns {Promise<google.cloud.metastore.v1beta.ListServicesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#getService}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef GetServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.metastore.v1beta.Service} [response] Service
+                         */
+    
+                        /**
+                         * Calls GetService.
+                         * @function getService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IGetServiceRequest} request GetServiceRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.GetServiceCallback} callback Node-style callback called with the error, if any, and Service
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.getService = function getService(request, callback) {
+                            return this.rpcCall(getService, $root.google.cloud.metastore.v1beta.GetServiceRequest, $root.google.cloud.metastore.v1beta.Service, request, callback);
+                        }, "name", { value: "GetService" });
+    
+                        /**
+                         * Calls GetService.
+                         * @function getService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IGetServiceRequest} request GetServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.metastore.v1beta.Service>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#createService}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef CreateServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateService.
+                         * @function createService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.ICreateServiceRequest} request CreateServiceRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.CreateServiceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.createService = function createService(request, callback) {
+                            return this.rpcCall(createService, $root.google.cloud.metastore.v1beta.CreateServiceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateService" });
+    
+                        /**
+                         * Calls CreateService.
+                         * @function createService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.ICreateServiceRequest} request CreateServiceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#updateService}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef UpdateServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateService.
+                         * @function updateService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IUpdateServiceRequest} request UpdateServiceRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.UpdateServiceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.updateService = function updateService(request, callback) {
+                            return this.rpcCall(updateService, $root.google.cloud.metastore.v1beta.UpdateServiceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateService" });
+    
+                        /**
+                         * Calls UpdateService.
+                         * @function updateService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IUpdateServiceRequest} request UpdateServiceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#deleteService}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef DeleteServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteService.
+                         * @function deleteService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IDeleteServiceRequest} request DeleteServiceRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.DeleteServiceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.deleteService = function deleteService(request, callback) {
+                            return this.rpcCall(deleteService, $root.google.cloud.metastore.v1beta.DeleteServiceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteService" });
+    
+                        /**
+                         * Calls DeleteService.
+                         * @function deleteService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IDeleteServiceRequest} request DeleteServiceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#listMetadataImports}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef ListMetadataImportsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.metastore.v1beta.ListMetadataImportsResponse} [response] ListMetadataImportsResponse
+                         */
+    
+                        /**
+                         * Calls ListMetadataImports.
+                         * @function listMetadataImports
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsRequest} request ListMetadataImportsRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.ListMetadataImportsCallback} callback Node-style callback called with the error, if any, and ListMetadataImportsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.listMetadataImports = function listMetadataImports(request, callback) {
+                            return this.rpcCall(listMetadataImports, $root.google.cloud.metastore.v1beta.ListMetadataImportsRequest, $root.google.cloud.metastore.v1beta.ListMetadataImportsResponse, request, callback);
+                        }, "name", { value: "ListMetadataImports" });
+    
+                        /**
+                         * Calls ListMetadataImports.
+                         * @function listMetadataImports
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsRequest} request ListMetadataImportsRequest message or plain object
+                         * @returns {Promise<google.cloud.metastore.v1beta.ListMetadataImportsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#getMetadataImport}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef GetMetadataImportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.metastore.v1beta.MetadataImport} [response] MetadataImport
+                         */
+    
+                        /**
+                         * Calls GetMetadataImport.
+                         * @function getMetadataImport
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IGetMetadataImportRequest} request GetMetadataImportRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.GetMetadataImportCallback} callback Node-style callback called with the error, if any, and MetadataImport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.getMetadataImport = function getMetadataImport(request, callback) {
+                            return this.rpcCall(getMetadataImport, $root.google.cloud.metastore.v1beta.GetMetadataImportRequest, $root.google.cloud.metastore.v1beta.MetadataImport, request, callback);
+                        }, "name", { value: "GetMetadataImport" });
+    
+                        /**
+                         * Calls GetMetadataImport.
+                         * @function getMetadataImport
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IGetMetadataImportRequest} request GetMetadataImportRequest message or plain object
+                         * @returns {Promise<google.cloud.metastore.v1beta.MetadataImport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#createMetadataImport}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef CreateMetadataImportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateMetadataImport.
+                         * @function createMetadataImport
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.ICreateMetadataImportRequest} request CreateMetadataImportRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.CreateMetadataImportCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.createMetadataImport = function createMetadataImport(request, callback) {
+                            return this.rpcCall(createMetadataImport, $root.google.cloud.metastore.v1beta.CreateMetadataImportRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateMetadataImport" });
+    
+                        /**
+                         * Calls CreateMetadataImport.
+                         * @function createMetadataImport
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.ICreateMetadataImportRequest} request CreateMetadataImportRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#updateMetadataImport}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef UpdateMetadataImportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateMetadataImport.
+                         * @function updateMetadataImport
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IUpdateMetadataImportRequest} request UpdateMetadataImportRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.UpdateMetadataImportCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.updateMetadataImport = function updateMetadataImport(request, callback) {
+                            return this.rpcCall(updateMetadataImport, $root.google.cloud.metastore.v1beta.UpdateMetadataImportRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateMetadataImport" });
+    
+                        /**
+                         * Calls UpdateMetadataImport.
+                         * @function updateMetadataImport
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IUpdateMetadataImportRequest} request UpdateMetadataImportRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#exportMetadata}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef ExportMetadataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportMetadata.
+                         * @function exportMetadata
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IExportMetadataRequest} request ExportMetadataRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.ExportMetadataCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.exportMetadata = function exportMetadata(request, callback) {
+                            return this.rpcCall(exportMetadata, $root.google.cloud.metastore.v1beta.ExportMetadataRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportMetadata" });
+    
+                        /**
+                         * Calls ExportMetadata.
+                         * @function exportMetadata
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IExportMetadataRequest} request ExportMetadataRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#restoreService}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef RestoreServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RestoreService.
+                         * @function restoreService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IRestoreServiceRequest} request RestoreServiceRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.RestoreServiceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.restoreService = function restoreService(request, callback) {
+                            return this.rpcCall(restoreService, $root.google.cloud.metastore.v1beta.RestoreServiceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RestoreService" });
+    
+                        /**
+                         * Calls RestoreService.
+                         * @function restoreService
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IRestoreServiceRequest} request RestoreServiceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#listBackups}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef ListBackupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.metastore.v1beta.ListBackupsResponse} [response] ListBackupsResponse
+                         */
+    
+                        /**
+                         * Calls ListBackups.
+                         * @function listBackups
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IListBackupsRequest} request ListBackupsRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.ListBackupsCallback} callback Node-style callback called with the error, if any, and ListBackupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.listBackups = function listBackups(request, callback) {
+                            return this.rpcCall(listBackups, $root.google.cloud.metastore.v1beta.ListBackupsRequest, $root.google.cloud.metastore.v1beta.ListBackupsResponse, request, callback);
+                        }, "name", { value: "ListBackups" });
+    
+                        /**
+                         * Calls ListBackups.
+                         * @function listBackups
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IListBackupsRequest} request ListBackupsRequest message or plain object
+                         * @returns {Promise<google.cloud.metastore.v1beta.ListBackupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#getBackup}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef GetBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.metastore.v1beta.Backup} [response] Backup
+                         */
+    
+                        /**
+                         * Calls GetBackup.
+                         * @function getBackup
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IGetBackupRequest} request GetBackupRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.GetBackupCallback} callback Node-style callback called with the error, if any, and Backup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.getBackup = function getBackup(request, callback) {
+                            return this.rpcCall(getBackup, $root.google.cloud.metastore.v1beta.GetBackupRequest, $root.google.cloud.metastore.v1beta.Backup, request, callback);
+                        }, "name", { value: "GetBackup" });
+    
+                        /**
+                         * Calls GetBackup.
+                         * @function getBackup
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IGetBackupRequest} request GetBackupRequest message or plain object
+                         * @returns {Promise<google.cloud.metastore.v1beta.Backup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#createBackup}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef CreateBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateBackup.
+                         * @function createBackup
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.ICreateBackupRequest} request CreateBackupRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.CreateBackupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.createBackup = function createBackup(request, callback) {
+                            return this.rpcCall(createBackup, $root.google.cloud.metastore.v1beta.CreateBackupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateBackup" });
+    
+                        /**
+                         * Calls CreateBackup.
+                         * @function createBackup
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.ICreateBackupRequest} request CreateBackupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore#deleteBackup}.
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @typedef DeleteBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteBackup.
+                         * @function deleteBackup
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IDeleteBackupRequest} request DeleteBackupRequest message or plain object
+                         * @param {google.cloud.metastore.v1beta.DataprocMetastore.DeleteBackupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.deleteBackup = function deleteBackup(request, callback) {
+                            return this.rpcCall(deleteBackup, $root.google.cloud.metastore.v1beta.DeleteBackupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteBackup" });
+    
+                        /**
+                         * Calls DeleteBackup.
+                         * @function deleteBackup
+                         * @memberof google.cloud.metastore.v1beta.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1beta.IDeleteBackupRequest} request DeleteBackupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return DataprocMetastore;
+                    })();
+    
+                    v1beta.Service = (function() {
+    
+                        /**
+                         * Properties of a Service.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IService
+                         * @property {google.cloud.metastore.v1beta.IHiveMetastoreConfig|null} [hiveMetastoreConfig] Service hiveMetastoreConfig
+                         * @property {string|null} [name] Service name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Service createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Service updateTime
+                         * @property {Object.<string,string>|null} [labels] Service labels
+                         * @property {string|null} [network] Service network
+                         * @property {string|null} [endpointUri] Service endpointUri
+                         * @property {number|null} [port] Service port
+                         * @property {google.cloud.metastore.v1beta.Service.State|null} [state] Service state
+                         * @property {string|null} [stateMessage] Service stateMessage
+                         * @property {string|null} [artifactGcsUri] Service artifactGcsUri
+                         * @property {google.cloud.metastore.v1beta.Service.Tier|null} [tier] Service tier
+                         * @property {google.cloud.metastore.v1beta.IMetadataIntegration|null} [metadataIntegration] Service metadataIntegration
+                         * @property {google.cloud.metastore.v1beta.IMaintenanceWindow|null} [maintenanceWindow] Service maintenanceWindow
+                         * @property {string|null} [uid] Service uid
+                         * @property {google.cloud.metastore.v1beta.IMetadataManagementActivity|null} [metadataManagementActivity] Service metadataManagementActivity
+                         * @property {google.cloud.metastore.v1beta.Service.ReleaseChannel|null} [releaseChannel] Service releaseChannel
+                         */
+    
+                        /**
+                         * Constructs a new Service.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a Service.
+                         * @implements IService
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IService=} [properties] Properties to set
+                         */
+                        function Service(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Service hiveMetastoreConfig.
+                         * @member {google.cloud.metastore.v1beta.IHiveMetastoreConfig|null|undefined} hiveMetastoreConfig
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.hiveMetastoreConfig = null;
+    
+                        /**
+                         * Service name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.name = "";
+    
+                        /**
+                         * Service createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.createTime = null;
+    
+                        /**
+                         * Service updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.updateTime = null;
+    
+                        /**
+                         * Service labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Service network.
+                         * @member {string} network
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.network = "";
+    
+                        /**
+                         * Service endpointUri.
+                         * @member {string} endpointUri
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.endpointUri = "";
+    
+                        /**
+                         * Service port.
+                         * @member {number} port
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.port = 0;
+    
+                        /**
+                         * Service state.
+                         * @member {google.cloud.metastore.v1beta.Service.State} state
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.state = 0;
+    
+                        /**
+                         * Service stateMessage.
+                         * @member {string} stateMessage
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.stateMessage = "";
+    
+                        /**
+                         * Service artifactGcsUri.
+                         * @member {string} artifactGcsUri
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.artifactGcsUri = "";
+    
+                        /**
+                         * Service tier.
+                         * @member {google.cloud.metastore.v1beta.Service.Tier} tier
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.tier = 0;
+    
+                        /**
+                         * Service metadataIntegration.
+                         * @member {google.cloud.metastore.v1beta.IMetadataIntegration|null|undefined} metadataIntegration
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.metadataIntegration = null;
+    
+                        /**
+                         * Service maintenanceWindow.
+                         * @member {google.cloud.metastore.v1beta.IMaintenanceWindow|null|undefined} maintenanceWindow
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.maintenanceWindow = null;
+    
+                        /**
+                         * Service uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.uid = "";
+    
+                        /**
+                         * Service metadataManagementActivity.
+                         * @member {google.cloud.metastore.v1beta.IMetadataManagementActivity|null|undefined} metadataManagementActivity
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.metadataManagementActivity = null;
+    
+                        /**
+                         * Service releaseChannel.
+                         * @member {google.cloud.metastore.v1beta.Service.ReleaseChannel} releaseChannel
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.releaseChannel = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Service metastoreConfig.
+                         * @member {"hiveMetastoreConfig"|undefined} metastoreConfig
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Object.defineProperty(Service.prototype, "metastoreConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["hiveMetastoreConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Service instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IService=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.Service} Service instance
+                         */
+                        Service.create = function create(properties) {
+                            return new Service(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Service message. Does not implicitly {@link google.cloud.metastore.v1beta.Service.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IService} message Service message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Service.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.hiveMetastoreConfig != null && Object.hasOwnProperty.call(message, "hiveMetastoreConfig"))
+                                $root.google.cloud.metastore.v1beta.HiveMetastoreConfig.encode(message.hiveMetastoreConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.network);
+                            if (message.endpointUri != null && Object.hasOwnProperty.call(message, "endpointUri"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.endpointUri);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.port);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
+                            if (message.stateMessage != null && Object.hasOwnProperty.call(message, "stateMessage"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.stateMessage);
+                            if (message.artifactGcsUri != null && Object.hasOwnProperty.call(message, "artifactGcsUri"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.artifactGcsUri);
+                            if (message.tier != null && Object.hasOwnProperty.call(message, "tier"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.tier);
+                            if (message.metadataIntegration != null && Object.hasOwnProperty.call(message, "metadataIntegration"))
+                                $root.google.cloud.metastore.v1beta.MetadataIntegration.encode(message.metadataIntegration, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.maintenanceWindow != null && Object.hasOwnProperty.call(message, "maintenanceWindow"))
+                                $root.google.cloud.metastore.v1beta.MaintenanceWindow.encode(message.maintenanceWindow, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.uid);
+                            if (message.metadataManagementActivity != null && Object.hasOwnProperty.call(message, "metadataManagementActivity"))
+                                $root.google.cloud.metastore.v1beta.MetadataManagementActivity.encode(message.metadataManagementActivity, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.releaseChannel != null && Object.hasOwnProperty.call(message, "releaseChannel"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.releaseChannel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Service message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.Service.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IService} message Service message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Service.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Service message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.Service} Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Service.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.Service(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 5:
+                                    message.hiveMetastoreConfig = $root.google.cloud.metastore.v1beta.HiveMetastoreConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 7:
+                                    message.network = reader.string();
+                                    break;
+                                case 8:
+                                    message.endpointUri = reader.string();
+                                    break;
+                                case 9:
+                                    message.port = reader.int32();
+                                    break;
+                                case 10:
+                                    message.state = reader.int32();
+                                    break;
+                                case 11:
+                                    message.stateMessage = reader.string();
+                                    break;
+                                case 12:
+                                    message.artifactGcsUri = reader.string();
+                                    break;
+                                case 13:
+                                    message.tier = reader.int32();
+                                    break;
+                                case 14:
+                                    message.metadataIntegration = $root.google.cloud.metastore.v1beta.MetadataIntegration.decode(reader, reader.uint32());
+                                    break;
+                                case 15:
+                                    message.maintenanceWindow = $root.google.cloud.metastore.v1beta.MaintenanceWindow.decode(reader, reader.uint32());
+                                    break;
+                                case 16:
+                                    message.uid = reader.string();
+                                    break;
+                                case 17:
+                                    message.metadataManagementActivity = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.decode(reader, reader.uint32());
+                                    break;
+                                case 19:
+                                    message.releaseChannel = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Service message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.Service} Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Service.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Service message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Service.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.hiveMetastoreConfig != null && message.hasOwnProperty("hiveMetastoreConfig")) {
+                                properties.metastoreConfig = 1;
+                                {
+                                    var error = $root.google.cloud.metastore.v1beta.HiveMetastoreConfig.verify(message.hiveMetastoreConfig);
+                                    if (error)
+                                        return "hiveMetastoreConfig." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            if (message.endpointUri != null && message.hasOwnProperty("endpointUri"))
+                                if (!$util.isString(message.endpointUri))
+                                    return "endpointUri: string expected";
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (!$util.isInteger(message.port))
+                                    return "port: integer expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
+                                if (!$util.isString(message.stateMessage))
+                                    return "stateMessage: string expected";
+                            if (message.artifactGcsUri != null && message.hasOwnProperty("artifactGcsUri"))
+                                if (!$util.isString(message.artifactGcsUri))
+                                    return "artifactGcsUri: string expected";
+                            if (message.tier != null && message.hasOwnProperty("tier"))
+                                switch (message.tier) {
+                                default:
+                                    return "tier: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                    break;
+                                }
+                            if (message.metadataIntegration != null && message.hasOwnProperty("metadataIntegration")) {
+                                var error = $root.google.cloud.metastore.v1beta.MetadataIntegration.verify(message.metadataIntegration);
+                                if (error)
+                                    return "metadataIntegration." + error;
+                            }
+                            if (message.maintenanceWindow != null && message.hasOwnProperty("maintenanceWindow")) {
+                                var error = $root.google.cloud.metastore.v1beta.MaintenanceWindow.verify(message.maintenanceWindow);
+                                if (error)
+                                    return "maintenanceWindow." + error;
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.metadataManagementActivity != null && message.hasOwnProperty("metadataManagementActivity")) {
+                                var error = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.verify(message.metadataManagementActivity);
+                                if (error)
+                                    return "metadataManagementActivity." + error;
+                            }
+                            if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
+                                switch (message.releaseChannel) {
+                                default:
+                                    return "releaseChannel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.Service} Service
+                         */
+                        Service.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.Service)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.Service();
+                            if (object.hiveMetastoreConfig != null) {
+                                if (typeof object.hiveMetastoreConfig !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.hiveMetastoreConfig: object expected");
+                                message.hiveMetastoreConfig = $root.google.cloud.metastore.v1beta.HiveMetastoreConfig.fromObject(object.hiveMetastoreConfig);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.endpointUri != null)
+                                message.endpointUri = String(object.endpointUri);
+                            if (object.port != null)
+                                message.port = object.port | 0;
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "SUSPENDING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "SUSPENDED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "UPDATING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "DELETING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "ERROR":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            }
+                            if (object.stateMessage != null)
+                                message.stateMessage = String(object.stateMessage);
+                            if (object.artifactGcsUri != null)
+                                message.artifactGcsUri = String(object.artifactGcsUri);
+                            switch (object.tier) {
+                            case "TIER_UNSPECIFIED":
+                            case 0:
+                                message.tier = 0;
+                                break;
+                            case "DEVELOPER":
+                            case 1:
+                                message.tier = 1;
+                                break;
+                            case "ENTERPRISE":
+                            case 3:
+                                message.tier = 3;
+                                break;
+                            }
+                            if (object.metadataIntegration != null) {
+                                if (typeof object.metadataIntegration !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.metadataIntegration: object expected");
+                                message.metadataIntegration = $root.google.cloud.metastore.v1beta.MetadataIntegration.fromObject(object.metadataIntegration);
+                            }
+                            if (object.maintenanceWindow != null) {
+                                if (typeof object.maintenanceWindow !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.maintenanceWindow: object expected");
+                                message.maintenanceWindow = $root.google.cloud.metastore.v1beta.MaintenanceWindow.fromObject(object.maintenanceWindow);
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.metadataManagementActivity != null) {
+                                if (typeof object.metadataManagementActivity !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.metadataManagementActivity: object expected");
+                                message.metadataManagementActivity = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.fromObject(object.metadataManagementActivity);
+                            }
+                            switch (object.releaseChannel) {
+                            case "RELEASE_CHANNEL_UNSPECIFIED":
+                            case 0:
+                                message.releaseChannel = 0;
+                                break;
+                            case "CANARY":
+                            case 1:
+                                message.releaseChannel = 1;
+                                break;
+                            case "STABLE":
+                            case 2:
+                                message.releaseChannel = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Service message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.Service} message Service
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Service.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.network = "";
+                                object.endpointUri = "";
+                                object.port = 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateMessage = "";
+                                object.artifactGcsUri = "";
+                                object.tier = options.enums === String ? "TIER_UNSPECIFIED" : 0;
+                                object.metadataIntegration = null;
+                                object.maintenanceWindow = null;
+                                object.uid = "";
+                                object.metadataManagementActivity = null;
+                                object.releaseChannel = options.enums === String ? "RELEASE_CHANNEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.hiveMetastoreConfig != null && message.hasOwnProperty("hiveMetastoreConfig")) {
+                                object.hiveMetastoreConfig = $root.google.cloud.metastore.v1beta.HiveMetastoreConfig.toObject(message.hiveMetastoreConfig, options);
+                                if (options.oneofs)
+                                    object.metastoreConfig = "hiveMetastoreConfig";
+                            }
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                object.network = message.network;
+                            if (message.endpointUri != null && message.hasOwnProperty("endpointUri"))
+                                object.endpointUri = message.endpointUri;
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                object.port = message.port;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.State[message.state] : message.state;
+                            if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
+                                object.stateMessage = message.stateMessage;
+                            if (message.artifactGcsUri != null && message.hasOwnProperty("artifactGcsUri"))
+                                object.artifactGcsUri = message.artifactGcsUri;
+                            if (message.tier != null && message.hasOwnProperty("tier"))
+                                object.tier = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.Tier[message.tier] : message.tier;
+                            if (message.metadataIntegration != null && message.hasOwnProperty("metadataIntegration"))
+                                object.metadataIntegration = $root.google.cloud.metastore.v1beta.MetadataIntegration.toObject(message.metadataIntegration, options);
+                            if (message.maintenanceWindow != null && message.hasOwnProperty("maintenanceWindow"))
+                                object.maintenanceWindow = $root.google.cloud.metastore.v1beta.MaintenanceWindow.toObject(message.maintenanceWindow, options);
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.metadataManagementActivity != null && message.hasOwnProperty("metadataManagementActivity"))
+                                object.metadataManagementActivity = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.toObject(message.metadataManagementActivity, options);
+                            if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
+                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Service to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Service.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.metastore.v1beta.Service.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} SUSPENDING=3 SUSPENDING value
+                         * @property {number} SUSPENDED=4 SUSPENDED value
+                         * @property {number} UPDATING=5 UPDATING value
+                         * @property {number} DELETING=6 DELETING value
+                         * @property {number} ERROR=7 ERROR value
+                         */
+                        Service.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "SUSPENDING"] = 3;
+                            values[valuesById[4] = "SUSPENDED"] = 4;
+                            values[valuesById[5] = "UPDATING"] = 5;
+                            values[valuesById[6] = "DELETING"] = 6;
+                            values[valuesById[7] = "ERROR"] = 7;
+                            return values;
+                        })();
+    
+                        /**
+                         * Tier enum.
+                         * @name google.cloud.metastore.v1beta.Service.Tier
+                         * @enum {number}
+                         * @property {number} TIER_UNSPECIFIED=0 TIER_UNSPECIFIED value
+                         * @property {number} DEVELOPER=1 DEVELOPER value
+                         * @property {number} ENTERPRISE=3 ENTERPRISE value
+                         */
+                        Service.Tier = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TIER_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEVELOPER"] = 1;
+                            values[valuesById[3] = "ENTERPRISE"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * ReleaseChannel enum.
+                         * @name google.cloud.metastore.v1beta.Service.ReleaseChannel
+                         * @enum {number}
+                         * @property {number} RELEASE_CHANNEL_UNSPECIFIED=0 RELEASE_CHANNEL_UNSPECIFIED value
+                         * @property {number} CANARY=1 CANARY value
+                         * @property {number} STABLE=2 STABLE value
+                         */
+                        Service.ReleaseChannel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RELEASE_CHANNEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CANARY"] = 1;
+                            values[valuesById[2] = "STABLE"] = 2;
+                            return values;
+                        })();
+    
+                        return Service;
+                    })();
+    
+                    v1beta.MetadataIntegration = (function() {
+    
+                        /**
+                         * Properties of a MetadataIntegration.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IMetadataIntegration
+                         * @property {google.cloud.metastore.v1beta.IDataCatalogConfig|null} [dataCatalogConfig] MetadataIntegration dataCatalogConfig
+                         */
+    
+                        /**
+                         * Constructs a new MetadataIntegration.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a MetadataIntegration.
+                         * @implements IMetadataIntegration
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IMetadataIntegration=} [properties] Properties to set
+                         */
+                        function MetadataIntegration(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetadataIntegration dataCatalogConfig.
+                         * @member {google.cloud.metastore.v1beta.IDataCatalogConfig|null|undefined} dataCatalogConfig
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @instance
+                         */
+                        MetadataIntegration.prototype.dataCatalogConfig = null;
+    
+                        /**
+                         * Creates a new MetadataIntegration instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataIntegration=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.MetadataIntegration} MetadataIntegration instance
+                         */
+                        MetadataIntegration.create = function create(properties) {
+                            return new MetadataIntegration(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataIntegration message. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataIntegration.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataIntegration} message MetadataIntegration message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataIntegration.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataCatalogConfig != null && Object.hasOwnProperty.call(message, "dataCatalogConfig"))
+                                $root.google.cloud.metastore.v1beta.DataCatalogConfig.encode(message.dataCatalogConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataIntegration message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataIntegration.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataIntegration} message MetadataIntegration message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataIntegration.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetadataIntegration message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.MetadataIntegration} MetadataIntegration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataIntegration.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.MetadataIntegration();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dataCatalogConfig = $root.google.cloud.metastore.v1beta.DataCatalogConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetadataIntegration message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.MetadataIntegration} MetadataIntegration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataIntegration.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetadataIntegration message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetadataIntegration.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataCatalogConfig != null && message.hasOwnProperty("dataCatalogConfig")) {
+                                var error = $root.google.cloud.metastore.v1beta.DataCatalogConfig.verify(message.dataCatalogConfig);
+                                if (error)
+                                    return "dataCatalogConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetadataIntegration message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.MetadataIntegration} MetadataIntegration
+                         */
+                        MetadataIntegration.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.MetadataIntegration)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.MetadataIntegration();
+                            if (object.dataCatalogConfig != null) {
+                                if (typeof object.dataCatalogConfig !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataIntegration.dataCatalogConfig: object expected");
+                                message.dataCatalogConfig = $root.google.cloud.metastore.v1beta.DataCatalogConfig.fromObject(object.dataCatalogConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetadataIntegration message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.MetadataIntegration} message MetadataIntegration
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetadataIntegration.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.dataCatalogConfig = null;
+                            if (message.dataCatalogConfig != null && message.hasOwnProperty("dataCatalogConfig"))
+                                object.dataCatalogConfig = $root.google.cloud.metastore.v1beta.DataCatalogConfig.toObject(message.dataCatalogConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetadataIntegration to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.MetadataIntegration
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetadataIntegration.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetadataIntegration;
+                    })();
+    
+                    v1beta.DataCatalogConfig = (function() {
+    
+                        /**
+                         * Properties of a DataCatalogConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IDataCatalogConfig
+                         * @property {boolean|null} [enabled] DataCatalogConfig enabled
+                         */
+    
+                        /**
+                         * Constructs a new DataCatalogConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a DataCatalogConfig.
+                         * @implements IDataCatalogConfig
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IDataCatalogConfig=} [properties] Properties to set
+                         */
+                        function DataCatalogConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataCatalogConfig enabled.
+                         * @member {boolean} enabled
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @instance
+                         */
+                        DataCatalogConfig.prototype.enabled = false;
+    
+                        /**
+                         * Creates a new DataCatalogConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDataCatalogConfig=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.DataCatalogConfig} DataCatalogConfig instance
+                         */
+                        DataCatalogConfig.create = function create(properties) {
+                            return new DataCatalogConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataCatalogConfig message. Does not implicitly {@link google.cloud.metastore.v1beta.DataCatalogConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDataCatalogConfig} message DataCatalogConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataCatalogConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataCatalogConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.DataCatalogConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDataCatalogConfig} message DataCatalogConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataCatalogConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataCatalogConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.DataCatalogConfig} DataCatalogConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataCatalogConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.DataCatalogConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.enabled = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataCatalogConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.DataCatalogConfig} DataCatalogConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataCatalogConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataCatalogConfig message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataCatalogConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataCatalogConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.DataCatalogConfig} DataCatalogConfig
+                         */
+                        DataCatalogConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.DataCatalogConfig)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.DataCatalogConfig();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataCatalogConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.DataCatalogConfig} message DataCatalogConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataCatalogConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enabled = false;
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                object.enabled = message.enabled;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataCatalogConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.DataCatalogConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataCatalogConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DataCatalogConfig;
+                    })();
+    
+                    v1beta.MaintenanceWindow = (function() {
+    
+                        /**
+                         * Properties of a MaintenanceWindow.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IMaintenanceWindow
+                         * @property {google.protobuf.IInt32Value|null} [hourOfDay] MaintenanceWindow hourOfDay
+                         * @property {google.type.DayOfWeek|null} [dayOfWeek] MaintenanceWindow dayOfWeek
+                         */
+    
+                        /**
+                         * Constructs a new MaintenanceWindow.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a MaintenanceWindow.
+                         * @implements IMaintenanceWindow
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IMaintenanceWindow=} [properties] Properties to set
+                         */
+                        function MaintenanceWindow(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenanceWindow hourOfDay.
+                         * @member {google.protobuf.IInt32Value|null|undefined} hourOfDay
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @instance
+                         */
+                        MaintenanceWindow.prototype.hourOfDay = null;
+    
+                        /**
+                         * MaintenanceWindow dayOfWeek.
+                         * @member {google.type.DayOfWeek} dayOfWeek
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @instance
+                         */
+                        MaintenanceWindow.prototype.dayOfWeek = 0;
+    
+                        /**
+                         * Creates a new MaintenanceWindow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMaintenanceWindow=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.MaintenanceWindow} MaintenanceWindow instance
+                         */
+                        MaintenanceWindow.create = function create(properties) {
+                            return new MaintenanceWindow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceWindow message. Does not implicitly {@link google.cloud.metastore.v1beta.MaintenanceWindow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMaintenanceWindow} message MaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceWindow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hourOfDay != null && Object.hasOwnProperty.call(message, "hourOfDay"))
+                                $root.google.protobuf.Int32Value.encode(message.hourOfDay, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dayOfWeek);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MaintenanceWindow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMaintenanceWindow} message MaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceWindow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.MaintenanceWindow} MaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceWindow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.MaintenanceWindow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.hourOfDay = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.dayOfWeek = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.MaintenanceWindow} MaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceWindow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenanceWindow message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenanceWindow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hourOfDay != null && message.hasOwnProperty("hourOfDay")) {
+                                var error = $root.google.protobuf.Int32Value.verify(message.hourOfDay);
+                                if (error)
+                                    return "hourOfDay." + error;
+                            }
+                            if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                switch (message.dayOfWeek) {
+                                default:
+                                    return "dayOfWeek: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.MaintenanceWindow} MaintenanceWindow
+                         */
+                        MaintenanceWindow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.MaintenanceWindow)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.MaintenanceWindow();
+                            if (object.hourOfDay != null) {
+                                if (typeof object.hourOfDay !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.MaintenanceWindow.hourOfDay: object expected");
+                                message.hourOfDay = $root.google.protobuf.Int32Value.fromObject(object.hourOfDay);
+                            }
+                            switch (object.dayOfWeek) {
+                            case "DAY_OF_WEEK_UNSPECIFIED":
+                            case 0:
+                                message.dayOfWeek = 0;
+                                break;
+                            case "MONDAY":
+                            case 1:
+                                message.dayOfWeek = 1;
+                                break;
+                            case "TUESDAY":
+                            case 2:
+                                message.dayOfWeek = 2;
+                                break;
+                            case "WEDNESDAY":
+                            case 3:
+                                message.dayOfWeek = 3;
+                                break;
+                            case "THURSDAY":
+                            case 4:
+                                message.dayOfWeek = 4;
+                                break;
+                            case "FRIDAY":
+                            case 5:
+                                message.dayOfWeek = 5;
+                                break;
+                            case "SATURDAY":
+                            case 6:
+                                message.dayOfWeek = 6;
+                                break;
+                            case "SUNDAY":
+                            case 7:
+                                message.dayOfWeek = 7;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenanceWindow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.MaintenanceWindow} message MaintenanceWindow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenanceWindow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hourOfDay = null;
+                                object.dayOfWeek = options.enums === String ? "DAY_OF_WEEK_UNSPECIFIED" : 0;
+                            }
+                            if (message.hourOfDay != null && message.hasOwnProperty("hourOfDay"))
+                                object.hourOfDay = $root.google.protobuf.Int32Value.toObject(message.hourOfDay, options);
+                            if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenanceWindow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.MaintenanceWindow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenanceWindow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MaintenanceWindow;
+                    })();
+    
+                    v1beta.HiveMetastoreConfig = (function() {
+    
+                        /**
+                         * Properties of a HiveMetastoreConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IHiveMetastoreConfig
+                         * @property {string|null} [version] HiveMetastoreConfig version
+                         * @property {Object.<string,string>|null} [configOverrides] HiveMetastoreConfig configOverrides
+                         * @property {google.cloud.metastore.v1beta.IKerberosConfig|null} [kerberosConfig] HiveMetastoreConfig kerberosConfig
+                         */
+    
+                        /**
+                         * Constructs a new HiveMetastoreConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a HiveMetastoreConfig.
+                         * @implements IHiveMetastoreConfig
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IHiveMetastoreConfig=} [properties] Properties to set
+                         */
+                        function HiveMetastoreConfig(properties) {
+                            this.configOverrides = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HiveMetastoreConfig version.
+                         * @member {string} version
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @instance
+                         */
+                        HiveMetastoreConfig.prototype.version = "";
+    
+                        /**
+                         * HiveMetastoreConfig configOverrides.
+                         * @member {Object.<string,string>} configOverrides
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @instance
+                         */
+                        HiveMetastoreConfig.prototype.configOverrides = $util.emptyObject;
+    
+                        /**
+                         * HiveMetastoreConfig kerberosConfig.
+                         * @member {google.cloud.metastore.v1beta.IKerberosConfig|null|undefined} kerberosConfig
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @instance
+                         */
+                        HiveMetastoreConfig.prototype.kerberosConfig = null;
+    
+                        /**
+                         * Creates a new HiveMetastoreConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IHiveMetastoreConfig=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.HiveMetastoreConfig} HiveMetastoreConfig instance
+                         */
+                        HiveMetastoreConfig.create = function create(properties) {
+                            return new HiveMetastoreConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HiveMetastoreConfig message. Does not implicitly {@link google.cloud.metastore.v1beta.HiveMetastoreConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IHiveMetastoreConfig} message HiveMetastoreConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HiveMetastoreConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                            if (message.configOverrides != null && Object.hasOwnProperty.call(message, "configOverrides"))
+                                for (var keys = Object.keys(message.configOverrides), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.configOverrides[keys[i]]).ldelim();
+                            if (message.kerberosConfig != null && Object.hasOwnProperty.call(message, "kerberosConfig"))
+                                $root.google.cloud.metastore.v1beta.KerberosConfig.encode(message.kerberosConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HiveMetastoreConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.HiveMetastoreConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IHiveMetastoreConfig} message HiveMetastoreConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HiveMetastoreConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HiveMetastoreConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.HiveMetastoreConfig} HiveMetastoreConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HiveMetastoreConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.HiveMetastoreConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.version = reader.string();
+                                    break;
+                                case 2:
+                                    if (message.configOverrides === $util.emptyObject)
+                                        message.configOverrides = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.configOverrides[key] = value;
+                                    break;
+                                case 3:
+                                    message.kerberosConfig = $root.google.cloud.metastore.v1beta.KerberosConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HiveMetastoreConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.HiveMetastoreConfig} HiveMetastoreConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HiveMetastoreConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HiveMetastoreConfig message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HiveMetastoreConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.configOverrides != null && message.hasOwnProperty("configOverrides")) {
+                                if (!$util.isObject(message.configOverrides))
+                                    return "configOverrides: object expected";
+                                var key = Object.keys(message.configOverrides);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.configOverrides[key[i]]))
+                                        return "configOverrides: string{k:string} expected";
+                            }
+                            if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig")) {
+                                var error = $root.google.cloud.metastore.v1beta.KerberosConfig.verify(message.kerberosConfig);
+                                if (error)
+                                    return "kerberosConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HiveMetastoreConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.HiveMetastoreConfig} HiveMetastoreConfig
+                         */
+                        HiveMetastoreConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.HiveMetastoreConfig)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.HiveMetastoreConfig();
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.configOverrides) {
+                                if (typeof object.configOverrides !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.HiveMetastoreConfig.configOverrides: object expected");
+                                message.configOverrides = {};
+                                for (var keys = Object.keys(object.configOverrides), i = 0; i < keys.length; ++i)
+                                    message.configOverrides[keys[i]] = String(object.configOverrides[keys[i]]);
+                            }
+                            if (object.kerberosConfig != null) {
+                                if (typeof object.kerberosConfig !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.HiveMetastoreConfig.kerberosConfig: object expected");
+                                message.kerberosConfig = $root.google.cloud.metastore.v1beta.KerberosConfig.fromObject(object.kerberosConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HiveMetastoreConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.HiveMetastoreConfig} message HiveMetastoreConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HiveMetastoreConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.configOverrides = {};
+                            if (options.defaults) {
+                                object.version = "";
+                                object.kerberosConfig = null;
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            var keys2;
+                            if (message.configOverrides && (keys2 = Object.keys(message.configOverrides)).length) {
+                                object.configOverrides = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.configOverrides[keys2[j]] = message.configOverrides[keys2[j]];
+                            }
+                            if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig"))
+                                object.kerberosConfig = $root.google.cloud.metastore.v1beta.KerberosConfig.toObject(message.kerberosConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HiveMetastoreConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.HiveMetastoreConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HiveMetastoreConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HiveMetastoreConfig;
+                    })();
+    
+                    v1beta.KerberosConfig = (function() {
+    
+                        /**
+                         * Properties of a KerberosConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IKerberosConfig
+                         * @property {google.cloud.metastore.v1beta.ISecret|null} [keytab] KerberosConfig keytab
+                         * @property {string|null} [principal] KerberosConfig principal
+                         * @property {string|null} [krb5ConfigGcsUri] KerberosConfig krb5ConfigGcsUri
+                         */
+    
+                        /**
+                         * Constructs a new KerberosConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a KerberosConfig.
+                         * @implements IKerberosConfig
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IKerberosConfig=} [properties] Properties to set
+                         */
+                        function KerberosConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KerberosConfig keytab.
+                         * @member {google.cloud.metastore.v1beta.ISecret|null|undefined} keytab
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.keytab = null;
+    
+                        /**
+                         * KerberosConfig principal.
+                         * @member {string} principal
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.principal = "";
+    
+                        /**
+                         * KerberosConfig krb5ConfigGcsUri.
+                         * @member {string} krb5ConfigGcsUri
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.krb5ConfigGcsUri = "";
+    
+                        /**
+                         * Creates a new KerberosConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IKerberosConfig=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.KerberosConfig} KerberosConfig instance
+                         */
+                        KerberosConfig.create = function create(properties) {
+                            return new KerberosConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KerberosConfig message. Does not implicitly {@link google.cloud.metastore.v1beta.KerberosConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IKerberosConfig} message KerberosConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KerberosConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.keytab != null && Object.hasOwnProperty.call(message, "keytab"))
+                                $root.google.cloud.metastore.v1beta.Secret.encode(message.keytab, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.principal != null && Object.hasOwnProperty.call(message, "principal"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.principal);
+                            if (message.krb5ConfigGcsUri != null && Object.hasOwnProperty.call(message, "krb5ConfigGcsUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.krb5ConfigGcsUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KerberosConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.KerberosConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IKerberosConfig} message KerberosConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KerberosConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KerberosConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.KerberosConfig} KerberosConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KerberosConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.KerberosConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.keytab = $root.google.cloud.metastore.v1beta.Secret.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.principal = reader.string();
+                                    break;
+                                case 3:
+                                    message.krb5ConfigGcsUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KerberosConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.KerberosConfig} KerberosConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KerberosConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KerberosConfig message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KerberosConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.keytab != null && message.hasOwnProperty("keytab")) {
+                                var error = $root.google.cloud.metastore.v1beta.Secret.verify(message.keytab);
+                                if (error)
+                                    return "keytab." + error;
+                            }
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                if (!$util.isString(message.principal))
+                                    return "principal: string expected";
+                            if (message.krb5ConfigGcsUri != null && message.hasOwnProperty("krb5ConfigGcsUri"))
+                                if (!$util.isString(message.krb5ConfigGcsUri))
+                                    return "krb5ConfigGcsUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KerberosConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.KerberosConfig} KerberosConfig
+                         */
+                        KerberosConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.KerberosConfig)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.KerberosConfig();
+                            if (object.keytab != null) {
+                                if (typeof object.keytab !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.KerberosConfig.keytab: object expected");
+                                message.keytab = $root.google.cloud.metastore.v1beta.Secret.fromObject(object.keytab);
+                            }
+                            if (object.principal != null)
+                                message.principal = String(object.principal);
+                            if (object.krb5ConfigGcsUri != null)
+                                message.krb5ConfigGcsUri = String(object.krb5ConfigGcsUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KerberosConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.KerberosConfig} message KerberosConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KerberosConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.keytab = null;
+                                object.principal = "";
+                                object.krb5ConfigGcsUri = "";
+                            }
+                            if (message.keytab != null && message.hasOwnProperty("keytab"))
+                                object.keytab = $root.google.cloud.metastore.v1beta.Secret.toObject(message.keytab, options);
+                            if (message.principal != null && message.hasOwnProperty("principal"))
+                                object.principal = message.principal;
+                            if (message.krb5ConfigGcsUri != null && message.hasOwnProperty("krb5ConfigGcsUri"))
+                                object.krb5ConfigGcsUri = message.krb5ConfigGcsUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KerberosConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.KerberosConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KerberosConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return KerberosConfig;
+                    })();
+    
+                    v1beta.Secret = (function() {
+    
+                        /**
+                         * Properties of a Secret.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface ISecret
+                         * @property {string|null} [cloudSecret] Secret cloudSecret
+                         */
+    
+                        /**
+                         * Constructs a new Secret.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a Secret.
+                         * @implements ISecret
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.ISecret=} [properties] Properties to set
+                         */
+                        function Secret(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Secret cloudSecret.
+                         * @member {string} cloudSecret
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @instance
+                         */
+                        Secret.prototype.cloudSecret = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Secret value.
+                         * @member {"cloudSecret"|undefined} value
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @instance
+                         */
+                        Object.defineProperty(Secret.prototype, "value", {
+                            get: $util.oneOfGetter($oneOfFields = ["cloudSecret"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Secret instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ISecret=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.Secret} Secret instance
+                         */
+                        Secret.create = function create(properties) {
+                            return new Secret(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Secret message. Does not implicitly {@link google.cloud.metastore.v1beta.Secret.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ISecret} message Secret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Secret.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cloudSecret != null && Object.hasOwnProperty.call(message, "cloudSecret"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.cloudSecret);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Secret message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.Secret.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ISecret} message Secret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Secret.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Secret message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.Secret} Secret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Secret.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.Secret();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.cloudSecret = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Secret message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.Secret} Secret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Secret.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Secret message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Secret.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.cloudSecret != null && message.hasOwnProperty("cloudSecret")) {
+                                properties.value = 1;
+                                if (!$util.isString(message.cloudSecret))
+                                    return "cloudSecret: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Secret message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.Secret} Secret
+                         */
+                        Secret.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.Secret)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.Secret();
+                            if (object.cloudSecret != null)
+                                message.cloudSecret = String(object.cloudSecret);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Secret message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.Secret} message Secret
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Secret.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.cloudSecret != null && message.hasOwnProperty("cloudSecret")) {
+                                object.cloudSecret = message.cloudSecret;
+                                if (options.oneofs)
+                                    object.value = "cloudSecret";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Secret to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.Secret
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Secret.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Secret;
+                    })();
+    
+                    v1beta.MetadataManagementActivity = (function() {
+    
+                        /**
+                         * Properties of a MetadataManagementActivity.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IMetadataManagementActivity
+                         * @property {Array.<google.cloud.metastore.v1beta.IMetadataExport>|null} [metadataExports] MetadataManagementActivity metadataExports
+                         * @property {Array.<google.cloud.metastore.v1beta.IRestore>|null} [restores] MetadataManagementActivity restores
+                         */
+    
+                        /**
+                         * Constructs a new MetadataManagementActivity.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a MetadataManagementActivity.
+                         * @implements IMetadataManagementActivity
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IMetadataManagementActivity=} [properties] Properties to set
+                         */
+                        function MetadataManagementActivity(properties) {
+                            this.metadataExports = [];
+                            this.restores = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetadataManagementActivity metadataExports.
+                         * @member {Array.<google.cloud.metastore.v1beta.IMetadataExport>} metadataExports
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @instance
+                         */
+                        MetadataManagementActivity.prototype.metadataExports = $util.emptyArray;
+    
+                        /**
+                         * MetadataManagementActivity restores.
+                         * @member {Array.<google.cloud.metastore.v1beta.IRestore>} restores
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @instance
+                         */
+                        MetadataManagementActivity.prototype.restores = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MetadataManagementActivity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataManagementActivity=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.MetadataManagementActivity} MetadataManagementActivity instance
+                         */
+                        MetadataManagementActivity.create = function create(properties) {
+                            return new MetadataManagementActivity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataManagementActivity message. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataManagementActivity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataManagementActivity} message MetadataManagementActivity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataManagementActivity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metadataExports != null && message.metadataExports.length)
+                                for (var i = 0; i < message.metadataExports.length; ++i)
+                                    $root.google.cloud.metastore.v1beta.MetadataExport.encode(message.metadataExports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.restores != null && message.restores.length)
+                                for (var i = 0; i < message.restores.length; ++i)
+                                    $root.google.cloud.metastore.v1beta.Restore.encode(message.restores[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataManagementActivity message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataManagementActivity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataManagementActivity} message MetadataManagementActivity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataManagementActivity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetadataManagementActivity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.MetadataManagementActivity} MetadataManagementActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataManagementActivity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.MetadataManagementActivity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.metadataExports && message.metadataExports.length))
+                                        message.metadataExports = [];
+                                    message.metadataExports.push($root.google.cloud.metastore.v1beta.MetadataExport.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.restores && message.restores.length))
+                                        message.restores = [];
+                                    message.restores.push($root.google.cloud.metastore.v1beta.Restore.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetadataManagementActivity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.MetadataManagementActivity} MetadataManagementActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataManagementActivity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetadataManagementActivity message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetadataManagementActivity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.metadataExports != null && message.hasOwnProperty("metadataExports")) {
+                                if (!Array.isArray(message.metadataExports))
+                                    return "metadataExports: array expected";
+                                for (var i = 0; i < message.metadataExports.length; ++i) {
+                                    var error = $root.google.cloud.metastore.v1beta.MetadataExport.verify(message.metadataExports[i]);
+                                    if (error)
+                                        return "metadataExports." + error;
+                                }
+                            }
+                            if (message.restores != null && message.hasOwnProperty("restores")) {
+                                if (!Array.isArray(message.restores))
+                                    return "restores: array expected";
+                                for (var i = 0; i < message.restores.length; ++i) {
+                                    var error = $root.google.cloud.metastore.v1beta.Restore.verify(message.restores[i]);
+                                    if (error)
+                                        return "restores." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetadataManagementActivity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.MetadataManagementActivity} MetadataManagementActivity
+                         */
+                        MetadataManagementActivity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.MetadataManagementActivity)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.MetadataManagementActivity();
+                            if (object.metadataExports) {
+                                if (!Array.isArray(object.metadataExports))
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataManagementActivity.metadataExports: array expected");
+                                message.metadataExports = [];
+                                for (var i = 0; i < object.metadataExports.length; ++i) {
+                                    if (typeof object.metadataExports[i] !== "object")
+                                        throw TypeError(".google.cloud.metastore.v1beta.MetadataManagementActivity.metadataExports: object expected");
+                                    message.metadataExports[i] = $root.google.cloud.metastore.v1beta.MetadataExport.fromObject(object.metadataExports[i]);
+                                }
+                            }
+                            if (object.restores) {
+                                if (!Array.isArray(object.restores))
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataManagementActivity.restores: array expected");
+                                message.restores = [];
+                                for (var i = 0; i < object.restores.length; ++i) {
+                                    if (typeof object.restores[i] !== "object")
+                                        throw TypeError(".google.cloud.metastore.v1beta.MetadataManagementActivity.restores: object expected");
+                                    message.restores[i] = $root.google.cloud.metastore.v1beta.Restore.fromObject(object.restores[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetadataManagementActivity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.MetadataManagementActivity} message MetadataManagementActivity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetadataManagementActivity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.metadataExports = [];
+                                object.restores = [];
+                            }
+                            if (message.metadataExports && message.metadataExports.length) {
+                                object.metadataExports = [];
+                                for (var j = 0; j < message.metadataExports.length; ++j)
+                                    object.metadataExports[j] = $root.google.cloud.metastore.v1beta.MetadataExport.toObject(message.metadataExports[j], options);
+                            }
+                            if (message.restores && message.restores.length) {
+                                object.restores = [];
+                                for (var j = 0; j < message.restores.length; ++j)
+                                    object.restores[j] = $root.google.cloud.metastore.v1beta.Restore.toObject(message.restores[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetadataManagementActivity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.MetadataManagementActivity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetadataManagementActivity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetadataManagementActivity;
+                    })();
+    
+                    v1beta.MetadataImport = (function() {
+    
+                        /**
+                         * Properties of a MetadataImport.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IMetadataImport
+                         * @property {google.cloud.metastore.v1beta.MetadataImport.IDatabaseDump|null} [databaseDump] MetadataImport databaseDump
+                         * @property {string|null} [name] MetadataImport name
+                         * @property {string|null} [description] MetadataImport description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MetadataImport createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MetadataImport updateTime
+                         * @property {google.cloud.metastore.v1beta.MetadataImport.State|null} [state] MetadataImport state
+                         */
+    
+                        /**
+                         * Constructs a new MetadataImport.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a MetadataImport.
+                         * @implements IMetadataImport
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IMetadataImport=} [properties] Properties to set
+                         */
+                        function MetadataImport(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetadataImport databaseDump.
+                         * @member {google.cloud.metastore.v1beta.MetadataImport.IDatabaseDump|null|undefined} databaseDump
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         */
+                        MetadataImport.prototype.databaseDump = null;
+    
+                        /**
+                         * MetadataImport name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         */
+                        MetadataImport.prototype.name = "";
+    
+                        /**
+                         * MetadataImport description.
+                         * @member {string} description
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         */
+                        MetadataImport.prototype.description = "";
+    
+                        /**
+                         * MetadataImport createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         */
+                        MetadataImport.prototype.createTime = null;
+    
+                        /**
+                         * MetadataImport updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         */
+                        MetadataImport.prototype.updateTime = null;
+    
+                        /**
+                         * MetadataImport state.
+                         * @member {google.cloud.metastore.v1beta.MetadataImport.State} state
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         */
+                        MetadataImport.prototype.state = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MetadataImport metadata.
+                         * @member {"databaseDump"|undefined} metadata
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         */
+                        Object.defineProperty(MetadataImport.prototype, "metadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["databaseDump"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MetadataImport instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataImport=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.MetadataImport} MetadataImport instance
+                         */
+                        MetadataImport.create = function create(properties) {
+                            return new MetadataImport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataImport message. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataImport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataImport} message MetadataImport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataImport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                            if (message.databaseDump != null && Object.hasOwnProperty.call(message, "databaseDump"))
+                                $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.encode(message.databaseDump, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataImport message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataImport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataImport} message MetadataImport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataImport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetadataImport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.MetadataImport} MetadataImport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataImport.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.MetadataImport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 6:
+                                    message.databaseDump = $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.state = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetadataImport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.MetadataImport} MetadataImport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataImport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetadataImport message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetadataImport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.databaseDump != null && message.hasOwnProperty("databaseDump")) {
+                                properties.metadata = 1;
+                                {
+                                    var error = $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.verify(message.databaseDump);
+                                    if (error)
+                                        return "databaseDump." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetadataImport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.MetadataImport} MetadataImport
+                         */
+                        MetadataImport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.MetadataImport)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.MetadataImport();
+                            if (object.databaseDump != null) {
+                                if (typeof object.databaseDump !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataImport.databaseDump: object expected");
+                                message.databaseDump = $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.fromObject(object.databaseDump);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataImport.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataImport.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetadataImport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.MetadataImport} message MetadataImport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetadataImport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataImport.State[message.state] : message.state;
+                            if (message.databaseDump != null && message.hasOwnProperty("databaseDump")) {
+                                object.databaseDump = $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.toObject(message.databaseDump, options);
+                                if (options.oneofs)
+                                    object.metadata = "databaseDump";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetadataImport to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.MetadataImport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetadataImport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        MetadataImport.DatabaseDump = (function() {
+    
+                            /**
+                             * Properties of a DatabaseDump.
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport
+                             * @interface IDatabaseDump
+                             * @property {google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.DatabaseType|null} [databaseType] DatabaseDump databaseType
+                             * @property {string|null} [gcsUri] DatabaseDump gcsUri
+                             * @property {string|null} [sourceDatabase] DatabaseDump sourceDatabase
+                             * @property {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type|null} [type] DatabaseDump type
+                             */
+    
+                            /**
+                             * Constructs a new DatabaseDump.
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport
+                             * @classdesc Represents a DatabaseDump.
+                             * @implements IDatabaseDump
+                             * @constructor
+                             * @param {google.cloud.metastore.v1beta.MetadataImport.IDatabaseDump=} [properties] Properties to set
+                             */
+                            function DatabaseDump(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DatabaseDump databaseType.
+                             * @member {google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.DatabaseType} databaseType
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @instance
+                             */
+                            DatabaseDump.prototype.databaseType = 0;
+    
+                            /**
+                             * DatabaseDump gcsUri.
+                             * @member {string} gcsUri
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @instance
+                             */
+                            DatabaseDump.prototype.gcsUri = "";
+    
+                            /**
+                             * DatabaseDump sourceDatabase.
+                             * @member {string} sourceDatabase
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @instance
+                             */
+                            DatabaseDump.prototype.sourceDatabase = "";
+    
+                            /**
+                             * DatabaseDump type.
+                             * @member {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type} type
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @instance
+                             */
+                            DatabaseDump.prototype.type = 0;
+    
+                            /**
+                             * Creates a new DatabaseDump instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.MetadataImport.IDatabaseDump=} [properties] Properties to set
+                             * @returns {google.cloud.metastore.v1beta.MetadataImport.DatabaseDump} DatabaseDump instance
+                             */
+                            DatabaseDump.create = function create(properties) {
+                                return new DatabaseDump(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DatabaseDump message. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.MetadataImport.IDatabaseDump} message DatabaseDump message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DatabaseDump.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.databaseType != null && Object.hasOwnProperty.call(message, "databaseType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.databaseType);
+                                if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.gcsUri);
+                                if (message.sourceDatabase != null && Object.hasOwnProperty.call(message, "sourceDatabase"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceDatabase);
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DatabaseDump message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.MetadataImport.IDatabaseDump} message DatabaseDump message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DatabaseDump.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DatabaseDump message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.metastore.v1beta.MetadataImport.DatabaseDump} DatabaseDump
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DatabaseDump.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.databaseType = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.gcsUri = reader.string();
+                                        break;
+                                    case 3:
+                                        message.sourceDatabase = reader.string();
+                                        break;
+                                    case 4:
+                                        message.type = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DatabaseDump message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.metastore.v1beta.MetadataImport.DatabaseDump} DatabaseDump
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DatabaseDump.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DatabaseDump message.
+                             * @function verify
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DatabaseDump.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.databaseType != null && message.hasOwnProperty("databaseType"))
+                                    switch (message.databaseType) {
+                                    default:
+                                        return "databaseType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
+                                    if (!$util.isString(message.gcsUri))
+                                        return "gcsUri: string expected";
+                                if (message.sourceDatabase != null && message.hasOwnProperty("sourceDatabase"))
+                                    if (!$util.isString(message.sourceDatabase))
+                                        return "sourceDatabase: string expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DatabaseDump message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.metastore.v1beta.MetadataImport.DatabaseDump} DatabaseDump
+                             */
+                            DatabaseDump.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump)
+                                    return object;
+                                var message = new $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump();
+                                switch (object.databaseType) {
+                                case "DATABASE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.databaseType = 0;
+                                    break;
+                                case "MYSQL":
+                                case 1:
+                                    message.databaseType = 1;
+                                    break;
+                                }
+                                if (object.gcsUri != null)
+                                    message.gcsUri = String(object.gcsUri);
+                                if (object.sourceDatabase != null)
+                                    message.sourceDatabase = String(object.sourceDatabase);
+                                switch (object.type) {
+                                case "TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "MYSQL":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DatabaseDump message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.MetadataImport.DatabaseDump} message DatabaseDump
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DatabaseDump.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.databaseType = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
+                                    object.gcsUri = "";
+                                    object.sourceDatabase = "";
+                                    object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.databaseType != null && message.hasOwnProperty("databaseType"))
+                                    object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
+                                if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
+                                    object.gcsUri = message.gcsUri;
+                                if (message.sourceDatabase != null && message.hasOwnProperty("sourceDatabase"))
+                                    object.sourceDatabase = message.sourceDatabase;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.type] : message.type;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DatabaseDump to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.metastore.v1beta.MetadataImport.DatabaseDump
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DatabaseDump.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * DatabaseType enum.
+                             * @name google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.DatabaseType
+                             * @enum {number}
+                             * @property {number} DATABASE_TYPE_UNSPECIFIED=0 DATABASE_TYPE_UNSPECIFIED value
+                             * @property {number} MYSQL=1 MYSQL value
+                             */
+                            DatabaseDump.DatabaseType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "DATABASE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "MYSQL"] = 1;
+                                return values;
+                            })();
+    
+                            return DatabaseDump;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.metastore.v1beta.MetadataImport.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} FAILED=4 FAILED value
+                         */
+                        MetadataImport.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            return values;
+                        })();
+    
+                        return MetadataImport;
+                    })();
+    
+                    v1beta.MetadataExport = (function() {
+    
+                        /**
+                         * Properties of a MetadataExport.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IMetadataExport
+                         * @property {string|null} [destinationGcsUri] MetadataExport destinationGcsUri
+                         * @property {google.protobuf.ITimestamp|null} [startTime] MetadataExport startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] MetadataExport endTime
+                         * @property {google.cloud.metastore.v1beta.MetadataExport.State|null} [state] MetadataExport state
+                         * @property {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type|null} [databaseDumpType] MetadataExport databaseDumpType
+                         */
+    
+                        /**
+                         * Constructs a new MetadataExport.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a MetadataExport.
+                         * @implements IMetadataExport
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IMetadataExport=} [properties] Properties to set
+                         */
+                        function MetadataExport(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetadataExport destinationGcsUri.
+                         * @member {string} destinationGcsUri
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @instance
+                         */
+                        MetadataExport.prototype.destinationGcsUri = "";
+    
+                        /**
+                         * MetadataExport startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @instance
+                         */
+                        MetadataExport.prototype.startTime = null;
+    
+                        /**
+                         * MetadataExport endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @instance
+                         */
+                        MetadataExport.prototype.endTime = null;
+    
+                        /**
+                         * MetadataExport state.
+                         * @member {google.cloud.metastore.v1beta.MetadataExport.State} state
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @instance
+                         */
+                        MetadataExport.prototype.state = 0;
+    
+                        /**
+                         * MetadataExport databaseDumpType.
+                         * @member {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type} databaseDumpType
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @instance
+                         */
+                        MetadataExport.prototype.databaseDumpType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MetadataExport destination.
+                         * @member {"destinationGcsUri"|undefined} destination
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @instance
+                         */
+                        Object.defineProperty(MetadataExport.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationGcsUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MetadataExport instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataExport=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.MetadataExport} MetadataExport instance
+                         */
+                        MetadataExport.create = function create(properties) {
+                            return new MetadataExport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataExport message. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataExport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataExport} message MetadataExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataExport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.destinationGcsUri != null && Object.hasOwnProperty.call(message, "destinationGcsUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.destinationGcsUri);
+                            if (message.databaseDumpType != null && Object.hasOwnProperty.call(message, "databaseDumpType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.databaseDumpType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetadataExport message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MetadataExport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IMetadataExport} message MetadataExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetadataExport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetadataExport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.MetadataExport} MetadataExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataExport.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.MetadataExport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.destinationGcsUri = reader.string();
+                                    break;
+                                case 1:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.state = reader.int32();
+                                    break;
+                                case 5:
+                                    message.databaseDumpType = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetadataExport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.MetadataExport} MetadataExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetadataExport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetadataExport message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetadataExport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.destinationGcsUri != null && message.hasOwnProperty("destinationGcsUri")) {
+                                properties.destination = 1;
+                                if (!$util.isString(message.destinationGcsUri))
+                                    return "destinationGcsUri: string expected";
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
+                                switch (message.databaseDumpType) {
+                                default:
+                                    return "databaseDumpType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetadataExport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.MetadataExport} MetadataExport
+                         */
+                        MetadataExport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.MetadataExport)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.MetadataExport();
+                            if (object.destinationGcsUri != null)
+                                message.destinationGcsUri = String(object.destinationGcsUri);
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataExport.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.MetadataExport.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "CANCELLED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            switch (object.databaseDumpType) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.databaseDumpType = 0;
+                                break;
+                            case "MYSQL":
+                            case 1:
+                                message.databaseDumpType = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetadataExport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.MetadataExport} message MetadataExport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetadataExport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.databaseDumpType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataExport.State[message.state] : message.state;
+                            if (message.destinationGcsUri != null && message.hasOwnProperty("destinationGcsUri")) {
+                                object.destinationGcsUri = message.destinationGcsUri;
+                                if (options.oneofs)
+                                    object.destination = "destinationGcsUri";
+                            }
+                            if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetadataExport to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.MetadataExport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetadataExport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.metastore.v1beta.MetadataExport.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         * @property {number} FAILED=3 FAILED value
+                         * @property {number} CANCELLED=4 CANCELLED value
+                         */
+                        MetadataExport.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            values[valuesById[4] = "CANCELLED"] = 4;
+                            return values;
+                        })();
+    
+                        return MetadataExport;
+                    })();
+    
+                    v1beta.Backup = (function() {
+    
+                        /**
+                         * Properties of a Backup.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IBackup
+                         * @property {string|null} [name] Backup name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Backup createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] Backup endTime
+                         * @property {google.cloud.metastore.v1beta.Backup.State|null} [state] Backup state
+                         * @property {google.cloud.metastore.v1beta.IService|null} [serviceRevision] Backup serviceRevision
+                         * @property {string|null} [description] Backup description
+                         */
+    
+                        /**
+                         * Constructs a new Backup.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a Backup.
+                         * @implements IBackup
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IBackup=} [properties] Properties to set
+                         */
+                        function Backup(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Backup name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @instance
+                         */
+                        Backup.prototype.name = "";
+    
+                        /**
+                         * Backup createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @instance
+                         */
+                        Backup.prototype.createTime = null;
+    
+                        /**
+                         * Backup endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @instance
+                         */
+                        Backup.prototype.endTime = null;
+    
+                        /**
+                         * Backup state.
+                         * @member {google.cloud.metastore.v1beta.Backup.State} state
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @instance
+                         */
+                        Backup.prototype.state = 0;
+    
+                        /**
+                         * Backup serviceRevision.
+                         * @member {google.cloud.metastore.v1beta.IService|null|undefined} serviceRevision
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @instance
+                         */
+                        Backup.prototype.serviceRevision = null;
+    
+                        /**
+                         * Backup description.
+                         * @member {string} description
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @instance
+                         */
+                        Backup.prototype.description = "";
+    
+                        /**
+                         * Creates a new Backup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IBackup=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.Backup} Backup instance
+                         */
+                        Backup.create = function create(properties) {
+                            return new Backup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Backup message. Does not implicitly {@link google.cloud.metastore.v1beta.Backup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IBackup} message Backup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Backup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.serviceRevision != null && Object.hasOwnProperty.call(message, "serviceRevision"))
+                                $root.google.cloud.metastore.v1beta.Service.encode(message.serviceRevision, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Backup message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.Backup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IBackup} message Backup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Backup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.Backup} Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Backup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.Backup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.state = reader.int32();
+                                    break;
+                                case 5:
+                                    message.serviceRevision = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.description = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.Backup} Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Backup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Backup message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Backup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.serviceRevision != null && message.hasOwnProperty("serviceRevision")) {
+                                var error = $root.google.cloud.metastore.v1beta.Service.verify(message.serviceRevision);
+                                if (error)
+                                    return "serviceRevision." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Backup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.Backup} Backup
+                         */
+                        Backup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.Backup)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.Backup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Backup.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Backup.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "DELETING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "ACTIVE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.serviceRevision != null) {
+                                if (typeof object.serviceRevision !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Backup.serviceRevision: object expected");
+                                message.serviceRevision = $root.google.cloud.metastore.v1beta.Service.fromObject(object.serviceRevision);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Backup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.Backup} message Backup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Backup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.serviceRevision = null;
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Backup.State[message.state] : message.state;
+                            if (message.serviceRevision != null && message.hasOwnProperty("serviceRevision"))
+                                object.serviceRevision = $root.google.cloud.metastore.v1beta.Service.toObject(message.serviceRevision, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Backup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.Backup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Backup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.metastore.v1beta.Backup.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} DELETING=2 DELETING value
+                         * @property {number} ACTIVE=3 ACTIVE value
+                         * @property {number} FAILED=4 FAILED value
+                         */
+                        Backup.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "DELETING"] = 2;
+                            values[valuesById[3] = "ACTIVE"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            return values;
+                        })();
+    
+                        return Backup;
+                    })();
+    
+                    v1beta.Restore = (function() {
+    
+                        /**
+                         * Properties of a Restore.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IRestore
+                         * @property {google.protobuf.ITimestamp|null} [startTime] Restore startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] Restore endTime
+                         * @property {google.cloud.metastore.v1beta.Restore.State|null} [state] Restore state
+                         * @property {string|null} [backup] Restore backup
+                         * @property {google.cloud.metastore.v1beta.Restore.RestoreType|null} [type] Restore type
+                         * @property {string|null} [details] Restore details
+                         */
+    
+                        /**
+                         * Constructs a new Restore.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a Restore.
+                         * @implements IRestore
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IRestore=} [properties] Properties to set
+                         */
+                        function Restore(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Restore startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @instance
+                         */
+                        Restore.prototype.startTime = null;
+    
+                        /**
+                         * Restore endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @instance
+                         */
+                        Restore.prototype.endTime = null;
+    
+                        /**
+                         * Restore state.
+                         * @member {google.cloud.metastore.v1beta.Restore.State} state
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @instance
+                         */
+                        Restore.prototype.state = 0;
+    
+                        /**
+                         * Restore backup.
+                         * @member {string} backup
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @instance
+                         */
+                        Restore.prototype.backup = "";
+    
+                        /**
+                         * Restore type.
+                         * @member {google.cloud.metastore.v1beta.Restore.RestoreType} type
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @instance
+                         */
+                        Restore.prototype.type = 0;
+    
+                        /**
+                         * Restore details.
+                         * @member {string} details
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @instance
+                         */
+                        Restore.prototype.details = "";
+    
+                        /**
+                         * Creates a new Restore instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IRestore=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.Restore} Restore instance
+                         */
+                        Restore.create = function create(properties) {
+                            return new Restore(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Restore message. Does not implicitly {@link google.cloud.metastore.v1beta.Restore.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IRestore} message Restore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Restore.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.backup);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.details);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Restore message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.Restore.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IRestore} message Restore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Restore.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Restore message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.Restore} Restore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Restore.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.Restore();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.state = reader.int32();
+                                    break;
+                                case 4:
+                                    message.backup = reader.string();
+                                    break;
+                                case 5:
+                                    message.type = reader.int32();
+                                    break;
+                                case 6:
+                                    message.details = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Restore message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.Restore} Restore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Restore.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Restore message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Restore.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                if (!$util.isString(message.backup))
+                                    return "backup: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                if (!$util.isString(message.details))
+                                    return "details: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Restore message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.Restore} Restore
+                         */
+                        Restore.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.Restore)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.Restore();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Restore.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Restore.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "CANCELLED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.backup != null)
+                                message.backup = String(object.backup);
+                            switch (object.type) {
+                            case "RESTORE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "FULL":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "METADATA_ONLY":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            if (object.details != null)
+                                message.details = String(object.details);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Restore message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.Restore} message Restore
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Restore.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.backup = "";
+                                object.type = options.enums === String ? "RESTORE_TYPE_UNSPECIFIED" : 0;
+                                object.details = "";
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.State[message.state] : message.state;
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                object.backup = message.backup;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.type] : message.type;
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = message.details;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Restore to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.Restore
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Restore.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.metastore.v1beta.Restore.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         * @property {number} FAILED=3 FAILED value
+                         * @property {number} CANCELLED=4 CANCELLED value
+                         */
+                        Restore.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            values[valuesById[4] = "CANCELLED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * RestoreType enum.
+                         * @name google.cloud.metastore.v1beta.Restore.RestoreType
+                         * @enum {number}
+                         * @property {number} RESTORE_TYPE_UNSPECIFIED=0 RESTORE_TYPE_UNSPECIFIED value
+                         * @property {number} FULL=1 FULL value
+                         * @property {number} METADATA_ONLY=2 METADATA_ONLY value
+                         */
+                        Restore.RestoreType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESTORE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FULL"] = 1;
+                            values[valuesById[2] = "METADATA_ONLY"] = 2;
+                            return values;
+                        })();
+    
+                        return Restore;
+                    })();
+    
+                    v1beta.ListServicesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListServicesRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IListServicesRequest
+                         * @property {string|null} [parent] ListServicesRequest parent
+                         * @property {number|null} [pageSize] ListServicesRequest pageSize
+                         * @property {string|null} [pageToken] ListServicesRequest pageToken
+                         * @property {string|null} [filter] ListServicesRequest filter
+                         * @property {string|null} [orderBy] ListServicesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListServicesRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a ListServicesRequest.
+                         * @implements IListServicesRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IListServicesRequest=} [properties] Properties to set
+                         */
+                        function ListServicesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServicesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListServicesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListServicesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListServicesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListServicesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @instance
+                         */
+                        ListServicesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListServicesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListServicesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ListServicesRequest} ListServicesRequest instance
+                         */
+                        ListServicesRequest.create = function create(properties) {
+                            return new ListServicesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.ListServicesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListServicesRequest} message ListServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ListServicesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListServicesRequest} message ListServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServicesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ListServicesRequest} ListServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ListServicesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServicesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ListServicesRequest} ListServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServicesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServicesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServicesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ListServicesRequest} ListServicesRequest
+                         */
+                        ListServicesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ListServicesRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ListServicesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServicesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ListServicesRequest} message ListServicesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServicesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServicesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ListServicesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServicesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListServicesRequest;
+                    })();
+    
+                    v1beta.ListServicesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListServicesResponse.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IListServicesResponse
+                         * @property {Array.<google.cloud.metastore.v1beta.IService>|null} [services] ListServicesResponse services
+                         * @property {string|null} [nextPageToken] ListServicesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListServicesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListServicesResponse.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a ListServicesResponse.
+                         * @implements IListServicesResponse
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IListServicesResponse=} [properties] Properties to set
+                         */
+                        function ListServicesResponse(properties) {
+                            this.services = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListServicesResponse services.
+                         * @member {Array.<google.cloud.metastore.v1beta.IService>} services
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @instance
+                         */
+                        ListServicesResponse.prototype.services = $util.emptyArray;
+    
+                        /**
+                         * ListServicesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @instance
+                         */
+                        ListServicesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListServicesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @instance
+                         */
+                        ListServicesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListServicesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListServicesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ListServicesResponse} ListServicesResponse instance
+                         */
+                        ListServicesResponse.create = function create(properties) {
+                            return new ListServicesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesResponse message. Does not implicitly {@link google.cloud.metastore.v1beta.ListServicesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListServicesResponse} message ListServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.services != null && message.services.length)
+                                for (var i = 0; i < message.services.length; ++i)
+                                    $root.google.cloud.metastore.v1beta.Service.encode(message.services[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListServicesResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ListServicesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListServicesResponse} message ListServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListServicesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListServicesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ListServicesResponse} ListServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ListServicesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.services && message.services.length))
+                                        message.services = [];
+                                    message.services.push($root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListServicesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ListServicesResponse} ListServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListServicesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListServicesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListServicesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.services != null && message.hasOwnProperty("services")) {
+                                if (!Array.isArray(message.services))
+                                    return "services: array expected";
+                                for (var i = 0; i < message.services.length; ++i) {
+                                    var error = $root.google.cloud.metastore.v1beta.Service.verify(message.services[i]);
+                                    if (error)
+                                        return "services." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListServicesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ListServicesResponse} ListServicesResponse
+                         */
+                        ListServicesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ListServicesResponse)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ListServicesResponse();
+                            if (object.services) {
+                                if (!Array.isArray(object.services))
+                                    throw TypeError(".google.cloud.metastore.v1beta.ListServicesResponse.services: array expected");
+                                message.services = [];
+                                for (var i = 0; i < object.services.length; ++i) {
+                                    if (typeof object.services[i] !== "object")
+                                        throw TypeError(".google.cloud.metastore.v1beta.ListServicesResponse.services: object expected");
+                                    message.services[i] = $root.google.cloud.metastore.v1beta.Service.fromObject(object.services[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.metastore.v1beta.ListServicesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListServicesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ListServicesResponse} message ListServicesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListServicesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.services = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.services && message.services.length) {
+                                object.services = [];
+                                for (var j = 0; j < message.services.length; ++j)
+                                    object.services[j] = $root.google.cloud.metastore.v1beta.Service.toObject(message.services[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListServicesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ListServicesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListServicesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListServicesResponse;
+                    })();
+    
+                    v1beta.GetServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IGetServiceRequest
+                         * @property {string|null} [name] GetServiceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a GetServiceRequest.
+                         * @implements IGetServiceRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IGetServiceRequest=} [properties] Properties to set
+                         */
+                        function GetServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @instance
+                         */
+                        GetServiceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.GetServiceRequest} GetServiceRequest instance
+                         */
+                        GetServiceRequest.create = function create(properties) {
+                            return new GetServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.GetServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetServiceRequest} message GetServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.GetServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetServiceRequest} message GetServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.GetServiceRequest} GetServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.GetServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.GetServiceRequest} GetServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.GetServiceRequest} GetServiceRequest
+                         */
+                        GetServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.GetServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.GetServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.GetServiceRequest} message GetServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.GetServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetServiceRequest;
+                    })();
+    
+                    v1beta.CreateServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface ICreateServiceRequest
+                         * @property {string|null} [parent] CreateServiceRequest parent
+                         * @property {string|null} [serviceId] CreateServiceRequest serviceId
+                         * @property {google.cloud.metastore.v1beta.IService|null} [service] CreateServiceRequest service
+                         * @property {string|null} [requestId] CreateServiceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a CreateServiceRequest.
+                         * @implements ICreateServiceRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.ICreateServiceRequest=} [properties] Properties to set
+                         */
+                        function CreateServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateServiceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @instance
+                         */
+                        CreateServiceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateServiceRequest serviceId.
+                         * @member {string} serviceId
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @instance
+                         */
+                        CreateServiceRequest.prototype.serviceId = "";
+    
+                        /**
+                         * CreateServiceRequest service.
+                         * @member {google.cloud.metastore.v1beta.IService|null|undefined} service
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @instance
+                         */
+                        CreateServiceRequest.prototype.service = null;
+    
+                        /**
+                         * CreateServiceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @instance
+                         */
+                        CreateServiceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.CreateServiceRequest} CreateServiceRequest instance
+                         */
+                        CreateServiceRequest.create = function create(properties) {
+                            return new CreateServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.CreateServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateServiceRequest} message CreateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.serviceId != null && Object.hasOwnProperty.call(message, "serviceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceId);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                $root.google.cloud.metastore.v1beta.Service.encode(message.service, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.CreateServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateServiceRequest} message CreateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.CreateServiceRequest} CreateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.CreateServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.serviceId = reader.string();
+                                    break;
+                                case 3:
+                                    message.service = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.CreateServiceRequest} CreateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                                if (!$util.isString(message.serviceId))
+                                    return "serviceId: string expected";
+                            if (message.service != null && message.hasOwnProperty("service")) {
+                                var error = $root.google.cloud.metastore.v1beta.Service.verify(message.service);
+                                if (error)
+                                    return "service." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.CreateServiceRequest} CreateServiceRequest
+                         */
+                        CreateServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.CreateServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.CreateServiceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.serviceId != null)
+                                message.serviceId = String(object.serviceId);
+                            if (object.service != null) {
+                                if (typeof object.service !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.CreateServiceRequest.service: object expected");
+                                message.service = $root.google.cloud.metastore.v1beta.Service.fromObject(object.service);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.CreateServiceRequest} message CreateServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.serviceId = "";
+                                object.service = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                                object.serviceId = message.serviceId;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = $root.google.cloud.metastore.v1beta.Service.toObject(message.service, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.CreateServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateServiceRequest;
+                    })();
+    
+                    v1beta.UpdateServiceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IUpdateServiceRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateServiceRequest updateMask
+                         * @property {google.cloud.metastore.v1beta.IService|null} [service] UpdateServiceRequest service
+                         * @property {string|null} [requestId] UpdateServiceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents an UpdateServiceRequest.
+                         * @implements IUpdateServiceRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IUpdateServiceRequest=} [properties] Properties to set
+                         */
+                        function UpdateServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateServiceRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @instance
+                         */
+                        UpdateServiceRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateServiceRequest service.
+                         * @member {google.cloud.metastore.v1beta.IService|null|undefined} service
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @instance
+                         */
+                        UpdateServiceRequest.prototype.service = null;
+    
+                        /**
+                         * UpdateServiceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @instance
+                         */
+                        UpdateServiceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IUpdateServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.UpdateServiceRequest} UpdateServiceRequest instance
+                         */
+                        UpdateServiceRequest.create = function create(properties) {
+                            return new UpdateServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.UpdateServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IUpdateServiceRequest} message UpdateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                $root.google.cloud.metastore.v1beta.Service.encode(message.service, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.UpdateServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IUpdateServiceRequest} message UpdateServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.UpdateServiceRequest} UpdateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.UpdateServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.service = $root.google.cloud.metastore.v1beta.Service.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.UpdateServiceRequest} UpdateServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.service != null && message.hasOwnProperty("service")) {
+                                var error = $root.google.cloud.metastore.v1beta.Service.verify(message.service);
+                                if (error)
+                                    return "service." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.UpdateServiceRequest} UpdateServiceRequest
+                         */
+                        UpdateServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.UpdateServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.UpdateServiceRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.UpdateServiceRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.service != null) {
+                                if (typeof object.service !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.UpdateServiceRequest.service: object expected");
+                                message.service = $root.google.cloud.metastore.v1beta.Service.fromObject(object.service);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.UpdateServiceRequest} message UpdateServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.service = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = $root.google.cloud.metastore.v1beta.Service.toObject(message.service, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.UpdateServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateServiceRequest;
+                    })();
+    
+                    v1beta.DeleteServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IDeleteServiceRequest
+                         * @property {string|null} [name] DeleteServiceRequest name
+                         * @property {string|null} [requestId] DeleteServiceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a DeleteServiceRequest.
+                         * @implements IDeleteServiceRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IDeleteServiceRequest=} [properties] Properties to set
+                         */
+                        function DeleteServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @instance
+                         */
+                        DeleteServiceRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteServiceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @instance
+                         */
+                        DeleteServiceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDeleteServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.DeleteServiceRequest} DeleteServiceRequest instance
+                         */
+                        DeleteServiceRequest.create = function create(properties) {
+                            return new DeleteServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.DeleteServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDeleteServiceRequest} message DeleteServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.DeleteServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDeleteServiceRequest} message DeleteServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.DeleteServiceRequest} DeleteServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.DeleteServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.DeleteServiceRequest} DeleteServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.DeleteServiceRequest} DeleteServiceRequest
+                         */
+                        DeleteServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.DeleteServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.DeleteServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.DeleteServiceRequest} message DeleteServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.DeleteServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteServiceRequest;
+                    })();
+    
+                    v1beta.ListMetadataImportsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMetadataImportsRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IListMetadataImportsRequest
+                         * @property {string|null} [parent] ListMetadataImportsRequest parent
+                         * @property {number|null} [pageSize] ListMetadataImportsRequest pageSize
+                         * @property {string|null} [pageToken] ListMetadataImportsRequest pageToken
+                         * @property {string|null} [filter] ListMetadataImportsRequest filter
+                         * @property {string|null} [orderBy] ListMetadataImportsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListMetadataImportsRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a ListMetadataImportsRequest.
+                         * @implements IListMetadataImportsRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsRequest=} [properties] Properties to set
+                         */
+                        function ListMetadataImportsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMetadataImportsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @instance
+                         */
+                        ListMetadataImportsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMetadataImportsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @instance
+                         */
+                        ListMetadataImportsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMetadataImportsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @instance
+                         */
+                        ListMetadataImportsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListMetadataImportsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @instance
+                         */
+                        ListMetadataImportsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListMetadataImportsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @instance
+                         */
+                        ListMetadataImportsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListMetadataImportsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsRequest} ListMetadataImportsRequest instance
+                         */
+                        ListMetadataImportsRequest.create = function create(properties) {
+                            return new ListMetadataImportsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMetadataImportsRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.ListMetadataImportsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsRequest} message ListMetadataImportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMetadataImportsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMetadataImportsRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ListMetadataImportsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsRequest} message ListMetadataImportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMetadataImportsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMetadataImportsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsRequest} ListMetadataImportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMetadataImportsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ListMetadataImportsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMetadataImportsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsRequest} ListMetadataImportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMetadataImportsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMetadataImportsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMetadataImportsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMetadataImportsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsRequest} ListMetadataImportsRequest
+                         */
+                        ListMetadataImportsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ListMetadataImportsRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ListMetadataImportsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMetadataImportsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ListMetadataImportsRequest} message ListMetadataImportsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMetadataImportsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMetadataImportsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMetadataImportsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListMetadataImportsRequest;
+                    })();
+    
+                    v1beta.ListMetadataImportsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMetadataImportsResponse.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IListMetadataImportsResponse
+                         * @property {Array.<google.cloud.metastore.v1beta.IMetadataImport>|null} [metadataImports] ListMetadataImportsResponse metadataImports
+                         * @property {string|null} [nextPageToken] ListMetadataImportsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMetadataImportsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMetadataImportsResponse.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a ListMetadataImportsResponse.
+                         * @implements IListMetadataImportsResponse
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsResponse=} [properties] Properties to set
+                         */
+                        function ListMetadataImportsResponse(properties) {
+                            this.metadataImports = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMetadataImportsResponse metadataImports.
+                         * @member {Array.<google.cloud.metastore.v1beta.IMetadataImport>} metadataImports
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @instance
+                         */
+                        ListMetadataImportsResponse.prototype.metadataImports = $util.emptyArray;
+    
+                        /**
+                         * ListMetadataImportsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @instance
+                         */
+                        ListMetadataImportsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMetadataImportsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @instance
+                         */
+                        ListMetadataImportsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMetadataImportsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsResponse} ListMetadataImportsResponse instance
+                         */
+                        ListMetadataImportsResponse.create = function create(properties) {
+                            return new ListMetadataImportsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMetadataImportsResponse message. Does not implicitly {@link google.cloud.metastore.v1beta.ListMetadataImportsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsResponse} message ListMetadataImportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMetadataImportsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metadataImports != null && message.metadataImports.length)
+                                for (var i = 0; i < message.metadataImports.length; ++i)
+                                    $root.google.cloud.metastore.v1beta.MetadataImport.encode(message.metadataImports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMetadataImportsResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ListMetadataImportsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListMetadataImportsResponse} message ListMetadataImportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMetadataImportsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMetadataImportsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsResponse} ListMetadataImportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMetadataImportsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ListMetadataImportsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.metadataImports && message.metadataImports.length))
+                                        message.metadataImports = [];
+                                    message.metadataImports.push($root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMetadataImportsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsResponse} ListMetadataImportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMetadataImportsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMetadataImportsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMetadataImportsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.metadataImports != null && message.hasOwnProperty("metadataImports")) {
+                                if (!Array.isArray(message.metadataImports))
+                                    return "metadataImports: array expected";
+                                for (var i = 0; i < message.metadataImports.length; ++i) {
+                                    var error = $root.google.cloud.metastore.v1beta.MetadataImport.verify(message.metadataImports[i]);
+                                    if (error)
+                                        return "metadataImports." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMetadataImportsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ListMetadataImportsResponse} ListMetadataImportsResponse
+                         */
+                        ListMetadataImportsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ListMetadataImportsResponse)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ListMetadataImportsResponse();
+                            if (object.metadataImports) {
+                                if (!Array.isArray(object.metadataImports))
+                                    throw TypeError(".google.cloud.metastore.v1beta.ListMetadataImportsResponse.metadataImports: array expected");
+                                message.metadataImports = [];
+                                for (var i = 0; i < object.metadataImports.length; ++i) {
+                                    if (typeof object.metadataImports[i] !== "object")
+                                        throw TypeError(".google.cloud.metastore.v1beta.ListMetadataImportsResponse.metadataImports: object expected");
+                                    message.metadataImports[i] = $root.google.cloud.metastore.v1beta.MetadataImport.fromObject(object.metadataImports[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.metastore.v1beta.ListMetadataImportsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMetadataImportsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ListMetadataImportsResponse} message ListMetadataImportsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMetadataImportsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.metadataImports = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.metadataImports && message.metadataImports.length) {
+                                object.metadataImports = [];
+                                for (var j = 0; j < message.metadataImports.length; ++j)
+                                    object.metadataImports[j] = $root.google.cloud.metastore.v1beta.MetadataImport.toObject(message.metadataImports[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMetadataImportsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ListMetadataImportsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMetadataImportsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListMetadataImportsResponse;
+                    })();
+    
+                    v1beta.GetMetadataImportRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMetadataImportRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IGetMetadataImportRequest
+                         * @property {string|null} [name] GetMetadataImportRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMetadataImportRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a GetMetadataImportRequest.
+                         * @implements IGetMetadataImportRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IGetMetadataImportRequest=} [properties] Properties to set
+                         */
+                        function GetMetadataImportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMetadataImportRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @instance
+                         */
+                        GetMetadataImportRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMetadataImportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetMetadataImportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.GetMetadataImportRequest} GetMetadataImportRequest instance
+                         */
+                        GetMetadataImportRequest.create = function create(properties) {
+                            return new GetMetadataImportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMetadataImportRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.GetMetadataImportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetMetadataImportRequest} message GetMetadataImportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMetadataImportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMetadataImportRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.GetMetadataImportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetMetadataImportRequest} message GetMetadataImportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMetadataImportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMetadataImportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.GetMetadataImportRequest} GetMetadataImportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMetadataImportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.GetMetadataImportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMetadataImportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.GetMetadataImportRequest} GetMetadataImportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMetadataImportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMetadataImportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMetadataImportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMetadataImportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.GetMetadataImportRequest} GetMetadataImportRequest
+                         */
+                        GetMetadataImportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.GetMetadataImportRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.GetMetadataImportRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMetadataImportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.GetMetadataImportRequest} message GetMetadataImportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMetadataImportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMetadataImportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.GetMetadataImportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMetadataImportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetMetadataImportRequest;
+                    })();
+    
+                    v1beta.CreateMetadataImportRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateMetadataImportRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface ICreateMetadataImportRequest
+                         * @property {string|null} [parent] CreateMetadataImportRequest parent
+                         * @property {string|null} [metadataImportId] CreateMetadataImportRequest metadataImportId
+                         * @property {google.cloud.metastore.v1beta.IMetadataImport|null} [metadataImport] CreateMetadataImportRequest metadataImport
+                         * @property {string|null} [requestId] CreateMetadataImportRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateMetadataImportRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a CreateMetadataImportRequest.
+                         * @implements ICreateMetadataImportRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.ICreateMetadataImportRequest=} [properties] Properties to set
+                         */
+                        function CreateMetadataImportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateMetadataImportRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @instance
+                         */
+                        CreateMetadataImportRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateMetadataImportRequest metadataImportId.
+                         * @member {string} metadataImportId
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @instance
+                         */
+                        CreateMetadataImportRequest.prototype.metadataImportId = "";
+    
+                        /**
+                         * CreateMetadataImportRequest metadataImport.
+                         * @member {google.cloud.metastore.v1beta.IMetadataImport|null|undefined} metadataImport
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @instance
+                         */
+                        CreateMetadataImportRequest.prototype.metadataImport = null;
+    
+                        /**
+                         * CreateMetadataImportRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @instance
+                         */
+                        CreateMetadataImportRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateMetadataImportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateMetadataImportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.CreateMetadataImportRequest} CreateMetadataImportRequest instance
+                         */
+                        CreateMetadataImportRequest.create = function create(properties) {
+                            return new CreateMetadataImportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMetadataImportRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.CreateMetadataImportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateMetadataImportRequest} message CreateMetadataImportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMetadataImportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.metadataImportId != null && Object.hasOwnProperty.call(message, "metadataImportId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.metadataImportId);
+                            if (message.metadataImport != null && Object.hasOwnProperty.call(message, "metadataImport"))
+                                $root.google.cloud.metastore.v1beta.MetadataImport.encode(message.metadataImport, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMetadataImportRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.CreateMetadataImportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateMetadataImportRequest} message CreateMetadataImportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMetadataImportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateMetadataImportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.CreateMetadataImportRequest} CreateMetadataImportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMetadataImportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.CreateMetadataImportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.metadataImportId = reader.string();
+                                    break;
+                                case 3:
+                                    message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateMetadataImportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.CreateMetadataImportRequest} CreateMetadataImportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMetadataImportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateMetadataImportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateMetadataImportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.metadataImportId != null && message.hasOwnProperty("metadataImportId"))
+                                if (!$util.isString(message.metadataImportId))
+                                    return "metadataImportId: string expected";
+                            if (message.metadataImport != null && message.hasOwnProperty("metadataImport")) {
+                                var error = $root.google.cloud.metastore.v1beta.MetadataImport.verify(message.metadataImport);
+                                if (error)
+                                    return "metadataImport." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateMetadataImportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.CreateMetadataImportRequest} CreateMetadataImportRequest
+                         */
+                        CreateMetadataImportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.CreateMetadataImportRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.CreateMetadataImportRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.metadataImportId != null)
+                                message.metadataImportId = String(object.metadataImportId);
+                            if (object.metadataImport != null) {
+                                if (typeof object.metadataImport !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.CreateMetadataImportRequest.metadataImport: object expected");
+                                message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.fromObject(object.metadataImport);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateMetadataImportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.CreateMetadataImportRequest} message CreateMetadataImportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateMetadataImportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.metadataImportId = "";
+                                object.metadataImport = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.metadataImportId != null && message.hasOwnProperty("metadataImportId"))
+                                object.metadataImportId = message.metadataImportId;
+                            if (message.metadataImport != null && message.hasOwnProperty("metadataImport"))
+                                object.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.toObject(message.metadataImport, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateMetadataImportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.CreateMetadataImportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateMetadataImportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateMetadataImportRequest;
+                    })();
+    
+                    v1beta.UpdateMetadataImportRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateMetadataImportRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IUpdateMetadataImportRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMetadataImportRequest updateMask
+                         * @property {google.cloud.metastore.v1beta.IMetadataImport|null} [metadataImport] UpdateMetadataImportRequest metadataImport
+                         * @property {string|null} [requestId] UpdateMetadataImportRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateMetadataImportRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents an UpdateMetadataImportRequest.
+                         * @implements IUpdateMetadataImportRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IUpdateMetadataImportRequest=} [properties] Properties to set
+                         */
+                        function UpdateMetadataImportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateMetadataImportRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @instance
+                         */
+                        UpdateMetadataImportRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateMetadataImportRequest metadataImport.
+                         * @member {google.cloud.metastore.v1beta.IMetadataImport|null|undefined} metadataImport
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @instance
+                         */
+                        UpdateMetadataImportRequest.prototype.metadataImport = null;
+    
+                        /**
+                         * UpdateMetadataImportRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @instance
+                         */
+                        UpdateMetadataImportRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateMetadataImportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IUpdateMetadataImportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.UpdateMetadataImportRequest} UpdateMetadataImportRequest instance
+                         */
+                        UpdateMetadataImportRequest.create = function create(properties) {
+                            return new UpdateMetadataImportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMetadataImportRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.UpdateMetadataImportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IUpdateMetadataImportRequest} message UpdateMetadataImportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMetadataImportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metadataImport != null && Object.hasOwnProperty.call(message, "metadataImport"))
+                                $root.google.cloud.metastore.v1beta.MetadataImport.encode(message.metadataImport, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMetadataImportRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.UpdateMetadataImportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IUpdateMetadataImportRequest} message UpdateMetadataImportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMetadataImportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateMetadataImportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.UpdateMetadataImportRequest} UpdateMetadataImportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMetadataImportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.UpdateMetadataImportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateMetadataImportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.UpdateMetadataImportRequest} UpdateMetadataImportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMetadataImportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateMetadataImportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateMetadataImportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.metadataImport != null && message.hasOwnProperty("metadataImport")) {
+                                var error = $root.google.cloud.metastore.v1beta.MetadataImport.verify(message.metadataImport);
+                                if (error)
+                                    return "metadataImport." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateMetadataImportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.UpdateMetadataImportRequest} UpdateMetadataImportRequest
+                         */
+                        UpdateMetadataImportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.UpdateMetadataImportRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.UpdateMetadataImportRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.UpdateMetadataImportRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.metadataImport != null) {
+                                if (typeof object.metadataImport !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.UpdateMetadataImportRequest.metadataImport: object expected");
+                                message.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.fromObject(object.metadataImport);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateMetadataImportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.UpdateMetadataImportRequest} message UpdateMetadataImportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateMetadataImportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.metadataImport = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.metadataImport != null && message.hasOwnProperty("metadataImport"))
+                                object.metadataImport = $root.google.cloud.metastore.v1beta.MetadataImport.toObject(message.metadataImport, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateMetadataImportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.UpdateMetadataImportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateMetadataImportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateMetadataImportRequest;
+                    })();
+    
+                    v1beta.ListBackupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBackupsRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IListBackupsRequest
+                         * @property {string|null} [parent] ListBackupsRequest parent
+                         * @property {number|null} [pageSize] ListBackupsRequest pageSize
+                         * @property {string|null} [pageToken] ListBackupsRequest pageToken
+                         * @property {string|null} [filter] ListBackupsRequest filter
+                         * @property {string|null} [orderBy] ListBackupsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupsRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a ListBackupsRequest.
+                         * @implements IListBackupsRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IListBackupsRequest=} [properties] Properties to set
+                         */
+                        function ListBackupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBackupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBackupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListBackupsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListBackupsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListBackupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListBackupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsRequest} ListBackupsRequest instance
+                         */
+                        ListBackupsRequest.create = function create(properties) {
+                            return new ListBackupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.ListBackupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListBackupsRequest} message ListBackupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ListBackupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListBackupsRequest} message ListBackupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsRequest} ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ListBackupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                case 5:
+                                    message.orderBy = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsRequest} ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsRequest} ListBackupsRequest
+                         */
+                        ListBackupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ListBackupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ListBackupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ListBackupsRequest} message ListBackupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListBackupsRequest;
+                    })();
+    
+                    v1beta.ListBackupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBackupsResponse.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IListBackupsResponse
+                         * @property {Array.<google.cloud.metastore.v1beta.IBackup>|null} [backups] ListBackupsResponse backups
+                         * @property {string|null} [nextPageToken] ListBackupsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBackupsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupsResponse.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a ListBackupsResponse.
+                         * @implements IListBackupsResponse
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IListBackupsResponse=} [properties] Properties to set
+                         */
+                        function ListBackupsResponse(properties) {
+                            this.backups = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupsResponse backups.
+                         * @member {Array.<google.cloud.metastore.v1beta.IBackup>} backups
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.backups = $util.emptyArray;
+    
+                        /**
+                         * ListBackupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBackupsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBackupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListBackupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsResponse} ListBackupsResponse instance
+                         */
+                        ListBackupsResponse.create = function create(properties) {
+                            return new ListBackupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsResponse message. Does not implicitly {@link google.cloud.metastore.v1beta.ListBackupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListBackupsResponse} message ListBackupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backups != null && message.backups.length)
+                                for (var i = 0; i < message.backups.length; ++i)
+                                    $root.google.cloud.metastore.v1beta.Backup.encode(message.backups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ListBackupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IListBackupsResponse} message ListBackupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsResponse} ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ListBackupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.backups && message.backups.length))
+                                        message.backups = [];
+                                    message.backups.push($root.google.cloud.metastore.v1beta.Backup.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.unreachable && message.unreachable.length))
+                                        message.unreachable = [];
+                                    message.unreachable.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsResponse} ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backups != null && message.hasOwnProperty("backups")) {
+                                if (!Array.isArray(message.backups))
+                                    return "backups: array expected";
+                                for (var i = 0; i < message.backups.length; ++i) {
+                                    var error = $root.google.cloud.metastore.v1beta.Backup.verify(message.backups[i]);
+                                    if (error)
+                                        return "backups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ListBackupsResponse} ListBackupsResponse
+                         */
+                        ListBackupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ListBackupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ListBackupsResponse();
+                            if (object.backups) {
+                                if (!Array.isArray(object.backups))
+                                    throw TypeError(".google.cloud.metastore.v1beta.ListBackupsResponse.backups: array expected");
+                                message.backups = [];
+                                for (var i = 0; i < object.backups.length; ++i) {
+                                    if (typeof object.backups[i] !== "object")
+                                        throw TypeError(".google.cloud.metastore.v1beta.ListBackupsResponse.backups: object expected");
+                                    message.backups[i] = $root.google.cloud.metastore.v1beta.Backup.fromObject(object.backups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.metastore.v1beta.ListBackupsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ListBackupsResponse} message ListBackupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.backups = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backups && message.backups.length) {
+                                object.backups = [];
+                                for (var j = 0; j < message.backups.length; ++j)
+                                    object.backups[j] = $root.google.cloud.metastore.v1beta.Backup.toObject(message.backups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ListBackupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListBackupsResponse;
+                    })();
+    
+                    v1beta.GetBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBackupRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IGetBackupRequest
+                         * @property {string|null} [name] GetBackupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBackupRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a GetBackupRequest.
+                         * @implements IGetBackupRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IGetBackupRequest=} [properties] Properties to set
+                         */
+                        function GetBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBackupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @instance
+                         */
+                        GetBackupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.GetBackupRequest} GetBackupRequest instance
+                         */
+                        GetBackupRequest.create = function create(properties) {
+                            return new GetBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.GetBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetBackupRequest} message GetBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.GetBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IGetBackupRequest} message GetBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.GetBackupRequest} GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.GetBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.GetBackupRequest} GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.GetBackupRequest} GetBackupRequest
+                         */
+                        GetBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.GetBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.GetBackupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.GetBackupRequest} message GetBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.GetBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetBackupRequest;
+                    })();
+    
+                    v1beta.CreateBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateBackupRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface ICreateBackupRequest
+                         * @property {string|null} [parent] CreateBackupRequest parent
+                         * @property {string|null} [backupId] CreateBackupRequest backupId
+                         * @property {google.cloud.metastore.v1beta.IBackup|null} [backup] CreateBackupRequest backup
+                         * @property {string|null} [requestId] CreateBackupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateBackupRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a CreateBackupRequest.
+                         * @implements ICreateBackupRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.ICreateBackupRequest=} [properties] Properties to set
+                         */
+                        function CreateBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateBackupRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @instance
+                         */
+                        CreateBackupRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateBackupRequest backupId.
+                         * @member {string} backupId
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @instance
+                         */
+                        CreateBackupRequest.prototype.backupId = "";
+    
+                        /**
+                         * CreateBackupRequest backup.
+                         * @member {google.cloud.metastore.v1beta.IBackup|null|undefined} backup
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @instance
+                         */
+                        CreateBackupRequest.prototype.backup = null;
+    
+                        /**
+                         * CreateBackupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @instance
+                         */
+                        CreateBackupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.CreateBackupRequest} CreateBackupRequest instance
+                         */
+                        CreateBackupRequest.create = function create(properties) {
+                            return new CreateBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.CreateBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateBackupRequest} message CreateBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.backupId != null && Object.hasOwnProperty.call(message, "backupId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupId);
+                            if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                $root.google.cloud.metastore.v1beta.Backup.encode(message.backup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.CreateBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ICreateBackupRequest} message CreateBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.CreateBackupRequest} CreateBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.CreateBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.backupId = reader.string();
+                                    break;
+                                case 3:
+                                    message.backup = $root.google.cloud.metastore.v1beta.Backup.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.CreateBackupRequest} CreateBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.backupId != null && message.hasOwnProperty("backupId"))
+                                if (!$util.isString(message.backupId))
+                                    return "backupId: string expected";
+                            if (message.backup != null && message.hasOwnProperty("backup")) {
+                                var error = $root.google.cloud.metastore.v1beta.Backup.verify(message.backup);
+                                if (error)
+                                    return "backup." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.CreateBackupRequest} CreateBackupRequest
+                         */
+                        CreateBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.CreateBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.CreateBackupRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.backupId != null)
+                                message.backupId = String(object.backupId);
+                            if (object.backup != null) {
+                                if (typeof object.backup !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.CreateBackupRequest.backup: object expected");
+                                message.backup = $root.google.cloud.metastore.v1beta.Backup.fromObject(object.backup);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.CreateBackupRequest} message CreateBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.backupId = "";
+                                object.backup = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.backupId != null && message.hasOwnProperty("backupId"))
+                                object.backupId = message.backupId;
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                object.backup = $root.google.cloud.metastore.v1beta.Backup.toObject(message.backup, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.CreateBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateBackupRequest;
+                    })();
+    
+                    v1beta.DeleteBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteBackupRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IDeleteBackupRequest
+                         * @property {string|null} [name] DeleteBackupRequest name
+                         * @property {string|null} [requestId] DeleteBackupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteBackupRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a DeleteBackupRequest.
+                         * @implements IDeleteBackupRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IDeleteBackupRequest=} [properties] Properties to set
+                         */
+                        function DeleteBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteBackupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @instance
+                         */
+                        DeleteBackupRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteBackupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @instance
+                         */
+                        DeleteBackupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDeleteBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.DeleteBackupRequest} DeleteBackupRequest instance
+                         */
+                        DeleteBackupRequest.create = function create(properties) {
+                            return new DeleteBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.DeleteBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDeleteBackupRequest} message DeleteBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.DeleteBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDeleteBackupRequest} message DeleteBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.DeleteBackupRequest} DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.DeleteBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.DeleteBackupRequest} DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.DeleteBackupRequest} DeleteBackupRequest
+                         */
+                        DeleteBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.DeleteBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.DeleteBackupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.DeleteBackupRequest} message DeleteBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.DeleteBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteBackupRequest;
+                    })();
+    
+                    v1beta.ExportMetadataRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportMetadataRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IExportMetadataRequest
+                         * @property {string|null} [destinationGcsFolder] ExportMetadataRequest destinationGcsFolder
+                         * @property {string|null} [service] ExportMetadataRequest service
+                         * @property {string|null} [requestId] ExportMetadataRequest requestId
+                         * @property {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type|null} [databaseDumpType] ExportMetadataRequest databaseDumpType
+                         */
+    
+                        /**
+                         * Constructs a new ExportMetadataRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents an ExportMetadataRequest.
+                         * @implements IExportMetadataRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IExportMetadataRequest=} [properties] Properties to set
+                         */
+                        function ExportMetadataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportMetadataRequest destinationGcsFolder.
+                         * @member {string} destinationGcsFolder
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @instance
+                         */
+                        ExportMetadataRequest.prototype.destinationGcsFolder = "";
+    
+                        /**
+                         * ExportMetadataRequest service.
+                         * @member {string} service
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @instance
+                         */
+                        ExportMetadataRequest.prototype.service = "";
+    
+                        /**
+                         * ExportMetadataRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @instance
+                         */
+                        ExportMetadataRequest.prototype.requestId = "";
+    
+                        /**
+                         * ExportMetadataRequest databaseDumpType.
+                         * @member {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type} databaseDumpType
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @instance
+                         */
+                        ExportMetadataRequest.prototype.databaseDumpType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExportMetadataRequest destination.
+                         * @member {"destinationGcsFolder"|undefined} destination
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ExportMetadataRequest.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationGcsFolder"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExportMetadataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IExportMetadataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ExportMetadataRequest} ExportMetadataRequest instance
+                         */
+                        ExportMetadataRequest.create = function create(properties) {
+                            return new ExportMetadataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportMetadataRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.ExportMetadataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IExportMetadataRequest} message ExportMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportMetadataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            if (message.destinationGcsFolder != null && Object.hasOwnProperty.call(message, "destinationGcsFolder"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.destinationGcsFolder);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            if (message.databaseDumpType != null && Object.hasOwnProperty.call(message, "databaseDumpType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.databaseDumpType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportMetadataRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ExportMetadataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IExportMetadataRequest} message ExportMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportMetadataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportMetadataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ExportMetadataRequest} ExportMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportMetadataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ExportMetadataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.destinationGcsFolder = reader.string();
+                                    break;
+                                case 1:
+                                    message.service = reader.string();
+                                    break;
+                                case 3:
+                                    message.requestId = reader.string();
+                                    break;
+                                case 4:
+                                    message.databaseDumpType = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportMetadataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ExportMetadataRequest} ExportMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportMetadataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportMetadataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportMetadataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.destinationGcsFolder != null && message.hasOwnProperty("destinationGcsFolder")) {
+                                properties.destination = 1;
+                                if (!$util.isString(message.destinationGcsFolder))
+                                    return "destinationGcsFolder: string expected";
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
+                                switch (message.databaseDumpType) {
+                                default:
+                                    return "databaseDumpType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ExportMetadataRequest} ExportMetadataRequest
+                         */
+                        ExportMetadataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ExportMetadataRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ExportMetadataRequest();
+                            if (object.destinationGcsFolder != null)
+                                message.destinationGcsFolder = String(object.destinationGcsFolder);
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            switch (object.databaseDumpType) {
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.databaseDumpType = 0;
+                                break;
+                            case "MYSQL":
+                            case 1:
+                                message.databaseDumpType = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportMetadataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ExportMetadataRequest} message ExportMetadataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportMetadataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.service = "";
+                                object.requestId = "";
+                                object.databaseDumpType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.destinationGcsFolder != null && message.hasOwnProperty("destinationGcsFolder")) {
+                                object.destinationGcsFolder = message.destinationGcsFolder;
+                                if (options.oneofs)
+                                    object.destination = "destinationGcsFolder";
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportMetadataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportMetadataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportMetadataRequest;
+                    })();
+    
+                    v1beta.RestoreServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a RestoreServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IRestoreServiceRequest
+                         * @property {string|null} [service] RestoreServiceRequest service
+                         * @property {string|null} [backup] RestoreServiceRequest backup
+                         * @property {google.cloud.metastore.v1beta.Restore.RestoreType|null} [restoreType] RestoreServiceRequest restoreType
+                         * @property {string|null} [requestId] RestoreServiceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new RestoreServiceRequest.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a RestoreServiceRequest.
+                         * @implements IRestoreServiceRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IRestoreServiceRequest=} [properties] Properties to set
+                         */
+                        function RestoreServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RestoreServiceRequest service.
+                         * @member {string} service
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @instance
+                         */
+                        RestoreServiceRequest.prototype.service = "";
+    
+                        /**
+                         * RestoreServiceRequest backup.
+                         * @member {string} backup
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @instance
+                         */
+                        RestoreServiceRequest.prototype.backup = "";
+    
+                        /**
+                         * RestoreServiceRequest restoreType.
+                         * @member {google.cloud.metastore.v1beta.Restore.RestoreType} restoreType
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @instance
+                         */
+                        RestoreServiceRequest.prototype.restoreType = 0;
+    
+                        /**
+                         * RestoreServiceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @instance
+                         */
+                        RestoreServiceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new RestoreServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IRestoreServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.RestoreServiceRequest} RestoreServiceRequest instance
+                         */
+                        RestoreServiceRequest.create = function create(properties) {
+                            return new RestoreServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.RestoreServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IRestoreServiceRequest} message RestoreServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backup);
+                            if (message.restoreType != null && Object.hasOwnProperty.call(message, "restoreType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.restoreType);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.RestoreServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IRestoreServiceRequest} message RestoreServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RestoreServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.RestoreServiceRequest} RestoreServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.RestoreServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.service = reader.string();
+                                    break;
+                                case 2:
+                                    message.backup = reader.string();
+                                    break;
+                                case 3:
+                                    message.restoreType = reader.int32();
+                                    break;
+                                case 4:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RestoreServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.RestoreServiceRequest} RestoreServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RestoreServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RestoreServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                if (!$util.isString(message.backup))
+                                    return "backup: string expected";
+                            if (message.restoreType != null && message.hasOwnProperty("restoreType"))
+                                switch (message.restoreType) {
+                                default:
+                                    return "restoreType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RestoreServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.RestoreServiceRequest} RestoreServiceRequest
+                         */
+                        RestoreServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.RestoreServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.RestoreServiceRequest();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.backup != null)
+                                message.backup = String(object.backup);
+                            switch (object.restoreType) {
+                            case "RESTORE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.restoreType = 0;
+                                break;
+                            case "FULL":
+                            case 1:
+                                message.restoreType = 1;
+                                break;
+                            case "METADATA_ONLY":
+                            case 2:
+                                message.restoreType = 2;
+                                break;
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RestoreServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.RestoreServiceRequest} message RestoreServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RestoreServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.service = "";
+                                object.backup = "";
+                                object.restoreType = options.enums === String ? "RESTORE_TYPE_UNSPECIFIED" : 0;
+                                object.requestId = "";
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                object.backup = message.backup;
+                            if (message.restoreType != null && message.hasOwnProperty("restoreType"))
+                                object.restoreType = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.restoreType] : message.restoreType;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RestoreServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.RestoreServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RestoreServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RestoreServiceRequest;
+                    })();
+    
+                    v1beta.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusMessage] OperationMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] OperationMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * OperationMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.metastore.v1beta.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.target = reader.string();
+                                    break;
+                                case 4:
+                                    message.verb = reader.string();
+                                    break;
+                                case 5:
+                                    message.statusMessage = reader.string();
+                                    break;
+                                case 6:
+                                    message.requestedCancellation = reader.bool();
+                                    break;
+                                case 7:
+                                    message.apiVersion = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    v1beta.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.metastore.v1beta.LocationMetadata.IHiveMetastoreVersion>|null} [supportedHiveMetastoreVersions] LocationMetadata supportedHiveMetastoreVersions
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.supportedHiveMetastoreVersions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata supportedHiveMetastoreVersions.
+                         * @member {Array.<google.cloud.metastore.v1beta.LocationMetadata.IHiveMetastoreVersion>} supportedHiveMetastoreVersions
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.supportedHiveMetastoreVersions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.metastore.v1beta.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportedHiveMetastoreVersions != null && message.supportedHiveMetastoreVersions.length)
+                                for (var i = 0; i < message.supportedHiveMetastoreVersions.length; ++i)
+                                    $root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.encode(message.supportedHiveMetastoreVersions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length))
+                                        message.supportedHiveMetastoreVersions = [];
+                                    message.supportedHiveMetastoreVersions.push($root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.supportedHiveMetastoreVersions != null && message.hasOwnProperty("supportedHiveMetastoreVersions")) {
+                                if (!Array.isArray(message.supportedHiveMetastoreVersions))
+                                    return "supportedHiveMetastoreVersions: array expected";
+                                for (var i = 0; i < message.supportedHiveMetastoreVersions.length; ++i) {
+                                    var error = $root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.verify(message.supportedHiveMetastoreVersions[i]);
+                                    if (error)
+                                        return "supportedHiveMetastoreVersions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.LocationMetadata();
+                            if (object.supportedHiveMetastoreVersions) {
+                                if (!Array.isArray(object.supportedHiveMetastoreVersions))
+                                    throw TypeError(".google.cloud.metastore.v1beta.LocationMetadata.supportedHiveMetastoreVersions: array expected");
+                                message.supportedHiveMetastoreVersions = [];
+                                for (var i = 0; i < object.supportedHiveMetastoreVersions.length; ++i) {
+                                    if (typeof object.supportedHiveMetastoreVersions[i] !== "object")
+                                        throw TypeError(".google.cloud.metastore.v1beta.LocationMetadata.supportedHiveMetastoreVersions: object expected");
+                                    message.supportedHiveMetastoreVersions[i] = $root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.fromObject(object.supportedHiveMetastoreVersions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.supportedHiveMetastoreVersions = [];
+                            if (message.supportedHiveMetastoreVersions && message.supportedHiveMetastoreVersions.length) {
+                                object.supportedHiveMetastoreVersions = [];
+                                for (var j = 0; j < message.supportedHiveMetastoreVersions.length; ++j)
+                                    object.supportedHiveMetastoreVersions[j] = $root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.toObject(message.supportedHiveMetastoreVersions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        LocationMetadata.HiveMetastoreVersion = (function() {
+    
+                            /**
+                             * Properties of a HiveMetastoreVersion.
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                             * @interface IHiveMetastoreVersion
+                             * @property {string|null} [version] HiveMetastoreVersion version
+                             * @property {boolean|null} [isDefault] HiveMetastoreVersion isDefault
+                             */
+    
+                            /**
+                             * Constructs a new HiveMetastoreVersion.
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata
+                             * @classdesc Represents a HiveMetastoreVersion.
+                             * @implements IHiveMetastoreVersion
+                             * @constructor
+                             * @param {google.cloud.metastore.v1beta.LocationMetadata.IHiveMetastoreVersion=} [properties] Properties to set
+                             */
+                            function HiveMetastoreVersion(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HiveMetastoreVersion version.
+                             * @member {string} version
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @instance
+                             */
+                            HiveMetastoreVersion.prototype.version = "";
+    
+                            /**
+                             * HiveMetastoreVersion isDefault.
+                             * @member {boolean} isDefault
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @instance
+                             */
+                            HiveMetastoreVersion.prototype.isDefault = false;
+    
+                            /**
+                             * Creates a new HiveMetastoreVersion instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.LocationMetadata.IHiveMetastoreVersion=} [properties] Properties to set
+                             * @returns {google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion} HiveMetastoreVersion instance
+                             */
+                            HiveMetastoreVersion.create = function create(properties) {
+                                return new HiveMetastoreVersion(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HiveMetastoreVersion message. Does not implicitly {@link google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.LocationMetadata.IHiveMetastoreVersion} message HiveMetastoreVersion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HiveMetastoreVersion.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                                if (message.isDefault != null && Object.hasOwnProperty.call(message, "isDefault"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isDefault);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HiveMetastoreVersion message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.LocationMetadata.IHiveMetastoreVersion} message HiveMetastoreVersion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HiveMetastoreVersion.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HiveMetastoreVersion message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion} HiveMetastoreVersion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HiveMetastoreVersion.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.version = reader.string();
+                                        break;
+                                    case 2:
+                                        message.isDefault = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HiveMetastoreVersion message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion} HiveMetastoreVersion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HiveMetastoreVersion.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HiveMetastoreVersion message.
+                             * @function verify
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HiveMetastoreVersion.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    if (!$util.isString(message.version))
+                                        return "version: string expected";
+                                if (message.isDefault != null && message.hasOwnProperty("isDefault"))
+                                    if (typeof message.isDefault !== "boolean")
+                                        return "isDefault: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HiveMetastoreVersion message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion} HiveMetastoreVersion
+                             */
+                            HiveMetastoreVersion.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion)
+                                    return object;
+                                var message = new $root.google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion();
+                                if (object.version != null)
+                                    message.version = String(object.version);
+                                if (object.isDefault != null)
+                                    message.isDefault = Boolean(object.isDefault);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HiveMetastoreVersion message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @static
+                             * @param {google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion} message HiveMetastoreVersion
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HiveMetastoreVersion.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.version = "";
+                                    object.isDefault = false;
+                                }
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = message.version;
+                                if (message.isDefault != null && message.hasOwnProperty("isDefault"))
+                                    object.isDefault = message.isDefault;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HiveMetastoreVersion to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HiveMetastoreVersion.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return HiveMetastoreVersion;
+                        })();
+    
+                        return LocationMetadata;
+                    })();
+    
+                    v1beta.DatabaseDumpSpec = (function() {
+    
+                        /**
+                         * Properties of a DatabaseDumpSpec.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IDatabaseDumpSpec
+                         */
+    
+                        /**
+                         * Constructs a new DatabaseDumpSpec.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a DatabaseDumpSpec.
+                         * @implements IDatabaseDumpSpec
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IDatabaseDumpSpec=} [properties] Properties to set
+                         */
+                        function DatabaseDumpSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DatabaseDumpSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDatabaseDumpSpec=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.DatabaseDumpSpec} DatabaseDumpSpec instance
+                         */
+                        DatabaseDumpSpec.create = function create(properties) {
+                            return new DatabaseDumpSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatabaseDumpSpec message. Does not implicitly {@link google.cloud.metastore.v1beta.DatabaseDumpSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDatabaseDumpSpec} message DatabaseDumpSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatabaseDumpSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatabaseDumpSpec message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.DatabaseDumpSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IDatabaseDumpSpec} message DatabaseDumpSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatabaseDumpSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatabaseDumpSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.DatabaseDumpSpec} DatabaseDumpSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatabaseDumpSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.DatabaseDumpSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatabaseDumpSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.DatabaseDumpSpec} DatabaseDumpSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatabaseDumpSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatabaseDumpSpec message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatabaseDumpSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatabaseDumpSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.DatabaseDumpSpec} DatabaseDumpSpec
+                         */
+                        DatabaseDumpSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.DatabaseDumpSpec)
+                                return object;
+                            return new $root.google.cloud.metastore.v1beta.DatabaseDumpSpec();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatabaseDumpSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.DatabaseDumpSpec} message DatabaseDumpSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatabaseDumpSpec.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DatabaseDumpSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.DatabaseDumpSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatabaseDumpSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.metastore.v1beta.DatabaseDumpSpec.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} MYSQL=1 MYSQL value
+                         */
+                        DatabaseDumpSpec.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MYSQL"] = 1;
+                            return values;
+                        })();
+    
+                        return DatabaseDumpSpec;
+                    })();
+    
+                    return v1beta;
+                })();
+    
                 return metastore;
             })();
     

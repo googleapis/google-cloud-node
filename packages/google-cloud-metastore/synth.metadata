@@ -3,7 +3,7 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-dataproc-metastore.git",
+        "remote": "git@github.com:googleapis/nodejs-dataproc-metastore.git",
         "sha": "296571faeb647a495f25c8d12a9b4abd728b9e13"
       }
     },
@@ -11,15 +11,15 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cd6119f83636cf9c0d2bee86db7456dc49c56c47",
-        "internalRef": "361819751"
+        "sha": "4b16c60a8fffe213d3a5002f85696fef2b6a8172",
+        "internalRef": "362090097"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "318e351e26ba65b2b3cfa3f61b3b64e3540c3525"
+        "sha": "ac8f20f12e7a4c0b0ae1c6fa415f684a25ea82b7"
       }
     }
   ],
@@ -29,6 +29,15 @@
         "source": "googleapis",
         "apiName": "metastore",
         "apiVersion": "v1alpha",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "metastore",
+        "apiVersion": "v1beta",
         "language": "nodejs",
         "generator": "bazel"
       }
