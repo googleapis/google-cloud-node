@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.2...v1.1.3) (2021-03-15)
+
+
+### Bug Fixes
+
+* fix service namespace in grpc_service_config. ([#56](https://www.github.com/googleapis/nodejs-functions/issues/56)) ([8f5af4a](https://www.github.com/googleapis/nodejs-functions/commit/8f5af4a519473ed3fe8fd0761f21b886d3d1c0c9))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.1...v1.1.2) (2020-11-25)
 
 
