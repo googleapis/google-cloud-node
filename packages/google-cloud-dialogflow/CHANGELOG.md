@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.3.0...v3.4.0) (2021-03-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed ImportAgentResponse which was not ready for use yet
+
+### Features
+
+* add additional_bindings to Dialogflow v2 ListIntents API docs: update copyrights and session docs ([66cd3a5](https://www.github.com/googleapis/nodejs-dialogflow/commit/66cd3a5b5c605deb37efbc4f87edf17b8d4dd4c1))
+* add additional_bindings to Dialogflow v2beta1 ListIntents API docs: update copyrights and session docs ([66cd3a5](https://www.github.com/googleapis/nodejs-dialogflow/commit/66cd3a5b5c605deb37efbc4f87edf17b8d4dd4c1))
+* add CCAI API ([a93fa71](https://www.github.com/googleapis/nodejs-dialogflow/commit/a93fa71d45cace7822d5585a8a407e3e7e563686))
+* added support for regionalization for document API ([#722](https://www.github.com/googleapis/nodejs-dialogflow/issues/722)) ([b6f5738](https://www.github.com/googleapis/nodejs-dialogflow/commit/b6f5738613fc5af49b966d4a8c4137921abed5ef))
+* adds style enum ([72bb3ae](https://www.github.com/googleapis/nodejs-dialogflow/commit/72bb3aed5fbe9a605810cce69a12fd3c5e4d1fac))
+* allowed custom to specify webhook headers through query parameters ([#724](https://www.github.com/googleapis/nodejs-dialogflow/issues/724)) ([a7f784a](https://www.github.com/googleapis/nodejs-dialogflow/commit/a7f784ac921a750e9df2e6edbfa3bee870187af1))
+
+
+### Bug Fixes
+
+* **browser:** check for fetch on window ([#718](https://www.github.com/googleapis/nodejs-dialogflow/issues/718)) ([fb28879](https://www.github.com/googleapis/nodejs-dialogflow/commit/fb28879443c27688d1923d6675ea97c3c5d4d0e7))
+* do not modify options object, use defaultScopes ([#706](https://www.github.com/googleapis/nodejs-dialogflow/issues/706)) ([95a938d](https://www.github.com/googleapis/nodejs-dialogflow/commit/95a938dbc5f2cc49c217bb5d3cecbbffba3e6d18))
+* remove MixedAudio ([a93fa71](https://www.github.com/googleapis/nodejs-dialogflow/commit/a93fa71d45cace7822d5585a8a407e3e7e563686))
+* removed ImportAgentResponse which was not ready for use yet ([e0d9fa6](https://www.github.com/googleapis/nodejs-dialogflow/commit/e0d9fa69bba79540c09ec777b3eee6bf0bd5e4b6))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.2.0...v3.3.0) (2020-09-15)
 
 
