@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.5.0...v2.6.0) (2021-03-15)
+
+
+### Features
+
+* remove the translation fields in document.proto ([#181](https://www.github.com/googleapis/nodejs-document-ai/issues/181)) ([d76272a](https://www.github.com/googleapis/nodejs-document-ai/commit/d76272a98f527d00a5862299208f8f0ebb054405))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.4.0...v2.5.0) (2021-02-24)
 
 
