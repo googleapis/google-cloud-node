@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-video-transcoder.git",
-        "sha": "6d17e3826038e12e35cc08aab04f8af78bb09f1b"
+        "sha": "47686fa17c5e5164f6d5f5f37f09d37bd9844cc3"
       }
     },
     {
