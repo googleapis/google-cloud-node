@@ -1198,6 +1198,8 @@ export class AgentsClient {
    *   `gs://<bucket-name>/<object-name>`.
    * @param {Buffer} request.agentContent
    *   Uncompressed raw byte content for agent.
+   * @param {google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption} request.restoreOption
+   *   Agent restore mode. If not specified, `KEEP` is assumed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
