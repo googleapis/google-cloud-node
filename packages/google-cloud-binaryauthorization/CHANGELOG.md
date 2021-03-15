@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.0.0...v1.0.1) (2021-03-15)
+
+
+### Bug Fixes
+
+* **docs:** downgrade to beta to match release level ([#19](https://www.github.com/googleapis/nodejs-binary-authorization/issues/19)) ([90ade48](https://www.github.com/googleapis/nodejs-binary-authorization/commit/90ade48c8088e3b2b41b6059e57ee57fd12f17de))
+
 ## 1.0.0 (2020-12-12)
 
 
