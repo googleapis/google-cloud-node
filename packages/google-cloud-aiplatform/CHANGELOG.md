@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.5.0...v1.6.0) (2021-03-11)
+
+
+### Features
+
+* removes forecasting (time_series_forecasting.proto) from public v1beta1 protos ([#86](https://www.github.com/googleapis/nodejs-ai-platform/issues/86)) ([ccc1953](https://www.github.com/googleapis/nodejs-ai-platform/commit/ccc19537477a57ab36b13072ff6d569eba29d0a7))
+
+
+### Bug Fixes
+
+* adds index.ts to excludes ([#81](https://www.github.com/googleapis/nodejs-ai-platform/issues/81)) ([d8c6bbb](https://www.github.com/googleapis/nodejs-ai-platform/commit/d8c6bbb67ca1ea81268674e9666536688f0cd720))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.4.0...v1.5.0) (2021-02-17)
 
 
