@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.3.0...v2.4.0) (2021-03-15)
+
+
+### Features
+
+* added fallback option when restoring an agent docs: clarified experiment length ([f90bb9c](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/f90bb9cd369659160a16fcfc67bc08c248bd1552))
+* added fallback option when restoring an agent docs: clarified experiment length ([f90bb9c](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/f90bb9cd369659160a16fcfc67bc08c248bd1552))
+* allow to disable webhook invocation per request ([f90bb9c](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/f90bb9cd369659160a16fcfc67bc08c248bd1552))
+* allow to disable webhook invocation per request ([3b1b674](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/3b1b674bbddbcb26fa607f9dc16db6c43752c371))
+* supports SentimentAnalysisResult in webhook request, add http rules for long running operations docs: minor ([3b1b674](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/3b1b674bbddbcb26fa607f9dc16db6c43752c371))
+
+
+### Bug Fixes
+
+* RunTestCase http template. PHP REST client lib can be generated. feat: Support transition route group coverage for Test Cases. feat: Support SentimentAnalysisResult input in the WebhookRequest. ([3b1b674](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/3b1b674bbddbcb26fa607f9dc16db6c43752c371))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.2.0...v2.3.0) (2021-03-01)
 
 
