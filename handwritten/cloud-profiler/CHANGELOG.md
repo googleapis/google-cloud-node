@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+### [4.1.1](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.0...v4.1.1) (2021-03-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency delay to v5 ([#722](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/722)) ([98d43e1](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/98d43e12b2d19f7d8b70618b6d3ec5de6e8d702c))
+* **deps:** update dependency parse-duration to v1 ([#725](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/725)) ([fcd1239](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/fcd12391782ad9363cffae0c3b507512fc8dfbc8))
+
 ## [4.1.0](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.0.3...v4.1.0) (2020-11-02)
 
 
