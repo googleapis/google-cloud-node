@@ -3354,6 +3354,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse results */
                     results?: (google.cloud.speech.v1p1beta1.ISpeechRecognitionResult[]|null);
+
+                    /** LongRunningRecognizeResponse outputConfig */
+                    outputConfig?: (google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null);
+
+                    /** LongRunningRecognizeResponse outputError */
+                    outputError?: (google.rpc.IStatus|null);
                 }
 
                 /** Represents a LongRunningRecognizeResponse. */
@@ -3367,6 +3373,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse results. */
                     public results: google.cloud.speech.v1p1beta1.ISpeechRecognitionResult[];
+
+                    /** LongRunningRecognizeResponse outputConfig. */
+                    public outputConfig?: (google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null);
+
+                    /** LongRunningRecognizeResponse outputError. */
+                    public outputError?: (google.rpc.IStatus|null);
 
                     /**
                      * Creates a new LongRunningRecognizeResponse instance using the specified properties.
@@ -3453,6 +3465,9 @@ export namespace google {
 
                     /** LongRunningRecognizeMetadata uri */
                     uri?: (string|null);
+
+                    /** LongRunningRecognizeMetadata outputConfig */
+                    outputConfig?: (google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null);
                 }
 
                 /** Represents a LongRunningRecognizeMetadata. */
@@ -3475,6 +3490,9 @@ export namespace google {
 
                     /** LongRunningRecognizeMetadata uri. */
                     public uri: string;
+
+                    /** LongRunningRecognizeMetadata outputConfig. */
+                    public outputConfig?: (google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null);
 
                     /**
                      * Creates a new LongRunningRecognizeMetadata instance using the specified properties.

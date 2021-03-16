@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-speech.git",
-        "sha": "fbcc04bb6fc8e8ecbd90b3559bf2e85210947a37"
+        "sha": "6abc5ec4c42344161eeefb3d52a249adead407c4"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b6ebac16c3aecb798d4f25443d96df2f42a965ca",
-        "internalRef": "362294447"
+        "sha": "72326861be446be27d53af95c87e6e313367c371",
+        "internalRef": "362934100"
       }
     },
     {

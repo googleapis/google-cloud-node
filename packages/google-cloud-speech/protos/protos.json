@@ -938,6 +938,14 @@
                           "rule": "repeated",
                           "type": "SpeechRecognitionResult",
                           "id": 2
+                        },
+                        "outputConfig": {
+                          "type": "TranscriptOutputConfig",
+                          "id": 6
+                        },
+                        "outputError": {
+                          "type": "google.rpc.Status",
+                          "id": 7
                         }
                       }
                     },
@@ -958,6 +966,13 @@
                         "uri": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "outputConfig": {
+                          "type": "TranscriptOutputConfig",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

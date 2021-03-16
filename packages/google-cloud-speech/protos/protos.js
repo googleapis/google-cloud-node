@@ -8493,6 +8493,8 @@
                          * @memberof google.cloud.speech.v1p1beta1
                          * @interface ILongRunningRecognizeResponse
                          * @property {Array.<google.cloud.speech.v1p1beta1.ISpeechRecognitionResult>|null} [results] LongRunningRecognizeResponse results
+                         * @property {google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null} [outputConfig] LongRunningRecognizeResponse outputConfig
+                         * @property {google.rpc.IStatus|null} [outputError] LongRunningRecognizeResponse outputError
                          */
     
                         /**
@@ -8518,6 +8520,22 @@
                          * @instance
                          */
                         LongRunningRecognizeResponse.prototype.results = $util.emptyArray;
+    
+                        /**
+                         * LongRunningRecognizeResponse outputConfig.
+                         * @member {google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse
+                         * @instance
+                         */
+                        LongRunningRecognizeResponse.prototype.outputConfig = null;
+    
+                        /**
+                         * LongRunningRecognizeResponse outputError.
+                         * @member {google.rpc.IStatus|null|undefined} outputError
+                         * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse
+                         * @instance
+                         */
+                        LongRunningRecognizeResponse.prototype.outputError = null;
     
                         /**
                          * Creates a new LongRunningRecognizeResponse instance using the specified properties.
@@ -8546,6 +8564,10 @@
                             if (message.results != null && message.results.length)
                                 for (var i = 0; i < message.results.length; ++i)
                                     $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.encode(message.results[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
+                                $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.encode(message.outputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.outputError != null && Object.hasOwnProperty.call(message, "outputError"))
+                                $root.google.rpc.Status.encode(message.outputError, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -8584,6 +8606,12 @@
                                     if (!(message.results && message.results.length))
                                         message.results = [];
                                     message.results.push($root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.decode(reader, reader.uint32()));
+                                    break;
+                                case 6:
+                                    message.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.outputError = $root.google.rpc.Status.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8629,6 +8657,16 @@
                                         return "results." + error;
                                 }
                             }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.verify(message.outputConfig);
+                                if (error)
+                                    return "outputConfig." + error;
+                            }
+                            if (message.outputError != null && message.hasOwnProperty("outputError")) {
+                                var error = $root.google.rpc.Status.verify(message.outputError);
+                                if (error)
+                                    return "outputError." + error;
+                            }
                             return null;
                         };
     
@@ -8654,6 +8692,16 @@
                                     message.results[i] = $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.fromObject(object.results[i]);
                                 }
                             }
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.fromObject(object.outputConfig);
+                            }
+                            if (object.outputError != null) {
+                                if (typeof object.outputError !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse.outputError: object expected");
+                                message.outputError = $root.google.rpc.Status.fromObject(object.outputError);
+                            }
                             return message;
                         };
     
@@ -8672,11 +8720,19 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.results = [];
+                            if (options.defaults) {
+                                object.outputConfig = null;
+                                object.outputError = null;
+                            }
                             if (message.results && message.results.length) {
                                 object.results = [];
                                 for (var j = 0; j < message.results.length; ++j)
                                     object.results[j] = $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.toObject(message.results[j], options);
                             }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                object.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.toObject(message.outputConfig, options);
+                            if (message.outputError != null && message.hasOwnProperty("outputError"))
+                                object.outputError = $root.google.rpc.Status.toObject(message.outputError, options);
                             return object;
                         };
     
@@ -8704,6 +8760,7 @@
                          * @property {google.protobuf.ITimestamp|null} [startTime] LongRunningRecognizeMetadata startTime
                          * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] LongRunningRecognizeMetadata lastUpdateTime
                          * @property {string|null} [uri] LongRunningRecognizeMetadata uri
+                         * @property {google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null} [outputConfig] LongRunningRecognizeMetadata outputConfig
                          */
     
                         /**
@@ -8754,6 +8811,14 @@
                         LongRunningRecognizeMetadata.prototype.uri = "";
     
                         /**
+                         * LongRunningRecognizeMetadata outputConfig.
+                         * @member {google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata
+                         * @instance
+                         */
+                        LongRunningRecognizeMetadata.prototype.outputConfig = null;
+    
+                        /**
                          * Creates a new LongRunningRecognizeMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata
@@ -8785,6 +8850,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.uri);
+                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
+                                $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.encode(message.outputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -8830,6 +8897,9 @@
                                     break;
                                 case 4:
                                     message.uri = reader.string();
+                                    break;
+                                case 5:
+                                    message.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8882,6 +8952,11 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 if (!$util.isString(message.uri))
                                     return "uri: string expected";
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.verify(message.outputConfig);
+                                if (error)
+                                    return "outputConfig." + error;
+                            }
                             return null;
                         };
     
@@ -8911,6 +8986,11 @@
                             }
                             if (object.uri != null)
                                 message.uri = String(object.uri);
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.fromObject(object.outputConfig);
+                            }
                             return message;
                         };
     
@@ -8932,6 +9012,7 @@
                                 object.startTime = null;
                                 object.lastUpdateTime = null;
                                 object.uri = "";
+                                object.outputConfig = null;
                             }
                             if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
                                 object.progressPercent = message.progressPercent;
@@ -8941,6 +9022,8 @@
                                 object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                object.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.toObject(message.outputConfig, options);
                             return object;
                         };
     
