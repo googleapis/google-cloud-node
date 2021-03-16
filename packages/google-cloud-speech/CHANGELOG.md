@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [4.4.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.3.0...v4.4.0) (2021-03-16)
+
+
+### Features
+
+* Support output transcript to GCS for LongRunningRecognize. ([#708](https://www.github.com/googleapis/nodejs-speech/issues/708)) ([357e34d](https://www.github.com/googleapis/nodejs-speech/commit/357e34d8fa008eb70ab05511d22954c04d08f061))
+
 ## [4.3.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.2.0...v4.3.0) (2021-03-12)
 
 
