@@ -37,7 +37,7 @@
     "delay": "^5.0.0",
     "extend": "^3.0.2",
     "gcp-metadata": "^4.0.0",
-    "parse-duration": "^0.4.4",
+    "parse-duration": "^1.0.0",
     "pprof": "3.0.0",
     "pretty-ms": "^7.0.0",
     "protobufjs": "~6.10.0",
