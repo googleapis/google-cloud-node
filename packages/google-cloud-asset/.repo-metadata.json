@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-asset",
   "distribution_name": "@google-cloud/asset",
   "api_id": "cloudasset.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "default_version": "v1"
 }
