@@ -1,14 +1,14 @@
 {
-  "name": "binaryauthorization",
-  "name_pretty": "Binary Authorization",
-  "product_documentation": "https://cloud.google.com/binary-authorization/",
   "client_documentation": "https://googleapis.dev/nodejs/binaryauthorization/latest/",
-  "issue_tracker": "https://github.com/googleapis/nodejs-binary-authorization/issues",
-  "release_level": "beta",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-binary-authorization",
-  "distribution_name": "@google-cloud/binary-authorization",
   "api_id": "binaryauthorization.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/binary-authorization",
+  "release_level": "beta",
+  "default_version": "v1beta1",
+  "language": "nodejs",
+  "name_pretty": "Binary Authorization",
+  "repo": "googleapis/nodejs-binary-authorization",
+  "product_documentation": "https://cloud.google.com/binary-authorization/",
+  "requires_billing": true,
+  "name": "binaryauthorization",
+  "issue_tracker": "https://github.com/googleapis/nodejs-binary-authorization/issues"
 }
-
