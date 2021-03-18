@@ -1,14 +1,14 @@
 {
-  "name": "websecurityscanner",
-  "name_pretty": "Web Security Scanner",
-  "product_documentation": "https://cloud.google.com/security-scanner/",
   "client_documentation": "https://googleapis.dev/nodejs/websecurityscanner/latest/",
-  "issue_tracker": "https://github.com/googleapis/nodejs-web-security-scanner/issues",
-  "release_level": "GA",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-web-security-scanner",
-  "distribution_name": "@google-cloud/web-security-scanner",
   "api_id": "websecurityscanner.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/web-security-scanner",
+  "release_level": "GA",
+  "default_version": "v1beta",
+  "language": "nodejs",
+  "name_pretty": "Web Security Scanner",
+  "repo": "googleapis/nodejs-web-security-scanner",
+  "product_documentation": "https://cloud.google.com/security-scanner/",
+  "requires_billing": true,
+  "name": "websecurityscanner",
+  "issue_tracker": "https://github.com/googleapis/nodejs-web-security-scanner/issues"
 }
-
