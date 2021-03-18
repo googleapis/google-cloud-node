@@ -1,13 +1,14 @@
 {
-  "name": "grafeas",
-  "name_pretty": "Grafeas",
-  "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
   "client_documentation": "https://googleapis.dev/nodejs/grafeas/latest",
-  "issue_tracker": "https://github.com/grafeas/grafeas/issues",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-grafeas",
-  "distribution_name": "@google-cloud/grafeas",
   "api_id": "containeranalysis.googleapis.com",
-  "requires_billing": false
+  "distribution_name": "@google-cloud/grafeas",
+  "release_level": "ga",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "Grafeas",
+  "repo": "googleapis/nodejs-grafeas",
+  "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
+  "requires_billing": false,
+  "name": "grafeas",
+  "issue_tracker": "https://github.com/grafeas/grafeas/issues"
 }
