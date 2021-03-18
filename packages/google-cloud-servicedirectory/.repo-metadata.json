@@ -1,13 +1,14 @@
 {
-  "name": "servicedirectory",
-  "name_pretty": "Service Directory",
-  "product_documentation": "",
   "client_documentation": "https://googleapis.dev/nodejs/servicedirectory/latest/index.html",
-  "issue_tracker": "https://github.com/googleapis/nodejs-service-directory/issues",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-service-directory",
-  "distribution_name": "@google-cloud/service-directory",
   "api_id": "servicedirectory.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/service-directory",
+  "release_level": "ga",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "Service Directory",
+  "repo": "googleapis/nodejs-service-directory",
+  "product_documentation": "",
+  "requires_billing": true,
+  "name": "servicedirectory",
+  "issue_tracker": "https://github.com/googleapis/nodejs-service-directory/issues"
 }
