@@ -1,13 +1,14 @@
 {
-  "name": "recaptcha-enterprise",
-  "name_pretty": "Google Cloud reCAPTCHA Enterprise",
-  "product_documentation": "https://cloud.google.com/recaptcha-enterprise/docs/",
   "client_documentation": "https://googleapis.dev/nodejs/recaptcha-enterprise/latest",
-  "issue_tracker": "",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-recaptcha-enterprise",
-  "distribution_name": "@google-cloud/recaptcha-enterprise",
   "api_id": "recaptchaenterprise.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/recaptcha-enterprise",
+  "release_level": "ga",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "Google Cloud reCAPTCHA Enterprise",
+  "repo": "googleapis/nodejs-recaptcha-enterprise",
+  "product_documentation": "https://cloud.google.com/recaptcha-enterprise/docs/",
+  "requires_billing": true,
+  "name": "recaptcha-enterprise",
+  "issue_tracker": ""
 }
