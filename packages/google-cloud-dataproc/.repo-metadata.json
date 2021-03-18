@@ -1,13 +1,14 @@
 {
-  "name": "dataproc",
-  "name_pretty": "Google Cloud Dataproc",
-  "product_documentation": "https://cloud.google.com/dataproc",
   "client_documentation": "https://googleapis.dev/nodejs/dataproc/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559745",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-dataproc",
-  "distribution_name": "@google-cloud/dataproc",
   "api_id": "dataproc.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/dataproc",
+  "release_level": "ga",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "Google Cloud Dataproc",
+  "repo": "googleapis/nodejs-dataproc",
+  "product_documentation": "https://cloud.google.com/dataproc",
+  "requires_billing": true,
+  "name": "dataproc",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559745"
 }

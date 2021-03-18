@@ -3684,8 +3684,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowTemplatesProto",
                     "java_package": "com.google.cloud.dataproc.v1beta2",
-                    "(google.api.resource_definition).type": "dataproc.googleapis.com/Region",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}"
+                    "(google.api.resource_definition).type": "metastore.googleapis.com/Service",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/services/{service}"
                   },
                   "nested": {
                     "AutoscalingPolicyService": {
@@ -4271,6 +4271,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "tempBucket": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "gceClusterConfig": {
                           "type": "GceClusterConfig",
                           "id": 8,
@@ -4540,6 +4547,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "preemptibility": {
+                          "type": "Preemptibility",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "managedGroupConfig": {
                           "type": "ManagedGroupConfig",
                           "id": 7,
@@ -4558,6 +4572,15 @@
                         "minCpuPlatform": {
                           "type": "string",
                           "id": 9
+                        }
+                      },
+                      "nested": {
+                        "Preemptibility": {
+                          "values": {
+                            "PREEMPTIBILITY_UNSPECIFIED": 0,
+                            "NON_PREEMPTIBLE": 1,
+                            "PREEMPTIBLE": 2
+                          }
                         }
                       }
                     },
@@ -5163,9 +5186,8 @@
                       "values": {
                         "COMPONENT_UNSPECIFIED": 0,
                         "ANACONDA": 5,
-                        "DOCKER": 13,
                         "DRUID": 9,
-                        "FLINK": 14,
+                        "HBASE": 11,
                         "HIVE_WEBHCAT": 3,
                         "JUPYTER": 1,
                         "KERBEROS": 7,
@@ -5908,7 +5930,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "jobId": {
@@ -6730,6 +6752,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "dagTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -6808,35 +6837,59 @@
                         },
                         "hadoopJob": {
                           "type": "HadoopJob",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkJob": {
                           "type": "SparkJob",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pysparkJob": {
                           "type": "PySparkJob",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "hiveJob": {
                           "type": "HiveJob",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pigJob": {
                           "type": "PigJob",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkRJob": {
                           "type": "SparkRJob",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sparkSqlJob": {
                           "type": "SparkSqlJob",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "prestoJob": {
                           "type": "PrestoJob",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "labels": {
                           "keyType": "string",
@@ -6995,6 +7048,27 @@
                         "clusterUuid": {
                           "type": "string",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dagTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dagStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dagEndTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

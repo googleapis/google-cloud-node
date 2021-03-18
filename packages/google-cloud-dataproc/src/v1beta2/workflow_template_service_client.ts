@@ -1074,7 +1074,8 @@ export class WorkflowTemplateServiceClient {
    * Instantiates a template and begins execution.
    *
    * This method is equivalent to executing the sequence
-   * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.CreateWorkflowTemplate|CreateWorkflowTemplate}, {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.InstantiateWorkflowTemplate|InstantiateWorkflowTemplate},
+   * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.CreateWorkflowTemplate|CreateWorkflowTemplate},
+   * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.InstantiateWorkflowTemplate|InstantiateWorkflowTemplate},
    * {@link google.cloud.dataproc.v1beta2.WorkflowTemplateService.DeleteWorkflowTemplate|DeleteWorkflowTemplate}.
    *
    * The returned Operation can be used to track execution of

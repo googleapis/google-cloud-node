@@ -11311,6 +11311,9 @@ export namespace google {
                     /** ClusterConfig configBucket */
                     configBucket?: (string|null);
 
+                    /** ClusterConfig tempBucket */
+                    tempBucket?: (string|null);
+
                     /** ClusterConfig gceClusterConfig */
                     gceClusterConfig?: (google.cloud.dataproc.v1beta2.IGceClusterConfig|null);
 
@@ -11359,6 +11362,9 @@ export namespace google {
 
                     /** ClusterConfig configBucket. */
                     public configBucket: string;
+
+                    /** ClusterConfig tempBucket. */
+                    public tempBucket: string;
 
                     /** ClusterConfig gceClusterConfig. */
                     public gceClusterConfig?: (google.cloud.dataproc.v1beta2.IGceClusterConfig|null);
@@ -12091,6 +12097,9 @@ export namespace google {
                     /** InstanceGroupConfig isPreemptible */
                     isPreemptible?: (boolean|null);
 
+                    /** InstanceGroupConfig preemptibility */
+                    preemptibility?: (google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility|keyof typeof google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility|null);
+
                     /** InstanceGroupConfig managedGroupConfig */
                     managedGroupConfig?: (google.cloud.dataproc.v1beta2.IManagedGroupConfig|null);
 
@@ -12127,6 +12136,9 @@ export namespace google {
 
                     /** InstanceGroupConfig isPreemptible. */
                     public isPreemptible: boolean;
+
+                    /** InstanceGroupConfig preemptibility. */
+                    public preemptibility: (google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility|keyof typeof google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility);
 
                     /** InstanceGroupConfig managedGroupConfig. */
                     public managedGroupConfig?: (google.cloud.dataproc.v1beta2.IManagedGroupConfig|null);
@@ -12206,6 +12218,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace InstanceGroupConfig {
+
+                    /** Preemptibility enum. */
+                    enum Preemptibility {
+                        PREEMPTIBILITY_UNSPECIFIED = 0,
+                        NON_PREEMPTIBLE = 1,
+                        PREEMPTIBLE = 2
+                    }
                 }
 
                 /** Properties of a ManagedGroupConfig. */
@@ -14271,9 +14293,8 @@ export namespace google {
                 enum Component {
                     COMPONENT_UNSPECIFIED = 0,
                     ANACONDA = 5,
-                    DOCKER = 13,
                     DRUID = 9,
-                    FLINK = 14,
+                    HBASE = 11,
                     HIVE_WEBHCAT = 3,
                     JUPYTER = 1,
                     KERBEROS = 7,
@@ -17742,6 +17763,9 @@ export namespace google {
 
                     /** WorkflowTemplate parameters */
                     parameters?: (google.cloud.dataproc.v1beta2.ITemplateParameter[]|null);
+
+                    /** WorkflowTemplate dagTimeout */
+                    dagTimeout?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a WorkflowTemplate. */
@@ -17779,6 +17803,9 @@ export namespace google {
 
                     /** WorkflowTemplate parameters. */
                     public parameters: google.cloud.dataproc.v1beta2.ITemplateParameter[];
+
+                    /** WorkflowTemplate dagTimeout. */
+                    public dagTimeout?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new WorkflowTemplate instance using the specified properties.
@@ -18729,6 +18756,15 @@ export namespace google {
 
                     /** WorkflowMetadata clusterUuid */
                     clusterUuid?: (string|null);
+
+                    /** WorkflowMetadata dagTimeout */
+                    dagTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkflowMetadata dagStartTime */
+                    dagStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkflowMetadata dagEndTime */
+                    dagEndTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a WorkflowMetadata. */
@@ -18772,6 +18808,15 @@ export namespace google {
 
                     /** WorkflowMetadata clusterUuid. */
                     public clusterUuid: string;
+
+                    /** WorkflowMetadata dagTimeout. */
+                    public dagTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkflowMetadata dagStartTime. */
+                    public dagStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkflowMetadata dagEndTime. */
+                    public dagEndTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new WorkflowMetadata instance using the specified properties.

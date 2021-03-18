@@ -28895,6 +28895,7 @@
                          * @memberof google.cloud.dataproc.v1beta2
                          * @interface IClusterConfig
                          * @property {string|null} [configBucket] ClusterConfig configBucket
+                         * @property {string|null} [tempBucket] ClusterConfig tempBucket
                          * @property {google.cloud.dataproc.v1beta2.IGceClusterConfig|null} [gceClusterConfig] ClusterConfig gceClusterConfig
                          * @property {google.cloud.dataproc.v1beta2.IInstanceGroupConfig|null} [masterConfig] ClusterConfig masterConfig
                          * @property {google.cloud.dataproc.v1beta2.IInstanceGroupConfig|null} [workerConfig] ClusterConfig workerConfig
@@ -28932,6 +28933,14 @@
                          * @instance
                          */
                         ClusterConfig.prototype.configBucket = "";
+    
+                        /**
+                         * ClusterConfig tempBucket.
+                         * @member {string} tempBucket
+                         * @memberof google.cloud.dataproc.v1beta2.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.tempBucket = "";
     
                         /**
                          * ClusterConfig gceClusterConfig.
@@ -29055,6 +29064,8 @@
                                 writer = $Writer.create();
                             if (message.configBucket != null && Object.hasOwnProperty.call(message, "configBucket"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.configBucket);
+                            if (message.tempBucket != null && Object.hasOwnProperty.call(message, "tempBucket"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tempBucket);
                             if (message.gceClusterConfig != null && Object.hasOwnProperty.call(message, "gceClusterConfig"))
                                 $root.google.cloud.dataproc.v1beta2.GceClusterConfig.encode(message.gceClusterConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.masterConfig != null && Object.hasOwnProperty.call(message, "masterConfig"))
@@ -29116,6 +29127,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.configBucket = reader.string();
+                                    break;
+                                case 2:
+                                    message.tempBucket = reader.string();
                                     break;
                                 case 8:
                                     message.gceClusterConfig = $root.google.cloud.dataproc.v1beta2.GceClusterConfig.decode(reader, reader.uint32());
@@ -29193,6 +29207,9 @@
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 if (!$util.isString(message.configBucket))
                                     return "configBucket: string expected";
+                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
+                                if (!$util.isString(message.tempBucket))
+                                    return "tempBucket: string expected";
                             if (message.gceClusterConfig != null && message.hasOwnProperty("gceClusterConfig")) {
                                 var error = $root.google.cloud.dataproc.v1beta2.GceClusterConfig.verify(message.gceClusterConfig);
                                 if (error)
@@ -29274,6 +29291,8 @@
                             var message = new $root.google.cloud.dataproc.v1beta2.ClusterConfig();
                             if (object.configBucket != null)
                                 message.configBucket = String(object.configBucket);
+                            if (object.tempBucket != null)
+                                message.tempBucket = String(object.tempBucket);
                             if (object.gceClusterConfig != null) {
                                 if (typeof object.gceClusterConfig !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1beta2.ClusterConfig.gceClusterConfig: object expected");
@@ -29359,6 +29378,7 @@
                                 object.initializationActions = [];
                             if (options.defaults) {
                                 object.configBucket = "";
+                                object.tempBucket = "";
                                 object.gceClusterConfig = null;
                                 object.masterConfig = null;
                                 object.workerConfig = null;
@@ -29373,6 +29393,8 @@
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
+                            if (message.tempBucket != null && message.hasOwnProperty("tempBucket"))
+                                object.tempBucket = message.tempBucket;
                             if (message.gceClusterConfig != null && message.hasOwnProperty("gceClusterConfig"))
                                 object.gceClusterConfig = $root.google.cloud.dataproc.v1beta2.GceClusterConfig.toObject(message.gceClusterConfig, options);
                             if (message.masterConfig != null && message.hasOwnProperty("masterConfig"))
@@ -30889,6 +30911,7 @@
                          * @property {string|null} [machineTypeUri] InstanceGroupConfig machineTypeUri
                          * @property {google.cloud.dataproc.v1beta2.IDiskConfig|null} [diskConfig] InstanceGroupConfig diskConfig
                          * @property {boolean|null} [isPreemptible] InstanceGroupConfig isPreemptible
+                         * @property {google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility|null} [preemptibility] InstanceGroupConfig preemptibility
                          * @property {google.cloud.dataproc.v1beta2.IManagedGroupConfig|null} [managedGroupConfig] InstanceGroupConfig managedGroupConfig
                          * @property {Array.<google.cloud.dataproc.v1beta2.IAcceleratorConfig>|null} [accelerators] InstanceGroupConfig accelerators
                          * @property {string|null} [minCpuPlatform] InstanceGroupConfig minCpuPlatform
@@ -30960,6 +30983,14 @@
                         InstanceGroupConfig.prototype.isPreemptible = false;
     
                         /**
+                         * InstanceGroupConfig preemptibility.
+                         * @member {google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility} preemptibility
+                         * @memberof google.cloud.dataproc.v1beta2.InstanceGroupConfig
+                         * @instance
+                         */
+                        InstanceGroupConfig.prototype.preemptibility = 0;
+    
+                        /**
                          * InstanceGroupConfig managedGroupConfig.
                          * @member {google.cloud.dataproc.v1beta2.IManagedGroupConfig|null|undefined} managedGroupConfig
                          * @memberof google.cloud.dataproc.v1beta2.InstanceGroupConfig
@@ -31027,6 +31058,8 @@
                                     $root.google.cloud.dataproc.v1beta2.AcceleratorConfig.encode(message.accelerators[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.minCpuPlatform != null && Object.hasOwnProperty.call(message, "minCpuPlatform"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.minCpuPlatform);
+                            if (message.preemptibility != null && Object.hasOwnProperty.call(message, "preemptibility"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.preemptibility);
                             return writer;
                         };
     
@@ -31080,6 +31113,9 @@
                                     break;
                                 case 6:
                                     message.isPreemptible = reader.bool();
+                                    break;
+                                case 10:
+                                    message.preemptibility = reader.int32();
                                     break;
                                 case 7:
                                     message.managedGroupConfig = $root.google.cloud.dataproc.v1beta2.ManagedGroupConfig.decode(reader, reader.uint32());
@@ -31151,6 +31187,15 @@
                             if (message.isPreemptible != null && message.hasOwnProperty("isPreemptible"))
                                 if (typeof message.isPreemptible !== "boolean")
                                     return "isPreemptible: boolean expected";
+                            if (message.preemptibility != null && message.hasOwnProperty("preemptibility"))
+                                switch (message.preemptibility) {
+                                default:
+                                    return "preemptibility: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.managedGroupConfig != null && message.hasOwnProperty("managedGroupConfig")) {
                                 var error = $root.google.cloud.dataproc.v1beta2.ManagedGroupConfig.verify(message.managedGroupConfig);
                                 if (error)
@@ -31203,6 +31248,20 @@
                             }
                             if (object.isPreemptible != null)
                                 message.isPreemptible = Boolean(object.isPreemptible);
+                            switch (object.preemptibility) {
+                            case "PREEMPTIBILITY_UNSPECIFIED":
+                            case 0:
+                                message.preemptibility = 0;
+                                break;
+                            case "NON_PREEMPTIBLE":
+                            case 1:
+                                message.preemptibility = 1;
+                                break;
+                            case "PREEMPTIBLE":
+                            case 2:
+                                message.preemptibility = 2;
+                                break;
+                            }
                             if (object.managedGroupConfig != null) {
                                 if (typeof object.managedGroupConfig !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1beta2.InstanceGroupConfig.managedGroupConfig: object expected");
@@ -31248,6 +31307,7 @@
                                 object.isPreemptible = false;
                                 object.managedGroupConfig = null;
                                 object.minCpuPlatform = "";
+                                object.preemptibility = options.enums === String ? "PREEMPTIBILITY_UNSPECIFIED" : 0;
                             }
                             if (message.numInstances != null && message.hasOwnProperty("numInstances"))
                                 object.numInstances = message.numInstances;
@@ -31273,6 +31333,8 @@
                             }
                             if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
                                 object.minCpuPlatform = message.minCpuPlatform;
+                            if (message.preemptibility != null && message.hasOwnProperty("preemptibility"))
+                                object.preemptibility = options.enums === String ? $root.google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility[message.preemptibility] : message.preemptibility;
                             return object;
                         };
     
@@ -31286,6 +31348,22 @@
                         InstanceGroupConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * Preemptibility enum.
+                         * @name google.cloud.dataproc.v1beta2.InstanceGroupConfig.Preemptibility
+                         * @enum {number}
+                         * @property {number} PREEMPTIBILITY_UNSPECIFIED=0 PREEMPTIBILITY_UNSPECIFIED value
+                         * @property {number} NON_PREEMPTIBLE=1 NON_PREEMPTIBLE value
+                         * @property {number} PREEMPTIBLE=2 PREEMPTIBLE value
+                         */
+                        InstanceGroupConfig.Preemptibility = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PREEMPTIBILITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NON_PREEMPTIBLE"] = 1;
+                            values[valuesById[2] = "PREEMPTIBLE"] = 2;
+                            return values;
+                        })();
     
                         return InstanceGroupConfig;
                     })();
@@ -33726,9 +33804,8 @@
                                         return "optionalComponents: enum value[] expected";
                                     case 0:
                                     case 5:
-                                    case 13:
                                     case 9:
-                                    case 14:
+                                    case 11:
                                     case 3:
                                     case 1:
                                     case 7:
@@ -33779,17 +33856,13 @@
                                     case 5:
                                         message.optionalComponents[i] = 5;
                                         break;
-                                    case "DOCKER":
-                                    case 13:
-                                        message.optionalComponents[i] = 13;
-                                        break;
                                     case "DRUID":
                                     case 9:
                                         message.optionalComponents[i] = 9;
                                         break;
-                                    case "FLINK":
-                                    case 14:
-                                        message.optionalComponents[i] = 14;
+                                    case "HBASE":
+                                    case 11:
+                                        message.optionalComponents[i] = 11;
                                         break;
                                     case "HIVE_WEBHCAT":
                                     case 3:
@@ -36500,9 +36573,8 @@
                      * @enum {number}
                      * @property {number} COMPONENT_UNSPECIFIED=0 COMPONENT_UNSPECIFIED value
                      * @property {number} ANACONDA=5 ANACONDA value
-                     * @property {number} DOCKER=13 DOCKER value
                      * @property {number} DRUID=9 DRUID value
-                     * @property {number} FLINK=14 FLINK value
+                     * @property {number} HBASE=11 HBASE value
                      * @property {number} HIVE_WEBHCAT=3 HIVE_WEBHCAT value
                      * @property {number} JUPYTER=1 JUPYTER value
                      * @property {number} KERBEROS=7 KERBEROS value
@@ -36516,9 +36588,8 @@
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "COMPONENT_UNSPECIFIED"] = 0;
                         values[valuesById[5] = "ANACONDA"] = 5;
-                        values[valuesById[13] = "DOCKER"] = 13;
                         values[valuesById[9] = "DRUID"] = 9;
-                        values[valuesById[14] = "FLINK"] = 14;
+                        values[valuesById[11] = "HBASE"] = 11;
                         values[valuesById[3] = "HIVE_WEBHCAT"] = 3;
                         values[valuesById[1] = "JUPYTER"] = 1;
                         values[valuesById[7] = "KERBEROS"] = 7;
@@ -46016,6 +46087,7 @@
                          * @property {google.cloud.dataproc.v1beta2.IWorkflowTemplatePlacement|null} [placement] WorkflowTemplate placement
                          * @property {Array.<google.cloud.dataproc.v1beta2.IOrderedJob>|null} [jobs] WorkflowTemplate jobs
                          * @property {Array.<google.cloud.dataproc.v1beta2.ITemplateParameter>|null} [parameters] WorkflowTemplate parameters
+                         * @property {google.protobuf.IDuration|null} [dagTimeout] WorkflowTemplate dagTimeout
                          */
     
                         /**
@@ -46109,6 +46181,14 @@
                         WorkflowTemplate.prototype.parameters = $util.emptyArray;
     
                         /**
+                         * WorkflowTemplate dagTimeout.
+                         * @member {google.protobuf.IDuration|null|undefined} dagTimeout
+                         * @memberof google.cloud.dataproc.v1beta2.WorkflowTemplate
+                         * @instance
+                         */
+                        WorkflowTemplate.prototype.dagTimeout = null;
+    
+                        /**
                          * Creates a new WorkflowTemplate instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1beta2.WorkflowTemplate
@@ -46153,6 +46233,8 @@
                             if (message.parameters != null && message.parameters.length)
                                 for (var i = 0; i < message.parameters.length; ++i)
                                     $root.google.cloud.dataproc.v1beta2.TemplateParameter.encode(message.parameters[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.dagTimeout != null && Object.hasOwnProperty.call(message, "dagTimeout"))
+                                $root.google.protobuf.Duration.encode(message.dagTimeout, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -46236,6 +46318,9 @@
                                     if (!(message.parameters && message.parameters.length))
                                         message.parameters = [];
                                     message.parameters.push($root.google.cloud.dataproc.v1beta2.TemplateParameter.decode(reader, reader.uint32()));
+                                    break;
+                                case 10:
+                                    message.dagTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -46322,6 +46407,11 @@
                                         return "parameters." + error;
                                 }
                             }
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.dagTimeout);
+                                if (error)
+                                    return "dagTimeout." + error;
+                            }
                             return null;
                         };
     
@@ -46385,6 +46475,11 @@
                                     message.parameters[i] = $root.google.cloud.dataproc.v1beta2.TemplateParameter.fromObject(object.parameters[i]);
                                 }
                             }
+                            if (object.dagTimeout != null) {
+                                if (typeof object.dagTimeout !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.WorkflowTemplate.dagTimeout: object expected");
+                                message.dagTimeout = $root.google.protobuf.Duration.fromObject(object.dagTimeout);
+                            }
                             return message;
                         };
     
@@ -46414,6 +46509,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.placement = null;
+                                object.dagTimeout = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -46443,6 +46539,8 @@
                                 for (var j = 0; j < message.parameters.length; ++j)
                                     object.parameters[j] = $root.google.cloud.dataproc.v1beta2.TemplateParameter.toObject(message.parameters[j], options);
                             }
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout"))
+                                object.dagTimeout = $root.google.protobuf.Duration.toObject(message.dagTimeout, options);
                             return object;
                         };
     
@@ -48764,6 +48862,9 @@
                          * @property {google.protobuf.ITimestamp|null} [startTime] WorkflowMetadata startTime
                          * @property {google.protobuf.ITimestamp|null} [endTime] WorkflowMetadata endTime
                          * @property {string|null} [clusterUuid] WorkflowMetadata clusterUuid
+                         * @property {google.protobuf.IDuration|null} [dagTimeout] WorkflowMetadata dagTimeout
+                         * @property {google.protobuf.ITimestamp|null} [dagStartTime] WorkflowMetadata dagStartTime
+                         * @property {google.protobuf.ITimestamp|null} [dagEndTime] WorkflowMetadata dagEndTime
                          */
     
                         /**
@@ -48871,6 +48972,30 @@
                         WorkflowMetadata.prototype.clusterUuid = "";
     
                         /**
+                         * WorkflowMetadata dagTimeout.
+                         * @member {google.protobuf.IDuration|null|undefined} dagTimeout
+                         * @memberof google.cloud.dataproc.v1beta2.WorkflowMetadata
+                         * @instance
+                         */
+                        WorkflowMetadata.prototype.dagTimeout = null;
+    
+                        /**
+                         * WorkflowMetadata dagStartTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} dagStartTime
+                         * @memberof google.cloud.dataproc.v1beta2.WorkflowMetadata
+                         * @instance
+                         */
+                        WorkflowMetadata.prototype.dagStartTime = null;
+    
+                        /**
+                         * WorkflowMetadata dagEndTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} dagEndTime
+                         * @memberof google.cloud.dataproc.v1beta2.WorkflowMetadata
+                         * @instance
+                         */
+                        WorkflowMetadata.prototype.dagEndTime = null;
+    
+                        /**
                          * Creates a new WorkflowMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1beta2.WorkflowMetadata
@@ -48917,6 +49042,12 @@
                                 $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.clusterUuid != null && Object.hasOwnProperty.call(message, "clusterUuid"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.clusterUuid);
+                            if (message.dagTimeout != null && Object.hasOwnProperty.call(message, "dagTimeout"))
+                                $root.google.protobuf.Duration.encode(message.dagTimeout, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.dagStartTime != null && Object.hasOwnProperty.call(message, "dagStartTime"))
+                                $root.google.protobuf.Timestamp.encode(message.dagStartTime, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.dagEndTime != null && Object.hasOwnProperty.call(message, "dagEndTime"))
+                                $root.google.protobuf.Timestamp.encode(message.dagEndTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -49002,6 +49133,15 @@
                                     break;
                                 case 11:
                                     message.clusterUuid = reader.string();
+                                    break;
+                                case 12:
+                                    message.dagTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.dagStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    message.dagEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -49093,6 +49233,21 @@
                             if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
                                 if (!$util.isString(message.clusterUuid))
                                     return "clusterUuid: string expected";
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.dagTimeout);
+                                if (error)
+                                    return "dagTimeout." + error;
+                            }
+                            if (message.dagStartTime != null && message.hasOwnProperty("dagStartTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.dagStartTime);
+                                if (error)
+                                    return "dagStartTime." + error;
+                            }
+                            if (message.dagEndTime != null && message.hasOwnProperty("dagEndTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.dagEndTime);
+                                if (error)
+                                    return "dagEndTime." + error;
+                            }
                             return null;
                         };
     
@@ -49166,6 +49321,21 @@
                             }
                             if (object.clusterUuid != null)
                                 message.clusterUuid = String(object.clusterUuid);
+                            if (object.dagTimeout != null) {
+                                if (typeof object.dagTimeout !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.WorkflowMetadata.dagTimeout: object expected");
+                                message.dagTimeout = $root.google.protobuf.Duration.fromObject(object.dagTimeout);
+                            }
+                            if (object.dagStartTime != null) {
+                                if (typeof object.dagStartTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.WorkflowMetadata.dagStartTime: object expected");
+                                message.dagStartTime = $root.google.protobuf.Timestamp.fromObject(object.dagStartTime);
+                            }
+                            if (object.dagEndTime != null) {
+                                if (typeof object.dagEndTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.WorkflowMetadata.dagEndTime: object expected");
+                                message.dagEndTime = $root.google.protobuf.Timestamp.fromObject(object.dagEndTime);
+                            }
                             return message;
                         };
     
@@ -49195,6 +49365,9 @@
                                 object.startTime = null;
                                 object.endTime = null;
                                 object.clusterUuid = "";
+                                object.dagTimeout = null;
+                                object.dagStartTime = null;
+                                object.dagEndTime = null;
                             }
                             if (message.template != null && message.hasOwnProperty("template"))
                                 object.template = message.template;
@@ -49222,6 +49395,12 @@
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
                                 object.clusterUuid = message.clusterUuid;
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout"))
+                                object.dagTimeout = $root.google.protobuf.Duration.toObject(message.dagTimeout, options);
+                            if (message.dagStartTime != null && message.hasOwnProperty("dagStartTime"))
+                                object.dagStartTime = $root.google.protobuf.Timestamp.toObject(message.dagStartTime, options);
+                            if (message.dagEndTime != null && message.hasOwnProperty("dagEndTime"))
+                                object.dagEndTime = $root.google.protobuf.Timestamp.toObject(message.dagEndTime, options);
                             return object;
                         };
     
