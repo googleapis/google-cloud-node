@@ -1,13 +1,14 @@
 {
-    "name": "retail",
-    "name_pretty": "Retail API",
-    "product_documentation": "https://cloud.google.com/recommendations/",
-    "client_documentation": "https://googleapis.dev/nodejs/retail/latest/",
-    "issue_tracker": "https://github.com/googleapis/nodejs-retail/issues",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-retail",
-    "distribution_name": "@google-cloud/retail",
-    "api_id": "retail.googleapis.com",
-    "requires_billing": true
-  }
+  "client_documentation": "https://googleapis.dev/nodejs/retail/latest/",
+  "api_id": "retail.googleapis.com",
+  "distribution_name": "@google-cloud/retail",
+  "release_level": "ga",
+  "default_version": "v2beta",
+  "language": "nodejs",
+  "name_pretty": "Retail API",
+  "repo": "googleapis/nodejs-retail",
+  "product_documentation": "https://cloud.google.com/recommendations/",
+  "requires_billing": true,
+  "name": "retail",
+  "issue_tracker": "https://github.com/googleapis/nodejs-retail/issues"
+}
