@@ -1,14 +1,15 @@
 {
-  "name": "scheduler",
-  "name_pretty": "Google Cloud Scheduler",
-  "product_documentation": "https://cloud.google.com/scheduler",
-  "client_documentation": "https://googleapis.dev/nodejs/scheduler/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/5411429",
+  "default_version": "v1",
   "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-scheduler",
-  "distribution_name": "@google-cloud/scheduler",
-  "api_id": "cloudscheduler.googleapis.com",
   "requires_billing": false,
-  "codeowner_team": "@googleapis/serverless-team"
+  "client_documentation": "https://googleapis.dev/nodejs/scheduler/latest",
+  "codeowner_team": "@googleapis/serverless-team",
+  "language": "nodejs",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5411429",
+  "product_documentation": "https://cloud.google.com/scheduler",
+  "name": "scheduler",
+  "distribution_name": "@google-cloud/scheduler",
+  "name_pretty": "Google Cloud Scheduler",
+  "api_id": "cloudscheduler.googleapis.com",
+  "repo": "googleapis/nodejs-scheduler"
 }
