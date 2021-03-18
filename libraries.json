@@ -99,6 +99,7 @@
     "distribution_name": "@google-cloud/asset",
     "api_id": "cloudasset.googleapis.com",
     "requires_billing": true,
+    "default_version": "v1",
     "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
