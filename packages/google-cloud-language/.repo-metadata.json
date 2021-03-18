@@ -1,14 +1,15 @@
 {
-  "name": "language",
-  "name_pretty": "Natural Language",
-  "product_documentation": "https://cloud.google.com/natural-language/docs/",
-  "client_documentation": "https://googleapis.dev/nodejs/language/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559753",
+  "default_version": "v1",
   "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-language",
-  "distribution_name": "@google-cloud/language",
-  "api_id": "language.googleapis.com",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/ml-apis"
+  "client_documentation": "https://googleapis.dev/nodejs/language/latest",
+  "codeowner_team": "@googleapis/ml-apis",
+  "language": "nodejs",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559753",
+  "product_documentation": "https://cloud.google.com/natural-language/docs/",
+  "name": "language",
+  "distribution_name": "@google-cloud/language",
+  "name_pretty": "Natural Language",
+  "api_id": "language.googleapis.com",
+  "repo": "googleapis/nodejs-language"
 }
