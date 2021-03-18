@@ -787,6 +787,9 @@ export namespace google {
 
                     /** Workload kmsSettings */
                     kmsSettings?: (google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null);
+
+                    /** Workload resourceSettings */
+                    resourceSettings?: (google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings[]|null);
                 }
 
                 /** Represents a Workload. */
@@ -839,6 +842,9 @@ export namespace google {
 
                     /** Workload kmsSettings. */
                     public kmsSettings?: (google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null);
+
+                    /** Workload resourceSettings. */
+                    public resourceSettings: google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings[];
 
                     /** Workload complianceRegimeSettings. */
                     public complianceRegimeSettings?: ("il4Settings"|"cjisSettings"|"fedrampHighSettings"|"fedrampModerateSettings");
@@ -1478,6 +1484,102 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of a ResourceSettings. */
+                    interface IResourceSettings {
+
+                        /** ResourceSettings resourceId */
+                        resourceId?: (string|null);
+
+                        /** ResourceSettings resourceType */
+                        resourceType?: (google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|null);
+                    }
+
+                    /** Represents a ResourceSettings. */
+                    class ResourceSettings implements IResourceSettings {
+
+                        /**
+                         * Constructs a new ResourceSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings);
+
+                        /** ResourceSettings resourceId. */
+                        public resourceId: string;
+
+                        /** ResourceSettings resourceType. */
+                        public resourceType: (google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType);
+
+                        /**
+                         * Creates a new ResourceSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceSettings instance
+                         */
+                        public static create(properties?: google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings): google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings;
+
+                        /**
+                         * Encodes the specified ResourceSettings message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.verify|verify} messages.
+                         * @param message ResourceSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceSettings message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.verify|verify} messages.
+                         * @param message ResourceSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings;
+
+                        /**
+                         * Decodes a ResourceSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings;
+
+                        /**
+                         * Verifies a ResourceSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings;
+
+                        /**
+                         * Creates a plain object from a ResourceSettings message. Also converts values to other types if specified.
+                         * @param message ResourceSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** ComplianceRegime enum. */
                     enum ComplianceRegime {
                         COMPLIANCE_REGIME_UNSPECIFIED = 0,
@@ -1485,7 +1587,9 @@ export namespace google {
                         CJIS = 2,
                         FEDRAMP_HIGH = 3,
                         FEDRAMP_MODERATE = 4,
-                        US_REGIONAL_ACCESS = 5
+                        US_REGIONAL_ACCESS = 5,
+                        HIPAA = 6,
+                        HITRUST = 7
                     }
                 }
 

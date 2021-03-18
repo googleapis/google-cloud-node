@@ -1625,6 +1625,7 @@
                          * @property {Object.<string,string>|null} [labels] Workload labels
                          * @property {string|null} [provisionedResourcesParent] Workload provisionedResourcesParent
                          * @property {google.cloud.assuredworkloads.v1beta1.Workload.IKMSSettings|null} [kmsSettings] Workload kmsSettings
+                         * @property {Array.<google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings>|null} [resourceSettings] Workload resourceSettings
                          */
     
                         /**
@@ -1638,6 +1639,7 @@
                         function Workload(properties) {
                             this.resources = [];
                             this.labels = {};
+                            this.resourceSettings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1756,6 +1758,14 @@
                          */
                         Workload.prototype.kmsSettings = null;
     
+                        /**
+                         * Workload resourceSettings.
+                         * @member {Array.<google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings>} resourceSettings
+                         * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.resourceSettings = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1824,6 +1834,9 @@
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.provisionedResourcesParent);
                             if (message.kmsSettings != null && Object.hasOwnProperty.call(message, "kmsSettings"))
                                 $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.encode(message.kmsSettings, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.resourceSettings != null && message.resourceSettings.length)
+                                for (var i = 0; i < message.resourceSettings.length; ++i)
+                                    $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.encode(message.resourceSettings[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -1921,6 +1934,11 @@
                                 case 14:
                                     message.kmsSettings = $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.decode(reader, reader.uint32());
                                     break;
+                                case 15:
+                                    if (!(message.resourceSettings && message.resourceSettings.length))
+                                        message.resourceSettings = [];
+                                    message.resourceSettings.push($root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.decode(reader, reader.uint32()));
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1982,6 +2000,8 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -2049,6 +2069,15 @@
                                 if (error)
                                     return "kmsSettings." + error;
                             }
+                            if (message.resourceSettings != null && message.hasOwnProperty("resourceSettings")) {
+                                if (!Array.isArray(message.resourceSettings))
+                                    return "resourceSettings: array expected";
+                                for (var i = 0; i < message.resourceSettings.length; ++i) {
+                                    var error = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.verify(message.resourceSettings[i]);
+                                    if (error)
+                                        return "resourceSettings." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2103,6 +2132,14 @@
                             case 5:
                                 message.complianceRegime = 5;
                                 break;
+                            case "HIPAA":
+                            case 6:
+                                message.complianceRegime = 6;
+                                break;
+                            case "HITRUST":
+                            case 7:
+                                message.complianceRegime = 7;
+                                break;
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -2147,6 +2184,16 @@
                                     throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.kmsSettings: object expected");
                                 message.kmsSettings = $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.fromObject(object.kmsSettings);
                             }
+                            if (object.resourceSettings) {
+                                if (!Array.isArray(object.resourceSettings))
+                                    throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.resourceSettings: array expected");
+                                message.resourceSettings = [];
+                                for (var i = 0; i < object.resourceSettings.length; ++i) {
+                                    if (typeof object.resourceSettings[i] !== "object")
+                                        throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.resourceSettings: object expected");
+                                    message.resourceSettings[i] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.fromObject(object.resourceSettings[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -2163,8 +2210,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.resources = [];
+                                object.resourceSettings = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -2224,6 +2273,11 @@
                                 object.provisionedResourcesParent = message.provisionedResourcesParent;
                             if (message.kmsSettings != null && message.hasOwnProperty("kmsSettings"))
                                 object.kmsSettings = $root.google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings.toObject(message.kmsSettings, options);
+                            if (message.resourceSettings && message.resourceSettings.length) {
+                                object.resourceSettings = [];
+                                for (var j = 0; j < message.resourceSettings.length; ++j)
+                                    object.resourceSettings[j] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.toObject(message.resourceSettings[j], options);
+                            }
                             return object;
                         };
     
@@ -3484,6 +3538,234 @@
                             return FedrampModerateSettings;
                         })();
     
+                        Workload.ResourceSettings = (function() {
+    
+                            /**
+                             * Properties of a ResourceSettings.
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                             * @interface IResourceSettings
+                             * @property {string|null} [resourceId] ResourceSettings resourceId
+                             * @property {google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|null} [resourceType] ResourceSettings resourceType
+                             */
+    
+                            /**
+                             * Constructs a new ResourceSettings.
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                             * @classdesc Represents a ResourceSettings.
+                             * @implements IResourceSettings
+                             * @constructor
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings=} [properties] Properties to set
+                             */
+                            function ResourceSettings(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ResourceSettings resourceId.
+                             * @member {string} resourceId
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @instance
+                             */
+                            ResourceSettings.prototype.resourceId = "";
+    
+                            /**
+                             * ResourceSettings resourceType.
+                             * @member {google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType} resourceType
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @instance
+                             */
+                            ResourceSettings.prototype.resourceType = 0;
+    
+                            /**
+                             * Creates a new ResourceSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings=} [properties] Properties to set
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings} ResourceSettings instance
+                             */
+                            ResourceSettings.create = function create(properties) {
+                                return new ResourceSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceSettings message. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings} message ResourceSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.resourceId != null && Object.hasOwnProperty.call(message, "resourceId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceId);
+                                if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.resourceType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceSettings message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings} message ResourceSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ResourceSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings} ResourceSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceSettings.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.resourceId = reader.string();
+                                        break;
+                                    case 2:
+                                        message.resourceType = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ResourceSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings} ResourceSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ResourceSettings message.
+                             * @function verify
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ResourceSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.resourceId != null && message.hasOwnProperty("resourceId"))
+                                    if (!$util.isString(message.resourceId))
+                                        return "resourceId: string expected";
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    switch (message.resourceType) {
+                                    default:
+                                        return "resourceType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ResourceSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings} ResourceSettings
+                             */
+                            ResourceSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings)
+                                    return object;
+                                var message = new $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings();
+                                if (object.resourceId != null)
+                                    message.resourceId = String(object.resourceId);
+                                switch (object.resourceType) {
+                                case "RESOURCE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.resourceType = 0;
+                                    break;
+                                case "CONSUMER_PROJECT":
+                                case 1:
+                                    message.resourceType = 1;
+                                    break;
+                                case "ENCRYPTION_KEYS_PROJECT":
+                                case 2:
+                                    message.resourceType = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ResourceSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings} message ResourceSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ResourceSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.resourceId = "";
+                                    object.resourceType = options.enums === String ? "RESOURCE_TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.resourceId != null && message.hasOwnProperty("resourceId"))
+                                    object.resourceId = message.resourceId;
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ResourceSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ResourceSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ResourceSettings;
+                        })();
+    
                         /**
                          * ComplianceRegime enum.
                          * @name google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime
@@ -3494,6 +3776,8 @@
                          * @property {number} FEDRAMP_HIGH=3 FEDRAMP_HIGH value
                          * @property {number} FEDRAMP_MODERATE=4 FEDRAMP_MODERATE value
                          * @property {number} US_REGIONAL_ACCESS=5 US_REGIONAL_ACCESS value
+                         * @property {number} HIPAA=6 HIPAA value
+                         * @property {number} HITRUST=7 HITRUST value
                          */
                         Workload.ComplianceRegime = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3503,6 +3787,8 @@
                             values[valuesById[3] = "FEDRAMP_HIGH"] = 3;
                             values[valuesById[4] = "FEDRAMP_MODERATE"] = 4;
                             values[valuesById[5] = "US_REGIONAL_ACCESS"] = 5;
+                            values[valuesById[6] = "HIPAA"] = 6;
+                            values[valuesById[7] = "HITRUST"] = 7;
                             return values;
                         })();
     
@@ -3702,6 +3988,8 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
                                     break;
                                 }
                             return null;
@@ -3752,6 +4040,14 @@
                             case "US_REGIONAL_ACCESS":
                             case 5:
                                 message.complianceRegime = 5;
+                                break;
+                            case "HIPAA":
+                            case 6:
+                                message.complianceRegime = 6;
+                                break;
+                            case "HITRUST":
+                            case 7:
+                                message.complianceRegime = 7;
                                 break;
                             }
                             return message;

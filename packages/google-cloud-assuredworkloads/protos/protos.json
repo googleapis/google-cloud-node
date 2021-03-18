@@ -360,6 +360,14 @@
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
+                        },
+                        "resourceSettings": {
+                          "rule": "repeated",
+                          "type": "ResourceSettings",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -458,6 +466,18 @@
                             }
                           }
                         },
+                        "ResourceSettings": {
+                          "fields": {
+                            "resourceId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resourceType": {
+                              "type": "ResourceInfo.ResourceType",
+                              "id": 2
+                            }
+                          }
+                        },
                         "ComplianceRegime": {
                           "values": {
                             "COMPLIANCE_REGIME_UNSPECIFIED": 0,
@@ -465,7 +485,9 @@
                             "CJIS": 2,
                             "FEDRAMP_HIGH": 3,
                             "FEDRAMP_MODERATE": 4,
-                            "US_REGIONAL_ACCESS": 5
+                            "US_REGIONAL_ACCESS": 5,
+                            "HIPAA": 6,
+                            "HITRUST": 7
                           }
                         }
                       }
