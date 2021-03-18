@@ -1,13 +1,14 @@
 {
-  "name": "analytics-admin",
-  "name_pretty": "Google Analytics Admin",
-  "product_documentation": "https://developers.google.com/analytics",
   "client_documentation": "https://googleapis.dev/nodejs/analytics-admin/latest/index.html",
-  "issue_tracker": "",
-  "release_level": "alpha",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-analytics-admin",
-  "distribution_name": "@google-analytics/admin",
   "api_id": "analyticsadmin.googleapis.com",
-  "requires_billing": false
+  "distribution_name": "@google-analytics/admin",
+  "release_level": "alpha",
+  "default_version": "v1alpha",
+  "language": "nodejs",
+  "name_pretty": "Google Analytics Admin",
+  "repo": "googleapis/nodejs-analytics-admin",
+  "product_documentation": "https://developers.google.com/analytics",
+  "requires_billing": false,
+  "name": "analytics-admin",
+  "issue_tracker": ""
 }
