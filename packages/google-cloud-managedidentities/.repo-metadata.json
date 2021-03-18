@@ -1,14 +1,14 @@
 {
-  "name": "managedidentities",
-  "name_pretty": "Managed Service for Microsoft Active Directory",
-  "product_documentation": "https://cloud.google.com/managed-microsoft-ad/",
   "client_documentation": "https://googleapis.dev/nodejs/managedidentities/latest/",
-  "issue_tracker": "https://github.com/googleapis/nodejs-managed-identities/issues",
-  "release_level": "GA",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-managed-identities",
-  "distribution_name": "@google-cloud/managed-identities",
   "api_id": "managedidentities.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/managed-identities",
+  "release_level": "GA",
+  "default_version": "v1beta1",
+  "language": "nodejs",
+  "name_pretty": "Managed Service for Microsoft Active Directory",
+  "repo": "googleapis/nodejs-managed-identities",
+  "product_documentation": "https://cloud.google.com/managed-microsoft-ad/",
+  "requires_billing": true,
+  "name": "managedidentities",
+  "issue_tracker": "https://github.com/googleapis/nodejs-managed-identities/issues"
 }
-
