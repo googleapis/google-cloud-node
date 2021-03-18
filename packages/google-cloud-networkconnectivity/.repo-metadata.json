@@ -1,13 +1,14 @@
 {
-    "name": "network-connectivity",
-    "name_pretty": "Network Connectivity Center",
-    "product_documentation": "https://cloud.google.com/network-connectivity/docs",
-    "client_documentation": "https://googleapis.dev/nodejs/network-connectivity/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-network-connectivity/issues",
-    "release_level": "alpha",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-network-connectivity",
-    "distribution_name": "@google-cloud/network-connectivity",
-    "api_id": "networkconnectivity.googleapis.com",
-    "requires_billing": true
-  }
+  "client_documentation": "https://googleapis.dev/nodejs/network-connectivity/latest",
+  "api_id": "networkconnectivity.googleapis.com",
+  "distribution_name": "@google-cloud/network-connectivity",
+  "release_level": "alpha",
+  "default_version": "v1alpha1",
+  "language": "nodejs",
+  "name_pretty": "Network Connectivity Center",
+  "repo": "googleapis/nodejs-network-connectivity",
+  "product_documentation": "https://cloud.google.com/network-connectivity/docs",
+  "requires_billing": true,
+  "name": "network-connectivity",
+  "issue_tracker": "https://github.com/googleapis/nodejs-network-connectivity/issues"
+}
