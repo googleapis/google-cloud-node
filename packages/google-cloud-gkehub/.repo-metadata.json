@@ -1,13 +1,14 @@
 {
-    "name": "gke-hub",
-    "name_pretty": "GKE Hub",
-    "product_documentation": "https://cloud.google.com/anthos/gke",
-    "client_documentation": "https://googleapis.dev/nodejs/gke-hub/latest/",
-    "issue_tracker": "https://github.com/googleapis/nodejs-gke-hub/issues",
-    "release_level": "BETA",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-gke-hub",
-    "distribution_name": "@google-cloud/gke-hub",
-    "api_id": "gkehub.googleapis.com",
-    "requires_billing": true
-  } 
+  "client_documentation": "https://googleapis.dev/nodejs/gke-hub/latest/",
+  "api_id": "gkehub.googleapis.com",
+  "distribution_name": "@google-cloud/gke-hub",
+  "release_level": "BETA",
+  "default_version": "v1beta1",
+  "language": "nodejs",
+  "name_pretty": "GKE Hub",
+  "repo": "googleapis/nodejs-gke-hub",
+  "product_documentation": "https://cloud.google.com/anthos/gke",
+  "requires_billing": true,
+  "name": "gke-hub",
+  "issue_tracker": "https://github.com/googleapis/nodejs-gke-hub/issues"
+}
