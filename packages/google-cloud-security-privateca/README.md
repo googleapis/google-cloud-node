@@ -2,10 +2,10 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Certificate Authority: Node.js Client](https://github.com/googleapis/nodejs-security-private-ca)
+# [Certificate Authority Service: Node.js Client](https://github.com/googleapis/nodejs-security-private-ca)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/privateca.svg)](https://www.npmjs.com/package/@google-cloud/security-private-ca)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/security-private-ca.svg)](https://www.npmjs.org/package/@google-cloud/security-private-ca)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-security-private-ca/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-security-private-ca)
 
 
@@ -17,8 +17,8 @@ Privateca client for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-security-private-ca/blob/master/CHANGELOG.md).
 
-* [Google Cloud Certificate Authority Node.js Client API Reference][client-docs]
-* [Google Cloud Certificate Authority Documentation][product-docs]
+* [Certificate Authority Service Node.js Client API Reference][client-docs]
+* [Certificate Authority Service Documentation][product-docs]
 * [github.com/googleapis/nodejs-security-private-ca](https://github.com/googleapis/nodejs-security-private-ca)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -44,14 +44,14 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Google Cloud Certificate Authority API][enable_api].
+1.  [Enable the Certificate Authority Service API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
 
 ```bash
-npm install privateca
+npm install @google-cloud/security-private-ca
 ```
 
 
@@ -62,7 +62,6 @@ npm install privateca
 
 const {
   CertificateAuthorityServiceClient,
-  // eslint-disable-next-line node/no-extraneous-require
 } = require('@google-cloud/security-private-ca');
 
 // TODO(developer): replace with your prefered project ID.
@@ -86,8 +85,7 @@ listCertificates();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-security-private-ca/tree/master/samples) directory. The samples' `README.md`
-has instructions for running the samples.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-security-private-ca/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
@@ -95,7 +93,7 @@ has instructions for running the samples.
 
 
 
-The [Google Cloud Certificate Authority Node.js Client API Reference][client-docs] documentation
+The [Certificate Authority Service Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -104,7 +102,7 @@ Our client libraries follow the [Node.js release schedule](https://nodejs.org/en
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 
-Client libraries targetting some end-of-life versions of Node.js are available, and
+Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
 
