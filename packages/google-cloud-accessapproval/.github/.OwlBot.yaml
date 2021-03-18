@@ -13,6 +13,10 @@
 # limitations under the License.
 docker:
   image: gcr.io/repo-automation-bots/owlbot-nodejs:latest
-copy-dirs:
-  - source: google/cloud/accessapproval/*/accessapproval-*-nodejs/src/*
-    dest: /src
+
+deep-remove-regex:
+  - /owl-bot-staging
+
+deep-copy-regex:
+  - source: /google/cloud/accessapproval/(.*)/.*-nodejs/(.*)
+    dest: /owl-bot-staging/$1/$2

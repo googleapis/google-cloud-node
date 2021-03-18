@@ -9,6 +9,7 @@
   "repo": "googleapis/nodejs-access-approval",
   "distribution_name": "@google-cloud/access-approval",
   "api_id": "accessapproval.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "default_version": "v1"
 }
 
