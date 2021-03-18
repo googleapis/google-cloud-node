@@ -1,14 +1,14 @@
 {
-  "name": "iamcredentials",
-  "name_pretty": "IAM Service Account Credentials API",
-  "product_documentation": "",
   "client_documentation": "https://googleapis.dev/nodejs/iamcredentials/latest/",
-  "issue_tracker": "https://github.com/googleapis/nodejs-iam-credentials/issues",
-  "release_level": "GA",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-iam-credentials",
-  "distribution_name": "@google-cloud/iam-credentials",
   "api_id": "iamcredentials.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/iam-credentials",
+  "release_level": "GA",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "IAM Service Account Credentials API",
+  "repo": "googleapis/nodejs-iam-credentials",
+  "product_documentation": "",
+  "requires_billing": true,
+  "name": "iamcredentials",
+  "issue_tracker": "https://github.com/googleapis/nodejs-iam-credentials/issues"
 }
-
