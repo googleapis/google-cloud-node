@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.0.0...v1.1.0) (2021-03-18)
+
+
+### Features
+
+* add v1beta surface ([#13](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/13)) ([efb8cba](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/efb8cbad707044757f5d7a7afed9388b9afc9ab2))
+* added support for release channels when creating service ([#11](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/11)) ([787f2cc](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/787f2cc38106ddb147db2676bfa0baba966e7d12))
+* Publish Dataproc Metastore v1alpha API ([#9](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/9)) ([296571f](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/296571faeb647a495f25c8d12a9b4abd728b9e13))
+
 ## 1.0.0 (2021-02-23)
 
 
