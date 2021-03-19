@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
 gapic = gcp.GAPICBazel()
-versions = ["v1","v1beta"]
+versions = ["v1"]
 name = 'appengine'
 for version in versions:
   library = gapic.node_library(
@@ -35,7 +35,7 @@ for version in versions:
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
-    source_location='build/src', versions=["v1","v1beta"], default_version="v1beta")
+    source_location='build/src', versions=["v1"], default_version="v1")
 s.copy(templates, excludes=[])
 
 node.postprocess_gapic_library()
