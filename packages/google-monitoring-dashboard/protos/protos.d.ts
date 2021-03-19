@@ -4012,6 +4012,9 @@ export namespace google {
                     /** Dashboard gridLayout */
                     gridLayout?: (google.monitoring.dashboard.v1.IGridLayout|null);
 
+                    /** Dashboard mosaicLayout */
+                    mosaicLayout?: (google.monitoring.dashboard.v1.IMosaicLayout|null);
+
                     /** Dashboard rowLayout */
                     rowLayout?: (google.monitoring.dashboard.v1.IRowLayout|null);
 
@@ -4040,6 +4043,9 @@ export namespace google {
                     /** Dashboard gridLayout. */
                     public gridLayout?: (google.monitoring.dashboard.v1.IGridLayout|null);
 
+                    /** Dashboard mosaicLayout. */
+                    public mosaicLayout?: (google.monitoring.dashboard.v1.IMosaicLayout|null);
+
                     /** Dashboard rowLayout. */
                     public rowLayout?: (google.monitoring.dashboard.v1.IRowLayout|null);
 
@@ -4047,7 +4053,7 @@ export namespace google {
                     public columnLayout?: (google.monitoring.dashboard.v1.IColumnLayout|null);
 
                     /** Dashboard layout. */
-                    public layout?: ("gridLayout"|"rowLayout"|"columnLayout");
+                    public layout?: ("gridLayout"|"mosaicLayout"|"rowLayout"|"columnLayout");
 
                     /**
                      * Creates a new Dashboard instance using the specified properties.
@@ -4214,6 +4220,219 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MosaicLayout. */
+                interface IMosaicLayout {
+
+                    /** MosaicLayout columns */
+                    columns?: (number|null);
+
+                    /** MosaicLayout tiles */
+                    tiles?: (google.monitoring.dashboard.v1.MosaicLayout.ITile[]|null);
+                }
+
+                /** Represents a MosaicLayout. */
+                class MosaicLayout implements IMosaicLayout {
+
+                    /**
+                     * Constructs a new MosaicLayout.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IMosaicLayout);
+
+                    /** MosaicLayout columns. */
+                    public columns: number;
+
+                    /** MosaicLayout tiles. */
+                    public tiles: google.monitoring.dashboard.v1.MosaicLayout.ITile[];
+
+                    /**
+                     * Creates a new MosaicLayout instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MosaicLayout instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IMosaicLayout): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Encodes the specified MosaicLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
+                     * @param message MosaicLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IMosaicLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MosaicLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
+                     * @param message MosaicLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IMosaicLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MosaicLayout message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MosaicLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Decodes a MosaicLayout message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MosaicLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Verifies a MosaicLayout message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MosaicLayout message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MosaicLayout
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Creates a plain object from a MosaicLayout message. Also converts values to other types if specified.
+                     * @param message MosaicLayout
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.MosaicLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MosaicLayout to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace MosaicLayout {
+
+                    /** Properties of a Tile. */
+                    interface ITile {
+
+                        /** Tile xPos */
+                        xPos?: (number|null);
+
+                        /** Tile yPos */
+                        yPos?: (number|null);
+
+                        /** Tile width */
+                        width?: (number|null);
+
+                        /** Tile height */
+                        height?: (number|null);
+
+                        /** Tile widget */
+                        widget?: (google.monitoring.dashboard.v1.IWidget|null);
+                    }
+
+                    /** Represents a Tile. */
+                    class Tile implements ITile {
+
+                        /**
+                         * Constructs a new Tile.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.MosaicLayout.ITile);
+
+                        /** Tile xPos. */
+                        public xPos: number;
+
+                        /** Tile yPos. */
+                        public yPos: number;
+
+                        /** Tile width. */
+                        public width: number;
+
+                        /** Tile height. */
+                        public height: number;
+
+                        /** Tile widget. */
+                        public widget?: (google.monitoring.dashboard.v1.IWidget|null);
+
+                        /**
+                         * Creates a new Tile instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Tile instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.MosaicLayout.ITile): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Encodes the specified Tile message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
+                         * @param message Tile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.MosaicLayout.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Tile message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
+                         * @param message Tile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.MosaicLayout.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Tile message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Tile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Decodes a Tile message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Tile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Verifies a Tile message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Tile message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Tile
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Creates a plain object from a Tile message. Also converts values to other types if specified.
+                         * @param message Tile
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.MosaicLayout.Tile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Tile to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of a RowLayout. */

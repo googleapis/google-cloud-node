@@ -1088,6 +1088,7 @@
                         "layout": {
                           "oneof": [
                             "gridLayout",
+                            "mosaicLayout",
                             "rowLayout",
                             "columnLayout"
                           ]
@@ -1116,6 +1117,10 @@
                           "type": "GridLayout",
                           "id": 5
                         },
+                        "mosaicLayout": {
+                          "type": "MosaicLayout",
+                          "id": 6
+                        },
                         "rowLayout": {
                           "type": "RowLayout",
                           "id": 8
@@ -1136,6 +1141,45 @@
                           "rule": "repeated",
                           "type": "Widget",
                           "id": 2
+                        }
+                      }
+                    },
+                    "MosaicLayout": {
+                      "fields": {
+                        "columns": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "tiles": {
+                          "rule": "repeated",
+                          "type": "Tile",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Tile": {
+                          "fields": {
+                            "xPos": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "yPos": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "width": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "height": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "widget": {
+                              "type": "Widget",
+                              "id": 5
+                            }
+                          }
                         }
                       }
                     },

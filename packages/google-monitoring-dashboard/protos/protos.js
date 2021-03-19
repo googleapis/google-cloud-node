@@ -10889,6 +10889,7 @@
                          * @property {string|null} [displayName] Dashboard displayName
                          * @property {string|null} [etag] Dashboard etag
                          * @property {google.monitoring.dashboard.v1.IGridLayout|null} [gridLayout] Dashboard gridLayout
+                         * @property {google.monitoring.dashboard.v1.IMosaicLayout|null} [mosaicLayout] Dashboard mosaicLayout
                          * @property {google.monitoring.dashboard.v1.IRowLayout|null} [rowLayout] Dashboard rowLayout
                          * @property {google.monitoring.dashboard.v1.IColumnLayout|null} [columnLayout] Dashboard columnLayout
                          */
@@ -10941,6 +10942,14 @@
                         Dashboard.prototype.gridLayout = null;
     
                         /**
+                         * Dashboard mosaicLayout.
+                         * @member {google.monitoring.dashboard.v1.IMosaicLayout|null|undefined} mosaicLayout
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.mosaicLayout = null;
+    
+                        /**
                          * Dashboard rowLayout.
                          * @member {google.monitoring.dashboard.v1.IRowLayout|null|undefined} rowLayout
                          * @memberof google.monitoring.dashboard.v1.Dashboard
@@ -10961,12 +10970,12 @@
     
                         /**
                          * Dashboard layout.
-                         * @member {"gridLayout"|"rowLayout"|"columnLayout"|undefined} layout
+                         * @member {"gridLayout"|"mosaicLayout"|"rowLayout"|"columnLayout"|undefined} layout
                          * @memberof google.monitoring.dashboard.v1.Dashboard
                          * @instance
                          */
                         Object.defineProperty(Dashboard.prototype, "layout", {
-                            get: $util.oneOfGetter($oneOfFields = ["gridLayout", "rowLayout", "columnLayout"]),
+                            get: $util.oneOfGetter($oneOfFields = ["gridLayout", "mosaicLayout", "rowLayout", "columnLayout"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -11002,6 +11011,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
                             if (message.gridLayout != null && Object.hasOwnProperty.call(message, "gridLayout"))
                                 $root.google.monitoring.dashboard.v1.GridLayout.encode(message.gridLayout, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.mosaicLayout != null && Object.hasOwnProperty.call(message, "mosaicLayout"))
+                                $root.google.monitoring.dashboard.v1.MosaicLayout.encode(message.mosaicLayout, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.rowLayout != null && Object.hasOwnProperty.call(message, "rowLayout"))
                                 $root.google.monitoring.dashboard.v1.RowLayout.encode(message.rowLayout, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.columnLayout != null && Object.hasOwnProperty.call(message, "columnLayout"))
@@ -11051,6 +11062,9 @@
                                     break;
                                 case 5:
                                     message.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.mosaicLayout = $root.google.monitoring.dashboard.v1.MosaicLayout.decode(reader, reader.uint32());
                                     break;
                                 case 8:
                                     message.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.decode(reader, reader.uint32());
@@ -11111,6 +11125,16 @@
                                         return "gridLayout." + error;
                                 }
                             }
+                            if (message.mosaicLayout != null && message.hasOwnProperty("mosaicLayout")) {
+                                if (properties.layout === 1)
+                                    return "layout: multiple values";
+                                properties.layout = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.MosaicLayout.verify(message.mosaicLayout);
+                                    if (error)
+                                        return "mosaicLayout." + error;
+                                }
+                            }
                             if (message.rowLayout != null && message.hasOwnProperty("rowLayout")) {
                                 if (properties.layout === 1)
                                     return "layout: multiple values";
@@ -11157,6 +11181,11 @@
                                     throw TypeError(".google.monitoring.dashboard.v1.Dashboard.gridLayout: object expected");
                                 message.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.fromObject(object.gridLayout);
                             }
+                            if (object.mosaicLayout != null) {
+                                if (typeof object.mosaicLayout !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.mosaicLayout: object expected");
+                                message.mosaicLayout = $root.google.monitoring.dashboard.v1.MosaicLayout.fromObject(object.mosaicLayout);
+                            }
                             if (object.rowLayout != null) {
                                 if (typeof object.rowLayout !== "object")
                                     throw TypeError(".google.monitoring.dashboard.v1.Dashboard.rowLayout: object expected");
@@ -11198,6 +11227,11 @@
                                 object.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.toObject(message.gridLayout, options);
                                 if (options.oneofs)
                                     object.layout = "gridLayout";
+                            }
+                            if (message.mosaicLayout != null && message.hasOwnProperty("mosaicLayout")) {
+                                object.mosaicLayout = $root.google.monitoring.dashboard.v1.MosaicLayout.toObject(message.mosaicLayout, options);
+                                if (options.oneofs)
+                                    object.layout = "mosaicLayout";
                             }
                             if (message.rowLayout != null && message.hasOwnProperty("rowLayout")) {
                                 object.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.toObject(message.rowLayout, options);
@@ -11469,6 +11503,518 @@
                         };
     
                         return GridLayout;
+                    })();
+    
+                    v1.MosaicLayout = (function() {
+    
+                        /**
+                         * Properties of a MosaicLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IMosaicLayout
+                         * @property {number|null} [columns] MosaicLayout columns
+                         * @property {Array.<google.monitoring.dashboard.v1.MosaicLayout.ITile>|null} [tiles] MosaicLayout tiles
+                         */
+    
+                        /**
+                         * Constructs a new MosaicLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a MosaicLayout.
+                         * @implements IMosaicLayout
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IMosaicLayout=} [properties] Properties to set
+                         */
+                        function MosaicLayout(properties) {
+                            this.tiles = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MosaicLayout columns.
+                         * @member {number} columns
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @instance
+                         */
+                        MosaicLayout.prototype.columns = 0;
+    
+                        /**
+                         * MosaicLayout tiles.
+                         * @member {Array.<google.monitoring.dashboard.v1.MosaicLayout.ITile>} tiles
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @instance
+                         */
+                        MosaicLayout.prototype.tiles = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MosaicLayout instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IMosaicLayout=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.MosaicLayout} MosaicLayout instance
+                         */
+                        MosaicLayout.create = function create(properties) {
+                            return new MosaicLayout(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MosaicLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IMosaicLayout} message MosaicLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MosaicLayout.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.columns != null && Object.hasOwnProperty.call(message, "columns"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.columns);
+                            if (message.tiles != null && message.tiles.length)
+                                for (var i = 0; i < message.tiles.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.MosaicLayout.Tile.encode(message.tiles[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MosaicLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IMosaicLayout} message MosaicLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MosaicLayout.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MosaicLayout message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.MosaicLayout} MosaicLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MosaicLayout.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.MosaicLayout();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.columns = reader.int32();
+                                    break;
+                                case 3:
+                                    if (!(message.tiles && message.tiles.length))
+                                        message.tiles = [];
+                                    message.tiles.push($root.google.monitoring.dashboard.v1.MosaicLayout.Tile.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MosaicLayout message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.MosaicLayout} MosaicLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MosaicLayout.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MosaicLayout message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MosaicLayout.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.columns != null && message.hasOwnProperty("columns"))
+                                if (!$util.isInteger(message.columns))
+                                    return "columns: integer expected";
+                            if (message.tiles != null && message.hasOwnProperty("tiles")) {
+                                if (!Array.isArray(message.tiles))
+                                    return "tiles: array expected";
+                                for (var i = 0; i < message.tiles.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.MosaicLayout.Tile.verify(message.tiles[i]);
+                                    if (error)
+                                        return "tiles." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MosaicLayout message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.MosaicLayout} MosaicLayout
+                         */
+                        MosaicLayout.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.MosaicLayout)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.MosaicLayout();
+                            if (object.columns != null)
+                                message.columns = object.columns | 0;
+                            if (object.tiles) {
+                                if (!Array.isArray(object.tiles))
+                                    throw TypeError(".google.monitoring.dashboard.v1.MosaicLayout.tiles: array expected");
+                                message.tiles = [];
+                                for (var i = 0; i < object.tiles.length; ++i) {
+                                    if (typeof object.tiles[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.MosaicLayout.tiles: object expected");
+                                    message.tiles[i] = $root.google.monitoring.dashboard.v1.MosaicLayout.Tile.fromObject(object.tiles[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MosaicLayout message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.MosaicLayout} message MosaicLayout
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MosaicLayout.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tiles = [];
+                            if (options.defaults)
+                                object.columns = 0;
+                            if (message.columns != null && message.hasOwnProperty("columns"))
+                                object.columns = message.columns;
+                            if (message.tiles && message.tiles.length) {
+                                object.tiles = [];
+                                for (var j = 0; j < message.tiles.length; ++j)
+                                    object.tiles[j] = $root.google.monitoring.dashboard.v1.MosaicLayout.Tile.toObject(message.tiles[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MosaicLayout to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MosaicLayout.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        MosaicLayout.Tile = (function() {
+    
+                            /**
+                             * Properties of a Tile.
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                             * @interface ITile
+                             * @property {number|null} [xPos] Tile xPos
+                             * @property {number|null} [yPos] Tile yPos
+                             * @property {number|null} [width] Tile width
+                             * @property {number|null} [height] Tile height
+                             * @property {google.monitoring.dashboard.v1.IWidget|null} [widget] Tile widget
+                             */
+    
+                            /**
+                             * Constructs a new Tile.
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout
+                             * @classdesc Represents a Tile.
+                             * @implements ITile
+                             * @constructor
+                             * @param {google.monitoring.dashboard.v1.MosaicLayout.ITile=} [properties] Properties to set
+                             */
+                            function Tile(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Tile xPos.
+                             * @member {number} xPos
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @instance
+                             */
+                            Tile.prototype.xPos = 0;
+    
+                            /**
+                             * Tile yPos.
+                             * @member {number} yPos
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @instance
+                             */
+                            Tile.prototype.yPos = 0;
+    
+                            /**
+                             * Tile width.
+                             * @member {number} width
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @instance
+                             */
+                            Tile.prototype.width = 0;
+    
+                            /**
+                             * Tile height.
+                             * @member {number} height
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @instance
+                             */
+                            Tile.prototype.height = 0;
+    
+                            /**
+                             * Tile widget.
+                             * @member {google.monitoring.dashboard.v1.IWidget|null|undefined} widget
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @instance
+                             */
+                            Tile.prototype.widget = null;
+    
+                            /**
+                             * Creates a new Tile instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.MosaicLayout.ITile=} [properties] Properties to set
+                             * @returns {google.monitoring.dashboard.v1.MosaicLayout.Tile} Tile instance
+                             */
+                            Tile.create = function create(properties) {
+                                return new Tile(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Tile message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.MosaicLayout.ITile} message Tile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Tile.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.xPos != null && Object.hasOwnProperty.call(message, "xPos"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.xPos);
+                                if (message.yPos != null && Object.hasOwnProperty.call(message, "yPos"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.yPos);
+                                if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.width);
+                                if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.height);
+                                if (message.widget != null && Object.hasOwnProperty.call(message, "widget"))
+                                    $root.google.monitoring.dashboard.v1.Widget.encode(message.widget, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Tile message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.MosaicLayout.ITile} message Tile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Tile.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Tile message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.dashboard.v1.MosaicLayout.Tile} Tile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Tile.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.MosaicLayout.Tile();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.xPos = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.yPos = reader.int32();
+                                        break;
+                                    case 3:
+                                        message.width = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.height = reader.int32();
+                                        break;
+                                    case 5:
+                                        message.widget = $root.google.monitoring.dashboard.v1.Widget.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Tile message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.dashboard.v1.MosaicLayout.Tile} Tile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Tile.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Tile message.
+                             * @function verify
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Tile.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.xPos != null && message.hasOwnProperty("xPos"))
+                                    if (!$util.isInteger(message.xPos))
+                                        return "xPos: integer expected";
+                                if (message.yPos != null && message.hasOwnProperty("yPos"))
+                                    if (!$util.isInteger(message.yPos))
+                                        return "yPos: integer expected";
+                                if (message.width != null && message.hasOwnProperty("width"))
+                                    if (!$util.isInteger(message.width))
+                                        return "width: integer expected";
+                                if (message.height != null && message.hasOwnProperty("height"))
+                                    if (!$util.isInteger(message.height))
+                                        return "height: integer expected";
+                                if (message.widget != null && message.hasOwnProperty("widget")) {
+                                    var error = $root.google.monitoring.dashboard.v1.Widget.verify(message.widget);
+                                    if (error)
+                                        return "widget." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Tile message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.dashboard.v1.MosaicLayout.Tile} Tile
+                             */
+                            Tile.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.dashboard.v1.MosaicLayout.Tile)
+                                    return object;
+                                var message = new $root.google.monitoring.dashboard.v1.MosaicLayout.Tile();
+                                if (object.xPos != null)
+                                    message.xPos = object.xPos | 0;
+                                if (object.yPos != null)
+                                    message.yPos = object.yPos | 0;
+                                if (object.width != null)
+                                    message.width = object.width | 0;
+                                if (object.height != null)
+                                    message.height = object.height | 0;
+                                if (object.widget != null) {
+                                    if (typeof object.widget !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.MosaicLayout.Tile.widget: object expected");
+                                    message.widget = $root.google.monitoring.dashboard.v1.Widget.fromObject(object.widget);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Tile message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.MosaicLayout.Tile} message Tile
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Tile.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.xPos = 0;
+                                    object.yPos = 0;
+                                    object.width = 0;
+                                    object.height = 0;
+                                    object.widget = null;
+                                }
+                                if (message.xPos != null && message.hasOwnProperty("xPos"))
+                                    object.xPos = message.xPos;
+                                if (message.yPos != null && message.hasOwnProperty("yPos"))
+                                    object.yPos = message.yPos;
+                                if (message.width != null && message.hasOwnProperty("width"))
+                                    object.width = message.width;
+                                if (message.height != null && message.hasOwnProperty("height"))
+                                    object.height = message.height;
+                                if (message.widget != null && message.hasOwnProperty("widget"))
+                                    object.widget = $root.google.monitoring.dashboard.v1.Widget.toObject(message.widget, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Tile to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.dashboard.v1.MosaicLayout.Tile
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Tile.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Tile;
+                        })();
+    
+                        return MosaicLayout;
                     })();
     
                     v1.RowLayout = (function() {
