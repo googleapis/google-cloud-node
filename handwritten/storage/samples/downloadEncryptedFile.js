@@ -24,17 +24,26 @@ const path = require('path');
 
 function main(
   bucketName = 'my-bucket',
-  srcFilename = path.join(__dirname, '../resources', 'test.txt'),
-  destFilename = 'test.txt',
-  key = process.env.GOOGLE_CLOUD_KMS_KEY_US
+  srcFileName = path.join(__dirname, '../resources', 'test.txt'),
+  destFileName = 'test.txt',
+  encryptionKey = process.env.GOOGLE_CLOUD_KMS_KEY_US
 ) {
   // [START storage_download_encrypted_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFilename = 'File to download, e.g. file_encrypted.txt';
-  // const destFilename = 'Local destination for file, e.g. ./file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const srcFileName = 'your-file-name';
+
+  // The path to which the file should be downloaded
+  // const destFileName = '/local/path/to/file.txt';
+
+  // The Base64 encoded decryption key, which should be the same key originally
+  // used to encrypt the file
+  // const encryptionKey = 'TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g=';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -44,19 +53,18 @@ function main(
 
   async function downloadEncryptedFile() {
     const options = {
-      // The path to which the file should be downloaded, e.g. "./file.txt"
-      destination: destFilename,
+      destination: destFileName,
     };
 
     // Descrypts and downloads the file. This can only be done with the key used
     // to encrypt and upload the file.
     await storage
       .bucket(bucketName)
-      .file(srcFilename)
-      .setEncryptionKey(Buffer.from(key, 'base64'))
+      .file(srcFileName)
+      .setEncryptionKey(Buffer.from(encryptionKey, 'base64'))
       .download(options);
 
-    console.log(`File ${srcFilename} downloaded to ${destFilename}.`);
+    console.log(`File ${srcFileName} downloaded to ${destFileName}`);
   }
 
   downloadEncryptedFile().catch(console.error);

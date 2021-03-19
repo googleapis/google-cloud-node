@@ -30,8 +30,21 @@ function main(
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const fileName = 'Nome of a file in the bucket, e.g. my-file';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
+
+  // The Base64 encoded AES-256 encryption key originally used to encrypt the
+  // object. See the documentation on Customer-Supplied Encryption keys for
+  // more info:
+  // https://cloud.google.com/storage/docs/encryption/using-customer-supplied-keys
+  // The Base64 encoded AES-256 encryption key originally used to encrypt the
+  // const oldKey = 'TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g=';
+
+  // The new encryption key to use
+  // const newKey = '0mMWhFvQOdS4AmxRpo8SJxXn5MjFhbz7DkKBUdUIef8=';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -40,9 +53,6 @@ function main(
   const storage = new Storage();
 
   async function rotateEncryptionKey() {
-    // See the "Generating your own encryption key" section above.
-    // const oldKey = 'The current base64 encoded customer-supplied encryption key';
-    // const newKey = 'A new base64 encoded customer-supplied encryption key';
     await storage
       .bucket(bucketName)
       .file(fileName, {
@@ -52,7 +62,7 @@ function main(
         encryptionKey: Buffer.from(newKey, 'base64'),
       });
 
-    console.log('Encryption key rotated successfully.');
+    console.log('Encryption key rotated successfully');
   }
 
   rotateEncryptionKey().catch(console.error);

@@ -34,19 +34,27 @@ function main(
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const fileName = 'File to access, e.g. file.txt';
-  // const storageClass = 'Name of a storage class, e.g. standard';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
+
+  // The name of a storage class
+  // See the StorageClass documentation for other valid storage classes:
+  // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/storage/StorageClass.html
+  // const storageClass = 'coldline';
+
   async function fileChangeStorageClass() {
     await storage
       .bucket(bucketName)
       .file(fileName)
       .setStorageClass(storageClass);
 
-    console.log(`${fileName} has been set to ${storageClass}.`);
+    console.log(`${fileName} has been set to ${storageClass}`);
   }
 
-  fileChangeStorageClass();
+  fileChangeStorageClass().catch(console.error);
   // [END storage_change_file_storage_class]
 }
 

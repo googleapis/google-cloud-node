@@ -72,7 +72,7 @@ describe('Bucket lifecycle management', () => {
     );
     assert.include(
       output,
-      `Lifecycle management is disabled for bucket ${bucketName}.`
+      `Lifecycle management is disabled for bucket ${bucketName}`
     );
     const [newMetadata] = await bucket.getMetadata();
     assert.isUndefined(newMetadata.lifecycle);

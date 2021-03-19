@@ -21,6 +21,12 @@
 
 function main(projectId = 'serviceAccountProjectId') {
   // [START storage_list_hmac_keys]
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // The ID of the project to which the service account belongs
+  // const projectId = 'project-id';
+
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
 
@@ -29,10 +35,6 @@ function main(projectId = 'serviceAccountProjectId') {
 
   // List HMAC SA Keys' Metadata
   async function listHmacKeys() {
-    /**
-     * TODO(developer): Uncomment the following line before running the sample.
-     */
-    // const projectId = 'The project Id this service account belongs to, e.g. serviceAccountProjectId';
     const [hmacKeys] = await storage.getHmacKeys({projectId});
 
     // hmacKeys is an array of HmacKey objects.

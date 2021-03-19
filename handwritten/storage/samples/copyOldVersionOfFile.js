@@ -23,18 +23,27 @@ function main(
   srcBucketName = 'my-bucket',
   srcFilename = 'test2.txt',
   destBucketName = 'my-bucket',
-  destFilename = 'test3.txt',
+  destFileName = 'test3.txt',
   generation = 1
 ) {
   // [START storage_copy_file_archived_generation]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const srcBucketName = 'Name of the source bucket, e.g. my-bucket';
-  // const srcFilename = 'Name of the source file, e.g. file.txt';
-  // const destBucketName = 'Name of the destination bucket, e.g. my-other-bucket';
-  // const destFilename = 'Destination name of file, e.g. file.txt';
-  // const generation = 'The generation of file to copy, e.g. 1'
+  // The ID of your GCS bucket
+  // const srcBucketName = "your-unique-bucket-name";
+
+  // The ID of the GCS file to copy an old version of
+  // const srcFilename = "your-file-name";
+
+  // The generation of fileToCopy to copy
+  // const generation = 1579287380533984;
+
+  // The ID of the bucket to copy the file to
+  // const destBucketName = 'target-file-bucket';
+
+  // What to name the new file with the old data from srcFilename
+  // const destFileName = "your-new-file";
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -49,10 +58,10 @@ function main(
       .file(srcFilename, {
         generation,
       })
-      .copy(storage.bucket(destBucketName).file(destFilename));
+      .copy(storage.bucket(destBucketName).file(destFileName));
 
     console.log(
-      `Generation ${generation} of file ${srcFilename} in bucket ${srcBucketName} was copied to ${destFilename} in bucket ${destBucketName}.`
+      `Generation ${generation} of file ${srcFilename} in bucket ${srcBucketName} was copied to ${destFileName} in bucket ${destBucketName}`
     );
   }
 

@@ -25,9 +25,14 @@ function main(bucketName = 'my-bucket', prefix = 'test', delimiter = '/') {
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const prefix = 'Prefix by which to filter, e.g. public/';
-  // const delimiter = 'Delimiter to use, e.g. /';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The directory prefix to search for
+  // const prefix = 'myDirectory/';
+
+  // The delimiter to use
+  // const delimiter = '/';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');

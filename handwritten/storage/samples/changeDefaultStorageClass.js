@@ -24,8 +24,13 @@ function main(bucketName = 'my-bucket', storageClass = 'standard') {
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const storageClass = 'Name of a storage class, e.g. standard';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The name of a storage class
+  // See the StorageClass documentation for other valid storage classes:
+  // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/storage/StorageClass.html
+  // const storageClass = 'coldline';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -36,10 +41,10 @@ function main(bucketName = 'my-bucket', storageClass = 'standard') {
   async function changeDefaultStorageClass() {
     await storage.bucket(bucketName).setStorageClass(storageClass);
 
-    console.log(`${bucketName} has been set to ${storageClass}.`);
+    console.log(`${bucketName} has been set to ${storageClass}`);
   }
 
-  changeDefaultStorageClass();
+  changeDefaultStorageClass().catch(console.error);
   // [END storage_change_default_storage_class]
 }
 process.on('unhandledRejection', err => {

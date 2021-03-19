@@ -20,13 +20,16 @@
  * at https://cloud.google.com/storage/docs.
  */
 
-function main(bucketName = 'my-bucket', filename = 'test.txt') {
+function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   // [START storage_get_metadata]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'File to access, e.g. file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -38,37 +41,47 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     // Gets the metadata for the file
     const [metadata] = await storage
       .bucket(bucketName)
-      .file(filename)
+      .file(fileName)
       .getMetadata();
 
-    console.log(`File: ${metadata.name}`);
     console.log(`Bucket: ${metadata.bucket}`);
-    console.log(`Storage class: ${metadata.storageClass}`);
-    console.log(`Self link: ${metadata.selfLink}`);
-    console.log(`ID: ${metadata.id}`);
-    console.log(`Size: ${metadata.size}`);
-    console.log(`Updated: ${metadata.updated}`);
-    console.log(`Generation: ${metadata.generation}`);
-    console.log(`Metageneration: ${metadata.metageneration}`);
-    console.log(`Etag: ${metadata.etag}`);
-    console.log(`Owner: ${metadata.owner}`);
-    console.log(`Component count: ${metadata.component_count}`);
+    console.log(`CacheControl: ${metadata.cacheControl}`);
+    console.log(`ComponentCount: ${metadata.componentCount}`);
+    console.log(`ContentDisposition: ${metadata.contentDisposition}`);
+    console.log(`ContentEncoding: ${metadata.contentEncoding}`);
+    console.log(`ContentLanguage: ${metadata.contentLanguage}`);
+    console.log(`ContentType: ${metadata.contentType}`);
+    console.log(`CustomTime: ${metadata.customTime}`);
     console.log(`Crc32c: ${metadata.crc32c}`);
-    console.log(`md5Hash: ${metadata.md5Hash}`);
-    console.log(`Cache-control: ${metadata.cacheControl}`);
-    console.log(`Content-type: ${metadata.contentType}`);
-    console.log(`Content-disposition: ${metadata.contentDisposition}`);
-    console.log(`Content-encoding: ${metadata.contentEncoding}`);
-    console.log(`Content-language: ${metadata.contentLanguage}`);
-    console.log(`Media link: ${metadata.mediaLink}`);
-    console.log(`KMS Key Name: ${metadata.kmsKeyName}`);
-    console.log(`Temporary Hold: ${metadata.temporaryHold}`);
-    console.log(`Event-based hold: ${metadata.eventBasedHold}`);
+    console.log(`ETag: ${metadata.etag}`);
+    console.log(`Generation: ${metadata.generation}`);
+    console.log(`Id: ${metadata.id}`);
+    console.log(`KmsKeyName: ${metadata.kmsKeyName}`);
+    console.log(`Md5Hash: ${metadata.md5Hash}`);
+    console.log(`MediaLink: ${metadata.mediaLink}`);
+    console.log(`Metageneration: ${metadata.metageneration}`);
+    console.log(`Name: ${metadata.name}`);
+    console.log(`Size: ${metadata.size}`);
+    console.log(`StorageClass: ${metadata.storageClass}`);
+    console.log(`TimeCreated: ${new Date(metadata.timeCreated)}`);
+    console.log(`Last Metadata Update: ${new Date(metadata.updated)}`);
     console.log(
-      `Effective Expiration Time: ${metadata.effectiveExpirationTime}`
+      `temporaryHold: ${metadata.temporaryHold ? 'enabled' : 'disabled'}`
     );
-    console.log(`Custom Time: ${metadata.customTime}`);
-    console.log(`Metadata: ${metadata.metadata}`);
+    console.log(
+      `eventBasedHold: ${metadata.eventBasedHold ? 'enabled' : 'disabled'}`
+    );
+    if (metadata.retentionExpirationTime) {
+      console.log(
+        `retentionExpirationTime: ${new Date(metadata.retentionExpirationTime)}`
+      );
+    }
+    if (metadata.metadata) {
+      console.log('\n\n\nUser metadata:');
+      for (const key in metadata.metadata) {
+        console.log(`${key}=${metadata.metadata[key]}`);
+      }
+    }
   }
 
   getMetadata().catch(console.error);

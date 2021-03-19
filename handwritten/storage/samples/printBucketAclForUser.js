@@ -23,10 +23,13 @@
 function main(bucketName = 'my-bucket', userEmail = 'jdobry@google.com') {
   // [START storage_print_bucket_acl_for_user]
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const userEmail = 'Email of user to check, e.g. developer@company.com';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The email address of the user to check
+  // const userEmail = 'user-email-to-check';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');

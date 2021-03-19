@@ -22,6 +22,11 @@
 
 function main(bucketName = 'my-bucket') {
   // [START storage_lock_retention_policy]
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -30,15 +35,16 @@ function main(bucketName = 'my-bucket') {
   const storage = new Storage();
 
   async function lockRetentionPolicy() {
-    // get_bucket gets the current metageneration value for the bucket,
-    // required by lock_retention_policy.
+    // Gets the current metageneration value for the bucket, required by
+    // lock_retention_policy
     const [unlockedMetadata] = await storage.bucket(bucketName).getMetadata();
-    // Warning: Once a retention policy is locked it cannot be unlocked
-    // and retention period can only be increased.
+
+    // Warning: Once a retention policy is locked, it cannot be unlocked. The
+    // retention period can only be increased
     const [lockedMetadata] = await storage
       .bucket(bucketName)
       .lock(unlockedMetadata.metageneration);
-    console.log(`Retention policy for ${bucketName} is now locked.`);
+    console.log(`Retention policy for ${bucketName} is now locked`);
     console.log(
       `Retention policy effective as of ${lockedMetadata.retentionPolicy.effectiveTime}`
     );

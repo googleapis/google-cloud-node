@@ -28,9 +28,14 @@ function main(
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const labelKey = 'The key of the label to add, e.g. labelone';
-  // const labelValue = 'The value of the label to add, e.g. labelonevalue';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The key of the label to add
+  // const labelKey = 'label-key-to-add';
+
+  // The value of the label to add
+  // const labelValue = 'label-value-to-add';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -41,12 +46,13 @@ function main(
   const labels = {
     [labelKey]: labelValue,
   };
+
   async function addBucketLabel() {
     await storage.bucket(bucketName).setLabels(labels);
-    console.log(`Added label to bucket ${bucketName}.`);
+    console.log(`Added label to bucket ${bucketName}`);
   }
 
-  addBucketLabel();
+  addBucketLabel().catch(console.error);
   // [END storage_add_bucket_label]
 }
 process.on('unhandledRejection', err => {

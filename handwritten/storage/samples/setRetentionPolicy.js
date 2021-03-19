@@ -22,6 +22,14 @@
 
 function main(bucketName = 'my-bucket', retentionPeriod = 5) {
   // [START storage_set_retention_policy]
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The retention period for objects in bucket
+  // const retentionPeriod = 3600; // 1 hour in seconds
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');

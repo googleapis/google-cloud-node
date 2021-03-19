@@ -31,11 +31,22 @@ function main(
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const roleName = 'Role to grant, e.g. roles/storage.objectViewer';
-  // const title = 'Condition title.';
-  // const description = 'Conditon description.';
-  // const expression = 'Condition expression.';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The role to grant
+  // const roleName = 'roles/storage.objectViewer';
+
+  // The members to grant the new role to
+  // const members = [
+  //   'user:jdoe@example.com',
+  //   'group:admins@example.com',
+  // ];
+
+  // Create a condition
+  // const title = 'Title';
+  // const description = 'Description';
+  // const expression = 'resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');

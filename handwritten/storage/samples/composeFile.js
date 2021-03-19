@@ -27,12 +27,19 @@ function main(
 ) {
   // [START storage_compose_file]
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const firstFileName = 'Name of first file name, e.g. file-one.txt';
-  // const secondFileName = 'Name of second file name, e.g. file-two.txt';
-  // const destinationFileName = 'Name of destination file name, e.g. file-one-two.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of the first GCS file to compose
+  // const firstFileName = 'your-first-file-name';
+
+  // The ID of the second GCS file to compose
+  // const secondFileName = 'your-second-file-name';
+
+  // The ID to give the new composite file
+  // const destinationFileName = 'new-composite-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -47,11 +54,11 @@ function main(
     await bucket.combine(sources, destinationFileName);
 
     console.log(
-      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}.`
+      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}`
     );
   }
 
-  composeFile();
+  composeFile().catch(console.error);
   // [END storage_compose_file]
 }
 process.on('unhandledRejection', err => {

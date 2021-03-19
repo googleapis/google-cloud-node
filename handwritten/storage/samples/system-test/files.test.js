@@ -59,7 +59,7 @@ describe('file', () => {
     const output = execSync(
       `node uploadFile.js ${bucketName} ${filePath} ${fileName}`
     );
-    assert.match(output, new RegExp(`${filePath} uploaded to ${bucketName}.`));
+    assert.match(output, new RegExp(`${filePath} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
     assert.strictEqual(exists, true);
   });
@@ -70,7 +70,7 @@ describe('file', () => {
     );
     assert.include(
       output,
-      `${filePath} uploaded to ${bucketName} using ${kmsKeyName}.`
+      `${filePath} uploaded to ${bucketName} using ${kmsKeyName}`
     );
     const [exists] = await bucket.file(fileName).exists();
     assert.strictEqual(exists, true);
@@ -138,11 +138,9 @@ describe('file', () => {
     const output = execSync(
       `node moveFile.js ${bucketName} ${fileName} ${movedFileName}`
     );
-    assert.match(
+    assert.include(
       output,
-      new RegExp(
-        `gs://${bucketName}/${fileName} moved to gs://${bucketName}/${movedFileName}.`
-      )
+      `gs://${bucketName}/${fileName} moved to gs://${bucketName}/${movedFileName}`
     );
     const [exists] = await bucket.file(movedFileName).exists();
     assert.strictEqual(exists, true);
@@ -152,11 +150,9 @@ describe('file', () => {
     const output = execSync(
       `node copyFile.js ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName}`
     );
-    assert.match(
+    assert.include(
       output,
-      new RegExp(
-        `gs://${bucketName}/${movedFileName} copied to gs://${bucketName}/${copiedFileName}.`
-      )
+      `gs://${bucketName}/${movedFileName} copied to gs://${bucketName}/${copiedFileName}`
     );
     const [exists] = await bucket.file(copiedFileName).exists();
     assert.strictEqual(exists, true);
@@ -233,7 +229,7 @@ describe('file', () => {
       );
       assert.match(
         output,
-        new RegExp(`gs://${bucketName}/${publicFileName} is now public.`)
+        new RegExp(`gs://${bucketName}/${publicFileName} is now public`)
       );
     });
 
@@ -243,7 +239,7 @@ describe('file', () => {
       );
       assert.include(
         output,
-        `Downloaded public file ${publicFileName} from bucket name ${bucketName} to ${downloadPublicFilePath}.`
+        `Downloaded public file ${publicFileName} from bucket name ${bucketName} to ${downloadPublicFilePath}`
       );
       fs.statSync(downloadPublicFilePath);
     });
@@ -335,8 +331,8 @@ describe('file', () => {
     const output = execSync(
       `node getMetadata.js ${bucketName} ${copiedFileName}`
     );
-    assert.match(output, new RegExp(`File: ${copiedFileName}`));
-    assert.match(output, new RegExp(`Bucket: ${bucketName}`));
+    assert.include(output, `Bucket: ${bucketName}`);
+    assert.include(output, `Name: ${copiedFileName}`);
   });
 
   it('should set metadata for a file', () => {
@@ -360,7 +356,7 @@ describe('file', () => {
     const output = execSync(
       `node fileChangeStorageClass.js ${bucketName} ${copiedFileName} standard`
     );
-    assert.include(output, `${copiedFileName} has been set to standard.`);
+    assert.include(output, `${copiedFileName} has been set to standard`);
     const [metadata] = await storage
       .bucket(bucketName)
       .file(copiedFileName)
@@ -386,7 +382,7 @@ describe('file', () => {
     );
     assert.include(
       output,
-      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}.`
+      `New composite file ${destinationFileName} was created by combining ${firstFileName} and ${secondFileName}`
     );
 
     const [contents] = await destinationFile.download();
@@ -402,7 +398,7 @@ describe('file', () => {
     );
     assert.match(
       output,
-      new RegExp(`gs://${bucketName}/${copiedFileName} deleted.`)
+      new RegExp(`gs://${bucketName}/${copiedFileName} deleted`)
     );
     const [exists] = await bucket.file(copiedFileName).exists();
     assert.strictEqual(exists, false);
@@ -453,7 +449,7 @@ describe('file', () => {
       assert.match(
         output,
         new RegExp(
-          `Generation ${generation} of file ${fileName} in bucket ${bucketNameWithVersioning} was copied to ${destFileName} in bucket ${bucketNameWithVersioning}.`
+          `Generation ${generation} of file ${fileName} in bucket ${bucketNameWithVersioning} was copied to ${destFileName} in bucket ${bucketNameWithVersioning}`
         )
       );
       const [exists] = await bucketWithVersioning.file(destFileName).exists();
@@ -469,7 +465,7 @@ describe('file', () => {
       assert.match(
         output,
         new RegExp(
-          `Generation ${generation} of file ${fileName} was deleted from ${bucketNameWithVersioning}.`
+          `Generation ${generation} of file ${fileName} was deleted from ${bucketNameWithVersioning}`
         )
       );
       const [exists] = await bucketWithVersioning

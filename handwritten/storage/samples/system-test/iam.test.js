@@ -99,5 +99,5 @@ it('should remove conditional binding to a bucket', async () => {
   const output = execSync(
     `node removeBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}'`
   );
-  assert.include(output, 'Conditional Binding was removed.');
+  assert.include(output, 'Conditional Binding was removed');
 });

@@ -29,8 +29,11 @@ function main(
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const topic = 'Name of a topic, e.g. my-topic';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The name of a topic
+  // const topic = 'my-topic';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');

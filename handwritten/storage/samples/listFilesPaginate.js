@@ -14,11 +14,12 @@
 /* eslint-disable no-unused-vars */
 
 function main(bucketName = 'my-bucket') {
-  // [START storage_list_files]
+  // [START storage_list_files_paginated]
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -49,6 +50,6 @@ function main(bucketName = 'my-bucket') {
   }
 
   listFilesPaginated().catch(console.error);
-  // [END storage_list_files]
+  // [END storage_list_files_paginated]
 }
 main(...process.argv.slice(2));

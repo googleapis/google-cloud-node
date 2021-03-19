@@ -22,6 +22,11 @@
 
 function main(bucketName = 'my-bucket') {
   // [START storage_get_retention_policy]
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');

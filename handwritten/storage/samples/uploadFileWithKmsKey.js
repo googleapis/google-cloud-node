@@ -22,16 +22,21 @@
 
 function main(
   bucketName = 'my-bucket',
-  filename = 'test.txt',
+  filePath = 'test.txt',
   kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US
 ) {
   // [START storage_upload_with_kms_key]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'Local file to upload, e.g. ./local/path/to/file.txt';
-  // const kmsKeyName = 'KMS key resource id, e.g. my-key';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The path to your file to upload
+  // const filePath = 'path/to/your/file';
+
+  // The name of the KMS-key
+  // const kmsKeyName = 'my-key';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -40,12 +45,11 @@ function main(
   const storage = new Storage();
 
   async function uploadFileWithKmsKey() {
-    // Uploads a local file to the bucket with the kms key
-    await storage.bucket(bucketName).upload(filename, {
+    await storage.bucket(bucketName).upload(filePath, {
       kmsKeyName,
     });
 
-    console.log(`${filename} uploaded to ${bucketName} using ${kmsKeyName}.`);
+    console.log(`${filePath} uploaded to ${bucketName} using ${kmsKeyName}.`);
   }
 
   uploadFileWithKmsKey().catch(console.error);

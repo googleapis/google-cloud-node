@@ -22,16 +22,21 @@
 
 function main(
   bucketName = 'my-bucket',
-  filename = 'test.txt',
+  fileName = 'test.txt',
   userEmail = 'jdobry@google.com'
 ) {
   // [START storage_remove_file_owner]
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'Name of file to access, e.g. file.txt';
-  // const userEmail = 'Email of user to remove, e.g. developer@company.com';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
+
+  // The email address of the user to remove
+  // const userEmail = 'user-email-to-remove';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -45,10 +50,10 @@ function main(
     // deleteAllAuthenticatedUsers() to remove access for different types of entities.
     await storage
       .bucket(bucketName)
-      .file(filename)
+      .file(fileName)
       .acl.owners.deleteUser(userEmail);
 
-    console.log(`Removed user ${userEmail} from file ${filename}.`);
+    console.log(`Removed user ${userEmail} from file ${fileName}.`);
   }
 
   removeFileOwner().catch(console.error);

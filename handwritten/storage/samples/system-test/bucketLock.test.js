@@ -57,7 +57,7 @@ it('should set a retention policy on a bucket', () => {
   assert.match(
     output,
     new RegExp(
-      `Bucket ${bucketName} retention period set for ${retentionPeriod} seconds.`
+      `Bucket ${bucketName} retention period set for ${retentionPeriod} seconds`
     )
   );
 });
@@ -84,7 +84,7 @@ it('should disable default event-based hold on a bucket', () => {
   const output = execSync(`node disableDefaultEventBasedHold.js ${bucketName}`);
   assert.match(
     output,
-    new RegExp(`Default event-based hold was disabled for ${bucketName}.`)
+    new RegExp(`Default event-based hold was disabled for ${bucketName}`)
   );
 });
 
@@ -92,7 +92,7 @@ it('should set an event-based hold on a file', () => {
   const output = execSync(
     `node setEventBasedHold.js ${bucketName} ${fileName}`
   );
-  assert.match(output, new RegExp(`Event-based hold was set for ${fileName}.`));
+  assert.match(output, new RegExp(`Event-based hold was set for ${fileName}`));
 });
 
 it('should release an event-based hold on a file', () => {
@@ -134,6 +134,6 @@ it('should lock a bucket with a retention policy', () => {
   const output = execSync(`node lockRetentionPolicy.js ${bucketName}`);
   assert.match(
     output,
-    new RegExp(`Retention policy for ${bucketName} is now locked.`)
+    new RegExp(`Retention policy for ${bucketName} is now locked`)
   );
 });

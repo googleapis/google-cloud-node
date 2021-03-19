@@ -22,16 +22,21 @@
 
 function main(
   bucketName = 'my-bucket',
-  srcFilename = 'test.txt',
-  destFilename = 'test2.txt'
+  srcFileName = 'test.txt',
+  destFileName = 'test2.txt'
 ) {
   // [START storage_move_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFilename = 'File to move, e.g. file.txt';
-  // const destFilename = 'Destination for file, e.g. moved.txt';
+  // The ID of your GCS bucket
+  // const srcBucketName = 'your-source-bucket';
+
+  // The ID of your GCS file
+  // const srcFileName = 'your-file-name';
+
+  // The new ID for your GCS file
+  // const destFileName = 'your-new-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -41,10 +46,10 @@ function main(
 
   async function moveFile() {
     // Moves the file within the bucket
-    await storage.bucket(bucketName).file(srcFilename).move(destFilename);
+    await storage.bucket(bucketName).file(srcFileName).move(destFileName);
 
     console.log(
-      `gs://${bucketName}/${srcFilename} moved to gs://${bucketName}/${destFilename}.`
+      `gs://${bucketName}/${srcFileName} moved to gs://${bucketName}/${destFileName}`
     );
   }
 

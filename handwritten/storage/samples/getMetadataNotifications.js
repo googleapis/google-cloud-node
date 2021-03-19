@@ -25,8 +25,11 @@ function main(bucketName = 'my-bucket', notificationId = '1') {
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const notificationId = 'ID of notification to get, e.g. 1';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of the notification
+  // const notificationId = '1';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');

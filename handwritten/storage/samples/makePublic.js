@@ -20,13 +20,16 @@
  * at https://cloud.google.com/storage/docs.
  */
 
-function main(bucketName = 'my-bucket', filename = 'test.txt') {
+function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   // [START storage_make_public]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'File to make public, e.g. file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -35,10 +38,9 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
   const storage = new Storage();
 
   async function makePublic() {
-    // Makes the file public
-    await storage.bucket(bucketName).file(filename).makePublic();
+    await storage.bucket(bucketName).file(fileName).makePublic();
 
-    console.log(`gs://${bucketName}/${filename} is now public.`);
+    console.log(`gs://${bucketName}/${fileName} is now public.`);
   }
 
   makePublic().catch(console.error);

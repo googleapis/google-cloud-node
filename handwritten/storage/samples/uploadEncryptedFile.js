@@ -15,17 +15,25 @@ const path = require('path');
 
 function main(
   bucketName = 'my-bucket',
-  srcFilename = path.join(__dirname, '../resources', 'test.txt'),
-  destFilename = 'test.txt',
+  filePath = path.join(__dirname, '../resources', 'test.txt'),
+  destFileName = 'test.txt',
   key = process.env.GOOGLE_CLOUD_KMS_KEY_US
 ) {
   // [START storage_upload_encrypted_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFilename = 'Local file to upload, e.g. ./local/path/to/file.txt';
-  // const destFilename = 'Remote destination for file, e.g. file_encrypted.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The path to your file to upload
+  // const filePath = 'path/to/your/file';
+
+  // The new ID for your GCS file
+  // const destFileName = 'your-new-file-name';
+
+  // The key to encrypt the object with
+  // const key = 'TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g=';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -35,19 +43,14 @@ function main(
 
   async function uploadEncryptedFile() {
     const options = {
-      // The path to which the file should be uploaded, e.g. "file_encrypted.txt"
-      destination: destFilename,
-      // Encrypt the file with a customer-supplied key.
-      // See the "Generating your own encryption key" section above.
+      destination: destFileName,
       encryptionKey: Buffer.from(key, 'base64'),
     };
 
-    // Encrypts and uploads a local file, e.g. "./local/path/to/file.txt".
-    // The file will only be retrievable using the key used to upload it.
-    await storage.bucket(bucketName).upload(srcFilename, options);
+    await storage.bucket(bucketName).upload(filePath, options);
 
     console.log(
-      `File ${srcFilename} uploaded to gs://${bucketName}/${destFilename}.`
+      `File ${filePath} uploaded to gs://${bucketName}/${destFileName}`
     );
   }
 

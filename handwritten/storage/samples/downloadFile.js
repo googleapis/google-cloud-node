@@ -24,16 +24,21 @@ const cwd = path.join(__dirname, '..');
 
 function main(
   bucketName = 'my-bucket',
-  srcFilename = 'test.txt',
-  destFilename = path.join(cwd, 'downloaded.txt')
+  fileName = 'test.txt',
+  destFileName = path.join(cwd, 'downloaded.txt')
 ) {
   // [START storage_download_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFilename = 'Remote file to download, e.g. file.txt';
-  // const destFilename = 'Local destination for file, e.g. ./local/path/to/file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
+
+  // The path to which the file should be downloaded
+  // const destFileName = '/local/path/to/file.txt';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -43,15 +48,14 @@ function main(
 
   async function downloadFile() {
     const options = {
-      // The path to which the file should be downloaded, e.g. "./file.txt"
-      destination: destFilename,
+      destination: destFileName,
     };
 
     // Downloads the file
-    await storage.bucket(bucketName).file(srcFilename).download(options);
+    await storage.bucket(bucketName).file(fileName).download(options);
 
     console.log(
-      `gs://${bucketName}/${srcFilename} downloaded to ${destFilename}.`
+      `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`
     );
   }
 

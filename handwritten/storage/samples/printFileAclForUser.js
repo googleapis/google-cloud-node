@@ -22,16 +22,21 @@
 
 function main(
   bucketName = 'my-bucket',
-  filename = 'test.txt',
+  fileName = 'test.txt',
   userEmail = 'jdobry@google.com'
 ) {
   // [START storage_print_file_acl_for_user]
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'File to access, e.g. file.txt';
-  // const userEmail = 'Email of user to check, e.g. developer@company.com';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
+
+  // The email address of the user to check
+  // const userEmail = 'user-email-to-check';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -48,7 +53,7 @@ function main(
     // Gets the user's ACL for the file
     const [aclObject] = await storage
       .bucket(bucketName)
-      .file(filename)
+      .file(fileName)
       .acl.get(options);
 
     console.log(`${aclObject.role}: ${aclObject.entity}`);

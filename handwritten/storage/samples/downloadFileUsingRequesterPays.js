@@ -26,18 +26,25 @@ const path = require('path');
 function main(
   projectId = 'cloud-devrel-public-resources',
   bucketName = `nodejs-storage-samples-${uuid.v4()}`,
-  srcFilename = 'test.txt',
-  destFilename = path.join(__dirname, `test_${uuid.v4()}.txt`)
+  srcFileName = 'test.txt',
+  destFileName = path.join(__dirname, `test_${uuid.v4()}.txt`)
 ) {
   // [START storage_download_file_requester_pays]
 
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const projectId = 'The project ID to bill from, e.g. some-project-id';
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFilename = 'Name of file to download, e.g. file.txt';
-  // const destFilename = 'Local destination of file, e.g. ./local/path/to/file.txt';
+  // The project ID to bill
+  // const projectId = 'my-billable-project-id';
+
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const srcFileName = 'your-file-name';
+
+  // The path to which the file should be downloaded
+  // const destFileName = '/local/path/to/file.txt';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -47,18 +54,15 @@ function main(
 
   async function downloadFileUsingRequesterPays() {
     const options = {
-      // The path to which the file should be downloaded, e.g. "./file.txt"
-      destination: destFilename,
-
-      // The project to bill from, if requester-pays requests are enabled
+      destination: destFileName,
       userProject: projectId,
     };
 
     // Downloads the file
-    await storage.bucket(bucketName).file(srcFilename).download(options);
+    await storage.bucket(bucketName).file(srcFileName).download(options);
 
     console.log(
-      `gs://${bucketName}/${srcFilename} downloaded to ${destFilename} using requester-pays requests.`
+      `gs://${bucketName}/${srcFileName} downloaded to ${destFileName} using requester-pays requests`
     );
   }
 

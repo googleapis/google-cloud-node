@@ -21,17 +21,22 @@
  */
 
 function main(
-  bucketName = 'my-bucket',
-  srcFilename = 'test2.txt',
-  destFilename = 'test4.txt'
+  srcBucketName = 'my-bucket',
+  srcFileName = 'test2.txt',
+  destFileName = 'test4.txt'
 ) {
   // [START storage_rename_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFilename = 'File to rename, e.g. file.txt';
-  // const destFilename = 'Destination for file, e.g. renamed.txt';
+  // The ID of the bucket the original file is in
+  // const srcBucketName = 'your-source-bucket';
+
+  // The ID of the GCS file to rename
+  // const srcFilename = 'your-file-name';
+
+  // The new ID of the GCS file
+  // const destFileName = 'target-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -41,10 +46,10 @@ function main(
 
   async function renameFile() {
     // renames the file
-    await storage.bucket(bucketName).file(srcFilename).rename(destFilename);
+    await storage.bucket(srcBucketName).file(srcFileName).rename(destFileName);
 
     console.log(
-      `gs://${bucketName}/${srcFilename} renamed to gs://${bucketName}/${destFilename}.`
+      `gs://${srcBucketName}/${srcFileName} renamed to gs://${srcBucketName}/${destFileName}.`
     );
   }
 

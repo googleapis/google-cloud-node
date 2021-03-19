@@ -24,16 +24,23 @@ function main(
   srcBucketName = 'my-bucket',
   srcFilename = 'test2.txt',
   destBucketName = 'my-bucket',
-  destFilename = 'test3.txt'
+  destFileName = 'test3.txt'
 ) {
   // [START storage_copy_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const srcBucketName = 'Name of the source bucket, e.g. my-bucket';
-  // const srcFilename = 'Name of the source file, e.g. file.txt';
-  // const destBucketName = 'Name of the destination bucket, e.g. my-other-bucket';
-  // const destFilename = 'Destination name of file, e.g. file.txt';
+  // The ID of the bucket the original file is in
+  // const srcBucketName = 'your-source-bucket';
+
+  // The ID of the GCS file to copy
+  // const srcFilename = 'your-file-name';
+
+  // The ID of the bucket to copy the file to
+  // const destBucketName = 'target-file-bucket';
+
+  // The ID of the GCS file to create
+  // const destFileName = 'target-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -46,10 +53,10 @@ function main(
     await storage
       .bucket(srcBucketName)
       .file(srcFilename)
-      .copy(storage.bucket(destBucketName).file(destFilename));
+      .copy(storage.bucket(destBucketName).file(destFileName));
 
     console.log(
-      `gs://${srcBucketName}/${srcFilename} copied to gs://${destBucketName}/${destFilename}.`
+      `gs://${srcBucketName}/${srcFilename} copied to gs://${destBucketName}/${destFileName}`
     );
   }
 

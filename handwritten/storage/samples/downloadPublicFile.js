@@ -31,9 +31,14 @@ function main(
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFileName = 'Remote public file to download, e.g. file.txt';
-  // const destFileName = 'Local destination for file, e.g. ./local/path/to/file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const srcFilename = 'your-file-name';
+
+  // The path to which the file should be downloaded
+  // const destFileName = '/local/path/to/file.txt';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -43,7 +48,6 @@ function main(
 
   async function downloadPublicFile() {
     const options = {
-      // The path to which the file should be downloaded, e.g. "./file.txt"
       destination: destFileName,
     };
 
@@ -51,7 +55,7 @@ function main(
     await storage.bucket(bucketName).file(srcFileName).download(options);
 
     console.log(
-      `Downloaded public file ${srcFileName} from bucket name ${bucketName} to ${destFileName}.`
+      `Downloaded public file ${srcFileName} from bucket name ${bucketName} to ${destFileName}`
     );
   }
 

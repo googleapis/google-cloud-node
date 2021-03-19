@@ -15,9 +15,10 @@
 function main(bucketName = 'my-bucket') {
   // [START storage_view_bucket_iam_members]
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -26,15 +27,14 @@ function main(bucketName = 'my-bucket') {
   const storage = new Storage();
 
   async function viewBucketIamMembers() {
-    // Gets and displays the bucket's IAM policy
-    // Gets and displays the bucket's IAM policy
+    // For more information please read:
+    // https://cloud.google.com/storage/docs/access-control/iam
     const results = await storage
       .bucket(bucketName)
       .iam.getPolicy({requestedPolicyVersion: 3});
 
     const bindings = results[0].bindings;
 
-    // Displays the roles in the bucket's IAM policy
     console.log(`Bindings for bucket ${bucketName}:`);
     for (const binding of bindings) {
       console.log(`  Role: ${binding.role}`);

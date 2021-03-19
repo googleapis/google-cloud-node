@@ -24,6 +24,15 @@ function main(
   projectId = 'serviceAccountProjectId'
 ) {
   // [START storage_create_hmac_key]
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // The service account email for which the new HMAC key will be created
+  // const serviceAccountEmail = 'service-account@iam.gserviceaccount.com';
+
+  // The ID of the project to which the service account belongs
+  // const projectId = 'project-id';
+
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
 
@@ -32,12 +41,6 @@ function main(
 
   // Create HMAC SA Key
   async function createHmacKey() {
-    /**
-     * TODO(developer): Uncomment the following line before running the sample.
-     */
-    // const serviceAccountEmail = 'Service Account Email to associate HMAC Key';
-    // const projectId = 'The project Id this service account to be created in, e.g. serviceAccountProjectId';
-
     const [hmacKey, secret] = await storage.createHmacKey(serviceAccountEmail, {
       projectId,
     });

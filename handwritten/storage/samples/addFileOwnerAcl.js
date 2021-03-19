@@ -22,16 +22,21 @@
 
 function main(
   bucketName = 'my-bucket',
-  filename = 'test.txt',
+  fileName = 'test.txt',
   userEmail = 'jdobry@google.com'
 ) {
   // [START storage_add_file_owner]
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'Name of file to access, e.g. file.txt';
-  // const userEmail = 'Email of user to add, e.g. developer@company.com';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The name of the file to access
+  // const fileName = 'file.txt';
+
+  // The email address of the user to add
+  // const userEmail = 'user-email-to-add';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -42,10 +47,10 @@ function main(
   async function addFileOwner() {
     await storage
       .bucket(bucketName)
-      .file(filename)
+      .file(fileName)
       .acl.owners.addUser(userEmail);
 
-    console.log(`Added user ${userEmail} as an owner on file ${filename}.`);
+    console.log(`Added user ${userEmail} as an owner on file ${fileName}.`);
   }
 
   addFileOwner().catch(console.error);

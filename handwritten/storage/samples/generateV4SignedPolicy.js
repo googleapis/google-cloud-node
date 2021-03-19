@@ -20,13 +20,16 @@
  * at https://cloud.google.com/storage/docs.
  */
 
-function main(bucketName = 'my-bucket', filename = 'test.txt') {
+function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   // [START storage_generate_signed_post_policy_v4]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'File to access, e.g. file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -36,7 +39,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
 
   async function generateV4SignedPolicy() {
     const bucket = storage.bucket(bucketName);
-    const file = bucket.file(filename);
+    const file = bucket.file(fileName);
 
     // These options will allow temporary uploading of a file
     // through an HTML form.

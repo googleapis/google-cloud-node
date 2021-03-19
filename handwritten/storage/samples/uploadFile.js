@@ -14,16 +14,21 @@
 
 function main(
   bucketName = 'my-bucket',
-  filename = './local/path/to/file.txt',
-  destination = 'file.txt'
+  filePath = './local/path/to/file.txt',
+  destFileName = 'file.txt'
 ) {
   // [START storage_upload_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'Local file to upload, e.g. ./local/path/to/file.txt';
-  // const destination = 'Destination object name, e.g. file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The path to your file to upload
+  // const filePath = 'path/to/your/file';
+
+  // The new ID for your GCS file
+  // const destFileName = 'your-new-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -32,20 +37,11 @@ function main(
   const storage = new Storage();
 
   async function uploadFile() {
-    // Uploads a local file to the bucket
-    await storage.bucket(bucketName).upload(filename, {
-      // By setting the option `destination`, you can change the name of the
-      // object you are uploading to a bucket.
-      destination: destination,
-      metadata: {
-        // Enable long-lived HTTP caching headers
-        // Use only if the contents of the file will never change
-        // (If the contents will change, use cacheControl: 'no-cache')
-        cacheControl: 'public, max-age=31536000',
-      },
+    await storage.bucket(bucketName).upload(filePath, {
+      destination: destFileName,
     });
 
-    console.log(`${filename} uploaded to ${bucketName}.`);
+    console.log(`${filePath} uploaded to ${bucketName}`);
   }
 
   uploadFile().catch(console.error);

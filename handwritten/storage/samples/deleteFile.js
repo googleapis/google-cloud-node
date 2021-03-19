@@ -20,13 +20,16 @@
  * at https://cloud.google.com/storage/docs.
  */
 
-function main(bucketName = 'my-bucket', filename = 'test.txt') {
+function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   // [START storage_delete_file]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'File to delete, e.g. file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -35,10 +38,9 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
   const storage = new Storage();
 
   async function deleteFile() {
-    // Deletes the file from the bucket
-    await storage.bucket(bucketName).file(filename).delete();
+    await storage.bucket(bucketName).file(fileName).delete();
 
-    console.log(`gs://${bucketName}/${filename} deleted.`);
+    console.log(`gs://${bucketName}/${fileName} deleted`);
   }
 
   deleteFile().catch(console.error);

@@ -19,7 +19,7 @@
 //   description: Set file metadata.
 //   usage: node fileSetMetadata.js <BUCKET_NAME> <FILE_NAME>
 
-function main(bucketName = 'my-bucket', filename = 'file.txt') {
+function main(bucketName = 'my-bucket', fileName = 'file.txt') {
   // [START storage_set_metadata]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -30,27 +30,37 @@ function main(bucketName = 'my-bucket', filename = 'file.txt') {
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const filename = 'File to access, e.g. file.txt';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The ID of your GCS file
+  // const fileName = 'your-file-name';
+
   async function setFileMetadata() {
     // Set file metadata.
     const [metadata] = await storage
       .bucket(bucketName)
-      .file(filename)
+      .file(fileName)
       .setMetadata({
         // Predefinded metadata for server e.g. 'cacheControl', 'contentDisposition',
         // 'contentEncoding', 'contentEncoding', 'contentLanguage', 'contentType'
         contentDisposition: 'attachment; filename*=utf-8\'\'"anotherImage.jpg"',
         contentType: 'image/jpeg',
 
-        // Note or actionable items for user e.g. uniqueId,
-        // object description or other useful information.
+        // A note or actionable items for user e.g. uniqueId, object description,
+        // or other useful information.
         metadata: {
           description: 'file description...',
           modified: '1900-01-01',
         },
       });
 
+    console.log(
+      'Updated metadata for object',
+      fileName,
+      'in bucket ',
+      bucketName
+    );
     console.log(metadata);
   }
 

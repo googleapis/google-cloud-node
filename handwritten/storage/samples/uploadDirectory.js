@@ -21,23 +21,27 @@
 
 async function main(bucketName, directoryPath) {
   // [START upload_directory]
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The local directory to upload
+  // const directoryPath = './local/path/to/directory';
+
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
+
+  // Creates a client
+  const storage = new Storage();
+
   const fs = require('fs');
   const path = require('path');
   const fileList = [];
 
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const directoryPath = 'Local directory to upload, e.g. ./local/path/to/directory';
-
   async function uploadDirectory() {
-    // Creates a client
-    const storage = new Storage();
-
-    // get the list of files from the specified directory
+    // Get a list of files from the specified directory
     let dirCtr = 1;
     let itemCtr = 0;
     const pathDirName = path.dirname(directoryPath);

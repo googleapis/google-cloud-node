@@ -28,8 +28,11 @@ function main(
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const defaultKmsKeyName = 'KMS key resource id, e.g. my-key';
+  // The ID of your GCS bucket
+  // const bucketName = 'your-unique-bucket-name';
+
+  // The name of the KMS-key to use as a default
+  // const defaultKmsKeyName = 'my-key';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
