@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.2.0...v2.3.0) (2021-03-19)
+
+
+### Features
+
+* added mosaic layout docs:clarified alignment_period max value and updated IAM docs link ([#152](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/152)) ([7ccce5a](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/7ccce5a57f0d927fa33a87cad94bf05d6fcb80da))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.1.3...v2.2.0) (2021-01-09)
 
 
