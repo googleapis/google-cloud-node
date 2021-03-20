@@ -1,0 +1,14 @@
+{
+  "name": "servicemanagement",
+  "name_pretty": "Service Management API",
+  "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
+  "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-management/reference",
+  "issue_tracker": "https://github.com/googleapis/nodejs-service-management/issues",
+  "release_level": "GA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-service-management",
+  "distribution_name": "",
+  "api_id": "servicemanagement.googleapis.com",
+  "requires_billing": true
+}
+
