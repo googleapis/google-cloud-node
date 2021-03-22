@@ -67,16 +67,20 @@ npm install @google-cloud/storage
 // Imports the Google Cloud client library
 const {Storage} = require('@google-cloud/storage');
 
-// Creates a client
+// For more information on ways to initialize Storage, please see
+// https://googleapis.dev/nodejs/storage/latest/Storage.html
+
+// Creates a client using Application Default Credentials
 const storage = new Storage();
-// Creates a client from a Google service account key.
-// const storage = new Storage({keyFilename: "key.json"});
-// For more information on ways to initialize Storage, please see https://googleapis.dev/nodejs/storage/latest/Storage.html
+
+// Creates a client from a Google service account key
+// const storage = new Storage({keyFilename: 'key.json'});
 
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
-// const bucketName = 'bucket-name';
+// The ID of your GCS bucket
+// const bucketName = 'your-unique-bucket-name';
 
 async function createBucket() {
   // Creates the new bucket
@@ -162,7 +166,6 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-storage/tre
 | Storage Make Bucket Public. | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/makeBucketPublic.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/makeBucketPublic.js,samples/README.md) |
 | Make Public | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/makePublic.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/makePublic.js,samples/README.md) |
 | Move File | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/moveFile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/moveFile.js,samples/README.md) |
-| Notifications | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/notifications.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/notifications.js,samples/README.md) |
 | Print Bucket Acl | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/printBucketAcl.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/printBucketAcl.js,samples/README.md) |
 | Print Bucket Acl For User | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/printBucketAclForUser.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/printBucketAclForUser.js,samples/README.md) |
 | Print File Acl | [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/printFileAcl.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/printFileAcl.js,samples/README.md) |

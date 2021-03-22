@@ -84,7 +84,6 @@ objects to users via direct download.
   * [Storage Make Bucket Public.](#storage-make-bucket-public.)
   * [Make Public](#make-public)
   * [Move File](#move-file)
-  * [Notifications](#notifications)
   * [Print Bucket Acl](#print-bucket-acl)
   * [Print Bucket Acl For User](#print-bucket-acl-for-user)
   * [Print File Acl](#print-file-acl)
@@ -1297,23 +1296,6 @@ __Usage:__
 
 
 
-### Notifications
-
-View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/notifications.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/notifications.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/notifications.js`
-
-
------
-
-
-
-
 ### Print Bucket Acl
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/printBucketAcl.js).
@@ -1514,7 +1496,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node removeBucketLabel.js <BUCKET_NAME> JSON.stringify(['labelone','labelone'])`
+`node removeBucketLabel.js <BUCKET_NAME> labelone)`
 
 
 -----
