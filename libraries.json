@@ -59,6 +59,20 @@
     "support_documentation": "https://cloud.google.com/api-gateway/docs/getting-support"
   },
   {
+    "name": "appengine",
+    "name_pretty": "App Engine Admin API",
+    "product_documentation": "https://cloud.google.com/appengine/docs/admin-api/",
+    "client_documentation": "https://cloud.google.com/appengine/docs/admin-api",
+    "issue_tracker": "https://github.com/googleapis/nodejs-appengine-admin/issues",
+    "release_level": "GA",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-appengine-admin",
+    "distribution_name": "@google-cloud/appengine-admin",
+    "api_id": "appengine.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/appengine/docs/admin-api/"
+  },
+  {
     "name": "area120tables",
     "name_pretty": "Area120 Tables API",
     "product_documentation": "https://area120.google.com/",
