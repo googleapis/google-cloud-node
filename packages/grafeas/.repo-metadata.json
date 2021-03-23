@@ -10,5 +10,6 @@
   "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
   "requires_billing": false,
   "name": "grafeas",
-  "issue_tracker": "https://github.com/grafeas/grafeas/issues"
+  "issue_tracker": "https://github.com/grafeas/grafeas/issues",
+  "codeowner_team": "@googleapis/cicd"
 }
