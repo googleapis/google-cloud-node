@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.8.2](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.1...v5.8.2) (2021-03-23)
+
+
+### Bug Fixes
+
+* **perf:** pull hashes without refreshing metadata ([#1419](https://www.github.com/googleapis/nodejs-storage/issues/1419)) ([f3ec627](https://www.github.com/googleapis/nodejs-storage/commit/f3ec6278df3c3df4d4cddf5293be4dda95f0cbf7))
+
 ### [5.8.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.0...v5.8.1) (2021-03-02)
 
 
