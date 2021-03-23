@@ -768,6 +768,9 @@ describe('File', () => {
   });
 
   describe('createReadStream', () => {
+    const CRC32C_HASH = 'crc32c-hash';
+    const MD5_HASH = 'md5-hash';
+
     function getFakeRequest(data?: {}) {
       let requestOptions: DecorateRequestOptions | undefined;
 
@@ -1130,10 +1133,6 @@ describe('File', () => {
             return requestStream;
           };
 
-          file.getMetadata = (options: object, callback: Function) => {
-            callback();
-          };
-
           file
             .createReadStream({validation: false})
             .on('error', (err: Error) => {
@@ -1154,6 +1153,10 @@ describe('File', () => {
       const GZIPPED_DATA = zlib.gzipSync(DATA);
 
       beforeEach(() => {
+        hashStreamValidationOverride = () =>
+          Object.assign(new PassThrough(), {
+            test: () => true,
+          });
         handleRespOverride = (
           err: Error,
           res: {},
@@ -1166,6 +1169,7 @@ describe('File', () => {
               return {
                 headers: {
                   'content-encoding': 'gzip',
+                  'x-goog-hash': `crc32c=${CRC32C_HASH},md5=${MD5_HASH}`,
                 },
               };
             },
@@ -1227,9 +1231,6 @@ describe('File', () => {
           });
           return createGunzipStream;
         };
-        file.getMetadata = (options: object, callback: Function) => {
-          callback();
-        };
         file
           .createReadStream({validation: false})
           .on('error', (err: Error) => {
@@ -1249,60 +1250,43 @@ describe('File', () => {
       let fakeValidationStream: Stream & {test: Function};
 
       beforeEach(() => {
-        file.metadata.mediaLink = 'http://uri';
-
-        file.getMetadata = (options: {}, callback: Function) => {
-          file.metadata = {
-            crc32c: '####wA==',
-            md5Hash: 'CY9rzUYh03PK3k6DJie09g==',
-          };
-          callback();
-        };
-
+        file.getMetadata = () => Promise.resolve({});
         fakeValidationStream = Object.assign(new PassThrough(), {
           test: () => true,
         });
         hashStreamValidationOverride = () => {
           return fakeValidationStream;
         };
+        handleRespOverride = (
+          err: Error,
+          res: {},
+          body: {},
+          callback: Function
+        ) => {
+          const rawResponseStream = new PassThrough();
+          Object.assign(rawResponseStream, {
+            toJSON() {
+              return {
+                headers: {
+                  'x-goog-hash': `crc32c=${CRC32C_HASH},md5=${MD5_HASH}`,
+                },
+              };
+            },
+          });
+          callback(null, null, rawResponseStream);
+          setImmediate(() => {
+            rawResponseStream.end(data);
+          });
+        };
+        file.requestStream = getFakeSuccessfulRequest(data);
       });
 
       describe('server decompression', () => {
-        beforeEach(() => {
-          handleRespOverride = (
-            err: Error,
-            res: {},
-            body: {},
-            callback: Function
-          ) => {
-            const rawResponseStream = new PassThrough();
-            Object.assign(rawResponseStream, {
-              toJSON() {
-                return {
-                  headers: {},
-                };
-              },
-            });
-            callback(null, null, rawResponseStream);
-            setImmediate(() => {
-              rawResponseStream.end(data);
-            });
-          };
-          file.requestStream = getFakeSuccessfulRequest(data);
-        });
-
         it('should skip validation if file was stored compressed', done => {
+          file.metadata.contentEncoding = 'gzip';
+
           const validateStub = sinon.stub().returns(true);
           fakeValidationStream.test = validateStub;
-
-          file.getMetadata = (options: {}, callback: Function) => {
-            file.metadata = {
-              crc32c: '####wA==',
-              md5Hash: 'CY9rzUYh03PK3k6DJie09g==',
-              contentEncoding: 'gzip',
-            };
-            callback();
-          };
 
           file
             .createReadStream({validation: 'crc32c'})
@@ -1368,18 +1352,19 @@ describe('File', () => {
 
         file.getMetadata = (options: GetFileMetadataOptions) => {
           assert.strictEqual(options.userProject, fakeOptions.userProject);
-          done();
+          setImmediate(done);
+          return Promise.resolve({});
         };
 
-        file.requestStream = getFakeSuccessfulRequest(data);
+        file.requestStream = getFakeSuccessfulRequest('data');
 
         file.createReadStream(fakeOptions).on('error', done).resume();
       });
 
       it('should destroy stream from failed metadata fetch', done => {
         const error = new Error('Error.');
-        file.getMetadata = (options: {}, callback: Function) => {
-          callback(error);
+        file.getMetadata = () => {
+          return Promise.reject(error);
         };
 
         file.requestStream = getFakeSuccessfulRequest('data');
@@ -1395,7 +1380,12 @@ describe('File', () => {
 
       it('should validate with crc32c', done => {
         file.requestStream = getFakeSuccessfulRequest(data);
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (fakeValidationStream as any).test = (algo: string, value: string) => {
+          assert.strictEqual(algo, 'crc32c');
+          assert.strictEqual(value, CRC32C_HASH.substr(4));
+          return true;
+        };
         file
           .createReadStream({validation: 'crc32c'})
           .on('error', done)
@@ -1419,7 +1409,11 @@ describe('File', () => {
       it('should validate with md5', done => {
         file.requestStream = getFakeSuccessfulRequest(data);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (fakeValidationStream as any).test = () => true;
+        (fakeValidationStream as any).test = (algo: string, value: string) => {
+          assert.strictEqual(algo, 'md5');
+          assert.strictEqual(value, MD5_HASH);
+          return true;
+        };
         file
           .createReadStream({validation: 'md5'})
           .on('error', done)
@@ -1430,7 +1424,10 @@ describe('File', () => {
       it('should emit an error if md5 validation fails', done => {
         file.requestStream = getFakeSuccessfulRequest('bad-data');
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (fakeValidationStream as any).test = () => false;
+        (fakeValidationStream as any).test = (algo: string) => {
+          assert.strictEqual(algo, 'md5');
+          return false;
+        };
         file
           .createReadStream({validation: 'md5'})
           .on('error', (err: ApiError) => {
@@ -1441,13 +1438,12 @@ describe('File', () => {
       });
 
       it('should default to crc32c validation', done => {
-        file.getMetadata = (options: {}, callback: Function) => {
-          file.metadata = {
-            crc32c: file.metadata.crc32c,
-          };
-          callback();
+        file.requestStream = getFakeSuccessfulRequest('bad-data');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (fakeValidationStream as any).test = (algo: string) => {
+          assert.strictEqual(algo, 'crc32c');
+          return false;
         };
-        file.requestStream = getFakeSuccessfulRequest(data);
         file
           .createReadStream()
           .on('error', (err: ApiError) => {
@@ -1468,6 +1464,40 @@ describe('File', () => {
           .on('end', done);
       });
 
+      it('should handle x-goog-hash with only crc32c', done => {
+        handleRespOverride = (
+          err: Error,
+          res: {},
+          body: {},
+          callback: Function
+        ) => {
+          const rawResponseStream = new PassThrough();
+          Object.assign(rawResponseStream, {
+            toJSON() {
+              return {
+                headers: {
+                  'x-goog-hash': `crc32c=${CRC32C_HASH}`,
+                },
+              };
+            },
+          });
+          callback(null, null, rawResponseStream);
+          setImmediate(() => {
+            rawResponseStream.end(data);
+          });
+        };
+
+        file.requestStream = getFakeSuccessfulRequest(data);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (fakeValidationStream as any).test = (algo: string, value: string) => {
+          assert.strictEqual(algo, 'crc32c');
+          assert.strictEqual(value, CRC32C_HASH.substr(4));
+          return true;
+        };
+
+        file.createReadStream().on('error', done).on('end', done).resume();
+      });
+
       describe('destroying the through stream', () => {
         beforeEach(() => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1486,13 +1516,25 @@ describe('File', () => {
         });
 
         it('should destroy if MD5 is requested but absent', done => {
-          file.getMetadata = (options: {}, callback: Function) => {
-            file.metadata = {
-              crc32c: file.metadata.crc32c,
-            };
-            callback();
+          handleRespOverride = (
+            err: Error,
+            res: {},
+            body: {},
+            callback: Function
+          ) => {
+            const rawResponseStream = new PassThrough();
+            Object.assign(rawResponseStream, {
+              toJSON() {
+                return {
+                  headers: {},
+                };
+              },
+            });
+            callback(null, null, rawResponseStream);
+            setImmediate(() => {
+              rawResponseStream.end();
+            });
           };
-
           file.requestStream = getFakeSuccessfulRequest('bad-data');
 
           const readStream = file.createReadStream({validation: 'md5'});

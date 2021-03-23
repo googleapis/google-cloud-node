@@ -1211,8 +1211,6 @@ class File extends ServiceObject<File> {
     let crc32c = true;
     let md5 = false;
 
-    let refreshedMetadata = false;
-
     if (typeof options.validation === 'string') {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (options as any).validation = (options.validation as string).toLowerCase();
@@ -1221,6 +1219,8 @@ class File extends ServiceObject<File> {
     } else if (options.validation === false) {
       crc32c = false;
     }
+
+    const shouldRunValidation = !rangeRequest && (crc32c || md5);
 
     if (rangeRequest) {
       if (
@@ -1268,6 +1268,8 @@ class File extends ServiceObject<File> {
         qs: query,
       };
 
+      const hashes: {crc32c?: string; md5?: string} = {};
+
       this.requestStream(reqOpts)
         .on('error', err => {
           throughStream.destroy(err);
@@ -1307,10 +1309,22 @@ class File extends ServiceObject<File> {
 
         const headers = rawResponseStream.toJSON().headers;
         isServedCompressed = headers['content-encoding'] === 'gzip';
-        const shouldRunValidation = !rangeRequest && (crc32c || md5);
         const throughStreams: Writable[] = [];
 
         if (shouldRunValidation) {
+          // The x-goog-hash header should be set with a crc32c and md5 hash.
+          // ex: headers['x-goog-hash'] = 'crc32c=xxxx,md5=xxxx'
+          if (typeof headers['x-goog-hash'] === 'string') {
+            headers['x-goog-hash']
+              .split(',')
+              .forEach((hashKeyValPair: string) => {
+                const delimiterIndex = hashKeyValPair.indexOf('=');
+                const hashType = hashKeyValPair.substr(0, delimiterIndex);
+                const hashValue = hashKeyValPair.substr(delimiterIndex + 1);
+                hashes[hashType as 'crc32c' | 'md5'] = hashValue;
+              });
+          }
+
           validateStream = hashStreamValidation({crc32c, md5});
           throughStreams.push(validateStream);
         }
@@ -1338,45 +1352,41 @@ class File extends ServiceObject<File> {
       // our chance to validate the data and let the user know if anything went
       // wrong.
       let onCompleteCalled = false;
-      const onComplete = (err: Error | null) => {
-        if (err) {
-          onCompleteCalled = true;
-          throughStream.destroy(err);
-          return;
-        }
-
-        if (rangeRequest) {
-          onCompleteCalled = true;
-          throughStream.end();
-          return;
-        }
-
-        if (!refreshedMetadata) {
-          refreshedMetadata = true;
-          this.getMetadata({userProject: options.userProject}, onComplete);
-          return;
-        }
-
+      const onComplete = async (err: Error | null) => {
         if (onCompleteCalled) {
           return;
         }
 
         onCompleteCalled = true;
 
-        // TODO(https://github.com/googleapis/nodejs-storage/issues/709):
-        // Remove once the backend issue is fixed.
-        // If object is stored compressed (having metadata.contentEncoding === 'gzip')
-        // and was served decompressed, then skip checksum validation because the
-        // remote checksum is computed against the compressed version of the object.
-        if (this.metadata.contentEncoding === 'gzip' && !isServedCompressed) {
+        if (err) {
+          throughStream.destroy(err);
+          return;
+        }
+
+        if (rangeRequest || !shouldRunValidation) {
           throughStream.end();
           return;
         }
 
-        const hashes = {
-          crc32c: this.metadata.crc32c,
-          md5: this.metadata.md5Hash,
-        };
+        // TODO(https://github.com/googleapis/nodejs-storage/issues/709):
+        // Remove once the backend issue is fixed.
+        // If object is stored compressed (having
+        // metadata.contentEncoding === 'gzip') and was served decompressed,
+        // then skip checksum validation because the remote checksum is computed
+        // against the compressed version of the object.
+        if (!isServedCompressed) {
+          try {
+            await this.getMetadata({userProject: options.userProject});
+          } catch (e) {
+            throughStream.destroy(e);
+            return;
+          }
+          if (this.metadata.contentEncoding === 'gzip') {
+            throughStream.end();
+            return;
+          }
+        }
 
         // If we're doing validation, assume the worst-- a data integrity
         // mismatch. If not, these tests won't be performed, and we can assume
