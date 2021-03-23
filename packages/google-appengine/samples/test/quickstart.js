@@ -21,7 +21,7 @@ const path = require('path');
 const cp = require('child_process');
 const {before, describe, it} = require('mocha');
 // eslint-disable-next-line node/no-missing-require
-const {ServicesClient} = require('@google-cloud/appengine-admin');
+const {VersionsClient} = require('@google-cloud/appengine-admin');
 // eslint-disable-next-line no-unused-vars, node/no-missing-require
 const {assert} = require('chai');
 
@@ -29,17 +29,22 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const client = new ServicesClient();
+const client = new {VersionsClient}();
 
 describe('Quickstart', () => {
+  //TODO: remove this if not using the projectId
+  // eslint-disable-next-line no-unused-vars
   let projectId;
 
   before(async () => {
+    // eslint-disable-next-line no-unused-vars
     projectId = await client.getProjectId();
   });
 
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${projectId}`, {cwd});
-    assert.match(stdout, /\[[\s\S]*\[[\s\S]*\][\s\S]*\]/);
+    //TODO: remove this line
+    // eslint-disable-next-line no-unused-vars
+    const stdout = execSync('node ./quickstart.js', {cwd});
+    //assert(stdout, stdout !== null);
   });
 });

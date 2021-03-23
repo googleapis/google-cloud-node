@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-appengine-admin.git",
-        "sha": "713ee9c67c67c88e284e5ae99a3b0db0dff0fe88"
+        "remote": "sso://user/sofialeon/nodejs-appengine-admin",
+        "sha": "1b8bac63942e37e3123e19aaa02acd5f729327ca"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "6598bb829c9e9a534be674649ffd1b4671a821f9",
-        "internalRef": "364449524"
+        "sha": "5da78db589d423db6bcd6a35637c923fe1a7665c",
+        "internalRef": "363947872"
       }
     },
     {

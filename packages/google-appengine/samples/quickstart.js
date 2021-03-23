@@ -13,25 +13,31 @@
 
 'use strict';
 
-async function main(projectId) {
+async function main() {
   // [START nodejs_appengine_admin_quickstart]
   // Imports the Google Cloud client library
 
-  const {ServicesClient} = require('@google-cloud/appengine-admin');
+  // remove this line after package is released
+  // eslint-disable-next-line node/no-missing-require
+  const {VersionsClient} = require('@google-cloud/appengine-admin');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
 
   // Creates a client
-  const client = new ServicesClient();
+  // eslint-disable-next-line no-unused-vars
+  const client = new {VersionsClient}();
 
-  async function listVersions() {
-    const [versions] = await client.listServices({
-      parent: `apps/${projectId}`,
-    });
-    console.info([versions]);
+  //TODO(library generator): write the actual function you will be testing
+  async function doSomething() {
+    console.log(
+      'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
+    );
+    // const [thing] = await client.methodName({
+    // });
+    // console.info(thing);
   }
-  listVersions();
+  doSomething();
   // [END nodejs_appengine_admin_quickstart]
 }
 
