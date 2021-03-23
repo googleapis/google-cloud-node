@@ -5,7 +5,7 @@
 # [App Engine Admin API: Node.js Client](https://github.com/googleapis/nodejs-appengine-admin)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/appengine.svg)](https://www.npmjs.org/package/@google-cloud/appengine)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/appengine-admin.svg)](https://www.npmjs.org/package/@google-cloud/appengine-admin)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-appengine-admin/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-appengine-admin)
 
 
@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -51,10 +51,46 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/appengine
+npm install @google-cloud/appengine-admin
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// remove this line after package is released
+// eslint-disable-next-line node/no-missing-require
+const {VersionsClient} = require('@google-cloud/appengine-admin');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
+
+// Creates a client
+// eslint-disable-next-line no-unused-vars
+const client = new {VersionsClient}();
+
+//TODO(library generator): write the actual function you will be testing
+async function doSomething() {
+ console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
+ // const [thing] = await client.methodName({
+ // });
+ // console.info(thing);
+}
+doSomething();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-appengine-admin/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-appengine-admin/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-appengine-admin&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
