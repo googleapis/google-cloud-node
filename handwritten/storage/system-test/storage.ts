@@ -2810,7 +2810,7 @@ describe('storage', () => {
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 
-    it('should copy an existing file and overwrite metadata', async () => {
+    it('should copy an existing file and overwrite custom metadata', async () => {
       const opts = {
         destination: 'CloudLogo',
         metadata: {
@@ -2828,6 +2828,27 @@ describe('storage', () => {
         'undefined'
       );
       assert.strictEqual(metadata.metadata.newProperty, 'true');
+      await Promise.all([file.delete, copiedFile.delete()]);
+    });
+
+    it('should copy an existing file and overwrite metadata', async () => {
+      const opts = {
+        destination: 'CloudLogo',
+      };
+      const CACHE_CONTROL = 'private';
+      const CONTENT_ENCODING = 'gzip';
+      const CONTENT_TYPE = 'text/plain';
+      const [file] = await bucket.upload(FILES.logo.path, opts);
+      const copyOpts = {
+        cacheControl: CACHE_CONTROL,
+        contentEncoding: CONTENT_ENCODING,
+        contentType: CONTENT_TYPE,
+      };
+      const [copiedFile] = await file.copy('CloudLogoCopy', copyOpts);
+      const [metadata] = await copiedFile.getMetadata();
+      assert.strictEqual(metadata.contentEncoding, CONTENT_ENCODING);
+      assert.strictEqual(metadata.cacheControl, CACHE_CONTROL);
+      assert.strictEqual(metadata.contentType, CONTENT_TYPE);
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 

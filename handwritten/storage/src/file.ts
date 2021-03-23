@@ -304,6 +304,9 @@ export interface FileOptions {
 }
 
 export interface CopyOptions {
+  cacheControl?: string;
+  contentEncoding?: string;
+  contentType?: string;
   destinationKmsKeyName?: string;
   metadata?: Metadata;
   predefinedAcl?: string;
@@ -857,6 +860,9 @@ class File extends ServiceObject<File> {
    * @typedef {object} CopyOptions Configuration options for File#copy(). See an
    *     [Object
    * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+   * @property {string} [cacheControl] The cacheControl setting for the new file.
+   * @property {string} [contentEncoding] The contentEncoding setting for the new file.
+   * @property {string} [contentType] The contentType setting for the new file.
    * @property {string} [destinationKmsKeyName] Resource name of the Cloud
    *     KMS key, of the form
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
