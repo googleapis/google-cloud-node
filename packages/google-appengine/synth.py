@@ -30,12 +30,12 @@ for version in versions:
   name, 
   version,
   bazel_target=f"//google/appengine/{version}:appengine-{version}-nodejs")
-  s.copy(library, excludes=["package.json","linkinator.config.json", "system-test/fixtures/sample/src/index.js","system-test/fixtures/sample/src/index.ts"])
+  s.copy(library, excludes=["package.json","linkinator.config.json"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=["v1"], default_version="v1")
-s.copy(templates, excludes=[])
+s.copy(templates, excludes=[".github/workflows/ci.yaml"])
 
 node.postprocess_gapic_library()
