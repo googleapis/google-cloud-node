@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.3.0...v1.4.0) (2021-03-19)
+
+
+### Features
+
+* add HIPAA and HITRUST compliance regimes ([#41](https://www.github.com/googleapis/nodejs-assured-workloads/issues/41)) ([a1c0181](https://www.github.com/googleapis/nodejs-assured-workloads/commit/a1c01819c0578d088de5e7d35890a914ff6a7aee))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.2.0...v1.3.0) (2021-02-18)
 
 
