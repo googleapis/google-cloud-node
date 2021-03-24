@@ -365,6 +365,7 @@ export class TestCasesClient {
       'importTestCases',
       'exportTestCases',
       'listTestCaseResults',
+      'getTestCaseResult',
     ];
     for (const methodName of testCasesStubMethods) {
       const callPromise = this.testCasesStub.then(
@@ -951,6 +952,106 @@ export class TestCasesClient {
     });
     this.initialize();
     return this.innerApiCalls.calculateCoverage(request, options, callback);
+  }
+  getTestCaseResult(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getTestCaseResult(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTestCaseResult(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets a test case result.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the testcase.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/testCases/<TestCase ID>/results/<TestCaseResult ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestCaseResult]{@link google.cloud.dialogflow.cx.v3beta1.TestCaseResult}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getTestCaseResult(request);
+   */
+  getTestCaseResult(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.getTestCaseResult(request, options, callback);
   }
 
   runTestCase(

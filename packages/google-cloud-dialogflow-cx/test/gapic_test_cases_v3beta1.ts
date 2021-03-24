@@ -791,6 +791,118 @@ describe('v3beta1.TestCasesClient', () => {
     });
   });
 
+  describe('getTestCaseResult', () => {
+    it('invokes getTestCaseResult without error', async () => {
+      const client = new testcasesModule.v3beta1.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetTestCaseResultRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.TestCaseResult()
+      );
+      client.innerApiCalls.getTestCaseResult = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTestCaseResult(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getTestCaseResult as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getTestCaseResult without error using callback', async () => {
+      const client = new testcasesModule.v3beta1.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetTestCaseResultRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.TestCaseResult()
+      );
+      client.innerApiCalls.getTestCaseResult = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.getTestCaseResult(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getTestCaseResult as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getTestCaseResult with error', async () => {
+      const client = new testcasesModule.v3beta1.TestCasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetTestCaseResultRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTestCaseResult = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getTestCaseResult(request), expectedError);
+      assert(
+        (client.innerApiCalls.getTestCaseResult as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('runTestCase', () => {
     it('invokes runTestCase without error', async () => {
       const client = new testcasesModule.v3beta1.TestCasesClient({
