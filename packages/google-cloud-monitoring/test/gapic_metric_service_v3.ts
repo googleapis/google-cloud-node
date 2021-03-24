@@ -3482,6 +3482,63 @@ describe('v3.MetricServiceClient', () => {
       });
     });
 
+    describe('projectTimeSeries', () => {
+      const fakePath = '/rendered/path/projectTimeSeries';
+      const expectedParameters = {
+        project: 'projectValue',
+        time_series: 'timeSeriesValue',
+      };
+      const client = new metricserviceModule.v3.MetricServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectTimeSeriesPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectTimeSeriesPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectTimeSeriesPath', () => {
+        const result = client.projectTimeSeriesPath(
+          'projectValue',
+          'timeSeriesValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectTimeSeriesPathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectTimeSeriesName', () => {
+        const result = client.matchProjectFromProjectTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectTimeSeriesPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTimeSeriesFromProjectTimeSeriesName', () => {
+        const result = client.matchTimeSeriesFromProjectTimeSeriesName(
+          fakePath
+        );
+        assert.strictEqual(result, 'timeSeriesValue');
+        assert(
+          (client.pathTemplates.projectTimeSeriesPathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectUptimeCheckConfig', () => {
       const fakePath = '/rendered/path/projectUptimeCheckConfig';
       const expectedParameters = {

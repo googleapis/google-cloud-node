@@ -805,6 +805,7 @@
                          * @property {string|null} [displayName] Condition displayName
                          * @property {google.monitoring.v3.AlertPolicy.Condition.IMetricThreshold|null} [conditionThreshold] Condition conditionThreshold
                          * @property {google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null} [conditionAbsent] Condition conditionAbsent
+                         * @property {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null} [conditionMonitoringQueryLanguage] Condition conditionMonitoringQueryLanguage
                          */
     
                         /**
@@ -854,17 +855,25 @@
                          */
                         Condition.prototype.conditionAbsent = null;
     
+                        /**
+                         * Condition conditionMonitoringQueryLanguage.
+                         * @member {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null|undefined} conditionMonitoringQueryLanguage
+                         * @memberof google.monitoring.v3.AlertPolicy.Condition
+                         * @instance
+                         */
+                        Condition.prototype.conditionMonitoringQueryLanguage = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Condition condition.
-                         * @member {"conditionThreshold"|"conditionAbsent"|undefined} condition
+                         * @member {"conditionThreshold"|"conditionAbsent"|"conditionMonitoringQueryLanguage"|undefined} condition
                          * @memberof google.monitoring.v3.AlertPolicy.Condition
                          * @instance
                          */
                         Object.defineProperty(Condition.prototype, "condition", {
-                            get: $util.oneOfGetter($oneOfFields = ["conditionThreshold", "conditionAbsent"]),
+                            get: $util.oneOfGetter($oneOfFields = ["conditionThreshold", "conditionAbsent", "conditionMonitoringQueryLanguage"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -900,6 +909,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.displayName);
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.name);
+                            if (message.conditionMonitoringQueryLanguage != null && Object.hasOwnProperty.call(message, "conditionMonitoringQueryLanguage"))
+                                $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.encode(message.conditionMonitoringQueryLanguage, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -945,6 +956,9 @@
                                     break;
                                 case 2:
                                     message.conditionAbsent = $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence.decode(reader, reader.uint32());
+                                    break;
+                                case 19:
+                                    message.conditionMonitoringQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1006,6 +1020,16 @@
                                         return "conditionAbsent." + error;
                                 }
                             }
+                            if (message.conditionMonitoringQueryLanguage != null && message.hasOwnProperty("conditionMonitoringQueryLanguage")) {
+                                if (properties.condition === 1)
+                                    return "condition: multiple values";
+                                properties.condition = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.verify(message.conditionMonitoringQueryLanguage);
+                                    if (error)
+                                        return "conditionMonitoringQueryLanguage." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1034,6 +1058,11 @@
                                 if (typeof object.conditionAbsent !== "object")
                                     throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionAbsent: object expected");
                                 message.conditionAbsent = $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence.fromObject(object.conditionAbsent);
+                            }
+                            if (object.conditionMonitoringQueryLanguage != null) {
+                                if (typeof object.conditionMonitoringQueryLanguage !== "object")
+                                    throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.conditionMonitoringQueryLanguage: object expected");
+                                message.conditionMonitoringQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.fromObject(object.conditionMonitoringQueryLanguage);
                             }
                             return message;
                         };
@@ -1069,6 +1098,11 @@
                                 object.displayName = message.displayName;
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.conditionMonitoringQueryLanguage != null && message.hasOwnProperty("conditionMonitoringQueryLanguage")) {
+                                object.conditionMonitoringQueryLanguage = $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.toObject(message.conditionMonitoringQueryLanguage, options);
+                                if (options.oneofs)
+                                    object.condition = "conditionMonitoringQueryLanguage";
+                            }
                             return object;
                         };
     
@@ -2034,6 +2068,248 @@
                             };
     
                             return MetricAbsence;
+                        })();
+    
+                        Condition.MonitoringQueryLanguageCondition = (function() {
+    
+                            /**
+                             * Properties of a MonitoringQueryLanguageCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @interface IMonitoringQueryLanguageCondition
+                             * @property {string|null} [query] MonitoringQueryLanguageCondition query
+                             * @property {google.protobuf.IDuration|null} [duration] MonitoringQueryLanguageCondition duration
+                             * @property {google.monitoring.v3.AlertPolicy.Condition.ITrigger|null} [trigger] MonitoringQueryLanguageCondition trigger
+                             */
+    
+                            /**
+                             * Constructs a new MonitoringQueryLanguageCondition.
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition
+                             * @classdesc Represents a MonitoringQueryLanguageCondition.
+                             * @implements IMonitoringQueryLanguageCondition
+                             * @constructor
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition=} [properties] Properties to set
+                             */
+                            function MonitoringQueryLanguageCondition(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MonitoringQueryLanguageCondition query.
+                             * @member {string} query
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @instance
+                             */
+                            MonitoringQueryLanguageCondition.prototype.query = "";
+    
+                            /**
+                             * MonitoringQueryLanguageCondition duration.
+                             * @member {google.protobuf.IDuration|null|undefined} duration
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @instance
+                             */
+                            MonitoringQueryLanguageCondition.prototype.duration = null;
+    
+                            /**
+                             * MonitoringQueryLanguageCondition trigger.
+                             * @member {google.monitoring.v3.AlertPolicy.Condition.ITrigger|null|undefined} trigger
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @instance
+                             */
+                            MonitoringQueryLanguageCondition.prototype.trigger = null;
+    
+                            /**
+                             * Creates a new MonitoringQueryLanguageCondition instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition=} [properties] Properties to set
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition} MonitoringQueryLanguageCondition instance
+                             */
+                            MonitoringQueryLanguageCondition.create = function create(properties) {
+                                return new MonitoringQueryLanguageCondition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MonitoringQueryLanguageCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition} message MonitoringQueryLanguageCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MonitoringQueryLanguageCondition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                    $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.trigger != null && Object.hasOwnProperty.call(message, "trigger"))
+                                    $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.encode(message.trigger, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MonitoringQueryLanguageCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition} message MonitoringQueryLanguageCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MonitoringQueryLanguageCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MonitoringQueryLanguageCondition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition} MonitoringQueryLanguageCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MonitoringQueryLanguageCondition.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.query = reader.string();
+                                        break;
+                                    case 2:
+                                        message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    case 3:
+                                        message.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MonitoringQueryLanguageCondition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition} MonitoringQueryLanguageCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MonitoringQueryLanguageCondition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MonitoringQueryLanguageCondition message.
+                             * @function verify
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MonitoringQueryLanguageCondition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.duration != null && message.hasOwnProperty("duration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.duration);
+                                    if (error)
+                                        return "duration." + error;
+                                }
+                                if (message.trigger != null && message.hasOwnProperty("trigger")) {
+                                    var error = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.verify(message.trigger);
+                                    if (error)
+                                        return "trigger." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MonitoringQueryLanguageCondition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition} MonitoringQueryLanguageCondition
+                             */
+                            MonitoringQueryLanguageCondition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition)
+                                    return object;
+                                var message = new $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.duration != null) {
+                                    if (typeof object.duration !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.duration: object expected");
+                                    message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                                }
+                                if (object.trigger != null) {
+                                    if (typeof object.trigger !== "object")
+                                        throw TypeError(".google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.trigger: object expected");
+                                    message.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.fromObject(object.trigger);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MonitoringQueryLanguageCondition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @static
+                             * @param {google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition} message MonitoringQueryLanguageCondition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MonitoringQueryLanguageCondition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.query = "";
+                                    object.duration = null;
+                                    object.trigger = null;
+                                }
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.duration != null && message.hasOwnProperty("duration"))
+                                    object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                                if (message.trigger != null && message.hasOwnProperty("trigger"))
+                                    object.trigger = $root.google.monitoring.v3.AlertPolicy.Condition.Trigger.toObject(message.trigger, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MonitoringQueryLanguageCondition to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MonitoringQueryLanguageCondition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return MonitoringQueryLanguageCondition;
                         })();
     
                         return Condition;
@@ -4287,6 +4563,7 @@
                      * @interface IListAlertPoliciesResponse
                      * @property {Array.<google.monitoring.v3.IAlertPolicy>|null} [alertPolicies] ListAlertPoliciesResponse alertPolicies
                      * @property {string|null} [nextPageToken] ListAlertPoliciesResponse nextPageToken
+                     * @property {number|null} [totalSize] ListAlertPoliciesResponse totalSize
                      */
     
                     /**
@@ -4322,6 +4599,14 @@
                     ListAlertPoliciesResponse.prototype.nextPageToken = "";
     
                     /**
+                     * ListAlertPoliciesResponse totalSize.
+                     * @member {number} totalSize
+                     * @memberof google.monitoring.v3.ListAlertPoliciesResponse
+                     * @instance
+                     */
+                    ListAlertPoliciesResponse.prototype.totalSize = 0;
+    
+                    /**
                      * Creates a new ListAlertPoliciesResponse instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.ListAlertPoliciesResponse
@@ -4350,6 +4635,8 @@
                         if (message.alertPolicies != null && message.alertPolicies.length)
                             for (var i = 0; i < message.alertPolicies.length; ++i)
                                 $root.google.monitoring.v3.AlertPolicy.encode(message.alertPolicies[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.totalSize);
                         return writer;
                     };
     
@@ -4391,6 +4678,9 @@
                                 break;
                             case 2:
                                 message.nextPageToken = reader.string();
+                                break;
+                            case 4:
+                                message.totalSize = reader.int32();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -4439,6 +4729,9 @@
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             if (!$util.isString(message.nextPageToken))
                                 return "nextPageToken: string expected";
+                        if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                            if (!$util.isInteger(message.totalSize))
+                                return "totalSize: integer expected";
                         return null;
                     };
     
@@ -4466,6 +4759,8 @@
                         }
                         if (object.nextPageToken != null)
                             message.nextPageToken = String(object.nextPageToken);
+                        if (object.totalSize != null)
+                            message.totalSize = object.totalSize | 0;
                         return message;
                     };
     
@@ -4484,8 +4779,10 @@
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.alertPolicies = [];
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.nextPageToken = "";
+                            object.totalSize = 0;
+                        }
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
                         if (message.alertPolicies && message.alertPolicies.length) {
@@ -4493,6 +4790,8 @@
                             for (var j = 0; j < message.alertPolicies.length; ++j)
                                 object.alertPolicies[j] = $root.google.monitoring.v3.AlertPolicy.toObject(message.alertPolicies[j], options);
                         }
+                        if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                            object.totalSize = message.totalSize;
                         return object;
                     };
     
@@ -7824,6 +8123,7 @@
                      * @property {google.api.MetricDescriptor.MetricKind|null} [metricKind] TimeSeries metricKind
                      * @property {google.api.MetricDescriptor.ValueType|null} [valueType] TimeSeries valueType
                      * @property {Array.<google.monitoring.v3.IPoint>|null} [points] TimeSeries points
+                     * @property {string|null} [unit] TimeSeries unit
                      */
     
                     /**
@@ -7891,6 +8191,14 @@
                     TimeSeries.prototype.points = $util.emptyArray;
     
                     /**
+                     * TimeSeries unit.
+                     * @member {string} unit
+                     * @memberof google.monitoring.v3.TimeSeries
+                     * @instance
+                     */
+                    TimeSeries.prototype.unit = "";
+    
+                    /**
                      * Creates a new TimeSeries instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.TimeSeries
@@ -7927,6 +8235,8 @@
                                 $root.google.monitoring.v3.Point.encode(message.points[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                             $root.google.api.MonitoredResourceMetadata.encode(message.metadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.unit);
                         return writer;
                     };
     
@@ -7980,6 +8290,9 @@
                                 if (!(message.points && message.points.length))
                                     message.points = [];
                                 message.points.push($root.google.monitoring.v3.Point.decode(reader, reader.uint32()));
+                                break;
+                            case 8:
+                                message.unit = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -8063,6 +8376,9 @@
                                     return "points." + error;
                             }
                         }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            if (!$util.isString(message.unit))
+                                return "unit: string expected";
                         return null;
                     };
     
@@ -8151,6 +8467,8 @@
                                 message.points[i] = $root.google.monitoring.v3.Point.fromObject(object.points[i]);
                             }
                         }
+                        if (object.unit != null)
+                            message.unit = String(object.unit);
                         return message;
                     };
     
@@ -8175,6 +8493,7 @@
                             object.metricKind = options.enums === String ? "METRIC_KIND_UNSPECIFIED" : 0;
                             object.valueType = options.enums === String ? "VALUE_TYPE_UNSPECIFIED" : 0;
                             object.metadata = null;
+                            object.unit = "";
                         }
                         if (message.metric != null && message.hasOwnProperty("metric"))
                             object.metric = $root.google.api.Metric.toObject(message.metric, options);
@@ -8191,6 +8510,8 @@
                         }
                         if (message.metadata != null && message.hasOwnProperty("metadata"))
                             object.metadata = $root.google.api.MonitoredResourceMetadata.toObject(message.metadata, options);
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            object.unit = message.unit;
                         return object;
                     };
     
@@ -8466,6 +8787,7 @@
                          * @property {string|null} [key] ValueDescriptor key
                          * @property {google.api.MetricDescriptor.ValueType|null} [valueType] ValueDescriptor valueType
                          * @property {google.api.MetricDescriptor.MetricKind|null} [metricKind] ValueDescriptor metricKind
+                         * @property {string|null} [unit] ValueDescriptor unit
                          */
     
                         /**
@@ -8508,6 +8830,14 @@
                         ValueDescriptor.prototype.metricKind = 0;
     
                         /**
+                         * ValueDescriptor unit.
+                         * @member {string} unit
+                         * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
+                         * @instance
+                         */
+                        ValueDescriptor.prototype.unit = "";
+    
+                        /**
                          * Creates a new ValueDescriptor instance using the specified properties.
                          * @function create
                          * @memberof google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor
@@ -8537,6 +8867,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.valueType);
                             if (message.metricKind != null && Object.hasOwnProperty.call(message, "metricKind"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.metricKind);
+                            if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.unit);
                             return writer;
                         };
     
@@ -8579,6 +8911,9 @@
                                     break;
                                 case 3:
                                     message.metricKind = reader.int32();
+                                    break;
+                                case 4:
+                                    message.unit = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8641,6 +8976,9 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.unit != null && message.hasOwnProperty("unit"))
+                                if (!$util.isString(message.unit))
+                                    return "unit: string expected";
                             return null;
                         };
     
@@ -8706,6 +9044,8 @@
                                 message.metricKind = 3;
                                 break;
                             }
+                            if (object.unit != null)
+                                message.unit = String(object.unit);
                             return message;
                         };
     
@@ -8726,6 +9066,7 @@
                                 object.key = "";
                                 object.valueType = options.enums === String ? "VALUE_TYPE_UNSPECIFIED" : 0;
                                 object.metricKind = options.enums === String ? "METRIC_KIND_UNSPECIFIED" : 0;
+                                object.unit = "";
                             }
                             if (message.key != null && message.hasOwnProperty("key"))
                                 object.key = message.key;
@@ -8733,6 +9074,8 @@
                                 object.valueType = options.enums === String ? $root.google.api.MetricDescriptor.ValueType[message.valueType] : message.valueType;
                             if (message.metricKind != null && message.hasOwnProperty("metricKind"))
                                 object.metricKind = options.enums === String ? $root.google.api.MetricDescriptor.MetricKind[message.metricKind] : message.metricKind;
+                            if (message.unit != null && message.hasOwnProperty("unit"))
+                                object.unit = message.unit;
                             return object;
                         };
     
@@ -12283,6 +12626,7 @@
                      * @property {string|null} [filter] ListTimeSeriesRequest filter
                      * @property {google.monitoring.v3.ITimeInterval|null} [interval] ListTimeSeriesRequest interval
                      * @property {google.monitoring.v3.IAggregation|null} [aggregation] ListTimeSeriesRequest aggregation
+                     * @property {google.monitoring.v3.IAggregation|null} [secondaryAggregation] ListTimeSeriesRequest secondaryAggregation
                      * @property {string|null} [orderBy] ListTimeSeriesRequest orderBy
                      * @property {google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView|null} [view] ListTimeSeriesRequest view
                      * @property {number|null} [pageSize] ListTimeSeriesRequest pageSize
@@ -12335,6 +12679,14 @@
                      * @instance
                      */
                     ListTimeSeriesRequest.prototype.aggregation = null;
+    
+                    /**
+                     * ListTimeSeriesRequest secondaryAggregation.
+                     * @member {google.monitoring.v3.IAggregation|null|undefined} secondaryAggregation
+                     * @memberof google.monitoring.v3.ListTimeSeriesRequest
+                     * @instance
+                     */
+                    ListTimeSeriesRequest.prototype.secondaryAggregation = null;
     
                     /**
                      * ListTimeSeriesRequest orderBy.
@@ -12408,6 +12760,8 @@
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.pageToken);
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.name);
+                        if (message.secondaryAggregation != null && Object.hasOwnProperty.call(message, "secondaryAggregation"))
+                            $root.google.monitoring.v3.Aggregation.encode(message.secondaryAggregation, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         return writer;
                     };
     
@@ -12453,6 +12807,9 @@
                                 break;
                             case 5:
                                 message.aggregation = $root.google.monitoring.v3.Aggregation.decode(reader, reader.uint32());
+                                break;
+                            case 11:
+                                message.secondaryAggregation = $root.google.monitoring.v3.Aggregation.decode(reader, reader.uint32());
                                 break;
                             case 6:
                                 message.orderBy = reader.string();
@@ -12517,6 +12874,11 @@
                             if (error)
                                 return "aggregation." + error;
                         }
+                        if (message.secondaryAggregation != null && message.hasOwnProperty("secondaryAggregation")) {
+                            var error = $root.google.monitoring.v3.Aggregation.verify(message.secondaryAggregation);
+                            if (error)
+                                return "secondaryAggregation." + error;
+                        }
                         if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                             if (!$util.isString(message.orderBy))
                                 return "orderBy: string expected";
@@ -12563,6 +12925,11 @@
                                 throw TypeError(".google.monitoring.v3.ListTimeSeriesRequest.aggregation: object expected");
                             message.aggregation = $root.google.monitoring.v3.Aggregation.fromObject(object.aggregation);
                         }
+                        if (object.secondaryAggregation != null) {
+                            if (typeof object.secondaryAggregation !== "object")
+                                throw TypeError(".google.monitoring.v3.ListTimeSeriesRequest.secondaryAggregation: object expected");
+                            message.secondaryAggregation = $root.google.monitoring.v3.Aggregation.fromObject(object.secondaryAggregation);
+                        }
                         if (object.orderBy != null)
                             message.orderBy = String(object.orderBy);
                         switch (object.view) {
@@ -12604,6 +12971,7 @@
                             object.pageSize = 0;
                             object.pageToken = "";
                             object.name = "";
+                            object.secondaryAggregation = null;
                         }
                         if (message.filter != null && message.hasOwnProperty("filter"))
                             object.filter = message.filter;
@@ -12621,6 +12989,8 @@
                             object.pageToken = message.pageToken;
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.secondaryAggregation != null && message.hasOwnProperty("secondaryAggregation"))
+                            object.secondaryAggregation = $root.google.monitoring.v3.Aggregation.toObject(message.secondaryAggregation, options);
                         return object;
                     };
     
@@ -12661,6 +13031,7 @@
                      * @property {Array.<google.monitoring.v3.ITimeSeries>|null} [timeSeries] ListTimeSeriesResponse timeSeries
                      * @property {string|null} [nextPageToken] ListTimeSeriesResponse nextPageToken
                      * @property {Array.<google.rpc.IStatus>|null} [executionErrors] ListTimeSeriesResponse executionErrors
+                     * @property {string|null} [unit] ListTimeSeriesResponse unit
                      */
     
                     /**
@@ -12705,6 +13076,14 @@
                     ListTimeSeriesResponse.prototype.executionErrors = $util.emptyArray;
     
                     /**
+                     * ListTimeSeriesResponse unit.
+                     * @member {string} unit
+                     * @memberof google.monitoring.v3.ListTimeSeriesResponse
+                     * @instance
+                     */
+                    ListTimeSeriesResponse.prototype.unit = "";
+    
+                    /**
                      * Creates a new ListTimeSeriesResponse instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.ListTimeSeriesResponse
@@ -12736,6 +13115,8 @@
                         if (message.executionErrors != null && message.executionErrors.length)
                             for (var i = 0; i < message.executionErrors.length; ++i)
                                 $root.google.rpc.Status.encode(message.executionErrors[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.unit);
                         return writer;
                     };
     
@@ -12782,6 +13163,9 @@
                                 if (!(message.executionErrors && message.executionErrors.length))
                                     message.executionErrors = [];
                                 message.executionErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                break;
+                            case 5:
+                                message.unit = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -12839,6 +13223,9 @@
                                     return "executionErrors." + error;
                             }
                         }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            if (!$util.isString(message.unit))
+                                return "unit: string expected";
                         return null;
                     };
     
@@ -12876,6 +13263,8 @@
                                 message.executionErrors[i] = $root.google.rpc.Status.fromObject(object.executionErrors[i]);
                             }
                         }
+                        if (object.unit != null)
+                            message.unit = String(object.unit);
                         return message;
                     };
     
@@ -12896,8 +13285,10 @@
                             object.timeSeries = [];
                             object.executionErrors = [];
                         }
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.nextPageToken = "";
+                            object.unit = "";
+                        }
                         if (message.timeSeries && message.timeSeries.length) {
                             object.timeSeries = [];
                             for (var j = 0; j < message.timeSeries.length; ++j)
@@ -12910,6 +13301,8 @@
                             for (var j = 0; j < message.executionErrors.length; ++j)
                                 object.executionErrors[j] = $root.google.rpc.Status.toObject(message.executionErrors[j], options);
                         }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            object.unit = message.unit;
                         return object;
                     };
     
@@ -15079,6 +15472,8 @@
                      * @property {Object.<string,string>|null} [userLabels] NotificationChannel userLabels
                      * @property {google.monitoring.v3.NotificationChannel.VerificationStatus|null} [verificationStatus] NotificationChannel verificationStatus
                      * @property {google.protobuf.IBoolValue|null} [enabled] NotificationChannel enabled
+                     * @property {google.monitoring.v3.IMutationRecord|null} [creationRecord] NotificationChannel creationRecord
+                     * @property {Array.<google.monitoring.v3.IMutationRecord>|null} [mutationRecords] NotificationChannel mutationRecords
                      */
     
                     /**
@@ -15092,6 +15487,7 @@
                     function NotificationChannel(properties) {
                         this.labels = {};
                         this.userLabels = {};
+                        this.mutationRecords = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -15163,6 +15559,22 @@
                     NotificationChannel.prototype.enabled = null;
     
                     /**
+                     * NotificationChannel creationRecord.
+                     * @member {google.monitoring.v3.IMutationRecord|null|undefined} creationRecord
+                     * @memberof google.monitoring.v3.NotificationChannel
+                     * @instance
+                     */
+                    NotificationChannel.prototype.creationRecord = null;
+    
+                    /**
+                     * NotificationChannel mutationRecords.
+                     * @member {Array.<google.monitoring.v3.IMutationRecord>} mutationRecords
+                     * @memberof google.monitoring.v3.NotificationChannel
+                     * @instance
+                     */
+                    NotificationChannel.prototype.mutationRecords = $util.emptyArray;
+    
+                    /**
                      * Creates a new NotificationChannel instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.NotificationChannel
@@ -15204,6 +15616,11 @@
                             writer.uint32(/* id 9, wireType 0 =*/72).int32(message.verificationStatus);
                         if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                             $root.google.protobuf.BoolValue.encode(message.enabled, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                        if (message.creationRecord != null && Object.hasOwnProperty.call(message, "creationRecord"))
+                            $root.google.monitoring.v3.MutationRecord.encode(message.creationRecord, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                        if (message.mutationRecords != null && message.mutationRecords.length)
+                            for (var i = 0; i < message.mutationRecords.length; ++i)
+                                $root.google.monitoring.v3.MutationRecord.encode(message.mutationRecords[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                         return writer;
                     };
     
@@ -15300,6 +15717,14 @@
                             case 11:
                                 message.enabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                 break;
+                            case 12:
+                                message.creationRecord = $root.google.monitoring.v3.MutationRecord.decode(reader, reader.uint32());
+                                break;
+                            case 13:
+                                if (!(message.mutationRecords && message.mutationRecords.length))
+                                    message.mutationRecords = [];
+                                message.mutationRecords.push($root.google.monitoring.v3.MutationRecord.decode(reader, reader.uint32()));
+                                break;
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -15377,6 +15802,20 @@
                             if (error)
                                 return "enabled." + error;
                         }
+                        if (message.creationRecord != null && message.hasOwnProperty("creationRecord")) {
+                            var error = $root.google.monitoring.v3.MutationRecord.verify(message.creationRecord);
+                            if (error)
+                                return "creationRecord." + error;
+                        }
+                        if (message.mutationRecords != null && message.hasOwnProperty("mutationRecords")) {
+                            if (!Array.isArray(message.mutationRecords))
+                                return "mutationRecords: array expected";
+                            for (var i = 0; i < message.mutationRecords.length; ++i) {
+                                var error = $root.google.monitoring.v3.MutationRecord.verify(message.mutationRecords[i]);
+                                if (error)
+                                    return "mutationRecords." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -15433,6 +15872,21 @@
                                 throw TypeError(".google.monitoring.v3.NotificationChannel.enabled: object expected");
                             message.enabled = $root.google.protobuf.BoolValue.fromObject(object.enabled);
                         }
+                        if (object.creationRecord != null) {
+                            if (typeof object.creationRecord !== "object")
+                                throw TypeError(".google.monitoring.v3.NotificationChannel.creationRecord: object expected");
+                            message.creationRecord = $root.google.monitoring.v3.MutationRecord.fromObject(object.creationRecord);
+                        }
+                        if (object.mutationRecords) {
+                            if (!Array.isArray(object.mutationRecords))
+                                throw TypeError(".google.monitoring.v3.NotificationChannel.mutationRecords: array expected");
+                            message.mutationRecords = [];
+                            for (var i = 0; i < object.mutationRecords.length; ++i) {
+                                if (typeof object.mutationRecords[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.NotificationChannel.mutationRecords: object expected");
+                                message.mutationRecords[i] = $root.google.monitoring.v3.MutationRecord.fromObject(object.mutationRecords[i]);
+                            }
+                        }
                         return message;
                     };
     
@@ -15449,6 +15903,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.arrays || options.defaults)
+                            object.mutationRecords = [];
                         if (options.objects || options.defaults) {
                             object.labels = {};
                             object.userLabels = {};
@@ -15460,6 +15916,7 @@
                             object.name = "";
                             object.verificationStatus = options.enums === String ? "VERIFICATION_STATUS_UNSPECIFIED" : 0;
                             object.enabled = null;
+                            object.creationRecord = null;
                         }
                         if (message.type != null && message.hasOwnProperty("type"))
                             object.type = message.type;
@@ -15484,6 +15941,13 @@
                             object.verificationStatus = options.enums === String ? $root.google.monitoring.v3.NotificationChannel.VerificationStatus[message.verificationStatus] : message.verificationStatus;
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             object.enabled = $root.google.protobuf.BoolValue.toObject(message.enabled, options);
+                        if (message.creationRecord != null && message.hasOwnProperty("creationRecord"))
+                            object.creationRecord = $root.google.monitoring.v3.MutationRecord.toObject(message.creationRecord, options);
+                        if (message.mutationRecords && message.mutationRecords.length) {
+                            object.mutationRecords = [];
+                            for (var j = 0; j < message.mutationRecords.length; ++j)
+                                object.mutationRecords[j] = $root.google.monitoring.v3.MutationRecord.toObject(message.mutationRecords[j], options);
+                        }
                         return object;
                     };
     
@@ -17031,6 +17495,7 @@
                      * @interface IListNotificationChannelsResponse
                      * @property {Array.<google.monitoring.v3.INotificationChannel>|null} [notificationChannels] ListNotificationChannelsResponse notificationChannels
                      * @property {string|null} [nextPageToken] ListNotificationChannelsResponse nextPageToken
+                     * @property {number|null} [totalSize] ListNotificationChannelsResponse totalSize
                      */
     
                     /**
@@ -17066,6 +17531,14 @@
                     ListNotificationChannelsResponse.prototype.nextPageToken = "";
     
                     /**
+                     * ListNotificationChannelsResponse totalSize.
+                     * @member {number} totalSize
+                     * @memberof google.monitoring.v3.ListNotificationChannelsResponse
+                     * @instance
+                     */
+                    ListNotificationChannelsResponse.prototype.totalSize = 0;
+    
+                    /**
                      * Creates a new ListNotificationChannelsResponse instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.ListNotificationChannelsResponse
@@ -17094,6 +17567,8 @@
                         if (message.notificationChannels != null && message.notificationChannels.length)
                             for (var i = 0; i < message.notificationChannels.length; ++i)
                                 $root.google.monitoring.v3.NotificationChannel.encode(message.notificationChannels[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.totalSize);
                         return writer;
                     };
     
@@ -17135,6 +17610,9 @@
                                 break;
                             case 2:
                                 message.nextPageToken = reader.string();
+                                break;
+                            case 4:
+                                message.totalSize = reader.int32();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -17183,6 +17661,9 @@
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             if (!$util.isString(message.nextPageToken))
                                 return "nextPageToken: string expected";
+                        if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                            if (!$util.isInteger(message.totalSize))
+                                return "totalSize: integer expected";
                         return null;
                     };
     
@@ -17210,6 +17691,8 @@
                         }
                         if (object.nextPageToken != null)
                             message.nextPageToken = String(object.nextPageToken);
+                        if (object.totalSize != null)
+                            message.totalSize = object.totalSize | 0;
                         return message;
                     };
     
@@ -17228,8 +17711,10 @@
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.notificationChannels = [];
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.nextPageToken = "";
+                            object.totalSize = 0;
+                        }
                         if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
                         if (message.notificationChannels && message.notificationChannels.length) {
@@ -17237,6 +17722,8 @@
                             for (var j = 0; j < message.notificationChannels.length; ++j)
                                 object.notificationChannels[j] = $root.google.monitoring.v3.NotificationChannel.toObject(message.notificationChannels[j], options);
                         }
+                        if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                            object.totalSize = message.totalSize;
                         return object;
                     };
     
@@ -18698,6 +19185,74 @@
                     return VerifyNotificationChannelRequest;
                 })();
     
+                v3.QueryService = (function() {
+    
+                    /**
+                     * Constructs a new QueryService service.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a QueryService
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function QueryService(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (QueryService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = QueryService;
+    
+                    /**
+                     * Creates new QueryService service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.monitoring.v3.QueryService
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {QueryService} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    QueryService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.QueryService#queryTimeSeries}.
+                     * @memberof google.monitoring.v3.QueryService
+                     * @typedef QueryTimeSeriesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.QueryTimeSeriesResponse} [response] QueryTimeSeriesResponse
+                     */
+    
+                    /**
+                     * Calls QueryTimeSeries.
+                     * @function queryTimeSeries
+                     * @memberof google.monitoring.v3.QueryService
+                     * @instance
+                     * @param {google.monitoring.v3.IQueryTimeSeriesRequest} request QueryTimeSeriesRequest message or plain object
+                     * @param {google.monitoring.v3.QueryService.QueryTimeSeriesCallback} callback Node-style callback called with the error, if any, and QueryTimeSeriesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(QueryService.prototype.queryTimeSeries = function queryTimeSeries(request, callback) {
+                        return this.rpcCall(queryTimeSeries, $root.google.monitoring.v3.QueryTimeSeriesRequest, $root.google.monitoring.v3.QueryTimeSeriesResponse, request, callback);
+                    }, "name", { value: "QueryTimeSeries" });
+    
+                    /**
+                     * Calls QueryTimeSeries.
+                     * @function queryTimeSeries
+                     * @memberof google.monitoring.v3.QueryService
+                     * @instance
+                     * @param {google.monitoring.v3.IQueryTimeSeriesRequest} request QueryTimeSeriesRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.QueryTimeSeriesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return QueryService;
+                })();
+    
                 v3.Service = (function() {
     
                     /**
@@ -18711,6 +19266,7 @@
                      * @property {google.monitoring.v3.Service.ICloudEndpoints|null} [cloudEndpoints] Service cloudEndpoints
                      * @property {google.monitoring.v3.Service.IClusterIstio|null} [clusterIstio] Service clusterIstio
                      * @property {google.monitoring.v3.Service.IMeshIstio|null} [meshIstio] Service meshIstio
+                     * @property {google.monitoring.v3.Service.IIstioCanonicalService|null} [istioCanonicalService] Service istioCanonicalService
                      * @property {google.monitoring.v3.Service.ITelemetry|null} [telemetry] Service telemetry
                      */
     
@@ -18786,6 +19342,14 @@
                     Service.prototype.meshIstio = null;
     
                     /**
+                     * Service istioCanonicalService.
+                     * @member {google.monitoring.v3.Service.IIstioCanonicalService|null|undefined} istioCanonicalService
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.istioCanonicalService = null;
+    
+                    /**
                      * Service telemetry.
                      * @member {google.monitoring.v3.Service.ITelemetry|null|undefined} telemetry
                      * @memberof google.monitoring.v3.Service
@@ -18798,12 +19362,12 @@
     
                     /**
                      * Service identifier.
-                     * @member {"custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|undefined} identifier
+                     * @member {"custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|"istioCanonicalService"|undefined} identifier
                      * @memberof google.monitoring.v3.Service
                      * @instance
                      */
                     Object.defineProperty(Service.prototype, "identifier", {
-                        get: $util.oneOfGetter($oneOfFields = ["custom", "appEngine", "cloudEndpoints", "clusterIstio", "meshIstio"]),
+                        get: $util.oneOfGetter($oneOfFields = ["custom", "appEngine", "cloudEndpoints", "clusterIstio", "meshIstio", "istioCanonicalService"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -18845,6 +19409,8 @@
                             $root.google.monitoring.v3.Service.ClusterIstio.encode(message.clusterIstio, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                         if (message.meshIstio != null && Object.hasOwnProperty.call(message, "meshIstio"))
                             $root.google.monitoring.v3.Service.MeshIstio.encode(message.meshIstio, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.istioCanonicalService != null && Object.hasOwnProperty.call(message, "istioCanonicalService"))
+                            $root.google.monitoring.v3.Service.IstioCanonicalService.encode(message.istioCanonicalService, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         if (message.telemetry != null && Object.hasOwnProperty.call(message, "telemetry"))
                             $root.google.monitoring.v3.Service.Telemetry.encode(message.telemetry, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                         return writer;
@@ -18901,6 +19467,9 @@
                                 break;
                             case 10:
                                 message.meshIstio = $root.google.monitoring.v3.Service.MeshIstio.decode(reader, reader.uint32());
+                                break;
+                            case 11:
+                                message.istioCanonicalService = $root.google.monitoring.v3.Service.IstioCanonicalService.decode(reader, reader.uint32());
                                 break;
                             case 13:
                                 message.telemetry = $root.google.monitoring.v3.Service.Telemetry.decode(reader, reader.uint32());
@@ -18995,6 +19564,16 @@
                                     return "meshIstio." + error;
                             }
                         }
+                        if (message.istioCanonicalService != null && message.hasOwnProperty("istioCanonicalService")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.IstioCanonicalService.verify(message.istioCanonicalService);
+                                if (error)
+                                    return "istioCanonicalService." + error;
+                            }
+                        }
                         if (message.telemetry != null && message.hasOwnProperty("telemetry")) {
                             var error = $root.google.monitoring.v3.Service.Telemetry.verify(message.telemetry);
                             if (error)
@@ -19043,6 +19622,11 @@
                             if (typeof object.meshIstio !== "object")
                                 throw TypeError(".google.monitoring.v3.Service.meshIstio: object expected");
                             message.meshIstio = $root.google.monitoring.v3.Service.MeshIstio.fromObject(object.meshIstio);
+                        }
+                        if (object.istioCanonicalService != null) {
+                            if (typeof object.istioCanonicalService !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.istioCanonicalService: object expected");
+                            message.istioCanonicalService = $root.google.monitoring.v3.Service.IstioCanonicalService.fromObject(object.istioCanonicalService);
                         }
                         if (object.telemetry != null) {
                             if (typeof object.telemetry !== "object")
@@ -19098,6 +19682,11 @@
                             object.meshIstio = $root.google.monitoring.v3.Service.MeshIstio.toObject(message.meshIstio, options);
                             if (options.oneofs)
                                 object.identifier = "meshIstio";
+                        }
+                        if (message.istioCanonicalService != null && message.hasOwnProperty("istioCanonicalService")) {
+                            object.istioCanonicalService = $root.google.monitoring.v3.Service.IstioCanonicalService.toObject(message.istioCanonicalService, options);
+                            if (options.oneofs)
+                                object.identifier = "istioCanonicalService";
                         }
                         if (message.telemetry != null && message.hasOwnProperty("telemetry"))
                             object.telemetry = $root.google.monitoring.v3.Service.Telemetry.toObject(message.telemetry, options);
@@ -20133,6 +20722,238 @@
                         };
     
                         return MeshIstio;
+                    })();
+    
+                    Service.IstioCanonicalService = (function() {
+    
+                        /**
+                         * Properties of an IstioCanonicalService.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IIstioCanonicalService
+                         * @property {string|null} [meshUid] IstioCanonicalService meshUid
+                         * @property {string|null} [canonicalServiceNamespace] IstioCanonicalService canonicalServiceNamespace
+                         * @property {string|null} [canonicalService] IstioCanonicalService canonicalService
+                         */
+    
+                        /**
+                         * Constructs a new IstioCanonicalService.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents an IstioCanonicalService.
+                         * @implements IIstioCanonicalService
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IIstioCanonicalService=} [properties] Properties to set
+                         */
+                        function IstioCanonicalService(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IstioCanonicalService meshUid.
+                         * @member {string} meshUid
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @instance
+                         */
+                        IstioCanonicalService.prototype.meshUid = "";
+    
+                        /**
+                         * IstioCanonicalService canonicalServiceNamespace.
+                         * @member {string} canonicalServiceNamespace
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @instance
+                         */
+                        IstioCanonicalService.prototype.canonicalServiceNamespace = "";
+    
+                        /**
+                         * IstioCanonicalService canonicalService.
+                         * @member {string} canonicalService
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @instance
+                         */
+                        IstioCanonicalService.prototype.canonicalService = "";
+    
+                        /**
+                         * Creates a new IstioCanonicalService instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IIstioCanonicalService=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.IstioCanonicalService} IstioCanonicalService instance
+                         */
+                        IstioCanonicalService.create = function create(properties) {
+                            return new IstioCanonicalService(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IstioCanonicalService message. Does not implicitly {@link google.monitoring.v3.Service.IstioCanonicalService.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IIstioCanonicalService} message IstioCanonicalService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IstioCanonicalService.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.meshUid != null && Object.hasOwnProperty.call(message, "meshUid"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.meshUid);
+                            if (message.canonicalServiceNamespace != null && Object.hasOwnProperty.call(message, "canonicalServiceNamespace"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.canonicalServiceNamespace);
+                            if (message.canonicalService != null && Object.hasOwnProperty.call(message, "canonicalService"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.canonicalService);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IstioCanonicalService message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.IstioCanonicalService.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IIstioCanonicalService} message IstioCanonicalService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IstioCanonicalService.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IstioCanonicalService message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.IstioCanonicalService} IstioCanonicalService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IstioCanonicalService.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.IstioCanonicalService();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.meshUid = reader.string();
+                                    break;
+                                case 3:
+                                    message.canonicalServiceNamespace = reader.string();
+                                    break;
+                                case 4:
+                                    message.canonicalService = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IstioCanonicalService message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.IstioCanonicalService} IstioCanonicalService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IstioCanonicalService.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IstioCanonicalService message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IstioCanonicalService.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.meshUid != null && message.hasOwnProperty("meshUid"))
+                                if (!$util.isString(message.meshUid))
+                                    return "meshUid: string expected";
+                            if (message.canonicalServiceNamespace != null && message.hasOwnProperty("canonicalServiceNamespace"))
+                                if (!$util.isString(message.canonicalServiceNamespace))
+                                    return "canonicalServiceNamespace: string expected";
+                            if (message.canonicalService != null && message.hasOwnProperty("canonicalService"))
+                                if (!$util.isString(message.canonicalService))
+                                    return "canonicalService: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IstioCanonicalService message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.IstioCanonicalService} IstioCanonicalService
+                         */
+                        IstioCanonicalService.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.IstioCanonicalService)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.IstioCanonicalService();
+                            if (object.meshUid != null)
+                                message.meshUid = String(object.meshUid);
+                            if (object.canonicalServiceNamespace != null)
+                                message.canonicalServiceNamespace = String(object.canonicalServiceNamespace);
+                            if (object.canonicalService != null)
+                                message.canonicalService = String(object.canonicalService);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IstioCanonicalService message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @static
+                         * @param {google.monitoring.v3.Service.IstioCanonicalService} message IstioCanonicalService
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IstioCanonicalService.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.meshUid = "";
+                                object.canonicalServiceNamespace = "";
+                                object.canonicalService = "";
+                            }
+                            if (message.meshUid != null && message.hasOwnProperty("meshUid"))
+                                object.meshUid = message.meshUid;
+                            if (message.canonicalServiceNamespace != null && message.hasOwnProperty("canonicalServiceNamespace"))
+                                object.canonicalServiceNamespace = message.canonicalServiceNamespace;
+                            if (message.canonicalService != null && message.hasOwnProperty("canonicalService"))
+                                object.canonicalService = message.canonicalService;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IstioCanonicalService to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.IstioCanonicalService
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IstioCanonicalService.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return IstioCanonicalService;
                     })();
     
                     Service.Telemetry = (function() {
@@ -26695,6 +27516,26 @@
                     return SpanContext;
                 })();
     
+                /**
+                 * UptimeCheckRegion enum.
+                 * @name google.monitoring.v3.UptimeCheckRegion
+                 * @enum {number}
+                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
+                 * @property {number} USA=1 USA value
+                 * @property {number} EUROPE=2 EUROPE value
+                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
+                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
+                 */
+                v3.UptimeCheckRegion = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "USA"] = 1;
+                    values[valuesById[2] = "EUROPE"] = 2;
+                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
+                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
+                    return values;
+                })();
+    
                 v3.InternalChecker = (function() {
     
                     /**
@@ -27025,26 +27866,6 @@
                     })();
     
                     return InternalChecker;
-                })();
-    
-                /**
-                 * UptimeCheckRegion enum.
-                 * @name google.monitoring.v3.UptimeCheckRegion
-                 * @enum {number}
-                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
-                 * @property {number} USA=1 USA value
-                 * @property {number} EUROPE=2 EUROPE value
-                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
-                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
-                 */
-                v3.UptimeCheckRegion = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "USA"] = 1;
-                    values[valuesById[2] = "EUROPE"] = 2;
-                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
-                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
-                    return values;
                 })();
     
                 v3.UptimeCheckConfig = (function() {
@@ -31295,6 +32116,30 @@
              */
             var api = {};
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                return values;
+            })();
+    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -34656,30 +35501,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                return values;
             })();
     
             api.MonitoredResourceDescriptor = (function() {
@@ -42192,8 +43013,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -42270,20 +43091,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
                  * FieldOptions .google.api.fieldBehavior.
                  * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -42389,9 +43210,6 @@
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                             break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
                         case 1052:
                             if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                 message[".google.api.fieldBehavior"] = [];
@@ -42401,6 +43219,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -42476,11 +43297,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
-                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -42497,6 +43313,11 @@
                             case 6:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -42559,11 +43380,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -42600,6 +43416,11 @@
                                 message[".google.api.fieldBehavior"][i] = 6;
                                 break;
                             }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };

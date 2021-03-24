@@ -285,6 +285,9 @@ export namespace google {
 
                     /** Condition conditionAbsent */
                     conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
+
+                    /** Condition conditionMonitoringQueryLanguage */
+                    conditionMonitoringQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null);
                 }
 
                 /** Represents a Condition. */
@@ -308,8 +311,11 @@ export namespace google {
                     /** Condition conditionAbsent. */
                     public conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
 
+                    /** Condition conditionMonitoringQueryLanguage. */
+                    public conditionMonitoringQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null);
+
                     /** Condition condition. */
-                    public condition?: ("conditionThreshold"|"conditionAbsent");
+                    public condition?: ("conditionThreshold"|"conditionAbsent"|"conditionMonitoringQueryLanguage");
 
                     /**
                      * Creates a new Condition instance using the specified properties.
@@ -718,6 +724,108 @@ export namespace google {
 
                         /**
                          * Converts this MetricAbsence to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a MonitoringQueryLanguageCondition. */
+                    interface IMonitoringQueryLanguageCondition {
+
+                        /** MonitoringQueryLanguageCondition query */
+                        query?: (string|null);
+
+                        /** MonitoringQueryLanguageCondition duration */
+                        duration?: (google.protobuf.IDuration|null);
+
+                        /** MonitoringQueryLanguageCondition trigger */
+                        trigger?: (google.monitoring.v3.AlertPolicy.Condition.ITrigger|null);
+                    }
+
+                    /** Represents a MonitoringQueryLanguageCondition. */
+                    class MonitoringQueryLanguageCondition implements IMonitoringQueryLanguageCondition {
+
+                        /**
+                         * Constructs a new MonitoringQueryLanguageCondition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition);
+
+                        /** MonitoringQueryLanguageCondition query. */
+                        public query: string;
+
+                        /** MonitoringQueryLanguageCondition duration. */
+                        public duration?: (google.protobuf.IDuration|null);
+
+                        /** MonitoringQueryLanguageCondition trigger. */
+                        public trigger?: (google.monitoring.v3.AlertPolicy.Condition.ITrigger|null);
+
+                        /**
+                         * Creates a new MonitoringQueryLanguageCondition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MonitoringQueryLanguageCondition instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition): google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition;
+
+                        /**
+                         * Encodes the specified MonitoringQueryLanguageCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.verify|verify} messages.
+                         * @param message MonitoringQueryLanguageCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MonitoringQueryLanguageCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition.verify|verify} messages.
+                         * @param message MonitoringQueryLanguageCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MonitoringQueryLanguageCondition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MonitoringQueryLanguageCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition;
+
+                        /**
+                         * Decodes a MonitoringQueryLanguageCondition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MonitoringQueryLanguageCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition;
+
+                        /**
+                         * Verifies a MonitoringQueryLanguageCondition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MonitoringQueryLanguageCondition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MonitoringQueryLanguageCondition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition;
+
+                        /**
+                         * Creates a plain object from a MonitoringQueryLanguageCondition message. Also converts values to other types if specified.
+                         * @param message MonitoringQueryLanguageCondition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MonitoringQueryLanguageCondition to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -1649,6 +1757,9 @@ export namespace google {
 
                 /** ListAlertPoliciesResponse nextPageToken */
                 nextPageToken?: (string|null);
+
+                /** ListAlertPoliciesResponse totalSize */
+                totalSize?: (number|null);
             }
 
             /** Represents a ListAlertPoliciesResponse. */
@@ -1665,6 +1776,9 @@ export namespace google {
 
                 /** ListAlertPoliciesResponse nextPageToken. */
                 public nextPageToken: string;
+
+                /** ListAlertPoliciesResponse totalSize. */
+                public totalSize: number;
 
                 /**
                  * Creates a new ListAlertPoliciesResponse instance using the specified properties.
@@ -3212,6 +3326,9 @@ export namespace google {
 
                 /** TimeSeries points */
                 points?: (google.monitoring.v3.IPoint[]|null);
+
+                /** TimeSeries unit */
+                unit?: (string|null);
             }
 
             /** Represents a TimeSeries. */
@@ -3240,6 +3357,9 @@ export namespace google {
 
                 /** TimeSeries points. */
                 public points: google.monitoring.v3.IPoint[];
+
+                /** TimeSeries unit. */
+                public unit: string;
 
                 /**
                  * Creates a new TimeSeries instance using the specified properties.
@@ -3421,6 +3541,9 @@ export namespace google {
 
                     /** ValueDescriptor metricKind */
                     metricKind?: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind|null);
+
+                    /** ValueDescriptor unit */
+                    unit?: (string|null);
                 }
 
                 /** Represents a ValueDescriptor. */
@@ -3440,6 +3563,9 @@ export namespace google {
 
                     /** ValueDescriptor metricKind. */
                     public metricKind: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind);
+
+                    /** ValueDescriptor unit. */
+                    public unit: string;
 
                     /**
                      * Creates a new ValueDescriptor instance using the specified properties.
@@ -5103,6 +5229,9 @@ export namespace google {
                 /** ListTimeSeriesRequest aggregation */
                 aggregation?: (google.monitoring.v3.IAggregation|null);
 
+                /** ListTimeSeriesRequest secondaryAggregation */
+                secondaryAggregation?: (google.monitoring.v3.IAggregation|null);
+
                 /** ListTimeSeriesRequest orderBy */
                 orderBy?: (string|null);
 
@@ -5136,6 +5265,9 @@ export namespace google {
 
                 /** ListTimeSeriesRequest aggregation. */
                 public aggregation?: (google.monitoring.v3.IAggregation|null);
+
+                /** ListTimeSeriesRequest secondaryAggregation. */
+                public secondaryAggregation?: (google.monitoring.v3.IAggregation|null);
 
                 /** ListTimeSeriesRequest orderBy. */
                 public orderBy: string;
@@ -5240,6 +5372,9 @@ export namespace google {
 
                 /** ListTimeSeriesResponse executionErrors */
                 executionErrors?: (google.rpc.IStatus[]|null);
+
+                /** ListTimeSeriesResponse unit */
+                unit?: (string|null);
             }
 
             /** Represents a ListTimeSeriesResponse. */
@@ -5259,6 +5394,9 @@ export namespace google {
 
                 /** ListTimeSeriesResponse executionErrors. */
                 public executionErrors: google.rpc.IStatus[];
+
+                /** ListTimeSeriesResponse unit. */
+                public unit: string;
 
                 /**
                  * Creates a new ListTimeSeriesResponse instance using the specified properties.
@@ -6188,6 +6326,12 @@ export namespace google {
 
                 /** NotificationChannel enabled */
                 enabled?: (google.protobuf.IBoolValue|null);
+
+                /** NotificationChannel creationRecord */
+                creationRecord?: (google.monitoring.v3.IMutationRecord|null);
+
+                /** NotificationChannel mutationRecords */
+                mutationRecords?: (google.monitoring.v3.IMutationRecord[]|null);
             }
 
             /** Represents a NotificationChannel. */
@@ -6222,6 +6366,12 @@ export namespace google {
 
                 /** NotificationChannel enabled. */
                 public enabled?: (google.protobuf.IBoolValue|null);
+
+                /** NotificationChannel creationRecord. */
+                public creationRecord?: (google.monitoring.v3.IMutationRecord|null);
+
+                /** NotificationChannel mutationRecords. */
+                public mutationRecords: google.monitoring.v3.IMutationRecord[];
 
                 /**
                  * Creates a new NotificationChannel instance using the specified properties.
@@ -7044,6 +7194,9 @@ export namespace google {
 
                 /** ListNotificationChannelsResponse nextPageToken */
                 nextPageToken?: (string|null);
+
+                /** ListNotificationChannelsResponse totalSize */
+                totalSize?: (number|null);
             }
 
             /** Represents a ListNotificationChannelsResponse. */
@@ -7060,6 +7213,9 @@ export namespace google {
 
                 /** ListNotificationChannelsResponse nextPageToken. */
                 public nextPageToken: string;
+
+                /** ListNotificationChannelsResponse totalSize. */
+                public totalSize: number;
 
                 /**
                  * Creates a new ListNotificationChannelsResponse instance using the specified properties.
@@ -7792,6 +7948,51 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Represents a QueryService */
+            class QueryService extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new QueryService service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Creates new QueryService service using the specified rpc implementation.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 * @returns RPC service. Useful where requests and/or responses are streamed.
+                 */
+                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): QueryService;
+
+                /**
+                 * Calls QueryTimeSeries.
+                 * @param request QueryTimeSeriesRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryTimeSeriesResponse
+                 */
+                public queryTimeSeries(request: google.monitoring.v3.IQueryTimeSeriesRequest, callback: google.monitoring.v3.QueryService.QueryTimeSeriesCallback): void;
+
+                /**
+                 * Calls QueryTimeSeries.
+                 * @param request QueryTimeSeriesRequest message or plain object
+                 * @returns Promise
+                 */
+                public queryTimeSeries(request: google.monitoring.v3.IQueryTimeSeriesRequest): Promise<google.monitoring.v3.QueryTimeSeriesResponse>;
+            }
+
+            namespace QueryService {
+
+                /**
+                 * Callback as used by {@link google.monitoring.v3.QueryService#queryTimeSeries}.
+                 * @param error Error, if any
+                 * @param [response] QueryTimeSeriesResponse
+                 */
+                type QueryTimeSeriesCallback = (error: (Error|null), response?: google.monitoring.v3.QueryTimeSeriesResponse) => void;
+            }
+
             /** Properties of a Service. */
             interface IService {
 
@@ -7815,6 +8016,9 @@ export namespace google {
 
                 /** Service meshIstio */
                 meshIstio?: (google.monitoring.v3.Service.IMeshIstio|null);
+
+                /** Service istioCanonicalService */
+                istioCanonicalService?: (google.monitoring.v3.Service.IIstioCanonicalService|null);
 
                 /** Service telemetry */
                 telemetry?: (google.monitoring.v3.Service.ITelemetry|null);
@@ -7850,11 +8054,14 @@ export namespace google {
                 /** Service meshIstio. */
                 public meshIstio?: (google.monitoring.v3.Service.IMeshIstio|null);
 
+                /** Service istioCanonicalService. */
+                public istioCanonicalService?: (google.monitoring.v3.Service.IIstioCanonicalService|null);
+
                 /** Service telemetry. */
                 public telemetry?: (google.monitoring.v3.Service.ITelemetry|null);
 
                 /** Service identifier. */
-                public identifier?: ("custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio");
+                public identifier?: ("custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|"istioCanonicalService");
 
                 /**
                  * Creates a new Service instance using the specified properties.
@@ -8398,6 +8605,108 @@ export namespace google {
 
                     /**
                      * Converts this MeshIstio to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an IstioCanonicalService. */
+                interface IIstioCanonicalService {
+
+                    /** IstioCanonicalService meshUid */
+                    meshUid?: (string|null);
+
+                    /** IstioCanonicalService canonicalServiceNamespace */
+                    canonicalServiceNamespace?: (string|null);
+
+                    /** IstioCanonicalService canonicalService */
+                    canonicalService?: (string|null);
+                }
+
+                /** Represents an IstioCanonicalService. */
+                class IstioCanonicalService implements IIstioCanonicalService {
+
+                    /**
+                     * Constructs a new IstioCanonicalService.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Service.IIstioCanonicalService);
+
+                    /** IstioCanonicalService meshUid. */
+                    public meshUid: string;
+
+                    /** IstioCanonicalService canonicalServiceNamespace. */
+                    public canonicalServiceNamespace: string;
+
+                    /** IstioCanonicalService canonicalService. */
+                    public canonicalService: string;
+
+                    /**
+                     * Creates a new IstioCanonicalService instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IstioCanonicalService instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Service.IIstioCanonicalService): google.monitoring.v3.Service.IstioCanonicalService;
+
+                    /**
+                     * Encodes the specified IstioCanonicalService message. Does not implicitly {@link google.monitoring.v3.Service.IstioCanonicalService.verify|verify} messages.
+                     * @param message IstioCanonicalService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Service.IIstioCanonicalService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IstioCanonicalService message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.IstioCanonicalService.verify|verify} messages.
+                     * @param message IstioCanonicalService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Service.IIstioCanonicalService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IstioCanonicalService message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IstioCanonicalService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Service.IstioCanonicalService;
+
+                    /**
+                     * Decodes an IstioCanonicalService message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IstioCanonicalService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Service.IstioCanonicalService;
+
+                    /**
+                     * Verifies an IstioCanonicalService message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IstioCanonicalService message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IstioCanonicalService
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Service.IstioCanonicalService;
+
+                    /**
+                     * Creates a plain object from an IstioCanonicalService message. Also converts values to other types if specified.
+                     * @param message IstioCanonicalService
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Service.IstioCanonicalService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IstioCanonicalService to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -11240,6 +11549,15 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** UptimeCheckRegion enum. */
+            enum UptimeCheckRegion {
+                REGION_UNSPECIFIED = 0,
+                USA = 1,
+                EUROPE = 2,
+                SOUTH_AMERICA = 3,
+                ASIA_PACIFIC = 4
+            }
+
             /** Properties of an InternalChecker. */
             interface IInternalChecker {
 
@@ -11368,15 +11686,6 @@ export namespace google {
                     CREATING = 1,
                     RUNNING = 2
                 }
-            }
-
-            /** UptimeCheckRegion enum. */
-            enum UptimeCheckRegion {
-                REGION_UNSPECIFIED = 0,
-                USA = 1,
-                EUROPE = 2,
-                SOUTH_AMERICA = 3,
-                ASIA_PACIFIC = 4
             }
 
             /** Properties of an UptimeCheckConfig. */
@@ -13126,6 +13435,17 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6
+        }
+
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -14430,17 +14750,6 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6
         }
 
         /** Properties of a MonitoredResourceDescriptor. */
@@ -17113,11 +17422,11 @@ export namespace google {
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */

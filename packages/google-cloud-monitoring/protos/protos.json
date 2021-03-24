@@ -13,8 +13,8 @@
                 "java_package": "com.google.monitoring.v3",
                 "php_namespace": "Google\\Cloud\\Monitoring\\V3",
                 "ruby_package": "Google::Cloud::Monitoring::V3",
-                "(google.api.resource_definition).type": "monitoring.googleapis.com/MonitoredResourceDescriptor",
-                "(google.api.resource_definition).pattern": "*",
+                "(google.api.resource_definition).type": "monitoring.googleapis.com/TimeSeries",
+                "(google.api.resource_definition).pattern": "folders/{folder}/timeSeries/{time_series}",
                 "(google.api.resource_definition).history": "ORIGINALLY_SINGLE_PATTERN"
               },
               "nested": {
@@ -94,7 +94,8 @@
                         "condition": {
                           "oneof": [
                             "conditionThreshold",
-                            "conditionAbsent"
+                            "conditionAbsent",
+                            "conditionMonitoringQueryLanguage"
                           ]
                         }
                       },
@@ -114,6 +115,10 @@
                         "conditionAbsent": {
                           "type": "MetricAbsence",
                           "id": 2
+                        },
+                        "conditionMonitoringQueryLanguage": {
+                          "type": "MonitoringQueryLanguageCondition",
+                          "id": 19
                         }
                       },
                       "nested": {
@@ -141,7 +146,10 @@
                           "fields": {
                             "filter": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "aggregations": {
                               "rule": "repeated",
@@ -179,12 +187,31 @@
                           "fields": {
                             "filter": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "aggregations": {
                               "rule": "repeated",
                               "type": "Aggregation",
                               "id": 5
+                            },
+                            "duration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            },
+                            "trigger": {
+                              "type": "Trigger",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "MonitoringQueryLanguageCondition": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1
                             },
                             "duration": {
                               "type": "google.protobuf.Duration",
@@ -523,6 +550,10 @@
                     "nextPageToken": {
                       "type": "string",
                       "id": 2
+                    },
+                    "totalSize": {
+                      "type": "int32",
+                      "id": 4
                     }
                   }
                 },
@@ -922,6 +953,10 @@
                       "rule": "repeated",
                       "type": "Point",
                       "id": 5
+                    },
+                    "unit": {
+                      "type": "string",
+                      "id": 8
                     }
                   }
                 },
@@ -952,6 +987,10 @@
                         "metricKind": {
                           "type": "google.api.MetricDescriptor.MetricKind",
                           "id": 3
+                        },
+                        "unit": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     }
@@ -1182,12 +1221,21 @@
                       "responseType": "ListTimeSeriesResponse",
                       "options": {
                         "(google.api.http).get": "/v3/{name=projects/*}/timeSeries",
+                        "(google.api.http).additional_bindings.get": "/v3/{name=folders/*}/timeSeries",
                         "(google.api.method_signature)": "name,filter,interval,view"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
-                            "get": "/v3/{name=projects/*}/timeSeries"
+                            "get": "/v3/{name=projects/*}/timeSeries",
+                            "additional_bindings": [
+                              {
+                                "get": "/v3/{name=organizations/*}/timeSeries"
+                              },
+                              {
+                                "get": "/v3/{name=folders/*}/timeSeries"
+                              }
+                            ]
                           }
                         },
                         {
@@ -1353,7 +1401,7 @@
                       "id": 10,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/TimeSeries"
                       }
                     },
                     "filter": {
@@ -1373,6 +1421,10 @@
                     "aggregation": {
                       "type": "Aggregation",
                       "id": 5
+                    },
+                    "secondaryAggregation": {
+                      "type": "Aggregation",
+                      "id": 11
                     },
                     "orderBy": {
                       "type": "string",
@@ -1418,6 +1470,10 @@
                       "rule": "repeated",
                       "type": "google.rpc.Status",
                       "id": 3
+                    },
+                    "unit": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 },
@@ -1625,6 +1681,15 @@
                     "enabled": {
                       "type": "google.protobuf.BoolValue",
                       "id": 11
+                    },
+                    "creationRecord": {
+                      "type": "MutationRecord",
+                      "id": 12
+                    },
+                    "mutationRecords": {
+                      "rule": "repeated",
+                      "type": "MutationRecord",
+                      "id": 13
                     }
                   },
                   "nested": {
@@ -1937,6 +2002,10 @@
                     "nextPageToken": {
                       "type": "string",
                       "id": 2
+                    },
+                    "totalSize": {
+                      "type": "int32",
+                      "id": 4
                     }
                   }
                 },
@@ -2042,6 +2111,30 @@
                     }
                   }
                 },
+                "QueryService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
+                  "methods": {
+                    "QueryTimeSeries": {
+                      "requestType": "QueryTimeSeriesRequest",
+                      "responseType": "QueryTimeSeriesResponse",
+                      "options": {
+                        "(google.api.http).post": "/v3/{name=projects/*}/timeSeries:query",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3/{name=projects/*}/timeSeries:query",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
                 "Service": {
                   "options": {
                     "(google.api.resource).type": "monitoring.googleapis.com/Service",
@@ -2054,7 +2147,8 @@
                         "appEngine",
                         "cloudEndpoints",
                         "clusterIstio",
-                        "meshIstio"
+                        "meshIstio",
+                        "istioCanonicalService"
                       ]
                     }
                   },
@@ -2081,14 +2175,15 @@
                     },
                     "clusterIstio": {
                       "type": "ClusterIstio",
-                      "id": 9,
-                      "options": {
-                        "deprecated": true
-                      }
+                      "id": 9
                     },
                     "meshIstio": {
                       "type": "MeshIstio",
                       "id": 10
+                    },
+                    "istioCanonicalService": {
+                      "type": "IstioCanonicalService",
+                      "id": 11
                     },
                     "telemetry": {
                       "type": "Telemetry",
@@ -2116,9 +2211,6 @@
                       }
                     },
                     "ClusterIstio": {
-                      "options": {
-                        "deprecated": true
-                      },
                       "fields": {
                         "location": {
                           "type": "string",
@@ -2149,6 +2241,22 @@
                           "id": 3
                         },
                         "serviceName": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "IstioCanonicalService": {
+                      "fields": {
+                        "meshUid": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "canonicalServiceNamespace": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "canonicalService": {
                           "type": "string",
                           "id": 4
                         }
@@ -2829,6 +2937,15 @@
                     }
                   }
                 },
+                "UptimeCheckRegion": {
+                  "values": {
+                    "REGION_UNSPECIFIED": 0,
+                    "USA": 1,
+                    "EUROPE": 2,
+                    "SOUTH_AMERICA": 3,
+                    "ASIA_PACIFIC": 4
+                  }
+                },
                 "InternalChecker": {
                   "options": {
                     "deprecated": true
@@ -2867,15 +2984,6 @@
                         "RUNNING": 2
                       }
                     }
-                  }
-                },
-                "UptimeCheckRegion": {
-                  "values": {
-                    "REGION_UNSPECIFIED": 0,
-                    "USA": 1,
-                    "EUROPE": 2,
-                    "SOUTH_AMERICA": 3,
-                    "ASIA_PACIFIC": 4
                   }
                 },
                 "UptimeCheckConfig": {
@@ -3339,14 +3447,31 @@
         },
         "api": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/metric;metric",
             "java_multiple_files": true,
             "java_outer_classname": "MetricProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -3659,23 +3784,6 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
-              }
             },
             "MonitoredResourceDescriptor": {
               "fields": {

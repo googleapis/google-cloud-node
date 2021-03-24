@@ -21,6 +21,7 @@ import {
   GroupServiceClient,
   MetricServiceClient,
   NotificationChannelServiceClient,
+  QueryServiceClient,
   ServiceMonitoringServiceClient,
   UptimeCheckServiceClient,
 } from '@google-cloud/monitoring';
@@ -38,6 +39,9 @@ function doStuffWithMetricServiceClient(client: MetricServiceClient) {
 function doStuffWithNotificationChannelServiceClient(
   client: NotificationChannelServiceClient
 ) {
+  client.close();
+}
+function doStuffWithQueryServiceClient(client: QueryServiceClient) {
   client.close();
 }
 function doStuffWithServiceMonitoringServiceClient(
@@ -62,6 +66,9 @@ function main() {
   // check that the client instance can be created
   const notificationChannelServiceClient = new NotificationChannelServiceClient();
   doStuffWithNotificationChannelServiceClient(notificationChannelServiceClient);
+  // check that the client instance can be created
+  const queryServiceClient = new QueryServiceClient();
+  doStuffWithQueryServiceClient(queryServiceClient);
   // check that the client instance can be created
   const serviceMonitoringServiceClient = new ServiceMonitoringServiceClient();
   doStuffWithServiceMonitoringServiceClient(serviceMonitoringServiceClient);

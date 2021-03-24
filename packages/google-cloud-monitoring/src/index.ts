@@ -26,6 +26,8 @@ const MetricServiceClient = v3.MetricServiceClient;
 type MetricServiceClient = v3.MetricServiceClient;
 const NotificationChannelServiceClient = v3.NotificationChannelServiceClient;
 type NotificationChannelServiceClient = v3.NotificationChannelServiceClient;
+const QueryServiceClient = v3.QueryServiceClient;
+type QueryServiceClient = v3.QueryServiceClient;
 const ServiceMonitoringServiceClient = v3.ServiceMonitoringServiceClient;
 type ServiceMonitoringServiceClient = v3.ServiceMonitoringServiceClient;
 const UptimeCheckServiceClient = v3.UptimeCheckServiceClient;
@@ -37,6 +39,7 @@ export {
   GroupServiceClient,
   MetricServiceClient,
   NotificationChannelServiceClient,
+  QueryServiceClient,
   ServiceMonitoringServiceClient,
   UptimeCheckServiceClient,
 };
@@ -46,6 +49,7 @@ export default {
   GroupServiceClient,
   MetricServiceClient,
   NotificationChannelServiceClient,
+  QueryServiceClient,
   ServiceMonitoringServiceClient,
   UptimeCheckServiceClient,
 };

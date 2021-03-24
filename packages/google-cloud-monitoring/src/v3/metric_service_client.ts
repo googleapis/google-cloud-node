@@ -257,6 +257,9 @@ export class MetricServiceClient {
       projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
       ),
+      projectTimeSeriesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/timeSeries/{time_series}'
+      ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
@@ -1430,9 +1433,12 @@ export class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
+   *   Required. The project, organization or folder on which to execute the request. The
+   *   format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
+   *       organizations/[ORGANIZATION_ID]
+   *       folders/[FOLDER_ID]
    * @param {string} request.filter
    *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
    *   that specifies which time series should be returned.  The filter must
@@ -1451,6 +1457,9 @@ export class MetricServiceClient {
    *
    *   By default (if no `aggregation` is explicitly specified), the raw time
    *   series data is returned.
+   * @param {google.monitoring.v3.Aggregation} request.secondaryAggregation
+   *   Apply a second aggregation after `aggregation` is applied. May only be
+   *   specified if `aggregation` is specified.
    * @param {string} request.orderBy
    *   Unsupported: must be left blank. The points in each time series are
    *   currently returned in reverse time order (most recent to oldest).
@@ -1527,9 +1536,12 @@ export class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
+   *   Required. The project, organization or folder on which to execute the request. The
+   *   format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
+   *       organizations/[ORGANIZATION_ID]
+   *       folders/[FOLDER_ID]
    * @param {string} request.filter
    *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
    *   that specifies which time series should be returned.  The filter must
@@ -1548,6 +1560,9 @@ export class MetricServiceClient {
    *
    *   By default (if no `aggregation` is explicitly specified), the raw time
    *   series data is returned.
+   * @param {google.monitoring.v3.Aggregation} request.secondaryAggregation
+   *   Apply a second aggregation after `aggregation` is applied. May only be
+   *   specified if `aggregation` is specified.
    * @param {string} request.orderBy
    *   Unsupported: must be left blank. The points in each time series are
    *   currently returned in reverse time order (most recent to oldest).
@@ -1604,9 +1619,12 @@ export class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
+   *   Required. The project, organization or folder on which to execute the request. The
+   *   format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
+   *       organizations/[ORGANIZATION_ID]
+   *       folders/[FOLDER_ID]
    * @param {string} request.filter
    *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
    *   that specifies which time series should be returned.  The filter must
@@ -1625,6 +1643,9 @@ export class MetricServiceClient {
    *
    *   By default (if no `aggregation` is explicitly specified), the raw time
    *   series data is returned.
+   * @param {google.monitoring.v3.Aggregation} request.secondaryAggregation
+   *   Apply a second aggregation after `aggregation` is applied. May only be
+   *   specified if `aggregation` is specified.
    * @param {string} request.orderBy
    *   Unsupported: must be left blank. The points in each time series are
    *   currently returned in reverse time order (most recent to oldest).
@@ -3106,6 +3127,46 @@ export class MetricServiceClient {
     return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
       projectServiceServiceLevelObjectiveName
     ).service_level_objective;
+  }
+
+  /**
+   * Return a fully-qualified projectTimeSeries resource name string.
+   *
+   * @param {string} project
+   * @param {string} time_series
+   * @returns {string} Resource name string.
+   */
+  projectTimeSeriesPath(project: string, timeSeries: string) {
+    return this.pathTemplates.projectTimeSeriesPathTemplate.render({
+      project: project,
+      time_series: timeSeries,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectTimeSeries resource.
+   *
+   * @param {string} projectTimeSeriesName
+   *   A fully-qualified path representing project_time_series resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectTimeSeriesName(projectTimeSeriesName: string) {
+    return this.pathTemplates.projectTimeSeriesPathTemplate.match(
+      projectTimeSeriesName
+    ).project;
+  }
+
+  /**
+   * Parse the time_series from ProjectTimeSeries resource.
+   *
+   * @param {string} projectTimeSeriesName
+   *   A fully-qualified path representing project_time_series resource.
+   * @returns {string} A string representing the time_series.
+   */
+  matchTimeSeriesFromProjectTimeSeriesName(projectTimeSeriesName: string) {
+    return this.pathTemplates.projectTimeSeriesPathTemplate.match(
+      projectTimeSeriesName
+    ).time_series;
   }
 
   /**

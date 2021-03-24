@@ -383,6 +383,34 @@
         }
       }
     },
+    "QueryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "QueryServiceClient",
+          "rpcs": {
+            "QueryTimeSeries": {
+              "methods": [
+                "queryTimeSeries",
+                "queryTimeSeriesStream",
+                "queryTimeSeriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "QueryServiceClient",
+          "rpcs": {
+            "QueryTimeSeries": {
+              "methods": [
+                "queryTimeSeries",
+                "queryTimeSeriesStream",
+                "queryTimeSeriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ServiceMonitoringService": {
       "clients": {
         "grpc": {
