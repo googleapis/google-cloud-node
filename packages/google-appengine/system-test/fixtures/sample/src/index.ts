@@ -25,7 +25,7 @@ import {
   InstancesClient,
   ServicesClient,
   VersionsClient,
-} from '@google-cloud/appengine';
+} from '@google-cloud/appengine-admin';
 
 // check that the client class type name can be used
 function doStuffWithApplicationsClient(client: ApplicationsClient) {

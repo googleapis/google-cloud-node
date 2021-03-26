@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const appengine = require('@google-cloud/appengine');
+const appengine = require('@google-cloud/appengine-admin');
 
 function main() {
   const applicationsClient = new appengine.ApplicationsClient();

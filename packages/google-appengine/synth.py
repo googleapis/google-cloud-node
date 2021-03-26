@@ -30,7 +30,7 @@ for version in versions:
   name, 
   version,
   bazel_target=f"//google/appengine/{version}:appengine-{version}-nodejs")
-  s.copy(library, excludes=["package.json","linkinator.config.json", "system-test/fixtures/sample/src/index.js","system-test/fixtures/sample/src/index.ts"])
+  s.copy(library, excludes=["package.json"])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
