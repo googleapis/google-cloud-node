@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.2.0...v2.3.0) (2021-03-24)
+
+
+### Features
+
+* Added support for Monitoring Query Language: https://cloud.google.com/monitoring/mql feat: Added support for units in the MetricService feat: Added total_size to the response of ListAlertPolicies. fix: Un-deprecated cluster_istio for service monitoring. feat: Added IstioCanonicalService for service monitoring. feat: Added creation and mutation records to notification channels. feat: Added support for querying metrics for folders and organizations. fix: Extended the default deadline for UpdateGroup to 180s. feat: Added support for secondary aggregation when querying metrics. ([#523](https://www.github.com/googleapis/nodejs-monitoring/issues/523)) ([cab3fdb](https://www.github.com/googleapis/nodejs-monitoring/commit/cab3fdb02c41149ae40e3a28987bb7ffeed050ac))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.1.5...v2.2.0) (2021-01-09)
 
 
