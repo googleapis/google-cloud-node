@@ -23,6 +23,2961 @@ export namespace google {
         /** Namespace metastore. */
         namespace metastore {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents a DataprocMetastore */
+                class DataprocMetastore extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataprocMetastore service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataprocMetastore service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataprocMetastore;
+
+                    /**
+                     * Calls ListServices.
+                     * @param request ListServicesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListServicesResponse
+                     */
+                    public listServices(request: google.cloud.metastore.v1.IListServicesRequest, callback: google.cloud.metastore.v1.DataprocMetastore.ListServicesCallback): void;
+
+                    /**
+                     * Calls ListServices.
+                     * @param request ListServicesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listServices(request: google.cloud.metastore.v1.IListServicesRequest): Promise<google.cloud.metastore.v1.ListServicesResponse>;
+
+                    /**
+                     * Calls GetService.
+                     * @param request GetServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Service
+                     */
+                    public getService(request: google.cloud.metastore.v1.IGetServiceRequest, callback: google.cloud.metastore.v1.DataprocMetastore.GetServiceCallback): void;
+
+                    /**
+                     * Calls GetService.
+                     * @param request GetServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getService(request: google.cloud.metastore.v1.IGetServiceRequest): Promise<google.cloud.metastore.v1.Service>;
+
+                    /**
+                     * Calls CreateService.
+                     * @param request CreateServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createService(request: google.cloud.metastore.v1.ICreateServiceRequest, callback: google.cloud.metastore.v1.DataprocMetastore.CreateServiceCallback): void;
+
+                    /**
+                     * Calls CreateService.
+                     * @param request CreateServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createService(request: google.cloud.metastore.v1.ICreateServiceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateService.
+                     * @param request UpdateServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateService(request: google.cloud.metastore.v1.IUpdateServiceRequest, callback: google.cloud.metastore.v1.DataprocMetastore.UpdateServiceCallback): void;
+
+                    /**
+                     * Calls UpdateService.
+                     * @param request UpdateServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateService(request: google.cloud.metastore.v1.IUpdateServiceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteService.
+                     * @param request DeleteServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteService(request: google.cloud.metastore.v1.IDeleteServiceRequest, callback: google.cloud.metastore.v1.DataprocMetastore.DeleteServiceCallback): void;
+
+                    /**
+                     * Calls DeleteService.
+                     * @param request DeleteServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteService(request: google.cloud.metastore.v1.IDeleteServiceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListMetadataImports.
+                     * @param request ListMetadataImportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMetadataImportsResponse
+                     */
+                    public listMetadataImports(request: google.cloud.metastore.v1.IListMetadataImportsRequest, callback: google.cloud.metastore.v1.DataprocMetastore.ListMetadataImportsCallback): void;
+
+                    /**
+                     * Calls ListMetadataImports.
+                     * @param request ListMetadataImportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMetadataImports(request: google.cloud.metastore.v1.IListMetadataImportsRequest): Promise<google.cloud.metastore.v1.ListMetadataImportsResponse>;
+
+                    /**
+                     * Calls GetMetadataImport.
+                     * @param request GetMetadataImportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MetadataImport
+                     */
+                    public getMetadataImport(request: google.cloud.metastore.v1.IGetMetadataImportRequest, callback: google.cloud.metastore.v1.DataprocMetastore.GetMetadataImportCallback): void;
+
+                    /**
+                     * Calls GetMetadataImport.
+                     * @param request GetMetadataImportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMetadataImport(request: google.cloud.metastore.v1.IGetMetadataImportRequest): Promise<google.cloud.metastore.v1.MetadataImport>;
+
+                    /**
+                     * Calls CreateMetadataImport.
+                     * @param request CreateMetadataImportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMetadataImport(request: google.cloud.metastore.v1.ICreateMetadataImportRequest, callback: google.cloud.metastore.v1.DataprocMetastore.CreateMetadataImportCallback): void;
+
+                    /**
+                     * Calls CreateMetadataImport.
+                     * @param request CreateMetadataImportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMetadataImport(request: google.cloud.metastore.v1.ICreateMetadataImportRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateMetadataImport.
+                     * @param request UpdateMetadataImportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateMetadataImport(request: google.cloud.metastore.v1.IUpdateMetadataImportRequest, callback: google.cloud.metastore.v1.DataprocMetastore.UpdateMetadataImportCallback): void;
+
+                    /**
+                     * Calls UpdateMetadataImport.
+                     * @param request UpdateMetadataImportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMetadataImport(request: google.cloud.metastore.v1.IUpdateMetadataImportRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportMetadata.
+                     * @param request ExportMetadataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportMetadata(request: google.cloud.metastore.v1.IExportMetadataRequest, callback: google.cloud.metastore.v1.DataprocMetastore.ExportMetadataCallback): void;
+
+                    /**
+                     * Calls ExportMetadata.
+                     * @param request ExportMetadataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportMetadata(request: google.cloud.metastore.v1.IExportMetadataRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace DataprocMetastore {
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#listServices}.
+                     * @param error Error, if any
+                     * @param [response] ListServicesResponse
+                     */
+                    type ListServicesCallback = (error: (Error|null), response?: google.cloud.metastore.v1.ListServicesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#getService}.
+                     * @param error Error, if any
+                     * @param [response] Service
+                     */
+                    type GetServiceCallback = (error: (Error|null), response?: google.cloud.metastore.v1.Service) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#createService}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#updateService}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#deleteService}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#listMetadataImports}.
+                     * @param error Error, if any
+                     * @param [response] ListMetadataImportsResponse
+                     */
+                    type ListMetadataImportsCallback = (error: (Error|null), response?: google.cloud.metastore.v1.ListMetadataImportsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#getMetadataImport}.
+                     * @param error Error, if any
+                     * @param [response] MetadataImport
+                     */
+                    type GetMetadataImportCallback = (error: (Error|null), response?: google.cloud.metastore.v1.MetadataImport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#createMetadataImport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMetadataImportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#updateMetadataImport}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateMetadataImportCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#exportMetadata}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportMetadataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a Service. */
+                interface IService {
+
+                    /** Service hiveMetastoreConfig */
+                    hiveMetastoreConfig?: (google.cloud.metastore.v1.IHiveMetastoreConfig|null);
+
+                    /** Service name */
+                    name?: (string|null);
+
+                    /** Service createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Service updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Service labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Service network */
+                    network?: (string|null);
+
+                    /** Service endpointUri */
+                    endpointUri?: (string|null);
+
+                    /** Service port */
+                    port?: (number|null);
+
+                    /** Service state */
+                    state?: (google.cloud.metastore.v1.Service.State|keyof typeof google.cloud.metastore.v1.Service.State|null);
+
+                    /** Service stateMessage */
+                    stateMessage?: (string|null);
+
+                    /** Service artifactGcsUri */
+                    artifactGcsUri?: (string|null);
+
+                    /** Service tier */
+                    tier?: (google.cloud.metastore.v1.Service.Tier|keyof typeof google.cloud.metastore.v1.Service.Tier|null);
+
+                    /** Service maintenanceWindow */
+                    maintenanceWindow?: (google.cloud.metastore.v1.IMaintenanceWindow|null);
+
+                    /** Service uid */
+                    uid?: (string|null);
+
+                    /** Service metadataManagementActivity */
+                    metadataManagementActivity?: (google.cloud.metastore.v1.IMetadataManagementActivity|null);
+
+                    /** Service releaseChannel */
+                    releaseChannel?: (google.cloud.metastore.v1.Service.ReleaseChannel|keyof typeof google.cloud.metastore.v1.Service.ReleaseChannel|null);
+                }
+
+                /** Represents a Service. */
+                class Service implements IService {
+
+                    /**
+                     * Constructs a new Service.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IService);
+
+                    /** Service hiveMetastoreConfig. */
+                    public hiveMetastoreConfig?: (google.cloud.metastore.v1.IHiveMetastoreConfig|null);
+
+                    /** Service name. */
+                    public name: string;
+
+                    /** Service createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Service updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Service labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Service network. */
+                    public network: string;
+
+                    /** Service endpointUri. */
+                    public endpointUri: string;
+
+                    /** Service port. */
+                    public port: number;
+
+                    /** Service state. */
+                    public state: (google.cloud.metastore.v1.Service.State|keyof typeof google.cloud.metastore.v1.Service.State);
+
+                    /** Service stateMessage. */
+                    public stateMessage: string;
+
+                    /** Service artifactGcsUri. */
+                    public artifactGcsUri: string;
+
+                    /** Service tier. */
+                    public tier: (google.cloud.metastore.v1.Service.Tier|keyof typeof google.cloud.metastore.v1.Service.Tier);
+
+                    /** Service maintenanceWindow. */
+                    public maintenanceWindow?: (google.cloud.metastore.v1.IMaintenanceWindow|null);
+
+                    /** Service uid. */
+                    public uid: string;
+
+                    /** Service metadataManagementActivity. */
+                    public metadataManagementActivity?: (google.cloud.metastore.v1.IMetadataManagementActivity|null);
+
+                    /** Service releaseChannel. */
+                    public releaseChannel: (google.cloud.metastore.v1.Service.ReleaseChannel|keyof typeof google.cloud.metastore.v1.Service.ReleaseChannel);
+
+                    /** Service metastoreConfig. */
+                    public metastoreConfig?: "hiveMetastoreConfig";
+
+                    /**
+                     * Creates a new Service instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Service instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IService): google.cloud.metastore.v1.Service;
+
+                    /**
+                     * Encodes the specified Service message. Does not implicitly {@link google.cloud.metastore.v1.Service.verify|verify} messages.
+                     * @param message Service message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Service message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.Service.verify|verify} messages.
+                     * @param message Service message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Service message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.Service;
+
+                    /**
+                     * Decodes a Service message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.Service;
+
+                    /**
+                     * Verifies a Service message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Service
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.Service;
+
+                    /**
+                     * Creates a plain object from a Service message. Also converts values to other types if specified.
+                     * @param message Service
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.Service, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Service to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Service {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        SUSPENDING = 3,
+                        SUSPENDED = 4,
+                        UPDATING = 5,
+                        DELETING = 6,
+                        ERROR = 7
+                    }
+
+                    /** Tier enum. */
+                    enum Tier {
+                        TIER_UNSPECIFIED = 0,
+                        DEVELOPER = 1,
+                        ENTERPRISE = 3
+                    }
+
+                    /** ReleaseChannel enum. */
+                    enum ReleaseChannel {
+                        RELEASE_CHANNEL_UNSPECIFIED = 0,
+                        CANARY = 1,
+                        STABLE = 2
+                    }
+                }
+
+                /** Properties of a MaintenanceWindow. */
+                interface IMaintenanceWindow {
+
+                    /** MaintenanceWindow hourOfDay */
+                    hourOfDay?: (google.protobuf.IInt32Value|null);
+
+                    /** MaintenanceWindow dayOfWeek */
+                    dayOfWeek?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+                }
+
+                /** Represents a MaintenanceWindow. */
+                class MaintenanceWindow implements IMaintenanceWindow {
+
+                    /**
+                     * Constructs a new MaintenanceWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IMaintenanceWindow);
+
+                    /** MaintenanceWindow hourOfDay. */
+                    public hourOfDay?: (google.protobuf.IInt32Value|null);
+
+                    /** MaintenanceWindow dayOfWeek. */
+                    public dayOfWeek: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                    /**
+                     * Creates a new MaintenanceWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceWindow instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IMaintenanceWindow): google.cloud.metastore.v1.MaintenanceWindow;
+
+                    /**
+                     * Encodes the specified MaintenanceWindow message. Does not implicitly {@link google.cloud.metastore.v1.MaintenanceWindow.verify|verify} messages.
+                     * @param message MaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.MaintenanceWindow.verify|verify} messages.
+                     * @param message MaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.MaintenanceWindow;
+
+                    /**
+                     * Decodes a MaintenanceWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.MaintenanceWindow;
+
+                    /**
+                     * Verifies a MaintenanceWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.MaintenanceWindow;
+
+                    /**
+                     * Creates a plain object from a MaintenanceWindow message. Also converts values to other types if specified.
+                     * @param message MaintenanceWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.MaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a HiveMetastoreConfig. */
+                interface IHiveMetastoreConfig {
+
+                    /** HiveMetastoreConfig version */
+                    version?: (string|null);
+
+                    /** HiveMetastoreConfig configOverrides */
+                    configOverrides?: ({ [k: string]: string }|null);
+
+                    /** HiveMetastoreConfig kerberosConfig */
+                    kerberosConfig?: (google.cloud.metastore.v1.IKerberosConfig|null);
+                }
+
+                /** Represents a HiveMetastoreConfig. */
+                class HiveMetastoreConfig implements IHiveMetastoreConfig {
+
+                    /**
+                     * Constructs a new HiveMetastoreConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IHiveMetastoreConfig);
+
+                    /** HiveMetastoreConfig version. */
+                    public version: string;
+
+                    /** HiveMetastoreConfig configOverrides. */
+                    public configOverrides: { [k: string]: string };
+
+                    /** HiveMetastoreConfig kerberosConfig. */
+                    public kerberosConfig?: (google.cloud.metastore.v1.IKerberosConfig|null);
+
+                    /**
+                     * Creates a new HiveMetastoreConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HiveMetastoreConfig instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IHiveMetastoreConfig): google.cloud.metastore.v1.HiveMetastoreConfig;
+
+                    /**
+                     * Encodes the specified HiveMetastoreConfig message. Does not implicitly {@link google.cloud.metastore.v1.HiveMetastoreConfig.verify|verify} messages.
+                     * @param message HiveMetastoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IHiveMetastoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HiveMetastoreConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.HiveMetastoreConfig.verify|verify} messages.
+                     * @param message HiveMetastoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IHiveMetastoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HiveMetastoreConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HiveMetastoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.HiveMetastoreConfig;
+
+                    /**
+                     * Decodes a HiveMetastoreConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HiveMetastoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.HiveMetastoreConfig;
+
+                    /**
+                     * Verifies a HiveMetastoreConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HiveMetastoreConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HiveMetastoreConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.HiveMetastoreConfig;
+
+                    /**
+                     * Creates a plain object from a HiveMetastoreConfig message. Also converts values to other types if specified.
+                     * @param message HiveMetastoreConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.HiveMetastoreConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HiveMetastoreConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a KerberosConfig. */
+                interface IKerberosConfig {
+
+                    /** KerberosConfig keytab */
+                    keytab?: (google.cloud.metastore.v1.ISecret|null);
+
+                    /** KerberosConfig principal */
+                    principal?: (string|null);
+
+                    /** KerberosConfig krb5ConfigGcsUri */
+                    krb5ConfigGcsUri?: (string|null);
+                }
+
+                /** Represents a KerberosConfig. */
+                class KerberosConfig implements IKerberosConfig {
+
+                    /**
+                     * Constructs a new KerberosConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IKerberosConfig);
+
+                    /** KerberosConfig keytab. */
+                    public keytab?: (google.cloud.metastore.v1.ISecret|null);
+
+                    /** KerberosConfig principal. */
+                    public principal: string;
+
+                    /** KerberosConfig krb5ConfigGcsUri. */
+                    public krb5ConfigGcsUri: string;
+
+                    /**
+                     * Creates a new KerberosConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KerberosConfig instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IKerberosConfig): google.cloud.metastore.v1.KerberosConfig;
+
+                    /**
+                     * Encodes the specified KerberosConfig message. Does not implicitly {@link google.cloud.metastore.v1.KerberosConfig.verify|verify} messages.
+                     * @param message KerberosConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IKerberosConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KerberosConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.KerberosConfig.verify|verify} messages.
+                     * @param message KerberosConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IKerberosConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KerberosConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KerberosConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.KerberosConfig;
+
+                    /**
+                     * Decodes a KerberosConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KerberosConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.KerberosConfig;
+
+                    /**
+                     * Verifies a KerberosConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KerberosConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KerberosConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.KerberosConfig;
+
+                    /**
+                     * Creates a plain object from a KerberosConfig message. Also converts values to other types if specified.
+                     * @param message KerberosConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.KerberosConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KerberosConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Secret. */
+                interface ISecret {
+
+                    /** Secret cloudSecret */
+                    cloudSecret?: (string|null);
+                }
+
+                /** Represents a Secret. */
+                class Secret implements ISecret {
+
+                    /**
+                     * Constructs a new Secret.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.ISecret);
+
+                    /** Secret cloudSecret. */
+                    public cloudSecret: string;
+
+                    /** Secret value. */
+                    public value?: "cloudSecret";
+
+                    /**
+                     * Creates a new Secret instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Secret instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.ISecret): google.cloud.metastore.v1.Secret;
+
+                    /**
+                     * Encodes the specified Secret message. Does not implicitly {@link google.cloud.metastore.v1.Secret.verify|verify} messages.
+                     * @param message Secret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.ISecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Secret message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.Secret.verify|verify} messages.
+                     * @param message Secret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.ISecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Secret message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Secret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.Secret;
+
+                    /**
+                     * Decodes a Secret message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Secret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.Secret;
+
+                    /**
+                     * Verifies a Secret message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Secret message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Secret
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.Secret;
+
+                    /**
+                     * Creates a plain object from a Secret message. Also converts values to other types if specified.
+                     * @param message Secret
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.Secret, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Secret to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetadataManagementActivity. */
+                interface IMetadataManagementActivity {
+
+                    /** MetadataManagementActivity metadataExports */
+                    metadataExports?: (google.cloud.metastore.v1.IMetadataExport[]|null);
+                }
+
+                /** Represents a MetadataManagementActivity. */
+                class MetadataManagementActivity implements IMetadataManagementActivity {
+
+                    /**
+                     * Constructs a new MetadataManagementActivity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IMetadataManagementActivity);
+
+                    /** MetadataManagementActivity metadataExports. */
+                    public metadataExports: google.cloud.metastore.v1.IMetadataExport[];
+
+                    /**
+                     * Creates a new MetadataManagementActivity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetadataManagementActivity instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IMetadataManagementActivity): google.cloud.metastore.v1.MetadataManagementActivity;
+
+                    /**
+                     * Encodes the specified MetadataManagementActivity message. Does not implicitly {@link google.cloud.metastore.v1.MetadataManagementActivity.verify|verify} messages.
+                     * @param message MetadataManagementActivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IMetadataManagementActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetadataManagementActivity message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.MetadataManagementActivity.verify|verify} messages.
+                     * @param message MetadataManagementActivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IMetadataManagementActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetadataManagementActivity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetadataManagementActivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.MetadataManagementActivity;
+
+                    /**
+                     * Decodes a MetadataManagementActivity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetadataManagementActivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.MetadataManagementActivity;
+
+                    /**
+                     * Verifies a MetadataManagementActivity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetadataManagementActivity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetadataManagementActivity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.MetadataManagementActivity;
+
+                    /**
+                     * Creates a plain object from a MetadataManagementActivity message. Also converts values to other types if specified.
+                     * @param message MetadataManagementActivity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.MetadataManagementActivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetadataManagementActivity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetadataImport. */
+                interface IMetadataImport {
+
+                    /** MetadataImport databaseDump */
+                    databaseDump?: (google.cloud.metastore.v1.MetadataImport.IDatabaseDump|null);
+
+                    /** MetadataImport name */
+                    name?: (string|null);
+
+                    /** MetadataImport description */
+                    description?: (string|null);
+
+                    /** MetadataImport createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataImport updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataImport state */
+                    state?: (google.cloud.metastore.v1.MetadataImport.State|keyof typeof google.cloud.metastore.v1.MetadataImport.State|null);
+                }
+
+                /** Represents a MetadataImport. */
+                class MetadataImport implements IMetadataImport {
+
+                    /**
+                     * Constructs a new MetadataImport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IMetadataImport);
+
+                    /** MetadataImport databaseDump. */
+                    public databaseDump?: (google.cloud.metastore.v1.MetadataImport.IDatabaseDump|null);
+
+                    /** MetadataImport name. */
+                    public name: string;
+
+                    /** MetadataImport description. */
+                    public description: string;
+
+                    /** MetadataImport createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataImport updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataImport state. */
+                    public state: (google.cloud.metastore.v1.MetadataImport.State|keyof typeof google.cloud.metastore.v1.MetadataImport.State);
+
+                    /** MetadataImport metadata. */
+                    public metadata?: "databaseDump";
+
+                    /**
+                     * Creates a new MetadataImport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetadataImport instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IMetadataImport): google.cloud.metastore.v1.MetadataImport;
+
+                    /**
+                     * Encodes the specified MetadataImport message. Does not implicitly {@link google.cloud.metastore.v1.MetadataImport.verify|verify} messages.
+                     * @param message MetadataImport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IMetadataImport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetadataImport message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.MetadataImport.verify|verify} messages.
+                     * @param message MetadataImport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IMetadataImport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetadataImport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetadataImport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.MetadataImport;
+
+                    /**
+                     * Decodes a MetadataImport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetadataImport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.MetadataImport;
+
+                    /**
+                     * Verifies a MetadataImport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetadataImport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetadataImport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.MetadataImport;
+
+                    /**
+                     * Creates a plain object from a MetadataImport message. Also converts values to other types if specified.
+                     * @param message MetadataImport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.MetadataImport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetadataImport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace MetadataImport {
+
+                    /** Properties of a DatabaseDump. */
+                    interface IDatabaseDump {
+
+                        /** DatabaseDump databaseType */
+                        databaseType?: (google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType|keyof typeof google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType|null);
+
+                        /** DatabaseDump gcsUri */
+                        gcsUri?: (string|null);
+
+                        /** DatabaseDump type */
+                        type?: (google.cloud.metastore.v1.DatabaseDumpSpec.Type|keyof typeof google.cloud.metastore.v1.DatabaseDumpSpec.Type|null);
+                    }
+
+                    /** Represents a DatabaseDump. */
+                    class DatabaseDump implements IDatabaseDump {
+
+                        /**
+                         * Constructs a new DatabaseDump.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.metastore.v1.MetadataImport.IDatabaseDump);
+
+                        /** DatabaseDump databaseType. */
+                        public databaseType: (google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType|keyof typeof google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType);
+
+                        /** DatabaseDump gcsUri. */
+                        public gcsUri: string;
+
+                        /** DatabaseDump type. */
+                        public type: (google.cloud.metastore.v1.DatabaseDumpSpec.Type|keyof typeof google.cloud.metastore.v1.DatabaseDumpSpec.Type);
+
+                        /**
+                         * Creates a new DatabaseDump instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DatabaseDump instance
+                         */
+                        public static create(properties?: google.cloud.metastore.v1.MetadataImport.IDatabaseDump): google.cloud.metastore.v1.MetadataImport.DatabaseDump;
+
+                        /**
+                         * Encodes the specified DatabaseDump message. Does not implicitly {@link google.cloud.metastore.v1.MetadataImport.DatabaseDump.verify|verify} messages.
+                         * @param message DatabaseDump message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.metastore.v1.MetadataImport.IDatabaseDump, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DatabaseDump message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.MetadataImport.DatabaseDump.verify|verify} messages.
+                         * @param message DatabaseDump message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.metastore.v1.MetadataImport.IDatabaseDump, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DatabaseDump message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DatabaseDump
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.MetadataImport.DatabaseDump;
+
+                        /**
+                         * Decodes a DatabaseDump message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DatabaseDump
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.MetadataImport.DatabaseDump;
+
+                        /**
+                         * Verifies a DatabaseDump message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DatabaseDump message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DatabaseDump
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.MetadataImport.DatabaseDump;
+
+                        /**
+                         * Creates a plain object from a DatabaseDump message. Also converts values to other types if specified.
+                         * @param message DatabaseDump
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.metastore.v1.MetadataImport.DatabaseDump, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DatabaseDump to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace DatabaseDump {
+
+                        /** DatabaseType enum. */
+                        enum DatabaseType {
+                            DATABASE_TYPE_UNSPECIFIED = 0,
+                            MYSQL = 1
+                        }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        UPDATING = 3,
+                        FAILED = 4
+                    }
+                }
+
+                /** Properties of a MetadataExport. */
+                interface IMetadataExport {
+
+                    /** MetadataExport destinationGcsUri */
+                    destinationGcsUri?: (string|null);
+
+                    /** MetadataExport startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataExport endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataExport state */
+                    state?: (google.cloud.metastore.v1.MetadataExport.State|keyof typeof google.cloud.metastore.v1.MetadataExport.State|null);
+
+                    /** MetadataExport databaseDumpType */
+                    databaseDumpType?: (google.cloud.metastore.v1.DatabaseDumpSpec.Type|keyof typeof google.cloud.metastore.v1.DatabaseDumpSpec.Type|null);
+                }
+
+                /** Represents a MetadataExport. */
+                class MetadataExport implements IMetadataExport {
+
+                    /**
+                     * Constructs a new MetadataExport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IMetadataExport);
+
+                    /** MetadataExport destinationGcsUri. */
+                    public destinationGcsUri: string;
+
+                    /** MetadataExport startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataExport endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataExport state. */
+                    public state: (google.cloud.metastore.v1.MetadataExport.State|keyof typeof google.cloud.metastore.v1.MetadataExport.State);
+
+                    /** MetadataExport databaseDumpType. */
+                    public databaseDumpType: (google.cloud.metastore.v1.DatabaseDumpSpec.Type|keyof typeof google.cloud.metastore.v1.DatabaseDumpSpec.Type);
+
+                    /** MetadataExport destination. */
+                    public destination?: "destinationGcsUri";
+
+                    /**
+                     * Creates a new MetadataExport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetadataExport instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IMetadataExport): google.cloud.metastore.v1.MetadataExport;
+
+                    /**
+                     * Encodes the specified MetadataExport message. Does not implicitly {@link google.cloud.metastore.v1.MetadataExport.verify|verify} messages.
+                     * @param message MetadataExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IMetadataExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetadataExport message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.MetadataExport.verify|verify} messages.
+                     * @param message MetadataExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IMetadataExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetadataExport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetadataExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.MetadataExport;
+
+                    /**
+                     * Decodes a MetadataExport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetadataExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.MetadataExport;
+
+                    /**
+                     * Verifies a MetadataExport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetadataExport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetadataExport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.MetadataExport;
+
+                    /**
+                     * Creates a plain object from a MetadataExport message. Also converts values to other types if specified.
+                     * @param message MetadataExport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.MetadataExport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetadataExport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace MetadataExport {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        CANCELLED = 4
+                    }
+                }
+
+                /** Properties of a ListServicesRequest. */
+                interface IListServicesRequest {
+
+                    /** ListServicesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListServicesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListServicesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListServicesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListServicesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListServicesRequest. */
+                class ListServicesRequest implements IListServicesRequest {
+
+                    /**
+                     * Constructs a new ListServicesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IListServicesRequest);
+
+                    /** ListServicesRequest parent. */
+                    public parent: string;
+
+                    /** ListServicesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListServicesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListServicesRequest filter. */
+                    public filter: string;
+
+                    /** ListServicesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListServicesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServicesRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IListServicesRequest): google.cloud.metastore.v1.ListServicesRequest;
+
+                    /**
+                     * Encodes the specified ListServicesRequest message. Does not implicitly {@link google.cloud.metastore.v1.ListServicesRequest.verify|verify} messages.
+                     * @param message ListServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IListServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServicesRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ListServicesRequest.verify|verify} messages.
+                     * @param message ListServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IListServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServicesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.ListServicesRequest;
+
+                    /**
+                     * Decodes a ListServicesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.ListServicesRequest;
+
+                    /**
+                     * Verifies a ListServicesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServicesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServicesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.ListServicesRequest;
+
+                    /**
+                     * Creates a plain object from a ListServicesRequest message. Also converts values to other types if specified.
+                     * @param message ListServicesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.ListServicesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServicesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListServicesResponse. */
+                interface IListServicesResponse {
+
+                    /** ListServicesResponse services */
+                    services?: (google.cloud.metastore.v1.IService[]|null);
+
+                    /** ListServicesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListServicesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListServicesResponse. */
+                class ListServicesResponse implements IListServicesResponse {
+
+                    /**
+                     * Constructs a new ListServicesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IListServicesResponse);
+
+                    /** ListServicesResponse services. */
+                    public services: google.cloud.metastore.v1.IService[];
+
+                    /** ListServicesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListServicesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListServicesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServicesResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IListServicesResponse): google.cloud.metastore.v1.ListServicesResponse;
+
+                    /**
+                     * Encodes the specified ListServicesResponse message. Does not implicitly {@link google.cloud.metastore.v1.ListServicesResponse.verify|verify} messages.
+                     * @param message ListServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IListServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServicesResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ListServicesResponse.verify|verify} messages.
+                     * @param message ListServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IListServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServicesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.ListServicesResponse;
+
+                    /**
+                     * Decodes a ListServicesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.ListServicesResponse;
+
+                    /**
+                     * Verifies a ListServicesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServicesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServicesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.ListServicesResponse;
+
+                    /**
+                     * Creates a plain object from a ListServicesResponse message. Also converts values to other types if specified.
+                     * @param message ListServicesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.ListServicesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServicesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetServiceRequest. */
+                interface IGetServiceRequest {
+
+                    /** GetServiceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetServiceRequest. */
+                class GetServiceRequest implements IGetServiceRequest {
+
+                    /**
+                     * Constructs a new GetServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IGetServiceRequest);
+
+                    /** GetServiceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IGetServiceRequest): google.cloud.metastore.v1.GetServiceRequest;
+
+                    /**
+                     * Encodes the specified GetServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1.GetServiceRequest.verify|verify} messages.
+                     * @param message GetServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IGetServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.GetServiceRequest.verify|verify} messages.
+                     * @param message GetServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IGetServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.GetServiceRequest;
+
+                    /**
+                     * Decodes a GetServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.GetServiceRequest;
+
+                    /**
+                     * Verifies a GetServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.GetServiceRequest;
+
+                    /**
+                     * Creates a plain object from a GetServiceRequest message. Also converts values to other types if specified.
+                     * @param message GetServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.GetServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateServiceRequest. */
+                interface ICreateServiceRequest {
+
+                    /** CreateServiceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateServiceRequest serviceId */
+                    serviceId?: (string|null);
+
+                    /** CreateServiceRequest service */
+                    service?: (google.cloud.metastore.v1.IService|null);
+
+                    /** CreateServiceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateServiceRequest. */
+                class CreateServiceRequest implements ICreateServiceRequest {
+
+                    /**
+                     * Constructs a new CreateServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.ICreateServiceRequest);
+
+                    /** CreateServiceRequest parent. */
+                    public parent: string;
+
+                    /** CreateServiceRequest serviceId. */
+                    public serviceId: string;
+
+                    /** CreateServiceRequest service. */
+                    public service?: (google.cloud.metastore.v1.IService|null);
+
+                    /** CreateServiceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.ICreateServiceRequest): google.cloud.metastore.v1.CreateServiceRequest;
+
+                    /**
+                     * Encodes the specified CreateServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1.CreateServiceRequest.verify|verify} messages.
+                     * @param message CreateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.ICreateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.CreateServiceRequest.verify|verify} messages.
+                     * @param message CreateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.ICreateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.CreateServiceRequest;
+
+                    /**
+                     * Decodes a CreateServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.CreateServiceRequest;
+
+                    /**
+                     * Verifies a CreateServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.CreateServiceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateServiceRequest message. Also converts values to other types if specified.
+                     * @param message CreateServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.CreateServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateServiceRequest. */
+                interface IUpdateServiceRequest {
+
+                    /** UpdateServiceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServiceRequest service */
+                    service?: (google.cloud.metastore.v1.IService|null);
+
+                    /** UpdateServiceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateServiceRequest. */
+                class UpdateServiceRequest implements IUpdateServiceRequest {
+
+                    /**
+                     * Constructs a new UpdateServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IUpdateServiceRequest);
+
+                    /** UpdateServiceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServiceRequest service. */
+                    public service?: (google.cloud.metastore.v1.IService|null);
+
+                    /** UpdateServiceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IUpdateServiceRequest): google.cloud.metastore.v1.UpdateServiceRequest;
+
+                    /**
+                     * Encodes the specified UpdateServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1.UpdateServiceRequest.verify|verify} messages.
+                     * @param message UpdateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IUpdateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.UpdateServiceRequest.verify|verify} messages.
+                     * @param message UpdateServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IUpdateServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.UpdateServiceRequest;
+
+                    /**
+                     * Decodes an UpdateServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.UpdateServiceRequest;
+
+                    /**
+                     * Verifies an UpdateServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.UpdateServiceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateServiceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.UpdateServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteServiceRequest. */
+                interface IDeleteServiceRequest {
+
+                    /** DeleteServiceRequest name */
+                    name?: (string|null);
+
+                    /** DeleteServiceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteServiceRequest. */
+                class DeleteServiceRequest implements IDeleteServiceRequest {
+
+                    /**
+                     * Constructs a new DeleteServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IDeleteServiceRequest);
+
+                    /** DeleteServiceRequest name. */
+                    public name: string;
+
+                    /** DeleteServiceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IDeleteServiceRequest): google.cloud.metastore.v1.DeleteServiceRequest;
+
+                    /**
+                     * Encodes the specified DeleteServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1.DeleteServiceRequest.verify|verify} messages.
+                     * @param message DeleteServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IDeleteServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.DeleteServiceRequest.verify|verify} messages.
+                     * @param message DeleteServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IDeleteServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.DeleteServiceRequest;
+
+                    /**
+                     * Decodes a DeleteServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.DeleteServiceRequest;
+
+                    /**
+                     * Verifies a DeleteServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.DeleteServiceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteServiceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.DeleteServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListMetadataImportsRequest. */
+                interface IListMetadataImportsRequest {
+
+                    /** ListMetadataImportsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMetadataImportsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMetadataImportsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMetadataImportsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListMetadataImportsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListMetadataImportsRequest. */
+                class ListMetadataImportsRequest implements IListMetadataImportsRequest {
+
+                    /**
+                     * Constructs a new ListMetadataImportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IListMetadataImportsRequest);
+
+                    /** ListMetadataImportsRequest parent. */
+                    public parent: string;
+
+                    /** ListMetadataImportsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMetadataImportsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMetadataImportsRequest filter. */
+                    public filter: string;
+
+                    /** ListMetadataImportsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListMetadataImportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMetadataImportsRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IListMetadataImportsRequest): google.cloud.metastore.v1.ListMetadataImportsRequest;
+
+                    /**
+                     * Encodes the specified ListMetadataImportsRequest message. Does not implicitly {@link google.cloud.metastore.v1.ListMetadataImportsRequest.verify|verify} messages.
+                     * @param message ListMetadataImportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IListMetadataImportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMetadataImportsRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ListMetadataImportsRequest.verify|verify} messages.
+                     * @param message ListMetadataImportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IListMetadataImportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMetadataImportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMetadataImportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.ListMetadataImportsRequest;
+
+                    /**
+                     * Decodes a ListMetadataImportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMetadataImportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.ListMetadataImportsRequest;
+
+                    /**
+                     * Verifies a ListMetadataImportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMetadataImportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMetadataImportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.ListMetadataImportsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMetadataImportsRequest message. Also converts values to other types if specified.
+                     * @param message ListMetadataImportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.ListMetadataImportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMetadataImportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListMetadataImportsResponse. */
+                interface IListMetadataImportsResponse {
+
+                    /** ListMetadataImportsResponse metadataImports */
+                    metadataImports?: (google.cloud.metastore.v1.IMetadataImport[]|null);
+
+                    /** ListMetadataImportsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMetadataImportsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMetadataImportsResponse. */
+                class ListMetadataImportsResponse implements IListMetadataImportsResponse {
+
+                    /**
+                     * Constructs a new ListMetadataImportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IListMetadataImportsResponse);
+
+                    /** ListMetadataImportsResponse metadataImports. */
+                    public metadataImports: google.cloud.metastore.v1.IMetadataImport[];
+
+                    /** ListMetadataImportsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMetadataImportsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMetadataImportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMetadataImportsResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IListMetadataImportsResponse): google.cloud.metastore.v1.ListMetadataImportsResponse;
+
+                    /**
+                     * Encodes the specified ListMetadataImportsResponse message. Does not implicitly {@link google.cloud.metastore.v1.ListMetadataImportsResponse.verify|verify} messages.
+                     * @param message ListMetadataImportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IListMetadataImportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMetadataImportsResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ListMetadataImportsResponse.verify|verify} messages.
+                     * @param message ListMetadataImportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IListMetadataImportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMetadataImportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMetadataImportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.ListMetadataImportsResponse;
+
+                    /**
+                     * Decodes a ListMetadataImportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMetadataImportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.ListMetadataImportsResponse;
+
+                    /**
+                     * Verifies a ListMetadataImportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMetadataImportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMetadataImportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.ListMetadataImportsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMetadataImportsResponse message. Also converts values to other types if specified.
+                     * @param message ListMetadataImportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.ListMetadataImportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMetadataImportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetMetadataImportRequest. */
+                interface IGetMetadataImportRequest {
+
+                    /** GetMetadataImportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMetadataImportRequest. */
+                class GetMetadataImportRequest implements IGetMetadataImportRequest {
+
+                    /**
+                     * Constructs a new GetMetadataImportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IGetMetadataImportRequest);
+
+                    /** GetMetadataImportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMetadataImportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMetadataImportRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IGetMetadataImportRequest): google.cloud.metastore.v1.GetMetadataImportRequest;
+
+                    /**
+                     * Encodes the specified GetMetadataImportRequest message. Does not implicitly {@link google.cloud.metastore.v1.GetMetadataImportRequest.verify|verify} messages.
+                     * @param message GetMetadataImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IGetMetadataImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMetadataImportRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.GetMetadataImportRequest.verify|verify} messages.
+                     * @param message GetMetadataImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IGetMetadataImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMetadataImportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMetadataImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.GetMetadataImportRequest;
+
+                    /**
+                     * Decodes a GetMetadataImportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMetadataImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.GetMetadataImportRequest;
+
+                    /**
+                     * Verifies a GetMetadataImportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMetadataImportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMetadataImportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.GetMetadataImportRequest;
+
+                    /**
+                     * Creates a plain object from a GetMetadataImportRequest message. Also converts values to other types if specified.
+                     * @param message GetMetadataImportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.GetMetadataImportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMetadataImportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateMetadataImportRequest. */
+                interface ICreateMetadataImportRequest {
+
+                    /** CreateMetadataImportRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMetadataImportRequest metadataImportId */
+                    metadataImportId?: (string|null);
+
+                    /** CreateMetadataImportRequest metadataImport */
+                    metadataImport?: (google.cloud.metastore.v1.IMetadataImport|null);
+
+                    /** CreateMetadataImportRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateMetadataImportRequest. */
+                class CreateMetadataImportRequest implements ICreateMetadataImportRequest {
+
+                    /**
+                     * Constructs a new CreateMetadataImportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.ICreateMetadataImportRequest);
+
+                    /** CreateMetadataImportRequest parent. */
+                    public parent: string;
+
+                    /** CreateMetadataImportRequest metadataImportId. */
+                    public metadataImportId: string;
+
+                    /** CreateMetadataImportRequest metadataImport. */
+                    public metadataImport?: (google.cloud.metastore.v1.IMetadataImport|null);
+
+                    /** CreateMetadataImportRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateMetadataImportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMetadataImportRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.ICreateMetadataImportRequest): google.cloud.metastore.v1.CreateMetadataImportRequest;
+
+                    /**
+                     * Encodes the specified CreateMetadataImportRequest message. Does not implicitly {@link google.cloud.metastore.v1.CreateMetadataImportRequest.verify|verify} messages.
+                     * @param message CreateMetadataImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.ICreateMetadataImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMetadataImportRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.CreateMetadataImportRequest.verify|verify} messages.
+                     * @param message CreateMetadataImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.ICreateMetadataImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMetadataImportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMetadataImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.CreateMetadataImportRequest;
+
+                    /**
+                     * Decodes a CreateMetadataImportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMetadataImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.CreateMetadataImportRequest;
+
+                    /**
+                     * Verifies a CreateMetadataImportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMetadataImportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMetadataImportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.CreateMetadataImportRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMetadataImportRequest message. Also converts values to other types if specified.
+                     * @param message CreateMetadataImportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.CreateMetadataImportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMetadataImportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateMetadataImportRequest. */
+                interface IUpdateMetadataImportRequest {
+
+                    /** UpdateMetadataImportRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateMetadataImportRequest metadataImport */
+                    metadataImport?: (google.cloud.metastore.v1.IMetadataImport|null);
+
+                    /** UpdateMetadataImportRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateMetadataImportRequest. */
+                class UpdateMetadataImportRequest implements IUpdateMetadataImportRequest {
+
+                    /**
+                     * Constructs a new UpdateMetadataImportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IUpdateMetadataImportRequest);
+
+                    /** UpdateMetadataImportRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateMetadataImportRequest metadataImport. */
+                    public metadataImport?: (google.cloud.metastore.v1.IMetadataImport|null);
+
+                    /** UpdateMetadataImportRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateMetadataImportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMetadataImportRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IUpdateMetadataImportRequest): google.cloud.metastore.v1.UpdateMetadataImportRequest;
+
+                    /**
+                     * Encodes the specified UpdateMetadataImportRequest message. Does not implicitly {@link google.cloud.metastore.v1.UpdateMetadataImportRequest.verify|verify} messages.
+                     * @param message UpdateMetadataImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IUpdateMetadataImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMetadataImportRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.UpdateMetadataImportRequest.verify|verify} messages.
+                     * @param message UpdateMetadataImportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IUpdateMetadataImportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMetadataImportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMetadataImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.UpdateMetadataImportRequest;
+
+                    /**
+                     * Decodes an UpdateMetadataImportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMetadataImportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.UpdateMetadataImportRequest;
+
+                    /**
+                     * Verifies an UpdateMetadataImportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMetadataImportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMetadataImportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.UpdateMetadataImportRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMetadataImportRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMetadataImportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.UpdateMetadataImportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMetadataImportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportMetadataRequest. */
+                interface IExportMetadataRequest {
+
+                    /** ExportMetadataRequest destinationGcsFolder */
+                    destinationGcsFolder?: (string|null);
+
+                    /** ExportMetadataRequest service */
+                    service?: (string|null);
+
+                    /** ExportMetadataRequest requestId */
+                    requestId?: (string|null);
+
+                    /** ExportMetadataRequest databaseDumpType */
+                    databaseDumpType?: (google.cloud.metastore.v1.DatabaseDumpSpec.Type|keyof typeof google.cloud.metastore.v1.DatabaseDumpSpec.Type|null);
+                }
+
+                /** Represents an ExportMetadataRequest. */
+                class ExportMetadataRequest implements IExportMetadataRequest {
+
+                    /**
+                     * Constructs a new ExportMetadataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IExportMetadataRequest);
+
+                    /** ExportMetadataRequest destinationGcsFolder. */
+                    public destinationGcsFolder: string;
+
+                    /** ExportMetadataRequest service. */
+                    public service: string;
+
+                    /** ExportMetadataRequest requestId. */
+                    public requestId: string;
+
+                    /** ExportMetadataRequest databaseDumpType. */
+                    public databaseDumpType: (google.cloud.metastore.v1.DatabaseDumpSpec.Type|keyof typeof google.cloud.metastore.v1.DatabaseDumpSpec.Type);
+
+                    /** ExportMetadataRequest destination. */
+                    public destination?: "destinationGcsFolder";
+
+                    /**
+                     * Creates a new ExportMetadataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportMetadataRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IExportMetadataRequest): google.cloud.metastore.v1.ExportMetadataRequest;
+
+                    /**
+                     * Encodes the specified ExportMetadataRequest message. Does not implicitly {@link google.cloud.metastore.v1.ExportMetadataRequest.verify|verify} messages.
+                     * @param message ExportMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IExportMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportMetadataRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ExportMetadataRequest.verify|verify} messages.
+                     * @param message ExportMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IExportMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportMetadataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.ExportMetadataRequest;
+
+                    /**
+                     * Decodes an ExportMetadataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.ExportMetadataRequest;
+
+                    /**
+                     * Verifies an ExportMetadataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportMetadataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.ExportMetadataRequest;
+
+                    /**
+                     * Creates a plain object from an ExportMetadataRequest message. Also converts values to other types if specified.
+                     * @param message ExportMetadataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.ExportMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportMetadataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IOperationMetadata): google.cloud.metastore.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.metastore.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata supportedHiveMetastoreVersions */
+                    supportedHiveMetastoreVersions?: (google.cloud.metastore.v1.LocationMetadata.IHiveMetastoreVersion[]|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.ILocationMetadata);
+
+                    /** LocationMetadata supportedHiveMetastoreVersions. */
+                    public supportedHiveMetastoreVersions: google.cloud.metastore.v1.LocationMetadata.IHiveMetastoreVersion[];
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.ILocationMetadata): google.cloud.metastore.v1.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.metastore.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace LocationMetadata {
+
+                    /** Properties of a HiveMetastoreVersion. */
+                    interface IHiveMetastoreVersion {
+
+                        /** HiveMetastoreVersion version */
+                        version?: (string|null);
+
+                        /** HiveMetastoreVersion isDefault */
+                        isDefault?: (boolean|null);
+                    }
+
+                    /** Represents a HiveMetastoreVersion. */
+                    class HiveMetastoreVersion implements IHiveMetastoreVersion {
+
+                        /**
+                         * Constructs a new HiveMetastoreVersion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.metastore.v1.LocationMetadata.IHiveMetastoreVersion);
+
+                        /** HiveMetastoreVersion version. */
+                        public version: string;
+
+                        /** HiveMetastoreVersion isDefault. */
+                        public isDefault: boolean;
+
+                        /**
+                         * Creates a new HiveMetastoreVersion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HiveMetastoreVersion instance
+                         */
+                        public static create(properties?: google.cloud.metastore.v1.LocationMetadata.IHiveMetastoreVersion): google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion;
+
+                        /**
+                         * Encodes the specified HiveMetastoreVersion message. Does not implicitly {@link google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion.verify|verify} messages.
+                         * @param message HiveMetastoreVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.metastore.v1.LocationMetadata.IHiveMetastoreVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HiveMetastoreVersion message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion.verify|verify} messages.
+                         * @param message HiveMetastoreVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.metastore.v1.LocationMetadata.IHiveMetastoreVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HiveMetastoreVersion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HiveMetastoreVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion;
+
+                        /**
+                         * Decodes a HiveMetastoreVersion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HiveMetastoreVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion;
+
+                        /**
+                         * Verifies a HiveMetastoreVersion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HiveMetastoreVersion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HiveMetastoreVersion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion;
+
+                        /**
+                         * Creates a plain object from a HiveMetastoreVersion message. Also converts values to other types if specified.
+                         * @param message HiveMetastoreVersion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HiveMetastoreVersion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a DatabaseDumpSpec. */
+                interface IDatabaseDumpSpec {
+                }
+
+                /** Represents a DatabaseDumpSpec. */
+                class DatabaseDumpSpec implements IDatabaseDumpSpec {
+
+                    /**
+                     * Constructs a new DatabaseDumpSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IDatabaseDumpSpec);
+
+                    /**
+                     * Creates a new DatabaseDumpSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseDumpSpec instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IDatabaseDumpSpec): google.cloud.metastore.v1.DatabaseDumpSpec;
+
+                    /**
+                     * Encodes the specified DatabaseDumpSpec message. Does not implicitly {@link google.cloud.metastore.v1.DatabaseDumpSpec.verify|verify} messages.
+                     * @param message DatabaseDumpSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IDatabaseDumpSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseDumpSpec message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.DatabaseDumpSpec.verify|verify} messages.
+                     * @param message DatabaseDumpSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IDatabaseDumpSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseDumpSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseDumpSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.DatabaseDumpSpec;
+
+                    /**
+                     * Decodes a DatabaseDumpSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseDumpSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.DatabaseDumpSpec;
+
+                    /**
+                     * Verifies a DatabaseDumpSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseDumpSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseDumpSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.DatabaseDumpSpec;
+
+                    /**
+                     * Creates a plain object from a DatabaseDumpSpec message. Also converts values to other types if specified.
+                     * @param message DatabaseDumpSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.DatabaseDumpSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseDumpSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DatabaseDumpSpec {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        MYSQL = 1
+                    }
+                }
+            }
+
             /** Namespace v1alpha. */
             namespace v1alpha {
 
