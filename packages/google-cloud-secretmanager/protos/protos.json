@@ -80,6 +80,13 @@
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
+                        },
+                        "rotation": {
+                          "type": "Rotation",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -293,6 +300,24 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Rotation": {
+                      "fields": {
+                        "nextRotationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rotationPeriod": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         }
                       }

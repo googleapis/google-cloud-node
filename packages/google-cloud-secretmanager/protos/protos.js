@@ -79,6 +79,7 @@
                          * @property {Array.<google.cloud.secretmanager.v1.ITopic>|null} [topics] Secret topics
                          * @property {google.protobuf.ITimestamp|null} [expireTime] Secret expireTime
                          * @property {google.protobuf.IDuration|null} [ttl] Secret ttl
+                         * @property {google.cloud.secretmanager.v1.IRotation|null} [rotation] Secret rotation
                          */
     
                         /**
@@ -154,6 +155,14 @@
                          */
                         Secret.prototype.ttl = null;
     
+                        /**
+                         * Secret rotation.
+                         * @member {google.cloud.secretmanager.v1.IRotation|null|undefined} rotation
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.rotation = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -208,6 +217,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
                                 $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.rotation != null && Object.hasOwnProperty.call(message, "rotation"))
+                                $root.google.cloud.secretmanager.v1.Rotation.encode(message.rotation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -283,6 +294,9 @@
                                     break;
                                 case 7:
                                     message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.rotation = $root.google.cloud.secretmanager.v1.Rotation.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -368,6 +382,11 @@
                                         return "ttl." + error;
                                 }
                             }
+                            if (message.rotation != null && message.hasOwnProperty("rotation")) {
+                                var error = $root.google.cloud.secretmanager.v1.Rotation.verify(message.rotation);
+                                if (error)
+                                    return "rotation." + error;
+                            }
                             return null;
                         };
     
@@ -422,6 +441,11 @@
                                     throw TypeError(".google.cloud.secretmanager.v1.Secret.ttl: object expected");
                                 message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
                             }
+                            if (object.rotation != null) {
+                                if (typeof object.rotation !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.rotation: object expected");
+                                message.rotation = $root.google.cloud.secretmanager.v1.Rotation.fromObject(object.rotation);
+                            }
                             return message;
                         };
     
@@ -446,6 +470,7 @@
                                 object.name = "";
                                 object.replication = null;
                                 object.createTime = null;
+                                object.rotation = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -474,6 +499,8 @@
                                 if (options.oneofs)
                                     object.expiration = "ttl";
                             }
+                            if (message.rotation != null && message.hasOwnProperty("rotation"))
+                                object.rotation = $root.google.cloud.secretmanager.v1.Rotation.toObject(message.rotation, options);
                             return object;
                         };
     
@@ -3102,6 +3129,226 @@
                         };
     
                         return Topic;
+                    })();
+    
+                    v1.Rotation = (function() {
+    
+                        /**
+                         * Properties of a Rotation.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @interface IRotation
+                         * @property {google.protobuf.ITimestamp|null} [nextRotationTime] Rotation nextRotationTime
+                         * @property {google.protobuf.IDuration|null} [rotationPeriod] Rotation rotationPeriod
+                         */
+    
+                        /**
+                         * Constructs a new Rotation.
+                         * @memberof google.cloud.secretmanager.v1
+                         * @classdesc Represents a Rotation.
+                         * @implements IRotation
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1.IRotation=} [properties] Properties to set
+                         */
+                        function Rotation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Rotation nextRotationTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} nextRotationTime
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @instance
+                         */
+                        Rotation.prototype.nextRotationTime = null;
+    
+                        /**
+                         * Rotation rotationPeriod.
+                         * @member {google.protobuf.IDuration|null|undefined} rotationPeriod
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @instance
+                         */
+                        Rotation.prototype.rotationPeriod = null;
+    
+                        /**
+                         * Creates a new Rotation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.IRotation=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1.Rotation} Rotation instance
+                         */
+                        Rotation.create = function create(properties) {
+                            return new Rotation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Rotation message. Does not implicitly {@link google.cloud.secretmanager.v1.Rotation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.IRotation} message Rotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Rotation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.nextRotationTime != null && Object.hasOwnProperty.call(message, "nextRotationTime"))
+                                $root.google.protobuf.Timestamp.encode(message.nextRotationTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rotationPeriod != null && Object.hasOwnProperty.call(message, "rotationPeriod"))
+                                $root.google.protobuf.Duration.encode(message.rotationPeriod, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Rotation message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.Rotation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.IRotation} message Rotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Rotation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Rotation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1.Rotation} Rotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Rotation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1.Rotation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.nextRotationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.rotationPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Rotation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1.Rotation} Rotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Rotation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Rotation message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Rotation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.nextRotationTime != null && message.hasOwnProperty("nextRotationTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.nextRotationTime);
+                                if (error)
+                                    return "nextRotationTime." + error;
+                            }
+                            if (message.rotationPeriod != null && message.hasOwnProperty("rotationPeriod")) {
+                                var error = $root.google.protobuf.Duration.verify(message.rotationPeriod);
+                                if (error)
+                                    return "rotationPeriod." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Rotation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1.Rotation} Rotation
+                         */
+                        Rotation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1.Rotation)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1.Rotation();
+                            if (object.nextRotationTime != null) {
+                                if (typeof object.nextRotationTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Rotation.nextRotationTime: object expected");
+                                message.nextRotationTime = $root.google.protobuf.Timestamp.fromObject(object.nextRotationTime);
+                            }
+                            if (object.rotationPeriod != null) {
+                                if (typeof object.rotationPeriod !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Rotation.rotationPeriod: object expected");
+                                message.rotationPeriod = $root.google.protobuf.Duration.fromObject(object.rotationPeriod);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Rotation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1.Rotation} message Rotation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Rotation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.nextRotationTime = null;
+                                object.rotationPeriod = null;
+                            }
+                            if (message.nextRotationTime != null && message.hasOwnProperty("nextRotationTime"))
+                                object.nextRotationTime = $root.google.protobuf.Timestamp.toObject(message.nextRotationTime, options);
+                            if (message.rotationPeriod != null && message.hasOwnProperty("rotationPeriod"))
+                                object.rotationPeriod = $root.google.protobuf.Duration.toObject(message.rotationPeriod, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Rotation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1.Rotation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Rotation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Rotation;
                     })();
     
                     v1.SecretPayload = (function() {

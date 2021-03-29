@@ -49,6 +49,9 @@ export namespace google {
 
                     /** Secret ttl */
                     ttl?: (google.protobuf.IDuration|null);
+
+                    /** Secret rotation */
+                    rotation?: (google.cloud.secretmanager.v1.IRotation|null);
                 }
 
                 /** Represents a Secret. */
@@ -80,6 +83,9 @@ export namespace google {
 
                     /** Secret ttl. */
                     public ttl?: (google.protobuf.IDuration|null);
+
+                    /** Secret rotation. */
+                    public rotation?: (google.cloud.secretmanager.v1.IRotation|null);
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");
@@ -1307,6 +1313,102 @@ export namespace google {
 
                     /**
                      * Converts this Topic to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Rotation. */
+                interface IRotation {
+
+                    /** Rotation nextRotationTime */
+                    nextRotationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Rotation rotationPeriod */
+                    rotationPeriod?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a Rotation. */
+                class Rotation implements IRotation {
+
+                    /**
+                     * Constructs a new Rotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1.IRotation);
+
+                    /** Rotation nextRotationTime. */
+                    public nextRotationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Rotation rotationPeriod. */
+                    public rotationPeriod?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new Rotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Rotation instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1.IRotation): google.cloud.secretmanager.v1.Rotation;
+
+                    /**
+                     * Encodes the specified Rotation message. Does not implicitly {@link google.cloud.secretmanager.v1.Rotation.verify|verify} messages.
+                     * @param message Rotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1.IRotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Rotation message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.Rotation.verify|verify} messages.
+                     * @param message Rotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1.IRotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Rotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Rotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.Rotation;
+
+                    /**
+                     * Decodes a Rotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Rotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.Rotation;
+
+                    /**
+                     * Verifies a Rotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Rotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Rotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.Rotation;
+
+                    /**
+                     * Creates a plain object from a Rotation message. Also converts values to other types if specified.
+                     * @param message Rotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1.Rotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Rotation to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
