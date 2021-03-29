@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.8.3](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.2...v5.8.3) (2021-03-29)
+
+
+### Bug Fixes
+
+* update CopyOptions type to include cacheControl, contentType and contentEncoding ([#1426](https://www.github.com/googleapis/nodejs-storage/issues/1426)) ([efa5bb8](https://www.github.com/googleapis/nodejs-storage/commit/efa5bb8a22ab68c0c3e8549850e5db4d57ff29bb))
+
 ### [5.8.2](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.1...v5.8.2) (2021-03-23)
 
 
