@@ -5,13 +5,13 @@
 # [Service Management API: Node.js Client](https://github.com/googleapis/nodejs-service-management)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/undefined.svg)](https://www.npmjs.org/package/undefined)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/service-management.svg)](https://www.npmjs.org/package/@google-cloud/service-management)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-service-management/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-service-management)
 
 
 
 
-Servicemanagement client for Node.js
+Service management client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
@@ -51,34 +51,28 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install undefined
+npm install @google-cloud/service-management
 ```
 
 
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {ServiceManagerClient} = require('');
+// Imports the Google Cloud client library
+const {ServiceManagerClient} = require('@google-cloud/service-management');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {ServiceManagerClient}();
+const client = new ServiceManagerClient();
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function listServices() {
+  const [thing] = await client.listServices({producerProjectId: projectId});
+  console.info(thing);
 }
-doSomething();
+listServices();
 
 ```
 

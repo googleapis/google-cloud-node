@@ -19,7 +19,7 @@
                     "csharp_namespace": "Google.Cloud.ServiceManagement.V1",
                     "go_package": "google.golang.org/genproto/googleapis/api/servicemanagement/v1;servicemanagement",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ResourcesProto",
+                    "java_outer_classname": "ServiceManagerProto",
                     "java_package": "com.google.api.servicemanagement.v1",
                     "objc_class_prefix": "GASM",
                     "php_namespace": "Google\\Cloud\\ServiceManagement\\V1",

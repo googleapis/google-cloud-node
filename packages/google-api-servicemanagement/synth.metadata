@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-service-management",
-        "sha": "1c6e94f8fe0215b6a8314951e5dcc482228db573"
+        "remote": "git@github.com:googleapis/nodejs-service-management.git",
+        "sha": "728ac209c44ba39714fb8c8acb38a7c0163acd6c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "68fdb1b7dc47ff7a3bda6b7744f5e01887b94d3b",
-        "internalRef": "361897210"
+        "sha": "5da78db589d423db6bcd6a35637c923fe1a7665c",
+        "internalRef": "363947872"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "e5fa6d93e42918dd4a000a80b92be23f5f4c6ac7"
+        "sha": "79c8dd7ee768292f933012d3a69a5b4676404cda"
       }
     }
   ],

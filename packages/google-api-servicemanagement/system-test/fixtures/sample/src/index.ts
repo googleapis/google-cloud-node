@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ServiceManagerClient} from 'undefined';
+import {ServiceManagerClient} from '@google-cloud/service-management';
 
 // check that the client class type name can be used
 function doStuffWithServiceManagerClient(client: ServiceManagerClient) {
