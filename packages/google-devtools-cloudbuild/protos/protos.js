@@ -462,6 +462,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#receiveTriggerWebhook}.
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @typedef ReceiveTriggerWebhookCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse} [response] ReceiveTriggerWebhookResponse
+                         */
+    
+                        /**
+                         * Calls ReceiveTriggerWebhook.
+                         * @function receiveTriggerWebhook
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest} request ReceiveTriggerWebhookRequest message or plain object
+                         * @param {google.devtools.cloudbuild.v1.CloudBuild.ReceiveTriggerWebhookCallback} callback Node-style callback called with the error, if any, and ReceiveTriggerWebhookResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudBuild.prototype.receiveTriggerWebhook = function receiveTriggerWebhook(request, callback) {
+                            return this.rpcCall(receiveTriggerWebhook, $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest, $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse, request, callback);
+                        }, "name", { value: "ReceiveTriggerWebhook" });
+    
+                        /**
+                         * Calls ReceiveTriggerWebhook.
+                         * @function receiveTriggerWebhook
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest} request ReceiveTriggerWebhookRequest message or plain object
+                         * @returns {Promise<google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#createWorkerPool}.
                          * @memberof google.devtools.cloudbuild.v1.CloudBuild
                          * @typedef CreateWorkerPoolCallback
@@ -3684,6 +3717,7 @@
                          * @property {Array.<google.devtools.cloudbuild.v1.ISecret>|null} [secrets] Build secrets
                          * @property {Object.<string,google.devtools.cloudbuild.v1.ITimeSpan>|null} [timing] Build timing
                          * @property {string|null} [serviceAccount] Build serviceAccount
+                         * @property {google.devtools.cloudbuild.v1.ISecrets|null} [availableSecrets] Build availableSecrets
                          */
     
                         /**
@@ -3908,6 +3942,14 @@
                         Build.prototype.serviceAccount = "";
     
                         /**
+                         * Build availableSecrets.
+                         * @member {google.devtools.cloudbuild.v1.ISecrets|null|undefined} availableSecrets
+                         * @memberof google.devtools.cloudbuild.v1.Build
+                         * @instance
+                         */
+                        Build.prototype.availableSecrets = null;
+    
+                        /**
                          * Creates a new Build instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.Build
@@ -3989,6 +4031,8 @@
                                 writer.uint32(/* id 42, wireType 2 =*/338).string(message.serviceAccount);
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 45, wireType 2 =*/362).string(message.name);
+                            if (message.availableSecrets != null && Object.hasOwnProperty.call(message, "availableSecrets"))
+                                $root.google.devtools.cloudbuild.v1.Secrets.encode(message.availableSecrets, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
                         };
     
@@ -4143,6 +4187,9 @@
                                     break;
                                 case 42:
                                     message.serviceAccount = reader.string();
+                                    break;
+                                case 47:
+                                    message.availableSecrets = $root.google.devtools.cloudbuild.v1.Secrets.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4318,6 +4365,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.availableSecrets != null && message.hasOwnProperty("availableSecrets")) {
+                                var error = $root.google.devtools.cloudbuild.v1.Secrets.verify(message.availableSecrets);
+                                if (error)
+                                    return "availableSecrets." + error;
+                            }
                             return null;
                         };
     
@@ -4488,6 +4540,11 @@
                             }
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.availableSecrets != null) {
+                                if (typeof object.availableSecrets !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Build.availableSecrets: object expected");
+                                message.availableSecrets = $root.google.devtools.cloudbuild.v1.Secrets.fromObject(object.availableSecrets);
+                            }
                             return message;
                         };
     
@@ -4534,6 +4591,7 @@
                                 object.queueTtl = null;
                                 object.serviceAccount = "";
                                 object.name = "";
+                                object.availableSecrets = null;
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -4604,6 +4662,8 @@
                                 object.serviceAccount = message.serviceAccount;
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.availableSecrets != null && message.hasOwnProperty("availableSecrets"))
+                                object.availableSecrets = $root.google.devtools.cloudbuild.v1.Secrets.toObject(message.availableSecrets, options);
                             return object;
                         };
     
@@ -6290,6 +6350,716 @@
                         })();
     
                         return Hash;
+                    })();
+    
+                    v1.Secrets = (function() {
+    
+                        /**
+                         * Properties of a Secrets.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface ISecrets
+                         * @property {Array.<google.devtools.cloudbuild.v1.ISecretManagerSecret>|null} [secretManager] Secrets secretManager
+                         * @property {Array.<google.devtools.cloudbuild.v1.IInlineSecret>|null} [inline] Secrets inline
+                         */
+    
+                        /**
+                         * Constructs a new Secrets.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a Secrets.
+                         * @implements ISecrets
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.ISecrets=} [properties] Properties to set
+                         */
+                        function Secrets(properties) {
+                            this.secretManager = [];
+                            this.inline = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Secrets secretManager.
+                         * @member {Array.<google.devtools.cloudbuild.v1.ISecretManagerSecret>} secretManager
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @instance
+                         */
+                        Secrets.prototype.secretManager = $util.emptyArray;
+    
+                        /**
+                         * Secrets inline.
+                         * @member {Array.<google.devtools.cloudbuild.v1.IInlineSecret>} inline
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @instance
+                         */
+                        Secrets.prototype.inline = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Secrets instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ISecrets=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.Secrets} Secrets instance
+                         */
+                        Secrets.create = function create(properties) {
+                            return new Secrets(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Secrets message. Does not implicitly {@link google.devtools.cloudbuild.v1.Secrets.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ISecrets} message Secrets message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Secrets.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.secretManager != null && message.secretManager.length)
+                                for (var i = 0; i < message.secretManager.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.SecretManagerSecret.encode(message.secretManager[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.inline != null && message.inline.length)
+                                for (var i = 0; i < message.inline.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.InlineSecret.encode(message.inline[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Secrets message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Secrets.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ISecrets} message Secrets message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Secrets.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Secrets message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.Secrets} Secrets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Secrets.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Secrets();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.secretManager && message.secretManager.length))
+                                        message.secretManager = [];
+                                    message.secretManager.push($root.google.devtools.cloudbuild.v1.SecretManagerSecret.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.inline && message.inline.length))
+                                        message.inline = [];
+                                    message.inline.push($root.google.devtools.cloudbuild.v1.InlineSecret.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Secrets message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.Secrets} Secrets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Secrets.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Secrets message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Secrets.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.secretManager != null && message.hasOwnProperty("secretManager")) {
+                                if (!Array.isArray(message.secretManager))
+                                    return "secretManager: array expected";
+                                for (var i = 0; i < message.secretManager.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.SecretManagerSecret.verify(message.secretManager[i]);
+                                    if (error)
+                                        return "secretManager." + error;
+                                }
+                            }
+                            if (message.inline != null && message.hasOwnProperty("inline")) {
+                                if (!Array.isArray(message.inline))
+                                    return "inline: array expected";
+                                for (var i = 0; i < message.inline.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.InlineSecret.verify(message.inline[i]);
+                                    if (error)
+                                        return "inline." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Secrets message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.Secrets} Secrets
+                         */
+                        Secrets.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.Secrets)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.Secrets();
+                            if (object.secretManager) {
+                                if (!Array.isArray(object.secretManager))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Secrets.secretManager: array expected");
+                                message.secretManager = [];
+                                for (var i = 0; i < object.secretManager.length; ++i) {
+                                    if (typeof object.secretManager[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Secrets.secretManager: object expected");
+                                    message.secretManager[i] = $root.google.devtools.cloudbuild.v1.SecretManagerSecret.fromObject(object.secretManager[i]);
+                                }
+                            }
+                            if (object.inline) {
+                                if (!Array.isArray(object.inline))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Secrets.inline: array expected");
+                                message.inline = [];
+                                for (var i = 0; i < object.inline.length; ++i) {
+                                    if (typeof object.inline[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Secrets.inline: object expected");
+                                    message.inline[i] = $root.google.devtools.cloudbuild.v1.InlineSecret.fromObject(object.inline[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Secrets message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.Secrets} message Secrets
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Secrets.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.secretManager = [];
+                                object.inline = [];
+                            }
+                            if (message.secretManager && message.secretManager.length) {
+                                object.secretManager = [];
+                                for (var j = 0; j < message.secretManager.length; ++j)
+                                    object.secretManager[j] = $root.google.devtools.cloudbuild.v1.SecretManagerSecret.toObject(message.secretManager[j], options);
+                            }
+                            if (message.inline && message.inline.length) {
+                                object.inline = [];
+                                for (var j = 0; j < message.inline.length; ++j)
+                                    object.inline[j] = $root.google.devtools.cloudbuild.v1.InlineSecret.toObject(message.inline[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Secrets to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.Secrets
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Secrets.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Secrets;
+                    })();
+    
+                    v1.InlineSecret = (function() {
+    
+                        /**
+                         * Properties of an InlineSecret.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IInlineSecret
+                         * @property {string|null} [kmsKeyName] InlineSecret kmsKeyName
+                         * @property {Object.<string,Uint8Array>|null} [envMap] InlineSecret envMap
+                         */
+    
+                        /**
+                         * Constructs a new InlineSecret.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an InlineSecret.
+                         * @implements IInlineSecret
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IInlineSecret=} [properties] Properties to set
+                         */
+                        function InlineSecret(properties) {
+                            this.envMap = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InlineSecret kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @instance
+                         */
+                        InlineSecret.prototype.kmsKeyName = "";
+    
+                        /**
+                         * InlineSecret envMap.
+                         * @member {Object.<string,Uint8Array>} envMap
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @instance
+                         */
+                        InlineSecret.prototype.envMap = $util.emptyObject;
+    
+                        /**
+                         * Creates a new InlineSecret instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IInlineSecret=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.InlineSecret} InlineSecret instance
+                         */
+                        InlineSecret.create = function create(properties) {
+                            return new InlineSecret(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InlineSecret message. Does not implicitly {@link google.devtools.cloudbuild.v1.InlineSecret.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IInlineSecret} message InlineSecret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineSecret.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kmsKeyName);
+                            if (message.envMap != null && Object.hasOwnProperty.call(message, "envMap"))
+                                for (var keys = Object.keys(message.envMap), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).bytes(message.envMap[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InlineSecret message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.InlineSecret.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IInlineSecret} message InlineSecret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineSecret.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InlineSecret message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.InlineSecret} InlineSecret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineSecret.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.InlineSecret(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.kmsKeyName = reader.string();
+                                    break;
+                                case 2:
+                                    if (message.envMap === $util.emptyObject)
+                                        message.envMap = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = [];
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.bytes();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.envMap[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InlineSecret message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.InlineSecret} InlineSecret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineSecret.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InlineSecret message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InlineSecret.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
+                            if (message.envMap != null && message.hasOwnProperty("envMap")) {
+                                if (!$util.isObject(message.envMap))
+                                    return "envMap: object expected";
+                                var key = Object.keys(message.envMap);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!(message.envMap[key[i]] && typeof message.envMap[key[i]].length === "number" || $util.isString(message.envMap[key[i]])))
+                                        return "envMap: buffer{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InlineSecret message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.InlineSecret} InlineSecret
+                         */
+                        InlineSecret.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.InlineSecret)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.InlineSecret();
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
+                            if (object.envMap) {
+                                if (typeof object.envMap !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.InlineSecret.envMap: object expected");
+                                message.envMap = {};
+                                for (var keys = Object.keys(object.envMap), i = 0; i < keys.length; ++i)
+                                    if (typeof object.envMap[keys[i]] === "string")
+                                        $util.base64.decode(object.envMap[keys[i]], message.envMap[keys[i]] = $util.newBuffer($util.base64.length(object.envMap[keys[i]])), 0);
+                                    else if (object.envMap[keys[i]].length)
+                                        message.envMap[keys[i]] = object.envMap[keys[i]];
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InlineSecret message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.InlineSecret} message InlineSecret
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InlineSecret.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.envMap = {};
+                            if (options.defaults)
+                                object.kmsKeyName = "";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
+                            var keys2;
+                            if (message.envMap && (keys2 = Object.keys(message.envMap)).length) {
+                                object.envMap = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.envMap[keys2[j]] = options.bytes === String ? $util.base64.encode(message.envMap[keys2[j]], 0, message.envMap[keys2[j]].length) : options.bytes === Array ? Array.prototype.slice.call(message.envMap[keys2[j]]) : message.envMap[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InlineSecret to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.InlineSecret
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InlineSecret.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return InlineSecret;
+                    })();
+    
+                    v1.SecretManagerSecret = (function() {
+    
+                        /**
+                         * Properties of a SecretManagerSecret.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface ISecretManagerSecret
+                         * @property {string|null} [versionName] SecretManagerSecret versionName
+                         * @property {string|null} [env] SecretManagerSecret env
+                         */
+    
+                        /**
+                         * Constructs a new SecretManagerSecret.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a SecretManagerSecret.
+                         * @implements ISecretManagerSecret
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.ISecretManagerSecret=} [properties] Properties to set
+                         */
+                        function SecretManagerSecret(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecretManagerSecret versionName.
+                         * @member {string} versionName
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @instance
+                         */
+                        SecretManagerSecret.prototype.versionName = "";
+    
+                        /**
+                         * SecretManagerSecret env.
+                         * @member {string} env
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @instance
+                         */
+                        SecretManagerSecret.prototype.env = "";
+    
+                        /**
+                         * Creates a new SecretManagerSecret instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ISecretManagerSecret=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.SecretManagerSecret} SecretManagerSecret instance
+                         */
+                        SecretManagerSecret.create = function create(properties) {
+                            return new SecretManagerSecret(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecretManagerSecret message. Does not implicitly {@link google.devtools.cloudbuild.v1.SecretManagerSecret.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ISecretManagerSecret} message SecretManagerSecret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretManagerSecret.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.versionName != null && Object.hasOwnProperty.call(message, "versionName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.versionName);
+                            if (message.env != null && Object.hasOwnProperty.call(message, "env"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.env);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecretManagerSecret message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.SecretManagerSecret.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ISecretManagerSecret} message SecretManagerSecret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretManagerSecret.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecretManagerSecret message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.SecretManagerSecret} SecretManagerSecret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretManagerSecret.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.SecretManagerSecret();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.versionName = reader.string();
+                                    break;
+                                case 2:
+                                    message.env = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecretManagerSecret message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.SecretManagerSecret} SecretManagerSecret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretManagerSecret.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecretManagerSecret message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecretManagerSecret.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.versionName != null && message.hasOwnProperty("versionName"))
+                                if (!$util.isString(message.versionName))
+                                    return "versionName: string expected";
+                            if (message.env != null && message.hasOwnProperty("env"))
+                                if (!$util.isString(message.env))
+                                    return "env: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecretManagerSecret message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.SecretManagerSecret} SecretManagerSecret
+                         */
+                        SecretManagerSecret.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.SecretManagerSecret)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.SecretManagerSecret();
+                            if (object.versionName != null)
+                                message.versionName = String(object.versionName);
+                            if (object.env != null)
+                                message.env = String(object.env);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecretManagerSecret message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.SecretManagerSecret} message SecretManagerSecret
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecretManagerSecret.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.versionName = "";
+                                object.env = "";
+                            }
+                            if (message.versionName != null && message.hasOwnProperty("versionName"))
+                                object.versionName = message.versionName;
+                            if (message.env != null && message.hasOwnProperty("env"))
+                                object.env = message.env;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecretManagerSecret to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.SecretManagerSecret
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecretManagerSecret.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SecretManagerSecret;
                     })();
     
                     v1.Secret = (function() {
@@ -8843,6 +9613,7 @@
                                     return "commentControl: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.invertRegex != null && message.hasOwnProperty("invertRegex"))
@@ -8873,6 +9644,10 @@
                             case "COMMENTS_ENABLED":
                             case 1:
                                 message.commentControl = 1;
+                                break;
+                            case "COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY":
+                            case 2:
+                                message.commentControl = 2;
                                 break;
                             }
                             if (object.invertRegex != null)
@@ -8926,11 +9701,13 @@
                          * @enum {number}
                          * @property {number} COMMENTS_DISABLED=0 COMMENTS_DISABLED value
                          * @property {number} COMMENTS_ENABLED=1 COMMENTS_ENABLED value
+                         * @property {number} COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY=2 COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY value
                          */
                         PullRequestFilter.CommentControl = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "COMMENTS_DISABLED"] = 0;
                             values[valuesById[1] = "COMMENTS_ENABLED"] = 1;
+                            values[valuesById[2] = "COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY"] = 2;
                             return values;
                         })();
     
@@ -10864,6 +11641,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
@@ -10985,6 +11764,14 @@
                             case "N1_HIGHCPU_32":
                             case 2:
                                 message.machineType = 2;
+                                break;
+                            case "E2_HIGHCPU_8":
+                            case 5:
+                                message.machineType = 5;
+                                break;
+                            case "E2_HIGHCPU_32":
+                            case 6:
+                                message.machineType = 6;
                                 break;
                             }
                             if (object.diskSizeGb != null)
@@ -11184,12 +11971,16 @@
                          * @property {number} UNSPECIFIED=0 UNSPECIFIED value
                          * @property {number} N1_HIGHCPU_8=1 N1_HIGHCPU_8 value
                          * @property {number} N1_HIGHCPU_32=2 N1_HIGHCPU_32 value
+                         * @property {number} E2_HIGHCPU_8=5 E2_HIGHCPU_8 value
+                         * @property {number} E2_HIGHCPU_32=6 E2_HIGHCPU_32 value
                          */
                         BuildOptions.MachineType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "UNSPECIFIED"] = 0;
                             values[valuesById[1] = "N1_HIGHCPU_8"] = 1;
                             values[valuesById[2] = "N1_HIGHCPU_32"] = 2;
+                            values[valuesById[5] = "E2_HIGHCPU_8"] = 5;
+                            values[valuesById[6] = "E2_HIGHCPU_32"] = 6;
                             return values;
                         })();
     
@@ -11246,6 +12037,425 @@
                         })();
     
                         return BuildOptions;
+                    })();
+    
+                    v1.ReceiveTriggerWebhookRequest = (function() {
+    
+                        /**
+                         * Properties of a ReceiveTriggerWebhookRequest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IReceiveTriggerWebhookRequest
+                         * @property {google.api.IHttpBody|null} [body] ReceiveTriggerWebhookRequest body
+                         * @property {string|null} [projectId] ReceiveTriggerWebhookRequest projectId
+                         * @property {string|null} [trigger] ReceiveTriggerWebhookRequest trigger
+                         * @property {string|null} [secret] ReceiveTriggerWebhookRequest secret
+                         */
+    
+                        /**
+                         * Constructs a new ReceiveTriggerWebhookRequest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a ReceiveTriggerWebhookRequest.
+                         * @implements IReceiveTriggerWebhookRequest
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest=} [properties] Properties to set
+                         */
+                        function ReceiveTriggerWebhookRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReceiveTriggerWebhookRequest body.
+                         * @member {google.api.IHttpBody|null|undefined} body
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @instance
+                         */
+                        ReceiveTriggerWebhookRequest.prototype.body = null;
+    
+                        /**
+                         * ReceiveTriggerWebhookRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @instance
+                         */
+                        ReceiveTriggerWebhookRequest.prototype.projectId = "";
+    
+                        /**
+                         * ReceiveTriggerWebhookRequest trigger.
+                         * @member {string} trigger
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @instance
+                         */
+                        ReceiveTriggerWebhookRequest.prototype.trigger = "";
+    
+                        /**
+                         * ReceiveTriggerWebhookRequest secret.
+                         * @member {string} secret
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @instance
+                         */
+                        ReceiveTriggerWebhookRequest.prototype.secret = "";
+    
+                        /**
+                         * Creates a new ReceiveTriggerWebhookRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest} ReceiveTriggerWebhookRequest instance
+                         */
+                        ReceiveTriggerWebhookRequest.create = function create(properties) {
+                            return new ReceiveTriggerWebhookRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReceiveTriggerWebhookRequest message. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest} message ReceiveTriggerWebhookRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReceiveTriggerWebhookRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                                $root.google.api.HttpBody.encode(message.body, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                            if (message.trigger != null && Object.hasOwnProperty.call(message, "trigger"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.trigger);
+                            if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.secret);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReceiveTriggerWebhookRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest} message ReceiveTriggerWebhookRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReceiveTriggerWebhookRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReceiveTriggerWebhookRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest} ReceiveTriggerWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReceiveTriggerWebhookRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.body = $root.google.api.HttpBody.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.trigger = reader.string();
+                                    break;
+                                case 4:
+                                    message.secret = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReceiveTriggerWebhookRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest} ReceiveTriggerWebhookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReceiveTriggerWebhookRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReceiveTriggerWebhookRequest message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReceiveTriggerWebhookRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.body != null && message.hasOwnProperty("body")) {
+                                var error = $root.google.api.HttpBody.verify(message.body);
+                                if (error)
+                                    return "body." + error;
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.trigger != null && message.hasOwnProperty("trigger"))
+                                if (!$util.isString(message.trigger))
+                                    return "trigger: string expected";
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                if (!$util.isString(message.secret))
+                                    return "secret: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReceiveTriggerWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest} ReceiveTriggerWebhookRequest
+                         */
+                        ReceiveTriggerWebhookRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest();
+                            if (object.body != null) {
+                                if (typeof object.body !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest.body: object expected");
+                                message.body = $root.google.api.HttpBody.fromObject(object.body);
+                            }
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.trigger != null)
+                                message.trigger = String(object.trigger);
+                            if (object.secret != null)
+                                message.secret = String(object.secret);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReceiveTriggerWebhookRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest} message ReceiveTriggerWebhookRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReceiveTriggerWebhookRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.body = null;
+                                object.projectId = "";
+                                object.trigger = "";
+                                object.secret = "";
+                            }
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = $root.google.api.HttpBody.toObject(message.body, options);
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.trigger != null && message.hasOwnProperty("trigger"))
+                                object.trigger = message.trigger;
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                object.secret = message.secret;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReceiveTriggerWebhookRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReceiveTriggerWebhookRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ReceiveTriggerWebhookRequest;
+                    })();
+    
+                    v1.ReceiveTriggerWebhookResponse = (function() {
+    
+                        /**
+                         * Properties of a ReceiveTriggerWebhookResponse.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IReceiveTriggerWebhookResponse
+                         */
+    
+                        /**
+                         * Constructs a new ReceiveTriggerWebhookResponse.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a ReceiveTriggerWebhookResponse.
+                         * @implements IReceiveTriggerWebhookResponse
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse=} [properties] Properties to set
+                         */
+                        function ReceiveTriggerWebhookResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ReceiveTriggerWebhookResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse} ReceiveTriggerWebhookResponse instance
+                         */
+                        ReceiveTriggerWebhookResponse.create = function create(properties) {
+                            return new ReceiveTriggerWebhookResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReceiveTriggerWebhookResponse message. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse} message ReceiveTriggerWebhookResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReceiveTriggerWebhookResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReceiveTriggerWebhookResponse message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse} message ReceiveTriggerWebhookResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReceiveTriggerWebhookResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReceiveTriggerWebhookResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse} ReceiveTriggerWebhookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReceiveTriggerWebhookResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReceiveTriggerWebhookResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse} ReceiveTriggerWebhookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReceiveTriggerWebhookResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReceiveTriggerWebhookResponse message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReceiveTriggerWebhookResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReceiveTriggerWebhookResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse} ReceiveTriggerWebhookResponse
+                         */
+                        ReceiveTriggerWebhookResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse)
+                                return object;
+                            return new $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReceiveTriggerWebhookResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse} message ReceiveTriggerWebhookResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReceiveTriggerWebhookResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ReceiveTriggerWebhookResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReceiveTriggerWebhookResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ReceiveTriggerWebhookResponse;
                     })();
     
                     v1.WorkerPool = (function() {
@@ -14439,6 +15649,269 @@
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 return values;
+            })();
+    
+            api.HttpBody = (function() {
+    
+                /**
+                 * Properties of a HttpBody.
+                 * @memberof google.api
+                 * @interface IHttpBody
+                 * @property {string|null} [contentType] HttpBody contentType
+                 * @property {Uint8Array|null} [data] HttpBody data
+                 * @property {Array.<google.protobuf.IAny>|null} [extensions] HttpBody extensions
+                 */
+    
+                /**
+                 * Constructs a new HttpBody.
+                 * @memberof google.api
+                 * @classdesc Represents a HttpBody.
+                 * @implements IHttpBody
+                 * @constructor
+                 * @param {google.api.IHttpBody=} [properties] Properties to set
+                 */
+                function HttpBody(properties) {
+                    this.extensions = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * HttpBody contentType.
+                 * @member {string} contentType
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 */
+                HttpBody.prototype.contentType = "";
+    
+                /**
+                 * HttpBody data.
+                 * @member {Uint8Array} data
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 */
+                HttpBody.prototype.data = $util.newBuffer([]);
+    
+                /**
+                 * HttpBody extensions.
+                 * @member {Array.<google.protobuf.IAny>} extensions
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 */
+                HttpBody.prototype.extensions = $util.emptyArray;
+    
+                /**
+                 * Creates a new HttpBody instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.IHttpBody=} [properties] Properties to set
+                 * @returns {google.api.HttpBody} HttpBody instance
+                 */
+                HttpBody.create = function create(properties) {
+                    return new HttpBody(properties);
+                };
+    
+                /**
+                 * Encodes the specified HttpBody message. Does not implicitly {@link google.api.HttpBody.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.IHttpBody} message HttpBody message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                HttpBody.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.contentType != null && Object.hasOwnProperty.call(message, "contentType"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.contentType);
+                    if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
+                    if (message.extensions != null && message.extensions.length)
+                        for (var i = 0; i < message.extensions.length; ++i)
+                            $root.google.protobuf.Any.encode(message.extensions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified HttpBody message, length delimited. Does not implicitly {@link google.api.HttpBody.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.IHttpBody} message HttpBody message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                HttpBody.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a HttpBody message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.HttpBody} HttpBody
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                HttpBody.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpBody();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.contentType = reader.string();
+                            break;
+                        case 2:
+                            message.data = reader.bytes();
+                            break;
+                        case 3:
+                            if (!(message.extensions && message.extensions.length))
+                                message.extensions = [];
+                            message.extensions.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a HttpBody message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.HttpBody} HttpBody
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                HttpBody.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a HttpBody message.
+                 * @function verify
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                HttpBody.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.contentType != null && message.hasOwnProperty("contentType"))
+                        if (!$util.isString(message.contentType))
+                            return "contentType: string expected";
+                    if (message.data != null && message.hasOwnProperty("data"))
+                        if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                            return "data: buffer expected";
+                    if (message.extensions != null && message.hasOwnProperty("extensions")) {
+                        if (!Array.isArray(message.extensions))
+                            return "extensions: array expected";
+                        for (var i = 0; i < message.extensions.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.extensions[i]);
+                            if (error)
+                                return "extensions." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a HttpBody message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.HttpBody} HttpBody
+                 */
+                HttpBody.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.HttpBody)
+                        return object;
+                    var message = new $root.google.api.HttpBody();
+                    if (object.contentType != null)
+                        message.contentType = String(object.contentType);
+                    if (object.data != null)
+                        if (typeof object.data === "string")
+                            $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                        else if (object.data.length)
+                            message.data = object.data;
+                    if (object.extensions) {
+                        if (!Array.isArray(object.extensions))
+                            throw TypeError(".google.api.HttpBody.extensions: array expected");
+                        message.extensions = [];
+                        for (var i = 0; i < object.extensions.length; ++i) {
+                            if (typeof object.extensions[i] !== "object")
+                                throw TypeError(".google.api.HttpBody.extensions: object expected");
+                            message.extensions[i] = $root.google.protobuf.Any.fromObject(object.extensions[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a HttpBody message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.HttpBody
+                 * @static
+                 * @param {google.api.HttpBody} message HttpBody
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                HttpBody.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.extensions = [];
+                    if (options.defaults) {
+                        object.contentType = "";
+                        if (options.bytes === String)
+                            object.data = "";
+                        else {
+                            object.data = [];
+                            if (options.bytes !== Array)
+                                object.data = $util.newBuffer(object.data);
+                        }
+                    }
+                    if (message.contentType != null && message.hasOwnProperty("contentType"))
+                        object.contentType = message.contentType;
+                    if (message.data != null && message.hasOwnProperty("data"))
+                        object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                    if (message.extensions && message.extensions.length) {
+                        object.extensions = [];
+                        for (var j = 0; j < message.extensions.length; ++j)
+                            object.extensions[j] = $root.google.protobuf.Any.toObject(message.extensions[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this HttpBody to JSON.
+                 * @function toJSON
+                 * @memberof google.api.HttpBody
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                HttpBody.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return HttpBody;
             })();
     
             api.ResourceDescriptor = (function() {

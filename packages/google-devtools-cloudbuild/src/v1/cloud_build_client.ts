@@ -178,6 +178,9 @@ export class CloudBuildClient {
       buildTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/triggers/{trigger}'
       ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -186,6 +189,9 @@ export class CloudBuildClient {
       ),
       projectLocationBuildPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/builds/{build}'
+      ),
+      secretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{version}'
       ),
       serviceAccountPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/serviceAccounts/{service_account}'
@@ -318,6 +324,7 @@ export class CloudBuildClient {
       'deleteBuildTrigger',
       'updateBuildTrigger',
       'runBuildTrigger',
+      'receiveTriggerWebhook',
       'createWorkerPool',
       'getWorkerPool',
       'deleteWorkerPool',
@@ -539,7 +546,7 @@ export class CloudBuildClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the `Build` to retrieve.
+   *   The name of the `Build` to cancel.
    *   Format: `projects/{project}/locations/{location}/builds/{build}`
    * @param {string} request.projectId
    *   Required. ID of the project.
@@ -1003,6 +1010,111 @@ export class CloudBuildClient {
     });
     this.initialize();
     return this.innerApiCalls.updateBuildTrigger(request, options, callback);
+  }
+  receiveTriggerWebhook(
+    request: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+      (
+        | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  receiveTriggerWebhook(
+    request: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+      | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  receiveTriggerWebhook(
+    request: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
+    callback: Callback<
+      protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+      | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * ReceiveTriggerWebhook [Experimental] is called when the API receives a
+   * webhook request targeted at a specific trigger.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.api.HttpBody} request.body
+   *   HTTP request body.
+   * @param {string} request.projectId
+   *   Project in which the specified trigger lives
+   * @param {string} request.trigger
+   *   Name of the trigger to run the payload against
+   * @param {string} request.secret
+   *   Secret token used for authorization if an OAuth token isn't provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ReceiveTriggerWebhookResponse]{@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.receiveTriggerWebhook(request);
+   */
+  receiveTriggerWebhook(
+    request: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+          | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+      | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+      (
+        | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.receiveTriggerWebhook(request, options, callback);
   }
   createWorkerPool(
     request: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
@@ -1819,7 +1931,7 @@ export class CloudBuildClient {
    * @param {string} request.triggerId
    *   Required. ID of the trigger.
    * @param {google.devtools.cloudbuild.v1.RepoSource} request.source
-   *   Required. Source to build against this trigger.
+   *   Source to build against this trigger.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1966,7 +2078,15 @@ export class CloudBuildClient {
    * @param {number} request.pageSize
    *   Number of results to return in the list.
    * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
+   *   The page token for the next page of Builds.
+   *
+   *   If unspecified, the first page of results is returned.
+   *
+   *   If the token is rejected for any reason, INVALID_ARGUMENT will be thrown.
+   *   In this case, the token should be discarded, and pagination should be
+   *   restarted from the first page of results.
+   *
+   *   See https://google.aip.dev/158 for more.
    * @param {string} request.filter
    *   The raw filter text to constrain the results.
    * @param {object} [options]
@@ -2040,7 +2160,15 @@ export class CloudBuildClient {
    * @param {number} request.pageSize
    *   Number of results to return in the list.
    * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
+   *   The page token for the next page of Builds.
+   *
+   *   If unspecified, the first page of results is returned.
+   *
+   *   If the token is rejected for any reason, INVALID_ARGUMENT will be thrown.
+   *   In this case, the token should be discarded, and pagination should be
+   *   restarted from the first page of results.
+   *
+   *   See https://google.aip.dev/158 for more.
    * @param {string} request.filter
    *   The raw filter text to constrain the results.
    * @param {object} [options]
@@ -2092,7 +2220,15 @@ export class CloudBuildClient {
    * @param {number} request.pageSize
    *   Number of results to return in the list.
    * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
+   *   The page token for the next page of Builds.
+   *
+   *   If unspecified, the first page of results is returned.
+   *
+   *   If the token is rejected for any reason, INVALID_ARGUMENT will be thrown.
+   *   In this case, the token should be discarded, and pagination should be
+   *   restarted from the first page of results.
+   *
+   *   See https://google.aip.dev/158 for more.
    * @param {string} request.filter
    *   The raw filter text to constrain the results.
    * @param {object} [options]
@@ -2373,6 +2509,76 @@ export class CloudBuildClient {
   }
 
   /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} keyring
+   * @param {string} key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyring: string,
+    key: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      keyring: keyring,
+      key: key,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the keyring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the keyring.
+   */
+  matchKeyringFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .keyring;
+  }
+
+  /**
+   * Parse the key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key.
+   */
+  matchKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -2486,6 +2692,58 @@ export class CloudBuildClient {
     return this.pathTemplates.projectLocationBuildPathTemplate.match(
       projectLocationBuildName
     ).build;
+  }
+
+  /**
+   * Return a fully-qualified secretVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} secret
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  secretVersionPath(project: string, secret: string, version: string) {
+    return this.pathTemplates.secretVersionPathTemplate.render({
+      project: project,
+      secret: secret,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from SecretVersion resource.
+   *
+   * @param {string} secretVersionName
+   *   A fully-qualified path representing SecretVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSecretVersionName(secretVersionName: string) {
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
+      .project;
+  }
+
+  /**
+   * Parse the secret from SecretVersion resource.
+   *
+   * @param {string} secretVersionName
+   *   A fully-qualified path representing SecretVersion resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromSecretVersionName(secretVersionName: string) {
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
+      .secret;
+  }
+
+  /**
+   * Parse the version from SecretVersion resource.
+   *
+   * @param {string} secretVersionName
+   *   A fully-qualified path representing SecretVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromSecretVersionName(secretVersionName: string) {
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
+      .version;
   }
 
   /**

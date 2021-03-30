@@ -907,6 +907,123 @@ describe('v1.CloudBuildClient', () => {
     });
   });
 
+  describe('receiveTriggerWebhook', () => {
+    it('invokes receiveTriggerWebhook without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
+      );
+      client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.receiveTriggerWebhook(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes receiveTriggerWebhook without error using callback', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
+      );
+      client.innerApiCalls.receiveTriggerWebhook = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.receiveTriggerWebhook(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes receiveTriggerWebhook with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
+      );
+      request.projectId = '';
+      const expectedHeaderRequestParams = 'project_id=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.receiveTriggerWebhook(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('createWorkerPool', () => {
     it('invokes createWorkerPool without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
@@ -2592,6 +2709,82 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
+    describe('cryptoKey', () => {
+      const fakePath = '/rendered/path/cryptoKey';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        keyring: 'keyringValue',
+        key: 'keyValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyPath', () => {
+        const result = client.cryptoKeyPath(
+          'projectValue',
+          'locationValue',
+          'keyringValue',
+          'keyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCryptoKeyName', () => {
+        const result = client.matchProjectFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCryptoKeyName', () => {
+        const result = client.matchLocationFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyringFromCryptoKeyName', () => {
+        const result = client.matchKeyringFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'keyringValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyFromCryptoKeyName', () => {
+        const result = client.matchKeyFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'keyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -2745,6 +2938,70 @@ describe('v1.CloudBuildClient', () => {
         assert(
           (client.pathTemplates.projectLocationBuildPathTemplate
             .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('secretVersion', () => {
+      const fakePath = '/rendered/path/secretVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        secret: 'secretValue',
+        version: 'versionValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.secretVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.secretVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('secretVersionPath', () => {
+        const result = client.secretVersionPath(
+          'projectValue',
+          'secretValue',
+          'versionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSecretVersionName', () => {
+        const result = client.matchProjectFromSecretVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretFromSecretVersionName', () => {
+        const result = client.matchSecretFromSecretVersionName(fakePath);
+        assert.strictEqual(result, 'secretValue');
+        assert(
+          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchVersionFromSecretVersionName', () => {
+        const result = client.matchVersionFromSecretVersionName(fakePath);
+        assert.strictEqual(result, 'versionValue');
+        assert(
+          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

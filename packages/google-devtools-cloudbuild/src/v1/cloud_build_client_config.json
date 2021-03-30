@@ -75,6 +75,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ReceiveTriggerWebhook": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateWorkerPool": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",

@@ -40,6 +40,11 @@
                 "updateBuildTrigger"
               ]
             },
+            "ReceiveTriggerWebhook": {
+              "methods": [
+                "receiveTriggerWebhook"
+              ]
+            },
             "CreateWorkerPool": {
               "methods": [
                 "createWorkerPool"
@@ -127,6 +132,11 @@
             "UpdateBuildTrigger": {
               "methods": [
                 "updateBuildTrigger"
+              ]
+            },
+            "ReceiveTriggerWebhook": {
+              "methods": [
+                "receiveTriggerWebhook"
               ]
             },
             "CreateWorkerPool": {

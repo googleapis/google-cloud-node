@@ -201,6 +201,20 @@ export namespace google {
                     public runBuildTrigger(request: google.devtools.cloudbuild.v1.IRunBuildTriggerRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ReceiveTriggerWebhook.
+                     * @param request ReceiveTriggerWebhookRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReceiveTriggerWebhookResponse
+                     */
+                    public receiveTriggerWebhook(request: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest, callback: google.devtools.cloudbuild.v1.CloudBuild.ReceiveTriggerWebhookCallback): void;
+
+                    /**
+                     * Calls ReceiveTriggerWebhook.
+                     * @param request ReceiveTriggerWebhookRequest message or plain object
+                     * @returns Promise
+                     */
+                    public receiveTriggerWebhook(request: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest): Promise<google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse>;
+
+                    /**
                      * Calls CreateWorkerPool.
                      * @param request CreateWorkerPoolRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and WorkerPool
@@ -349,6 +363,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RunBuildTriggerCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#receiveTriggerWebhook}.
+                     * @param error Error, if any
+                     * @param [response] ReceiveTriggerWebhookResponse
+                     */
+                    type ReceiveTriggerWebhookCallback = (error: (Error|null), response?: google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse) => void;
 
                     /**
                      * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#createWorkerPool}.
@@ -1579,6 +1600,9 @@ export namespace google {
 
                     /** Build serviceAccount */
                     serviceAccount?: (string|null);
+
+                    /** Build availableSecrets */
+                    availableSecrets?: (google.devtools.cloudbuild.v1.ISecrets|null);
                 }
 
                 /** Represents a Build. */
@@ -1664,6 +1688,9 @@ export namespace google {
 
                     /** Build serviceAccount. */
                     public serviceAccount: string;
+
+                    /** Build availableSecrets. */
+                    public availableSecrets?: (google.devtools.cloudbuild.v1.ISecrets|null);
 
                     /**
                      * Creates a new Build instance using the specified properties.
@@ -2435,6 +2462,294 @@ export namespace google {
                         SHA256 = 1,
                         MD5 = 2
                     }
+                }
+
+                /** Properties of a Secrets. */
+                interface ISecrets {
+
+                    /** Secrets secretManager */
+                    secretManager?: (google.devtools.cloudbuild.v1.ISecretManagerSecret[]|null);
+
+                    /** Secrets inline */
+                    inline?: (google.devtools.cloudbuild.v1.IInlineSecret[]|null);
+                }
+
+                /** Represents a Secrets. */
+                class Secrets implements ISecrets {
+
+                    /**
+                     * Constructs a new Secrets.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.ISecrets);
+
+                    /** Secrets secretManager. */
+                    public secretManager: google.devtools.cloudbuild.v1.ISecretManagerSecret[];
+
+                    /** Secrets inline. */
+                    public inline: google.devtools.cloudbuild.v1.IInlineSecret[];
+
+                    /**
+                     * Creates a new Secrets instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Secrets instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.ISecrets): google.devtools.cloudbuild.v1.Secrets;
+
+                    /**
+                     * Encodes the specified Secrets message. Does not implicitly {@link google.devtools.cloudbuild.v1.Secrets.verify|verify} messages.
+                     * @param message Secrets message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.ISecrets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Secrets message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Secrets.verify|verify} messages.
+                     * @param message Secrets message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.ISecrets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Secrets message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Secrets
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Secrets;
+
+                    /**
+                     * Decodes a Secrets message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Secrets
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Secrets;
+
+                    /**
+                     * Verifies a Secrets message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Secrets message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Secrets
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Secrets;
+
+                    /**
+                     * Creates a plain object from a Secrets message. Also converts values to other types if specified.
+                     * @param message Secrets
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.Secrets, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Secrets to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an InlineSecret. */
+                interface IInlineSecret {
+
+                    /** InlineSecret kmsKeyName */
+                    kmsKeyName?: (string|null);
+
+                    /** InlineSecret envMap */
+                    envMap?: ({ [k: string]: Uint8Array }|null);
+                }
+
+                /** Represents an InlineSecret. */
+                class InlineSecret implements IInlineSecret {
+
+                    /**
+                     * Constructs a new InlineSecret.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IInlineSecret);
+
+                    /** InlineSecret kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /** InlineSecret envMap. */
+                    public envMap: { [k: string]: Uint8Array };
+
+                    /**
+                     * Creates a new InlineSecret instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InlineSecret instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IInlineSecret): google.devtools.cloudbuild.v1.InlineSecret;
+
+                    /**
+                     * Encodes the specified InlineSecret message. Does not implicitly {@link google.devtools.cloudbuild.v1.InlineSecret.verify|verify} messages.
+                     * @param message InlineSecret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IInlineSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InlineSecret message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.InlineSecret.verify|verify} messages.
+                     * @param message InlineSecret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IInlineSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InlineSecret message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InlineSecret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.InlineSecret;
+
+                    /**
+                     * Decodes an InlineSecret message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InlineSecret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.InlineSecret;
+
+                    /**
+                     * Verifies an InlineSecret message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InlineSecret message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InlineSecret
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.InlineSecret;
+
+                    /**
+                     * Creates a plain object from an InlineSecret message. Also converts values to other types if specified.
+                     * @param message InlineSecret
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.InlineSecret, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InlineSecret to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SecretManagerSecret. */
+                interface ISecretManagerSecret {
+
+                    /** SecretManagerSecret versionName */
+                    versionName?: (string|null);
+
+                    /** SecretManagerSecret env */
+                    env?: (string|null);
+                }
+
+                /** Represents a SecretManagerSecret. */
+                class SecretManagerSecret implements ISecretManagerSecret {
+
+                    /**
+                     * Constructs a new SecretManagerSecret.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.ISecretManagerSecret);
+
+                    /** SecretManagerSecret versionName. */
+                    public versionName: string;
+
+                    /** SecretManagerSecret env. */
+                    public env: string;
+
+                    /**
+                     * Creates a new SecretManagerSecret instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretManagerSecret instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.ISecretManagerSecret): google.devtools.cloudbuild.v1.SecretManagerSecret;
+
+                    /**
+                     * Encodes the specified SecretManagerSecret message. Does not implicitly {@link google.devtools.cloudbuild.v1.SecretManagerSecret.verify|verify} messages.
+                     * @param message SecretManagerSecret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.ISecretManagerSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretManagerSecret message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.SecretManagerSecret.verify|verify} messages.
+                     * @param message SecretManagerSecret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.ISecretManagerSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretManagerSecret message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretManagerSecret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.SecretManagerSecret;
+
+                    /**
+                     * Decodes a SecretManagerSecret message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretManagerSecret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.SecretManagerSecret;
+
+                    /**
+                     * Verifies a SecretManagerSecret message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretManagerSecret message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretManagerSecret
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.SecretManagerSecret;
+
+                    /**
+                     * Creates a plain object from a SecretManagerSecret message. Also converts values to other types if specified.
+                     * @param message SecretManagerSecret
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.SecretManagerSecret, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretManagerSecret to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a Secret. */
@@ -3441,7 +3756,8 @@ export namespace google {
                     /** CommentControl enum. */
                     enum CommentControl {
                         COMMENTS_DISABLED = 0,
-                        COMMENTS_ENABLED = 1
+                        COMMENTS_ENABLED = 1,
+                        COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY = 2
                     }
                 }
 
@@ -4306,7 +4622,9 @@ export namespace google {
                     enum MachineType {
                         UNSPECIFIED = 0,
                         N1_HIGHCPU_8 = 1,
-                        N1_HIGHCPU_32 = 2
+                        N1_HIGHCPU_32 = 2,
+                        E2_HIGHCPU_8 = 5,
+                        E2_HIGHCPU_32 = 6
                     }
 
                     /** SubstitutionOption enum. */
@@ -4331,6 +4649,198 @@ export namespace google {
                         CLOUD_LOGGING_ONLY = 5,
                         NONE = 4
                     }
+                }
+
+                /** Properties of a ReceiveTriggerWebhookRequest. */
+                interface IReceiveTriggerWebhookRequest {
+
+                    /** ReceiveTriggerWebhookRequest body */
+                    body?: (google.api.IHttpBody|null);
+
+                    /** ReceiveTriggerWebhookRequest projectId */
+                    projectId?: (string|null);
+
+                    /** ReceiveTriggerWebhookRequest trigger */
+                    trigger?: (string|null);
+
+                    /** ReceiveTriggerWebhookRequest secret */
+                    secret?: (string|null);
+                }
+
+                /** Represents a ReceiveTriggerWebhookRequest. */
+                class ReceiveTriggerWebhookRequest implements IReceiveTriggerWebhookRequest {
+
+                    /**
+                     * Constructs a new ReceiveTriggerWebhookRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest);
+
+                    /** ReceiveTriggerWebhookRequest body. */
+                    public body?: (google.api.IHttpBody|null);
+
+                    /** ReceiveTriggerWebhookRequest projectId. */
+                    public projectId: string;
+
+                    /** ReceiveTriggerWebhookRequest trigger. */
+                    public trigger: string;
+
+                    /** ReceiveTriggerWebhookRequest secret. */
+                    public secret: string;
+
+                    /**
+                     * Creates a new ReceiveTriggerWebhookRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReceiveTriggerWebhookRequest instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest;
+
+                    /**
+                     * Encodes the specified ReceiveTriggerWebhookRequest message. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest.verify|verify} messages.
+                     * @param message ReceiveTriggerWebhookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReceiveTriggerWebhookRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest.verify|verify} messages.
+                     * @param message ReceiveTriggerWebhookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReceiveTriggerWebhookRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReceiveTriggerWebhookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest;
+
+                    /**
+                     * Decodes a ReceiveTriggerWebhookRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReceiveTriggerWebhookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest;
+
+                    /**
+                     * Verifies a ReceiveTriggerWebhookRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReceiveTriggerWebhookRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReceiveTriggerWebhookRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest;
+
+                    /**
+                     * Creates a plain object from a ReceiveTriggerWebhookRequest message. Also converts values to other types if specified.
+                     * @param message ReceiveTriggerWebhookRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReceiveTriggerWebhookRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ReceiveTriggerWebhookResponse. */
+                interface IReceiveTriggerWebhookResponse {
+                }
+
+                /** Represents a ReceiveTriggerWebhookResponse. */
+                class ReceiveTriggerWebhookResponse implements IReceiveTriggerWebhookResponse {
+
+                    /**
+                     * Constructs a new ReceiveTriggerWebhookResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse);
+
+                    /**
+                     * Creates a new ReceiveTriggerWebhookResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReceiveTriggerWebhookResponse instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse;
+
+                    /**
+                     * Encodes the specified ReceiveTriggerWebhookResponse message. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse.verify|verify} messages.
+                     * @param message ReceiveTriggerWebhookResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReceiveTriggerWebhookResponse message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse.verify|verify} messages.
+                     * @param message ReceiveTriggerWebhookResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReceiveTriggerWebhookResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReceiveTriggerWebhookResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse;
+
+                    /**
+                     * Decodes a ReceiveTriggerWebhookResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReceiveTriggerWebhookResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse;
+
+                    /**
+                     * Verifies a ReceiveTriggerWebhookResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReceiveTriggerWebhookResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReceiveTriggerWebhookResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse;
+
+                    /**
+                     * Creates a plain object from a ReceiveTriggerWebhookResponse message. Also converts values to other types if specified.
+                     * @param message ReceiveTriggerWebhookResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReceiveTriggerWebhookResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a WorkerPool. */
@@ -5614,6 +6124,108 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6
+        }
+
+        /** Properties of a HttpBody. */
+        interface IHttpBody {
+
+            /** HttpBody contentType */
+            contentType?: (string|null);
+
+            /** HttpBody data */
+            data?: (Uint8Array|string|null);
+
+            /** HttpBody extensions */
+            extensions?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a HttpBody. */
+        class HttpBody implements IHttpBody {
+
+            /**
+             * Constructs a new HttpBody.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IHttpBody);
+
+            /** HttpBody contentType. */
+            public contentType: string;
+
+            /** HttpBody data. */
+            public data: (Uint8Array|string);
+
+            /** HttpBody extensions. */
+            public extensions: google.protobuf.IAny[];
+
+            /**
+             * Creates a new HttpBody instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns HttpBody instance
+             */
+            public static create(properties?: google.api.IHttpBody): google.api.HttpBody;
+
+            /**
+             * Encodes the specified HttpBody message. Does not implicitly {@link google.api.HttpBody.verify|verify} messages.
+             * @param message HttpBody message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IHttpBody, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified HttpBody message, length delimited. Does not implicitly {@link google.api.HttpBody.verify|verify} messages.
+             * @param message HttpBody message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IHttpBody, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a HttpBody message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns HttpBody
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.HttpBody;
+
+            /**
+             * Decodes a HttpBody message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns HttpBody
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.HttpBody;
+
+            /**
+             * Verifies a HttpBody message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a HttpBody message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns HttpBody
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.HttpBody;
+
+            /**
+             * Creates a plain object from a HttpBody message. Also converts values to other types if specified.
+             * @param message HttpBody
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.HttpBody, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this HttpBody to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of a ResourceDescriptor. */

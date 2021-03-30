@@ -14,8 +14,8 @@
                     "java_package": "com.google.cloudbuild.v1",
                     "objc_class_prefix": "GCB",
                     "ruby_package": "Google::Cloud::Build::V1",
-                    "(google.api.resource_definition).type": "iam.googleapis.com/ServiceAccount",
-                    "(google.api.resource_definition).pattern": "projects/{project}/serviceAccounts/{service_account}"
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}"
                   },
                   "nested": {
                     "CloudBuild": {
@@ -31,7 +31,7 @@
                             "(google.api.http).post": "/v1/projects/{project_id}/builds",
                             "(google.api.http).body": "build",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/builds",
-                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.http).additional_bindings.body": "build",
                             "(google.api.method_signature)": "project_id,build",
                             "(google.longrunning.operation_info).response_type": "Build",
                             "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
@@ -43,7 +43,7 @@
                                 "body": "build",
                                 "additional_bindings": {
                                   "post": "/v1/{parent=projects/*/locations/*}/builds",
-                                  "body": "*"
+                                  "body": "build"
                                 }
                               }
                             },
@@ -284,6 +284,22 @@
                             }
                           ]
                         },
+                        "ReceiveTriggerWebhook": {
+                          "requestType": "ReceiveTriggerWebhookRequest",
+                          "responseType": "ReceiveTriggerWebhookResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project_id}/triggers/{trigger}:webhook",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/triggers/{trigger}:webhook",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "CreateWorkerPool": {
                           "requestType": "CreateWorkerPoolRequest",
                           "responseType": "WorkerPool"
@@ -349,10 +365,7 @@
                         },
                         "source": {
                           "type": "RepoSource",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 3
                         }
                       }
                     },
@@ -736,6 +749,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
                           }
+                        },
+                        "availableSecrets": {
+                          "type": "Secrets",
+                          "id": 47
                         }
                       },
                       "nested": {
@@ -856,6 +873,51 @@
                             "SHA256": 1,
                             "MD5": 2
                           }
+                        }
+                      }
+                    },
+                    "Secrets": {
+                      "fields": {
+                        "secretManager": {
+                          "rule": "repeated",
+                          "type": "SecretManagerSecret",
+                          "id": 1
+                        },
+                        "inline": {
+                          "rule": "repeated",
+                          "type": "InlineSecret",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "InlineSecret": {
+                      "fields": {
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "envMap": {
+                          "keyType": "string",
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SecretManagerSecret": {
+                      "fields": {
+                        "versionName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "env": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1129,7 +1191,8 @@
                         "CommentControl": {
                           "values": {
                             "COMMENTS_DISABLED": 0,
-                            "COMMENTS_ENABLED": 1
+                            "COMMENTS_ENABLED": 1,
+                            "COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY": 2
                           }
                         }
                       }
@@ -1335,7 +1398,9 @@
                           "values": {
                             "UNSPECIFIED": 0,
                             "N1_HIGHCPU_8": 1,
-                            "N1_HIGHCPU_32": 2
+                            "N1_HIGHCPU_32": 2,
+                            "E2_HIGHCPU_8": 5,
+                            "E2_HIGHCPU_32": 6
                           }
                         },
                         "SubstitutionOption": {
@@ -1362,6 +1427,29 @@
                           }
                         }
                       }
+                    },
+                    "ReceiveTriggerWebhookRequest": {
+                      "fields": {
+                        "body": {
+                          "type": "google.api.HttpBody",
+                          "id": 1
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "trigger": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "secret": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ReceiveTriggerWebhookResponse": {
+                      "fields": {}
                     },
                     "WorkerPool": {
                       "fields": {
@@ -1655,6 +1743,23 @@
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6
+              }
+            },
+            "HttpBody": {
+              "fields": {
+                "contentType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "data": {
+                  "type": "bytes",
+                  "id": 2
+                },
+                "extensions": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
               }
             },
             "resourceReference": {
