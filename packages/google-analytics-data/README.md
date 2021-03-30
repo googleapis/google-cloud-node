@@ -58,21 +58,22 @@ npm install @google-analytics/data
 
 ```javascript
 /**
- * TODO(developer): Uncomment this variable and replace with your GA4
- *   property ID before running the sample.
+ * TODO(developer): Uncomment this variable and replace with your
+ *   Google Analytics 4 property ID before running the sample.
  */
 // propertyId = 'YOUR-GA4-PROPERTY-ID';
 
 // Imports the Google Analytics Data API client library.
 const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
-// Creates a client.
+// Using a default constructor instructs the client to use the credentials
+// specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
 const analyticsDataClient = new BetaAnalyticsDataClient();
 
 // Runs a simple report.
 async function runReport() {
   const [response] = await analyticsDataClient.runReport({
-    property: 'properties/' + propertyId,
+    property: `properties/${propertyId}`,
     dateRanges: [
       {
         startDate: '2020-03-31',
@@ -110,6 +111,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-analytics-d
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart_json_credentials | [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/quickstart_json_credentials.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart_json_credentials.js,samples/README.md) |
 | Quickstart_oauth2 | [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/quickstart_oauth2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart_oauth2.js,samples/README.md) |
 | Realtime | [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/realtime.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/realtime.js,samples/README.md) |
 
