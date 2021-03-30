@@ -1158,10 +1158,10 @@ export class NotebookServiceClient {
    * @param {google.cloud.notebooks.v1beta1.Instance.AcceleratorType} request.type
    *   Required. Type of this accelerator.
    * @param {number} request.coreCount
-   *   Required. Count of cores of this accelerator. Note that not all combinations
-   *   of `type` and `core_count` are valid. Check [GPUs on
-   *   Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
-   *   find a valid combination. TPUs are not supported.
+   *   Required. Count of cores of this accelerator. Note that not all
+   *   combinations of `type` and `core_count` are valid. Check [GPUs on Compute
+   *   Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
+   *   valid combination. TPUs are not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2623,10 +2623,10 @@ export class NotebookServiceClient {
    * @param {string} request.parent
    *   Required. Format: `projects/{project_id}/locations/{location}`
    * @param {string} request.environmentId
-   *   Required. User-defined unique ID of this environment. The `environment_id` must
-   *   be 1 to 63 characters long and contain only lowercase letters,
-   *   numeric characters, and dashes. The first character must be a lowercase
-   *   letter and the last character cannot be a dash.
+   *   Required. User-defined unique ID of this environment. The `environment_id`
+   *   must be 1 to 63 characters long and contain only lowercase letters, numeric
+   *   characters, and dashes. The first character must be a lowercase letter and
+   *   the last character cannot be a dash.
    * @param {google.cloud.notebooks.v1beta1.Environment} request.environment
    *   Required. The environment to be created.
    * @param {object} [options]
