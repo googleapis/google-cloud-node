@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-api-gateway.git",
-        "sha": "1aab7d895701f479b96b358dc3117276f977a4e4"
+        "sha": "80d2c6350ca305ae5e96a76d30edd72ef97a7fd5"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cd26fbc116e430ffa5c736dd5dcdb19d370e0430",
-        "internalRef": "363699248"
+        "sha": "c0507a2bf28ea9f9af82559f2c876d2af598d6d9",
+        "internalRef": "365593953"
       }
     },
     {

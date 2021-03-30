@@ -13,7 +13,7 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.apigateway.v1",
                     "php_namespace": "Google\\Cloud\\ApiGateway\\V1",
-                    "ruby_package": "Google::Cloud::APIGateway::V1",
+                    "ruby_package": "Google::Cloud::ApiGateway::V1",
                     "(google.api.resource_definition).type": "servicemanagement.googleapis.com/Service",
                     "(google.api.resource_definition).pattern": "services/{service}/configs/{config}"
                   },
