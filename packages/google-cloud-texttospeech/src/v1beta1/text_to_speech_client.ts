@@ -316,13 +316,14 @@ export class TextToSpeechClient {
    *   The request object that will be sent.
    * @param {string} [request.languageCode]
    *   Optional. Recommended.
-   *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
-   *   specified, the ListVoices call will only return voices that can be used to
-   *   synthesize this language_code. E.g. when specifying "en-NZ", you will get
-   *   supported "en-\*" voices; when specifying "no", you will get supported
+   *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+   *   If not specified, the API will return all supported voices.
+   *   If specified, the ListVoices call will only return voices that can be used
+   *   to synthesize this language_code. E.g. when specifying "en-NZ", you will
+   *   get supported "en-NZ" voices; when specifying "no", you will get supported
    *   "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh"
    *   will also get supported "cmn-\*" voices; specifying "zh-hk" will also get
-   *   supported "yue-\*" voices.
+   *   supported "yue-hk" voices.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -417,7 +418,7 @@ export class TextToSpeechClient {
    * @param {google.cloud.texttospeech.v1beta1.AudioConfig} request.audioConfig
    *   Required. The configuration of the synthesized audio.
    * @param {number[]} request.enableTimePointing
-   *   Whether and what timepoints should be returned in the response.
+   *   Whether and what timepoints are returned in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

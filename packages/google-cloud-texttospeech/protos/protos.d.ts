@@ -1084,7 +1084,8 @@ export namespace google {
                     MP3 = 2,
                     MP3_64_KBPS = 4,
                     OGG_OPUS = 3,
-                    MULAW = 5
+                    MULAW = 5,
+                    ALAW = 6
                 }
 
                 /** Properties of a ListVoicesResponse. */
