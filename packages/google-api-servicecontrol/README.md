@@ -5,13 +5,13 @@
 # [Service Control API: Node.js Client](https://github.com/googleapis/nodejs-service-control)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/undefined.svg)](https://www.npmjs.org/package/undefined)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/service-control.svg)](https://www.npmjs.org/package/@google-cloud/service-control)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-service-control/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-service-control)
 
 
 
 
-Servicecontrol client for Node.js
+Service control client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install undefined
+npm install @google-cloud/service-control
 ```
 
 
@@ -60,25 +60,21 @@ npm install undefined
 ```javascript
 // Imports the Google Cloud client library
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {ServiceControllerClient} = require('');
+const {ServiceControllerClient} = require('@google-cloud/service-control');
 
-// TODO(developer): replace with your prefered project ID.
+// TODO(developer): replace with your prefered project ID and serviceName.
 // const projectId = 'my-project'
+// the service name to test, like 'pubsub.googleapis.com'
+// const serviceName = 'pubsub.googleapis.com'
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {ServiceControllerClient}();
+const client = new ServiceControllerClient();
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function reportOperationResults() {
+  const [response] = await client.report({serviceName});
+  console.info(response);
 }
-doSomething();
+reportOperationResults();
 
 ```
 

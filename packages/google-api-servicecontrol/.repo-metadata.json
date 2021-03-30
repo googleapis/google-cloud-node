@@ -1,5 +1,5 @@
 {
-  "name": "servicecontrol",
+  "name": "service-control",
   "name_pretty": "Service Control API",
   "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
   "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-control/reference",
@@ -7,7 +7,7 @@
   "release_level": "GA",
   "language": "nodejs",
   "repo": "googleapis/nodejs-service-control",
-  "distribution_name": "",
+  "distribution_name": "@google-cloud/service-control",
   "api_id": "servicecontrol.googleapis.com",
   "requires_billing": true
 }

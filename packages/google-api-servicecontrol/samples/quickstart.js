@@ -13,31 +13,25 @@
 
 'use strict';
 
-async function main() {
+async function main(serviceName) {
   // [START nodejs_service_control_quickstart]
   // Imports the Google Cloud client library
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
-  const {ServiceControllerClient} = require('');
+  const {ServiceControllerClient} = require('@google-cloud/service-control');
 
-  // TODO(developer): replace with your prefered project ID.
+  // TODO(developer): replace with your prefered project ID and serviceName.
   // const projectId = 'my-project'
+  // the service name to test, like 'pubsub.googleapis.com'
+  // const serviceName = 'pubsub.googleapis.com'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {ServiceControllerClient}();
+  const client = new ServiceControllerClient();
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  async function reportOperationResults() {
+    const [response] = await client.report({serviceName});
+    console.info(response);
   }
-  doSomething();
+  reportOperationResults();
   // [END nodejs_service_control_quickstart]
 }
 

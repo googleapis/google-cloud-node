@@ -3,23 +3,23 @@
     {
       "git": {
         "name": ".",
-        "remote": "sso://user/sofialeon/nodejs-service-control",
-        "sha": "a67a7591df40ae306d6f4b63b26f4d78c950fcdf"
+        "remote": "git@github.com:googleapis/nodejs-service-control.git",
+        "sha": "5ab1515518da236bb9adc1e8b666306c491b5863"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d652c6370bf66e325da6ac9ad82989fe7ee7bb4b",
-        "internalRef": "362183999"
+        "sha": "2124b6251e56e2ec8dd5c47e7d3815d7d5841880",
+        "internalRef": "364422694"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "ac8f20f12e7a4c0b0ae1c6fa415f684a25ea82b7"
+        "sha": "79c8dd7ee768292f933012d3a69a5b4676404cda"
       }
     }
   ],
