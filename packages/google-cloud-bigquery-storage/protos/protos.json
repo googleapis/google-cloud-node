@@ -40,6 +40,22 @@
                             }
                           }
                         },
+                        "ArrowSerializationOptions": {
+                          "fields": {
+                            "bufferCompression": {
+                              "type": "CompressionCodec",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "CompressionCodec": {
+                              "values": {
+                                "COMPRESSION_UNSPECIFIED": 0,
+                                "LZ4_FRAME": 1
+                              }
+                            }
+                          }
+                        },
                         "AvroSchema": {
                           "fields": {
                             "schema": {
@@ -197,6 +213,12 @@
                                 "avroRows",
                                 "arrowRecordBatch"
                               ]
+                            },
+                            "schema": {
+                              "oneof": [
+                                "avroSchema",
+                                "arrowSchema"
+                              ]
                             }
                           },
                           "fields": {
@@ -219,6 +241,20 @@
                             "throttleState": {
                               "type": "ThrottleState",
                               "id": 5
+                            },
+                            "avroSchema": {
+                              "type": "AvroSchema",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "arrowSchema": {
+                              "type": "ArrowSchema",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -347,6 +383,13 @@
                               }
                             },
                             "TableReadOptions": {
+                              "oneofs": {
+                                "outputFormatSerializationOptions": {
+                                  "oneof": [
+                                    "arrowSerializationOptions"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "selectedFields": {
                                   "rule": "repeated",
@@ -356,6 +399,13 @@
                                 "rowRestriction": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "arrowSerializationOptions": {
+                                  "type": "ArrowSerializationOptions",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             }

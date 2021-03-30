@@ -215,6 +215,105 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of an ArrowSerializationOptions. */
+                    interface IArrowSerializationOptions {
+
+                        /** ArrowSerializationOptions bufferCompression */
+                        bufferCompression?: (google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec|keyof typeof google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec|null);
+                    }
+
+                    /** Represents an ArrowSerializationOptions. */
+                    class ArrowSerializationOptions implements IArrowSerializationOptions {
+
+                        /**
+                         * Constructs a new ArrowSerializationOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.storage.v1.IArrowSerializationOptions);
+
+                        /** ArrowSerializationOptions bufferCompression. */
+                        public bufferCompression: (google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec|keyof typeof google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec);
+
+                        /**
+                         * Creates a new ArrowSerializationOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ArrowSerializationOptions instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.storage.v1.IArrowSerializationOptions): google.cloud.bigquery.storage.v1.ArrowSerializationOptions;
+
+                        /**
+                         * Encodes the specified ArrowSerializationOptions message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowSerializationOptions.verify|verify} messages.
+                         * @param message ArrowSerializationOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.storage.v1.IArrowSerializationOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ArrowSerializationOptions message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowSerializationOptions.verify|verify} messages.
+                         * @param message ArrowSerializationOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.storage.v1.IArrowSerializationOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ArrowSerializationOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ArrowSerializationOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.storage.v1.ArrowSerializationOptions;
+
+                        /**
+                         * Decodes an ArrowSerializationOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ArrowSerializationOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.storage.v1.ArrowSerializationOptions;
+
+                        /**
+                         * Verifies an ArrowSerializationOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ArrowSerializationOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ArrowSerializationOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.storage.v1.ArrowSerializationOptions;
+
+                        /**
+                         * Creates a plain object from an ArrowSerializationOptions message. Also converts values to other types if specified.
+                         * @param message ArrowSerializationOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.storage.v1.ArrowSerializationOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ArrowSerializationOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ArrowSerializationOptions {
+
+                        /** CompressionCodec enum. */
+                        enum CompressionCodec {
+                            COMPRESSION_UNSPECIFIED = 0,
+                            LZ4_FRAME = 1
+                        }
+                    }
+
                     /** Properties of an AvroSchema. */
                     interface IAvroSchema {
 
@@ -982,6 +1081,12 @@ export namespace google {
 
                         /** ReadRowsResponse throttleState */
                         throttleState?: (google.cloud.bigquery.storage.v1.IThrottleState|null);
+
+                        /** ReadRowsResponse avroSchema */
+                        avroSchema?: (google.cloud.bigquery.storage.v1.IAvroSchema|null);
+
+                        /** ReadRowsResponse arrowSchema */
+                        arrowSchema?: (google.cloud.bigquery.storage.v1.IArrowSchema|null);
                     }
 
                     /** Represents a ReadRowsResponse. */
@@ -1008,8 +1113,17 @@ export namespace google {
                         /** ReadRowsResponse throttleState. */
                         public throttleState?: (google.cloud.bigquery.storage.v1.IThrottleState|null);
 
+                        /** ReadRowsResponse avroSchema. */
+                        public avroSchema?: (google.cloud.bigquery.storage.v1.IAvroSchema|null);
+
+                        /** ReadRowsResponse arrowSchema. */
+                        public arrowSchema?: (google.cloud.bigquery.storage.v1.IArrowSchema|null);
+
                         /** ReadRowsResponse rows. */
                         public rows?: ("avroRows"|"arrowRecordBatch");
+
+                        /** ReadRowsResponse schema. */
+                        public schema?: ("avroSchema"|"arrowSchema");
 
                         /**
                          * Creates a new ReadRowsResponse instance using the specified properties.
@@ -1522,6 +1636,9 @@ export namespace google {
 
                             /** TableReadOptions rowRestriction */
                             rowRestriction?: (string|null);
+
+                            /** TableReadOptions arrowSerializationOptions */
+                            arrowSerializationOptions?: (google.cloud.bigquery.storage.v1.IArrowSerializationOptions|null);
                         }
 
                         /** Represents a TableReadOptions. */
@@ -1538,6 +1655,12 @@ export namespace google {
 
                             /** TableReadOptions rowRestriction. */
                             public rowRestriction: string;
+
+                            /** TableReadOptions arrowSerializationOptions. */
+                            public arrowSerializationOptions?: (google.cloud.bigquery.storage.v1.IArrowSerializationOptions|null);
+
+                            /** TableReadOptions outputFormatSerializationOptions. */
+                            public outputFormatSerializationOptions?: "arrowSerializationOptions";
 
                             /**
                              * Creates a new TableReadOptions instance using the specified properties.

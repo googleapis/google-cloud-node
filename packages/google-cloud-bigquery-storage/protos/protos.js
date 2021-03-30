@@ -504,6 +504,220 @@
                             return ArrowRecordBatch;
                         })();
     
+                        v1.ArrowSerializationOptions = (function() {
+    
+                            /**
+                             * Properties of an ArrowSerializationOptions.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @interface IArrowSerializationOptions
+                             * @property {google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec|null} [bufferCompression] ArrowSerializationOptions bufferCompression
+                             */
+    
+                            /**
+                             * Constructs a new ArrowSerializationOptions.
+                             * @memberof google.cloud.bigquery.storage.v1
+                             * @classdesc Represents an ArrowSerializationOptions.
+                             * @implements IArrowSerializationOptions
+                             * @constructor
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSerializationOptions=} [properties] Properties to set
+                             */
+                            function ArrowSerializationOptions(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ArrowSerializationOptions bufferCompression.
+                             * @member {google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec} bufferCompression
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @instance
+                             */
+                            ArrowSerializationOptions.prototype.bufferCompression = 0;
+    
+                            /**
+                             * Creates a new ArrowSerializationOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSerializationOptions=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSerializationOptions} ArrowSerializationOptions instance
+                             */
+                            ArrowSerializationOptions.create = function create(properties) {
+                                return new ArrowSerializationOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ArrowSerializationOptions message. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowSerializationOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSerializationOptions} message ArrowSerializationOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ArrowSerializationOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.bufferCompression != null && Object.hasOwnProperty.call(message, "bufferCompression"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.bufferCompression);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ArrowSerializationOptions message, length delimited. Does not implicitly {@link google.cloud.bigquery.storage.v1.ArrowSerializationOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.IArrowSerializationOptions} message ArrowSerializationOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ArrowSerializationOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ArrowSerializationOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSerializationOptions} ArrowSerializationOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ArrowSerializationOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2:
+                                        message.bufferCompression = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ArrowSerializationOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSerializationOptions} ArrowSerializationOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ArrowSerializationOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ArrowSerializationOptions message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ArrowSerializationOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.bufferCompression != null && message.hasOwnProperty("bufferCompression"))
+                                    switch (message.bufferCompression) {
+                                    default:
+                                        return "bufferCompression: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ArrowSerializationOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.storage.v1.ArrowSerializationOptions} ArrowSerializationOptions
+                             */
+                            ArrowSerializationOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions();
+                                switch (object.bufferCompression) {
+                                case "COMPRESSION_UNSPECIFIED":
+                                case 0:
+                                    message.bufferCompression = 0;
+                                    break;
+                                case "LZ4_FRAME":
+                                case 1:
+                                    message.bufferCompression = 1;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ArrowSerializationOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @static
+                             * @param {google.cloud.bigquery.storage.v1.ArrowSerializationOptions} message ArrowSerializationOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ArrowSerializationOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.bufferCompression = options.enums === String ? "COMPRESSION_UNSPECIFIED" : 0;
+                                if (message.bufferCompression != null && message.hasOwnProperty("bufferCompression"))
+                                    object.bufferCompression = options.enums === String ? $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec[message.bufferCompression] : message.bufferCompression;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ArrowSerializationOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.storage.v1.ArrowSerializationOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ArrowSerializationOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * CompressionCodec enum.
+                             * @name google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec
+                             * @enum {number}
+                             * @property {number} COMPRESSION_UNSPECIFIED=0 COMPRESSION_UNSPECIFIED value
+                             * @property {number} LZ4_FRAME=1 LZ4_FRAME value
+                             */
+                            ArrowSerializationOptions.CompressionCodec = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "COMPRESSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "LZ4_FRAME"] = 1;
+                                return values;
+                            })();
+    
+                            return ArrowSerializationOptions;
+                        })();
+    
                         v1.AvroSchema = (function() {
     
                             /**
@@ -2119,6 +2333,8 @@
                              * @property {number|Long|null} [rowCount] ReadRowsResponse rowCount
                              * @property {google.cloud.bigquery.storage.v1.IStreamStats|null} [stats] ReadRowsResponse stats
                              * @property {google.cloud.bigquery.storage.v1.IThrottleState|null} [throttleState] ReadRowsResponse throttleState
+                             * @property {google.cloud.bigquery.storage.v1.IAvroSchema|null} [avroSchema] ReadRowsResponse avroSchema
+                             * @property {google.cloud.bigquery.storage.v1.IArrowSchema|null} [arrowSchema] ReadRowsResponse arrowSchema
                              */
     
                             /**
@@ -2176,6 +2392,22 @@
                              */
                             ReadRowsResponse.prototype.throttleState = null;
     
+                            /**
+                             * ReadRowsResponse avroSchema.
+                             * @member {google.cloud.bigquery.storage.v1.IAvroSchema|null|undefined} avroSchema
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            ReadRowsResponse.prototype.avroSchema = null;
+    
+                            /**
+                             * ReadRowsResponse arrowSchema.
+                             * @member {google.cloud.bigquery.storage.v1.IArrowSchema|null|undefined} arrowSchema
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            ReadRowsResponse.prototype.arrowSchema = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -2187,6 +2419,17 @@
                              */
                             Object.defineProperty(ReadRowsResponse.prototype, "rows", {
                                 get: $util.oneOfGetter($oneOfFields = ["avroRows", "arrowRecordBatch"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ReadRowsResponse schema.
+                             * @member {"avroSchema"|"arrowSchema"|undefined} schema
+                             * @memberof google.cloud.bigquery.storage.v1.ReadRowsResponse
+                             * @instance
+                             */
+                            Object.defineProperty(ReadRowsResponse.prototype, "schema", {
+                                get: $util.oneOfGetter($oneOfFields = ["avroSchema", "arrowSchema"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -2224,6 +2467,10 @@
                                     $root.google.cloud.bigquery.storage.v1.ThrottleState.encode(message.throttleState, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).int64(message.rowCount);
+                                if (message.avroSchema != null && Object.hasOwnProperty.call(message, "avroSchema"))
+                                    $root.google.cloud.bigquery.storage.v1.AvroSchema.encode(message.avroSchema, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.arrowSchema != null && Object.hasOwnProperty.call(message, "arrowSchema"))
+                                    $root.google.cloud.bigquery.storage.v1.ArrowSchema.encode(message.arrowSchema, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2272,6 +2519,12 @@
                                         break;
                                     case 5:
                                         message.throttleState = $root.google.cloud.bigquery.storage.v1.ThrottleState.decode(reader, reader.uint32());
+                                        break;
+                                    case 7:
+                                        message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.decode(reader, reader.uint32());
+                                        break;
+                                    case 8:
+                                        message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2340,6 +2593,24 @@
                                     if (error)
                                         return "throttleState." + error;
                                 }
+                                if (message.avroSchema != null && message.hasOwnProperty("avroSchema")) {
+                                    properties.schema = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.storage.v1.AvroSchema.verify(message.avroSchema);
+                                        if (error)
+                                            return "avroSchema." + error;
+                                    }
+                                }
+                                if (message.arrowSchema != null && message.hasOwnProperty("arrowSchema")) {
+                                    if (properties.schema === 1)
+                                        return "schema: multiple values";
+                                    properties.schema = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.storage.v1.ArrowSchema.verify(message.arrowSchema);
+                                        if (error)
+                                            return "arrowSchema." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -2383,6 +2654,16 @@
                                     if (typeof object.throttleState !== "object")
                                         throw TypeError(".google.cloud.bigquery.storage.v1.ReadRowsResponse.throttleState: object expected");
                                     message.throttleState = $root.google.cloud.bigquery.storage.v1.ThrottleState.fromObject(object.throttleState);
+                                }
+                                if (object.avroSchema != null) {
+                                    if (typeof object.avroSchema !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadRowsResponse.avroSchema: object expected");
+                                    message.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.fromObject(object.avroSchema);
+                                }
+                                if (object.arrowSchema != null) {
+                                    if (typeof object.arrowSchema !== "object")
+                                        throw TypeError(".google.cloud.bigquery.storage.v1.ReadRowsResponse.arrowSchema: object expected");
+                                    message.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.fromObject(object.arrowSchema);
                                 }
                                 return message;
                             };
@@ -2428,6 +2709,16 @@
                                         object.rowCount = options.longs === String ? String(message.rowCount) : message.rowCount;
                                     else
                                         object.rowCount = options.longs === String ? $util.Long.prototype.toString.call(message.rowCount) : options.longs === Number ? new $util.LongBits(message.rowCount.low >>> 0, message.rowCount.high >>> 0).toNumber() : message.rowCount;
+                                if (message.avroSchema != null && message.hasOwnProperty("avroSchema")) {
+                                    object.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.toObject(message.avroSchema, options);
+                                    if (options.oneofs)
+                                        object.schema = "avroSchema";
+                                }
+                                if (message.arrowSchema != null && message.hasOwnProperty("arrowSchema")) {
+                                    object.arrowSchema = $root.google.cloud.bigquery.storage.v1.ArrowSchema.toObject(message.arrowSchema, options);
+                                    if (options.oneofs)
+                                        object.schema = "arrowSchema";
+                                }
                                 return object;
                             };
     
@@ -3544,6 +3835,7 @@
                                  * @interface ITableReadOptions
                                  * @property {Array.<string>|null} [selectedFields] TableReadOptions selectedFields
                                  * @property {string|null} [rowRestriction] TableReadOptions rowRestriction
+                                 * @property {google.cloud.bigquery.storage.v1.IArrowSerializationOptions|null} [arrowSerializationOptions] TableReadOptions arrowSerializationOptions
                                  */
     
                                 /**
@@ -3579,6 +3871,28 @@
                                 TableReadOptions.prototype.rowRestriction = "";
     
                                 /**
+                                 * TableReadOptions arrowSerializationOptions.
+                                 * @member {google.cloud.bigquery.storage.v1.IArrowSerializationOptions|null|undefined} arrowSerializationOptions
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @instance
+                                 */
+                                TableReadOptions.prototype.arrowSerializationOptions = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * TableReadOptions outputFormatSerializationOptions.
+                                 * @member {"arrowSerializationOptions"|undefined} outputFormatSerializationOptions
+                                 * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
+                                 * @instance
+                                 */
+                                Object.defineProperty(TableReadOptions.prototype, "outputFormatSerializationOptions", {
+                                    get: $util.oneOfGetter($oneOfFields = ["arrowSerializationOptions"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
                                  * Creates a new TableReadOptions instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions
@@ -3607,6 +3921,8 @@
                                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.selectedFields[i]);
                                     if (message.rowRestriction != null && Object.hasOwnProperty.call(message, "rowRestriction"))
                                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.rowRestriction);
+                                    if (message.arrowSerializationOptions != null && Object.hasOwnProperty.call(message, "arrowSerializationOptions"))
+                                        $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.encode(message.arrowSerializationOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -3649,6 +3965,9 @@
                                         case 2:
                                             message.rowRestriction = reader.string();
                                             break;
+                                        case 3:
+                                            message.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.decode(reader, reader.uint32());
+                                            break;
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -3684,6 +4003,7 @@
                                 TableReadOptions.verify = function verify(message) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    var properties = {};
                                     if (message.selectedFields != null && message.hasOwnProperty("selectedFields")) {
                                         if (!Array.isArray(message.selectedFields))
                                             return "selectedFields: array expected";
@@ -3694,6 +4014,14 @@
                                     if (message.rowRestriction != null && message.hasOwnProperty("rowRestriction"))
                                         if (!$util.isString(message.rowRestriction))
                                             return "rowRestriction: string expected";
+                                    if (message.arrowSerializationOptions != null && message.hasOwnProperty("arrowSerializationOptions")) {
+                                        properties.outputFormatSerializationOptions = 1;
+                                        {
+                                            var error = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.verify(message.arrowSerializationOptions);
+                                            if (error)
+                                                return "arrowSerializationOptions." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -3718,6 +4046,11 @@
                                     }
                                     if (object.rowRestriction != null)
                                         message.rowRestriction = String(object.rowRestriction);
+                                    if (object.arrowSerializationOptions != null) {
+                                        if (typeof object.arrowSerializationOptions !== "object")
+                                            throw TypeError(".google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions.arrowSerializationOptions: object expected");
+                                        message.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.fromObject(object.arrowSerializationOptions);
+                                    }
                                     return message;
                                 };
     
@@ -3745,6 +4078,11 @@
                                     }
                                     if (message.rowRestriction != null && message.hasOwnProperty("rowRestriction"))
                                         object.rowRestriction = message.rowRestriction;
+                                    if (message.arrowSerializationOptions != null && message.hasOwnProperty("arrowSerializationOptions")) {
+                                        object.arrowSerializationOptions = $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.toObject(message.arrowSerializationOptions, options);
+                                        if (options.oneofs)
+                                            object.outputFormatSerializationOptions = "arrowSerializationOptions";
+                                    }
                                     return object;
                                 };
     
