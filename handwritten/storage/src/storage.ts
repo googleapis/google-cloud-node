@@ -396,6 +396,7 @@ export class Storage extends Service {
     let apiEndpoint = 'https://storage.googleapis.com';
     let customEndpoint = false;
 
+    // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
     const EMULATOR_HOST = process.env.STORAGE_EMULATOR_HOST;
     if (typeof EMULATOR_HOST === 'string') {
       apiEndpoint = Storage.sanitizeEndpoint(EMULATOR_HOST);
@@ -409,6 +410,7 @@ export class Storage extends Service {
 
     options = Object.assign({}, options, {apiEndpoint});
 
+    // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
     const baseUrl = EMULATOR_HOST || `${options.apiEndpoint}/storage/v1`;
 
     const config = {

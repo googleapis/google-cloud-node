@@ -228,6 +228,7 @@ describe('Storage', () => {
     });
 
     describe('STORAGE_EMULATOR_HOST', () => {
+      // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
       const EMULATOR_HOST = 'https://internal.benchmark.com/path';
       before(() => {
         process.env.STORAGE_EMULATOR_HOST = EMULATOR_HOST;
