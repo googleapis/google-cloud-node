@@ -9070,6 +9070,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public listTestCaseResults(request: google.cloud.dialogflow.cx.v3.IListTestCaseResultsRequest): Promise<google.cloud.dialogflow.cx.v3.ListTestCaseResultsResponse>;
+
+                        /**
+                         * Calls GetTestCaseResult.
+                         * @param request GetTestCaseResultRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TestCaseResult
+                         */
+                        public getTestCaseResult(request: google.cloud.dialogflow.cx.v3.IGetTestCaseResultRequest, callback: google.cloud.dialogflow.cx.v3.TestCases.GetTestCaseResultCallback): void;
+
+                        /**
+                         * Calls GetTestCaseResult.
+                         * @param request GetTestCaseResultRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getTestCaseResult(request: google.cloud.dialogflow.cx.v3.IGetTestCaseResultRequest): Promise<google.cloud.dialogflow.cx.v3.TestCaseResult>;
                     }
 
                     namespace TestCases {
@@ -9150,6 +9164,13 @@ export namespace google {
                          * @param [response] ListTestCaseResultsResponse
                          */
                         type ListTestCaseResultsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListTestCaseResultsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.TestCases#getTestCaseResult}.
+                         * @param error Error, if any
+                         * @param [response] TestCaseResult
+                         */
+                        type GetTestCaseResultCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.TestCaseResult) => void;
                     }
 
                     /** Properties of a TestCase. */
@@ -13093,6 +13114,96 @@ export namespace google {
 
                         /**
                          * Converts this ListTestCaseResultsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GetTestCaseResultRequest. */
+                    interface IGetTestCaseResultRequest {
+
+                        /** GetTestCaseResultRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetTestCaseResultRequest. */
+                    class GetTestCaseResultRequest implements IGetTestCaseResultRequest {
+
+                        /**
+                         * Constructs a new GetTestCaseResultRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetTestCaseResultRequest);
+
+                        /** GetTestCaseResultRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetTestCaseResultRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetTestCaseResultRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetTestCaseResultRequest): google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest;
+
+                        /**
+                         * Encodes the specified GetTestCaseResultRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest.verify|verify} messages.
+                         * @param message GetTestCaseResultRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetTestCaseResultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetTestCaseResultRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest.verify|verify} messages.
+                         * @param message GetTestCaseResultRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetTestCaseResultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetTestCaseResultRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetTestCaseResultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest;
+
+                        /**
+                         * Decodes a GetTestCaseResultRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetTestCaseResultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest;
+
+                        /**
+                         * Verifies a GetTestCaseResultRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetTestCaseResultRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetTestCaseResultRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest;
+
+                        /**
+                         * Creates a plain object from a GetTestCaseResultRequest message. Also converts values to other types if specified.
+                         * @param message GetTestCaseResultRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetTestCaseResultRequest to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -22903,6 +23014,18 @@ export namespace google {
                         /** WebhookRequest detectIntentResponseId */
                         detectIntentResponseId?: (string|null);
 
+                        /** WebhookRequest text */
+                        text?: (string|null);
+
+                        /** WebhookRequest triggerIntent */
+                        triggerIntent?: (string|null);
+
+                        /** WebhookRequest transcript */
+                        transcript?: (string|null);
+
+                        /** WebhookRequest triggerEvent */
+                        triggerEvent?: (string|null);
+
                         /** WebhookRequest fulfillmentInfo */
                         fulfillmentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo|null);
 
@@ -22937,6 +23060,18 @@ export namespace google {
                         /** WebhookRequest detectIntentResponseId. */
                         public detectIntentResponseId: string;
 
+                        /** WebhookRequest text. */
+                        public text: string;
+
+                        /** WebhookRequest triggerIntent. */
+                        public triggerIntent: string;
+
+                        /** WebhookRequest transcript. */
+                        public transcript: string;
+
+                        /** WebhookRequest triggerEvent. */
+                        public triggerEvent: string;
+
                         /** WebhookRequest fulfillmentInfo. */
                         public fulfillmentInfo?: (google.cloud.dialogflow.cx.v3.WebhookRequest.IFulfillmentInfo|null);
 
@@ -22957,6 +23092,9 @@ export namespace google {
 
                         /** WebhookRequest sentimentAnalysisResult. */
                         public sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult|null);
+
+                        /** WebhookRequest query. */
+                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent");
 
                         /**
                          * Creates a new WebhookRequest instance using the specified properties.

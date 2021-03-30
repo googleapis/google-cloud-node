@@ -516,9 +516,6 @@ export class SessionEntityTypesClient {
   /**
    * Creates a session entity type.
    *
-   * If the specified session entity type already exists, overrides the
-   * session entity type.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent

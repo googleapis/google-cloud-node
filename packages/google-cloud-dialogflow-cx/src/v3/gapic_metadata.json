@@ -800,6 +800,11 @@
                 "calculateCoverage"
               ]
             },
+            "GetTestCaseResult": {
+              "methods": [
+                "getTestCaseResult"
+              ]
+            },
             "RunTestCase": {
               "methods": [
                 "runTestCase"
@@ -862,6 +867,11 @@
             "CalculateCoverage": {
               "methods": [
                 "calculateCoverage"
+              ]
+            },
+            "GetTestCaseResult": {
+              "methods": [
+                "getTestCaseResult"
               ]
             },
             "RunTestCase": {

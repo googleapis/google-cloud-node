@@ -2673,6 +2673,24 @@
                                   "(google.api.method_signature)": "parent"
                                 }
                               ]
+                            },
+                            "GetTestCaseResult": {
+                              "requestType": "GetTestCaseResultRequest",
+                              "responseType": "TestCaseResult",
+                              "options": {
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/testCases/*/results/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/testCases/*/results/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             }
                           }
                         },
@@ -3447,6 +3465,18 @@
                             }
                           }
                         },
+                        "GetTestCaseResultRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/TestCaseResult"
+                              }
+                            }
+                          }
+                        },
                         "TestResult": {
                           "values": {
                             "TEST_RESULT_UNSPECIFIED": 0,
@@ -4105,7 +4135,10 @@
                             },
                             "triggerIntent": {
                               "type": "string",
-                              "id": 11
+                              "id": 11,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Intent"
+                              }
                             },
                             "transcript": {
                               "type": "string",
@@ -4310,7 +4343,10 @@
                             },
                             "triggerIntent": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Intent"
+                              }
                             },
                             "transcript": {
                               "type": "string",
@@ -6219,10 +6255,39 @@
                           }
                         },
                         "WebhookRequest": {
+                          "oneofs": {
+                            "query": {
+                              "oneof": [
+                                "text",
+                                "triggerIntent",
+                                "transcript",
+                                "triggerEvent"
+                              ]
+                            }
+                          },
                           "fields": {
                             "detectIntentResponseId": {
                               "type": "string",
                               "id": 1
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 10
+                            },
+                            "triggerIntent": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Intent"
+                              }
+                            },
+                            "transcript": {
+                              "type": "string",
+                              "id": 12
+                            },
+                            "triggerEvent": {
+                              "type": "string",
+                              "id": 14
                             },
                             "fulfillmentInfo": {
                               "type": "FulfillmentInfo",
