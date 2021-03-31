@@ -1,7 +1,7 @@
 {
   "client_documentation": "https://googleapis.dev/nodejs/iot/latest",
   "api_id": "cloudiot.googleapis.com",
-  "codeowner_team": "@googleapis/ml-apis",
+  "codeowner_team": "@googleapis/api-iot",
   "distribution_name": "@google-cloud/iot",
   "release_level": "ga",
   "language": "nodejs",
