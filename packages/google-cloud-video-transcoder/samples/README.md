@@ -17,6 +17,8 @@
   * [Create Job From Template](#create-job-from-template)
   * [Create Job Template](#create-job-template)
   * [Create Job With Animated Overlay](#create-job-with-animated-overlay)
+  * [Create Job With Periodic Images Spritesheet](#create-job-with-periodic-images-spritesheet)
+  * [Create Job With Set Number Images Spritesheet](#create-job-with-set-number-images-spritesheet)
   * [Create Job With Static Overlay](#create-job-with-static-overlay)
   * [Delete Job](#delete-job)
   * [Delete Job Template](#delete-job-template)
@@ -120,6 +122,40 @@ __Usage:__
 
 
 `node samples/createJobWithAnimatedOverlay.js`
+
+
+-----
+
+
+
+
+### Create Job With Periodic Images Spritesheet
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobWithPeriodicImagesSpritesheet.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithPeriodicImagesSpritesheet.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobWithPeriodicImagesSpritesheet.js`
+
+
+-----
+
+
+
+
+### Create Job With Set Number Images Spritesheet
+
+View the [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobWithSetNumberImagesSpritesheet.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithSetNumberImagesSpritesheet.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createJobWithSetNumberImagesSpritesheet.js`
 
 
 -----
