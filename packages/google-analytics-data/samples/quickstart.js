@@ -27,25 +27,25 @@
  */
 
 function main(propertyId = 'YOUR-GA4-PROPERTY-ID') {
-  // [START google_analytics_data_quickstart]
+  // [START analyticsdata_quickstart]
   /**
    * TODO(developer): Uncomment this variable and replace with your
    *   Google Analytics 4 property ID before running the sample.
    */
   // propertyId = 'YOUR-GA4-PROPERTY-ID';
 
-  // [START google_analytics_data_initialize]
+  // [START analyticsdata_run_report_initialize]
   // Imports the Google Analytics Data API client library.
   const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
   // Using a default constructor instructs the client to use the credentials
   // specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
   const analyticsDataClient = new BetaAnalyticsDataClient();
-  // [END google_analytics_data_initialize]
+  // [END analyticsdata_run_report_initialize]
 
   // Runs a simple report.
   async function runReport() {
-    // [START google_analytics_data_run_report]
+    // [START analyticsdata_run_report]
     const [response] = await analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [
@@ -65,18 +65,18 @@ function main(propertyId = 'YOUR-GA4-PROPERTY-ID') {
         },
       ],
     });
-    // [END google_analytics_data_run_report]
+    // [END analyticsdata_run_report]
 
-    // [START google_analytics_data_run_report_response]
+    // [START analyticsdata_run_report_response]
     console.log('Report result:');
     response.rows.forEach(row => {
       console.log(row.dimensionValues[0], row.metricValues[0]);
     });
-    // [END google_analytics_data_run_report_response]
+    // [END analyticsdata_run_report_response]
   }
 
   runReport();
-  // [END google_analytics_data_quickstart]
+  // [END analyticsdata_quickstart]
 }
 
 process.on('unhandledRejection', err => {
