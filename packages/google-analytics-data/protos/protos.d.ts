@@ -5813,6 +5813,9 @@ export namespace google {
 
                     /** RunReportResponse propertyQuota */
                     propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /** RunReportResponse kind */
+                    kind?: (string|null);
                 }
 
                 /** Represents a RunReportResponse. */
@@ -5850,6 +5853,9 @@ export namespace google {
 
                     /** RunReportResponse propertyQuota. */
                     public propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /** RunReportResponse kind. */
+                    public kind: string;
 
                     /**
                      * Creates a new RunReportResponse instance using the specified properties.
@@ -6095,6 +6101,9 @@ export namespace google {
 
                     /** RunPivotReportResponse propertyQuota */
                     propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /** RunPivotReportResponse kind */
+                    kind?: (string|null);
                 }
 
                 /** Represents a RunPivotReportResponse. */
@@ -6126,6 +6135,9 @@ export namespace google {
 
                     /** RunPivotReportResponse propertyQuota. */
                     public propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /** RunPivotReportResponse kind. */
+                    public kind: string;
 
                     /**
                      * Creates a new RunPivotReportResponse instance using the specified properties.
@@ -6299,6 +6311,9 @@ export namespace google {
 
                     /** BatchRunReportsResponse reports */
                     reports?: (google.analytics.data.v1beta.IRunReportResponse[]|null);
+
+                    /** BatchRunReportsResponse kind */
+                    kind?: (string|null);
                 }
 
                 /** Represents a BatchRunReportsResponse. */
@@ -6312,6 +6327,9 @@ export namespace google {
 
                     /** BatchRunReportsResponse reports. */
                     public reports: google.analytics.data.v1beta.IRunReportResponse[];
+
+                    /** BatchRunReportsResponse kind. */
+                    public kind: string;
 
                     /**
                      * Creates a new BatchRunReportsResponse instance using the specified properties.
@@ -6485,6 +6503,9 @@ export namespace google {
 
                     /** BatchRunPivotReportsResponse pivotReports */
                     pivotReports?: (google.analytics.data.v1beta.IRunPivotReportResponse[]|null);
+
+                    /** BatchRunPivotReportsResponse kind */
+                    kind?: (string|null);
                 }
 
                 /** Represents a BatchRunPivotReportsResponse. */
@@ -6498,6 +6519,9 @@ export namespace google {
 
                     /** BatchRunPivotReportsResponse pivotReports. */
                     public pivotReports: google.analytics.data.v1beta.IRunPivotReportResponse[];
+
+                    /** BatchRunPivotReportsResponse kind. */
+                    public kind: string;
 
                     /**
                      * Creates a new BatchRunPivotReportsResponse instance using the specified properties.
@@ -6824,6 +6848,9 @@ export namespace google {
 
                     /** RunRealtimeReportResponse propertyQuota */
                     propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /** RunRealtimeReportResponse kind */
+                    kind?: (string|null);
                 }
 
                 /** Represents a RunRealtimeReportResponse. */
@@ -6858,6 +6885,9 @@ export namespace google {
 
                     /** RunRealtimeReportResponse propertyQuota. */
                     public propertyQuota?: (google.analytics.data.v1beta.IPropertyQuota|null);
+
+                    /** RunRealtimeReportResponse kind. */
+                    public kind: string;
 
                     /**
                      * Creates a new RunRealtimeReportResponse instance using the specified properties.
@@ -10146,6 +10176,9 @@ export namespace google {
 
                     /** PropertyQuota serverErrorsPerProjectPerHour */
                     serverErrorsPerProjectPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota potentiallyThresholdedRequestsPerHour */
+                    potentiallyThresholdedRequestsPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
                 }
 
                 /** Represents a PropertyQuota. */
@@ -10168,6 +10201,9 @@ export namespace google {
 
                     /** PropertyQuota serverErrorsPerProjectPerHour. */
                     public serverErrorsPerProjectPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota potentiallyThresholdedRequestsPerHour. */
+                    public potentiallyThresholdedRequestsPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
 
                     /**
                      * Creates a new PropertyQuota instance using the specified properties.

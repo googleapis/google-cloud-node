@@ -1400,6 +1400,10 @@
                         "propertyQuota": {
                           "type": "PropertyQuota",
                           "id": 9
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -1489,6 +1493,10 @@
                         "propertyQuota": {
                           "type": "PropertyQuota",
                           "id": 7
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 8
                         }
                       }
                     },
@@ -1511,6 +1519,10 @@
                           "rule": "repeated",
                           "type": "RunReportResponse",
                           "id": 1
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1533,6 +1545,10 @@
                           "rule": "repeated",
                           "type": "RunPivotReportResponse",
                           "id": 1
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1631,6 +1647,10 @@
                         "propertyQuota": {
                           "type": "PropertyQuota",
                           "id": 8
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 9
                         }
                       }
                     },
@@ -2192,6 +2212,10 @@
                         "serverErrorsPerProjectPerHour": {
                           "type": "QuotaStatus",
                           "id": 4
+                        },
+                        "potentiallyThresholdedRequestsPerHour": {
+                          "type": "QuotaStatus",
+                          "id": 5
                         }
                       }
                     },

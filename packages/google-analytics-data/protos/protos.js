@@ -15164,6 +15164,7 @@
                          * @property {number|null} [rowCount] RunReportResponse rowCount
                          * @property {google.analytics.data.v1beta.IResponseMetaData|null} [metadata] RunReportResponse metadata
                          * @property {google.analytics.data.v1beta.IPropertyQuota|null} [propertyQuota] RunReportResponse propertyQuota
+                         * @property {string|null} [kind] RunReportResponse kind
                          */
     
                         /**
@@ -15260,6 +15261,14 @@
                         RunReportResponse.prototype.propertyQuota = null;
     
                         /**
+                         * RunReportResponse kind.
+                         * @member {string} kind
+                         * @memberof google.analytics.data.v1beta.RunReportResponse
+                         * @instance
+                         */
+                        RunReportResponse.prototype.kind = "";
+    
+                        /**
                          * Creates a new RunReportResponse instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.RunReportResponse
@@ -15307,6 +15316,8 @@
                                 $root.google.analytics.data.v1beta.ResponseMetaData.encode(message.metadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.propertyQuota != null && Object.hasOwnProperty.call(message, "propertyQuota"))
                                 $root.google.analytics.data.v1beta.PropertyQuota.encode(message.propertyQuota, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.kind);
                             return writer;
                         };
     
@@ -15379,6 +15390,9 @@
                                     break;
                                 case 9:
                                     message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.kind = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15482,6 +15496,9 @@
                                 if (error)
                                     return "propertyQuota." + error;
                             }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
                             return null;
                         };
     
@@ -15569,6 +15586,8 @@
                                     throw TypeError(".google.analytics.data.v1beta.RunReportResponse.propertyQuota: object expected");
                                 message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.fromObject(object.propertyQuota);
                             }
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
                             return message;
                         };
     
@@ -15597,6 +15616,7 @@
                                 object.rowCount = 0;
                                 object.metadata = null;
                                 object.propertyQuota = null;
+                                object.kind = "";
                             }
                             if (message.dimensionHeaders && message.dimensionHeaders.length) {
                                 object.dimensionHeaders = [];
@@ -15634,6 +15654,8 @@
                                 object.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.toObject(message.metadata, options);
                             if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota"))
                                 object.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.toObject(message.propertyQuota, options);
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
                             return object;
                         };
     
@@ -16173,6 +16195,7 @@
                          * @property {Array.<google.analytics.data.v1beta.IRow>|null} [aggregates] RunPivotReportResponse aggregates
                          * @property {google.analytics.data.v1beta.IResponseMetaData|null} [metadata] RunPivotReportResponse metadata
                          * @property {google.analytics.data.v1beta.IPropertyQuota|null} [propertyQuota] RunPivotReportResponse propertyQuota
+                         * @property {string|null} [kind] RunPivotReportResponse kind
                          */
     
                         /**
@@ -16252,6 +16275,14 @@
                         RunPivotReportResponse.prototype.propertyQuota = null;
     
                         /**
+                         * RunPivotReportResponse kind.
+                         * @member {string} kind
+                         * @memberof google.analytics.data.v1beta.RunPivotReportResponse
+                         * @instance
+                         */
+                        RunPivotReportResponse.prototype.kind = "";
+    
+                        /**
                          * Creates a new RunPivotReportResponse instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.RunPivotReportResponse
@@ -16294,6 +16325,8 @@
                                 $root.google.analytics.data.v1beta.ResponseMetaData.encode(message.metadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.propertyQuota != null && Object.hasOwnProperty.call(message, "propertyQuota"))
                                 $root.google.analytics.data.v1beta.PropertyQuota.encode(message.propertyQuota, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.kind);
                             return writer;
                         };
     
@@ -16358,6 +16391,9 @@
                                     break;
                                 case 7:
                                     message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.kind = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -16449,6 +16485,9 @@
                                 if (error)
                                     return "propertyQuota." + error;
                             }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
                             return null;
                         };
     
@@ -16524,6 +16563,8 @@
                                     throw TypeError(".google.analytics.data.v1beta.RunPivotReportResponse.propertyQuota: object expected");
                                 message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.fromObject(object.propertyQuota);
                             }
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
                             return message;
                         };
     
@@ -16550,6 +16591,7 @@
                             if (options.defaults) {
                                 object.metadata = null;
                                 object.propertyQuota = null;
+                                object.kind = "";
                             }
                             if (message.pivotHeaders && message.pivotHeaders.length) {
                                 object.pivotHeaders = [];
@@ -16580,6 +16622,8 @@
                                 object.metadata = $root.google.analytics.data.v1beta.ResponseMetaData.toObject(message.metadata, options);
                             if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota"))
                                 object.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.toObject(message.propertyQuota, options);
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
                             return object;
                         };
     
@@ -16835,6 +16879,7 @@
                          * @memberof google.analytics.data.v1beta
                          * @interface IBatchRunReportsResponse
                          * @property {Array.<google.analytics.data.v1beta.IRunReportResponse>|null} [reports] BatchRunReportsResponse reports
+                         * @property {string|null} [kind] BatchRunReportsResponse kind
                          */
     
                         /**
@@ -16860,6 +16905,14 @@
                          * @instance
                          */
                         BatchRunReportsResponse.prototype.reports = $util.emptyArray;
+    
+                        /**
+                         * BatchRunReportsResponse kind.
+                         * @member {string} kind
+                         * @memberof google.analytics.data.v1beta.BatchRunReportsResponse
+                         * @instance
+                         */
+                        BatchRunReportsResponse.prototype.kind = "";
     
                         /**
                          * Creates a new BatchRunReportsResponse instance using the specified properties.
@@ -16888,6 +16941,8 @@
                             if (message.reports != null && message.reports.length)
                                 for (var i = 0; i < message.reports.length; ++i)
                                     $root.google.analytics.data.v1beta.RunReportResponse.encode(message.reports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kind);
                             return writer;
                         };
     
@@ -16926,6 +16981,9 @@
                                     if (!(message.reports && message.reports.length))
                                         message.reports = [];
                                     message.reports.push($root.google.analytics.data.v1beta.RunReportResponse.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.kind = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -16971,6 +17029,9 @@
                                         return "reports." + error;
                                 }
                             }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
                             return null;
                         };
     
@@ -16996,6 +17057,8 @@
                                     message.reports[i] = $root.google.analytics.data.v1beta.RunReportResponse.fromObject(object.reports[i]);
                                 }
                             }
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
                             return message;
                         };
     
@@ -17014,11 +17077,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.reports = [];
+                            if (options.defaults)
+                                object.kind = "";
                             if (message.reports && message.reports.length) {
                                 object.reports = [];
                                 for (var j = 0; j < message.reports.length; ++j)
                                     object.reports[j] = $root.google.analytics.data.v1beta.RunReportResponse.toObject(message.reports[j], options);
                             }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
                             return object;
                         };
     
@@ -17274,6 +17341,7 @@
                          * @memberof google.analytics.data.v1beta
                          * @interface IBatchRunPivotReportsResponse
                          * @property {Array.<google.analytics.data.v1beta.IRunPivotReportResponse>|null} [pivotReports] BatchRunPivotReportsResponse pivotReports
+                         * @property {string|null} [kind] BatchRunPivotReportsResponse kind
                          */
     
                         /**
@@ -17299,6 +17367,14 @@
                          * @instance
                          */
                         BatchRunPivotReportsResponse.prototype.pivotReports = $util.emptyArray;
+    
+                        /**
+                         * BatchRunPivotReportsResponse kind.
+                         * @member {string} kind
+                         * @memberof google.analytics.data.v1beta.BatchRunPivotReportsResponse
+                         * @instance
+                         */
+                        BatchRunPivotReportsResponse.prototype.kind = "";
     
                         /**
                          * Creates a new BatchRunPivotReportsResponse instance using the specified properties.
@@ -17327,6 +17403,8 @@
                             if (message.pivotReports != null && message.pivotReports.length)
                                 for (var i = 0; i < message.pivotReports.length; ++i)
                                     $root.google.analytics.data.v1beta.RunPivotReportResponse.encode(message.pivotReports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kind);
                             return writer;
                         };
     
@@ -17365,6 +17443,9 @@
                                     if (!(message.pivotReports && message.pivotReports.length))
                                         message.pivotReports = [];
                                     message.pivotReports.push($root.google.analytics.data.v1beta.RunPivotReportResponse.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.kind = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -17410,6 +17491,9 @@
                                         return "pivotReports." + error;
                                 }
                             }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
                             return null;
                         };
     
@@ -17435,6 +17519,8 @@
                                     message.pivotReports[i] = $root.google.analytics.data.v1beta.RunPivotReportResponse.fromObject(object.pivotReports[i]);
                                 }
                             }
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
                             return message;
                         };
     
@@ -17453,11 +17539,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.pivotReports = [];
+                            if (options.defaults)
+                                object.kind = "";
                             if (message.pivotReports && message.pivotReports.length) {
                                 object.pivotReports = [];
                                 for (var j = 0; j < message.pivotReports.length; ++j)
                                     object.pivotReports[j] = $root.google.analytics.data.v1beta.RunPivotReportResponse.toObject(message.pivotReports[j], options);
                             }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
                             return object;
                         };
     
@@ -18183,6 +18273,7 @@
                          * @property {Array.<google.analytics.data.v1beta.IRow>|null} [minimums] RunRealtimeReportResponse minimums
                          * @property {number|null} [rowCount] RunRealtimeReportResponse rowCount
                          * @property {google.analytics.data.v1beta.IPropertyQuota|null} [propertyQuota] RunRealtimeReportResponse propertyQuota
+                         * @property {string|null} [kind] RunRealtimeReportResponse kind
                          */
     
                         /**
@@ -18271,6 +18362,14 @@
                         RunRealtimeReportResponse.prototype.propertyQuota = null;
     
                         /**
+                         * RunRealtimeReportResponse kind.
+                         * @member {string} kind
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
+                         * @instance
+                         */
+                        RunRealtimeReportResponse.prototype.kind = "";
+    
+                        /**
                          * Creates a new RunRealtimeReportResponse instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.RunRealtimeReportResponse
@@ -18316,6 +18415,8 @@
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.rowCount);
                             if (message.propertyQuota != null && Object.hasOwnProperty.call(message, "propertyQuota"))
                                 $root.google.analytics.data.v1beta.PropertyQuota.encode(message.propertyQuota, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.kind);
                             return writer;
                         };
     
@@ -18385,6 +18486,9 @@
                                     break;
                                 case 8:
                                     message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.kind = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -18483,6 +18587,9 @@
                                 if (error)
                                     return "propertyQuota." + error;
                             }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
                             return null;
                         };
     
@@ -18565,6 +18672,8 @@
                                     throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportResponse.propertyQuota: object expected");
                                 message.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.fromObject(object.propertyQuota);
                             }
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
                             return message;
                         };
     
@@ -18592,6 +18701,7 @@
                             if (options.defaults) {
                                 object.rowCount = 0;
                                 object.propertyQuota = null;
+                                object.kind = "";
                             }
                             if (message.dimensionHeaders && message.dimensionHeaders.length) {
                                 object.dimensionHeaders = [];
@@ -18627,6 +18737,8 @@
                                 object.rowCount = message.rowCount;
                             if (message.propertyQuota != null && message.hasOwnProperty("propertyQuota"))
                                 object.propertyQuota = $root.google.analytics.data.v1beta.PropertyQuota.toObject(message.propertyQuota, options);
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
                             return object;
                         };
     
@@ -26427,6 +26539,7 @@
                          * @property {google.analytics.data.v1beta.IQuotaStatus|null} [tokensPerHour] PropertyQuota tokensPerHour
                          * @property {google.analytics.data.v1beta.IQuotaStatus|null} [concurrentRequests] PropertyQuota concurrentRequests
                          * @property {google.analytics.data.v1beta.IQuotaStatus|null} [serverErrorsPerProjectPerHour] PropertyQuota serverErrorsPerProjectPerHour
+                         * @property {google.analytics.data.v1beta.IQuotaStatus|null} [potentiallyThresholdedRequestsPerHour] PropertyQuota potentiallyThresholdedRequestsPerHour
                          */
     
                         /**
@@ -26477,6 +26590,14 @@
                         PropertyQuota.prototype.serverErrorsPerProjectPerHour = null;
     
                         /**
+                         * PropertyQuota potentiallyThresholdedRequestsPerHour.
+                         * @member {google.analytics.data.v1beta.IQuotaStatus|null|undefined} potentiallyThresholdedRequestsPerHour
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @instance
+                         */
+                        PropertyQuota.prototype.potentiallyThresholdedRequestsPerHour = null;
+    
+                        /**
                          * Creates a new PropertyQuota instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.PropertyQuota
@@ -26508,6 +26629,8 @@
                                 $root.google.analytics.data.v1beta.QuotaStatus.encode(message.concurrentRequests, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.serverErrorsPerProjectPerHour != null && Object.hasOwnProperty.call(message, "serverErrorsPerProjectPerHour"))
                                 $root.google.analytics.data.v1beta.QuotaStatus.encode(message.serverErrorsPerProjectPerHour, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.potentiallyThresholdedRequestsPerHour != null && Object.hasOwnProperty.call(message, "potentiallyThresholdedRequestsPerHour"))
+                                $root.google.analytics.data.v1beta.QuotaStatus.encode(message.potentiallyThresholdedRequestsPerHour, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -26553,6 +26676,9 @@
                                     break;
                                 case 4:
                                     message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -26609,6 +26735,11 @@
                                 if (error)
                                     return "serverErrorsPerProjectPerHour." + error;
                             }
+                            if (message.potentiallyThresholdedRequestsPerHour != null && message.hasOwnProperty("potentiallyThresholdedRequestsPerHour")) {
+                                var error = $root.google.analytics.data.v1beta.QuotaStatus.verify(message.potentiallyThresholdedRequestsPerHour);
+                                if (error)
+                                    return "potentiallyThresholdedRequestsPerHour." + error;
+                            }
                             return null;
                         };
     
@@ -26644,6 +26775,11 @@
                                     throw TypeError(".google.analytics.data.v1beta.PropertyQuota.serverErrorsPerProjectPerHour: object expected");
                                 message.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.serverErrorsPerProjectPerHour);
                             }
+                            if (object.potentiallyThresholdedRequestsPerHour != null) {
+                                if (typeof object.potentiallyThresholdedRequestsPerHour !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.PropertyQuota.potentiallyThresholdedRequestsPerHour: object expected");
+                                message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.potentiallyThresholdedRequestsPerHour);
+                            }
                             return message;
                         };
     
@@ -26665,6 +26801,7 @@
                                 object.tokensPerHour = null;
                                 object.concurrentRequests = null;
                                 object.serverErrorsPerProjectPerHour = null;
+                                object.potentiallyThresholdedRequestsPerHour = null;
                             }
                             if (message.tokensPerDay != null && message.hasOwnProperty("tokensPerDay"))
                                 object.tokensPerDay = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.tokensPerDay, options);
@@ -26674,6 +26811,8 @@
                                 object.concurrentRequests = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.concurrentRequests, options);
                             if (message.serverErrorsPerProjectPerHour != null && message.hasOwnProperty("serverErrorsPerProjectPerHour"))
                                 object.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.serverErrorsPerProjectPerHour, options);
+                            if (message.potentiallyThresholdedRequestsPerHour != null && message.hasOwnProperty("potentiallyThresholdedRequestsPerHour"))
+                                object.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.potentiallyThresholdedRequestsPerHour, options);
                             return object;
                         };
     
