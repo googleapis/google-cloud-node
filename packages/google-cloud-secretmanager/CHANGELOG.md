@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.5.0...v3.6.0) (2021-03-30)
+
+
+### Features
+
+* Rotation for Secrets ([#228](https://www.github.com/googleapis/nodejs-secret-manager/issues/228)) ([fcc5295](https://www.github.com/googleapis/nodejs-secret-manager/commit/fcc529557d92ad1447c29d346f3037b9cd7cbe31))
+
 ## [3.5.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.4.0...v3.5.0) (2021-03-03)
 
 
