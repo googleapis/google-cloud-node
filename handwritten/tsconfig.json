@@ -3,7 +3,13 @@
   "compilerOptions": {
     "lib": ["es2018", "dom"],
     "rootDir": ".",
-    "outDir": "build"
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "@hapi/podium": [
+        "node_modules/@types/hapi__podium"
+      ]
+    }
   },
   "include": [
     "src/*.ts",
