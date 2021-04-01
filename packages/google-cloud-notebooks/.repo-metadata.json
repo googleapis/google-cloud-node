@@ -1,14 +1,15 @@
 {
-  "name": "notebooks",
-  "name_pretty": "AI Platform Notebooks",
-  "product_documentation": "https://cloud.google.com/ai-platform/notebooks/docs",
-  "client_documentation": "https://googleapis.dev/nodejs/notebooks/latest",
-  "issue_tracker": "",
-  "release_level": "beta",
-  "language": "nodejs",
   "repo": "googleapis/nodejs-notebooks",
-  "distribution_name": "@google-cloud/notebooks",
-  "api_id": "notebooks.googleapis.com",
+  "codeowner_team": "@googleapis/ml-apis",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/ml-apis"
+  "name": "notebooks",
+  "issue_tracker": "",
+  "client_documentation": "https://googleapis.dev/nodejs/notebooks/latest",
+  "language": "nodejs",
+  "release_level": "beta",
+  "product_documentation": "https://cloud.google.com/ai-platform/notebooks/docs",
+  "default_version": "v1beta1",
+  "name_pretty": "AI Platform Notebooks",
+  "distribution_name": "@google-cloud/notebooks",
+  "api_id": "notebooks.googleapis.com"
 }
