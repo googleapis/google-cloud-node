@@ -1797,13 +1797,41 @@ class File extends ServiceObject<File> {
         return;
       }
 
-      // Same as configstore:
+      // The logic below attempts to mimic the resumable upload library,
+      // gcs-resumable-upload. That library requires a writable configuration
+      // directory in order to work. If we wait for that library to discover any
+      // issues, we've already started a resumable upload which is difficult to back
+      // out of. We want to catch any errors first, so we can choose a simple, non-
+      // resumable upload instead.
+
+      // Same as configstore (used by gcs-resumable-upload):
       // https://github.com/yeoman/configstore/blob/f09f067e50e6a636cfc648a6fc36a522062bd49d/index.js#L11
       const configDir = xdgBasedir.config || os.tmpdir();
 
-      fs.access(configDir, fs.constants.W_OK, err => {
-        if (err) {
+      fs.access(configDir, fs.constants.W_OK, accessErr => {
+        if (!accessErr) {
+          // A configuration directory exists, and it's writable. gcs-resumable-upload
+          // should have everything it needs to work.
+          this.startResumableUpload_(fileWriteStream, options);
+          return;
+        }
+
+        // The configuration directory is either not writable, or it doesn't exist.
+        // gcs-resumable-upload will attempt to create it for the user, but we'll try
+        // it now to confirm that it won't have any issues. That way, if we catch the
+        // issue before we start the resumable upload, we can instead start a simple
+        // upload.
+        fs.mkdir(configDir, {mode: 0o0700}, err => {
+          if (!err) {
+            // We successfully created a configuration directory that
+            // gcs-resumable-upload will use.
+            this.startResumableUpload_(fileWriteStream, options);
+            return;
+          }
+
           if (options.resumable) {
+            // The user wanted a resumable upload, but we couldn't create a
+            // configuration directory, which means gcs-resumable-upload will fail.
             const error = new ResumableUploadError(
               [
                 'A resumable upload could not be performed. The directory,',
@@ -1812,15 +1840,11 @@ class File extends ServiceObject<File> {
               ].join(' ')
             );
             stream.destroy(error);
-            return;
+          } else {
+            // The user didn't care, resumable or not. Fall back to simple upload.
+            this.startSimpleUpload_(fileWriteStream, options);
           }
-
-          // User didn't care, resumable or not. Fall back to simple upload.
-          this.startSimpleUpload_(fileWriteStream, options);
-          return;
-        }
-
-        this.startResumableUpload_(fileWriteStream, options);
+        });
       });
     });
 
