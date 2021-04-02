@@ -4557,6 +4557,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1beta2.CloudMemcache#applySoftwareUpdate}.
+                         * @memberof google.cloud.memcache.v1beta2.CloudMemcache
+                         * @typedef ApplySoftwareUpdateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ApplySoftwareUpdate.
+                         * @function applySoftwareUpdate
+                         * @memberof google.cloud.memcache.v1beta2.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest} request ApplySoftwareUpdateRequest message or plain object
+                         * @param {google.cloud.memcache.v1beta2.CloudMemcache.ApplySoftwareUpdateCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.applySoftwareUpdate = function applySoftwareUpdate(request, callback) {
+                            return this.rpcCall(applySoftwareUpdate, $root.google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ApplySoftwareUpdate" });
+    
+                        /**
+                         * Calls ApplySoftwareUpdate.
+                         * @function applySoftwareUpdate
+                         * @memberof google.cloud.memcache.v1beta2.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest} request ApplySoftwareUpdateRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudMemcache;
                     })();
     
@@ -4582,6 +4615,7 @@
                          * @property {string|null} [memcacheFullVersion] Instance memcacheFullVersion
                          * @property {Array.<google.cloud.memcache.v1beta2.Instance.IInstanceMessage>|null} [instanceMessages] Instance instanceMessages
                          * @property {string|null} [discoveryEndpoint] Instance discoveryEndpoint
+                         * @property {boolean|null} [updateAvailable] Instance updateAvailable
                          */
     
                         /**
@@ -4732,6 +4766,14 @@
                         Instance.prototype.discoveryEndpoint = "";
     
                         /**
+                         * Instance updateAvailable.
+                         * @member {boolean} updateAvailable
+                         * @memberof google.cloud.memcache.v1beta2.Instance
+                         * @instance
+                         */
+                        Instance.prototype.updateAvailable = false;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.memcache.v1beta2.Instance
@@ -4791,6 +4833,8 @@
                                     $root.google.cloud.memcache.v1beta2.Instance.InstanceMessage.encode(message.instanceMessages[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.discoveryEndpoint != null && Object.hasOwnProperty.call(message, "discoveryEndpoint"))
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.discoveryEndpoint);
+                            if (message.updateAvailable != null && Object.hasOwnProperty.call(message, "updateAvailable"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).bool(message.updateAvailable);
                             return writer;
                         };
     
@@ -4897,6 +4941,9 @@
                                     break;
                                 case 20:
                                     message.discoveryEndpoint = reader.string();
+                                    break;
+                                case 21:
+                                    message.updateAvailable = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5023,6 +5070,9 @@
                             if (message.discoveryEndpoint != null && message.hasOwnProperty("discoveryEndpoint"))
                                 if (!$util.isString(message.discoveryEndpoint))
                                     return "discoveryEndpoint: string expected";
+                            if (message.updateAvailable != null && message.hasOwnProperty("updateAvailable"))
+                                if (typeof message.updateAvailable !== "boolean")
+                                    return "updateAvailable: boolean expected";
                             return null;
                         };
     
@@ -5136,6 +5186,8 @@
                             }
                             if (object.discoveryEndpoint != null)
                                 message.discoveryEndpoint = String(object.discoveryEndpoint);
+                            if (object.updateAvailable != null)
+                                message.updateAvailable = Boolean(object.updateAvailable);
                             return message;
                         };
     
@@ -5172,6 +5224,7 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.memcacheFullVersion = "";
                                 object.discoveryEndpoint = "";
+                                object.updateAvailable = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5218,6 +5271,8 @@
                             }
                             if (message.discoveryEndpoint != null && message.hasOwnProperty("discoveryEndpoint"))
                                 object.discoveryEndpoint = message.discoveryEndpoint;
+                            if (message.updateAvailable != null && message.hasOwnProperty("updateAvailable"))
+                                object.updateAvailable = message.updateAvailable;
                             return object;
                         };
     
@@ -5454,6 +5509,7 @@
                              * @property {string|null} [host] Node host
                              * @property {number|null} [port] Node port
                              * @property {google.cloud.memcache.v1beta2.IMemcacheParameters|null} [parameters] Node parameters
+                             * @property {boolean|null} [updateAvailable] Node updateAvailable
                              */
     
                             /**
@@ -5520,6 +5576,14 @@
                             Node.prototype.parameters = null;
     
                             /**
+                             * Node updateAvailable.
+                             * @member {boolean} updateAvailable
+                             * @memberof google.cloud.memcache.v1beta2.Instance.Node
+                             * @instance
+                             */
+                            Node.prototype.updateAvailable = false;
+    
+                            /**
                              * Creates a new Node instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.memcache.v1beta2.Instance.Node
@@ -5555,6 +5619,8 @@
                                     writer.uint32(/* id 5, wireType 0 =*/40).int32(message.port);
                                 if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
                                     $root.google.cloud.memcache.v1beta2.MemcacheParameters.encode(message.parameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.updateAvailable != null && Object.hasOwnProperty.call(message, "updateAvailable"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.updateAvailable);
                                 return writer;
                             };
     
@@ -5606,6 +5672,9 @@
                                         break;
                                     case 6:
                                         message.parameters = $root.google.cloud.memcache.v1beta2.MemcacheParameters.decode(reader, reader.uint32());
+                                        break;
+                                    case 7:
+                                        message.updateAvailable = reader.bool();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -5670,6 +5739,9 @@
                                     if (error)
                                         return "parameters." + error;
                                 }
+                                if (message.updateAvailable != null && message.hasOwnProperty("updateAvailable"))
+                                    if (typeof message.updateAvailable !== "boolean")
+                                        return "updateAvailable: boolean expected";
                                 return null;
                             };
     
@@ -5720,6 +5792,8 @@
                                         throw TypeError(".google.cloud.memcache.v1beta2.Instance.Node.parameters: object expected");
                                     message.parameters = $root.google.cloud.memcache.v1beta2.MemcacheParameters.fromObject(object.parameters);
                                 }
+                                if (object.updateAvailable != null)
+                                    message.updateAvailable = Boolean(object.updateAvailable);
                                 return message;
                             };
     
@@ -5743,6 +5817,7 @@
                                     object.host = "";
                                     object.port = 0;
                                     object.parameters = null;
+                                    object.updateAvailable = false;
                                 }
                                 if (message.nodeId != null && message.hasOwnProperty("nodeId"))
                                     object.nodeId = message.nodeId;
@@ -5756,6 +5831,8 @@
                                     object.port = message.port;
                                 if (message.parameters != null && message.hasOwnProperty("parameters"))
                                     object.parameters = $root.google.cloud.memcache.v1beta2.MemcacheParameters.toObject(message.parameters, options);
+                                if (message.updateAvailable != null && message.hasOwnProperty("updateAvailable"))
+                                    object.updateAvailable = message.updateAvailable;
                                 return object;
                             };
     
@@ -7919,6 +7996,255 @@
                         };
     
                         return UpdateParametersRequest;
+                    })();
+    
+                    v1beta2.ApplySoftwareUpdateRequest = (function() {
+    
+                        /**
+                         * Properties of an ApplySoftwareUpdateRequest.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @interface IApplySoftwareUpdateRequest
+                         * @property {string|null} [instance] ApplySoftwareUpdateRequest instance
+                         * @property {Array.<string>|null} [nodeIds] ApplySoftwareUpdateRequest nodeIds
+                         * @property {boolean|null} [applyAll] ApplySoftwareUpdateRequest applyAll
+                         */
+    
+                        /**
+                         * Constructs a new ApplySoftwareUpdateRequest.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @classdesc Represents an ApplySoftwareUpdateRequest.
+                         * @implements IApplySoftwareUpdateRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest=} [properties] Properties to set
+                         */
+                        function ApplySoftwareUpdateRequest(properties) {
+                            this.nodeIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApplySoftwareUpdateRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @instance
+                         */
+                        ApplySoftwareUpdateRequest.prototype.instance = "";
+    
+                        /**
+                         * ApplySoftwareUpdateRequest nodeIds.
+                         * @member {Array.<string>} nodeIds
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @instance
+                         */
+                        ApplySoftwareUpdateRequest.prototype.nodeIds = $util.emptyArray;
+    
+                        /**
+                         * ApplySoftwareUpdateRequest applyAll.
+                         * @member {boolean} applyAll
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @instance
+                         */
+                        ApplySoftwareUpdateRequest.prototype.applyAll = false;
+    
+                        /**
+                         * Creates a new ApplySoftwareUpdateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest} ApplySoftwareUpdateRequest instance
+                         */
+                        ApplySoftwareUpdateRequest.create = function create(properties) {
+                            return new ApplySoftwareUpdateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApplySoftwareUpdateRequest message. Does not implicitly {@link google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest} message ApplySoftwareUpdateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplySoftwareUpdateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.nodeIds != null && message.nodeIds.length)
+                                for (var i = 0; i < message.nodeIds.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeIds[i]);
+                            if (message.applyAll != null && Object.hasOwnProperty.call(message, "applyAll"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.applyAll);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApplySoftwareUpdateRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest} message ApplySoftwareUpdateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplySoftwareUpdateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApplySoftwareUpdateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest} ApplySoftwareUpdateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplySoftwareUpdateRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.instance = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.nodeIds && message.nodeIds.length))
+                                        message.nodeIds = [];
+                                    message.nodeIds.push(reader.string());
+                                    break;
+                                case 3:
+                                    message.applyAll = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApplySoftwareUpdateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest} ApplySoftwareUpdateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplySoftwareUpdateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApplySoftwareUpdateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApplySoftwareUpdateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.nodeIds != null && message.hasOwnProperty("nodeIds")) {
+                                if (!Array.isArray(message.nodeIds))
+                                    return "nodeIds: array expected";
+                                for (var i = 0; i < message.nodeIds.length; ++i)
+                                    if (!$util.isString(message.nodeIds[i]))
+                                        return "nodeIds: string[] expected";
+                            }
+                            if (message.applyAll != null && message.hasOwnProperty("applyAll"))
+                                if (typeof message.applyAll !== "boolean")
+                                    return "applyAll: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApplySoftwareUpdateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest} ApplySoftwareUpdateRequest
+                         */
+                        ApplySoftwareUpdateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.nodeIds) {
+                                if (!Array.isArray(object.nodeIds))
+                                    throw TypeError(".google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest.nodeIds: array expected");
+                                message.nodeIds = [];
+                                for (var i = 0; i < object.nodeIds.length; ++i)
+                                    message.nodeIds[i] = String(object.nodeIds[i]);
+                            }
+                            if (object.applyAll != null)
+                                message.applyAll = Boolean(object.applyAll);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApplySoftwareUpdateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest} message ApplySoftwareUpdateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApplySoftwareUpdateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.nodeIds = [];
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.applyAll = false;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.nodeIds && message.nodeIds.length) {
+                                object.nodeIds = [];
+                                for (var j = 0; j < message.nodeIds.length; ++j)
+                                    object.nodeIds[j] = message.nodeIds[j];
+                            }
+                            if (message.applyAll != null && message.hasOwnProperty("applyAll"))
+                                object.applyAll = message.applyAll;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApplySoftwareUpdateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApplySoftwareUpdateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ApplySoftwareUpdateRequest;
                     })();
     
                     v1beta2.MemcacheParameters = (function() {

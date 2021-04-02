@@ -1869,6 +1869,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public applyParameters(request: google.cloud.memcache.v1beta2.IApplyParametersRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ApplySoftwareUpdate.
+                     * @param request ApplySoftwareUpdateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public applySoftwareUpdate(request: google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest, callback: google.cloud.memcache.v1beta2.CloudMemcache.ApplySoftwareUpdateCallback): void;
+
+                    /**
+                     * Calls ApplySoftwareUpdate.
+                     * @param request ApplySoftwareUpdateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public applySoftwareUpdate(request: google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace CloudMemcache {
@@ -1921,6 +1935,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ApplyParametersCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1beta2.CloudMemcache#applySoftwareUpdate}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ApplySoftwareUpdateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an Instance. */
@@ -1973,6 +1994,9 @@ export namespace google {
 
                     /** Instance discoveryEndpoint */
                     discoveryEndpoint?: (string|null);
+
+                    /** Instance updateAvailable */
+                    updateAvailable?: (boolean|null);
                 }
 
                 /** Represents an Instance. */
@@ -2031,6 +2055,9 @@ export namespace google {
 
                     /** Instance discoveryEndpoint. */
                     public discoveryEndpoint: string;
+
+                    /** Instance updateAvailable. */
+                    public updateAvailable: boolean;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -2221,6 +2248,9 @@ export namespace google {
 
                         /** Node parameters */
                         parameters?: (google.cloud.memcache.v1beta2.IMemcacheParameters|null);
+
+                        /** Node updateAvailable */
+                        updateAvailable?: (boolean|null);
                     }
 
                     /** Represents a Node. */
@@ -2249,6 +2279,9 @@ export namespace google {
 
                         /** Node parameters. */
                         public parameters?: (google.cloud.memcache.v1beta2.IMemcacheParameters|null);
+
+                        /** Node updateAvailable. */
+                        public updateAvailable: boolean;
 
                         /**
                          * Creates a new Node instance using the specified properties.
@@ -3241,6 +3274,108 @@ export namespace google {
 
                     /**
                      * Converts this UpdateParametersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ApplySoftwareUpdateRequest. */
+                interface IApplySoftwareUpdateRequest {
+
+                    /** ApplySoftwareUpdateRequest instance */
+                    instance?: (string|null);
+
+                    /** ApplySoftwareUpdateRequest nodeIds */
+                    nodeIds?: (string[]|null);
+
+                    /** ApplySoftwareUpdateRequest applyAll */
+                    applyAll?: (boolean|null);
+                }
+
+                /** Represents an ApplySoftwareUpdateRequest. */
+                class ApplySoftwareUpdateRequest implements IApplySoftwareUpdateRequest {
+
+                    /**
+                     * Constructs a new ApplySoftwareUpdateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest);
+
+                    /** ApplySoftwareUpdateRequest instance. */
+                    public instance: string;
+
+                    /** ApplySoftwareUpdateRequest nodeIds. */
+                    public nodeIds: string[];
+
+                    /** ApplySoftwareUpdateRequest applyAll. */
+                    public applyAll: boolean;
+
+                    /**
+                     * Creates a new ApplySoftwareUpdateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApplySoftwareUpdateRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest): google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest;
+
+                    /**
+                     * Encodes the specified ApplySoftwareUpdateRequest message. Does not implicitly {@link google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest.verify|verify} messages.
+                     * @param message ApplySoftwareUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApplySoftwareUpdateRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest.verify|verify} messages.
+                     * @param message ApplySoftwareUpdateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApplySoftwareUpdateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApplySoftwareUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest;
+
+                    /**
+                     * Decodes an ApplySoftwareUpdateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApplySoftwareUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest;
+
+                    /**
+                     * Verifies an ApplySoftwareUpdateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApplySoftwareUpdateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApplySoftwareUpdateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest;
+
+                    /**
+                     * Creates a plain object from an ApplySoftwareUpdateRequest message. Also converts values to other types if specified.
+                     * @param message ApplySoftwareUpdateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApplySoftwareUpdateRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

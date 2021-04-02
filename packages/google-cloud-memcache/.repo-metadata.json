@@ -1,13 +1,14 @@
 {
-  "name": "memcache",
-  "name_pretty": "Memorystore for Memcached",
-  "product_documentation": "https://cloud.google.com/memorystore/docs/memcached",
-  "client_documentation": "https://googleapis.dev/nodejs/memcache/latest/index.html",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/5169231",
-  "release_level": "ga",
   "language": "nodejs",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/memorystore/docs/memcached",
   "repo": "googleapis/nodejs-memcache",
+  "default_version": "v1",
+  "name_pretty": "Memorystore for Memcached",
+  "release_level": "ga",
   "distribution_name": "@google-cloud/memcache",
+  "name": "memcache",
+  "client_documentation": "https://googleapis.dev/nodejs/memcache/latest/index.html",
   "api_id": "memcache.googleapis.com",
-  "requires_billing": true
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5169231"
 }

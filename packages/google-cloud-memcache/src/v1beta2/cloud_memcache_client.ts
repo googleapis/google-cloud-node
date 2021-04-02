@@ -55,7 +55,7 @@ const version = require('../../../package.json').version;
  *  * As such, Memcached instances are resources of the form:
  *    `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
  *
- *  Note that location_id must be refering to a GCP `region`; for example:
+ *  Note that location_id must be a GCP `region`; for example:
  *  * `projects/my-memcached-project/locations/us-central1/instances/my-memcached`
  * @class
  * @memberof v1beta2
@@ -247,6 +247,12 @@ export class CloudMemcacheClient {
     const applyParametersMetadata = protoFilesRoot.lookup(
       '.google.cloud.memcache.v1beta2.OperationMetadata'
     ) as gax.protobuf.Type;
+    const applySoftwareUpdateResponse = protoFilesRoot.lookup(
+      '.google.cloud.memcache.v1beta2.Instance'
+    ) as gax.protobuf.Type;
+    const applySoftwareUpdateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.memcache.v1beta2.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
@@ -273,6 +279,11 @@ export class CloudMemcacheClient {
         this.operationsClient,
         applyParametersResponse.decode.bind(applyParametersResponse),
         applyParametersMetadata.decode.bind(applyParametersMetadata)
+      ),
+      applySoftwareUpdate: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        applySoftwareUpdateResponse.decode.bind(applySoftwareUpdateResponse),
+        applySoftwareUpdateMetadata.decode.bind(applySoftwareUpdateMetadata)
       ),
     };
 
@@ -329,6 +340,7 @@ export class CloudMemcacheClient {
       'updateParameters',
       'deleteInstance',
       'applyParameters',
+      'applySoftwareUpdate',
     ];
     for (const methodName of cloudMemcacheStubMethods) {
       const callPromise = this.cloudMemcacheStub.then(
@@ -545,7 +557,7 @@ export class CloudMemcacheClient {
     >
   ): void;
   /**
-   * Creates a new Instance in a given project and location.
+   * Creates a new Instance in a given location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -561,7 +573,9 @@ export class CloudMemcacheClient {
    *   * Must start with a letter.
    *   * Must be between 1-40 characters.
    *   * Must end with a number or a letter.
-   *   * Must be unique within the user project / location
+   *   * Must be unique within the user project / location.
+   *
+   *   If any of the above are not met, the API raises an invalid argument error.
    * @param {google.cloud.memcache.v1beta2.Instance} request.resource
    *   Required. A Memcached [Instance] resource
    * @param {object} [options]
@@ -706,7 +720,7 @@ export class CloudMemcacheClient {
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update.
-   *    *   `displayName`
+   *    *  `displayName`
    * @param {google.cloud.memcache.v1beta2.Instance} request.resource
    *   Required. A Memcached [Instance] resource.
    *   Only fields specified in update_mask are updated.
@@ -846,9 +860,10 @@ export class CloudMemcacheClient {
     >
   ): void;
   /**
-   * Updates the defined Memcached Parameters for an existing Instance.
+   * Updates the defined Memcached parameters for an existing instance.
    * This method only stages the parameters, it must be followed by
-   * ApplyParameters to apply the parameters to nodes of the Memcached Instance.
+   * `ApplyParameters` to apply the parameters to nodes of the Memcached
+   * instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1000,7 +1015,7 @@ export class CloudMemcacheClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Memcached instance resource name in the format:
+   *   Required. Memcached instance resource name in the format:
    *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
    *   where `location_id` refers to a GCP region
    * @param {object} [options]
@@ -1139,8 +1154,8 @@ export class CloudMemcacheClient {
     >
   ): void;
   /**
-   * ApplyParameters will update current set of Parameters to the set of
-   * specified nodes of the Memcached Instance.
+   * `ApplyParameters` restarts the set of specified nodes in order to update
+   * them to the current set of parameters for the Memcached Instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1148,11 +1163,11 @@ export class CloudMemcacheClient {
    *   Required. Resource name of the Memcached instance for which parameter group updates
    *   should be applied.
    * @param {string[]} request.nodeIds
-   *   Nodes to which we should apply the instance-level parameter group.
+   *   Nodes to which the instance-level parameter group is applied.
    * @param {boolean} request.applyAll
    *   Whether to apply instance-level parameter group to all nodes. If set to
-   *   true, will explicitly restrict users from specifying any nodes, and apply
-   *   parameter group updates to all nodes within the instance.
+   *   true, users are restricted from specifying individual nodes, and
+   *   `ApplyParameters` updates all nodes within the instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1252,6 +1267,156 @@ export class CloudMemcacheClient {
       protos.google.cloud.memcache.v1beta2.OperationMetadata
     >;
   }
+  applySoftwareUpdate(
+    request: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.memcache.v1beta2.IInstance,
+        protos.google.cloud.memcache.v1beta2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  applySoftwareUpdate(
+    request: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.memcache.v1beta2.IInstance,
+        protos.google.cloud.memcache.v1beta2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  applySoftwareUpdate(
+    request: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.memcache.v1beta2.IInstance,
+        protos.google.cloud.memcache.v1beta2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates software on the selected nodes of the Instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. Resource name of the Memcached instance for which software update should be
+   *   applied.
+   * @param {string[]} request.nodeIds
+   *   Nodes to which we should apply the update to. Note all the selected nodes
+   *   are updated in parallel.
+   * @param {boolean} request.applyAll
+   *   Whether to apply the update to all nodes. If set to
+   *   true, will explicitly restrict users from specifying any nodes, and apply
+   *   software update to all nodes (where applicable) within the instance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.applySoftwareUpdate(request);
+   * const [response] = await operation.promise();
+   */
+  applySoftwareUpdate(
+    request: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.memcache.v1beta2.IInstance,
+            protos.google.cloud.memcache.v1beta2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.memcache.v1beta2.IInstance,
+        protos.google.cloud.memcache.v1beta2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.memcache.v1beta2.IInstance,
+        protos.google.cloud.memcache.v1beta2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      instance: request.instance || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.applySoftwareUpdate(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `applySoftwareUpdate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkApplySoftwareUpdateProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkApplySoftwareUpdateProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.applySoftwareUpdate,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.memcache.v1beta2.Instance,
+      protos.google.cloud.memcache.v1beta2.OperationMetadata
+    >;
+  }
   listInstances(
     request: protos.google.cloud.memcache.v1beta2.IListInstancesRequest,
     options?: CallOptions
@@ -1284,7 +1449,7 @@ export class CloudMemcacheClient {
     >
   ): void;
   /**
-   * Lists Instances in a given project and location.
+   * Lists Instances in a given location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1296,16 +1461,15 @@ export class CloudMemcacheClient {
    *   The maximum number of items to return.
    *
    *   If not specified, a default value of 1000 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link CloudMemcache.ListInstancesResponse.next_page_token|next_page_token}
+   *   Regardless of the `page_size` value, the response may include a partial
+   *   list and a caller should only rely on response's
+   *   {@link google.cloud.memcache.v1beta2.ListInstancesResponse.next_page_token|`next_page_token`}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request,
-   *   if any.
+   *   The `next_page_token` value returned from a previous List request, if any.
    * @param {string} request.filter
    *   List filter. For example, exclude all Memcached instances with name as
-   *   my-instance by specifying "name != my-instance".
+   *   my-instance by specifying `"name != my-instance"`.
    * @param {string} request.orderBy
    *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
    * @param {object} [options]
@@ -1378,16 +1542,15 @@ export class CloudMemcacheClient {
    *   The maximum number of items to return.
    *
    *   If not specified, a default value of 1000 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link CloudMemcache.ListInstancesResponse.next_page_token|next_page_token}
+   *   Regardless of the `page_size` value, the response may include a partial
+   *   list and a caller should only rely on response's
+   *   {@link google.cloud.memcache.v1beta2.ListInstancesResponse.next_page_token|`next_page_token`}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request,
-   *   if any.
+   *   The `next_page_token` value returned from a previous List request, if any.
    * @param {string} request.filter
    *   List filter. For example, exclude all Memcached instances with name as
-   *   my-instance by specifying "name != my-instance".
+   *   my-instance by specifying `"name != my-instance"`.
    * @param {string} request.orderBy
    *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
    * @param {object} [options]
@@ -1438,16 +1601,15 @@ export class CloudMemcacheClient {
    *   The maximum number of items to return.
    *
    *   If not specified, a default value of 1000 will be used by the service.
-   *   Regardless of the page_size value, the response may include a partial list
-   *   and a caller should only rely on response's
-   *   {@link CloudMemcache.ListInstancesResponse.next_page_token|next_page_token}
+   *   Regardless of the `page_size` value, the response may include a partial
+   *   list and a caller should only rely on response's
+   *   {@link google.cloud.memcache.v1beta2.ListInstancesResponse.next_page_token|`next_page_token`}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request,
-   *   if any.
+   *   The `next_page_token` value returned from a previous List request, if any.
    * @param {string} request.filter
    *   List filter. For example, exclude all Memcached instances with name as
-   *   my-instance by specifying "name != my-instance".
+   *   my-instance by specifying `"name != my-instance"`.
    * @param {string} request.orderBy
    *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
    * @param {object} [options]

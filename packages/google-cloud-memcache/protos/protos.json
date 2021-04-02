@@ -824,6 +824,34 @@
                               }
                             }
                           ]
+                        },
+                        "ApplySoftwareUpdate": {
+                          "requestType": "ApplySoftwareUpdateRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta2/{instance=projects/*/locations/*/instances/*}:applySoftwareUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "instance,node_ids,apply_all",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.memcache.v1beta2.Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta2/{instance=projects/*/locations/*/instances/*}:applySoftwareUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance,node_ids,apply_all"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.memcache.v1beta2.Instance",
+                                "metadata_type": "google.cloud.memcache.v1beta2.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -927,6 +955,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "updateAvailable": {
+                          "type": "bool",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -988,6 +1023,13 @@
                             "parameters": {
                               "type": "MemcacheParameters",
                               "id": 6
+                            },
+                            "updateAvailable": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -1139,7 +1181,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memcache.googleapis.com/Instance"
+                          }
                         }
                       }
                     },
@@ -1187,6 +1233,27 @@
                         }
                       }
                     },
+                    "ApplySoftwareUpdateRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memcache.googleapis.com/Instance"
+                          }
+                        },
+                        "nodeIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "applyAll": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
                     "MemcacheParameters": {
                       "fields": {
                         "id": {
@@ -1207,31 +1274,52 @@
                       "fields": {
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "endTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "target": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "verb": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "statusDetail": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "cancelRequested": {
                           "type": "bool",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "apiVersion": {
                           "type": "string",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },

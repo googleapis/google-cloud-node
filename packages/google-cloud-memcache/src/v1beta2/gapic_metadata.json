@@ -40,6 +40,11 @@
                 "applyParameters"
               ]
             },
+            "ApplySoftwareUpdate": {
+              "methods": [
+                "applySoftwareUpdate"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -80,6 +85,11 @@
             "ApplyParameters": {
               "methods": [
                 "applyParameters"
+              ]
+            },
+            "ApplySoftwareUpdate": {
+              "methods": [
+                "applySoftwareUpdate"
               ]
             },
             "ListInstances": {
