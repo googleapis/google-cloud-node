@@ -1,13 +1,14 @@
 {
-  "name": "billing",
-  "name_pretty": "Cloud Billing",
-  "product_documentation": "https://cloud.google.com/billing/docs",
-  "client_documentation": "https://googleapis.dev/nodejs/billing/latest/index.html",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559770",
-  "release_level": "ga",
   "language": "nodejs",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/billing/docs",
   "repo": "googleapis/nodejs-billing",
+  "default_version": "v1",
+  "name_pretty": "Cloud Billing",
+  "release_level": "ga",
   "distribution_name": "@google-cloud/billing",
+  "name": "billing",
+  "client_documentation": "https://googleapis.dev/nodejs/billing/latest/index.html",
   "api_id": "cloudbilling.googleapis.com",
-  "requires_billing": true
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559770"
 }
