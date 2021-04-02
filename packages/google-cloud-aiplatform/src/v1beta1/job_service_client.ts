@@ -210,6 +210,9 @@ export class JobServiceClient {
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
+      ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
@@ -916,7 +919,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the DataLabelingJob.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1017,7 +1019,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the DataLabelingJob.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1223,7 +1224,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the HyperparameterTuningJob resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1337,7 +1337,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the HyperparameterTuningJob to cancel.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1548,7 +1547,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the BatchPredictionJob resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1658,7 +1656,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the BatchPredictionJob to cancel.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1910,7 +1907,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the DataLabelingJob to be deleted.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2055,7 +2051,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the HyperparameterTuningJob resource to be deleted.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2205,7 +2200,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the BatchPredictionJob resource to be deleted.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3172,6 +3166,8 @@ export class JobServiceClient {
    *
    *     * `state` supports = and !=.
    *
+   *     * `model_display_name` supports = and !=
+   *
    *   Some examples of using the filter are:
    *
    *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
@@ -3268,6 +3264,8 @@ export class JobServiceClient {
    *
    *     * `state` supports = and !=.
    *
+   *     * `model_display_name` supports = and !=
+   *
    *   Some examples of using the filter are:
    *
    *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
@@ -3337,6 +3335,8 @@ export class JobServiceClient {
    *     * `display_name` supports = and !=.
    *
    *     * `state` supports = and !=.
+   *
+   *     * `model_display_name` supports = and !=
    *
    *   Some examples of using the filter are:
    *
@@ -4272,6 +4272,55 @@ export class JobServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**

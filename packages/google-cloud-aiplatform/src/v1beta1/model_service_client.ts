@@ -210,6 +210,9 @@ export class ModelServiceClient {
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
+      ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
@@ -663,7 +666,6 @@ export class ModelServiceClient {
    * @param {string} request.name
    *   Required. The name of the ModelEvaluation resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -764,7 +766,6 @@ export class ModelServiceClient {
    * @param {string} request.name
    *   Required. The name of the ModelEvaluationSlice resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1782,7 +1783,6 @@ export class ModelServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
    *   from. Format:
-   *
    *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -1866,7 +1866,6 @@ export class ModelServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
    *   from. Format:
-   *
    *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -1924,7 +1923,6 @@ export class ModelServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
    *   from. Format:
-   *
    *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -2855,6 +2853,55 @@ export class ModelServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**

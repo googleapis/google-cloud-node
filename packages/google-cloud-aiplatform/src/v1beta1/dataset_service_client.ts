@@ -209,6 +209,9 @@ export class DatasetServiceClient {
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
+      ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
@@ -679,7 +682,6 @@ export class DatasetServiceClient {
    * @param {string} request.name
    *   Required. The name of the AnnotationSpec resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}`
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
@@ -1849,7 +1851,6 @@ export class DatasetServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the DataItem to list Annotations from.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -1927,7 +1928,6 @@ export class DatasetServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the DataItem to list Annotations from.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -1983,7 +1983,6 @@ export class DatasetServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the DataItem to list Annotations from.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -2912,6 +2911,55 @@ export class DatasetServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**

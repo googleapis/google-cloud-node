@@ -2102,6 +2102,70 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
     });
 
+    describe('study', () => {
+      const fakePath = '/rendered/path/study';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+      };
+      const client = new pipelineserviceModule.v1beta1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.studyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.studyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('studyPath', () => {
+        const result = client.studyPath(
+          'projectValue',
+          'locationValue',
+          'studyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.studyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromStudyName', () => {
+        const result = client.matchProjectFromStudyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromStudyName', () => {
+        const result = client.matchLocationFromStudyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromStudyName', () => {
+        const result = client.matchStudyFromStudyName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('trainingPipeline', () => {
       const fakePath = '/rendered/path/trainingPipeline';
       const expectedParameters = {

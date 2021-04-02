@@ -26310,9 +26310,7 @@ export namespace google {
                     NVIDIA_TESLA_P100 = 2,
                     NVIDIA_TESLA_V100 = 3,
                     NVIDIA_TESLA_P4 = 4,
-                    NVIDIA_TESLA_T4 = 5,
-                    TPU_V2 = 6,
-                    TPU_V3 = 7
+                    NVIDIA_TESLA_T4 = 5
                 }
 
                 /** Properties of an Annotation. */
@@ -29866,7 +29864,8 @@ export namespace google {
                     JOB_STATE_FAILED = 5,
                     JOB_STATE_CANCELLING = 6,
                     JOB_STATE_CANCELLED = 7,
-                    JOB_STATE_PAUSED = 8
+                    JOB_STATE_PAUSED = 8,
+                    JOB_STATE_EXPIRED = 9
                 }
 
                 /** Properties of a MachineSpec. */
@@ -29982,6 +29981,9 @@ export namespace google {
 
                     /** DedicatedResources maxReplicaCount */
                     maxReplicaCount?: (number|null);
+
+                    /** DedicatedResources autoscalingMetricSpecs */
+                    autoscalingMetricSpecs?: (google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec[]|null);
                 }
 
                 /** Represents a DedicatedResources. */
@@ -30001,6 +30003,9 @@ export namespace google {
 
                     /** DedicatedResources maxReplicaCount. */
                     public maxReplicaCount: number;
+
+                    /** DedicatedResources autoscalingMetricSpecs. */
+                    public autoscalingMetricSpecs: google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec[];
 
                     /**
                      * Creates a new DedicatedResources instance using the specified properties.
@@ -30452,6 +30457,102 @@ export namespace google {
 
                     /**
                      * Converts this DiskSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AutoscalingMetricSpec. */
+                interface IAutoscalingMetricSpec {
+
+                    /** AutoscalingMetricSpec metricName */
+                    metricName?: (string|null);
+
+                    /** AutoscalingMetricSpec target */
+                    target?: (number|null);
+                }
+
+                /** Represents an AutoscalingMetricSpec. */
+                class AutoscalingMetricSpec implements IAutoscalingMetricSpec {
+
+                    /**
+                     * Constructs a new AutoscalingMetricSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec);
+
+                    /** AutoscalingMetricSpec metricName. */
+                    public metricName: string;
+
+                    /** AutoscalingMetricSpec target. */
+                    public target: number;
+
+                    /**
+                     * Creates a new AutoscalingMetricSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoscalingMetricSpec instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec): google.cloud.aiplatform.v1beta1.AutoscalingMetricSpec;
+
+                    /**
+                     * Encodes the specified AutoscalingMetricSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AutoscalingMetricSpec.verify|verify} messages.
+                     * @param message AutoscalingMetricSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoscalingMetricSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AutoscalingMetricSpec.verify|verify} messages.
+                     * @param message AutoscalingMetricSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoscalingMetricSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoscalingMetricSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.AutoscalingMetricSpec;
+
+                    /**
+                     * Decodes an AutoscalingMetricSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoscalingMetricSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.AutoscalingMetricSpec;
+
+                    /**
+                     * Verifies an AutoscalingMetricSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoscalingMetricSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoscalingMetricSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.AutoscalingMetricSpec;
+
+                    /**
+                     * Creates a plain object from an AutoscalingMetricSpec message. Also converts values to other types if specified.
+                     * @param message AutoscalingMetricSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.AutoscalingMetricSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoscalingMetricSpec to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -37945,8 +38046,142 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a Study. */
+                interface IStudy {
+
+                    /** Study name */
+                    name?: (string|null);
+
+                    /** Study displayName */
+                    displayName?: (string|null);
+
+                    /** Study studySpec */
+                    studySpec?: (google.cloud.aiplatform.v1beta1.IStudySpec|null);
+
+                    /** Study state */
+                    state?: (google.cloud.aiplatform.v1beta1.Study.State|keyof typeof google.cloud.aiplatform.v1beta1.Study.State|null);
+
+                    /** Study createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Study inactiveReason */
+                    inactiveReason?: (string|null);
+                }
+
+                /** Represents a Study. */
+                class Study implements IStudy {
+
+                    /**
+                     * Constructs a new Study.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IStudy);
+
+                    /** Study name. */
+                    public name: string;
+
+                    /** Study displayName. */
+                    public displayName: string;
+
+                    /** Study studySpec. */
+                    public studySpec?: (google.cloud.aiplatform.v1beta1.IStudySpec|null);
+
+                    /** Study state. */
+                    public state: (google.cloud.aiplatform.v1beta1.Study.State|keyof typeof google.cloud.aiplatform.v1beta1.Study.State);
+
+                    /** Study createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Study inactiveReason. */
+                    public inactiveReason: string;
+
+                    /**
+                     * Creates a new Study instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Study instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IStudy): google.cloud.aiplatform.v1beta1.Study;
+
+                    /**
+                     * Encodes the specified Study message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Study.verify|verify} messages.
+                     * @param message Study message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IStudy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Study message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Study.verify|verify} messages.
+                     * @param message Study message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IStudy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Study message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Study
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.Study;
+
+                    /**
+                     * Decodes a Study message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Study
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.Study;
+
+                    /**
+                     * Verifies a Study message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Study message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Study
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.Study;
+
+                    /**
+                     * Creates a plain object from a Study message. Also converts values to other types if specified.
+                     * @param message Study
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.Study, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Study to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Study {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        INACTIVE = 2,
+                        COMPLETED = 3
+                    }
+                }
+
                 /** Properties of a Trial. */
                 interface ITrial {
+
+                    /** Trial name */
+                    name?: (string|null);
 
                     /** Trial id */
                     id?: (string|null);
@@ -37978,6 +38213,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.ITrial);
+
+                    /** Trial name. */
+                    public name: string;
 
                     /** Trial id. */
                     public id: string;
@@ -38183,6 +38421,15 @@ export namespace google {
                 /** Properties of a StudySpec. */
                 interface IStudySpec {
 
+                    /** StudySpec decayCurveStoppingSpec */
+                    decayCurveStoppingSpec?: (google.cloud.aiplatform.v1beta1.StudySpec.IDecayCurveAutomatedStoppingSpec|null);
+
+                    /** StudySpec medianAutomatedStoppingSpec */
+                    medianAutomatedStoppingSpec?: (google.cloud.aiplatform.v1beta1.StudySpec.IMedianAutomatedStoppingSpec|null);
+
+                    /** StudySpec convexStopConfig */
+                    convexStopConfig?: (google.cloud.aiplatform.v1beta1.StudySpec.IConvexStopConfig|null);
+
                     /** StudySpec metrics */
                     metrics?: (google.cloud.aiplatform.v1beta1.StudySpec.IMetricSpec[]|null);
 
@@ -38208,6 +38455,15 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IStudySpec);
 
+                    /** StudySpec decayCurveStoppingSpec. */
+                    public decayCurveStoppingSpec?: (google.cloud.aiplatform.v1beta1.StudySpec.IDecayCurveAutomatedStoppingSpec|null);
+
+                    /** StudySpec medianAutomatedStoppingSpec. */
+                    public medianAutomatedStoppingSpec?: (google.cloud.aiplatform.v1beta1.StudySpec.IMedianAutomatedStoppingSpec|null);
+
+                    /** StudySpec convexStopConfig. */
+                    public convexStopConfig?: (google.cloud.aiplatform.v1beta1.StudySpec.IConvexStopConfig|null);
+
                     /** StudySpec metrics. */
                     public metrics: google.cloud.aiplatform.v1beta1.StudySpec.IMetricSpec[];
 
@@ -38222,6 +38478,9 @@ export namespace google {
 
                     /** StudySpec measurementSelectionType. */
                     public measurementSelectionType: (google.cloud.aiplatform.v1beta1.StudySpec.MeasurementSelectionType|keyof typeof google.cloud.aiplatform.v1beta1.StudySpec.MeasurementSelectionType);
+
+                    /** StudySpec automatedStoppingSpec. */
+                    public automatedStoppingSpec?: ("decayCurveStoppingSpec"|"medianAutomatedStoppingSpec"|"convexStopConfig");
 
                     /**
                      * Creates a new StudySpec instance using the specified properties.
@@ -39296,6 +39555,300 @@ export namespace google {
                             UNIT_LOG_SCALE = 2,
                             UNIT_REVERSE_LOG_SCALE = 3
                         }
+                    }
+
+                    /** Properties of a DecayCurveAutomatedStoppingSpec. */
+                    interface IDecayCurveAutomatedStoppingSpec {
+
+                        /** DecayCurveAutomatedStoppingSpec useElapsedDuration */
+                        useElapsedDuration?: (boolean|null);
+                    }
+
+                    /** Represents a DecayCurveAutomatedStoppingSpec. */
+                    class DecayCurveAutomatedStoppingSpec implements IDecayCurveAutomatedStoppingSpec {
+
+                        /**
+                         * Constructs a new DecayCurveAutomatedStoppingSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.StudySpec.IDecayCurveAutomatedStoppingSpec);
+
+                        /** DecayCurveAutomatedStoppingSpec useElapsedDuration. */
+                        public useElapsedDuration: boolean;
+
+                        /**
+                         * Creates a new DecayCurveAutomatedStoppingSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DecayCurveAutomatedStoppingSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.StudySpec.IDecayCurveAutomatedStoppingSpec): google.cloud.aiplatform.v1beta1.StudySpec.DecayCurveAutomatedStoppingSpec;
+
+                        /**
+                         * Encodes the specified DecayCurveAutomatedStoppingSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StudySpec.DecayCurveAutomatedStoppingSpec.verify|verify} messages.
+                         * @param message DecayCurveAutomatedStoppingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.StudySpec.IDecayCurveAutomatedStoppingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DecayCurveAutomatedStoppingSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StudySpec.DecayCurveAutomatedStoppingSpec.verify|verify} messages.
+                         * @param message DecayCurveAutomatedStoppingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.StudySpec.IDecayCurveAutomatedStoppingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DecayCurveAutomatedStoppingSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DecayCurveAutomatedStoppingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.StudySpec.DecayCurveAutomatedStoppingSpec;
+
+                        /**
+                         * Decodes a DecayCurveAutomatedStoppingSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DecayCurveAutomatedStoppingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.StudySpec.DecayCurveAutomatedStoppingSpec;
+
+                        /**
+                         * Verifies a DecayCurveAutomatedStoppingSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DecayCurveAutomatedStoppingSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DecayCurveAutomatedStoppingSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.StudySpec.DecayCurveAutomatedStoppingSpec;
+
+                        /**
+                         * Creates a plain object from a DecayCurveAutomatedStoppingSpec message. Also converts values to other types if specified.
+                         * @param message DecayCurveAutomatedStoppingSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.StudySpec.DecayCurveAutomatedStoppingSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DecayCurveAutomatedStoppingSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a MedianAutomatedStoppingSpec. */
+                    interface IMedianAutomatedStoppingSpec {
+
+                        /** MedianAutomatedStoppingSpec useElapsedDuration */
+                        useElapsedDuration?: (boolean|null);
+                    }
+
+                    /** Represents a MedianAutomatedStoppingSpec. */
+                    class MedianAutomatedStoppingSpec implements IMedianAutomatedStoppingSpec {
+
+                        /**
+                         * Constructs a new MedianAutomatedStoppingSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.StudySpec.IMedianAutomatedStoppingSpec);
+
+                        /** MedianAutomatedStoppingSpec useElapsedDuration. */
+                        public useElapsedDuration: boolean;
+
+                        /**
+                         * Creates a new MedianAutomatedStoppingSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MedianAutomatedStoppingSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.StudySpec.IMedianAutomatedStoppingSpec): google.cloud.aiplatform.v1beta1.StudySpec.MedianAutomatedStoppingSpec;
+
+                        /**
+                         * Encodes the specified MedianAutomatedStoppingSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StudySpec.MedianAutomatedStoppingSpec.verify|verify} messages.
+                         * @param message MedianAutomatedStoppingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.StudySpec.IMedianAutomatedStoppingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MedianAutomatedStoppingSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StudySpec.MedianAutomatedStoppingSpec.verify|verify} messages.
+                         * @param message MedianAutomatedStoppingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.StudySpec.IMedianAutomatedStoppingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MedianAutomatedStoppingSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MedianAutomatedStoppingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.StudySpec.MedianAutomatedStoppingSpec;
+
+                        /**
+                         * Decodes a MedianAutomatedStoppingSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MedianAutomatedStoppingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.StudySpec.MedianAutomatedStoppingSpec;
+
+                        /**
+                         * Verifies a MedianAutomatedStoppingSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MedianAutomatedStoppingSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MedianAutomatedStoppingSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.StudySpec.MedianAutomatedStoppingSpec;
+
+                        /**
+                         * Creates a plain object from a MedianAutomatedStoppingSpec message. Also converts values to other types if specified.
+                         * @param message MedianAutomatedStoppingSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.StudySpec.MedianAutomatedStoppingSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MedianAutomatedStoppingSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ConvexStopConfig. */
+                    interface IConvexStopConfig {
+
+                        /** ConvexStopConfig maxNumSteps */
+                        maxNumSteps?: (number|Long|string|null);
+
+                        /** ConvexStopConfig minNumSteps */
+                        minNumSteps?: (number|Long|string|null);
+
+                        /** ConvexStopConfig autoregressiveOrder */
+                        autoregressiveOrder?: (number|Long|string|null);
+
+                        /** ConvexStopConfig learningRateParameterName */
+                        learningRateParameterName?: (string|null);
+
+                        /** ConvexStopConfig useSeconds */
+                        useSeconds?: (boolean|null);
+                    }
+
+                    /** Represents a ConvexStopConfig. */
+                    class ConvexStopConfig implements IConvexStopConfig {
+
+                        /**
+                         * Constructs a new ConvexStopConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.StudySpec.IConvexStopConfig);
+
+                        /** ConvexStopConfig maxNumSteps. */
+                        public maxNumSteps: (number|Long|string);
+
+                        /** ConvexStopConfig minNumSteps. */
+                        public minNumSteps: (number|Long|string);
+
+                        /** ConvexStopConfig autoregressiveOrder. */
+                        public autoregressiveOrder: (number|Long|string);
+
+                        /** ConvexStopConfig learningRateParameterName. */
+                        public learningRateParameterName: string;
+
+                        /** ConvexStopConfig useSeconds. */
+                        public useSeconds: boolean;
+
+                        /**
+                         * Creates a new ConvexStopConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConvexStopConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.StudySpec.IConvexStopConfig): google.cloud.aiplatform.v1beta1.StudySpec.ConvexStopConfig;
+
+                        /**
+                         * Encodes the specified ConvexStopConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StudySpec.ConvexStopConfig.verify|verify} messages.
+                         * @param message ConvexStopConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.StudySpec.IConvexStopConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConvexStopConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StudySpec.ConvexStopConfig.verify|verify} messages.
+                         * @param message ConvexStopConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.StudySpec.IConvexStopConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConvexStopConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConvexStopConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.StudySpec.ConvexStopConfig;
+
+                        /**
+                         * Decodes a ConvexStopConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConvexStopConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.StudySpec.ConvexStopConfig;
+
+                        /**
+                         * Verifies a ConvexStopConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConvexStopConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConvexStopConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.StudySpec.ConvexStopConfig;
+
+                        /**
+                         * Creates a plain object from a ConvexStopConfig message. Also converts values to other types if specified.
+                         * @param message ConvexStopConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.StudySpec.ConvexStopConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConvexStopConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
 
                     /** Algorithm enum. */
@@ -57927,6 +58480,2451 @@ export namespace google {
 
                     /**
                      * Converts this UpdateSpecialistPoolOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a VizierService */
+                class VizierService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new VizierService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new VizierService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): VizierService;
+
+                    /**
+                     * Calls CreateStudy.
+                     * @param request CreateStudyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Study
+                     */
+                    public createStudy(request: google.cloud.aiplatform.v1beta1.ICreateStudyRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.CreateStudyCallback): void;
+
+                    /**
+                     * Calls CreateStudy.
+                     * @param request CreateStudyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createStudy(request: google.cloud.aiplatform.v1beta1.ICreateStudyRequest): Promise<google.cloud.aiplatform.v1beta1.Study>;
+
+                    /**
+                     * Calls GetStudy.
+                     * @param request GetStudyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Study
+                     */
+                    public getStudy(request: google.cloud.aiplatform.v1beta1.IGetStudyRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.GetStudyCallback): void;
+
+                    /**
+                     * Calls GetStudy.
+                     * @param request GetStudyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getStudy(request: google.cloud.aiplatform.v1beta1.IGetStudyRequest): Promise<google.cloud.aiplatform.v1beta1.Study>;
+
+                    /**
+                     * Calls ListStudies.
+                     * @param request ListStudiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListStudiesResponse
+                     */
+                    public listStudies(request: google.cloud.aiplatform.v1beta1.IListStudiesRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.ListStudiesCallback): void;
+
+                    /**
+                     * Calls ListStudies.
+                     * @param request ListStudiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listStudies(request: google.cloud.aiplatform.v1beta1.IListStudiesRequest): Promise<google.cloud.aiplatform.v1beta1.ListStudiesResponse>;
+
+                    /**
+                     * Calls DeleteStudy.
+                     * @param request DeleteStudyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteStudy(request: google.cloud.aiplatform.v1beta1.IDeleteStudyRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.DeleteStudyCallback): void;
+
+                    /**
+                     * Calls DeleteStudy.
+                     * @param request DeleteStudyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteStudy(request: google.cloud.aiplatform.v1beta1.IDeleteStudyRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls LookupStudy.
+                     * @param request LookupStudyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Study
+                     */
+                    public lookupStudy(request: google.cloud.aiplatform.v1beta1.ILookupStudyRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.LookupStudyCallback): void;
+
+                    /**
+                     * Calls LookupStudy.
+                     * @param request LookupStudyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public lookupStudy(request: google.cloud.aiplatform.v1beta1.ILookupStudyRequest): Promise<google.cloud.aiplatform.v1beta1.Study>;
+
+                    /**
+                     * Calls SuggestTrials.
+                     * @param request SuggestTrialsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public suggestTrials(request: google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.SuggestTrialsCallback): void;
+
+                    /**
+                     * Calls SuggestTrials.
+                     * @param request SuggestTrialsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public suggestTrials(request: google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateTrial.
+                     * @param request CreateTrialRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Trial
+                     */
+                    public createTrial(request: google.cloud.aiplatform.v1beta1.ICreateTrialRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.CreateTrialCallback): void;
+
+                    /**
+                     * Calls CreateTrial.
+                     * @param request CreateTrialRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTrial(request: google.cloud.aiplatform.v1beta1.ICreateTrialRequest): Promise<google.cloud.aiplatform.v1beta1.Trial>;
+
+                    /**
+                     * Calls GetTrial.
+                     * @param request GetTrialRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Trial
+                     */
+                    public getTrial(request: google.cloud.aiplatform.v1beta1.IGetTrialRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.GetTrialCallback): void;
+
+                    /**
+                     * Calls GetTrial.
+                     * @param request GetTrialRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTrial(request: google.cloud.aiplatform.v1beta1.IGetTrialRequest): Promise<google.cloud.aiplatform.v1beta1.Trial>;
+
+                    /**
+                     * Calls ListTrials.
+                     * @param request ListTrialsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTrialsResponse
+                     */
+                    public listTrials(request: google.cloud.aiplatform.v1beta1.IListTrialsRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.ListTrialsCallback): void;
+
+                    /**
+                     * Calls ListTrials.
+                     * @param request ListTrialsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTrials(request: google.cloud.aiplatform.v1beta1.IListTrialsRequest): Promise<google.cloud.aiplatform.v1beta1.ListTrialsResponse>;
+
+                    /**
+                     * Calls AddTrialMeasurement.
+                     * @param request AddTrialMeasurementRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Trial
+                     */
+                    public addTrialMeasurement(request: google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.AddTrialMeasurementCallback): void;
+
+                    /**
+                     * Calls AddTrialMeasurement.
+                     * @param request AddTrialMeasurementRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addTrialMeasurement(request: google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest): Promise<google.cloud.aiplatform.v1beta1.Trial>;
+
+                    /**
+                     * Calls CompleteTrial.
+                     * @param request CompleteTrialRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Trial
+                     */
+                    public completeTrial(request: google.cloud.aiplatform.v1beta1.ICompleteTrialRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.CompleteTrialCallback): void;
+
+                    /**
+                     * Calls CompleteTrial.
+                     * @param request CompleteTrialRequest message or plain object
+                     * @returns Promise
+                     */
+                    public completeTrial(request: google.cloud.aiplatform.v1beta1.ICompleteTrialRequest): Promise<google.cloud.aiplatform.v1beta1.Trial>;
+
+                    /**
+                     * Calls DeleteTrial.
+                     * @param request DeleteTrialRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteTrial(request: google.cloud.aiplatform.v1beta1.IDeleteTrialRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.DeleteTrialCallback): void;
+
+                    /**
+                     * Calls DeleteTrial.
+                     * @param request DeleteTrialRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTrial(request: google.cloud.aiplatform.v1beta1.IDeleteTrialRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CheckTrialEarlyStoppingState.
+                     * @param request CheckTrialEarlyStoppingStateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public checkTrialEarlyStoppingState(request: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.CheckTrialEarlyStoppingStateCallback): void;
+
+                    /**
+                     * Calls CheckTrialEarlyStoppingState.
+                     * @param request CheckTrialEarlyStoppingStateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public checkTrialEarlyStoppingState(request: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StopTrial.
+                     * @param request StopTrialRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Trial
+                     */
+                    public stopTrial(request: google.cloud.aiplatform.v1beta1.IStopTrialRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.StopTrialCallback): void;
+
+                    /**
+                     * Calls StopTrial.
+                     * @param request StopTrialRequest message or plain object
+                     * @returns Promise
+                     */
+                    public stopTrial(request: google.cloud.aiplatform.v1beta1.IStopTrialRequest): Promise<google.cloud.aiplatform.v1beta1.Trial>;
+
+                    /**
+                     * Calls ListOptimalTrials.
+                     * @param request ListOptimalTrialsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOptimalTrialsResponse
+                     */
+                    public listOptimalTrials(request: google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest, callback: google.cloud.aiplatform.v1beta1.VizierService.ListOptimalTrialsCallback): void;
+
+                    /**
+                     * Calls ListOptimalTrials.
+                     * @param request ListOptimalTrialsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOptimalTrials(request: google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest): Promise<google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse>;
+                }
+
+                namespace VizierService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#createStudy}.
+                     * @param error Error, if any
+                     * @param [response] Study
+                     */
+                    type CreateStudyCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Study) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#getStudy}.
+                     * @param error Error, if any
+                     * @param [response] Study
+                     */
+                    type GetStudyCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Study) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#listStudies}.
+                     * @param error Error, if any
+                     * @param [response] ListStudiesResponse
+                     */
+                    type ListStudiesCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.ListStudiesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#deleteStudy}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteStudyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#lookupStudy}.
+                     * @param error Error, if any
+                     * @param [response] Study
+                     */
+                    type LookupStudyCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Study) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#suggestTrials}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SuggestTrialsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#createTrial}.
+                     * @param error Error, if any
+                     * @param [response] Trial
+                     */
+                    type CreateTrialCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Trial) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#getTrial}.
+                     * @param error Error, if any
+                     * @param [response] Trial
+                     */
+                    type GetTrialCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Trial) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#listTrials}.
+                     * @param error Error, if any
+                     * @param [response] ListTrialsResponse
+                     */
+                    type ListTrialsCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.ListTrialsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#addTrialMeasurement}.
+                     * @param error Error, if any
+                     * @param [response] Trial
+                     */
+                    type AddTrialMeasurementCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Trial) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#completeTrial}.
+                     * @param error Error, if any
+                     * @param [response] Trial
+                     */
+                    type CompleteTrialCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Trial) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#deleteTrial}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteTrialCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#checkTrialEarlyStoppingState}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CheckTrialEarlyStoppingStateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#stopTrial}.
+                     * @param error Error, if any
+                     * @param [response] Trial
+                     */
+                    type StopTrialCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.Trial) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.VizierService#listOptimalTrials}.
+                     * @param error Error, if any
+                     * @param [response] ListOptimalTrialsResponse
+                     */
+                    type ListOptimalTrialsCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse) => void;
+                }
+
+                /** Properties of a GetStudyRequest. */
+                interface IGetStudyRequest {
+
+                    /** GetStudyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetStudyRequest. */
+                class GetStudyRequest implements IGetStudyRequest {
+
+                    /**
+                     * Constructs a new GetStudyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGetStudyRequest);
+
+                    /** GetStudyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetStudyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetStudyRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGetStudyRequest): google.cloud.aiplatform.v1beta1.GetStudyRequest;
+
+                    /**
+                     * Encodes the specified GetStudyRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GetStudyRequest.verify|verify} messages.
+                     * @param message GetStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGetStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetStudyRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GetStudyRequest.verify|verify} messages.
+                     * @param message GetStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGetStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetStudyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GetStudyRequest;
+
+                    /**
+                     * Decodes a GetStudyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GetStudyRequest;
+
+                    /**
+                     * Verifies a GetStudyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetStudyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetStudyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GetStudyRequest;
+
+                    /**
+                     * Creates a plain object from a GetStudyRequest message. Also converts values to other types if specified.
+                     * @param message GetStudyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GetStudyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetStudyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateStudyRequest. */
+                interface ICreateStudyRequest {
+
+                    /** CreateStudyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateStudyRequest study */
+                    study?: (google.cloud.aiplatform.v1beta1.IStudy|null);
+                }
+
+                /** Represents a CreateStudyRequest. */
+                class CreateStudyRequest implements ICreateStudyRequest {
+
+                    /**
+                     * Constructs a new CreateStudyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICreateStudyRequest);
+
+                    /** CreateStudyRequest parent. */
+                    public parent: string;
+
+                    /** CreateStudyRequest study. */
+                    public study?: (google.cloud.aiplatform.v1beta1.IStudy|null);
+
+                    /**
+                     * Creates a new CreateStudyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateStudyRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICreateStudyRequest): google.cloud.aiplatform.v1beta1.CreateStudyRequest;
+
+                    /**
+                     * Encodes the specified CreateStudyRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CreateStudyRequest.verify|verify} messages.
+                     * @param message CreateStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICreateStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateStudyRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CreateStudyRequest.verify|verify} messages.
+                     * @param message CreateStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICreateStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateStudyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CreateStudyRequest;
+
+                    /**
+                     * Decodes a CreateStudyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CreateStudyRequest;
+
+                    /**
+                     * Verifies a CreateStudyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateStudyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateStudyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CreateStudyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateStudyRequest message. Also converts values to other types if specified.
+                     * @param message CreateStudyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CreateStudyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateStudyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListStudiesRequest. */
+                interface IListStudiesRequest {
+
+                    /** ListStudiesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListStudiesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListStudiesRequest pageSize */
+                    pageSize?: (number|null);
+                }
+
+                /** Represents a ListStudiesRequest. */
+                class ListStudiesRequest implements IListStudiesRequest {
+
+                    /**
+                     * Constructs a new ListStudiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListStudiesRequest);
+
+                    /** ListStudiesRequest parent. */
+                    public parent: string;
+
+                    /** ListStudiesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListStudiesRequest pageSize. */
+                    public pageSize: number;
+
+                    /**
+                     * Creates a new ListStudiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListStudiesRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListStudiesRequest): google.cloud.aiplatform.v1beta1.ListStudiesRequest;
+
+                    /**
+                     * Encodes the specified ListStudiesRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListStudiesRequest.verify|verify} messages.
+                     * @param message ListStudiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListStudiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListStudiesRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListStudiesRequest.verify|verify} messages.
+                     * @param message ListStudiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListStudiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListStudiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListStudiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListStudiesRequest;
+
+                    /**
+                     * Decodes a ListStudiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListStudiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListStudiesRequest;
+
+                    /**
+                     * Verifies a ListStudiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListStudiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListStudiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListStudiesRequest;
+
+                    /**
+                     * Creates a plain object from a ListStudiesRequest message. Also converts values to other types if specified.
+                     * @param message ListStudiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListStudiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListStudiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListStudiesResponse. */
+                interface IListStudiesResponse {
+
+                    /** ListStudiesResponse studies */
+                    studies?: (google.cloud.aiplatform.v1beta1.IStudy[]|null);
+
+                    /** ListStudiesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListStudiesResponse. */
+                class ListStudiesResponse implements IListStudiesResponse {
+
+                    /**
+                     * Constructs a new ListStudiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListStudiesResponse);
+
+                    /** ListStudiesResponse studies. */
+                    public studies: google.cloud.aiplatform.v1beta1.IStudy[];
+
+                    /** ListStudiesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListStudiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListStudiesResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListStudiesResponse): google.cloud.aiplatform.v1beta1.ListStudiesResponse;
+
+                    /**
+                     * Encodes the specified ListStudiesResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListStudiesResponse.verify|verify} messages.
+                     * @param message ListStudiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListStudiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListStudiesResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListStudiesResponse.verify|verify} messages.
+                     * @param message ListStudiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListStudiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListStudiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListStudiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListStudiesResponse;
+
+                    /**
+                     * Decodes a ListStudiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListStudiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListStudiesResponse;
+
+                    /**
+                     * Verifies a ListStudiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListStudiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListStudiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListStudiesResponse;
+
+                    /**
+                     * Creates a plain object from a ListStudiesResponse message. Also converts values to other types if specified.
+                     * @param message ListStudiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListStudiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListStudiesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteStudyRequest. */
+                interface IDeleteStudyRequest {
+
+                    /** DeleteStudyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteStudyRequest. */
+                class DeleteStudyRequest implements IDeleteStudyRequest {
+
+                    /**
+                     * Constructs a new DeleteStudyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IDeleteStudyRequest);
+
+                    /** DeleteStudyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteStudyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteStudyRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IDeleteStudyRequest): google.cloud.aiplatform.v1beta1.DeleteStudyRequest;
+
+                    /**
+                     * Encodes the specified DeleteStudyRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteStudyRequest.verify|verify} messages.
+                     * @param message DeleteStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IDeleteStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteStudyRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteStudyRequest.verify|verify} messages.
+                     * @param message DeleteStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IDeleteStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteStudyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.DeleteStudyRequest;
+
+                    /**
+                     * Decodes a DeleteStudyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.DeleteStudyRequest;
+
+                    /**
+                     * Verifies a DeleteStudyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteStudyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteStudyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.DeleteStudyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteStudyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteStudyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.DeleteStudyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteStudyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LookupStudyRequest. */
+                interface ILookupStudyRequest {
+
+                    /** LookupStudyRequest parent */
+                    parent?: (string|null);
+
+                    /** LookupStudyRequest displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a LookupStudyRequest. */
+                class LookupStudyRequest implements ILookupStudyRequest {
+
+                    /**
+                     * Constructs a new LookupStudyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ILookupStudyRequest);
+
+                    /** LookupStudyRequest parent. */
+                    public parent: string;
+
+                    /** LookupStudyRequest displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new LookupStudyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LookupStudyRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ILookupStudyRequest): google.cloud.aiplatform.v1beta1.LookupStudyRequest;
+
+                    /**
+                     * Encodes the specified LookupStudyRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.LookupStudyRequest.verify|verify} messages.
+                     * @param message LookupStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ILookupStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LookupStudyRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.LookupStudyRequest.verify|verify} messages.
+                     * @param message LookupStudyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ILookupStudyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LookupStudyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LookupStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.LookupStudyRequest;
+
+                    /**
+                     * Decodes a LookupStudyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LookupStudyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.LookupStudyRequest;
+
+                    /**
+                     * Verifies a LookupStudyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LookupStudyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LookupStudyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.LookupStudyRequest;
+
+                    /**
+                     * Creates a plain object from a LookupStudyRequest message. Also converts values to other types if specified.
+                     * @param message LookupStudyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.LookupStudyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LookupStudyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SuggestTrialsRequest. */
+                interface ISuggestTrialsRequest {
+
+                    /** SuggestTrialsRequest parent */
+                    parent?: (string|null);
+
+                    /** SuggestTrialsRequest suggestionCount */
+                    suggestionCount?: (number|null);
+
+                    /** SuggestTrialsRequest clientId */
+                    clientId?: (string|null);
+                }
+
+                /** Represents a SuggestTrialsRequest. */
+                class SuggestTrialsRequest implements ISuggestTrialsRequest {
+
+                    /**
+                     * Constructs a new SuggestTrialsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest);
+
+                    /** SuggestTrialsRequest parent. */
+                    public parent: string;
+
+                    /** SuggestTrialsRequest suggestionCount. */
+                    public suggestionCount: number;
+
+                    /** SuggestTrialsRequest clientId. */
+                    public clientId: string;
+
+                    /**
+                     * Creates a new SuggestTrialsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SuggestTrialsRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest): google.cloud.aiplatform.v1beta1.SuggestTrialsRequest;
+
+                    /**
+                     * Encodes the specified SuggestTrialsRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SuggestTrialsRequest.verify|verify} messages.
+                     * @param message SuggestTrialsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SuggestTrialsRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SuggestTrialsRequest.verify|verify} messages.
+                     * @param message SuggestTrialsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SuggestTrialsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SuggestTrialsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.SuggestTrialsRequest;
+
+                    /**
+                     * Decodes a SuggestTrialsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SuggestTrialsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.SuggestTrialsRequest;
+
+                    /**
+                     * Verifies a SuggestTrialsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SuggestTrialsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SuggestTrialsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.SuggestTrialsRequest;
+
+                    /**
+                     * Creates a plain object from a SuggestTrialsRequest message. Also converts values to other types if specified.
+                     * @param message SuggestTrialsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.SuggestTrialsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SuggestTrialsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SuggestTrialsResponse. */
+                interface ISuggestTrialsResponse {
+
+                    /** SuggestTrialsResponse trials */
+                    trials?: (google.cloud.aiplatform.v1beta1.ITrial[]|null);
+
+                    /** SuggestTrialsResponse studyState */
+                    studyState?: (google.cloud.aiplatform.v1beta1.Study.State|keyof typeof google.cloud.aiplatform.v1beta1.Study.State|null);
+
+                    /** SuggestTrialsResponse startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SuggestTrialsResponse endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SuggestTrialsResponse. */
+                class SuggestTrialsResponse implements ISuggestTrialsResponse {
+
+                    /**
+                     * Constructs a new SuggestTrialsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse);
+
+                    /** SuggestTrialsResponse trials. */
+                    public trials: google.cloud.aiplatform.v1beta1.ITrial[];
+
+                    /** SuggestTrialsResponse studyState. */
+                    public studyState: (google.cloud.aiplatform.v1beta1.Study.State|keyof typeof google.cloud.aiplatform.v1beta1.Study.State);
+
+                    /** SuggestTrialsResponse startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SuggestTrialsResponse endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SuggestTrialsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SuggestTrialsResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse): google.cloud.aiplatform.v1beta1.SuggestTrialsResponse;
+
+                    /**
+                     * Encodes the specified SuggestTrialsResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SuggestTrialsResponse.verify|verify} messages.
+                     * @param message SuggestTrialsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SuggestTrialsResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SuggestTrialsResponse.verify|verify} messages.
+                     * @param message SuggestTrialsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SuggestTrialsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SuggestTrialsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.SuggestTrialsResponse;
+
+                    /**
+                     * Decodes a SuggestTrialsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SuggestTrialsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.SuggestTrialsResponse;
+
+                    /**
+                     * Verifies a SuggestTrialsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SuggestTrialsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SuggestTrialsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.SuggestTrialsResponse;
+
+                    /**
+                     * Creates a plain object from a SuggestTrialsResponse message. Also converts values to other types if specified.
+                     * @param message SuggestTrialsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.SuggestTrialsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SuggestTrialsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SuggestTrialsMetadata. */
+                interface ISuggestTrialsMetadata {
+
+                    /** SuggestTrialsMetadata genericMetadata */
+                    genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** SuggestTrialsMetadata clientId */
+                    clientId?: (string|null);
+                }
+
+                /** Represents a SuggestTrialsMetadata. */
+                class SuggestTrialsMetadata implements ISuggestTrialsMetadata {
+
+                    /**
+                     * Constructs a new SuggestTrialsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata);
+
+                    /** SuggestTrialsMetadata genericMetadata. */
+                    public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** SuggestTrialsMetadata clientId. */
+                    public clientId: string;
+
+                    /**
+                     * Creates a new SuggestTrialsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SuggestTrialsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata): google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata;
+
+                    /**
+                     * Encodes the specified SuggestTrialsMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata.verify|verify} messages.
+                     * @param message SuggestTrialsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SuggestTrialsMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata.verify|verify} messages.
+                     * @param message SuggestTrialsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SuggestTrialsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SuggestTrialsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata;
+
+                    /**
+                     * Decodes a SuggestTrialsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SuggestTrialsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata;
+
+                    /**
+                     * Verifies a SuggestTrialsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SuggestTrialsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SuggestTrialsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata;
+
+                    /**
+                     * Creates a plain object from a SuggestTrialsMetadata message. Also converts values to other types if specified.
+                     * @param message SuggestTrialsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SuggestTrialsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateTrialRequest. */
+                interface ICreateTrialRequest {
+
+                    /** CreateTrialRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTrialRequest trial */
+                    trial?: (google.cloud.aiplatform.v1beta1.ITrial|null);
+                }
+
+                /** Represents a CreateTrialRequest. */
+                class CreateTrialRequest implements ICreateTrialRequest {
+
+                    /**
+                     * Constructs a new CreateTrialRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICreateTrialRequest);
+
+                    /** CreateTrialRequest parent. */
+                    public parent: string;
+
+                    /** CreateTrialRequest trial. */
+                    public trial?: (google.cloud.aiplatform.v1beta1.ITrial|null);
+
+                    /**
+                     * Creates a new CreateTrialRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTrialRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICreateTrialRequest): google.cloud.aiplatform.v1beta1.CreateTrialRequest;
+
+                    /**
+                     * Encodes the specified CreateTrialRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CreateTrialRequest.verify|verify} messages.
+                     * @param message CreateTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICreateTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTrialRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CreateTrialRequest.verify|verify} messages.
+                     * @param message CreateTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICreateTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTrialRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CreateTrialRequest;
+
+                    /**
+                     * Decodes a CreateTrialRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CreateTrialRequest;
+
+                    /**
+                     * Verifies a CreateTrialRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTrialRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTrialRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CreateTrialRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTrialRequest message. Also converts values to other types if specified.
+                     * @param message CreateTrialRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CreateTrialRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTrialRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetTrialRequest. */
+                interface IGetTrialRequest {
+
+                    /** GetTrialRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTrialRequest. */
+                class GetTrialRequest implements IGetTrialRequest {
+
+                    /**
+                     * Constructs a new GetTrialRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGetTrialRequest);
+
+                    /** GetTrialRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTrialRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTrialRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGetTrialRequest): google.cloud.aiplatform.v1beta1.GetTrialRequest;
+
+                    /**
+                     * Encodes the specified GetTrialRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GetTrialRequest.verify|verify} messages.
+                     * @param message GetTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGetTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTrialRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GetTrialRequest.verify|verify} messages.
+                     * @param message GetTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGetTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTrialRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GetTrialRequest;
+
+                    /**
+                     * Decodes a GetTrialRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GetTrialRequest;
+
+                    /**
+                     * Verifies a GetTrialRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTrialRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTrialRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GetTrialRequest;
+
+                    /**
+                     * Creates a plain object from a GetTrialRequest message. Also converts values to other types if specified.
+                     * @param message GetTrialRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GetTrialRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTrialRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListTrialsRequest. */
+                interface IListTrialsRequest {
+
+                    /** ListTrialsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTrialsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTrialsRequest pageSize */
+                    pageSize?: (number|null);
+                }
+
+                /** Represents a ListTrialsRequest. */
+                class ListTrialsRequest implements IListTrialsRequest {
+
+                    /**
+                     * Constructs a new ListTrialsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListTrialsRequest);
+
+                    /** ListTrialsRequest parent. */
+                    public parent: string;
+
+                    /** ListTrialsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTrialsRequest pageSize. */
+                    public pageSize: number;
+
+                    /**
+                     * Creates a new ListTrialsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTrialsRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListTrialsRequest): google.cloud.aiplatform.v1beta1.ListTrialsRequest;
+
+                    /**
+                     * Encodes the specified ListTrialsRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListTrialsRequest.verify|verify} messages.
+                     * @param message ListTrialsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListTrialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTrialsRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListTrialsRequest.verify|verify} messages.
+                     * @param message ListTrialsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListTrialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTrialsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTrialsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListTrialsRequest;
+
+                    /**
+                     * Decodes a ListTrialsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTrialsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListTrialsRequest;
+
+                    /**
+                     * Verifies a ListTrialsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTrialsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTrialsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListTrialsRequest;
+
+                    /**
+                     * Creates a plain object from a ListTrialsRequest message. Also converts values to other types if specified.
+                     * @param message ListTrialsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListTrialsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTrialsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListTrialsResponse. */
+                interface IListTrialsResponse {
+
+                    /** ListTrialsResponse trials */
+                    trials?: (google.cloud.aiplatform.v1beta1.ITrial[]|null);
+
+                    /** ListTrialsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListTrialsResponse. */
+                class ListTrialsResponse implements IListTrialsResponse {
+
+                    /**
+                     * Constructs a new ListTrialsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListTrialsResponse);
+
+                    /** ListTrialsResponse trials. */
+                    public trials: google.cloud.aiplatform.v1beta1.ITrial[];
+
+                    /** ListTrialsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListTrialsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTrialsResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListTrialsResponse): google.cloud.aiplatform.v1beta1.ListTrialsResponse;
+
+                    /**
+                     * Encodes the specified ListTrialsResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListTrialsResponse.verify|verify} messages.
+                     * @param message ListTrialsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListTrialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTrialsResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListTrialsResponse.verify|verify} messages.
+                     * @param message ListTrialsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListTrialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTrialsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTrialsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListTrialsResponse;
+
+                    /**
+                     * Decodes a ListTrialsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTrialsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListTrialsResponse;
+
+                    /**
+                     * Verifies a ListTrialsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTrialsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTrialsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListTrialsResponse;
+
+                    /**
+                     * Creates a plain object from a ListTrialsResponse message. Also converts values to other types if specified.
+                     * @param message ListTrialsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListTrialsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTrialsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AddTrialMeasurementRequest. */
+                interface IAddTrialMeasurementRequest {
+
+                    /** AddTrialMeasurementRequest trialName */
+                    trialName?: (string|null);
+
+                    /** AddTrialMeasurementRequest measurement */
+                    measurement?: (google.cloud.aiplatform.v1beta1.IMeasurement|null);
+                }
+
+                /** Represents an AddTrialMeasurementRequest. */
+                class AddTrialMeasurementRequest implements IAddTrialMeasurementRequest {
+
+                    /**
+                     * Constructs a new AddTrialMeasurementRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest);
+
+                    /** AddTrialMeasurementRequest trialName. */
+                    public trialName: string;
+
+                    /** AddTrialMeasurementRequest measurement. */
+                    public measurement?: (google.cloud.aiplatform.v1beta1.IMeasurement|null);
+
+                    /**
+                     * Creates a new AddTrialMeasurementRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddTrialMeasurementRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest): google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest;
+
+                    /**
+                     * Encodes the specified AddTrialMeasurementRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest.verify|verify} messages.
+                     * @param message AddTrialMeasurementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddTrialMeasurementRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest.verify|verify} messages.
+                     * @param message AddTrialMeasurementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddTrialMeasurementRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddTrialMeasurementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest;
+
+                    /**
+                     * Decodes an AddTrialMeasurementRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddTrialMeasurementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest;
+
+                    /**
+                     * Verifies an AddTrialMeasurementRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddTrialMeasurementRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddTrialMeasurementRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest;
+
+                    /**
+                     * Creates a plain object from an AddTrialMeasurementRequest message. Also converts values to other types if specified.
+                     * @param message AddTrialMeasurementRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddTrialMeasurementRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CompleteTrialRequest. */
+                interface ICompleteTrialRequest {
+
+                    /** CompleteTrialRequest name */
+                    name?: (string|null);
+
+                    /** CompleteTrialRequest finalMeasurement */
+                    finalMeasurement?: (google.cloud.aiplatform.v1beta1.IMeasurement|null);
+
+                    /** CompleteTrialRequest trialInfeasible */
+                    trialInfeasible?: (boolean|null);
+
+                    /** CompleteTrialRequest infeasibleReason */
+                    infeasibleReason?: (string|null);
+                }
+
+                /** Represents a CompleteTrialRequest. */
+                class CompleteTrialRequest implements ICompleteTrialRequest {
+
+                    /**
+                     * Constructs a new CompleteTrialRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICompleteTrialRequest);
+
+                    /** CompleteTrialRequest name. */
+                    public name: string;
+
+                    /** CompleteTrialRequest finalMeasurement. */
+                    public finalMeasurement?: (google.cloud.aiplatform.v1beta1.IMeasurement|null);
+
+                    /** CompleteTrialRequest trialInfeasible. */
+                    public trialInfeasible: boolean;
+
+                    /** CompleteTrialRequest infeasibleReason. */
+                    public infeasibleReason: string;
+
+                    /**
+                     * Creates a new CompleteTrialRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CompleteTrialRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICompleteTrialRequest): google.cloud.aiplatform.v1beta1.CompleteTrialRequest;
+
+                    /**
+                     * Encodes the specified CompleteTrialRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CompleteTrialRequest.verify|verify} messages.
+                     * @param message CompleteTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICompleteTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CompleteTrialRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CompleteTrialRequest.verify|verify} messages.
+                     * @param message CompleteTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICompleteTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CompleteTrialRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CompleteTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CompleteTrialRequest;
+
+                    /**
+                     * Decodes a CompleteTrialRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CompleteTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CompleteTrialRequest;
+
+                    /**
+                     * Verifies a CompleteTrialRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CompleteTrialRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CompleteTrialRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CompleteTrialRequest;
+
+                    /**
+                     * Creates a plain object from a CompleteTrialRequest message. Also converts values to other types if specified.
+                     * @param message CompleteTrialRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CompleteTrialRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CompleteTrialRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteTrialRequest. */
+                interface IDeleteTrialRequest {
+
+                    /** DeleteTrialRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteTrialRequest. */
+                class DeleteTrialRequest implements IDeleteTrialRequest {
+
+                    /**
+                     * Constructs a new DeleteTrialRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IDeleteTrialRequest);
+
+                    /** DeleteTrialRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteTrialRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTrialRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IDeleteTrialRequest): google.cloud.aiplatform.v1beta1.DeleteTrialRequest;
+
+                    /**
+                     * Encodes the specified DeleteTrialRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteTrialRequest.verify|verify} messages.
+                     * @param message DeleteTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IDeleteTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTrialRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteTrialRequest.verify|verify} messages.
+                     * @param message DeleteTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IDeleteTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTrialRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.DeleteTrialRequest;
+
+                    /**
+                     * Decodes a DeleteTrialRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.DeleteTrialRequest;
+
+                    /**
+                     * Verifies a DeleteTrialRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTrialRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTrialRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.DeleteTrialRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTrialRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTrialRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.DeleteTrialRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTrialRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CheckTrialEarlyStoppingStateRequest. */
+                interface ICheckTrialEarlyStoppingStateRequest {
+
+                    /** CheckTrialEarlyStoppingStateRequest trialName */
+                    trialName?: (string|null);
+                }
+
+                /** Represents a CheckTrialEarlyStoppingStateRequest. */
+                class CheckTrialEarlyStoppingStateRequest implements ICheckTrialEarlyStoppingStateRequest {
+
+                    /**
+                     * Constructs a new CheckTrialEarlyStoppingStateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest);
+
+                    /** CheckTrialEarlyStoppingStateRequest trialName. */
+                    public trialName: string;
+
+                    /**
+                     * Creates a new CheckTrialEarlyStoppingStateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckTrialEarlyStoppingStateRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest;
+
+                    /**
+                     * Encodes the specified CheckTrialEarlyStoppingStateRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest.verify|verify} messages.
+                     * @param message CheckTrialEarlyStoppingStateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckTrialEarlyStoppingStateRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest.verify|verify} messages.
+                     * @param message CheckTrialEarlyStoppingStateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckTrialEarlyStoppingStateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckTrialEarlyStoppingStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest;
+
+                    /**
+                     * Decodes a CheckTrialEarlyStoppingStateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckTrialEarlyStoppingStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest;
+
+                    /**
+                     * Verifies a CheckTrialEarlyStoppingStateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckTrialEarlyStoppingStateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckTrialEarlyStoppingStateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest;
+
+                    /**
+                     * Creates a plain object from a CheckTrialEarlyStoppingStateRequest message. Also converts values to other types if specified.
+                     * @param message CheckTrialEarlyStoppingStateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckTrialEarlyStoppingStateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CheckTrialEarlyStoppingStateResponse. */
+                interface ICheckTrialEarlyStoppingStateResponse {
+
+                    /** CheckTrialEarlyStoppingStateResponse shouldStop */
+                    shouldStop?: (boolean|null);
+                }
+
+                /** Represents a CheckTrialEarlyStoppingStateResponse. */
+                class CheckTrialEarlyStoppingStateResponse implements ICheckTrialEarlyStoppingStateResponse {
+
+                    /**
+                     * Constructs a new CheckTrialEarlyStoppingStateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse);
+
+                    /** CheckTrialEarlyStoppingStateResponse shouldStop. */
+                    public shouldStop: boolean;
+
+                    /**
+                     * Creates a new CheckTrialEarlyStoppingStateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckTrialEarlyStoppingStateResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse;
+
+                    /**
+                     * Encodes the specified CheckTrialEarlyStoppingStateResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse.verify|verify} messages.
+                     * @param message CheckTrialEarlyStoppingStateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckTrialEarlyStoppingStateResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse.verify|verify} messages.
+                     * @param message CheckTrialEarlyStoppingStateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckTrialEarlyStoppingStateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckTrialEarlyStoppingStateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse;
+
+                    /**
+                     * Decodes a CheckTrialEarlyStoppingStateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckTrialEarlyStoppingStateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse;
+
+                    /**
+                     * Verifies a CheckTrialEarlyStoppingStateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckTrialEarlyStoppingStateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckTrialEarlyStoppingStateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse;
+
+                    /**
+                     * Creates a plain object from a CheckTrialEarlyStoppingStateResponse message. Also converts values to other types if specified.
+                     * @param message CheckTrialEarlyStoppingStateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckTrialEarlyStoppingStateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CheckTrialEarlyStoppingStateMetatdata. */
+                interface ICheckTrialEarlyStoppingStateMetatdata {
+
+                    /** CheckTrialEarlyStoppingStateMetatdata genericMetadata */
+                    genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** CheckTrialEarlyStoppingStateMetatdata study */
+                    study?: (string|null);
+
+                    /** CheckTrialEarlyStoppingStateMetatdata trial */
+                    trial?: (string|null);
+                }
+
+                /** Represents a CheckTrialEarlyStoppingStateMetatdata. */
+                class CheckTrialEarlyStoppingStateMetatdata implements ICheckTrialEarlyStoppingStateMetatdata {
+
+                    /**
+                     * Constructs a new CheckTrialEarlyStoppingStateMetatdata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata);
+
+                    /** CheckTrialEarlyStoppingStateMetatdata genericMetadata. */
+                    public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** CheckTrialEarlyStoppingStateMetatdata study. */
+                    public study: string;
+
+                    /** CheckTrialEarlyStoppingStateMetatdata trial. */
+                    public trial: string;
+
+                    /**
+                     * Creates a new CheckTrialEarlyStoppingStateMetatdata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckTrialEarlyStoppingStateMetatdata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata;
+
+                    /**
+                     * Encodes the specified CheckTrialEarlyStoppingStateMetatdata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata.verify|verify} messages.
+                     * @param message CheckTrialEarlyStoppingStateMetatdata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckTrialEarlyStoppingStateMetatdata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata.verify|verify} messages.
+                     * @param message CheckTrialEarlyStoppingStateMetatdata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckTrialEarlyStoppingStateMetatdata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckTrialEarlyStoppingStateMetatdata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata;
+
+                    /**
+                     * Decodes a CheckTrialEarlyStoppingStateMetatdata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckTrialEarlyStoppingStateMetatdata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata;
+
+                    /**
+                     * Verifies a CheckTrialEarlyStoppingStateMetatdata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckTrialEarlyStoppingStateMetatdata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckTrialEarlyStoppingStateMetatdata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata;
+
+                    /**
+                     * Creates a plain object from a CheckTrialEarlyStoppingStateMetatdata message. Also converts values to other types if specified.
+                     * @param message CheckTrialEarlyStoppingStateMetatdata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckTrialEarlyStoppingStateMetatdata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StopTrialRequest. */
+                interface IStopTrialRequest {
+
+                    /** StopTrialRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a StopTrialRequest. */
+                class StopTrialRequest implements IStopTrialRequest {
+
+                    /**
+                     * Constructs a new StopTrialRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IStopTrialRequest);
+
+                    /** StopTrialRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new StopTrialRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopTrialRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IStopTrialRequest): google.cloud.aiplatform.v1beta1.StopTrialRequest;
+
+                    /**
+                     * Encodes the specified StopTrialRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StopTrialRequest.verify|verify} messages.
+                     * @param message StopTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IStopTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopTrialRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.StopTrialRequest.verify|verify} messages.
+                     * @param message StopTrialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IStopTrialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopTrialRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.StopTrialRequest;
+
+                    /**
+                     * Decodes a StopTrialRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopTrialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.StopTrialRequest;
+
+                    /**
+                     * Verifies a StopTrialRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopTrialRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopTrialRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.StopTrialRequest;
+
+                    /**
+                     * Creates a plain object from a StopTrialRequest message. Also converts values to other types if specified.
+                     * @param message StopTrialRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.StopTrialRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopTrialRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOptimalTrialsRequest. */
+                interface IListOptimalTrialsRequest {
+
+                    /** ListOptimalTrialsRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a ListOptimalTrialsRequest. */
+                class ListOptimalTrialsRequest implements IListOptimalTrialsRequest {
+
+                    /**
+                     * Constructs a new ListOptimalTrialsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest);
+
+                    /** ListOptimalTrialsRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new ListOptimalTrialsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOptimalTrialsRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest): google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest;
+
+                    /**
+                     * Encodes the specified ListOptimalTrialsRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest.verify|verify} messages.
+                     * @param message ListOptimalTrialsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOptimalTrialsRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest.verify|verify} messages.
+                     * @param message ListOptimalTrialsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOptimalTrialsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOptimalTrialsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest;
+
+                    /**
+                     * Decodes a ListOptimalTrialsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOptimalTrialsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest;
+
+                    /**
+                     * Verifies a ListOptimalTrialsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOptimalTrialsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOptimalTrialsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOptimalTrialsRequest message. Also converts values to other types if specified.
+                     * @param message ListOptimalTrialsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOptimalTrialsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOptimalTrialsResponse. */
+                interface IListOptimalTrialsResponse {
+
+                    /** ListOptimalTrialsResponse optimalTrials */
+                    optimalTrials?: (google.cloud.aiplatform.v1beta1.ITrial[]|null);
+                }
+
+                /** Represents a ListOptimalTrialsResponse. */
+                class ListOptimalTrialsResponse implements IListOptimalTrialsResponse {
+
+                    /**
+                     * Constructs a new ListOptimalTrialsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse);
+
+                    /** ListOptimalTrialsResponse optimalTrials. */
+                    public optimalTrials: google.cloud.aiplatform.v1beta1.ITrial[];
+
+                    /**
+                     * Creates a new ListOptimalTrialsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOptimalTrialsResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse): google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse;
+
+                    /**
+                     * Encodes the specified ListOptimalTrialsResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse.verify|verify} messages.
+                     * @param message ListOptimalTrialsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOptimalTrialsResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse.verify|verify} messages.
+                     * @param message ListOptimalTrialsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOptimalTrialsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOptimalTrialsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse;
+
+                    /**
+                     * Decodes a ListOptimalTrialsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOptimalTrialsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse;
+
+                    /**
+                     * Verifies a ListOptimalTrialsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOptimalTrialsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOptimalTrialsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOptimalTrialsResponse message. Also converts values to other types if specified.
+                     * @param message ListOptimalTrialsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOptimalTrialsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

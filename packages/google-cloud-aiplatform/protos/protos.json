@@ -6810,7 +6810,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1;aiplatform",
                     "java_multiple_files": true,
-                    "java_outer_classname": "SpecialistPoolServiceProto",
+                    "java_outer_classname": "VizierServiceProto",
                     "java_package": "com.google.cloud.aiplatform.v1beta1",
                     "(google.api.resource_definition).type": "datalabeling.googleapis.com/AnnotatedDataset",
                     "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}"
@@ -6823,9 +6823,7 @@
                         "NVIDIA_TESLA_P100": 2,
                         "NVIDIA_TESLA_V100": 3,
                         "NVIDIA_TESLA_P4": 4,
-                        "NVIDIA_TESLA_T4": 5,
-                        "TPU_V2": 6,
-                        "TPU_V3": 7
+                        "NVIDIA_TESLA_T4": 5
                       }
                     },
                     "Annotation": {
@@ -7746,7 +7744,8 @@
                         "JOB_STATE_FAILED": 5,
                         "JOB_STATE_CANCELLING": 6,
                         "JOB_STATE_CANCELLED": 7,
-                        "JOB_STATE_PAUSED": 8
+                        "JOB_STATE_PAUSED": 8,
+                        "JOB_STATE_EXPIRED": 9
                       }
                     },
                     "MachineSpec": {
@@ -7790,6 +7789,14 @@
                         "maxReplicaCount": {
                           "type": "int32",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "autoscalingMetricSpecs": {
+                          "rule": "repeated",
+                          "type": "AutoscalingMetricSpec",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
@@ -7857,6 +7864,21 @@
                           "id": 1
                         },
                         "bootDiskSizeGb": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AutoscalingMetricSpec": {
+                      "fields": {
+                        "metricName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "target": {
                           "type": "int32",
                           "id": 2
                         }
@@ -10197,12 +10219,79 @@
                         }
                       }
                     },
+                    "Study": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Study",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/studies/{study}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "studySpec": {
+                          "type": "StudySpec",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "inactiveReason": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "INACTIVE": 2,
+                            "COMPLETED": 3
+                          }
+                        }
+                      }
+                    },
                     "Trial": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/Trial",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/studies/{study}/trials/{trial}"
                       },
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "id": {
                           "type": "string",
                           "id": 2,
@@ -10287,7 +10376,28 @@
                       }
                     },
                     "StudySpec": {
+                      "oneofs": {
+                        "automatedStoppingSpec": {
+                          "oneof": [
+                            "decayCurveStoppingSpec",
+                            "medianAutomatedStoppingSpec",
+                            "convexStopConfig"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "decayCurveStoppingSpec": {
+                          "type": "DecayCurveAutomatedStoppingSpec",
+                          "id": 4
+                        },
+                        "medianAutomatedStoppingSpec": {
+                          "type": "MedianAutomatedStoppingSpec",
+                          "id": 5
+                        },
+                        "convexStopConfig": {
+                          "type": "ConvexStopConfig",
+                          "id": 8
+                        },
                         "metrics": {
                           "rule": "repeated",
                           "type": "MetricSpec",
@@ -10528,6 +10638,46 @@
                                 "UNIT_LOG_SCALE": 2,
                                 "UNIT_REVERSE_LOG_SCALE": 3
                               }
+                            }
+                          }
+                        },
+                        "DecayCurveAutomatedStoppingSpec": {
+                          "fields": {
+                            "useElapsedDuration": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "MedianAutomatedStoppingSpec": {
+                          "fields": {
+                            "useElapsedDuration": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ConvexStopConfig": {
+                          "fields": {
+                            "maxNumSteps": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "minNumSteps": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "autoregressiveOrder": {
+                              "type": "int64",
+                              "id": 3
+                            },
+                            "learningRateParameterName": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "useSeconds": {
+                              "type": "bool",
+                              "id": 5
                             }
                           }
                         },
@@ -14630,6 +14780,661 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 2
+                        }
+                      }
+                    },
+                    "VizierService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateStudy": {
+                          "requestType": "CreateStudyRequest",
+                          "responseType": "Study",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/studies",
+                            "(google.api.http).body": "study",
+                            "(google.api.method_signature)": "parent,study"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/studies",
+                                "body": "study"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,study"
+                            }
+                          ]
+                        },
+                        "GetStudy": {
+                          "requestType": "GetStudyRequest",
+                          "responseType": "Study",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/studies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/studies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListStudies": {
+                          "requestType": "ListStudiesRequest",
+                          "responseType": "ListStudiesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/studies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/studies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteStudy": {
+                          "requestType": "DeleteStudyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/studies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/studies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "LookupStudy": {
+                          "requestType": "LookupStudyRequest",
+                          "responseType": "Study",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/studies:lookup",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/studies:lookup",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "SuggestTrials": {
+                          "requestType": "SuggestTrialsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials:suggest",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "SuggestTrialsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "SuggestTrialsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials:suggest",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "SuggestTrialsResponse",
+                                "metadata_type": "SuggestTrialsMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateTrial": {
+                          "requestType": "CreateTrialRequest",
+                          "responseType": "Trial",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials",
+                            "(google.api.http).body": "trial",
+                            "(google.api.method_signature)": "parent,trial"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials",
+                                "body": "trial"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,trial"
+                            }
+                          ]
+                        },
+                        "GetTrial": {
+                          "requestType": "GetTrialRequest",
+                          "responseType": "Trial",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListTrials": {
+                          "requestType": "ListTrialsRequest",
+                          "responseType": "ListTrialsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "AddTrialMeasurement": {
+                          "requestType": "AddTrialMeasurementRequest",
+                          "responseType": "Trial",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{trial_name=projects/*/locations/*/studies/*/trials/*}:addTrialMeasurement",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{trial_name=projects/*/locations/*/studies/*/trials/*}:addTrialMeasurement",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "CompleteTrial": {
+                          "requestType": "CompleteTrialRequest",
+                          "responseType": "Trial",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}:complete",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}:complete",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteTrial": {
+                          "requestType": "DeleteTrialRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CheckTrialEarlyStoppingState": {
+                          "requestType": "CheckTrialEarlyStoppingStateRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{trial_name=projects/*/locations/*/studies/*/trials/*}:checkTrialEarlyStoppingState",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "CheckTrialEarlyStoppingStateResponse",
+                            "(google.longrunning.operation_info).metadata_type": "CheckTrialEarlyStoppingStateMetatdata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{trial_name=projects/*/locations/*/studies/*/trials/*}:checkTrialEarlyStoppingState",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CheckTrialEarlyStoppingStateResponse",
+                                "metadata_type": "CheckTrialEarlyStoppingStateMetatdata"
+                              }
+                            }
+                          ]
+                        },
+                        "StopTrial": {
+                          "requestType": "StopTrialRequest",
+                          "responseType": "Trial",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}:stop",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}:stop",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ListOptimalTrials": {
+                          "requestType": "ListOptimalTrialsRequest",
+                          "responseType": "ListOptimalTrialsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials:listOptimalTrials",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/studies/*}/trials:listOptimalTrials",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetStudyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Study"
+                          }
+                        }
+                      }
+                    },
+                    "CreateStudyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "study": {
+                          "type": "Study",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListStudiesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListStudiesResponse": {
+                      "fields": {
+                        "studies": {
+                          "rule": "repeated",
+                          "type": "Study",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteStudyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Study"
+                          }
+                        }
+                      }
+                    },
+                    "LookupStudyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SuggestTrialsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Study"
+                          }
+                        },
+                        "suggestionCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SuggestTrialsResponse": {
+                      "fields": {
+                        "trials": {
+                          "rule": "repeated",
+                          "type": "Trial",
+                          "id": 1
+                        },
+                        "studyState": {
+                          "type": "Study.State",
+                          "id": 2
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SuggestTrialsMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateTrialRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Study"
+                          }
+                        },
+                        "trial": {
+                          "type": "Trial",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetTrialRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Trial"
+                          }
+                        }
+                      }
+                    },
+                    "ListTrialsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Study"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListTrialsResponse": {
+                      "fields": {
+                        "trials": {
+                          "rule": "repeated",
+                          "type": "Trial",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AddTrialMeasurementRequest": {
+                      "fields": {
+                        "trialName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Trial"
+                          }
+                        },
+                        "measurement": {
+                          "type": "Measurement",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CompleteTrialRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Trial"
+                          }
+                        },
+                        "finalMeasurement": {
+                          "type": "Measurement",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "trialInfeasible": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "infeasibleReason": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTrialRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Trial"
+                          }
+                        }
+                      }
+                    },
+                    "CheckTrialEarlyStoppingStateRequest": {
+                      "fields": {
+                        "trialName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Trial"
+                          }
+                        }
+                      }
+                    },
+                    "CheckTrialEarlyStoppingStateResponse": {
+                      "fields": {
+                        "shouldStop": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CheckTrialEarlyStoppingStateMetatdata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        },
+                        "study": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "trial": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StopTrialRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Trial"
+                          }
+                        }
+                      }
+                    },
+                    "ListOptimalTrialsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Study"
+                          }
+                        }
+                      }
+                    },
+                    "ListOptimalTrialsResponse": {
+                      "fields": {
+                        "optimalTrials": {
+                          "rule": "repeated",
+                          "type": "Trial",
+                          "id": 1
                         }
                       }
                     }

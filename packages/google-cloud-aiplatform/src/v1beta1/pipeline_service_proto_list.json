@@ -77,5 +77,6 @@
   "../../protos/google/cloud/aiplatform/v1beta1/specialist_pool_service.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/study.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/training_pipeline.proto",
-  "../../protos/google/cloud/aiplatform/v1beta1/user_action_reference.proto"
+  "../../protos/google/cloud/aiplatform/v1beta1/user_action_reference.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/vizier_service.proto"
 ]

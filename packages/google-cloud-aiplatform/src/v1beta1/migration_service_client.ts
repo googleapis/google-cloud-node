@@ -211,6 +211,9 @@ export class MigrationServiceClient {
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
+      ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
@@ -603,7 +606,7 @@ export class MigrationServiceClient {
    *     * `data_labeling_dataset:*`.
    *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
    *     * `last_migrate_time:*` will filter migrated resources.
-   *     * `NOT last_migrate_time:*` will filter not yet migrated resource.
+   *     * `NOT last_migrate_time:*` will filter not yet migrated resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -690,7 +693,7 @@ export class MigrationServiceClient {
    *     * `data_labeling_dataset:*`.
    *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
    *     * `last_migrate_time:*` will filter migrated resources.
-   *     * `NOT last_migrate_time:*` will filter not yet migrated resource.
+   *     * `NOT last_migrate_time:*` will filter not yet migrated resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -751,7 +754,7 @@ export class MigrationServiceClient {
    *     * `data_labeling_dataset:*`.
    *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
    *     * `last_migrate_time:*` will filter migrated resources.
-   *     * `NOT last_migrate_time:*` will filter not yet migrated resource.
+   *     * `NOT last_migrate_time:*` will filter not yet migrated resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1668,6 +1671,55 @@ export class MigrationServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**
