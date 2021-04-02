@@ -1,14 +1,15 @@
 {
-  "name": "container",
-  "name_pretty": "Kubernetes Engine Cluster Manager API",
-  "product_documentation": "https://cloud.google.com/kubernetes-engine",
-  "client_documentation": "https://googleapis.dev/nodejs/container/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559746",
-  "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-cloud-container",
-  "distribution_name": "@google-cloud/container",
+  "name": "container",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559746",
+  "default_version": "v1",
   "api_id": "container.googleapis.com",
+  "distribution_name": "@google-cloud/container",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/cicd"
+  "product_documentation": "https://cloud.google.com/kubernetes-engine",
+  "codeowner_team": "@googleapis/cicd",
+  "name_pretty": "Kubernetes Engine Cluster Manager API",
+  "client_documentation": "https://googleapis.dev/nodejs/container/latest",
+  "release_level": "ga"
 }
