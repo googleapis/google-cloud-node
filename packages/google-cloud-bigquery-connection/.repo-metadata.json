@@ -1,14 +1,15 @@
 {
-  "name": "bigqueryconnection",
-  "name_pretty": "Google BigQuery Connection",
-  "product_documentation": "https://cloud.google.com/bigquery/docs/reference/bigqueryconnection",
-  "client_documentation": "https://googleapis.dev/nodejs/bigqueryconnection/latest",
-  "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
-  "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-bigquery-connection",
-  "distribution_name": "@google-cloud/bigquery-connection",
+  "name": "bigqueryconnection",
+  "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
+  "default_version": "v1",
   "api_id": "bigqueryconnection.googleapis.com",
+  "distribution_name": "@google-cloud/bigquery-connection",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/api-bigquery"
+  "product_documentation": "https://cloud.google.com/bigquery/docs/reference/bigqueryconnection",
+  "codeowner_team": "@googleapis/api-bigquery",
+  "name_pretty": "Google BigQuery Connection",
+  "client_documentation": "https://googleapis.dev/nodejs/bigqueryconnection/latest",
+  "release_level": "ga"
 }
