@@ -26,6 +26,8399 @@ export namespace google {
             /** Namespace privateca. */
             namespace privateca {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Properties of a CertificateAuthority. */
+                    interface ICertificateAuthority {
+
+                        /** CertificateAuthority name */
+                        name?: (string|null);
+
+                        /** CertificateAuthority type */
+                        type?: (google.cloud.security.privateca.v1.CertificateAuthority.Type|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.Type|null);
+
+                        /** CertificateAuthority config */
+                        config?: (google.cloud.security.privateca.v1.ICertificateConfig|null);
+
+                        /** CertificateAuthority lifetime */
+                        lifetime?: (google.protobuf.IDuration|null);
+
+                        /** CertificateAuthority keySpec */
+                        keySpec?: (google.cloud.security.privateca.v1.CertificateAuthority.IKeyVersionSpec|null);
+
+                        /** CertificateAuthority subordinateConfig */
+                        subordinateConfig?: (google.cloud.security.privateca.v1.ISubordinateConfig|null);
+
+                        /** CertificateAuthority tier */
+                        tier?: (google.cloud.security.privateca.v1.CaPool.Tier|keyof typeof google.cloud.security.privateca.v1.CaPool.Tier|null);
+
+                        /** CertificateAuthority state */
+                        state?: (google.cloud.security.privateca.v1.CertificateAuthority.State|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.State|null);
+
+                        /** CertificateAuthority pemCaCertificates */
+                        pemCaCertificates?: (string[]|null);
+
+                        /** CertificateAuthority caCertificateDescriptions */
+                        caCertificateDescriptions?: (google.cloud.security.privateca.v1.ICertificateDescription[]|null);
+
+                        /** CertificateAuthority gcsBucket */
+                        gcsBucket?: (string|null);
+
+                        /** CertificateAuthority accessUrls */
+                        accessUrls?: (google.cloud.security.privateca.v1.CertificateAuthority.IAccessUrls|null);
+
+                        /** CertificateAuthority createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority deleteTime */
+                        deleteTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority expireTime */
+                        expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority labels */
+                        labels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a CertificateAuthority. */
+                    class CertificateAuthority implements ICertificateAuthority {
+
+                        /**
+                         * Constructs a new CertificateAuthority.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificateAuthority);
+
+                        /** CertificateAuthority name. */
+                        public name: string;
+
+                        /** CertificateAuthority type. */
+                        public type: (google.cloud.security.privateca.v1.CertificateAuthority.Type|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.Type);
+
+                        /** CertificateAuthority config. */
+                        public config?: (google.cloud.security.privateca.v1.ICertificateConfig|null);
+
+                        /** CertificateAuthority lifetime. */
+                        public lifetime?: (google.protobuf.IDuration|null);
+
+                        /** CertificateAuthority keySpec. */
+                        public keySpec?: (google.cloud.security.privateca.v1.CertificateAuthority.IKeyVersionSpec|null);
+
+                        /** CertificateAuthority subordinateConfig. */
+                        public subordinateConfig?: (google.cloud.security.privateca.v1.ISubordinateConfig|null);
+
+                        /** CertificateAuthority tier. */
+                        public tier: (google.cloud.security.privateca.v1.CaPool.Tier|keyof typeof google.cloud.security.privateca.v1.CaPool.Tier);
+
+                        /** CertificateAuthority state. */
+                        public state: (google.cloud.security.privateca.v1.CertificateAuthority.State|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.State);
+
+                        /** CertificateAuthority pemCaCertificates. */
+                        public pemCaCertificates: string[];
+
+                        /** CertificateAuthority caCertificateDescriptions. */
+                        public caCertificateDescriptions: google.cloud.security.privateca.v1.ICertificateDescription[];
+
+                        /** CertificateAuthority gcsBucket. */
+                        public gcsBucket: string;
+
+                        /** CertificateAuthority accessUrls. */
+                        public accessUrls?: (google.cloud.security.privateca.v1.CertificateAuthority.IAccessUrls|null);
+
+                        /** CertificateAuthority createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority deleteTime. */
+                        public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority expireTime. */
+                        public expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateAuthority labels. */
+                        public labels: { [k: string]: string };
+
+                        /**
+                         * Creates a new CertificateAuthority instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateAuthority instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificateAuthority): google.cloud.security.privateca.v1.CertificateAuthority;
+
+                        /**
+                         * Encodes the specified CertificateAuthority message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.verify|verify} messages.
+                         * @param message CertificateAuthority message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificateAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.verify|verify} messages.
+                         * @param message CertificateAuthority message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificateAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateAuthority message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateAuthority;
+
+                        /**
+                         * Decodes a CertificateAuthority message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateAuthority;
+
+                        /**
+                         * Verifies a CertificateAuthority message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateAuthority
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateAuthority;
+
+                        /**
+                         * Creates a plain object from a CertificateAuthority message. Also converts values to other types if specified.
+                         * @param message CertificateAuthority
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CertificateAuthority, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateAuthority to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CertificateAuthority {
+
+                        /** Properties of an AccessUrls. */
+                        interface IAccessUrls {
+
+                            /** AccessUrls caCertificateAccessUrl */
+                            caCertificateAccessUrl?: (string|null);
+
+                            /** AccessUrls crlAccessUrls */
+                            crlAccessUrls?: (string[]|null);
+                        }
+
+                        /** Represents an AccessUrls. */
+                        class AccessUrls implements IAccessUrls {
+
+                            /**
+                             * Constructs a new AccessUrls.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateAuthority.IAccessUrls);
+
+                            /** AccessUrls caCertificateAccessUrl. */
+                            public caCertificateAccessUrl: string;
+
+                            /** AccessUrls crlAccessUrls. */
+                            public crlAccessUrls: string[];
+
+                            /**
+                             * Creates a new AccessUrls instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AccessUrls instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateAuthority.IAccessUrls): google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls;
+
+                            /**
+                             * Encodes the specified AccessUrls message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls.verify|verify} messages.
+                             * @param message AccessUrls message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateAuthority.IAccessUrls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AccessUrls message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls.verify|verify} messages.
+                             * @param message AccessUrls message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateAuthority.IAccessUrls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AccessUrls message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AccessUrls
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls;
+
+                            /**
+                             * Decodes an AccessUrls message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AccessUrls
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls;
+
+                            /**
+                             * Verifies an AccessUrls message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AccessUrls message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AccessUrls
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls;
+
+                            /**
+                             * Creates a plain object from an AccessUrls message. Also converts values to other types if specified.
+                             * @param message AccessUrls
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AccessUrls to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a KeyVersionSpec. */
+                        interface IKeyVersionSpec {
+
+                            /** KeyVersionSpec cloudKmsKeyVersion */
+                            cloudKmsKeyVersion?: (string|null);
+
+                            /** KeyVersionSpec algorithm */
+                            algorithm?: (google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm|null);
+                        }
+
+                        /** Represents a KeyVersionSpec. */
+                        class KeyVersionSpec implements IKeyVersionSpec {
+
+                            /**
+                             * Constructs a new KeyVersionSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateAuthority.IKeyVersionSpec);
+
+                            /** KeyVersionSpec cloudKmsKeyVersion. */
+                            public cloudKmsKeyVersion: string;
+
+                            /** KeyVersionSpec algorithm. */
+                            public algorithm: (google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm);
+
+                            /** KeyVersionSpec KeyVersion. */
+                            public KeyVersion?: ("cloudKmsKeyVersion"|"algorithm");
+
+                            /**
+                             * Creates a new KeyVersionSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns KeyVersionSpec instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateAuthority.IKeyVersionSpec): google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec;
+
+                            /**
+                             * Encodes the specified KeyVersionSpec message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec.verify|verify} messages.
+                             * @param message KeyVersionSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateAuthority.IKeyVersionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified KeyVersionSpec message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec.verify|verify} messages.
+                             * @param message KeyVersionSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateAuthority.IKeyVersionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a KeyVersionSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns KeyVersionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec;
+
+                            /**
+                             * Decodes a KeyVersionSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns KeyVersionSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec;
+
+                            /**
+                             * Verifies a KeyVersionSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a KeyVersionSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns KeyVersionSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec;
+
+                            /**
+                             * Creates a plain object from a KeyVersionSpec message. Also converts values to other types if specified.
+                             * @param message KeyVersionSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this KeyVersionSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            SELF_SIGNED = 1,
+                            SUBORDINATE = 2
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ENABLED = 1,
+                            DISABLED = 2,
+                            STAGED = 3,
+                            AWAITING_USER_ACTIVATION = 4,
+                            DELETED = 5
+                        }
+
+                        /** SignHashAlgorithm enum. */
+                        enum SignHashAlgorithm {
+                            SIGN_HASH_ALGORITHM_UNSPECIFIED = 0,
+                            RSA_PSS_2048_SHA256 = 1,
+                            RSA_PSS_3072_SHA256 = 2,
+                            RSA_PSS_4096_SHA256 = 3,
+                            RSA_PKCS1_2048_SHA256 = 6,
+                            RSA_PKCS1_3072_SHA256 = 7,
+                            RSA_PKCS1_4096_SHA256 = 8,
+                            EC_P256_SHA256 = 4,
+                            EC_P384_SHA384 = 5
+                        }
+                    }
+
+                    /** Properties of a CaPool. */
+                    interface ICaPool {
+
+                        /** CaPool name */
+                        name?: (string|null);
+
+                        /** CaPool tier */
+                        tier?: (google.cloud.security.privateca.v1.CaPool.Tier|keyof typeof google.cloud.security.privateca.v1.CaPool.Tier|null);
+
+                        /** CaPool issuancePolicy */
+                        issuancePolicy?: (google.cloud.security.privateca.v1.CaPool.IIssuancePolicy|null);
+
+                        /** CaPool publishingOptions */
+                        publishingOptions?: (google.cloud.security.privateca.v1.CaPool.IPublishingOptions|null);
+
+                        /** CaPool labels */
+                        labels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a CaPool. */
+                    class CaPool implements ICaPool {
+
+                        /**
+                         * Constructs a new CaPool.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICaPool);
+
+                        /** CaPool name. */
+                        public name: string;
+
+                        /** CaPool tier. */
+                        public tier: (google.cloud.security.privateca.v1.CaPool.Tier|keyof typeof google.cloud.security.privateca.v1.CaPool.Tier);
+
+                        /** CaPool issuancePolicy. */
+                        public issuancePolicy?: (google.cloud.security.privateca.v1.CaPool.IIssuancePolicy|null);
+
+                        /** CaPool publishingOptions. */
+                        public publishingOptions?: (google.cloud.security.privateca.v1.CaPool.IPublishingOptions|null);
+
+                        /** CaPool labels. */
+                        public labels: { [k: string]: string };
+
+                        /**
+                         * Creates a new CaPool instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CaPool instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICaPool): google.cloud.security.privateca.v1.CaPool;
+
+                        /**
+                         * Encodes the specified CaPool message. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.verify|verify} messages.
+                         * @param message CaPool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICaPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CaPool message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.verify|verify} messages.
+                         * @param message CaPool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICaPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CaPool message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CaPool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CaPool;
+
+                        /**
+                         * Decodes a CaPool message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CaPool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CaPool;
+
+                        /**
+                         * Verifies a CaPool message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CaPool message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CaPool
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CaPool;
+
+                        /**
+                         * Creates a plain object from a CaPool message. Also converts values to other types if specified.
+                         * @param message CaPool
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CaPool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CaPool to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CaPool {
+
+                        /** Properties of a PublishingOptions. */
+                        interface IPublishingOptions {
+
+                            /** PublishingOptions publishCaCert */
+                            publishCaCert?: (boolean|null);
+
+                            /** PublishingOptions publishCrl */
+                            publishCrl?: (boolean|null);
+                        }
+
+                        /** Represents a PublishingOptions. */
+                        class PublishingOptions implements IPublishingOptions {
+
+                            /**
+                             * Constructs a new PublishingOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CaPool.IPublishingOptions);
+
+                            /** PublishingOptions publishCaCert. */
+                            public publishCaCert: boolean;
+
+                            /** PublishingOptions publishCrl. */
+                            public publishCrl: boolean;
+
+                            /**
+                             * Creates a new PublishingOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PublishingOptions instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CaPool.IPublishingOptions): google.cloud.security.privateca.v1.CaPool.PublishingOptions;
+
+                            /**
+                             * Encodes the specified PublishingOptions message. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.PublishingOptions.verify|verify} messages.
+                             * @param message PublishingOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CaPool.IPublishingOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PublishingOptions message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.PublishingOptions.verify|verify} messages.
+                             * @param message PublishingOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CaPool.IPublishingOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PublishingOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PublishingOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CaPool.PublishingOptions;
+
+                            /**
+                             * Decodes a PublishingOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PublishingOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CaPool.PublishingOptions;
+
+                            /**
+                             * Verifies a PublishingOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PublishingOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PublishingOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CaPool.PublishingOptions;
+
+                            /**
+                             * Creates a plain object from a PublishingOptions message. Also converts values to other types if specified.
+                             * @param message PublishingOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CaPool.PublishingOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PublishingOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of an IssuancePolicy. */
+                        interface IIssuancePolicy {
+
+                            /** IssuancePolicy allowedKeyTypes */
+                            allowedKeyTypes?: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType[]|null);
+
+                            /** IssuancePolicy maximumLifetime */
+                            maximumLifetime?: (google.protobuf.IDuration|null);
+
+                            /** IssuancePolicy allowedIssuanceModes */
+                            allowedIssuanceModes?: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes|null);
+
+                            /** IssuancePolicy baselineValues */
+                            baselineValues?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                            /** IssuancePolicy identityConstraints */
+                            identityConstraints?: (google.cloud.security.privateca.v1.ICertificateIdentityConstraints|null);
+
+                            /** IssuancePolicy passthroughExtensions */
+                            passthroughExtensions?: (google.cloud.security.privateca.v1.ICertificateExtensionConstraints|null);
+                        }
+
+                        /** Represents an IssuancePolicy. */
+                        class IssuancePolicy implements IIssuancePolicy {
+
+                            /**
+                             * Constructs a new IssuancePolicy.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CaPool.IIssuancePolicy);
+
+                            /** IssuancePolicy allowedKeyTypes. */
+                            public allowedKeyTypes: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType[];
+
+                            /** IssuancePolicy maximumLifetime. */
+                            public maximumLifetime?: (google.protobuf.IDuration|null);
+
+                            /** IssuancePolicy allowedIssuanceModes. */
+                            public allowedIssuanceModes?: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes|null);
+
+                            /** IssuancePolicy baselineValues. */
+                            public baselineValues?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                            /** IssuancePolicy identityConstraints. */
+                            public identityConstraints?: (google.cloud.security.privateca.v1.ICertificateIdentityConstraints|null);
+
+                            /** IssuancePolicy passthroughExtensions. */
+                            public passthroughExtensions?: (google.cloud.security.privateca.v1.ICertificateExtensionConstraints|null);
+
+                            /**
+                             * Creates a new IssuancePolicy instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns IssuancePolicy instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CaPool.IIssuancePolicy): google.cloud.security.privateca.v1.CaPool.IssuancePolicy;
+
+                            /**
+                             * Encodes the specified IssuancePolicy message. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.verify|verify} messages.
+                             * @param message IssuancePolicy message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CaPool.IIssuancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified IssuancePolicy message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.verify|verify} messages.
+                             * @param message IssuancePolicy message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CaPool.IIssuancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an IssuancePolicy message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns IssuancePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CaPool.IssuancePolicy;
+
+                            /**
+                             * Decodes an IssuancePolicy message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns IssuancePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CaPool.IssuancePolicy;
+
+                            /**
+                             * Verifies an IssuancePolicy message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an IssuancePolicy message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns IssuancePolicy
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CaPool.IssuancePolicy;
+
+                            /**
+                             * Creates a plain object from an IssuancePolicy message. Also converts values to other types if specified.
+                             * @param message IssuancePolicy
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this IssuancePolicy to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace IssuancePolicy {
+
+                            /** Properties of an AllowedKeyType. */
+                            interface IAllowedKeyType {
+
+                                /** AllowedKeyType rsa */
+                                rsa?: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IRsaKeyType|null);
+
+                                /** AllowedKeyType ellipticCurve */
+                                ellipticCurve?: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve|keyof typeof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve|null);
+                            }
+
+                            /** Represents an AllowedKeyType. */
+                            class AllowedKeyType implements IAllowedKeyType {
+
+                                /**
+                                 * Constructs a new AllowedKeyType.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType);
+
+                                /** AllowedKeyType rsa. */
+                                public rsa?: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IRsaKeyType|null);
+
+                                /** AllowedKeyType ellipticCurve. */
+                                public ellipticCurve: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve|keyof typeof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve);
+
+                                /** AllowedKeyType keyType. */
+                                public keyType?: ("rsa"|"ellipticCurve");
+
+                                /**
+                                 * Creates a new AllowedKeyType instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AllowedKeyType instance
+                                 */
+                                public static create(properties?: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType;
+
+                                /**
+                                 * Encodes the specified AllowedKeyType message. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.verify|verify} messages.
+                                 * @param message AllowedKeyType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AllowedKeyType message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.verify|verify} messages.
+                                 * @param message AllowedKeyType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AllowedKeyType message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AllowedKeyType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType;
+
+                                /**
+                                 * Decodes an AllowedKeyType message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AllowedKeyType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType;
+
+                                /**
+                                 * Verifies an AllowedKeyType message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AllowedKeyType message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AllowedKeyType
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType;
+
+                                /**
+                                 * Creates a plain object from an AllowedKeyType message. Also converts values to other types if specified.
+                                 * @param message AllowedKeyType
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AllowedKeyType to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            namespace AllowedKeyType {
+
+                                /** Properties of a RsaKeyType. */
+                                interface IRsaKeyType {
+
+                                    /** RsaKeyType minModulusSize */
+                                    minModulusSize?: (number|Long|string|null);
+
+                                    /** RsaKeyType maxModulusSize */
+                                    maxModulusSize?: (number|Long|string|null);
+                                }
+
+                                /** Represents a RsaKeyType. */
+                                class RsaKeyType implements IRsaKeyType {
+
+                                    /**
+                                     * Constructs a new RsaKeyType.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IRsaKeyType);
+
+                                    /** RsaKeyType minModulusSize. */
+                                    public minModulusSize: (number|Long|string);
+
+                                    /** RsaKeyType maxModulusSize. */
+                                    public maxModulusSize: (number|Long|string);
+
+                                    /**
+                                     * Creates a new RsaKeyType instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns RsaKeyType instance
+                                     */
+                                    public static create(properties?: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IRsaKeyType): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType;
+
+                                    /**
+                                     * Encodes the specified RsaKeyType message. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType.verify|verify} messages.
+                                     * @param message RsaKeyType message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IRsaKeyType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified RsaKeyType message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType.verify|verify} messages.
+                                     * @param message RsaKeyType message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IRsaKeyType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a RsaKeyType message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns RsaKeyType
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType;
+
+                                    /**
+                                     * Decodes a RsaKeyType message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns RsaKeyType
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType;
+
+                                    /**
+                                     * Verifies a RsaKeyType message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a RsaKeyType message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns RsaKeyType
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType;
+
+                                    /**
+                                     * Creates a plain object from a RsaKeyType message. Also converts values to other types if specified.
+                                     * @param message RsaKeyType
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this RsaKeyType to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+                                }
+
+                                /** NamedCurve enum. */
+                                enum NamedCurve {
+                                    NAMED_CURVE_UNSPECIFIED = 0,
+                                    ECDSA_P256 = 2,
+                                    ECDSA_P384 = 3,
+                                    EDDSA_25519 = 4
+                                }
+                            }
+
+                            /** Properties of an IssuanceModes. */
+                            interface IIssuanceModes {
+
+                                /** IssuanceModes allowCsrBasedIssuance */
+                                allowCsrBasedIssuance?: (boolean|null);
+
+                                /** IssuanceModes allowConfigBasedIssuance */
+                                allowConfigBasedIssuance?: (boolean|null);
+                            }
+
+                            /** Represents an IssuanceModes. */
+                            class IssuanceModes implements IIssuanceModes {
+
+                                /**
+                                 * Constructs a new IssuanceModes.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes);
+
+                                /** IssuanceModes allowCsrBasedIssuance. */
+                                public allowCsrBasedIssuance: boolean;
+
+                                /** IssuanceModes allowConfigBasedIssuance. */
+                                public allowConfigBasedIssuance: boolean;
+
+                                /**
+                                 * Creates a new IssuanceModes instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns IssuanceModes instance
+                                 */
+                                public static create(properties?: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes;
+
+                                /**
+                                 * Encodes the specified IssuanceModes message. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes.verify|verify} messages.
+                                 * @param message IssuanceModes message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified IssuanceModes message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes.verify|verify} messages.
+                                 * @param message IssuanceModes message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an IssuanceModes message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns IssuanceModes
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes;
+
+                                /**
+                                 * Decodes an IssuanceModes message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns IssuanceModes
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes;
+
+                                /**
+                                 * Verifies an IssuanceModes message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an IssuanceModes message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns IssuanceModes
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes;
+
+                                /**
+                                 * Creates a plain object from an IssuanceModes message. Also converts values to other types if specified.
+                                 * @param message IssuanceModes
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this IssuanceModes to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+                        }
+
+                        /** Tier enum. */
+                        enum Tier {
+                            TIER_UNSPECIFIED = 0,
+                            ENTERPRISE = 1,
+                            DEVOPS = 2
+                        }
+                    }
+
+                    /** Properties of a CertificateRevocationList. */
+                    interface ICertificateRevocationList {
+
+                        /** CertificateRevocationList name */
+                        name?: (string|null);
+
+                        /** CertificateRevocationList sequenceNumber */
+                        sequenceNumber?: (number|Long|string|null);
+
+                        /** CertificateRevocationList revokedCertificates */
+                        revokedCertificates?: (google.cloud.security.privateca.v1.CertificateRevocationList.IRevokedCertificate[]|null);
+
+                        /** CertificateRevocationList pemCrl */
+                        pemCrl?: (string|null);
+
+                        /** CertificateRevocationList accessUrl */
+                        accessUrl?: (string|null);
+
+                        /** CertificateRevocationList state */
+                        state?: (google.cloud.security.privateca.v1.CertificateRevocationList.State|keyof typeof google.cloud.security.privateca.v1.CertificateRevocationList.State|null);
+
+                        /** CertificateRevocationList createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateRevocationList updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateRevocationList revisionId */
+                        revisionId?: (string|null);
+
+                        /** CertificateRevocationList labels */
+                        labels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a CertificateRevocationList. */
+                    class CertificateRevocationList implements ICertificateRevocationList {
+
+                        /**
+                         * Constructs a new CertificateRevocationList.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificateRevocationList);
+
+                        /** CertificateRevocationList name. */
+                        public name: string;
+
+                        /** CertificateRevocationList sequenceNumber. */
+                        public sequenceNumber: (number|Long|string);
+
+                        /** CertificateRevocationList revokedCertificates. */
+                        public revokedCertificates: google.cloud.security.privateca.v1.CertificateRevocationList.IRevokedCertificate[];
+
+                        /** CertificateRevocationList pemCrl. */
+                        public pemCrl: string;
+
+                        /** CertificateRevocationList accessUrl. */
+                        public accessUrl: string;
+
+                        /** CertificateRevocationList state. */
+                        public state: (google.cloud.security.privateca.v1.CertificateRevocationList.State|keyof typeof google.cloud.security.privateca.v1.CertificateRevocationList.State);
+
+                        /** CertificateRevocationList createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateRevocationList updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateRevocationList revisionId. */
+                        public revisionId: string;
+
+                        /** CertificateRevocationList labels. */
+                        public labels: { [k: string]: string };
+
+                        /**
+                         * Creates a new CertificateRevocationList instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateRevocationList instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificateRevocationList): google.cloud.security.privateca.v1.CertificateRevocationList;
+
+                        /**
+                         * Encodes the specified CertificateRevocationList message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateRevocationList.verify|verify} messages.
+                         * @param message CertificateRevocationList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificateRevocationList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateRevocationList message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateRevocationList.verify|verify} messages.
+                         * @param message CertificateRevocationList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificateRevocationList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateRevocationList message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateRevocationList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateRevocationList;
+
+                        /**
+                         * Decodes a CertificateRevocationList message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateRevocationList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateRevocationList;
+
+                        /**
+                         * Verifies a CertificateRevocationList message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateRevocationList message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateRevocationList
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateRevocationList;
+
+                        /**
+                         * Creates a plain object from a CertificateRevocationList message. Also converts values to other types if specified.
+                         * @param message CertificateRevocationList
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CertificateRevocationList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateRevocationList to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CertificateRevocationList {
+
+                        /** Properties of a RevokedCertificate. */
+                        interface IRevokedCertificate {
+
+                            /** RevokedCertificate certificate */
+                            certificate?: (string|null);
+
+                            /** RevokedCertificate hexSerialNumber */
+                            hexSerialNumber?: (string|null);
+
+                            /** RevokedCertificate revocationReason */
+                            revocationReason?: (google.cloud.security.privateca.v1.RevocationReason|keyof typeof google.cloud.security.privateca.v1.RevocationReason|null);
+                        }
+
+                        /** Represents a RevokedCertificate. */
+                        class RevokedCertificate implements IRevokedCertificate {
+
+                            /**
+                             * Constructs a new RevokedCertificate.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateRevocationList.IRevokedCertificate);
+
+                            /** RevokedCertificate certificate. */
+                            public certificate: string;
+
+                            /** RevokedCertificate hexSerialNumber. */
+                            public hexSerialNumber: string;
+
+                            /** RevokedCertificate revocationReason. */
+                            public revocationReason: (google.cloud.security.privateca.v1.RevocationReason|keyof typeof google.cloud.security.privateca.v1.RevocationReason);
+
+                            /**
+                             * Creates a new RevokedCertificate instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RevokedCertificate instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateRevocationList.IRevokedCertificate): google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate;
+
+                            /**
+                             * Encodes the specified RevokedCertificate message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate.verify|verify} messages.
+                             * @param message RevokedCertificate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateRevocationList.IRevokedCertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RevokedCertificate message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate.verify|verify} messages.
+                             * @param message RevokedCertificate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateRevocationList.IRevokedCertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RevokedCertificate message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RevokedCertificate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate;
+
+                            /**
+                             * Decodes a RevokedCertificate message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RevokedCertificate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate;
+
+                            /**
+                             * Verifies a RevokedCertificate message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RevokedCertificate message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RevokedCertificate
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate;
+
+                            /**
+                             * Creates a plain object from a RevokedCertificate message. Also converts values to other types if specified.
+                             * @param message RevokedCertificate
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RevokedCertificate to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            SUPERSEDED = 2
+                        }
+                    }
+
+                    /** Properties of a Certificate. */
+                    interface ICertificate {
+
+                        /** Certificate name */
+                        name?: (string|null);
+
+                        /** Certificate pemCsr */
+                        pemCsr?: (string|null);
+
+                        /** Certificate config */
+                        config?: (google.cloud.security.privateca.v1.ICertificateConfig|null);
+
+                        /** Certificate issuerCertificateAuthority */
+                        issuerCertificateAuthority?: (string|null);
+
+                        /** Certificate lifetime */
+                        lifetime?: (google.protobuf.IDuration|null);
+
+                        /** Certificate certificateTemplate */
+                        certificateTemplate?: (string|null);
+
+                        /** Certificate subjectMode */
+                        subjectMode?: (google.cloud.security.privateca.v1.SubjectRequestMode|keyof typeof google.cloud.security.privateca.v1.SubjectRequestMode|null);
+
+                        /** Certificate revocationDetails */
+                        revocationDetails?: (google.cloud.security.privateca.v1.Certificate.IRevocationDetails|null);
+
+                        /** Certificate pemCertificate */
+                        pemCertificate?: (string|null);
+
+                        /** Certificate certificateDescription */
+                        certificateDescription?: (google.cloud.security.privateca.v1.ICertificateDescription|null);
+
+                        /** Certificate pemCertificateChain */
+                        pemCertificateChain?: (string[]|null);
+
+                        /** Certificate createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Certificate updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Certificate labels */
+                        labels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a Certificate. */
+                    class Certificate implements ICertificate {
+
+                        /**
+                         * Constructs a new Certificate.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificate);
+
+                        /** Certificate name. */
+                        public name: string;
+
+                        /** Certificate pemCsr. */
+                        public pemCsr: string;
+
+                        /** Certificate config. */
+                        public config?: (google.cloud.security.privateca.v1.ICertificateConfig|null);
+
+                        /** Certificate issuerCertificateAuthority. */
+                        public issuerCertificateAuthority: string;
+
+                        /** Certificate lifetime. */
+                        public lifetime?: (google.protobuf.IDuration|null);
+
+                        /** Certificate certificateTemplate. */
+                        public certificateTemplate: string;
+
+                        /** Certificate subjectMode. */
+                        public subjectMode: (google.cloud.security.privateca.v1.SubjectRequestMode|keyof typeof google.cloud.security.privateca.v1.SubjectRequestMode);
+
+                        /** Certificate revocationDetails. */
+                        public revocationDetails?: (google.cloud.security.privateca.v1.Certificate.IRevocationDetails|null);
+
+                        /** Certificate pemCertificate. */
+                        public pemCertificate: string;
+
+                        /** Certificate certificateDescription. */
+                        public certificateDescription?: (google.cloud.security.privateca.v1.ICertificateDescription|null);
+
+                        /** Certificate pemCertificateChain. */
+                        public pemCertificateChain: string[];
+
+                        /** Certificate createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Certificate updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Certificate labels. */
+                        public labels: { [k: string]: string };
+
+                        /** Certificate certificateConfig. */
+                        public certificateConfig?: ("pemCsr"|"config");
+
+                        /**
+                         * Creates a new Certificate instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Certificate instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificate): google.cloud.security.privateca.v1.Certificate;
+
+                        /**
+                         * Encodes the specified Certificate message. Does not implicitly {@link google.cloud.security.privateca.v1.Certificate.verify|verify} messages.
+                         * @param message Certificate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Certificate message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.Certificate.verify|verify} messages.
+                         * @param message Certificate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Certificate message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Certificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.Certificate;
+
+                        /**
+                         * Decodes a Certificate message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Certificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.Certificate;
+
+                        /**
+                         * Verifies a Certificate message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Certificate message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Certificate
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.Certificate;
+
+                        /**
+                         * Creates a plain object from a Certificate message. Also converts values to other types if specified.
+                         * @param message Certificate
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.Certificate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Certificate to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Certificate {
+
+                        /** Properties of a RevocationDetails. */
+                        interface IRevocationDetails {
+
+                            /** RevocationDetails revocationState */
+                            revocationState?: (google.cloud.security.privateca.v1.RevocationReason|keyof typeof google.cloud.security.privateca.v1.RevocationReason|null);
+
+                            /** RevocationDetails revocationTime */
+                            revocationTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a RevocationDetails. */
+                        class RevocationDetails implements IRevocationDetails {
+
+                            /**
+                             * Constructs a new RevocationDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.Certificate.IRevocationDetails);
+
+                            /** RevocationDetails revocationState. */
+                            public revocationState: (google.cloud.security.privateca.v1.RevocationReason|keyof typeof google.cloud.security.privateca.v1.RevocationReason);
+
+                            /** RevocationDetails revocationTime. */
+                            public revocationTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new RevocationDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RevocationDetails instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.Certificate.IRevocationDetails): google.cloud.security.privateca.v1.Certificate.RevocationDetails;
+
+                            /**
+                             * Encodes the specified RevocationDetails message. Does not implicitly {@link google.cloud.security.privateca.v1.Certificate.RevocationDetails.verify|verify} messages.
+                             * @param message RevocationDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.Certificate.IRevocationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RevocationDetails message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.Certificate.RevocationDetails.verify|verify} messages.
+                             * @param message RevocationDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.Certificate.IRevocationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RevocationDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RevocationDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.Certificate.RevocationDetails;
+
+                            /**
+                             * Decodes a RevocationDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RevocationDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.Certificate.RevocationDetails;
+
+                            /**
+                             * Verifies a RevocationDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RevocationDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RevocationDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.Certificate.RevocationDetails;
+
+                            /**
+                             * Creates a plain object from a RevocationDetails message. Also converts values to other types if specified.
+                             * @param message RevocationDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.Certificate.RevocationDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RevocationDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a CertificateTemplate. */
+                    interface ICertificateTemplate {
+
+                        /** CertificateTemplate name */
+                        name?: (string|null);
+
+                        /** CertificateTemplate predefinedValues */
+                        predefinedValues?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                        /** CertificateTemplate identityConstraints */
+                        identityConstraints?: (google.cloud.security.privateca.v1.ICertificateIdentityConstraints|null);
+
+                        /** CertificateTemplate passthroughExtensions */
+                        passthroughExtensions?: (google.cloud.security.privateca.v1.ICertificateExtensionConstraints|null);
+
+                        /** CertificateTemplate description */
+                        description?: (string|null);
+
+                        /** CertificateTemplate createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateTemplate updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateTemplate labels */
+                        labels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a CertificateTemplate. */
+                    class CertificateTemplate implements ICertificateTemplate {
+
+                        /**
+                         * Constructs a new CertificateTemplate.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificateTemplate);
+
+                        /** CertificateTemplate name. */
+                        public name: string;
+
+                        /** CertificateTemplate predefinedValues. */
+                        public predefinedValues?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                        /** CertificateTemplate identityConstraints. */
+                        public identityConstraints?: (google.cloud.security.privateca.v1.ICertificateIdentityConstraints|null);
+
+                        /** CertificateTemplate passthroughExtensions. */
+                        public passthroughExtensions?: (google.cloud.security.privateca.v1.ICertificateExtensionConstraints|null);
+
+                        /** CertificateTemplate description. */
+                        public description: string;
+
+                        /** CertificateTemplate createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateTemplate updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** CertificateTemplate labels. */
+                        public labels: { [k: string]: string };
+
+                        /**
+                         * Creates a new CertificateTemplate instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateTemplate instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificateTemplate): google.cloud.security.privateca.v1.CertificateTemplate;
+
+                        /**
+                         * Encodes the specified CertificateTemplate message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateTemplate.verify|verify} messages.
+                         * @param message CertificateTemplate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificateTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateTemplate message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateTemplate.verify|verify} messages.
+                         * @param message CertificateTemplate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificateTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateTemplate message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateTemplate;
+
+                        /**
+                         * Decodes a CertificateTemplate message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateTemplate;
+
+                        /**
+                         * Verifies a CertificateTemplate message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateTemplate message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateTemplate
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateTemplate;
+
+                        /**
+                         * Creates a plain object from a CertificateTemplate message. Also converts values to other types if specified.
+                         * @param message CertificateTemplate
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CertificateTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateTemplate to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a X509Parameters. */
+                    interface IX509Parameters {
+
+                        /** X509Parameters keyUsage */
+                        keyUsage?: (google.cloud.security.privateca.v1.IKeyUsage|null);
+
+                        /** X509Parameters caOptions */
+                        caOptions?: (google.cloud.security.privateca.v1.X509Parameters.ICaOptions|null);
+
+                        /** X509Parameters policyIds */
+                        policyIds?: (google.cloud.security.privateca.v1.IObjectId[]|null);
+
+                        /** X509Parameters aiaOcspServers */
+                        aiaOcspServers?: (string[]|null);
+
+                        /** X509Parameters additionalExtensions */
+                        additionalExtensions?: (google.cloud.security.privateca.v1.IX509Extension[]|null);
+                    }
+
+                    /** Represents a X509Parameters. */
+                    class X509Parameters implements IX509Parameters {
+
+                        /**
+                         * Constructs a new X509Parameters.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IX509Parameters);
+
+                        /** X509Parameters keyUsage. */
+                        public keyUsage?: (google.cloud.security.privateca.v1.IKeyUsage|null);
+
+                        /** X509Parameters caOptions. */
+                        public caOptions?: (google.cloud.security.privateca.v1.X509Parameters.ICaOptions|null);
+
+                        /** X509Parameters policyIds. */
+                        public policyIds: google.cloud.security.privateca.v1.IObjectId[];
+
+                        /** X509Parameters aiaOcspServers. */
+                        public aiaOcspServers: string[];
+
+                        /** X509Parameters additionalExtensions. */
+                        public additionalExtensions: google.cloud.security.privateca.v1.IX509Extension[];
+
+                        /**
+                         * Creates a new X509Parameters instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns X509Parameters instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IX509Parameters): google.cloud.security.privateca.v1.X509Parameters;
+
+                        /**
+                         * Encodes the specified X509Parameters message. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.verify|verify} messages.
+                         * @param message X509Parameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IX509Parameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified X509Parameters message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.verify|verify} messages.
+                         * @param message X509Parameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IX509Parameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a X509Parameters message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns X509Parameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.X509Parameters;
+
+                        /**
+                         * Decodes a X509Parameters message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns X509Parameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.X509Parameters;
+
+                        /**
+                         * Verifies a X509Parameters message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a X509Parameters message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns X509Parameters
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.X509Parameters;
+
+                        /**
+                         * Creates a plain object from a X509Parameters message. Also converts values to other types if specified.
+                         * @param message X509Parameters
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.X509Parameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this X509Parameters to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace X509Parameters {
+
+                        /** Properties of a CaOptions. */
+                        interface ICaOptions {
+
+                            /** CaOptions isCa */
+                            isCa?: (boolean|null);
+
+                            /** CaOptions maxIssuerPathLength */
+                            maxIssuerPathLength?: (number|null);
+                        }
+
+                        /** Represents a CaOptions. */
+                        class CaOptions implements ICaOptions {
+
+                            /**
+                             * Constructs a new CaOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.X509Parameters.ICaOptions);
+
+                            /** CaOptions isCa. */
+                            public isCa: boolean;
+
+                            /** CaOptions maxIssuerPathLength. */
+                            public maxIssuerPathLength: number;
+
+                            /**
+                             * Creates a new CaOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CaOptions instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.X509Parameters.ICaOptions): google.cloud.security.privateca.v1.X509Parameters.CaOptions;
+
+                            /**
+                             * Encodes the specified CaOptions message. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.CaOptions.verify|verify} messages.
+                             * @param message CaOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.X509Parameters.ICaOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CaOptions message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.CaOptions.verify|verify} messages.
+                             * @param message CaOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.X509Parameters.ICaOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CaOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CaOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.X509Parameters.CaOptions;
+
+                            /**
+                             * Decodes a CaOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CaOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.X509Parameters.CaOptions;
+
+                            /**
+                             * Verifies a CaOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CaOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CaOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.X509Parameters.CaOptions;
+
+                            /**
+                             * Creates a plain object from a CaOptions message. Also converts values to other types if specified.
+                             * @param message CaOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.X509Parameters.CaOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CaOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a SubordinateConfig. */
+                    interface ISubordinateConfig {
+
+                        /** SubordinateConfig certificateAuthority */
+                        certificateAuthority?: (string|null);
+
+                        /** SubordinateConfig pemIssuerChain */
+                        pemIssuerChain?: (google.cloud.security.privateca.v1.SubordinateConfig.ISubordinateConfigChain|null);
+                    }
+
+                    /** Represents a SubordinateConfig. */
+                    class SubordinateConfig implements ISubordinateConfig {
+
+                        /**
+                         * Constructs a new SubordinateConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ISubordinateConfig);
+
+                        /** SubordinateConfig certificateAuthority. */
+                        public certificateAuthority: string;
+
+                        /** SubordinateConfig pemIssuerChain. */
+                        public pemIssuerChain?: (google.cloud.security.privateca.v1.SubordinateConfig.ISubordinateConfigChain|null);
+
+                        /** SubordinateConfig subordinateConfig. */
+                        public subordinateConfig?: ("certificateAuthority"|"pemIssuerChain");
+
+                        /**
+                         * Creates a new SubordinateConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SubordinateConfig instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ISubordinateConfig): google.cloud.security.privateca.v1.SubordinateConfig;
+
+                        /**
+                         * Encodes the specified SubordinateConfig message. Does not implicitly {@link google.cloud.security.privateca.v1.SubordinateConfig.verify|verify} messages.
+                         * @param message SubordinateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ISubordinateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SubordinateConfig message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.SubordinateConfig.verify|verify} messages.
+                         * @param message SubordinateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ISubordinateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SubordinateConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SubordinateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.SubordinateConfig;
+
+                        /**
+                         * Decodes a SubordinateConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SubordinateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.SubordinateConfig;
+
+                        /**
+                         * Verifies a SubordinateConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SubordinateConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SubordinateConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.SubordinateConfig;
+
+                        /**
+                         * Creates a plain object from a SubordinateConfig message. Also converts values to other types if specified.
+                         * @param message SubordinateConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.SubordinateConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SubordinateConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace SubordinateConfig {
+
+                        /** Properties of a SubordinateConfigChain. */
+                        interface ISubordinateConfigChain {
+
+                            /** SubordinateConfigChain pemCertificates */
+                            pemCertificates?: (string[]|null);
+                        }
+
+                        /** Represents a SubordinateConfigChain. */
+                        class SubordinateConfigChain implements ISubordinateConfigChain {
+
+                            /**
+                             * Constructs a new SubordinateConfigChain.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.SubordinateConfig.ISubordinateConfigChain);
+
+                            /** SubordinateConfigChain pemCertificates. */
+                            public pemCertificates: string[];
+
+                            /**
+                             * Creates a new SubordinateConfigChain instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SubordinateConfigChain instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.SubordinateConfig.ISubordinateConfigChain): google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain;
+
+                            /**
+                             * Encodes the specified SubordinateConfigChain message. Does not implicitly {@link google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain.verify|verify} messages.
+                             * @param message SubordinateConfigChain message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.SubordinateConfig.ISubordinateConfigChain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SubordinateConfigChain message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain.verify|verify} messages.
+                             * @param message SubordinateConfigChain message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.SubordinateConfig.ISubordinateConfigChain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SubordinateConfigChain message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SubordinateConfigChain
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain;
+
+                            /**
+                             * Decodes a SubordinateConfigChain message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SubordinateConfigChain
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain;
+
+                            /**
+                             * Verifies a SubordinateConfigChain message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SubordinateConfigChain message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SubordinateConfigChain
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain;
+
+                            /**
+                             * Creates a plain object from a SubordinateConfigChain message. Also converts values to other types if specified.
+                             * @param message SubordinateConfigChain
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SubordinateConfigChain to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a PublicKey. */
+                    interface IPublicKey {
+
+                        /** PublicKey key */
+                        key?: (Uint8Array|string|null);
+
+                        /** PublicKey format */
+                        format?: (google.cloud.security.privateca.v1.PublicKey.KeyFormat|keyof typeof google.cloud.security.privateca.v1.PublicKey.KeyFormat|null);
+                    }
+
+                    /** Represents a PublicKey. */
+                    class PublicKey implements IPublicKey {
+
+                        /**
+                         * Constructs a new PublicKey.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IPublicKey);
+
+                        /** PublicKey key. */
+                        public key: (Uint8Array|string);
+
+                        /** PublicKey format. */
+                        public format: (google.cloud.security.privateca.v1.PublicKey.KeyFormat|keyof typeof google.cloud.security.privateca.v1.PublicKey.KeyFormat);
+
+                        /**
+                         * Creates a new PublicKey instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublicKey instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IPublicKey): google.cloud.security.privateca.v1.PublicKey;
+
+                        /**
+                         * Encodes the specified PublicKey message. Does not implicitly {@link google.cloud.security.privateca.v1.PublicKey.verify|verify} messages.
+                         * @param message PublicKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublicKey message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.PublicKey.verify|verify} messages.
+                         * @param message PublicKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublicKey message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.PublicKey;
+
+                        /**
+                         * Decodes a PublicKey message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.PublicKey;
+
+                        /**
+                         * Verifies a PublicKey message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublicKey message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublicKey
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.PublicKey;
+
+                        /**
+                         * Creates a plain object from a PublicKey message. Also converts values to other types if specified.
+                         * @param message PublicKey
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.PublicKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublicKey to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace PublicKey {
+
+                        /** KeyFormat enum. */
+                        enum KeyFormat {
+                            KEY_FORMAT_UNSPECIFIED = 0,
+                            PEM = 1
+                        }
+                    }
+
+                    /** Properties of a CertificateConfig. */
+                    interface ICertificateConfig {
+
+                        /** CertificateConfig subjectConfig */
+                        subjectConfig?: (google.cloud.security.privateca.v1.CertificateConfig.ISubjectConfig|null);
+
+                        /** CertificateConfig x509Config */
+                        x509Config?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                        /** CertificateConfig publicKey */
+                        publicKey?: (google.cloud.security.privateca.v1.IPublicKey|null);
+                    }
+
+                    /** Represents a CertificateConfig. */
+                    class CertificateConfig implements ICertificateConfig {
+
+                        /**
+                         * Constructs a new CertificateConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificateConfig);
+
+                        /** CertificateConfig subjectConfig. */
+                        public subjectConfig?: (google.cloud.security.privateca.v1.CertificateConfig.ISubjectConfig|null);
+
+                        /** CertificateConfig x509Config. */
+                        public x509Config?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                        /** CertificateConfig publicKey. */
+                        public publicKey?: (google.cloud.security.privateca.v1.IPublicKey|null);
+
+                        /**
+                         * Creates a new CertificateConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateConfig instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificateConfig): google.cloud.security.privateca.v1.CertificateConfig;
+
+                        /**
+                         * Encodes the specified CertificateConfig message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateConfig.verify|verify} messages.
+                         * @param message CertificateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateConfig message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateConfig.verify|verify} messages.
+                         * @param message CertificateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateConfig;
+
+                        /**
+                         * Decodes a CertificateConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateConfig;
+
+                        /**
+                         * Verifies a CertificateConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateConfig;
+
+                        /**
+                         * Creates a plain object from a CertificateConfig message. Also converts values to other types if specified.
+                         * @param message CertificateConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CertificateConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CertificateConfig {
+
+                        /** Properties of a SubjectConfig. */
+                        interface ISubjectConfig {
+
+                            /** SubjectConfig subject */
+                            subject?: (google.cloud.security.privateca.v1.ISubject|null);
+
+                            /** SubjectConfig subjectAltName */
+                            subjectAltName?: (google.cloud.security.privateca.v1.ISubjectAltNames|null);
+                        }
+
+                        /** Represents a SubjectConfig. */
+                        class SubjectConfig implements ISubjectConfig {
+
+                            /**
+                             * Constructs a new SubjectConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateConfig.ISubjectConfig);
+
+                            /** SubjectConfig subject. */
+                            public subject?: (google.cloud.security.privateca.v1.ISubject|null);
+
+                            /** SubjectConfig subjectAltName. */
+                            public subjectAltName?: (google.cloud.security.privateca.v1.ISubjectAltNames|null);
+
+                            /**
+                             * Creates a new SubjectConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SubjectConfig instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateConfig.ISubjectConfig): google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig;
+
+                            /**
+                             * Encodes the specified SubjectConfig message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig.verify|verify} messages.
+                             * @param message SubjectConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateConfig.ISubjectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SubjectConfig message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig.verify|verify} messages.
+                             * @param message SubjectConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateConfig.ISubjectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SubjectConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SubjectConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig;
+
+                            /**
+                             * Decodes a SubjectConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SubjectConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig;
+
+                            /**
+                             * Verifies a SubjectConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SubjectConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SubjectConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig;
+
+                            /**
+                             * Creates a plain object from a SubjectConfig message. Also converts values to other types if specified.
+                             * @param message SubjectConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SubjectConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a CertificateDescription. */
+                    interface ICertificateDescription {
+
+                        /** CertificateDescription subjectDescription */
+                        subjectDescription?: (google.cloud.security.privateca.v1.CertificateDescription.ISubjectDescription|null);
+
+                        /** CertificateDescription x509Description */
+                        x509Description?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                        /** CertificateDescription publicKey */
+                        publicKey?: (google.cloud.security.privateca.v1.IPublicKey|null);
+
+                        /** CertificateDescription subjectKeyId */
+                        subjectKeyId?: (google.cloud.security.privateca.v1.CertificateDescription.IKeyId|null);
+
+                        /** CertificateDescription authorityKeyId */
+                        authorityKeyId?: (google.cloud.security.privateca.v1.CertificateDescription.IKeyId|null);
+
+                        /** CertificateDescription crlDistributionPoints */
+                        crlDistributionPoints?: (string[]|null);
+
+                        /** CertificateDescription aiaIssuingCertificateUrls */
+                        aiaIssuingCertificateUrls?: (string[]|null);
+
+                        /** CertificateDescription certFingerprint */
+                        certFingerprint?: (google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint|null);
+                    }
+
+                    /** Represents a CertificateDescription. */
+                    class CertificateDescription implements ICertificateDescription {
+
+                        /**
+                         * Constructs a new CertificateDescription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificateDescription);
+
+                        /** CertificateDescription subjectDescription. */
+                        public subjectDescription?: (google.cloud.security.privateca.v1.CertificateDescription.ISubjectDescription|null);
+
+                        /** CertificateDescription x509Description. */
+                        public x509Description?: (google.cloud.security.privateca.v1.IX509Parameters|null);
+
+                        /** CertificateDescription publicKey. */
+                        public publicKey?: (google.cloud.security.privateca.v1.IPublicKey|null);
+
+                        /** CertificateDescription subjectKeyId. */
+                        public subjectKeyId?: (google.cloud.security.privateca.v1.CertificateDescription.IKeyId|null);
+
+                        /** CertificateDescription authorityKeyId. */
+                        public authorityKeyId?: (google.cloud.security.privateca.v1.CertificateDescription.IKeyId|null);
+
+                        /** CertificateDescription crlDistributionPoints. */
+                        public crlDistributionPoints: string[];
+
+                        /** CertificateDescription aiaIssuingCertificateUrls. */
+                        public aiaIssuingCertificateUrls: string[];
+
+                        /** CertificateDescription certFingerprint. */
+                        public certFingerprint?: (google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint|null);
+
+                        /**
+                         * Creates a new CertificateDescription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateDescription instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificateDescription): google.cloud.security.privateca.v1.CertificateDescription;
+
+                        /**
+                         * Encodes the specified CertificateDescription message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.verify|verify} messages.
+                         * @param message CertificateDescription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificateDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateDescription message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.verify|verify} messages.
+                         * @param message CertificateDescription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificateDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateDescription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateDescription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateDescription;
+
+                        /**
+                         * Decodes a CertificateDescription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateDescription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateDescription;
+
+                        /**
+                         * Verifies a CertificateDescription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateDescription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateDescription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateDescription;
+
+                        /**
+                         * Creates a plain object from a CertificateDescription message. Also converts values to other types if specified.
+                         * @param message CertificateDescription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CertificateDescription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateDescription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CertificateDescription {
+
+                        /** Properties of a SubjectDescription. */
+                        interface ISubjectDescription {
+
+                            /** SubjectDescription subject */
+                            subject?: (google.cloud.security.privateca.v1.ISubject|null);
+
+                            /** SubjectDescription subjectAltName */
+                            subjectAltName?: (google.cloud.security.privateca.v1.ISubjectAltNames|null);
+
+                            /** SubjectDescription hexSerialNumber */
+                            hexSerialNumber?: (string|null);
+
+                            /** SubjectDescription lifetime */
+                            lifetime?: (google.protobuf.IDuration|null);
+
+                            /** SubjectDescription notBeforeTime */
+                            notBeforeTime?: (google.protobuf.ITimestamp|null);
+
+                            /** SubjectDescription notAfterTime */
+                            notAfterTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a SubjectDescription. */
+                        class SubjectDescription implements ISubjectDescription {
+
+                            /**
+                             * Constructs a new SubjectDescription.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateDescription.ISubjectDescription);
+
+                            /** SubjectDescription subject. */
+                            public subject?: (google.cloud.security.privateca.v1.ISubject|null);
+
+                            /** SubjectDescription subjectAltName. */
+                            public subjectAltName?: (google.cloud.security.privateca.v1.ISubjectAltNames|null);
+
+                            /** SubjectDescription hexSerialNumber. */
+                            public hexSerialNumber: string;
+
+                            /** SubjectDescription lifetime. */
+                            public lifetime?: (google.protobuf.IDuration|null);
+
+                            /** SubjectDescription notBeforeTime. */
+                            public notBeforeTime?: (google.protobuf.ITimestamp|null);
+
+                            /** SubjectDescription notAfterTime. */
+                            public notAfterTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new SubjectDescription instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SubjectDescription instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateDescription.ISubjectDescription): google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription;
+
+                            /**
+                             * Encodes the specified SubjectDescription message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription.verify|verify} messages.
+                             * @param message SubjectDescription message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateDescription.ISubjectDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SubjectDescription message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription.verify|verify} messages.
+                             * @param message SubjectDescription message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateDescription.ISubjectDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SubjectDescription message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SubjectDescription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription;
+
+                            /**
+                             * Decodes a SubjectDescription message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SubjectDescription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription;
+
+                            /**
+                             * Verifies a SubjectDescription message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SubjectDescription message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SubjectDescription
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription;
+
+                            /**
+                             * Creates a plain object from a SubjectDescription message. Also converts values to other types if specified.
+                             * @param message SubjectDescription
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SubjectDescription to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a KeyId. */
+                        interface IKeyId {
+
+                            /** KeyId keyId */
+                            keyId?: (string|null);
+                        }
+
+                        /** Represents a KeyId. */
+                        class KeyId implements IKeyId {
+
+                            /**
+                             * Constructs a new KeyId.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateDescription.IKeyId);
+
+                            /** KeyId keyId. */
+                            public keyId: string;
+
+                            /**
+                             * Creates a new KeyId instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns KeyId instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateDescription.IKeyId): google.cloud.security.privateca.v1.CertificateDescription.KeyId;
+
+                            /**
+                             * Encodes the specified KeyId message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.KeyId.verify|verify} messages.
+                             * @param message KeyId message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateDescription.IKeyId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified KeyId message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.KeyId.verify|verify} messages.
+                             * @param message KeyId message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateDescription.IKeyId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a KeyId message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns KeyId
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateDescription.KeyId;
+
+                            /**
+                             * Decodes a KeyId message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns KeyId
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateDescription.KeyId;
+
+                            /**
+                             * Verifies a KeyId message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a KeyId message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns KeyId
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateDescription.KeyId;
+
+                            /**
+                             * Creates a plain object from a KeyId message. Also converts values to other types if specified.
+                             * @param message KeyId
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateDescription.KeyId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this KeyId to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a CertificateFingerprint. */
+                        interface ICertificateFingerprint {
+
+                            /** CertificateFingerprint sha256Hash */
+                            sha256Hash?: (string|null);
+                        }
+
+                        /** Represents a CertificateFingerprint. */
+                        class CertificateFingerprint implements ICertificateFingerprint {
+
+                            /**
+                             * Constructs a new CertificateFingerprint.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint);
+
+                            /** CertificateFingerprint sha256Hash. */
+                            public sha256Hash: string;
+
+                            /**
+                             * Creates a new CertificateFingerprint instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CertificateFingerprint instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint): google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint;
+
+                            /**
+                             * Encodes the specified CertificateFingerprint message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint.verify|verify} messages.
+                             * @param message CertificateFingerprint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CertificateFingerprint message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint.verify|verify} messages.
+                             * @param message CertificateFingerprint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CertificateFingerprint message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CertificateFingerprint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint;
+
+                            /**
+                             * Decodes a CertificateFingerprint message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CertificateFingerprint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint;
+
+                            /**
+                             * Verifies a CertificateFingerprint message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CertificateFingerprint message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CertificateFingerprint
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint;
+
+                            /**
+                             * Creates a plain object from a CertificateFingerprint message. Also converts values to other types if specified.
+                             * @param message CertificateFingerprint
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CertificateFingerprint to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of an ObjectId. */
+                    interface IObjectId {
+
+                        /** ObjectId objectIdPath */
+                        objectIdPath?: (number[]|null);
+                    }
+
+                    /** Represents an ObjectId. */
+                    class ObjectId implements IObjectId {
+
+                        /**
+                         * Constructs a new ObjectId.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IObjectId);
+
+                        /** ObjectId objectIdPath. */
+                        public objectIdPath: number[];
+
+                        /**
+                         * Creates a new ObjectId instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ObjectId instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IObjectId): google.cloud.security.privateca.v1.ObjectId;
+
+                        /**
+                         * Encodes the specified ObjectId message. Does not implicitly {@link google.cloud.security.privateca.v1.ObjectId.verify|verify} messages.
+                         * @param message ObjectId message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IObjectId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ObjectId message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ObjectId.verify|verify} messages.
+                         * @param message ObjectId message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IObjectId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ObjectId message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ObjectId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ObjectId;
+
+                        /**
+                         * Decodes an ObjectId message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ObjectId
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ObjectId;
+
+                        /**
+                         * Verifies an ObjectId message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ObjectId message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ObjectId
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ObjectId;
+
+                        /**
+                         * Creates a plain object from an ObjectId message. Also converts values to other types if specified.
+                         * @param message ObjectId
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ObjectId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ObjectId to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a X509Extension. */
+                    interface IX509Extension {
+
+                        /** X509Extension objectId */
+                        objectId?: (google.cloud.security.privateca.v1.IObjectId|null);
+
+                        /** X509Extension critical */
+                        critical?: (boolean|null);
+
+                        /** X509Extension value */
+                        value?: (Uint8Array|string|null);
+                    }
+
+                    /** Represents a X509Extension. */
+                    class X509Extension implements IX509Extension {
+
+                        /**
+                         * Constructs a new X509Extension.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IX509Extension);
+
+                        /** X509Extension objectId. */
+                        public objectId?: (google.cloud.security.privateca.v1.IObjectId|null);
+
+                        /** X509Extension critical. */
+                        public critical: boolean;
+
+                        /** X509Extension value. */
+                        public value: (Uint8Array|string);
+
+                        /**
+                         * Creates a new X509Extension instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns X509Extension instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IX509Extension): google.cloud.security.privateca.v1.X509Extension;
+
+                        /**
+                         * Encodes the specified X509Extension message. Does not implicitly {@link google.cloud.security.privateca.v1.X509Extension.verify|verify} messages.
+                         * @param message X509Extension message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IX509Extension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified X509Extension message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.X509Extension.verify|verify} messages.
+                         * @param message X509Extension message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IX509Extension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a X509Extension message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns X509Extension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.X509Extension;
+
+                        /**
+                         * Decodes a X509Extension message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns X509Extension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.X509Extension;
+
+                        /**
+                         * Verifies a X509Extension message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a X509Extension message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns X509Extension
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.X509Extension;
+
+                        /**
+                         * Creates a plain object from a X509Extension message. Also converts values to other types if specified.
+                         * @param message X509Extension
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.X509Extension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this X509Extension to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a KeyUsage. */
+                    interface IKeyUsage {
+
+                        /** KeyUsage baseKeyUsage */
+                        baseKeyUsage?: (google.cloud.security.privateca.v1.KeyUsage.IKeyUsageOptions|null);
+
+                        /** KeyUsage extendedKeyUsage */
+                        extendedKeyUsage?: (google.cloud.security.privateca.v1.KeyUsage.IExtendedKeyUsageOptions|null);
+
+                        /** KeyUsage unknownExtendedKeyUsages */
+                        unknownExtendedKeyUsages?: (google.cloud.security.privateca.v1.IObjectId[]|null);
+                    }
+
+                    /** Represents a KeyUsage. */
+                    class KeyUsage implements IKeyUsage {
+
+                        /**
+                         * Constructs a new KeyUsage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IKeyUsage);
+
+                        /** KeyUsage baseKeyUsage. */
+                        public baseKeyUsage?: (google.cloud.security.privateca.v1.KeyUsage.IKeyUsageOptions|null);
+
+                        /** KeyUsage extendedKeyUsage. */
+                        public extendedKeyUsage?: (google.cloud.security.privateca.v1.KeyUsage.IExtendedKeyUsageOptions|null);
+
+                        /** KeyUsage unknownExtendedKeyUsages. */
+                        public unknownExtendedKeyUsages: google.cloud.security.privateca.v1.IObjectId[];
+
+                        /**
+                         * Creates a new KeyUsage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns KeyUsage instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IKeyUsage): google.cloud.security.privateca.v1.KeyUsage;
+
+                        /**
+                         * Encodes the specified KeyUsage message. Does not implicitly {@link google.cloud.security.privateca.v1.KeyUsage.verify|verify} messages.
+                         * @param message KeyUsage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IKeyUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified KeyUsage message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.KeyUsage.verify|verify} messages.
+                         * @param message KeyUsage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IKeyUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a KeyUsage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns KeyUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.KeyUsage;
+
+                        /**
+                         * Decodes a KeyUsage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns KeyUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.KeyUsage;
+
+                        /**
+                         * Verifies a KeyUsage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a KeyUsage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns KeyUsage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.KeyUsage;
+
+                        /**
+                         * Creates a plain object from a KeyUsage message. Also converts values to other types if specified.
+                         * @param message KeyUsage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.KeyUsage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this KeyUsage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace KeyUsage {
+
+                        /** Properties of a KeyUsageOptions. */
+                        interface IKeyUsageOptions {
+
+                            /** KeyUsageOptions digitalSignature */
+                            digitalSignature?: (boolean|null);
+
+                            /** KeyUsageOptions contentCommitment */
+                            contentCommitment?: (boolean|null);
+
+                            /** KeyUsageOptions keyEncipherment */
+                            keyEncipherment?: (boolean|null);
+
+                            /** KeyUsageOptions dataEncipherment */
+                            dataEncipherment?: (boolean|null);
+
+                            /** KeyUsageOptions keyAgreement */
+                            keyAgreement?: (boolean|null);
+
+                            /** KeyUsageOptions certSign */
+                            certSign?: (boolean|null);
+
+                            /** KeyUsageOptions crlSign */
+                            crlSign?: (boolean|null);
+
+                            /** KeyUsageOptions encipherOnly */
+                            encipherOnly?: (boolean|null);
+
+                            /** KeyUsageOptions decipherOnly */
+                            decipherOnly?: (boolean|null);
+                        }
+
+                        /** Represents a KeyUsageOptions. */
+                        class KeyUsageOptions implements IKeyUsageOptions {
+
+                            /**
+                             * Constructs a new KeyUsageOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.KeyUsage.IKeyUsageOptions);
+
+                            /** KeyUsageOptions digitalSignature. */
+                            public digitalSignature: boolean;
+
+                            /** KeyUsageOptions contentCommitment. */
+                            public contentCommitment: boolean;
+
+                            /** KeyUsageOptions keyEncipherment. */
+                            public keyEncipherment: boolean;
+
+                            /** KeyUsageOptions dataEncipherment. */
+                            public dataEncipherment: boolean;
+
+                            /** KeyUsageOptions keyAgreement. */
+                            public keyAgreement: boolean;
+
+                            /** KeyUsageOptions certSign. */
+                            public certSign: boolean;
+
+                            /** KeyUsageOptions crlSign. */
+                            public crlSign: boolean;
+
+                            /** KeyUsageOptions encipherOnly. */
+                            public encipherOnly: boolean;
+
+                            /** KeyUsageOptions decipherOnly. */
+                            public decipherOnly: boolean;
+
+                            /**
+                             * Creates a new KeyUsageOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns KeyUsageOptions instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.KeyUsage.IKeyUsageOptions): google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions;
+
+                            /**
+                             * Encodes the specified KeyUsageOptions message. Does not implicitly {@link google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions.verify|verify} messages.
+                             * @param message KeyUsageOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.KeyUsage.IKeyUsageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified KeyUsageOptions message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions.verify|verify} messages.
+                             * @param message KeyUsageOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.KeyUsage.IKeyUsageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a KeyUsageOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns KeyUsageOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions;
+
+                            /**
+                             * Decodes a KeyUsageOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns KeyUsageOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions;
+
+                            /**
+                             * Verifies a KeyUsageOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a KeyUsageOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns KeyUsageOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions;
+
+                            /**
+                             * Creates a plain object from a KeyUsageOptions message. Also converts values to other types if specified.
+                             * @param message KeyUsageOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this KeyUsageOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of an ExtendedKeyUsageOptions. */
+                        interface IExtendedKeyUsageOptions {
+
+                            /** ExtendedKeyUsageOptions serverAuth */
+                            serverAuth?: (boolean|null);
+
+                            /** ExtendedKeyUsageOptions clientAuth */
+                            clientAuth?: (boolean|null);
+
+                            /** ExtendedKeyUsageOptions codeSigning */
+                            codeSigning?: (boolean|null);
+
+                            /** ExtendedKeyUsageOptions emailProtection */
+                            emailProtection?: (boolean|null);
+
+                            /** ExtendedKeyUsageOptions timeStamping */
+                            timeStamping?: (boolean|null);
+
+                            /** ExtendedKeyUsageOptions ocspSigning */
+                            ocspSigning?: (boolean|null);
+                        }
+
+                        /** Represents an ExtendedKeyUsageOptions. */
+                        class ExtendedKeyUsageOptions implements IExtendedKeyUsageOptions {
+
+                            /**
+                             * Constructs a new ExtendedKeyUsageOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.KeyUsage.IExtendedKeyUsageOptions);
+
+                            /** ExtendedKeyUsageOptions serverAuth. */
+                            public serverAuth: boolean;
+
+                            /** ExtendedKeyUsageOptions clientAuth. */
+                            public clientAuth: boolean;
+
+                            /** ExtendedKeyUsageOptions codeSigning. */
+                            public codeSigning: boolean;
+
+                            /** ExtendedKeyUsageOptions emailProtection. */
+                            public emailProtection: boolean;
+
+                            /** ExtendedKeyUsageOptions timeStamping. */
+                            public timeStamping: boolean;
+
+                            /** ExtendedKeyUsageOptions ocspSigning. */
+                            public ocspSigning: boolean;
+
+                            /**
+                             * Creates a new ExtendedKeyUsageOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ExtendedKeyUsageOptions instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.KeyUsage.IExtendedKeyUsageOptions): google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions;
+
+                            /**
+                             * Encodes the specified ExtendedKeyUsageOptions message. Does not implicitly {@link google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions.verify|verify} messages.
+                             * @param message ExtendedKeyUsageOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.KeyUsage.IExtendedKeyUsageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ExtendedKeyUsageOptions message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions.verify|verify} messages.
+                             * @param message ExtendedKeyUsageOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.KeyUsage.IExtendedKeyUsageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ExtendedKeyUsageOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ExtendedKeyUsageOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions;
+
+                            /**
+                             * Decodes an ExtendedKeyUsageOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ExtendedKeyUsageOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions;
+
+                            /**
+                             * Verifies an ExtendedKeyUsageOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ExtendedKeyUsageOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ExtendedKeyUsageOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions;
+
+                            /**
+                             * Creates a plain object from an ExtendedKeyUsageOptions message. Also converts values to other types if specified.
+                             * @param message ExtendedKeyUsageOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ExtendedKeyUsageOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a Subject. */
+                    interface ISubject {
+
+                        /** Subject commonName */
+                        commonName?: (string|null);
+
+                        /** Subject countryCode */
+                        countryCode?: (string|null);
+
+                        /** Subject organization */
+                        organization?: (string|null);
+
+                        /** Subject organizationalUnit */
+                        organizationalUnit?: (string|null);
+
+                        /** Subject locality */
+                        locality?: (string|null);
+
+                        /** Subject province */
+                        province?: (string|null);
+
+                        /** Subject streetAddress */
+                        streetAddress?: (string|null);
+
+                        /** Subject postalCode */
+                        postalCode?: (string|null);
+                    }
+
+                    /** Represents a Subject. */
+                    class Subject implements ISubject {
+
+                        /**
+                         * Constructs a new Subject.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ISubject);
+
+                        /** Subject commonName. */
+                        public commonName: string;
+
+                        /** Subject countryCode. */
+                        public countryCode: string;
+
+                        /** Subject organization. */
+                        public organization: string;
+
+                        /** Subject organizationalUnit. */
+                        public organizationalUnit: string;
+
+                        /** Subject locality. */
+                        public locality: string;
+
+                        /** Subject province. */
+                        public province: string;
+
+                        /** Subject streetAddress. */
+                        public streetAddress: string;
+
+                        /** Subject postalCode. */
+                        public postalCode: string;
+
+                        /**
+                         * Creates a new Subject instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Subject instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ISubject): google.cloud.security.privateca.v1.Subject;
+
+                        /**
+                         * Encodes the specified Subject message. Does not implicitly {@link google.cloud.security.privateca.v1.Subject.verify|verify} messages.
+                         * @param message Subject message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ISubject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Subject message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.Subject.verify|verify} messages.
+                         * @param message Subject message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ISubject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Subject message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Subject
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.Subject;
+
+                        /**
+                         * Decodes a Subject message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Subject
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.Subject;
+
+                        /**
+                         * Verifies a Subject message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Subject message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Subject
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.Subject;
+
+                        /**
+                         * Creates a plain object from a Subject message. Also converts values to other types if specified.
+                         * @param message Subject
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.Subject, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Subject to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a SubjectAltNames. */
+                    interface ISubjectAltNames {
+
+                        /** SubjectAltNames dnsNames */
+                        dnsNames?: (string[]|null);
+
+                        /** SubjectAltNames uris */
+                        uris?: (string[]|null);
+
+                        /** SubjectAltNames emailAddresses */
+                        emailAddresses?: (string[]|null);
+
+                        /** SubjectAltNames ipAddresses */
+                        ipAddresses?: (string[]|null);
+
+                        /** SubjectAltNames customSans */
+                        customSans?: (google.cloud.security.privateca.v1.IX509Extension[]|null);
+                    }
+
+                    /** Represents a SubjectAltNames. */
+                    class SubjectAltNames implements ISubjectAltNames {
+
+                        /**
+                         * Constructs a new SubjectAltNames.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ISubjectAltNames);
+
+                        /** SubjectAltNames dnsNames. */
+                        public dnsNames: string[];
+
+                        /** SubjectAltNames uris. */
+                        public uris: string[];
+
+                        /** SubjectAltNames emailAddresses. */
+                        public emailAddresses: string[];
+
+                        /** SubjectAltNames ipAddresses. */
+                        public ipAddresses: string[];
+
+                        /** SubjectAltNames customSans. */
+                        public customSans: google.cloud.security.privateca.v1.IX509Extension[];
+
+                        /**
+                         * Creates a new SubjectAltNames instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SubjectAltNames instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ISubjectAltNames): google.cloud.security.privateca.v1.SubjectAltNames;
+
+                        /**
+                         * Encodes the specified SubjectAltNames message. Does not implicitly {@link google.cloud.security.privateca.v1.SubjectAltNames.verify|verify} messages.
+                         * @param message SubjectAltNames message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ISubjectAltNames, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SubjectAltNames message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.SubjectAltNames.verify|verify} messages.
+                         * @param message SubjectAltNames message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ISubjectAltNames, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SubjectAltNames message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SubjectAltNames
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.SubjectAltNames;
+
+                        /**
+                         * Decodes a SubjectAltNames message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SubjectAltNames
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.SubjectAltNames;
+
+                        /**
+                         * Verifies a SubjectAltNames message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SubjectAltNames message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SubjectAltNames
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.SubjectAltNames;
+
+                        /**
+                         * Creates a plain object from a SubjectAltNames message. Also converts values to other types if specified.
+                         * @param message SubjectAltNames
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.SubjectAltNames, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SubjectAltNames to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CertificateIdentityConstraints. */
+                    interface ICertificateIdentityConstraints {
+
+                        /** CertificateIdentityConstraints celExpression */
+                        celExpression?: (google.type.IExpr|null);
+
+                        /** CertificateIdentityConstraints allowSubjectPassthrough */
+                        allowSubjectPassthrough?: (boolean|null);
+
+                        /** CertificateIdentityConstraints allowSubjectAltNamesPassthrough */
+                        allowSubjectAltNamesPassthrough?: (boolean|null);
+                    }
+
+                    /** Represents a CertificateIdentityConstraints. */
+                    class CertificateIdentityConstraints implements ICertificateIdentityConstraints {
+
+                        /**
+                         * Constructs a new CertificateIdentityConstraints.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificateIdentityConstraints);
+
+                        /** CertificateIdentityConstraints celExpression. */
+                        public celExpression?: (google.type.IExpr|null);
+
+                        /** CertificateIdentityConstraints allowSubjectPassthrough. */
+                        public allowSubjectPassthrough: boolean;
+
+                        /** CertificateIdentityConstraints allowSubjectAltNamesPassthrough. */
+                        public allowSubjectAltNamesPassthrough: boolean;
+
+                        /**
+                         * Creates a new CertificateIdentityConstraints instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateIdentityConstraints instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificateIdentityConstraints): google.cloud.security.privateca.v1.CertificateIdentityConstraints;
+
+                        /**
+                         * Encodes the specified CertificateIdentityConstraints message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateIdentityConstraints.verify|verify} messages.
+                         * @param message CertificateIdentityConstraints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificateIdentityConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateIdentityConstraints message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateIdentityConstraints.verify|verify} messages.
+                         * @param message CertificateIdentityConstraints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificateIdentityConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateIdentityConstraints message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateIdentityConstraints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateIdentityConstraints;
+
+                        /**
+                         * Decodes a CertificateIdentityConstraints message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateIdentityConstraints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateIdentityConstraints;
+
+                        /**
+                         * Verifies a CertificateIdentityConstraints message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateIdentityConstraints message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateIdentityConstraints
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateIdentityConstraints;
+
+                        /**
+                         * Creates a plain object from a CertificateIdentityConstraints message. Also converts values to other types if specified.
+                         * @param message CertificateIdentityConstraints
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CertificateIdentityConstraints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateIdentityConstraints to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CertificateExtensionConstraints. */
+                    interface ICertificateExtensionConstraints {
+
+                        /** CertificateExtensionConstraints knownExtensions */
+                        knownExtensions?: (google.cloud.security.privateca.v1.CertificateExtensionConstraints.KnownCertificateExtension[]|null);
+
+                        /** CertificateExtensionConstraints additionalExtensions */
+                        additionalExtensions?: (google.cloud.security.privateca.v1.IObjectId[]|null);
+                    }
+
+                    /** Represents a CertificateExtensionConstraints. */
+                    class CertificateExtensionConstraints implements ICertificateExtensionConstraints {
+
+                        /**
+                         * Constructs a new CertificateExtensionConstraints.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICertificateExtensionConstraints);
+
+                        /** CertificateExtensionConstraints knownExtensions. */
+                        public knownExtensions: google.cloud.security.privateca.v1.CertificateExtensionConstraints.KnownCertificateExtension[];
+
+                        /** CertificateExtensionConstraints additionalExtensions. */
+                        public additionalExtensions: google.cloud.security.privateca.v1.IObjectId[];
+
+                        /**
+                         * Creates a new CertificateExtensionConstraints instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateExtensionConstraints instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICertificateExtensionConstraints): google.cloud.security.privateca.v1.CertificateExtensionConstraints;
+
+                        /**
+                         * Encodes the specified CertificateExtensionConstraints message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateExtensionConstraints.verify|verify} messages.
+                         * @param message CertificateExtensionConstraints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICertificateExtensionConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateExtensionConstraints message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateExtensionConstraints.verify|verify} messages.
+                         * @param message CertificateExtensionConstraints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICertificateExtensionConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateExtensionConstraints message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateExtensionConstraints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateExtensionConstraints;
+
+                        /**
+                         * Decodes a CertificateExtensionConstraints message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateExtensionConstraints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateExtensionConstraints;
+
+                        /**
+                         * Verifies a CertificateExtensionConstraints message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateExtensionConstraints message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateExtensionConstraints
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateExtensionConstraints;
+
+                        /**
+                         * Creates a plain object from a CertificateExtensionConstraints message. Also converts values to other types if specified.
+                         * @param message CertificateExtensionConstraints
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CertificateExtensionConstraints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateExtensionConstraints to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace CertificateExtensionConstraints {
+
+                        /** KnownCertificateExtension enum. */
+                        enum KnownCertificateExtension {
+                            KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED = 0,
+                            BASE_KEY_USAGE = 1,
+                            EXTENDED_KEY_USAGE = 2,
+                            CA_OPTIONS = 3,
+                            POLICY_IDS = 4,
+                            AIA_OCSP_SERVERS = 5
+                        }
+                    }
+
+                    /** RevocationReason enum. */
+                    enum RevocationReason {
+                        REVOCATION_REASON_UNSPECIFIED = 0,
+                        KEY_COMPROMISE = 1,
+                        CERTIFICATE_AUTHORITY_COMPROMISE = 2,
+                        AFFILIATION_CHANGED = 3,
+                        SUPERSEDED = 4,
+                        CESSATION_OF_OPERATION = 5,
+                        CERTIFICATE_HOLD = 6,
+                        PRIVILEGE_WITHDRAWN = 7,
+                        ATTRIBUTE_AUTHORITY_COMPROMISE = 8
+                    }
+
+                    /** SubjectRequestMode enum. */
+                    enum SubjectRequestMode {
+                        SUBJECT_REQUEST_MODE_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        REFLECTED_SPIFFE = 2
+                    }
+
+                    /** Represents a CertificateAuthorityService */
+                    class CertificateAuthorityService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new CertificateAuthorityService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new CertificateAuthorityService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CertificateAuthorityService;
+
+                        /**
+                         * Calls CreateCertificate.
+                         * @param request CreateCertificateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Certificate
+                         */
+                        public createCertificate(request: google.cloud.security.privateca.v1.ICreateCertificateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateCallback): void;
+
+                        /**
+                         * Calls CreateCertificate.
+                         * @param request CreateCertificateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createCertificate(request: google.cloud.security.privateca.v1.ICreateCertificateRequest): Promise<google.cloud.security.privateca.v1.Certificate>;
+
+                        /**
+                         * Calls GetCertificate.
+                         * @param request GetCertificateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Certificate
+                         */
+                        public getCertificate(request: google.cloud.security.privateca.v1.IGetCertificateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateCallback): void;
+
+                        /**
+                         * Calls GetCertificate.
+                         * @param request GetCertificateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getCertificate(request: google.cloud.security.privateca.v1.IGetCertificateRequest): Promise<google.cloud.security.privateca.v1.Certificate>;
+
+                        /**
+                         * Calls ListCertificates.
+                         * @param request ListCertificatesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListCertificatesResponse
+                         */
+                        public listCertificates(request: google.cloud.security.privateca.v1.IListCertificatesRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificatesCallback): void;
+
+                        /**
+                         * Calls ListCertificates.
+                         * @param request ListCertificatesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listCertificates(request: google.cloud.security.privateca.v1.IListCertificatesRequest): Promise<google.cloud.security.privateca.v1.ListCertificatesResponse>;
+
+                        /**
+                         * Calls RevokeCertificate.
+                         * @param request RevokeCertificateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Certificate
+                         */
+                        public revokeCertificate(request: google.cloud.security.privateca.v1.IRevokeCertificateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.RevokeCertificateCallback): void;
+
+                        /**
+                         * Calls RevokeCertificate.
+                         * @param request RevokeCertificateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public revokeCertificate(request: google.cloud.security.privateca.v1.IRevokeCertificateRequest): Promise<google.cloud.security.privateca.v1.Certificate>;
+
+                        /**
+                         * Calls UpdateCertificate.
+                         * @param request UpdateCertificateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Certificate
+                         */
+                        public updateCertificate(request: google.cloud.security.privateca.v1.IUpdateCertificateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateCallback): void;
+
+                        /**
+                         * Calls UpdateCertificate.
+                         * @param request UpdateCertificateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateCertificate(request: google.cloud.security.privateca.v1.IUpdateCertificateRequest): Promise<google.cloud.security.privateca.v1.Certificate>;
+
+                        /**
+                         * Calls ActivateCertificateAuthority.
+                         * @param request ActivateCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public activateCertificateAuthority(request: google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.ActivateCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls ActivateCertificateAuthority.
+                         * @param request ActivateCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public activateCertificateAuthority(request: google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls CreateCertificateAuthority.
+                         * @param request CreateCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public createCertificateAuthority(request: google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls CreateCertificateAuthority.
+                         * @param request CreateCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createCertificateAuthority(request: google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DisableCertificateAuthority.
+                         * @param request DisableCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public disableCertificateAuthority(request: google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.DisableCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls DisableCertificateAuthority.
+                         * @param request DisableCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public disableCertificateAuthority(request: google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls EnableCertificateAuthority.
+                         * @param request EnableCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public enableCertificateAuthority(request: google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.EnableCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls EnableCertificateAuthority.
+                         * @param request EnableCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public enableCertificateAuthority(request: google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls FetchCertificateAuthorityCsr.
+                         * @param request FetchCertificateAuthorityCsrRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and FetchCertificateAuthorityCsrResponse
+                         */
+                        public fetchCertificateAuthorityCsr(request: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsrCallback): void;
+
+                        /**
+                         * Calls FetchCertificateAuthorityCsr.
+                         * @param request FetchCertificateAuthorityCsrRequest message or plain object
+                         * @returns Promise
+                         */
+                        public fetchCertificateAuthorityCsr(request: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest): Promise<google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse>;
+
+                        /**
+                         * Calls GetCertificateAuthority.
+                         * @param request GetCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CertificateAuthority
+                         */
+                        public getCertificateAuthority(request: google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls GetCertificateAuthority.
+                         * @param request GetCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getCertificateAuthority(request: google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest): Promise<google.cloud.security.privateca.v1.CertificateAuthority>;
+
+                        /**
+                         * Calls ListCertificateAuthorities.
+                         * @param request ListCertificateAuthoritiesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListCertificateAuthoritiesResponse
+                         */
+                        public listCertificateAuthorities(request: google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthoritiesCallback): void;
+
+                        /**
+                         * Calls ListCertificateAuthorities.
+                         * @param request ListCertificateAuthoritiesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listCertificateAuthorities(request: google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest): Promise<google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse>;
+
+                        /**
+                         * Calls UndeleteCertificateAuthority.
+                         * @param request UndeleteCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public undeleteCertificateAuthority(request: google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.UndeleteCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls UndeleteCertificateAuthority.
+                         * @param request UndeleteCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public undeleteCertificateAuthority(request: google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DeleteCertificateAuthority.
+                         * @param request DeleteCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteCertificateAuthority(request: google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls DeleteCertificateAuthority.
+                         * @param request DeleteCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteCertificateAuthority(request: google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls UpdateCertificateAuthority.
+                         * @param request UpdateCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateCertificateAuthority(request: google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls UpdateCertificateAuthority.
+                         * @param request UpdateCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateCertificateAuthority(request: google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls CreateCaPool.
+                         * @param request CreateCaPoolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public createCaPool(request: google.cloud.security.privateca.v1.ICreateCaPoolRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCaPoolCallback): void;
+
+                        /**
+                         * Calls CreateCaPool.
+                         * @param request CreateCaPoolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createCaPool(request: google.cloud.security.privateca.v1.ICreateCaPoolRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls UpdateCaPool.
+                         * @param request UpdateCaPoolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateCaPool(request: google.cloud.security.privateca.v1.IUpdateCaPoolRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCaPoolCallback): void;
+
+                        /**
+                         * Calls UpdateCaPool.
+                         * @param request UpdateCaPoolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateCaPool(request: google.cloud.security.privateca.v1.IUpdateCaPoolRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls GetCaPool.
+                         * @param request GetCaPoolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CaPool
+                         */
+                        public getCaPool(request: google.cloud.security.privateca.v1.IGetCaPoolRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.GetCaPoolCallback): void;
+
+                        /**
+                         * Calls GetCaPool.
+                         * @param request GetCaPoolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getCaPool(request: google.cloud.security.privateca.v1.IGetCaPoolRequest): Promise<google.cloud.security.privateca.v1.CaPool>;
+
+                        /**
+                         * Calls ListCaPools.
+                         * @param request ListCaPoolsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListCaPoolsResponse
+                         */
+                        public listCaPools(request: google.cloud.security.privateca.v1.IListCaPoolsRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.ListCaPoolsCallback): void;
+
+                        /**
+                         * Calls ListCaPools.
+                         * @param request ListCaPoolsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listCaPools(request: google.cloud.security.privateca.v1.IListCaPoolsRequest): Promise<google.cloud.security.privateca.v1.ListCaPoolsResponse>;
+
+                        /**
+                         * Calls DeleteCaPool.
+                         * @param request DeleteCaPoolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteCaPool(request: google.cloud.security.privateca.v1.IDeleteCaPoolRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCaPoolCallback): void;
+
+                        /**
+                         * Calls DeleteCaPool.
+                         * @param request DeleteCaPoolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteCaPool(request: google.cloud.security.privateca.v1.IDeleteCaPoolRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls FetchCaCerts.
+                         * @param request FetchCaCertsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and FetchCaCertsResponse
+                         */
+                        public fetchCaCerts(request: google.cloud.security.privateca.v1.IFetchCaCertsRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCaCertsCallback): void;
+
+                        /**
+                         * Calls FetchCaCerts.
+                         * @param request FetchCaCertsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public fetchCaCerts(request: google.cloud.security.privateca.v1.IFetchCaCertsRequest): Promise<google.cloud.security.privateca.v1.FetchCaCertsResponse>;
+
+                        /**
+                         * Calls GetCertificateRevocationList.
+                         * @param request GetCertificateRevocationListRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CertificateRevocationList
+                         */
+                        public getCertificateRevocationList(request: google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateRevocationListCallback): void;
+
+                        /**
+                         * Calls GetCertificateRevocationList.
+                         * @param request GetCertificateRevocationListRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getCertificateRevocationList(request: google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest): Promise<google.cloud.security.privateca.v1.CertificateRevocationList>;
+
+                        /**
+                         * Calls ListCertificateRevocationLists.
+                         * @param request ListCertificateRevocationListsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListCertificateRevocationListsResponse
+                         */
+                        public listCertificateRevocationLists(request: google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationListsCallback): void;
+
+                        /**
+                         * Calls ListCertificateRevocationLists.
+                         * @param request ListCertificateRevocationListsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listCertificateRevocationLists(request: google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest): Promise<google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse>;
+
+                        /**
+                         * Calls UpdateCertificateRevocationList.
+                         * @param request UpdateCertificateRevocationListRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateCertificateRevocationList(request: google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateRevocationListCallback): void;
+
+                        /**
+                         * Calls UpdateCertificateRevocationList.
+                         * @param request UpdateCertificateRevocationListRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateCertificateRevocationList(request: google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls CreateCertificateTemplate.
+                         * @param request CreateCertificateTemplateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public createCertificateTemplate(request: google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateTemplateCallback): void;
+
+                        /**
+                         * Calls CreateCertificateTemplate.
+                         * @param request CreateCertificateTemplateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createCertificateTemplate(request: google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DeleteCertificateTemplate.
+                         * @param request DeleteCertificateTemplateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteCertificateTemplate(request: google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateTemplateCallback): void;
+
+                        /**
+                         * Calls DeleteCertificateTemplate.
+                         * @param request DeleteCertificateTemplateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteCertificateTemplate(request: google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls GetCertificateTemplate.
+                         * @param request GetCertificateTemplateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CertificateTemplate
+                         */
+                        public getCertificateTemplate(request: google.cloud.security.privateca.v1.IGetCertificateTemplateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateTemplateCallback): void;
+
+                        /**
+                         * Calls GetCertificateTemplate.
+                         * @param request GetCertificateTemplateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getCertificateTemplate(request: google.cloud.security.privateca.v1.IGetCertificateTemplateRequest): Promise<google.cloud.security.privateca.v1.CertificateTemplate>;
+
+                        /**
+                         * Calls ListCertificateTemplates.
+                         * @param request ListCertificateTemplatesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListCertificateTemplatesResponse
+                         */
+                        public listCertificateTemplates(request: google.cloud.security.privateca.v1.IListCertificateTemplatesRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplatesCallback): void;
+
+                        /**
+                         * Calls ListCertificateTemplates.
+                         * @param request ListCertificateTemplatesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listCertificateTemplates(request: google.cloud.security.privateca.v1.IListCertificateTemplatesRequest): Promise<google.cloud.security.privateca.v1.ListCertificateTemplatesResponse>;
+
+                        /**
+                         * Calls UpdateCertificateTemplate.
+                         * @param request UpdateCertificateTemplateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateCertificateTemplate(request: google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest, callback: google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateTemplateCallback): void;
+
+                        /**
+                         * Calls UpdateCertificateTemplate.
+                         * @param request UpdateCertificateTemplateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateCertificateTemplate(request: google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest): Promise<google.longrunning.Operation>;
+                    }
+
+                    namespace CertificateAuthorityService {
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCertificate}.
+                         * @param error Error, if any
+                         * @param [response] Certificate
+                         */
+                        type CreateCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificate}.
+                         * @param error Error, if any
+                         * @param [response] Certificate
+                         */
+                        type GetCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificates}.
+                         * @param error Error, if any
+                         * @param [response] ListCertificatesResponse
+                         */
+                        type ListCertificatesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificatesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#revokeCertificate}.
+                         * @param error Error, if any
+                         * @param [response] Certificate
+                         */
+                        type RevokeCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificate}.
+                         * @param error Error, if any
+                         * @param [response] Certificate
+                         */
+                        type UpdateCertificateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.Certificate) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#activateCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ActivateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type CreateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#disableCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DisableCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#enableCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type EnableCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#fetchCertificateAuthorityCsr}.
+                         * @param error Error, if any
+                         * @param [response] FetchCertificateAuthorityCsrResponse
+                         */
+                        type FetchCertificateAuthorityCsrCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] CertificateAuthority
+                         */
+                        type GetCertificateAuthorityCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CertificateAuthority) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificateAuthorities}.
+                         * @param error Error, if any
+                         * @param [response] ListCertificateAuthoritiesResponse
+                         */
+                        type ListCertificateAuthoritiesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#undeleteCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UndeleteCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#deleteCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateCertificateAuthorityCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCaPool}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type CreateCaPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCaPool}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateCaPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCaPool}.
+                         * @param error Error, if any
+                         * @param [response] CaPool
+                         */
+                        type GetCaPoolCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CaPool) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCaPools}.
+                         * @param error Error, if any
+                         * @param [response] ListCaPoolsResponse
+                         */
+                        type ListCaPoolsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCaPoolsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#deleteCaPool}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteCaPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#fetchCaCerts}.
+                         * @param error Error, if any
+                         * @param [response] FetchCaCertsResponse
+                         */
+                        type FetchCaCertsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.FetchCaCertsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificateRevocationList}.
+                         * @param error Error, if any
+                         * @param [response] CertificateRevocationList
+                         */
+                        type GetCertificateRevocationListCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CertificateRevocationList) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificateRevocationLists}.
+                         * @param error Error, if any
+                         * @param [response] ListCertificateRevocationListsResponse
+                         */
+                        type ListCertificateRevocationListsCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificateRevocationList}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateCertificateRevocationListCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#createCertificateTemplate}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type CreateCertificateTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#deleteCertificateTemplate}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteCertificateTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#getCertificateTemplate}.
+                         * @param error Error, if any
+                         * @param [response] CertificateTemplate
+                         */
+                        type GetCertificateTemplateCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.CertificateTemplate) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#listCertificateTemplates}.
+                         * @param error Error, if any
+                         * @param [response] ListCertificateTemplatesResponse
+                         */
+                        type ListCertificateTemplatesCallback = (error: (Error|null), response?: google.cloud.security.privateca.v1.ListCertificateTemplatesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.security.privateca.v1.CertificateAuthorityService#updateCertificateTemplate}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateCertificateTemplateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                    }
+
+                    /** Properties of a CreateCertificateRequest. */
+                    interface ICreateCertificateRequest {
+
+                        /** CreateCertificateRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateCertificateRequest certificateId */
+                        certificateId?: (string|null);
+
+                        /** CreateCertificateRequest certificate */
+                        certificate?: (google.cloud.security.privateca.v1.ICertificate|null);
+
+                        /** CreateCertificateRequest requestId */
+                        requestId?: (string|null);
+
+                        /** CreateCertificateRequest validateOnly */
+                        validateOnly?: (boolean|null);
+
+                        /** CreateCertificateRequest issuingCertificateAuthorityId */
+                        issuingCertificateAuthorityId?: (string|null);
+                    }
+
+                    /** Represents a CreateCertificateRequest. */
+                    class CreateCertificateRequest implements ICreateCertificateRequest {
+
+                        /**
+                         * Constructs a new CreateCertificateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICreateCertificateRequest);
+
+                        /** CreateCertificateRequest parent. */
+                        public parent: string;
+
+                        /** CreateCertificateRequest certificateId. */
+                        public certificateId: string;
+
+                        /** CreateCertificateRequest certificate. */
+                        public certificate?: (google.cloud.security.privateca.v1.ICertificate|null);
+
+                        /** CreateCertificateRequest requestId. */
+                        public requestId: string;
+
+                        /** CreateCertificateRequest validateOnly. */
+                        public validateOnly: boolean;
+
+                        /** CreateCertificateRequest issuingCertificateAuthorityId. */
+                        public issuingCertificateAuthorityId: string;
+
+                        /**
+                         * Creates a new CreateCertificateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateCertificateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICreateCertificateRequest): google.cloud.security.privateca.v1.CreateCertificateRequest;
+
+                        /**
+                         * Encodes the specified CreateCertificateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCertificateRequest.verify|verify} messages.
+                         * @param message CreateCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICreateCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateCertificateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCertificateRequest.verify|verify} messages.
+                         * @param message CreateCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICreateCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateCertificateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CreateCertificateRequest;
+
+                        /**
+                         * Decodes a CreateCertificateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CreateCertificateRequest;
+
+                        /**
+                         * Verifies a CreateCertificateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateCertificateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateCertificateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CreateCertificateRequest;
+
+                        /**
+                         * Creates a plain object from a CreateCertificateRequest message. Also converts values to other types if specified.
+                         * @param message CreateCertificateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CreateCertificateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateCertificateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GetCertificateRequest. */
+                    interface IGetCertificateRequest {
+
+                        /** GetCertificateRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetCertificateRequest. */
+                    class GetCertificateRequest implements IGetCertificateRequest {
+
+                        /**
+                         * Constructs a new GetCertificateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IGetCertificateRequest);
+
+                        /** GetCertificateRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetCertificateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetCertificateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IGetCertificateRequest): google.cloud.security.privateca.v1.GetCertificateRequest;
+
+                        /**
+                         * Encodes the specified GetCertificateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateRequest.verify|verify} messages.
+                         * @param message GetCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IGetCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetCertificateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateRequest.verify|verify} messages.
+                         * @param message GetCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IGetCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetCertificateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.GetCertificateRequest;
+
+                        /**
+                         * Decodes a GetCertificateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.GetCertificateRequest;
+
+                        /**
+                         * Verifies a GetCertificateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetCertificateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetCertificateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.GetCertificateRequest;
+
+                        /**
+                         * Creates a plain object from a GetCertificateRequest message. Also converts values to other types if specified.
+                         * @param message GetCertificateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.GetCertificateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetCertificateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificatesRequest. */
+                    interface IListCertificatesRequest {
+
+                        /** ListCertificatesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListCertificatesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListCertificatesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListCertificatesRequest filter */
+                        filter?: (string|null);
+
+                        /** ListCertificatesRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListCertificatesRequest. */
+                    class ListCertificatesRequest implements IListCertificatesRequest {
+
+                        /**
+                         * Constructs a new ListCertificatesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificatesRequest);
+
+                        /** ListCertificatesRequest parent. */
+                        public parent: string;
+
+                        /** ListCertificatesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListCertificatesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListCertificatesRequest filter. */
+                        public filter: string;
+
+                        /** ListCertificatesRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListCertificatesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificatesRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificatesRequest): google.cloud.security.privateca.v1.ListCertificatesRequest;
+
+                        /**
+                         * Encodes the specified ListCertificatesRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificatesRequest.verify|verify} messages.
+                         * @param message ListCertificatesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificatesRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificatesRequest.verify|verify} messages.
+                         * @param message ListCertificatesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificatesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificatesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificatesRequest;
+
+                        /**
+                         * Decodes a ListCertificatesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificatesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificatesRequest;
+
+                        /**
+                         * Verifies a ListCertificatesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificatesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificatesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificatesRequest;
+
+                        /**
+                         * Creates a plain object from a ListCertificatesRequest message. Also converts values to other types if specified.
+                         * @param message ListCertificatesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificatesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificatesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificatesResponse. */
+                    interface IListCertificatesResponse {
+
+                        /** ListCertificatesResponse certificates */
+                        certificates?: (google.cloud.security.privateca.v1.ICertificate[]|null);
+
+                        /** ListCertificatesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListCertificatesResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListCertificatesResponse. */
+                    class ListCertificatesResponse implements IListCertificatesResponse {
+
+                        /**
+                         * Constructs a new ListCertificatesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificatesResponse);
+
+                        /** ListCertificatesResponse certificates. */
+                        public certificates: google.cloud.security.privateca.v1.ICertificate[];
+
+                        /** ListCertificatesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListCertificatesResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListCertificatesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificatesResponse instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificatesResponse): google.cloud.security.privateca.v1.ListCertificatesResponse;
+
+                        /**
+                         * Encodes the specified ListCertificatesResponse message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificatesResponse.verify|verify} messages.
+                         * @param message ListCertificatesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificatesResponse message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificatesResponse.verify|verify} messages.
+                         * @param message ListCertificatesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificatesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificatesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificatesResponse;
+
+                        /**
+                         * Decodes a ListCertificatesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificatesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificatesResponse;
+
+                        /**
+                         * Verifies a ListCertificatesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificatesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificatesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificatesResponse;
+
+                        /**
+                         * Creates a plain object from a ListCertificatesResponse message. Also converts values to other types if specified.
+                         * @param message ListCertificatesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificatesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificatesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a RevokeCertificateRequest. */
+                    interface IRevokeCertificateRequest {
+
+                        /** RevokeCertificateRequest name */
+                        name?: (string|null);
+
+                        /** RevokeCertificateRequest reason */
+                        reason?: (google.cloud.security.privateca.v1.RevocationReason|keyof typeof google.cloud.security.privateca.v1.RevocationReason|null);
+
+                        /** RevokeCertificateRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a RevokeCertificateRequest. */
+                    class RevokeCertificateRequest implements IRevokeCertificateRequest {
+
+                        /**
+                         * Constructs a new RevokeCertificateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IRevokeCertificateRequest);
+
+                        /** RevokeCertificateRequest name. */
+                        public name: string;
+
+                        /** RevokeCertificateRequest reason. */
+                        public reason: (google.cloud.security.privateca.v1.RevocationReason|keyof typeof google.cloud.security.privateca.v1.RevocationReason);
+
+                        /** RevokeCertificateRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new RevokeCertificateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RevokeCertificateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IRevokeCertificateRequest): google.cloud.security.privateca.v1.RevokeCertificateRequest;
+
+                        /**
+                         * Encodes the specified RevokeCertificateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.RevokeCertificateRequest.verify|verify} messages.
+                         * @param message RevokeCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IRevokeCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RevokeCertificateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.RevokeCertificateRequest.verify|verify} messages.
+                         * @param message RevokeCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IRevokeCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RevokeCertificateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RevokeCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.RevokeCertificateRequest;
+
+                        /**
+                         * Decodes a RevokeCertificateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RevokeCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.RevokeCertificateRequest;
+
+                        /**
+                         * Verifies a RevokeCertificateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RevokeCertificateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RevokeCertificateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.RevokeCertificateRequest;
+
+                        /**
+                         * Creates a plain object from a RevokeCertificateRequest message. Also converts values to other types if specified.
+                         * @param message RevokeCertificateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.RevokeCertificateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RevokeCertificateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateCertificateRequest. */
+                    interface IUpdateCertificateRequest {
+
+                        /** UpdateCertificateRequest certificate */
+                        certificate?: (google.cloud.security.privateca.v1.ICertificate|null);
+
+                        /** UpdateCertificateRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateCertificateRequest. */
+                    class UpdateCertificateRequest implements IUpdateCertificateRequest {
+
+                        /**
+                         * Constructs a new UpdateCertificateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IUpdateCertificateRequest);
+
+                        /** UpdateCertificateRequest certificate. */
+                        public certificate?: (google.cloud.security.privateca.v1.ICertificate|null);
+
+                        /** UpdateCertificateRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateCertificateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateCertificateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IUpdateCertificateRequest): google.cloud.security.privateca.v1.UpdateCertificateRequest;
+
+                        /**
+                         * Encodes the specified UpdateCertificateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateRequest.verify|verify} messages.
+                         * @param message UpdateCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IUpdateCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateCertificateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateRequest.verify|verify} messages.
+                         * @param message UpdateCertificateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IUpdateCertificateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateCertificateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.UpdateCertificateRequest;
+
+                        /**
+                         * Decodes an UpdateCertificateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateCertificateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.UpdateCertificateRequest;
+
+                        /**
+                         * Verifies an UpdateCertificateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateCertificateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateCertificateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.UpdateCertificateRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateCertificateRequest message. Also converts values to other types if specified.
+                         * @param message UpdateCertificateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.UpdateCertificateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateCertificateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an ActivateCertificateAuthorityRequest. */
+                    interface IActivateCertificateAuthorityRequest {
+
+                        /** ActivateCertificateAuthorityRequest name */
+                        name?: (string|null);
+
+                        /** ActivateCertificateAuthorityRequest pemCaCertificate */
+                        pemCaCertificate?: (string|null);
+
+                        /** ActivateCertificateAuthorityRequest subordinateConfig */
+                        subordinateConfig?: (google.cloud.security.privateca.v1.ISubordinateConfig|null);
+
+                        /** ActivateCertificateAuthorityRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an ActivateCertificateAuthorityRequest. */
+                    class ActivateCertificateAuthorityRequest implements IActivateCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new ActivateCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest);
+
+                        /** ActivateCertificateAuthorityRequest name. */
+                        public name: string;
+
+                        /** ActivateCertificateAuthorityRequest pemCaCertificate. */
+                        public pemCaCertificate: string;
+
+                        /** ActivateCertificateAuthorityRequest subordinateConfig. */
+                        public subordinateConfig?: (google.cloud.security.privateca.v1.ISubordinateConfig|null);
+
+                        /** ActivateCertificateAuthorityRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new ActivateCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ActivateCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest): google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified ActivateCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message ActivateCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ActivateCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message ActivateCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IActivateCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ActivateCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ActivateCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes an ActivateCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ActivateCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies an ActivateCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ActivateCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ActivateCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from an ActivateCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message ActivateCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ActivateCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CreateCertificateAuthorityRequest. */
+                    interface ICreateCertificateAuthorityRequest {
+
+                        /** CreateCertificateAuthorityRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateCertificateAuthorityRequest certificateAuthorityId */
+                        certificateAuthorityId?: (string|null);
+
+                        /** CreateCertificateAuthorityRequest certificateAuthority */
+                        certificateAuthority?: (google.cloud.security.privateca.v1.ICertificateAuthority|null);
+
+                        /** CreateCertificateAuthorityRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateCertificateAuthorityRequest. */
+                    class CreateCertificateAuthorityRequest implements ICreateCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new CreateCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest);
+
+                        /** CreateCertificateAuthorityRequest parent. */
+                        public parent: string;
+
+                        /** CreateCertificateAuthorityRequest certificateAuthorityId. */
+                        public certificateAuthorityId: string;
+
+                        /** CreateCertificateAuthorityRequest certificateAuthority. */
+                        public certificateAuthority?: (google.cloud.security.privateca.v1.ICertificateAuthority|null);
+
+                        /** CreateCertificateAuthorityRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest): google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified CreateCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message CreateCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message CreateCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICreateCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes a CreateCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies a CreateCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from a CreateCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message CreateCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DisableCertificateAuthorityRequest. */
+                    interface IDisableCertificateAuthorityRequest {
+
+                        /** DisableCertificateAuthorityRequest name */
+                        name?: (string|null);
+
+                        /** DisableCertificateAuthorityRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a DisableCertificateAuthorityRequest. */
+                    class DisableCertificateAuthorityRequest implements IDisableCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new DisableCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest);
+
+                        /** DisableCertificateAuthorityRequest name. */
+                        public name: string;
+
+                        /** DisableCertificateAuthorityRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new DisableCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DisableCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest): google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified DisableCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message DisableCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DisableCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message DisableCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IDisableCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DisableCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DisableCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes a DisableCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DisableCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies a DisableCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DisableCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DisableCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from a DisableCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message DisableCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DisableCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an EnableCertificateAuthorityRequest. */
+                    interface IEnableCertificateAuthorityRequest {
+
+                        /** EnableCertificateAuthorityRequest name */
+                        name?: (string|null);
+
+                        /** EnableCertificateAuthorityRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an EnableCertificateAuthorityRequest. */
+                    class EnableCertificateAuthorityRequest implements IEnableCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new EnableCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest);
+
+                        /** EnableCertificateAuthorityRequest name. */
+                        public name: string;
+
+                        /** EnableCertificateAuthorityRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new EnableCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EnableCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest): google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified EnableCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message EnableCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EnableCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message EnableCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IEnableCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EnableCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EnableCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes an EnableCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EnableCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies an EnableCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EnableCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EnableCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from an EnableCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message EnableCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EnableCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a FetchCertificateAuthorityCsrRequest. */
+                    interface IFetchCertificateAuthorityCsrRequest {
+
+                        /** FetchCertificateAuthorityCsrRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a FetchCertificateAuthorityCsrRequest. */
+                    class FetchCertificateAuthorityCsrRequest implements IFetchCertificateAuthorityCsrRequest {
+
+                        /**
+                         * Constructs a new FetchCertificateAuthorityCsrRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest);
+
+                        /** FetchCertificateAuthorityCsrRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new FetchCertificateAuthorityCsrRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FetchCertificateAuthorityCsrRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest;
+
+                        /**
+                         * Encodes the specified FetchCertificateAuthorityCsrRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest.verify|verify} messages.
+                         * @param message FetchCertificateAuthorityCsrRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FetchCertificateAuthorityCsrRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest.verify|verify} messages.
+                         * @param message FetchCertificateAuthorityCsrRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FetchCertificateAuthorityCsrRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FetchCertificateAuthorityCsrRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest;
+
+                        /**
+                         * Decodes a FetchCertificateAuthorityCsrRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FetchCertificateAuthorityCsrRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest;
+
+                        /**
+                         * Verifies a FetchCertificateAuthorityCsrRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FetchCertificateAuthorityCsrRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FetchCertificateAuthorityCsrRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest;
+
+                        /**
+                         * Creates a plain object from a FetchCertificateAuthorityCsrRequest message. Also converts values to other types if specified.
+                         * @param message FetchCertificateAuthorityCsrRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FetchCertificateAuthorityCsrRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a FetchCertificateAuthorityCsrResponse. */
+                    interface IFetchCertificateAuthorityCsrResponse {
+
+                        /** FetchCertificateAuthorityCsrResponse pemCsr */
+                        pemCsr?: (string|null);
+                    }
+
+                    /** Represents a FetchCertificateAuthorityCsrResponse. */
+                    class FetchCertificateAuthorityCsrResponse implements IFetchCertificateAuthorityCsrResponse {
+
+                        /**
+                         * Constructs a new FetchCertificateAuthorityCsrResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse);
+
+                        /** FetchCertificateAuthorityCsrResponse pemCsr. */
+                        public pemCsr: string;
+
+                        /**
+                         * Creates a new FetchCertificateAuthorityCsrResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FetchCertificateAuthorityCsrResponse instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse;
+
+                        /**
+                         * Encodes the specified FetchCertificateAuthorityCsrResponse message. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse.verify|verify} messages.
+                         * @param message FetchCertificateAuthorityCsrResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FetchCertificateAuthorityCsrResponse message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse.verify|verify} messages.
+                         * @param message FetchCertificateAuthorityCsrResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FetchCertificateAuthorityCsrResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FetchCertificateAuthorityCsrResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse;
+
+                        /**
+                         * Decodes a FetchCertificateAuthorityCsrResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FetchCertificateAuthorityCsrResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse;
+
+                        /**
+                         * Verifies a FetchCertificateAuthorityCsrResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FetchCertificateAuthorityCsrResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FetchCertificateAuthorityCsrResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse;
+
+                        /**
+                         * Creates a plain object from a FetchCertificateAuthorityCsrResponse message. Also converts values to other types if specified.
+                         * @param message FetchCertificateAuthorityCsrResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FetchCertificateAuthorityCsrResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GetCertificateAuthorityRequest. */
+                    interface IGetCertificateAuthorityRequest {
+
+                        /** GetCertificateAuthorityRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetCertificateAuthorityRequest. */
+                    class GetCertificateAuthorityRequest implements IGetCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new GetCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest);
+
+                        /** GetCertificateAuthorityRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest): google.cloud.security.privateca.v1.GetCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified GetCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message GetCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message GetCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.GetCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes a GetCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.GetCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies a GetCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.GetCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from a GetCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message GetCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.GetCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificateAuthoritiesRequest. */
+                    interface IListCertificateAuthoritiesRequest {
+
+                        /** ListCertificateAuthoritiesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListCertificateAuthoritiesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListCertificateAuthoritiesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListCertificateAuthoritiesRequest filter */
+                        filter?: (string|null);
+
+                        /** ListCertificateAuthoritiesRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListCertificateAuthoritiesRequest. */
+                    class ListCertificateAuthoritiesRequest implements IListCertificateAuthoritiesRequest {
+
+                        /**
+                         * Constructs a new ListCertificateAuthoritiesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest);
+
+                        /** ListCertificateAuthoritiesRequest parent. */
+                        public parent: string;
+
+                        /** ListCertificateAuthoritiesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListCertificateAuthoritiesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListCertificateAuthoritiesRequest filter. */
+                        public filter: string;
+
+                        /** ListCertificateAuthoritiesRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListCertificateAuthoritiesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificateAuthoritiesRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest): google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest;
+
+                        /**
+                         * Encodes the specified ListCertificateAuthoritiesRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest.verify|verify} messages.
+                         * @param message ListCertificateAuthoritiesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificateAuthoritiesRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest.verify|verify} messages.
+                         * @param message ListCertificateAuthoritiesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificateAuthoritiesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificateAuthoritiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest;
+
+                        /**
+                         * Decodes a ListCertificateAuthoritiesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificateAuthoritiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest;
+
+                        /**
+                         * Verifies a ListCertificateAuthoritiesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificateAuthoritiesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificateAuthoritiesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest;
+
+                        /**
+                         * Creates a plain object from a ListCertificateAuthoritiesRequest message. Also converts values to other types if specified.
+                         * @param message ListCertificateAuthoritiesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificateAuthoritiesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificateAuthoritiesResponse. */
+                    interface IListCertificateAuthoritiesResponse {
+
+                        /** ListCertificateAuthoritiesResponse certificateAuthorities */
+                        certificateAuthorities?: (google.cloud.security.privateca.v1.ICertificateAuthority[]|null);
+
+                        /** ListCertificateAuthoritiesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListCertificateAuthoritiesResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListCertificateAuthoritiesResponse. */
+                    class ListCertificateAuthoritiesResponse implements IListCertificateAuthoritiesResponse {
+
+                        /**
+                         * Constructs a new ListCertificateAuthoritiesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse);
+
+                        /** ListCertificateAuthoritiesResponse certificateAuthorities. */
+                        public certificateAuthorities: google.cloud.security.privateca.v1.ICertificateAuthority[];
+
+                        /** ListCertificateAuthoritiesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListCertificateAuthoritiesResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListCertificateAuthoritiesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificateAuthoritiesResponse instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse): google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse;
+
+                        /**
+                         * Encodes the specified ListCertificateAuthoritiesResponse message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.verify|verify} messages.
+                         * @param message ListCertificateAuthoritiesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificateAuthoritiesResponse message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.verify|verify} messages.
+                         * @param message ListCertificateAuthoritiesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificateAuthoritiesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificateAuthoritiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse;
+
+                        /**
+                         * Decodes a ListCertificateAuthoritiesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificateAuthoritiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse;
+
+                        /**
+                         * Verifies a ListCertificateAuthoritiesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificateAuthoritiesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificateAuthoritiesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse;
+
+                        /**
+                         * Creates a plain object from a ListCertificateAuthoritiesResponse message. Also converts values to other types if specified.
+                         * @param message ListCertificateAuthoritiesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificateAuthoritiesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UndeleteCertificateAuthorityRequest. */
+                    interface IUndeleteCertificateAuthorityRequest {
+
+                        /** UndeleteCertificateAuthorityRequest name */
+                        name?: (string|null);
+
+                        /** UndeleteCertificateAuthorityRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UndeleteCertificateAuthorityRequest. */
+                    class UndeleteCertificateAuthorityRequest implements IUndeleteCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new UndeleteCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest);
+
+                        /** UndeleteCertificateAuthorityRequest name. */
+                        public name: string;
+
+                        /** UndeleteCertificateAuthorityRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UndeleteCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UndeleteCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest): google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified UndeleteCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message UndeleteCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UndeleteCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message UndeleteCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IUndeleteCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UndeleteCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UndeleteCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes an UndeleteCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UndeleteCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies an UndeleteCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UndeleteCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UndeleteCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from an UndeleteCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message UndeleteCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UndeleteCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DeleteCertificateAuthorityRequest. */
+                    interface IDeleteCertificateAuthorityRequest {
+
+                        /** DeleteCertificateAuthorityRequest name */
+                        name?: (string|null);
+
+                        /** DeleteCertificateAuthorityRequest requestId */
+                        requestId?: (string|null);
+
+                        /** DeleteCertificateAuthorityRequest ignoreActiveCertificates */
+                        ignoreActiveCertificates?: (boolean|null);
+                    }
+
+                    /** Represents a DeleteCertificateAuthorityRequest. */
+                    class DeleteCertificateAuthorityRequest implements IDeleteCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new DeleteCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest);
+
+                        /** DeleteCertificateAuthorityRequest name. */
+                        public name: string;
+
+                        /** DeleteCertificateAuthorityRequest requestId. */
+                        public requestId: string;
+
+                        /** DeleteCertificateAuthorityRequest ignoreActiveCertificates. */
+                        public ignoreActiveCertificates: boolean;
+
+                        /**
+                         * Creates a new DeleteCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest): google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified DeleteCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message DeleteCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message DeleteCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IDeleteCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes a DeleteCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies a DeleteCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message DeleteCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateCertificateAuthorityRequest. */
+                    interface IUpdateCertificateAuthorityRequest {
+
+                        /** UpdateCertificateAuthorityRequest certificateAuthority */
+                        certificateAuthority?: (google.cloud.security.privateca.v1.ICertificateAuthority|null);
+
+                        /** UpdateCertificateAuthorityRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateAuthorityRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateCertificateAuthorityRequest. */
+                    class UpdateCertificateAuthorityRequest implements IUpdateCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new UpdateCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest);
+
+                        /** UpdateCertificateAuthorityRequest certificateAuthority. */
+                        public certificateAuthority?: (google.cloud.security.privateca.v1.ICertificateAuthority|null);
+
+                        /** UpdateCertificateAuthorityRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateAuthorityRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest): google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified UpdateCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message UpdateCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message UpdateCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IUpdateCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes an UpdateCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies an UpdateCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message UpdateCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CreateCaPoolRequest. */
+                    interface ICreateCaPoolRequest {
+
+                        /** CreateCaPoolRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateCaPoolRequest caPoolId */
+                        caPoolId?: (string|null);
+
+                        /** CreateCaPoolRequest caPool */
+                        caPool?: (google.cloud.security.privateca.v1.ICaPool|null);
+
+                        /** CreateCaPoolRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateCaPoolRequest. */
+                    class CreateCaPoolRequest implements ICreateCaPoolRequest {
+
+                        /**
+                         * Constructs a new CreateCaPoolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICreateCaPoolRequest);
+
+                        /** CreateCaPoolRequest parent. */
+                        public parent: string;
+
+                        /** CreateCaPoolRequest caPoolId. */
+                        public caPoolId: string;
+
+                        /** CreateCaPoolRequest caPool. */
+                        public caPool?: (google.cloud.security.privateca.v1.ICaPool|null);
+
+                        /** CreateCaPoolRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateCaPoolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateCaPoolRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICreateCaPoolRequest): google.cloud.security.privateca.v1.CreateCaPoolRequest;
+
+                        /**
+                         * Encodes the specified CreateCaPoolRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCaPoolRequest.verify|verify} messages.
+                         * @param message CreateCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICreateCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateCaPoolRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCaPoolRequest.verify|verify} messages.
+                         * @param message CreateCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICreateCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateCaPoolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CreateCaPoolRequest;
+
+                        /**
+                         * Decodes a CreateCaPoolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CreateCaPoolRequest;
+
+                        /**
+                         * Verifies a CreateCaPoolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateCaPoolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateCaPoolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CreateCaPoolRequest;
+
+                        /**
+                         * Creates a plain object from a CreateCaPoolRequest message. Also converts values to other types if specified.
+                         * @param message CreateCaPoolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CreateCaPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateCaPoolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateCaPoolRequest. */
+                    interface IUpdateCaPoolRequest {
+
+                        /** UpdateCaPoolRequest caPool */
+                        caPool?: (google.cloud.security.privateca.v1.ICaPool|null);
+
+                        /** UpdateCaPoolRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCaPoolRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateCaPoolRequest. */
+                    class UpdateCaPoolRequest implements IUpdateCaPoolRequest {
+
+                        /**
+                         * Constructs a new UpdateCaPoolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IUpdateCaPoolRequest);
+
+                        /** UpdateCaPoolRequest caPool. */
+                        public caPool?: (google.cloud.security.privateca.v1.ICaPool|null);
+
+                        /** UpdateCaPoolRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCaPoolRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateCaPoolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateCaPoolRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IUpdateCaPoolRequest): google.cloud.security.privateca.v1.UpdateCaPoolRequest;
+
+                        /**
+                         * Encodes the specified UpdateCaPoolRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCaPoolRequest.verify|verify} messages.
+                         * @param message UpdateCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IUpdateCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateCaPoolRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCaPoolRequest.verify|verify} messages.
+                         * @param message UpdateCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IUpdateCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateCaPoolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.UpdateCaPoolRequest;
+
+                        /**
+                         * Decodes an UpdateCaPoolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.UpdateCaPoolRequest;
+
+                        /**
+                         * Verifies an UpdateCaPoolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateCaPoolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateCaPoolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.UpdateCaPoolRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateCaPoolRequest message. Also converts values to other types if specified.
+                         * @param message UpdateCaPoolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.UpdateCaPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateCaPoolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DeleteCaPoolRequest. */
+                    interface IDeleteCaPoolRequest {
+
+                        /** DeleteCaPoolRequest name */
+                        name?: (string|null);
+
+                        /** DeleteCaPoolRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a DeleteCaPoolRequest. */
+                    class DeleteCaPoolRequest implements IDeleteCaPoolRequest {
+
+                        /**
+                         * Constructs a new DeleteCaPoolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IDeleteCaPoolRequest);
+
+                        /** DeleteCaPoolRequest name. */
+                        public name: string;
+
+                        /** DeleteCaPoolRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new DeleteCaPoolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteCaPoolRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IDeleteCaPoolRequest): google.cloud.security.privateca.v1.DeleteCaPoolRequest;
+
+                        /**
+                         * Encodes the specified DeleteCaPoolRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.DeleteCaPoolRequest.verify|verify} messages.
+                         * @param message DeleteCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IDeleteCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteCaPoolRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.DeleteCaPoolRequest.verify|verify} messages.
+                         * @param message DeleteCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IDeleteCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteCaPoolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.DeleteCaPoolRequest;
+
+                        /**
+                         * Decodes a DeleteCaPoolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.DeleteCaPoolRequest;
+
+                        /**
+                         * Verifies a DeleteCaPoolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteCaPoolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteCaPoolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.DeleteCaPoolRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteCaPoolRequest message. Also converts values to other types if specified.
+                         * @param message DeleteCaPoolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.DeleteCaPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteCaPoolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a FetchCaCertsRequest. */
+                    interface IFetchCaCertsRequest {
+
+                        /** FetchCaCertsRequest caPool */
+                        caPool?: (string|null);
+
+                        /** FetchCaCertsRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a FetchCaCertsRequest. */
+                    class FetchCaCertsRequest implements IFetchCaCertsRequest {
+
+                        /**
+                         * Constructs a new FetchCaCertsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IFetchCaCertsRequest);
+
+                        /** FetchCaCertsRequest caPool. */
+                        public caPool: string;
+
+                        /** FetchCaCertsRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new FetchCaCertsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FetchCaCertsRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IFetchCaCertsRequest): google.cloud.security.privateca.v1.FetchCaCertsRequest;
+
+                        /**
+                         * Encodes the specified FetchCaCertsRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCaCertsRequest.verify|verify} messages.
+                         * @param message FetchCaCertsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IFetchCaCertsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FetchCaCertsRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCaCertsRequest.verify|verify} messages.
+                         * @param message FetchCaCertsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IFetchCaCertsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FetchCaCertsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FetchCaCertsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.FetchCaCertsRequest;
+
+                        /**
+                         * Decodes a FetchCaCertsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FetchCaCertsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.FetchCaCertsRequest;
+
+                        /**
+                         * Verifies a FetchCaCertsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FetchCaCertsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FetchCaCertsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.FetchCaCertsRequest;
+
+                        /**
+                         * Creates a plain object from a FetchCaCertsRequest message. Also converts values to other types if specified.
+                         * @param message FetchCaCertsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.FetchCaCertsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FetchCaCertsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a FetchCaCertsResponse. */
+                    interface IFetchCaCertsResponse {
+
+                        /** FetchCaCertsResponse caCerts */
+                        caCerts?: (google.cloud.security.privateca.v1.FetchCaCertsResponse.ICertChain[]|null);
+                    }
+
+                    /** Represents a FetchCaCertsResponse. */
+                    class FetchCaCertsResponse implements IFetchCaCertsResponse {
+
+                        /**
+                         * Constructs a new FetchCaCertsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IFetchCaCertsResponse);
+
+                        /** FetchCaCertsResponse caCerts. */
+                        public caCerts: google.cloud.security.privateca.v1.FetchCaCertsResponse.ICertChain[];
+
+                        /**
+                         * Creates a new FetchCaCertsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FetchCaCertsResponse instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IFetchCaCertsResponse): google.cloud.security.privateca.v1.FetchCaCertsResponse;
+
+                        /**
+                         * Encodes the specified FetchCaCertsResponse message. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCaCertsResponse.verify|verify} messages.
+                         * @param message FetchCaCertsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IFetchCaCertsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FetchCaCertsResponse message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCaCertsResponse.verify|verify} messages.
+                         * @param message FetchCaCertsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IFetchCaCertsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FetchCaCertsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FetchCaCertsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.FetchCaCertsResponse;
+
+                        /**
+                         * Decodes a FetchCaCertsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FetchCaCertsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.FetchCaCertsResponse;
+
+                        /**
+                         * Verifies a FetchCaCertsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FetchCaCertsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FetchCaCertsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.FetchCaCertsResponse;
+
+                        /**
+                         * Creates a plain object from a FetchCaCertsResponse message. Also converts values to other types if specified.
+                         * @param message FetchCaCertsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.FetchCaCertsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FetchCaCertsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace FetchCaCertsResponse {
+
+                        /** Properties of a CertChain. */
+                        interface ICertChain {
+
+                            /** CertChain certificates */
+                            certificates?: (string[]|null);
+                        }
+
+                        /** Represents a CertChain. */
+                        class CertChain implements ICertChain {
+
+                            /**
+                             * Constructs a new CertChain.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.FetchCaCertsResponse.ICertChain);
+
+                            /** CertChain certificates. */
+                            public certificates: string[];
+
+                            /**
+                             * Creates a new CertChain instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CertChain instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.FetchCaCertsResponse.ICertChain): google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain;
+
+                            /**
+                             * Encodes the specified CertChain message. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain.verify|verify} messages.
+                             * @param message CertChain message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.FetchCaCertsResponse.ICertChain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CertChain message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain.verify|verify} messages.
+                             * @param message CertChain message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.FetchCaCertsResponse.ICertChain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CertChain message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CertChain
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain;
+
+                            /**
+                             * Decodes a CertChain message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CertChain
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain;
+
+                            /**
+                             * Verifies a CertChain message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CertChain message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CertChain
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain;
+
+                            /**
+                             * Creates a plain object from a CertChain message. Also converts values to other types if specified.
+                             * @param message CertChain
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CertChain to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a GetCaPoolRequest. */
+                    interface IGetCaPoolRequest {
+
+                        /** GetCaPoolRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetCaPoolRequest. */
+                    class GetCaPoolRequest implements IGetCaPoolRequest {
+
+                        /**
+                         * Constructs a new GetCaPoolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IGetCaPoolRequest);
+
+                        /** GetCaPoolRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetCaPoolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetCaPoolRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IGetCaPoolRequest): google.cloud.security.privateca.v1.GetCaPoolRequest;
+
+                        /**
+                         * Encodes the specified GetCaPoolRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.GetCaPoolRequest.verify|verify} messages.
+                         * @param message GetCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IGetCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetCaPoolRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.GetCaPoolRequest.verify|verify} messages.
+                         * @param message GetCaPoolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IGetCaPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetCaPoolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.GetCaPoolRequest;
+
+                        /**
+                         * Decodes a GetCaPoolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetCaPoolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.GetCaPoolRequest;
+
+                        /**
+                         * Verifies a GetCaPoolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetCaPoolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetCaPoolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.GetCaPoolRequest;
+
+                        /**
+                         * Creates a plain object from a GetCaPoolRequest message. Also converts values to other types if specified.
+                         * @param message GetCaPoolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.GetCaPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetCaPoolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCaPoolsRequest. */
+                    interface IListCaPoolsRequest {
+
+                        /** ListCaPoolsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListCaPoolsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListCaPoolsRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListCaPoolsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListCaPoolsRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListCaPoolsRequest. */
+                    class ListCaPoolsRequest implements IListCaPoolsRequest {
+
+                        /**
+                         * Constructs a new ListCaPoolsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCaPoolsRequest);
+
+                        /** ListCaPoolsRequest parent. */
+                        public parent: string;
+
+                        /** ListCaPoolsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListCaPoolsRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListCaPoolsRequest filter. */
+                        public filter: string;
+
+                        /** ListCaPoolsRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListCaPoolsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCaPoolsRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCaPoolsRequest): google.cloud.security.privateca.v1.ListCaPoolsRequest;
+
+                        /**
+                         * Encodes the specified ListCaPoolsRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCaPoolsRequest.verify|verify} messages.
+                         * @param message ListCaPoolsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCaPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCaPoolsRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCaPoolsRequest.verify|verify} messages.
+                         * @param message ListCaPoolsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCaPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCaPoolsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCaPoolsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCaPoolsRequest;
+
+                        /**
+                         * Decodes a ListCaPoolsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCaPoolsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCaPoolsRequest;
+
+                        /**
+                         * Verifies a ListCaPoolsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCaPoolsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCaPoolsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCaPoolsRequest;
+
+                        /**
+                         * Creates a plain object from a ListCaPoolsRequest message. Also converts values to other types if specified.
+                         * @param message ListCaPoolsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCaPoolsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCaPoolsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCaPoolsResponse. */
+                    interface IListCaPoolsResponse {
+
+                        /** ListCaPoolsResponse caPools */
+                        caPools?: (google.cloud.security.privateca.v1.ICaPool[]|null);
+
+                        /** ListCaPoolsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListCaPoolsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListCaPoolsResponse. */
+                    class ListCaPoolsResponse implements IListCaPoolsResponse {
+
+                        /**
+                         * Constructs a new ListCaPoolsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCaPoolsResponse);
+
+                        /** ListCaPoolsResponse caPools. */
+                        public caPools: google.cloud.security.privateca.v1.ICaPool[];
+
+                        /** ListCaPoolsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListCaPoolsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListCaPoolsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCaPoolsResponse instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCaPoolsResponse): google.cloud.security.privateca.v1.ListCaPoolsResponse;
+
+                        /**
+                         * Encodes the specified ListCaPoolsResponse message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCaPoolsResponse.verify|verify} messages.
+                         * @param message ListCaPoolsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCaPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCaPoolsResponse message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCaPoolsResponse.verify|verify} messages.
+                         * @param message ListCaPoolsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCaPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCaPoolsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCaPoolsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCaPoolsResponse;
+
+                        /**
+                         * Decodes a ListCaPoolsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCaPoolsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCaPoolsResponse;
+
+                        /**
+                         * Verifies a ListCaPoolsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCaPoolsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCaPoolsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCaPoolsResponse;
+
+                        /**
+                         * Creates a plain object from a ListCaPoolsResponse message. Also converts values to other types if specified.
+                         * @param message ListCaPoolsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCaPoolsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCaPoolsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GetCertificateRevocationListRequest. */
+                    interface IGetCertificateRevocationListRequest {
+
+                        /** GetCertificateRevocationListRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetCertificateRevocationListRequest. */
+                    class GetCertificateRevocationListRequest implements IGetCertificateRevocationListRequest {
+
+                        /**
+                         * Constructs a new GetCertificateRevocationListRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest);
+
+                        /** GetCertificateRevocationListRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetCertificateRevocationListRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetCertificateRevocationListRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest): google.cloud.security.privateca.v1.GetCertificateRevocationListRequest;
+
+                        /**
+                         * Encodes the specified GetCertificateRevocationListRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateRevocationListRequest.verify|verify} messages.
+                         * @param message GetCertificateRevocationListRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetCertificateRevocationListRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateRevocationListRequest.verify|verify} messages.
+                         * @param message GetCertificateRevocationListRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetCertificateRevocationListRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetCertificateRevocationListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.GetCertificateRevocationListRequest;
+
+                        /**
+                         * Decodes a GetCertificateRevocationListRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetCertificateRevocationListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.GetCertificateRevocationListRequest;
+
+                        /**
+                         * Verifies a GetCertificateRevocationListRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetCertificateRevocationListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetCertificateRevocationListRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.GetCertificateRevocationListRequest;
+
+                        /**
+                         * Creates a plain object from a GetCertificateRevocationListRequest message. Also converts values to other types if specified.
+                         * @param message GetCertificateRevocationListRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.GetCertificateRevocationListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetCertificateRevocationListRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificateRevocationListsRequest. */
+                    interface IListCertificateRevocationListsRequest {
+
+                        /** ListCertificateRevocationListsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListCertificateRevocationListsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListCertificateRevocationListsRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListCertificateRevocationListsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListCertificateRevocationListsRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListCertificateRevocationListsRequest. */
+                    class ListCertificateRevocationListsRequest implements IListCertificateRevocationListsRequest {
+
+                        /**
+                         * Constructs a new ListCertificateRevocationListsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest);
+
+                        /** ListCertificateRevocationListsRequest parent. */
+                        public parent: string;
+
+                        /** ListCertificateRevocationListsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListCertificateRevocationListsRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListCertificateRevocationListsRequest filter. */
+                        public filter: string;
+
+                        /** ListCertificateRevocationListsRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListCertificateRevocationListsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificateRevocationListsRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest): google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest;
+
+                        /**
+                         * Encodes the specified ListCertificateRevocationListsRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest.verify|verify} messages.
+                         * @param message ListCertificateRevocationListsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificateRevocationListsRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest.verify|verify} messages.
+                         * @param message ListCertificateRevocationListsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificateRevocationListsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificateRevocationListsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest;
+
+                        /**
+                         * Decodes a ListCertificateRevocationListsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificateRevocationListsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest;
+
+                        /**
+                         * Verifies a ListCertificateRevocationListsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificateRevocationListsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificateRevocationListsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest;
+
+                        /**
+                         * Creates a plain object from a ListCertificateRevocationListsRequest message. Also converts values to other types if specified.
+                         * @param message ListCertificateRevocationListsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificateRevocationListsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificateRevocationListsResponse. */
+                    interface IListCertificateRevocationListsResponse {
+
+                        /** ListCertificateRevocationListsResponse certificateRevocationLists */
+                        certificateRevocationLists?: (google.cloud.security.privateca.v1.ICertificateRevocationList[]|null);
+
+                        /** ListCertificateRevocationListsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListCertificateRevocationListsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListCertificateRevocationListsResponse. */
+                    class ListCertificateRevocationListsResponse implements IListCertificateRevocationListsResponse {
+
+                        /**
+                         * Constructs a new ListCertificateRevocationListsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse);
+
+                        /** ListCertificateRevocationListsResponse certificateRevocationLists. */
+                        public certificateRevocationLists: google.cloud.security.privateca.v1.ICertificateRevocationList[];
+
+                        /** ListCertificateRevocationListsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListCertificateRevocationListsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListCertificateRevocationListsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificateRevocationListsResponse instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse): google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse;
+
+                        /**
+                         * Encodes the specified ListCertificateRevocationListsResponse message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.verify|verify} messages.
+                         * @param message ListCertificateRevocationListsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificateRevocationListsResponse message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse.verify|verify} messages.
+                         * @param message ListCertificateRevocationListsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificateRevocationListsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificateRevocationListsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse;
+
+                        /**
+                         * Decodes a ListCertificateRevocationListsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificateRevocationListsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse;
+
+                        /**
+                         * Verifies a ListCertificateRevocationListsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificateRevocationListsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificateRevocationListsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse;
+
+                        /**
+                         * Creates a plain object from a ListCertificateRevocationListsResponse message. Also converts values to other types if specified.
+                         * @param message ListCertificateRevocationListsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificateRevocationListsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateCertificateRevocationListRequest. */
+                    interface IUpdateCertificateRevocationListRequest {
+
+                        /** UpdateCertificateRevocationListRequest certificateRevocationList */
+                        certificateRevocationList?: (google.cloud.security.privateca.v1.ICertificateRevocationList|null);
+
+                        /** UpdateCertificateRevocationListRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateRevocationListRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateCertificateRevocationListRequest. */
+                    class UpdateCertificateRevocationListRequest implements IUpdateCertificateRevocationListRequest {
+
+                        /**
+                         * Constructs a new UpdateCertificateRevocationListRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest);
+
+                        /** UpdateCertificateRevocationListRequest certificateRevocationList. */
+                        public certificateRevocationList?: (google.cloud.security.privateca.v1.ICertificateRevocationList|null);
+
+                        /** UpdateCertificateRevocationListRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateRevocationListRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateCertificateRevocationListRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateCertificateRevocationListRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest): google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest;
+
+                        /**
+                         * Encodes the specified UpdateCertificateRevocationListRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest.verify|verify} messages.
+                         * @param message UpdateCertificateRevocationListRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateCertificateRevocationListRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest.verify|verify} messages.
+                         * @param message UpdateCertificateRevocationListRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IUpdateCertificateRevocationListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateCertificateRevocationListRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateCertificateRevocationListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest;
+
+                        /**
+                         * Decodes an UpdateCertificateRevocationListRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateCertificateRevocationListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest;
+
+                        /**
+                         * Verifies an UpdateCertificateRevocationListRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateCertificateRevocationListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateCertificateRevocationListRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateCertificateRevocationListRequest message. Also converts values to other types if specified.
+                         * @param message UpdateCertificateRevocationListRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateCertificateRevocationListRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a CreateCertificateTemplateRequest. */
+                    interface ICreateCertificateTemplateRequest {
+
+                        /** CreateCertificateTemplateRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateCertificateTemplateRequest certificateTemplateId */
+                        certificateTemplateId?: (string|null);
+
+                        /** CreateCertificateTemplateRequest certificateTemplate */
+                        certificateTemplate?: (google.cloud.security.privateca.v1.ICertificateTemplate|null);
+
+                        /** CreateCertificateTemplateRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateCertificateTemplateRequest. */
+                    class CreateCertificateTemplateRequest implements ICreateCertificateTemplateRequest {
+
+                        /**
+                         * Constructs a new CreateCertificateTemplateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest);
+
+                        /** CreateCertificateTemplateRequest parent. */
+                        public parent: string;
+
+                        /** CreateCertificateTemplateRequest certificateTemplateId. */
+                        public certificateTemplateId: string;
+
+                        /** CreateCertificateTemplateRequest certificateTemplate. */
+                        public certificateTemplate?: (google.cloud.security.privateca.v1.ICertificateTemplate|null);
+
+                        /** CreateCertificateTemplateRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateCertificateTemplateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateCertificateTemplateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest): google.cloud.security.privateca.v1.CreateCertificateTemplateRequest;
+
+                        /**
+                         * Encodes the specified CreateCertificateTemplateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCertificateTemplateRequest.verify|verify} messages.
+                         * @param message CreateCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateCertificateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CreateCertificateTemplateRequest.verify|verify} messages.
+                         * @param message CreateCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.ICreateCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateCertificateTemplateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CreateCertificateTemplateRequest;
+
+                        /**
+                         * Decodes a CreateCertificateTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CreateCertificateTemplateRequest;
+
+                        /**
+                         * Verifies a CreateCertificateTemplateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateCertificateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateCertificateTemplateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CreateCertificateTemplateRequest;
+
+                        /**
+                         * Creates a plain object from a CreateCertificateTemplateRequest message. Also converts values to other types if specified.
+                         * @param message CreateCertificateTemplateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.CreateCertificateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateCertificateTemplateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DeleteCertificateTemplateRequest. */
+                    interface IDeleteCertificateTemplateRequest {
+
+                        /** DeleteCertificateTemplateRequest name */
+                        name?: (string|null);
+
+                        /** DeleteCertificateTemplateRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a DeleteCertificateTemplateRequest. */
+                    class DeleteCertificateTemplateRequest implements IDeleteCertificateTemplateRequest {
+
+                        /**
+                         * Constructs a new DeleteCertificateTemplateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest);
+
+                        /** DeleteCertificateTemplateRequest name. */
+                        public name: string;
+
+                        /** DeleteCertificateTemplateRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new DeleteCertificateTemplateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteCertificateTemplateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest): google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest;
+
+                        /**
+                         * Encodes the specified DeleteCertificateTemplateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest.verify|verify} messages.
+                         * @param message DeleteCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteCertificateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest.verify|verify} messages.
+                         * @param message DeleteCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IDeleteCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteCertificateTemplateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest;
+
+                        /**
+                         * Decodes a DeleteCertificateTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest;
+
+                        /**
+                         * Verifies a DeleteCertificateTemplateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteCertificateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteCertificateTemplateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteCertificateTemplateRequest message. Also converts values to other types if specified.
+                         * @param message DeleteCertificateTemplateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteCertificateTemplateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GetCertificateTemplateRequest. */
+                    interface IGetCertificateTemplateRequest {
+
+                        /** GetCertificateTemplateRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetCertificateTemplateRequest. */
+                    class GetCertificateTemplateRequest implements IGetCertificateTemplateRequest {
+
+                        /**
+                         * Constructs a new GetCertificateTemplateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IGetCertificateTemplateRequest);
+
+                        /** GetCertificateTemplateRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetCertificateTemplateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetCertificateTemplateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IGetCertificateTemplateRequest): google.cloud.security.privateca.v1.GetCertificateTemplateRequest;
+
+                        /**
+                         * Encodes the specified GetCertificateTemplateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateTemplateRequest.verify|verify} messages.
+                         * @param message GetCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IGetCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetCertificateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.GetCertificateTemplateRequest.verify|verify} messages.
+                         * @param message GetCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IGetCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetCertificateTemplateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.GetCertificateTemplateRequest;
+
+                        /**
+                         * Decodes a GetCertificateTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.GetCertificateTemplateRequest;
+
+                        /**
+                         * Verifies a GetCertificateTemplateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetCertificateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetCertificateTemplateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.GetCertificateTemplateRequest;
+
+                        /**
+                         * Creates a plain object from a GetCertificateTemplateRequest message. Also converts values to other types if specified.
+                         * @param message GetCertificateTemplateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.GetCertificateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetCertificateTemplateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificateTemplatesRequest. */
+                    interface IListCertificateTemplatesRequest {
+
+                        /** ListCertificateTemplatesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListCertificateTemplatesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListCertificateTemplatesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListCertificateTemplatesRequest filter */
+                        filter?: (string|null);
+
+                        /** ListCertificateTemplatesRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListCertificateTemplatesRequest. */
+                    class ListCertificateTemplatesRequest implements IListCertificateTemplatesRequest {
+
+                        /**
+                         * Constructs a new ListCertificateTemplatesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificateTemplatesRequest);
+
+                        /** ListCertificateTemplatesRequest parent. */
+                        public parent: string;
+
+                        /** ListCertificateTemplatesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListCertificateTemplatesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListCertificateTemplatesRequest filter. */
+                        public filter: string;
+
+                        /** ListCertificateTemplatesRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListCertificateTemplatesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificateTemplatesRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificateTemplatesRequest): google.cloud.security.privateca.v1.ListCertificateTemplatesRequest;
+
+                        /**
+                         * Encodes the specified ListCertificateTemplatesRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateTemplatesRequest.verify|verify} messages.
+                         * @param message ListCertificateTemplatesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificateTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificateTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateTemplatesRequest.verify|verify} messages.
+                         * @param message ListCertificateTemplatesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificateTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificateTemplatesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificateTemplatesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificateTemplatesRequest;
+
+                        /**
+                         * Decodes a ListCertificateTemplatesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificateTemplatesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificateTemplatesRequest;
+
+                        /**
+                         * Verifies a ListCertificateTemplatesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificateTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificateTemplatesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificateTemplatesRequest;
+
+                        /**
+                         * Creates a plain object from a ListCertificateTemplatesRequest message. Also converts values to other types if specified.
+                         * @param message ListCertificateTemplatesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificateTemplatesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificateTemplatesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListCertificateTemplatesResponse. */
+                    interface IListCertificateTemplatesResponse {
+
+                        /** ListCertificateTemplatesResponse certificateTemplates */
+                        certificateTemplates?: (google.cloud.security.privateca.v1.ICertificateTemplate[]|null);
+
+                        /** ListCertificateTemplatesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListCertificateTemplatesResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListCertificateTemplatesResponse. */
+                    class ListCertificateTemplatesResponse implements IListCertificateTemplatesResponse {
+
+                        /**
+                         * Constructs a new ListCertificateTemplatesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IListCertificateTemplatesResponse);
+
+                        /** ListCertificateTemplatesResponse certificateTemplates. */
+                        public certificateTemplates: google.cloud.security.privateca.v1.ICertificateTemplate[];
+
+                        /** ListCertificateTemplatesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListCertificateTemplatesResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListCertificateTemplatesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListCertificateTemplatesResponse instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IListCertificateTemplatesResponse): google.cloud.security.privateca.v1.ListCertificateTemplatesResponse;
+
+                        /**
+                         * Encodes the specified ListCertificateTemplatesResponse message. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.verify|verify} messages.
+                         * @param message ListCertificateTemplatesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IListCertificateTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListCertificateTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.ListCertificateTemplatesResponse.verify|verify} messages.
+                         * @param message ListCertificateTemplatesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IListCertificateTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListCertificateTemplatesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListCertificateTemplatesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.ListCertificateTemplatesResponse;
+
+                        /**
+                         * Decodes a ListCertificateTemplatesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListCertificateTemplatesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.ListCertificateTemplatesResponse;
+
+                        /**
+                         * Verifies a ListCertificateTemplatesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListCertificateTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListCertificateTemplatesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.ListCertificateTemplatesResponse;
+
+                        /**
+                         * Creates a plain object from a ListCertificateTemplatesResponse message. Also converts values to other types if specified.
+                         * @param message ListCertificateTemplatesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.ListCertificateTemplatesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListCertificateTemplatesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an UpdateCertificateTemplateRequest. */
+                    interface IUpdateCertificateTemplateRequest {
+
+                        /** UpdateCertificateTemplateRequest certificateTemplate */
+                        certificateTemplate?: (google.cloud.security.privateca.v1.ICertificateTemplate|null);
+
+                        /** UpdateCertificateTemplateRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateTemplateRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateCertificateTemplateRequest. */
+                    class UpdateCertificateTemplateRequest implements IUpdateCertificateTemplateRequest {
+
+                        /**
+                         * Constructs a new UpdateCertificateTemplateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest);
+
+                        /** UpdateCertificateTemplateRequest certificateTemplate. */
+                        public certificateTemplate?: (google.cloud.security.privateca.v1.ICertificateTemplate|null);
+
+                        /** UpdateCertificateTemplateRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateCertificateTemplateRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateCertificateTemplateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateCertificateTemplateRequest instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest): google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest;
+
+                        /**
+                         * Encodes the specified UpdateCertificateTemplateRequest message. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest.verify|verify} messages.
+                         * @param message UpdateCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateCertificateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest.verify|verify} messages.
+                         * @param message UpdateCertificateTemplateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IUpdateCertificateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateCertificateTemplateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest;
+
+                        /**
+                         * Decodes an UpdateCertificateTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateCertificateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest;
+
+                        /**
+                         * Verifies an UpdateCertificateTemplateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateCertificateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateCertificateTemplateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateCertificateTemplateRequest message. Also converts values to other types if specified.
+                         * @param message UpdateCertificateTemplateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateCertificateTemplateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an OperationMetadata. */
+                    interface IOperationMetadata {
+
+                        /** OperationMetadata createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata target */
+                        target?: (string|null);
+
+                        /** OperationMetadata verb */
+                        verb?: (string|null);
+
+                        /** OperationMetadata statusMessage */
+                        statusMessage?: (string|null);
+
+                        /** OperationMetadata requestedCancellation */
+                        requestedCancellation?: (boolean|null);
+
+                        /** OperationMetadata apiVersion */
+                        apiVersion?: (string|null);
+                    }
+
+                    /** Represents an OperationMetadata. */
+                    class OperationMetadata implements IOperationMetadata {
+
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IOperationMetadata);
+
+                        /** OperationMetadata createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata target. */
+                        public target: string;
+
+                        /** OperationMetadata verb. */
+                        public verb: string;
+
+                        /** OperationMetadata statusMessage. */
+                        public statusMessage: string;
+
+                        /** OperationMetadata requestedCancellation. */
+                        public requestedCancellation: boolean;
+
+                        /** OperationMetadata apiVersion. */
+                        public apiVersion: string;
+
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OperationMetadata instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IOperationMetadata): google.cloud.security.privateca.v1.OperationMetadata;
+
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.security.privateca.v1.OperationMetadata.verify|verify} messages.
+                         * @param message OperationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.OperationMetadata.verify|verify} messages.
+                         * @param message OperationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.OperationMetadata;
+
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.OperationMetadata;
+
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OperationMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.OperationMetadata;
+
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @param message OperationMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Namespace v1beta1. */
                 namespace v1beta1 {
 
@@ -10687,6 +19080,276 @@ export namespace google {
             public toJSON(): { [k: string]: any };
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a DoubleValue. */
         interface IDoubleValue {
 
@@ -11496,272 +20159,114 @@ export namespace google {
              */
             public toJSON(): { [k: string]: any };
         }
+    }
 
-        /** Properties of an Any. */
-        interface IAny {
+    /** Namespace type. */
+    namespace type {
 
-            /** Any type_url */
-            type_url?: (string|null);
+        /** Properties of an Expr. */
+        interface IExpr {
 
-            /** Any value */
-            value?: (Uint8Array|string|null);
+            /** Expr expression */
+            expression?: (string|null);
+
+            /** Expr title */
+            title?: (string|null);
+
+            /** Expr description */
+            description?: (string|null);
+
+            /** Expr location */
+            location?: (string|null);
         }
 
-        /** Represents an Any. */
-        class Any implements IAny {
+        /** Represents an Expr. */
+        class Expr implements IExpr {
 
             /**
-             * Constructs a new Any.
+             * Constructs a new Expr.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IAny);
+            constructor(properties?: google.type.IExpr);
 
-            /** Any type_url. */
-            public type_url: string;
+            /** Expr expression. */
+            public expression: string;
 
-            /** Any value. */
-            public value: (Uint8Array|string);
+            /** Expr title. */
+            public title: string;
+
+            /** Expr description. */
+            public description: string;
+
+            /** Expr location. */
+            public location: string;
 
             /**
-             * Creates a new Any instance using the specified properties.
+             * Creates a new Expr instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Any instance
+             * @returns Expr instance
              */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+            public static create(properties?: google.type.IExpr): google.type.Expr;
 
             /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+             * @param message Expr message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+             * @param message Expr message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes an Any message from the specified reader or buffer.
+             * Decodes an Expr message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Any
+             * @returns Expr
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Expr;
 
             /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * Decodes an Expr message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Any
+             * @returns Expr
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Expr;
 
             /**
-             * Verifies an Any message.
+             * Verifies an Expr message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * Creates an Expr message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Any
+             * @returns Expr
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+            public static fromObject(object: { [k: string]: any }): google.type.Expr;
 
             /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
+             * Creates a plain object from an Expr message. Also converts values to other types if specified.
+             * @param message Expr
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.type.Expr, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of an Empty. */
-        interface IEmpty {
-        }
-
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
-
-            /**
-             * Constructs a new Empty.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEmpty);
-
-            /**
-             * Creates a new Empty instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Empty instance
-             */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
-
-            /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
-
-            /**
-             * Verifies an Empty message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Empty
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
-
-            /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Empty to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
+             * Converts this Expr to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
