@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.6...v2.1.0) (2021-04-01)
+
+
+### Features
+
+* Add `COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY` for corresponding comment control feat: Committer: [@lozord](https://www.github.com/lozord) ([48fe15d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/48fe15d49504bbb77078984154a147840c484825))
+* Add `ReceiveTriggerWebhook` for webhooks activating specific triggers. ([48fe15d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/48fe15d49504bbb77078984154a147840c484825))
+* Add `SecretManager`-related resources and messages for corresponding integration. ([48fe15d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/48fe15d49504bbb77078984154a147840c484825))
+
+
+### Bug Fixes
+
+* Specify `build` as the body of a `CreateBuild` call. The Cloud Build API has always assumed this, but now we are actually specifying it. ([#202](https://www.github.com/googleapis/nodejs-cloudbuild/issues/202)) ([48fe15d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/48fe15d49504bbb77078984154a147840c484825))
+
 ### [2.0.6](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.5...v2.0.6) (2020-11-25)
 
 
