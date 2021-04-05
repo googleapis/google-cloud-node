@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.3.0...v2.4.0) (2021-04-02)
+
+
+### Features
+
+* add `kind` field which is used to distinguish between response types feat: add `potentially_thresholded_requests_per_hour` field to `PropertyQuota` ([#85](https://www.github.com/googleapis/nodejs-analytics-data/issues/85)) ([00b1d04](https://www.github.com/googleapis/nodejs-analytics-data/commit/00b1d04b34e737d3b68ab9e14fe7949106680ac2))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.2.1...v2.3.0) (2021-03-11)
 
 
