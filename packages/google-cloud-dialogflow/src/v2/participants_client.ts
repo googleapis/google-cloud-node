@@ -199,9 +199,6 @@ export class ParticipantsClient {
       projectConversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}'
       ),
-      projectConversationCallMatcherPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}/callMatchers/{call_matcher}'
-      ),
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}/messages/{message}'
       ),
@@ -222,9 +219,6 @@ export class ParticipantsClient {
       ),
       projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}'
-      ),
-      projectLocationConversationCallMatcherPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/callMatchers/{call_matcher}'
       ),
       projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
@@ -251,14 +245,6 @@ export class ParticipantsClient {
         'pageToken',
         'nextPageToken',
         'participants'
-      ),
-    };
-
-    // Some of the methods on this service provide streaming responses.
-    // Provide descriptors for these.
-    this.descriptors.stream = {
-      streamingAnalyzeContent: new this._gaxModule.StreamDescriptor(
-        gax.StreamType.BIDI_STREAMING
       ),
     };
 
@@ -313,7 +299,6 @@ export class ParticipantsClient {
       'listParticipants',
       'updateParticipant',
       'analyzeContent',
-      'streamingAnalyzeContent',
       'suggestArticles',
       'suggestFaqAnswers',
     ];
@@ -331,10 +316,7 @@ export class ParticipantsClient {
         }
       );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        this.descriptors.stream[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -724,7 +706,7 @@ export class ParticipantsClient {
    *
    * Note: Always use agent versions for production traffic
    * sent to virtual agents. See [Versions and
-   * environments(https://cloud.google.com/dialogflow/es/docs/agents-versions).
+   * environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -734,8 +716,6 @@ export class ParticipantsClient {
    *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
    * @param {google.cloud.dialogflow.v2.TextInput} request.textInput
    *   The natural language text to be processed.
-   * @param {google.cloud.dialogflow.v2.AudioInput} request.audioInput
-   *   The natural language speech audio to be processed.
    * @param {google.cloud.dialogflow.v2.EventInput} request.eventInput
    *   An input event to send to Dialogflow.
    * @param {google.cloud.dialogflow.v2.OutputAudioConfig} request.replyAudioConfig
@@ -1013,44 +993,6 @@ export class ParticipantsClient {
     });
     this.initialize();
     return this.innerApiCalls.suggestFaqAnswers(request, options, callback);
-  }
-
-  /**
-   * Adds a text (chat, for example), or audio (phone recording, for example)
-   * message from a participant into the conversation.
-   * Note: This method is only available through the gRPC API (not REST).
-   *
-   * The top-level message sent to the client by the server is
-   * `StreamingAnalyzeContentResponse`. Multiple response messages can be
-   * returned in order. The first one or more messages contain the
-   * `recognition_result` field. Each result represents a more complete
-   * transcript of what the user said. The next message contains the
-   * `reply_text` field and potentially the `reply_audio` field. The message can
-   * also contain the `automated_agent_reply` field.
-   *
-   * Note: Always use agent versions for production traffic
-   * sent to virtual agents. See [Versions and
-   * environments(https://cloud.google.com/dialogflow/es/docs/agents-versions).
-   *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which is both readable and writable. It accepts objects
-   *   representing [StreamingAnalyzeContentRequest]{@link google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest} for write() method, and
-   *   will emit objects representing [StreamingAnalyzeContentResponse]{@link google.cloud.dialogflow.v2.StreamingAnalyzeContentResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
-   *   for more details and examples.
-   * @example
-   * const stream = client.streamingAnalyzeContent();
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
-   * stream.write(request);
-   * stream.end();
-   */
-  streamingAnalyzeContent(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
-    return this.innerApiCalls.streamingAnalyzeContent(options);
   }
 
   listParticipants(
@@ -1839,73 +1781,6 @@ export class ParticipantsClient {
   }
 
   /**
-   * Return a fully-qualified projectConversationCallMatcher resource name string.
-   *
-   * @param {string} project
-   * @param {string} conversation
-   * @param {string} call_matcher
-   * @returns {string} Resource name string.
-   */
-  projectConversationCallMatcherPath(
-    project: string,
-    conversation: string,
-    callMatcher: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.render(
-      {
-        project: project,
-        conversation: conversation,
-        call_matcher: callMatcher,
-      }
-    );
-  }
-
-  /**
-   * Parse the project from ProjectConversationCallMatcher resource.
-   *
-   * @param {string} projectConversationCallMatcherName
-   *   A fully-qualified path representing project_conversation_call_matcher resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectConversationCallMatcherName(
-    projectConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
-      projectConversationCallMatcherName
-    ).project;
-  }
-
-  /**
-   * Parse the conversation from ProjectConversationCallMatcher resource.
-   *
-   * @param {string} projectConversationCallMatcherName
-   *   A fully-qualified path representing project_conversation_call_matcher resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromProjectConversationCallMatcherName(
-    projectConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
-      projectConversationCallMatcherName
-    ).conversation;
-  }
-
-  /**
-   * Parse the call_matcher from ProjectConversationCallMatcher resource.
-   *
-   * @param {string} projectConversationCallMatcherName
-   *   A fully-qualified path representing project_conversation_call_matcher resource.
-   * @returns {string} A string representing the call_matcher.
-   */
-  matchCallMatcherFromProjectConversationCallMatcherName(
-    projectConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
-      projectConversationCallMatcherName
-    ).call_matcher;
-  }
-
-  /**
    * Return a fully-qualified projectConversationMessage resource name string.
    *
    * @param {string} project
@@ -2316,91 +2191,6 @@ export class ParticipantsClient {
     return this.pathTemplates.projectLocationConversationPathTemplate.match(
       projectLocationConversationName
     ).conversation;
-  }
-
-  /**
-   * Return a fully-qualified projectLocationConversationCallMatcher resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} conversation
-   * @param {string} call_matcher
-   * @returns {string} Resource name string.
-   */
-  projectLocationConversationCallMatcherPath(
-    project: string,
-    location: string,
-    conversation: string,
-    callMatcher: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        conversation: conversation,
-        call_matcher: callMatcher,
-      }
-    );
-  }
-
-  /**
-   * Parse the project from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).location;
-  }
-
-  /**
-   * Parse the conversation from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).conversation;
-  }
-
-  /**
-   * Parse the call_matcher from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the call_matcher.
-   */
-  matchCallMatcherFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).call_matcher;
   }
 
   /**

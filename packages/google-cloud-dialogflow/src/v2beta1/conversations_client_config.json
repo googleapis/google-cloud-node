@@ -43,21 +43,6 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
-        "CreateCallMatcher": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "default"
-        },
-        "ListCallMatchers": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "default"
-        },
-        "DeleteCallMatcher": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "default"
-        },
         "BatchCreateMessages": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",

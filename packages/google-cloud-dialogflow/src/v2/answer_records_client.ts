@@ -41,7 +41,8 @@ import * as gapicConfig from './answer_records_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2.AnswerRecord|AnswerRecords}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2.AnswerRecord|AnswerRecords}.
  * @class
  * @memberof v2
  */
@@ -199,9 +200,6 @@ export class AnswerRecordsClient {
       projectConversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}'
       ),
-      projectConversationCallMatcherPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}/callMatchers/{call_matcher}'
-      ),
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}/messages/{message}'
       ),
@@ -222,9 +220,6 @@ export class AnswerRecordsClient {
       ),
       projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}'
-      ),
-      projectLocationConversationCallMatcherPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/callMatchers/{call_matcher}'
       ),
       projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
@@ -1301,73 +1296,6 @@ export class AnswerRecordsClient {
   }
 
   /**
-   * Return a fully-qualified projectConversationCallMatcher resource name string.
-   *
-   * @param {string} project
-   * @param {string} conversation
-   * @param {string} call_matcher
-   * @returns {string} Resource name string.
-   */
-  projectConversationCallMatcherPath(
-    project: string,
-    conversation: string,
-    callMatcher: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.render(
-      {
-        project: project,
-        conversation: conversation,
-        call_matcher: callMatcher,
-      }
-    );
-  }
-
-  /**
-   * Parse the project from ProjectConversationCallMatcher resource.
-   *
-   * @param {string} projectConversationCallMatcherName
-   *   A fully-qualified path representing project_conversation_call_matcher resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectConversationCallMatcherName(
-    projectConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
-      projectConversationCallMatcherName
-    ).project;
-  }
-
-  /**
-   * Parse the conversation from ProjectConversationCallMatcher resource.
-   *
-   * @param {string} projectConversationCallMatcherName
-   *   A fully-qualified path representing project_conversation_call_matcher resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromProjectConversationCallMatcherName(
-    projectConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
-      projectConversationCallMatcherName
-    ).conversation;
-  }
-
-  /**
-   * Parse the call_matcher from ProjectConversationCallMatcher resource.
-   *
-   * @param {string} projectConversationCallMatcherName
-   *   A fully-qualified path representing project_conversation_call_matcher resource.
-   * @returns {string} A string representing the call_matcher.
-   */
-  matchCallMatcherFromProjectConversationCallMatcherName(
-    projectConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectConversationCallMatcherPathTemplate.match(
-      projectConversationCallMatcherName
-    ).call_matcher;
-  }
-
-  /**
    * Return a fully-qualified projectConversationMessage resource name string.
    *
    * @param {string} project
@@ -1778,91 +1706,6 @@ export class AnswerRecordsClient {
     return this.pathTemplates.projectLocationConversationPathTemplate.match(
       projectLocationConversationName
     ).conversation;
-  }
-
-  /**
-   * Return a fully-qualified projectLocationConversationCallMatcher resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} conversation
-   * @param {string} call_matcher
-   * @returns {string} Resource name string.
-   */
-  projectLocationConversationCallMatcherPath(
-    project: string,
-    location: string,
-    conversation: string,
-    callMatcher: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        conversation: conversation,
-        call_matcher: callMatcher,
-      }
-    );
-  }
-
-  /**
-   * Parse the project from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).location;
-  }
-
-  /**
-   * Parse the conversation from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).conversation;
-  }
-
-  /**
-   * Parse the call_matcher from ProjectLocationConversationCallMatcher resource.
-   *
-   * @param {string} projectLocationConversationCallMatcherName
-   *   A fully-qualified path representing project_location_conversation_call_matcher resource.
-   * @returns {string} A string representing the call_matcher.
-   */
-  matchCallMatcherFromProjectLocationConversationCallMatcherName(
-    projectLocationConversationCallMatcherName: string
-  ) {
-    return this.pathTemplates.projectLocationConversationCallMatcherPathTemplate.match(
-      projectLocationConversationCallMatcherName
-    ).call_matcher;
   }
 
   /**

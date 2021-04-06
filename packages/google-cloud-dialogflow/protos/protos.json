@@ -30,12 +30,16 @@
                           "responseType": "Agent",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/agent",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/agent",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*}/agent"
+                                "get": "/v2/{parent=projects/*}/agent",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*}/agent"
+                                }
                               }
                             },
                             {
@@ -49,13 +53,19 @@
                           "options": {
                             "(google.api.http).post": "/v2/{agent.parent=projects/*}/agent",
                             "(google.api.http).body": "agent",
+                            "(google.api.http).additional_bindings.post": "/v2/{agent.parent=projects/*/locations/*}/agent",
+                            "(google.api.http).additional_bindings.body": "agent",
                             "(google.api.method_signature)": "agent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{agent.parent=projects/*}/agent",
-                                "body": "agent"
+                                "body": "agent",
+                                "additional_bindings": {
+                                  "post": "/v2/{agent.parent=projects/*/locations/*}/agent",
+                                  "body": "agent"
+                                }
                               }
                             },
                             {
@@ -68,12 +78,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{parent=projects/*}/agent",
+                            "(google.api.http).additional_bindings.delete": "/v2/{parent=projects/*/locations/*}/agent",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{parent=projects/*}/agent"
+                                "delete": "/v2/{parent=projects/*}/agent",
+                                "additional_bindings": {
+                                  "delete": "/v2/{parent=projects/*/locations/*}/agent"
+                                }
                               }
                             },
                             {
@@ -86,12 +100,16 @@
                           "responseType": "SearchAgentsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/agent:search",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/agent:search",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*}/agent:search"
+                                "get": "/v2/{parent=projects/*}/agent:search",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*}/agent:search"
+                                }
                               }
                             },
                             {
@@ -105,6 +123,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/agent:train",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/agent:train",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -113,7 +133,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*}/agent:train",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/agent:train",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -133,6 +157,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/agent:export",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/agent:export",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent",
                             "(google.longrunning.operation_info).response_type": "google.cloud.dialogflow.v2.ExportAgentResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -141,7 +167,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*}/agent:export",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/agent:export",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -161,6 +191,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/agent:import",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/agent:import",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           },
@@ -168,7 +200,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*}/agent:import",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/agent:import",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -185,6 +221,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/agent:restore",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/agent:restore",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           },
@@ -192,7 +230,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*}/agent:restore",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*}/agent:restore",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -207,12 +249,16 @@
                           "requestType": "GetValidationResultRequest",
                           "responseType": "ValidationResult",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*}/agent/validationResult"
+                            "(google.api.http).get": "/v2/{parent=projects/*}/agent/validationResult",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/agent/validationResult"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*}/agent/validationResult"
+                                "get": "/v2/{parent=projects/*}/agent/validationResult",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*}/agent/validationResult"
+                                }
                               }
                             }
                           ]
@@ -721,8 +767,7 @@
                           "type": "AnswerRecord",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "updateMask": {
@@ -980,18 +1025,9 @@
                               "(google.api.method_signature)": "participant,text_input"
                             },
                             {
-                              "(google.api.method_signature)": "participant,audio_input"
-                            },
-                            {
                               "(google.api.method_signature)": "participant,event_input"
                             }
                           ]
-                        },
-                        "StreamingAnalyzeContent": {
-                          "requestType": "StreamingAnalyzeContentRequest",
-                          "requestStream": true,
-                          "responseType": "StreamingAnalyzeContentResponse",
-                          "responseStream": true
                         },
                         "SuggestArticles": {
                           "requestType": "SuggestArticlesRequest",
@@ -1233,7 +1269,6 @@
                         "input": {
                           "oneof": [
                             "textInput",
-                            "audioInput",
                             "eventInput"
                           ]
                         }
@@ -1250,10 +1285,6 @@
                         "textInput": {
                           "type": "TextInput",
                           "id": 6
-                        },
-                        "audioInput": {
-                          "type": "AudioInput",
-                          "id": 7
                         },
                         "eventInput": {
                           "type": "EventInput",
@@ -1312,99 +1343,6 @@
                         "dtmfParameters": {
                           "type": "DtmfParameters",
                           "id": 9
-                        }
-                      }
-                    },
-                    "StreamingAnalyzeContentRequest": {
-                      "oneofs": {
-                        "config": {
-                          "oneof": [
-                            "audioConfig",
-                            "textConfig"
-                          ]
-                        },
-                        "input": {
-                          "oneof": [
-                            "inputAudio",
-                            "inputText",
-                            "inputDtmf"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "participant": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Participant"
-                          }
-                        },
-                        "audioConfig": {
-                          "type": "InputAudioConfig",
-                          "id": 2
-                        },
-                        "textConfig": {
-                          "type": "InputTextConfig",
-                          "id": 3
-                        },
-                        "replyAudioConfig": {
-                          "type": "OutputAudioConfig",
-                          "id": 4
-                        },
-                        "inputAudio": {
-                          "type": "bytes",
-                          "id": 5
-                        },
-                        "inputText": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "inputDtmf": {
-                          "type": "TelephonyDtmfEvents",
-                          "id": 9
-                        },
-                        "queryParams": {
-                          "type": "QueryParameters",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "StreamingAnalyzeContentResponse": {
-                      "fields": {
-                        "recognitionResult": {
-                          "type": "StreamingRecognitionResult",
-                          "id": 1
-                        },
-                        "replyText": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "replyAudio": {
-                          "type": "OutputAudio",
-                          "id": 3
-                        },
-                        "automatedAgentReply": {
-                          "type": "AutomatedAgentReply",
-                          "id": 4
-                        },
-                        "message": {
-                          "type": "Message",
-                          "id": 6
-                        },
-                        "humanAgentSuggestionResults": {
-                          "rule": "repeated",
-                          "type": "SuggestionResult",
-                          "id": 7
-                        },
-                        "endUserSuggestionResults": {
-                          "rule": "repeated",
-                          "type": "SuggestionResult",
-                          "id": 8
-                        },
-                        "dtmfParameters": {
-                          "type": "DtmfParameters",
-                          "id": 10
                         }
                       }
                     },
@@ -1485,24 +1423,6 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
-                        }
-                      }
-                    },
-                    "AudioInput": {
-                      "fields": {
-                        "config": {
-                          "type": "InputAudioConfig",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "audio": {
-                          "type": "bytes",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
                         }
                       }
                     },
@@ -1607,17 +1527,6 @@
                         "suggestFaqAnswersResponse": {
                           "type": "SuggestFaqAnswersResponse",
                           "id": 3
-                        }
-                      }
-                    },
-                    "InputTextConfig": {
-                      "fields": {
-                        "languageCode": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
                         }
                       }
                     },
@@ -1816,23 +1725,6 @@
                         }
                       }
                     },
-                    "TelephonyDtmfEvents": {
-                      "fields": {
-                        "dtmfEvents": {
-                          "rule": "repeated",
-                          "type": "TelephonyDtmf",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "OutputAudioEncoding": {
-                      "values": {
-                        "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
-                        "OUTPUT_AUDIO_ENCODING_MP3": 2,
-                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3
-                      }
-                    },
                     "SpeechToTextConfig": {
                       "fields": {
                         "speechModelVariant": {
@@ -1844,25 +1736,14 @@
                         }
                       }
                     },
-                    "TelephonyDtmf": {
+                    "OutputAudioEncoding": {
                       "values": {
-                        "TELEPHONY_DTMF_UNSPECIFIED": 0,
-                        "DTMF_ONE": 1,
-                        "DTMF_TWO": 2,
-                        "DTMF_THREE": 3,
-                        "DTMF_FOUR": 4,
-                        "DTMF_FIVE": 5,
-                        "DTMF_SIX": 6,
-                        "DTMF_SEVEN": 7,
-                        "DTMF_EIGHT": 8,
-                        "DTMF_NINE": 9,
-                        "DTMF_ZERO": 10,
-                        "DTMF_A": 11,
-                        "DTMF_B": 12,
-                        "DTMF_C": 13,
-                        "DTMF_D": 14,
-                        "DTMF_STAR": 15,
-                        "DTMF_POUND": 16
+                        "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
+                        "OUTPUT_AUDIO_ENCODING_MP3": 2,
+                        "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
+                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
+                        "OUTPUT_AUDIO_ENCODING_MULAW": 5
                       }
                     },
                     "Sessions": {
@@ -1877,7 +1758,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{session=projects/*/agent/sessions/*}:detectIntent",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{session=projects/*/agent/environments/*/users/*/sessions/*}:detectIntent",
+                            "(google.api.http).additional_bindings.post": "/v2/{session=projects/*/locations/*/agent/environments/*/users/*/sessions/*}:detectIntent",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "session,query_input"
                           },
@@ -1886,10 +1767,20 @@
                               "(google.api.http)": {
                                 "post": "/v2/{session=projects/*/agent/sessions/*}:detectIntent",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v2/{session=projects/*/agent/environments/*/users/*/sessions/*}:detectIntent",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{session=projects/*/agent/environments/*/users/*/sessions/*}:detectIntent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{session=projects/*/locations/*/agent/sessions/*}:detectIntent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{session=projects/*/locations/*/agent/environments/*/users/*/sessions/*}:detectIntent",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2281,16 +2172,24 @@
                           "responseType": "ListContextsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/contexts",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*/agent/sessions/*}/contexts"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/contexts"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2303,16 +2202,24 @@
                           "responseType": "Context",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/agent/sessions/*/contexts/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/contexts/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{name=projects/*/agent/sessions/*/contexts/*}",
-                                "additional_bindings": {
-                                  "get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/agent/sessions/*/contexts/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/contexts/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2326,7 +2233,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
                             "(google.api.http).body": "context",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/contexts",
                             "(google.api.http).additional_bindings.body": "context",
                             "(google.api.method_signature)": "parent,context"
                           },
@@ -2335,10 +2242,20 @@
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
                                 "body": "context",
-                                "additional_bindings": {
-                                  "post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
-                                  "body": "context"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
+                                    "body": "context"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*/agent/sessions/*}/contexts",
+                                    "body": "context"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/contexts",
+                                    "body": "context"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2352,7 +2269,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{context.name=projects/*/agent/sessions/*/contexts/*}",
                             "(google.api.http).body": "context",
-                            "(google.api.http).additional_bindings.patch": "/v2/{context.name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{context.name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/contexts/*}",
                             "(google.api.http).additional_bindings.body": "context",
                             "(google.api.method_signature)": "context,update_mask"
                           },
@@ -2361,10 +2278,20 @@
                               "(google.api.http)": {
                                 "patch": "/v2/{context.name=projects/*/agent/sessions/*/contexts/*}",
                                 "body": "context",
-                                "additional_bindings": {
-                                  "patch": "/v2/{context.name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
-                                  "body": "context"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{context.name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                                    "body": "context"
+                                  },
+                                  {
+                                    "patch": "/v2/{context.name=projects/*/locations/*/agent/sessions/*/contexts/*}",
+                                    "body": "context"
+                                  },
+                                  {
+                                    "patch": "/v2/{context.name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                                    "body": "context"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2377,16 +2304,24 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/agent/sessions/*/contexts/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/contexts/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "delete": "/v2/{name=projects/*/agent/sessions/*/contexts/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/contexts/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/agent/sessions/*/contexts/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/contexts/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2399,16 +2334,24 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
-                            "(google.api.http).additional_bindings.delete": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts",
+                            "(google.api.http).additional_bindings.delete": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/contexts",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "delete": "/v2/{parent=projects/*/agent/sessions/*}/contexts",
-                                "additional_bindings": {
-                                  "delete": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/contexts"
+                                  },
+                                  {
+                                    "delete": "/v2/{parent=projects/*/locations/*/agent/sessions/*}/contexts"
+                                  },
+                                  {
+                                    "delete": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/contexts"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2577,9 +2520,14 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*/agent}/intents",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/agent/environments/*}/intents"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*/agent}/intents"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/agent/environments/*}/intents"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2595,12 +2543,16 @@
                           "responseType": "Intent",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/agent/intents/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/agent/intents/*}",
                             "(google.api.method_signature)": "name,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=projects/*/agent/intents/*}"
+                                "get": "/v2/{name=projects/*/agent/intents/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=projects/*/locations/*/agent/intents/*}"
+                                }
                               }
                             },
                             {
@@ -2617,13 +2569,19 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/intents",
                             "(google.api.http).body": "intent",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent}/intents",
+                            "(google.api.http).additional_bindings.body": "intent",
                             "(google.api.method_signature)": "parent,intent,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent}/intents",
-                                "body": "intent"
+                                "body": "intent",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent}/intents",
+                                  "body": "intent"
+                                }
                               }
                             },
                             {
@@ -2640,13 +2598,19 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{intent.name=projects/*/agent/intents/*}",
                             "(google.api.http).body": "intent",
+                            "(google.api.http).additional_bindings.patch": "/v2/{intent.name=projects/*/locations/*/agent/intents/*}",
+                            "(google.api.http).additional_bindings.body": "intent",
                             "(google.api.method_signature)": "intent,language_code,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v2/{intent.name=projects/*/agent/intents/*}",
-                                "body": "intent"
+                                "body": "intent",
+                                "additional_bindings": {
+                                  "patch": "/v2/{intent.name=projects/*/locations/*/agent/intents/*}",
+                                  "body": "intent"
+                                }
                               }
                             },
                             {
@@ -2662,12 +2626,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/agent/intents/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/agent/intents/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=projects/*/agent/intents/*}"
+                                "delete": "/v2/{name=projects/*/agent/intents/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=projects/*/locations/*/agent/intents/*}"
+                                }
                               }
                             },
                             {
@@ -2681,6 +2649,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/intents:batchUpdate",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent}/intents:batchUpdate",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,intent_batch_inline",
                             "(google.longrunning.operation_info).response_type": "google.cloud.dialogflow.v2.BatchUpdateIntentsResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -2689,7 +2659,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent}/intents:batchUpdate",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent}/intents:batchUpdate",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -2712,6 +2686,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/intents:batchDelete",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent}/intents:batchDelete",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,intents",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -2720,7 +2696,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent}/intents:batchDelete",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent}/intents:batchDelete",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -4002,16 +3982,24 @@
                           "responseType": "ListSessionEntityTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/agent/sessions/*}/entityTypes",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/entityTypes",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*/agent/sessions/*}/entityTypes",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*/agent/sessions/*}/entityTypes"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/entityTypes"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -4024,16 +4012,24 @@
                           "responseType": "SessionEntityType",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/agent/sessions/*/entityTypes/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{name=projects/*/agent/sessions/*/entityTypes/*}",
-                                "additional_bindings": {
-                                  "get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/agent/sessions/*/entityTypes/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/entityTypes/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -4047,7 +4043,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/sessions/*}/entityTypes",
                             "(google.api.http).body": "session_entity_type",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/entityTypes",
                             "(google.api.http).additional_bindings.body": "session_entity_type",
                             "(google.api.method_signature)": "parent,session_entity_type"
                           },
@@ -4056,10 +4052,20 @@
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent/sessions/*}/entityTypes",
                                 "body": "session_entity_type",
-                                "additional_bindings": {
-                                  "post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes",
-                                  "body": "session_entity_type"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=projects/*/agent/environments/*/users/*/sessions/*}/entityTypes",
+                                    "body": "session_entity_type"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*/agent/sessions/*}/entityTypes",
+                                    "body": "session_entity_type"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*/agent/environments/*/users/*/sessions/*}/entityTypes",
+                                    "body": "session_entity_type"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -4073,7 +4079,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{session_entity_type.name=projects/*/agent/sessions/*/entityTypes/*}",
                             "(google.api.http).body": "session_entity_type",
-                            "(google.api.http).additional_bindings.patch": "/v2/{session_entity_type.name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{session_entity_type.name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
                             "(google.api.http).additional_bindings.body": "session_entity_type",
                             "(google.api.method_signature)": "session_entity_type,update_mask"
                           },
@@ -4082,10 +4088,20 @@
                               "(google.api.http)": {
                                 "patch": "/v2/{session_entity_type.name=projects/*/agent/sessions/*/entityTypes/*}",
                                 "body": "session_entity_type",
-                                "additional_bindings": {
-                                  "patch": "/v2/{session_entity_type.name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
-                                  "body": "session_entity_type"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{session_entity_type.name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
+                                    "body": "session_entity_type"
+                                  },
+                                  {
+                                    "patch": "/v2/{session_entity_type.name=projects/*/locations/*/agent/sessions/*/entityTypes/*}",
+                                    "body": "session_entity_type"
+                                  },
+                                  {
+                                    "patch": "/v2/{session_entity_type.name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
+                                    "body": "session_entity_type"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -4101,16 +4117,24 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/agent/sessions/*/entityTypes/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/entityTypes/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "delete": "/v2/{name=projects/*/agent/sessions/*/entityTypes/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=projects/*/agent/environments/*/users/*/sessions/*/entityTypes/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/agent/sessions/*/entityTypes/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/agent/environments/*/users/*/sessions/*/entityTypes/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -4270,12 +4294,16 @@
                           "responseType": "ListEntityTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/agent}/entityTypes",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*/agent}/entityTypes",
                             "(google.api.method_signature)": "parent,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*/agent}/entityTypes"
+                                "get": "/v2/{parent=projects/*/agent}/entityTypes",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*/agent}/entityTypes"
+                                }
                               }
                             },
                             {
@@ -4291,12 +4319,16 @@
                           "responseType": "EntityType",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/agent/entityTypes/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/agent/entityTypes/*}",
                             "(google.api.method_signature)": "name,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=projects/*/agent/entityTypes/*}"
+                                "get": "/v2/{name=projects/*/agent/entityTypes/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=projects/*/locations/*/agent/entityTypes/*}"
+                                }
                               }
                             },
                             {
@@ -4313,13 +4345,19 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/entityTypes",
                             "(google.api.http).body": "entity_type",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent}/entityTypes",
+                            "(google.api.http).additional_bindings.body": "entity_type",
                             "(google.api.method_signature)": "parent,entity_type,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent}/entityTypes",
-                                "body": "entity_type"
+                                "body": "entity_type",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent}/entityTypes",
+                                  "body": "entity_type"
+                                }
                               }
                             },
                             {
@@ -4336,13 +4374,19 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{entity_type.name=projects/*/agent/entityTypes/*}",
                             "(google.api.http).body": "entity_type",
+                            "(google.api.http).additional_bindings.patch": "/v2/{entity_type.name=projects/*/locations/*/agent/entityTypes/*}",
+                            "(google.api.http).additional_bindings.body": "entity_type",
                             "(google.api.method_signature)": "entity_type,language_code"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v2/{entity_type.name=projects/*/agent/entityTypes/*}",
-                                "body": "entity_type"
+                                "body": "entity_type",
+                                "additional_bindings": {
+                                  "patch": "/v2/{entity_type.name=projects/*/locations/*/agent/entityTypes/*}",
+                                  "body": "entity_type"
+                                }
                               }
                             },
                             {
@@ -4358,12 +4402,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/agent/entityTypes/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/agent/entityTypes/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=projects/*/agent/entityTypes/*}"
+                                "delete": "/v2/{name=projects/*/agent/entityTypes/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=projects/*/locations/*/agent/entityTypes/*}"
+                                }
                               }
                             },
                             {
@@ -4377,6 +4425,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/entityTypes:batchUpdate",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent}/entityTypes:batchUpdate",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           },
@@ -4384,7 +4434,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent}/entityTypes:batchUpdate",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent}/entityTypes:batchUpdate",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -4401,6 +4455,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent}/entityTypes:batchDelete",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent}/entityTypes:batchDelete",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,entity_type_names",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -4409,7 +4465,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent}/entityTypes:batchDelete",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent}/entityTypes:batchDelete",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -4429,6 +4489,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchCreate",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchCreate",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,entities,language_code",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -4437,7 +4499,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchCreate",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchCreate",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -4460,6 +4526,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchUpdate",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,entities,language_code",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -4468,7 +4536,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchUpdate",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -4491,6 +4563,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchDelete",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,entity_values,language_code",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
@@ -4499,7 +4573,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchDelete",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -4999,76 +5077,6 @@
                             }
                           ]
                         },
-                        "CreateCallMatcher": {
-                          "requestType": "CreateCallMatcherRequest",
-                          "responseType": "CallMatcher",
-                          "options": {
-                            "(google.api.http).post": "/v2/{parent=projects/*/conversations/*}/callMatchers",
-                            "(google.api.http).body": "call_matcher",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/conversations/*}/callMatchers",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "parent,call_matcher"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v2/{parent=projects/*/conversations/*}/callMatchers",
-                                "body": "call_matcher",
-                                "additional_bindings": {
-                                  "post": "/v2/{parent=projects/*/locations/*/conversations/*}/callMatchers",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,call_matcher"
-                            }
-                          ]
-                        },
-                        "ListCallMatchers": {
-                          "requestType": "ListCallMatchersRequest",
-                          "responseType": "ListCallMatchersResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*/conversations/*}/callMatchers",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*/conversations/*}/callMatchers",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*/conversations/*}/callMatchers",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/locations/*/conversations/*}/callMatchers"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "DeleteCallMatcher": {
-                          "requestType": "DeleteCallMatcherRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v2/{name=projects/*/conversations/*/callMatchers/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/conversations/*/callMatchers/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v2/{name=projects/*/conversations/*/callMatchers/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2/{name=projects/*/locations/*/conversations/*/callMatchers/*}"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
                         "ListMessages": {
                           "requestType": "ListMessagesRequest",
                           "responseType": "ListMessagesResponse",
@@ -5164,47 +5172,6 @@
                         }
                       }
                     },
-                    "CallMatcher": {
-                      "options": {
-                        "(google.api.resource).type": "dialogflow.googleapis.com/CallMatcher",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversations/{conversation}/callMatchers/{call_matcher}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "toHeader": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "fromHeader": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "callIdHeader": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "customHeaders": {
-                          "type": "CustomHeaders",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "CustomHeaders": {
-                          "fields": {
-                            "ciscoGuid": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
                     "CreateConversationRequest": {
                       "fields": {
                         "parent": {
@@ -5294,76 +5261,6 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "dialogflow.googleapis.com/Conversation"
-                          }
-                        }
-                      }
-                    },
-                    "CreateCallMatcherRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/CallMatcher"
-                          }
-                        },
-                        "callMatcher": {
-                          "type": "CallMatcher",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ListCallMatchersRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/CallMatcher"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ListCallMatchersResponse": {
-                      "fields": {
-                        "callMatchers": {
-                          "rule": "repeated",
-                          "type": "CallMatcher",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteCallMatcherRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/CallMatcher"
                           }
                         }
                       }
@@ -5932,8 +5829,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationModel"
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
@@ -6074,16 +5970,21 @@
                           "responseType": "ListDocumentsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/knowledgeBases/*}/documents",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*/knowledgeBases/*}/documents",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/agent/knowledgeBases/*}/documents",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*/knowledgeBases/*}/documents",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/locations/*/knowledgeBases/*}/documents"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*/knowledgeBases/*}/documents"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/agent/knowledgeBases/*}/documents"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6096,16 +5997,21 @@
                           "responseType": "Document",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/knowledgeBases/*/documents/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/agent/knowledgeBases/*/documents/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{name=projects/*/knowledgeBases/*/documents/*}",
-                                "additional_bindings": {
-                                  "get": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/agent/knowledgeBases/*/documents/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6119,7 +6025,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/knowledgeBases/*}/documents",
                             "(google.api.http).body": "document",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/knowledgeBases/*}/documents",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/agent/knowledgeBases/*}/documents",
                             "(google.api.http).additional_bindings.body": "document",
                             "(google.api.method_signature)": "parent,document",
                             "(google.longrunning.operation_info).response_type": "Document",
@@ -6130,10 +6036,16 @@
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/knowledgeBases/*}/documents",
                                 "body": "document",
-                                "additional_bindings": {
-                                  "post": "/v2/{parent=projects/*/locations/*/knowledgeBases/*}/documents",
-                                  "body": "document"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*/knowledgeBases/*}/documents",
+                                    "body": "document"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/agent/knowledgeBases/*}/documents",
+                                    "body": "document"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6152,7 +6064,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/knowledgeBases/*/documents/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/agent/knowledgeBases/*/documents/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "KnowledgeOperationMetadata"
@@ -6161,9 +6073,14 @@
                             {
                               "(google.api.http)": {
                                 "delete": "/v2/{name=projects/*/knowledgeBases/*/documents/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/agent/knowledgeBases/*/documents/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6183,7 +6100,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{document.name=projects/*/knowledgeBases/*/documents/*}",
                             "(google.api.http).body": "document",
-                            "(google.api.http).additional_bindings.patch": "/v2/{document.name=projects/*/locations/*/knowledgeBases/*/documents/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{document.name=projects/*/agent/knowledgeBases/*/documents/*}",
                             "(google.api.http).additional_bindings.body": "document",
                             "(google.api.method_signature)": "document,update_mask",
                             "(google.longrunning.operation_info).response_type": "Document",
@@ -6194,10 +6111,16 @@
                               "(google.api.http)": {
                                 "patch": "/v2/{document.name=projects/*/knowledgeBases/*/documents/*}",
                                 "body": "document",
-                                "additional_bindings": {
-                                  "patch": "/v2/{document.name=projects/*/locations/*/knowledgeBases/*/documents/*}",
-                                  "body": "document"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{document.name=projects/*/locations/*/knowledgeBases/*/documents/*}",
+                                    "body": "document"
+                                  },
+                                  {
+                                    "patch": "/v2/{document.name=projects/*/agent/knowledgeBases/*/documents/*}",
+                                    "body": "document"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6217,7 +6140,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/knowledgeBases/*/documents/*}:reload",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}:reload",
+                            "(google.api.http).additional_bindings.post": "/v2/{name=projects/*/agent/knowledgeBases/*/documents/*}:reload",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,content_uri",
                             "(google.longrunning.operation_info).response_type": "Document",
@@ -6228,10 +6151,16 @@
                               "(google.api.http)": {
                                 "post": "/v2/{name=projects/*/knowledgeBases/*/documents/*}:reload",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}:reload",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{name=projects/*/locations/*/knowledgeBases/*/documents/*}:reload",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{name=projects/*/agent/knowledgeBases/*/documents/*}:reload",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6495,12 +6424,16 @@
                           "requestType": "ListEnvironmentsRequest",
                           "responseType": "ListEnvironmentsResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*/agent}/environments"
+                            "(google.api.http).get": "/v2/{parent=projects/*/agent}/environments",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*/agent}/environments"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*/agent}/environments"
+                                "get": "/v2/{parent=projects/*/agent}/environments",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*/agent}/environments"
+                                }
                               }
                             }
                           ]
@@ -6627,16 +6560,21 @@
                           "responseType": "ListKnowledgeBasesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/knowledgeBases",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/knowledgeBases",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/agent}/knowledgeBases",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*}/knowledgeBases",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=projects/*/locations/*}/knowledgeBases"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=projects/*/locations/*}/knowledgeBases"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=projects/*/agent}/knowledgeBases"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6649,16 +6587,21 @@
                           "responseType": "KnowledgeBase",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/knowledgeBases/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/knowledgeBases/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/agent/knowledgeBases/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{name=projects/*/knowledgeBases/*}",
-                                "additional_bindings": {
-                                  "get": "/v2/{name=projects/*/locations/*/knowledgeBases/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=projects/*/locations/*/knowledgeBases/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=projects/*/agent/knowledgeBases/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6672,7 +6615,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/knowledgeBases",
                             "(google.api.http).body": "knowledge_base",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/knowledgeBases",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/agent}/knowledgeBases",
                             "(google.api.http).additional_bindings.body": "knowledge_base",
                             "(google.api.method_signature)": "parent,knowledge_base"
                           },
@@ -6681,10 +6624,16 @@
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*}/knowledgeBases",
                                 "body": "knowledge_base",
-                                "additional_bindings": {
-                                  "post": "/v2/{parent=projects/*/locations/*}/knowledgeBases",
-                                  "body": "knowledge_base"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*}/knowledgeBases",
+                                    "body": "knowledge_base"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=projects/*/agent}/knowledgeBases",
+                                    "body": "knowledge_base"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6697,16 +6646,21 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/knowledgeBases/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/knowledgeBases/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/agent/knowledgeBases/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "delete": "/v2/{name=projects/*/knowledgeBases/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2/{name=projects/*/locations/*/knowledgeBases/*}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=projects/*/locations/*/knowledgeBases/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=projects/*/agent/knowledgeBases/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -6720,7 +6674,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{knowledge_base.name=projects/*/knowledgeBases/*}",
                             "(google.api.http).body": "knowledge_base",
-                            "(google.api.http).additional_bindings.patch": "/v2/{knowledge_base.name=projects/*/locations/*/knowledgeBases/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{knowledge_base.name=projects/*/agent/knowledgeBases/*}",
                             "(google.api.http).additional_bindings.body": "knowledge_base",
                             "(google.api.method_signature)": "knowledge_base,update_mask"
                           },
@@ -6729,10 +6683,16 @@
                               "(google.api.http)": {
                                 "patch": "/v2/{knowledge_base.name=projects/*/knowledgeBases/*}",
                                 "body": "knowledge_base",
-                                "additional_bindings": {
-                                  "patch": "/v2/{knowledge_base.name=projects/*/locations/*/knowledgeBases/*}",
-                                  "body": "knowledge_base"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{knowledge_base.name=projects/*/locations/*/knowledgeBases/*}",
+                                    "body": "knowledge_base"
+                                  },
+                                  {
+                                    "patch": "/v2/{knowledge_base.name=projects/*/agent/knowledgeBases/*}",
+                                    "body": "knowledge_base"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -7796,7 +7756,9 @@
                         "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
                         "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
                         "OUTPUT_AUDIO_ENCODING_MP3": 2,
-                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3
+                        "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
+                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
+                        "OUTPUT_AUDIO_ENCODING_MULAW": 5
                       }
                     },
                     "SpeechToTextConfig": {
@@ -8149,8 +8111,7 @@
                           "type": "AnswerRecord",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "updateMask": {
@@ -8286,18 +8247,9 @@
                               "(google.api.method_signature)": "participant,text_input"
                             },
                             {
-                              "(google.api.method_signature)": "participant,audio_input"
-                            },
-                            {
                               "(google.api.method_signature)": "participant,event_input"
                             }
                           ]
-                        },
-                        "StreamingAnalyzeContent": {
-                          "requestType": "StreamingAnalyzeContentRequest",
-                          "requestStream": true,
-                          "responseType": "StreamingAnalyzeContentResponse",
-                          "responseStream": true
                         },
                         "SuggestArticles": {
                           "requestType": "SuggestArticlesRequest",
@@ -8639,18 +8591,6 @@
                         }
                       }
                     },
-                    "AudioInput": {
-                      "fields": {
-                        "config": {
-                          "type": "InputAudioConfig",
-                          "id": 1
-                        },
-                        "audio": {
-                          "type": "bytes",
-                          "id": 2
-                        }
-                      }
-                    },
                     "OutputAudio": {
                       "fields": {
                         "config": {
@@ -8726,10 +8666,7 @@
                       "oneofs": {
                         "input": {
                           "oneof": [
-                            "text",
-                            "audio",
                             "textInput",
-                            "audioInput",
                             "eventInput"
                           ]
                         }
@@ -8743,27 +8680,9 @@
                             "(google.api.resource_reference).type": "dialogflow.googleapis.com/Participant"
                           }
                         },
-                        "text": {
-                          "type": "InputText",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "audio": {
-                          "type": "InputAudio",
-                          "id": 4,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
                         "textInput": {
                           "type": "TextInput",
                           "id": 6
-                        },
-                        "audioInput": {
-                          "type": "AudioInput",
-                          "id": 7
                         },
                         "eventInput": {
                           "type": "EventInput",
@@ -8826,111 +8745,6 @@
                         "dtmfParameters": {
                           "type": "DtmfParameters",
                           "id": 9
-                        }
-                      }
-                    },
-                    "InputTextConfig": {
-                      "fields": {
-                        "languageCode": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "StreamingAnalyzeContentRequest": {
-                      "oneofs": {
-                        "config": {
-                          "oneof": [
-                            "audioConfig",
-                            "textConfig"
-                          ]
-                        },
-                        "input": {
-                          "oneof": [
-                            "inputAudio",
-                            "inputText",
-                            "inputDtmf"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "participant": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Participant"
-                          }
-                        },
-                        "audioConfig": {
-                          "type": "InputAudioConfig",
-                          "id": 2
-                        },
-                        "textConfig": {
-                          "type": "InputTextConfig",
-                          "id": 3
-                        },
-                        "replyAudioConfig": {
-                          "type": "OutputAudioConfig",
-                          "id": 4
-                        },
-                        "inputAudio": {
-                          "type": "bytes",
-                          "id": 5
-                        },
-                        "inputText": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "inputDtmf": {
-                          "type": "TelephonyDtmfEvents",
-                          "id": 9
-                        },
-                        "queryParams": {
-                          "type": "QueryParameters",
-                          "id": 7
-                        },
-                        "enableExtendedStreaming": {
-                          "type": "bool",
-                          "id": 11
-                        }
-                      }
-                    },
-                    "StreamingAnalyzeContentResponse": {
-                      "fields": {
-                        "recognitionResult": {
-                          "type": "StreamingRecognitionResult",
-                          "id": 1
-                        },
-                        "replyText": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "replyAudio": {
-                          "type": "OutputAudio",
-                          "id": 3
-                        },
-                        "automatedAgentReply": {
-                          "type": "AutomatedAgentReply",
-                          "id": 4
-                        },
-                        "message": {
-                          "type": "Message",
-                          "id": 6
-                        },
-                        "humanAgentSuggestionResults": {
-                          "rule": "repeated",
-                          "type": "SuggestionResult",
-                          "id": 7
-                        },
-                        "endUserSuggestionResults": {
-                          "rule": "repeated",
-                          "type": "SuggestionResult",
-                          "id": 8
-                        },
-                        "dtmfParameters": {
-                          "type": "DtmfParameters",
-                          "id": 10
                         }
                       }
                     },
@@ -9580,7 +9394,8 @@
                           "oneof": [
                             "audioConfig",
                             "text",
-                            "event"
+                            "event",
+                            "dtmf"
                           ]
                         }
                       },
@@ -9596,6 +9411,10 @@
                         "event": {
                           "type": "EventInput",
                           "id": 3
+                        },
+                        "dtmf": {
+                          "type": "TelephonyDtmfEvents",
+                          "id": 4
                         }
                       }
                     },
@@ -12876,76 +12695,6 @@
                             }
                           ]
                         },
-                        "CreateCallMatcher": {
-                          "requestType": "CreateCallMatcherRequest",
-                          "responseType": "CallMatcher",
-                          "options": {
-                            "(google.api.http).post": "/v2beta1/{parent=projects/*/conversations/*}/callMatchers",
-                            "(google.api.http).body": "call_matcher",
-                            "(google.api.http).additional_bindings.post": "/v2beta1/{parent=projects/*/locations/*/conversations/*}/callMatchers",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "parent,call_matcher"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v2beta1/{parent=projects/*/conversations/*}/callMatchers",
-                                "body": "call_matcher",
-                                "additional_bindings": {
-                                  "post": "/v2beta1/{parent=projects/*/locations/*/conversations/*}/callMatchers",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,call_matcher"
-                            }
-                          ]
-                        },
-                        "ListCallMatchers": {
-                          "requestType": "ListCallMatchersRequest",
-                          "responseType": "ListCallMatchersResponse",
-                          "options": {
-                            "(google.api.http).get": "/v2beta1/{parent=projects/*/conversations/*}/callMatchers",
-                            "(google.api.http).additional_bindings.get": "/v2beta1/{parent=projects/*/locations/*/conversations/*}/callMatchers",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v2beta1/{parent=projects/*/conversations/*}/callMatchers",
-                                "additional_bindings": {
-                                  "get": "/v2beta1/{parent=projects/*/locations/*/conversations/*}/callMatchers"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "DeleteCallMatcher": {
-                          "requestType": "DeleteCallMatcherRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v2beta1/{name=projects/*/conversations/*/callMatchers/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2beta1/{name=projects/*/locations/*/conversations/*/callMatchers/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v2beta1/{name=projects/*/conversations/*/callMatchers/*}",
-                                "additional_bindings": {
-                                  "delete": "/v2beta1/{name=projects/*/locations/*/conversations/*/callMatchers/*}"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
                         "BatchCreateMessages": {
                           "requestType": "BatchCreateMessagesRequest",
                           "responseType": "BatchCreateMessagesResponse",
@@ -13078,47 +12827,6 @@
                         }
                       }
                     },
-                    "CallMatcher": {
-                      "options": {
-                        "(google.api.resource).type": "dialogflow.googleapis.com/CallMatcher",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversations/{conversation}/callMatchers/{call_matcher}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "toHeader": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "fromHeader": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "callIdHeader": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "customHeaders": {
-                          "type": "CustomHeaders",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "CustomHeaders": {
-                          "fields": {
-                            "ciscoGuid": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
                     "CreateConversationRequest": {
                       "fields": {
                         "parent": {
@@ -13202,67 +12910,6 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "dialogflow.googleapis.com/Conversation"
-                          }
-                        }
-                      }
-                    },
-                    "CreateCallMatcherRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/CallMatcher"
-                          }
-                        },
-                        "callMatcher": {
-                          "type": "CallMatcher",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ListCallMatchersRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/CallMatcher"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListCallMatchersResponse": {
-                      "fields": {
-                        "callMatchers": {
-                          "rule": "repeated",
-                          "type": "CallMatcher",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteCallMatcherRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/CallMatcher"
                           }
                         }
                       }
@@ -13761,8 +13408,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationModel"
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }

@@ -317,28 +317,11 @@
                 "completeConversation"
               ]
             },
-            "CreateCallMatcher": {
-              "methods": [
-                "createCallMatcher"
-              ]
-            },
-            "DeleteCallMatcher": {
-              "methods": [
-                "deleteCallMatcher"
-              ]
-            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
-              ]
-            },
-            "ListCallMatchers": {
-              "methods": [
-                "listCallMatchers",
-                "listCallMatchersStream",
-                "listCallMatchersAsync"
               ]
             },
             "ListMessages": {
@@ -368,28 +351,11 @@
                 "completeConversation"
               ]
             },
-            "CreateCallMatcher": {
-              "methods": [
-                "createCallMatcher"
-              ]
-            },
-            "DeleteCallMatcher": {
-              "methods": [
-                "deleteCallMatcher"
-              ]
-            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
-              ]
-            },
-            "ListCallMatchers": {
-              "methods": [
-                "listCallMatchers",
-                "listCallMatchersStream",
-                "listCallMatchersAsync"
               ]
             },
             "ListMessages": {
@@ -816,11 +782,6 @@
             "SuggestFaqAnswers": {
               "methods": [
                 "suggestFaqAnswers"
-              ]
-            },
-            "StreamingAnalyzeContent": {
-              "methods": [
-                "streamingAnalyzeContent"
               ]
             },
             "ListParticipants": {

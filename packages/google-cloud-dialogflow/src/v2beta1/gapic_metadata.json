@@ -327,16 +327,6 @@
                 "completeConversation"
               ]
             },
-            "CreateCallMatcher": {
-              "methods": [
-                "createCallMatcher"
-              ]
-            },
-            "DeleteCallMatcher": {
-              "methods": [
-                "deleteCallMatcher"
-              ]
-            },
             "BatchCreateMessages": {
               "methods": [
                 "batchCreateMessages"
@@ -347,13 +337,6 @@
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
-              ]
-            },
-            "ListCallMatchers": {
-              "methods": [
-                "listCallMatchers",
-                "listCallMatchersStream",
-                "listCallMatchersAsync"
               ]
             },
             "ListMessages": {
@@ -383,16 +366,6 @@
                 "completeConversation"
               ]
             },
-            "CreateCallMatcher": {
-              "methods": [
-                "createCallMatcher"
-              ]
-            },
-            "DeleteCallMatcher": {
-              "methods": [
-                "deleteCallMatcher"
-              ]
-            },
             "BatchCreateMessages": {
               "methods": [
                 "batchCreateMessages"
@@ -403,13 +376,6 @@
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
-              ]
-            },
-            "ListCallMatchers": {
-              "methods": [
-                "listCallMatchers",
-                "listCallMatchersStream",
-                "listCallMatchersAsync"
               ]
             },
             "ListMessages": {
@@ -856,11 +822,6 @@
             "CompileSuggestion": {
               "methods": [
                 "compileSuggestion"
-              ]
-            },
-            "StreamingAnalyzeContent": {
-              "methods": [
-                "streamingAnalyzeContent"
               ]
             },
             "ListParticipants": {
