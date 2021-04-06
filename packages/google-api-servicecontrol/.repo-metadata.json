@@ -1,14 +1,14 @@
 {
-  "name": "service-control",
-  "name_pretty": "Service Control API",
-  "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
   "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-control/reference",
-  "issue_tracker": "https://github.com/googleapis/nodejs-service-control/issues",
-  "release_level": "GA",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-service-control",
+  "requires_billing": true,
   "distribution_name": "@google-cloud/service-control",
+  "release_level": "GA",
   "api_id": "servicecontrol.googleapis.com",
-  "requires_billing": true
+  "name": "service-control",
+  "language": "nodejs",
+  "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
+  "default_version": "v1",
+  "issue_tracker": "https://github.com/googleapis/nodejs-service-control/issues",
+  "name_pretty": "Service Control API",
+  "repo": "googleapis/nodejs-service-control"
 }
-
