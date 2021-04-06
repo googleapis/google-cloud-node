@@ -728,6 +728,14 @@
                               "type": "EventHandler",
                               "id": 10
                             },
+                            "transitionRouteGroups": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 15,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/TransitionRouteGroup"
+                              }
+                            },
                             "nluSettings": {
                               "type": "NluSettings",
                               "id": 11
@@ -3624,17 +3632,11 @@
                             "labels": {
                               "keyType": "string",
                               "type": "string",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
+                              "id": 7
                             },
                             "description": {
                               "type": "string",
-                              "id": 8,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -4059,6 +4061,13 @@
                             "parameters": {
                               "type": "google.protobuf.Struct",
                               "id": 5
+                            },
+                            "currentPage": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Page"
+                              }
                             },
                             "disableWebhook": {
                               "type": "bool",
@@ -6288,6 +6297,10 @@
                             "triggerEvent": {
                               "type": "string",
                               "id": 14
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 15
                             },
                             "fulfillmentInfo": {
                               "type": "FulfillmentInfo",
