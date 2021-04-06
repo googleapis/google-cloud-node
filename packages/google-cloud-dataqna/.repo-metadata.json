@@ -1,13 +1,14 @@
 {
-  "name": "dataqna",
-  "name_pretty": "Data QnA",
-  "product_documentation": "https://cloud.google.com/bigquery/docs/dataqna",
-  "client_documentation": "https://googleapis.dev/nodejs/dataqna/latest",
-  "issue_tracker": "",
-  "release_level": "alpha",
   "language": "nodejs",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/bigquery/docs",
   "repo": "googleapis/nodejs-data-qna",
+  "default_version": "v1alpha",
+  "name_pretty": "Data QnA",
+  "release_level": "alpha",
   "distribution_name": "@google-cloud/data-qna",
+  "name": "dataqna",
+  "client_documentation": "https://googleapis.dev/nodejs/dataqna/latest",
   "api_id": "dataqna.googleapis.com",
-  "requires_billing": true
+  "issue_tracker": ""
 }
