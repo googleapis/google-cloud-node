@@ -1213,6 +1213,7 @@
                          * @property {string|null} [stringValue] Value stringValue
                          * @property {number|null} [doubleValue] Value doubleValue
                          * @property {google.protobuf.IAny|null} [protoValue] Value protoValue
+                         * @property {boolean|null} [boolValue] Value boolValue
                          */
     
                         /**
@@ -1262,17 +1263,25 @@
                          */
                         Value.prototype.protoValue = null;
     
+                        /**
+                         * Value boolValue.
+                         * @member {boolean} boolValue
+                         * @memberof google.cloud.channel.v1.Value
+                         * @instance
+                         */
+                        Value.prototype.boolValue = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Value kind.
-                         * @member {"int64Value"|"stringValue"|"doubleValue"|"protoValue"|undefined} kind
+                         * @member {"int64Value"|"stringValue"|"doubleValue"|"protoValue"|"boolValue"|undefined} kind
                          * @memberof google.cloud.channel.v1.Value
                          * @instance
                          */
                         Object.defineProperty(Value.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["int64Value", "stringValue", "doubleValue", "protoValue"]),
+                            get: $util.oneOfGetter($oneOfFields = ["int64Value", "stringValue", "doubleValue", "protoValue", "boolValue"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1308,6 +1317,8 @@
                                 writer.uint32(/* id 3, wireType 1 =*/25).double(message.doubleValue);
                             if (message.protoValue != null && Object.hasOwnProperty.call(message, "protoValue"))
                                 $root.google.protobuf.Any.encode(message.protoValue, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.boolValue);
                             return writer;
                         };
     
@@ -1353,6 +1364,9 @@
                                     break;
                                 case 4:
                                     message.protoValue = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.boolValue = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1419,6 +1433,13 @@
                                         return "protoValue." + error;
                                 }
                             }
+                            if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                if (typeof message.boolValue !== "boolean")
+                                    return "boolValue: boolean expected";
+                            }
                             return null;
                         };
     
@@ -1452,6 +1473,8 @@
                                     throw TypeError(".google.cloud.channel.v1.Value.protoValue: object expected");
                                 message.protoValue = $root.google.protobuf.Any.fromObject(object.protoValue);
                             }
+                            if (object.boolValue != null)
+                                message.boolValue = Boolean(object.boolValue);
                             return message;
                         };
     
@@ -1490,6 +1513,11 @@
                                 object.protoValue = $root.google.protobuf.Any.toObject(message.protoValue, options);
                                 if (options.oneofs)
                                     object.kind = "protoValue";
+                            }
+                            if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                                object.boolValue = message.boolValue;
+                                if (options.oneofs)
+                                    object.kind = "boolValue";
                             }
                             return object;
                         };
@@ -4509,6 +4537,7 @@
                          * @interface ITransferableSku
                          * @property {google.cloud.channel.v1.ITransferEligibility|null} [transferEligibility] TransferableSku transferEligibility
                          * @property {google.cloud.channel.v1.ISku|null} [sku] TransferableSku sku
+                         * @property {google.cloud.channel.v1.ISku|null} [legacySku] TransferableSku legacySku
                          */
     
                         /**
@@ -4543,6 +4572,14 @@
                         TransferableSku.prototype.sku = null;
     
                         /**
+                         * TransferableSku legacySku.
+                         * @member {google.cloud.channel.v1.ISku|null|undefined} legacySku
+                         * @memberof google.cloud.channel.v1.TransferableSku
+                         * @instance
+                         */
+                        TransferableSku.prototype.legacySku = null;
+    
+                        /**
                          * Creates a new TransferableSku instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.TransferableSku
@@ -4570,6 +4607,8 @@
                                 $root.google.cloud.channel.v1.TransferEligibility.encode(message.transferEligibility, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.sku != null && Object.hasOwnProperty.call(message, "sku"))
                                 $root.google.cloud.channel.v1.Sku.encode(message.sku, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.legacySku != null && Object.hasOwnProperty.call(message, "legacySku"))
+                                $root.google.cloud.channel.v1.Sku.encode(message.legacySku, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -4609,6 +4648,9 @@
                                     break;
                                 case 11:
                                     message.sku = $root.google.cloud.channel.v1.Sku.decode(reader, reader.uint32());
+                                    break;
+                                case 12:
+                                    message.legacySku = $root.google.cloud.channel.v1.Sku.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4655,6 +4697,11 @@
                                 if (error)
                                     return "sku." + error;
                             }
+                            if (message.legacySku != null && message.hasOwnProperty("legacySku")) {
+                                var error = $root.google.cloud.channel.v1.Sku.verify(message.legacySku);
+                                if (error)
+                                    return "legacySku." + error;
+                            }
                             return null;
                         };
     
@@ -4680,6 +4727,11 @@
                                     throw TypeError(".google.cloud.channel.v1.TransferableSku.sku: object expected");
                                 message.sku = $root.google.cloud.channel.v1.Sku.fromObject(object.sku);
                             }
+                            if (object.legacySku != null) {
+                                if (typeof object.legacySku !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.TransferableSku.legacySku: object expected");
+                                message.legacySku = $root.google.cloud.channel.v1.Sku.fromObject(object.legacySku);
+                            }
                             return message;
                         };
     
@@ -4699,11 +4751,14 @@
                             if (options.defaults) {
                                 object.transferEligibility = null;
                                 object.sku = null;
+                                object.legacySku = null;
                             }
                             if (message.transferEligibility != null && message.hasOwnProperty("transferEligibility"))
                                 object.transferEligibility = $root.google.cloud.channel.v1.TransferEligibility.toObject(message.transferEligibility, options);
                             if (message.sku != null && message.hasOwnProperty("sku"))
                                 object.sku = $root.google.cloud.channel.v1.Sku.toObject(message.sku, options);
+                            if (message.legacySku != null && message.hasOwnProperty("legacySku"))
+                                object.legacySku = $root.google.cloud.channel.v1.Sku.toObject(message.legacySku, options);
                             return object;
                         };
     
@@ -23782,6 +23837,8 @@
                                 default:
                                     return "eventType: enum value expected";
                                 case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             return null;
@@ -23805,6 +23862,14 @@
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.eventType = 0;
+                                break;
+                            case "PRIMARY_DOMAIN_CHANGED":
+                            case 1:
+                                message.eventType = 1;
+                                break;
+                            case "PRIMARY_DOMAIN_VERIFIED":
+                            case 2:
+                                message.eventType = 2;
                                 break;
                             }
                             return message;
@@ -23850,10 +23915,14 @@
                          * @name google.cloud.channel.v1.CustomerEvent.Type
                          * @enum {number}
                          * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} PRIMARY_DOMAIN_CHANGED=1 PRIMARY_DOMAIN_CHANGED value
+                         * @property {number} PRIMARY_DOMAIN_VERIFIED=2 PRIMARY_DOMAIN_VERIFIED value
                          */
                         CustomerEvent.Type = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PRIMARY_DOMAIN_CHANGED"] = 1;
+                            values[valuesById[2] = "PRIMARY_DOMAIN_VERIFIED"] = 2;
                             return values;
                         })();
     

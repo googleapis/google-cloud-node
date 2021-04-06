@@ -42,27 +42,25 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  CloudChannelService enables Google cloud resellers and distributors to manage
- *  their customers, channel partners, entitlements and reports.
+ *  CloudChannelService lets Google cloud resellers and distributors manage
+ *  their customers, channel partners, entitlements, and reports.
  *
  *  Using this service:
- *  1. Resellers or distributors can manage a customer entity.
- *  2. Distributors can register an authorized reseller in their channel and then
- *     enable delegated admin access for the reseller.
- *  3. Resellers or distributors can manage entitlements for their customers.
+ *  1. Resellers and distributors can manage a customer entity.
+ *  2. Distributors can register an authorized reseller in their channel and
+ *     provide them with delegated admin access.
+ *  3. Resellers and distributors can manage customer entitlements.
  *
- *  The service primarily exposes the following resources:
- *  - {@link google.cloud.channel.v1.Customer|Customer}s: A Customer represents an entity managed by a reseller or
- *  distributor. A customer typically represents an enterprise. In an n-tier
- *  resale channel hierarchy, customers are generally represented as leaf nodes.
- *  Customers primarily have an Entitlement sub-resource discussed below.
+ *  CloudChannelService exposes the following resources:
+ *  - {@link google.cloud.channel.v1.Customer|Customer}s: An entity—usually an enterprise—managed by a reseller or
+ *  distributor.
  *
- *  - {@link google.cloud.channel.v1.Entitlement|Entitlement}s: An Entitlement represents an entity which provides a
- *  customer means to start using a service. Entitlements are created or updated
- *  as a result of a successful fulfillment.
+ *  - {@link google.cloud.channel.v1.Entitlement|Entitlement}s: An entity that provides a customer with the means to use
+ *  a service. Entitlements are created or updated as a result of a successful
+ *  fulfillment.
  *
- *  - {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s: A ChannelPartnerLink is an entity that identifies
- *  links between distributors and their indirect resellers in a channel.
+ *  - {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s: An entity that identifies links between
+ *  distributors and their indirect resellers in a channel.
  * @class
  * @memberof v1
  */
@@ -610,23 +608,22 @@ export class CloudChannelServiceClient {
   /**
    * Returns a requested {@link google.cloud.channel.v1.Customer|Customer} resource.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * NOT_FOUND: If the customer resource doesn't exist. Usually
-   * the result of an invalid name parameter.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The customer resource doesn't exist. Usually the result of an
+   * invalid name parameter.
    *
-   * Return Value:
-   * {@link google.cloud.channel.v1.Customer|Customer} resource if found, error otherwise.
+   * Return value:
+   * The {@link google.cloud.channel.v1.Customer|Customer} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the customer to retrieve.
-   *   The name takes the format: accounts/{account_id}/customers/{customer_id}
+   *   Name uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -712,31 +709,30 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Confirms the existence of Cloud Identity accounts, based on the domain and
-   * whether the Cloud Identity accounts are owned by the reseller.
+   * Confirms the existence of Cloud Identity accounts based on the domain and
+   * if the Cloud Identity accounts are owned by the reseller.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * INVALID_VALUE: Invalid domain value in the request.
    *
-   * Return Value:
-   * List of {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources for the domain.
-   * List may be empty.
+   * Return value:
+   * A list of {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources for the domain (may be
+   * empty)
    *
-   * Note: in the v1alpha1 version of the API, a NOT_FOUND error is returned if
+   * Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
    * no {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources match the domain.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account.
-   *   The parent takes the format: accounts/{account_id}
+   *   Required. The reseller account's resource name.
+   *   Parent uses the format: accounts/{account_id}
    * @param {string} request.domain
-   *   Required. Domain for which the Cloud Identity account customer is fetched.
+   *   Required. Domain to fetch for Cloud Identity account customer.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -829,24 +825,22 @@ export class CloudChannelServiceClient {
    * Creates a new {@link google.cloud.channel.v1.Customer|Customer} resource under the reseller or distributor
    * account.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: It can happen in following scenarios -
-   *     * Missing or invalid required parameters in the request.
-   *     * Domain field value doesn't match the domain specified in primary
-   *     email.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT:
+   *     * Required request parameters are missing or invalid.
+   *     * Domain field value doesn't match the primary email domain.
    *
-   * Return Value:
-   * If successful, the newly created {@link google.cloud.channel.v1.Customer|Customer} resource, otherwise
-   * returns an error.
+   * Return value:
+   * The newly created {@link google.cloud.channel.v1.Customer|Customer} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of reseller account in which to create the customer.
-   *   The parent takes the format: accounts/{account_id}
+   *   Parent uses the format: accounts/{account_id}
    * @param {google.cloud.channel.v1.Customer} request.customer
    *   Required. The customer to create.
    * @param {object} [options]
@@ -929,21 +923,18 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Updates an existing {@link google.cloud.channel.v1.Customer|Customer} resource belonging to the reseller or
+   * Updates an existing {@link google.cloud.channel.v1.Customer|Customer} resource for the reseller or
    * distributor.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name
-   * specified in the request.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name in the request.
    *
-   * Return Value:
-   * If successful, the updated {@link google.cloud.channel.v1.Customer|Customer} resource, otherwise returns
-   * an error.
+   * Return value:
+   * The updated {@link google.cloud.channel.v1.Customer|Customer} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1034,15 +1025,13 @@ export class CloudChannelServiceClient {
   /**
    * Deletes the given {@link google.cloud.channel.v1.Customer|Customer} permanently and irreversibly.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the account making the request does not own
+   * * PERMISSION_DENIED: The account making the request does not own
    * this customer.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * FAILED_PRECONDITION: If the customer has existing entitlements.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name
-   * specified in the request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * FAILED_PRECONDITION: The customer has existing entitlements.
+   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1130,23 +1119,21 @@ export class CloudChannelServiceClient {
   /**
    * Returns a requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * NOT_FOUND: If the entitlement is not found for the customer.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The customer entitlement was not found.
    *
-   * Return Value:
-   * If found, the requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource, otherwise returns
-   * an error.
+   * Return value:
+   * The requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the entitlement to retrieve.
-   *   The name takes the format:
-   *   accounts/{account_id}/customers/{customer_id}/entitlements/{id}
+   *   Name uses the format:
+   *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1232,25 +1219,24 @@ export class CloudChannelServiceClient {
   ): void;
   /**
    * Returns a requested {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
-   * To call this method, you must be a distributor.
+   * You must be a distributor to call this method.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * NOT_FOUND: ChannelPartnerLink resource not found. Results
-   * due invalid channel partner link name.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: ChannelPartnerLink resource not found because of an
+   * invalid channel partner link name.
    *
-   * Return Value:
-   * {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource if found, otherwise returns an error.
+   * Return value:
+   * The {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the channel partner link to retrieve.
-   *   The name takes the format: accounts/{account_id}/channelPartnerLinks/{id}
+   *   Name uses the format: accounts/{account_id}/channelPartnerLinks/{id}
    *   where {id} is the Cloud Identity ID of the partner.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
    *   Optional. The level of granularity the ChannelPartnerLink will display.
@@ -1343,37 +1329,35 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Initiates a channel partner link between a distributor and a reseller or
+   * Initiates a channel partner link between a distributor and a reseller, or
    * between resellers in an n-tier reseller channel.
-   * To accept the invite, the invited partner should follow the invite_link_uri
-   * provided in the response. If the link creation is accepted, a valid link is
-   * set up between the two involved parties.
-   * To call this method, you must be a distributor.
+   * Invited partners need to follow the invite_link_uri provided in the
+   * response to accept. After accepting the invitation, a link is set up
+   * between the two parties.
+   * You must be a distributor to call this method.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * ALREADY_EXISTS: If the ChannelPartnerLink sent in the request already
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * ALREADY_EXISTS: The ChannelPartnerLink sent in the request already
    * exists.
-   * * NOT_FOUND: If no Cloud Identity customer exists for domain provided.
+   * * NOT_FOUND: No Cloud Identity customer exists for provided domain.
    * * INTERNAL: Any non-user error related to a technical issue in the
-   * backend. In this case, contact Cloud Channel support.
-   * * UNKNOWN: Any non-user error related to a technical issue in
-   * the backend. In this case, contact Cloud Channel support.
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Newly created {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource if successful,
-   * otherwise error is returned.
+   * Return value:
+   * The new {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of reseller's account for which to create a channel
-   *   partner link.
-   *   The parent takes the format: accounts/{account_id}
+   *   Required. Create a channel partner link for the provided reseller account's
+   *   resource name.
+   *   Parent uses the format: accounts/{account_id}
    * @param {google.cloud.channel.v1.ChannelPartnerLink} request.channelPartnerLink
    *   Required. The channel partner link to create.
    *   Either channel_partner_link.reseller_cloud_identity_id or domain can be
@@ -1474,41 +1458,40 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Updates a channel partner link. A distributor calls this method to change a
-   * link's status. For example, suspend a partner link.
-   * To call this method, you must be a distributor.
+   * Updates a channel partner link. Distributors call this method to change a
+   * link's status. For example, to suspend a partner link.
+   * You must be a distributor to call this method.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: It can happen in following scenarios -
-   *     * Missing or invalid required parameters in the request.
-   *     * Updating link state from invited to active or suspended.
-   *     * Sending reseller_cloud_identity_id, invite_url or name in update
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT:
+   *     * Required request parameters are missing or invalid.
+   *     * Link state cannot change from invited to active or suspended.
+   *     * Cannot send reseller_cloud_identity_id, invite_url, or name in update
    *     mask.
    * * NOT_FOUND: ChannelPartnerLink resource not found.
-   * * INTERNAL: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * If successful, the updated {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource, otherwise
-   * returns an error.
+   * Return value:
+   * The updated {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the channel partner link to cancel.
-   *   The name takes the format: accounts/{account_id}/channelPartnerLinks/{id}
+   *   Name uses the format: accounts/{account_id}/channelPartnerLinks/{id}
    *   where {id} is the Cloud Identity ID of the partner.
    * @param {google.cloud.channel.v1.ChannelPartnerLink} request.channelPartnerLink
-   *   Required. The channel partner link to update. Only field
-   *   channel_partner_link.link_state is allowed to be updated.
+   *   Required. The channel partner link to update. Only channel_partner_link.link_state
+   *   is allowed for updates.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask that applies to the resource.
-   *   The only allowable value for update mask is
+   *   The only allowable value for an update mask is
    *   channel_partner_link.link_state.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1604,32 +1587,29 @@ export class CloudChannelServiceClient {
   ): void;
   /**
    * Registers a service account with subscriber privileges on the Cloud Pub/Sub
-   * topic created for this Channel Services account. Once you create a
-   * subscriber, you will get the events as per {@link google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
+   * topic for this Channel Services account. After you create a
+   * subscriber, you get the events through {@link google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being provided are different, or if the impersonated user
+   * * PERMISSION_DENIED: The reseller account making the request and the
+   * provided reseller account are different, or the impersonated user
    * is not a super admin.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * INTERNAL: Any non-user error related to a technical issue in the
-   * backend. In this case, contact Cloud Channel support.
-   * * UNKNOWN: Any non-user error related to a technical issue in
-   * the backend. In this case, contact Cloud Channel support.
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Topic name with service email address registered if successful,
-   * otherwise error is returned.
+   * Return value:
+   * The topic name with the registered service email address.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. Resource name of the account.
    * @param {string} request.serviceAccount
-   *   Required. Service account which will provide subscriber access to the
-   *   registered topic.
+   *   Required. Service account that provides subscriber access to the registered topic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1718,34 +1698,32 @@ export class CloudChannelServiceClient {
   /**
    * Unregisters a service account with subscriber privileges on the Cloud
    * Pub/Sub topic created for this Channel Services account. If there are no
-   * more service account left with sunbscriber privileges, the topic will be
-   * deleted. You can check this by calling ListSubscribers api.
+   * service accounts left with subscriber privileges, this deletes the topic.
+   * You can call ListSubscribers to check for these accounts.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being provided are different, or if the impersonated user
+   * * PERMISSION_DENIED: The reseller account making the request and the
+   * provided reseller account are different, or the impersonated user
    * is not a super admin.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * NOT_FOUND: If the topic resource doesn't exist.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The topic resource doesn't exist.
    * * INTERNAL: Any non-user error related to a technical issue in the
-   * backend. In this case, contact Cloud Channel support.
-   * * UNKNOWN: Any non-user error related to a technical issue in
-   * the backend. In this case, contact Cloud Channel support.
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Topic name from which service email address has been unregistered if
-   * successful, otherwise error is returned. If the service email was already
-   * not associated with the topic, the success response will be returned.
+   * Return value:
+   * The topic name that unregistered the service email address.
+   * Returns a success response if the service email address wasn't registered
+   * with the topic.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. Resource name of the account.
    * @param {string} request.serviceAccount
-   *   Required. Service account which will be unregistered from getting subscriber access
-   *   to the topic.
+   *   Required. Service account to unregister from subscriber access to the topic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1839,25 +1817,25 @@ export class CloudChannelServiceClient {
   ): void;
   /**
    * Creates a Cloud Identity for the given customer using the customer's
-   * information or the information provided here, if present.
+   * information, or the information provided here.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * *  PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * *  INVALID_ARGUMENT: Missing or invalid required parameters in the request.
-   * *  NOT_FOUND: If the customer is not found for the reseller.
-   * *  ALREADY_EXISTS: If the customer's primary email already exists. In this
-   *    case, retry after changing the customer's primary contact email.
-   * *  INTERNAL: Any non-user error related to a technical issue in the
-   *    backend. Contact Cloud Channel support in this case.
-   * *  UNKNOWN: Any non-user error related to a technical issue in the backend.
-   *    Contact Cloud Channel support in this case.
+   * *  PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * *  INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * *  NOT_FOUND: The customer was not found.
+   * *  ALREADY_EXISTS: The customer's primary email already exists. Retry
+   *    after changing the customer's primary contact email.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
-   * CloudChannelOperationsService. The Operation metadata will contain an
+   * CloudChannelOperationsService. The Operation metadata contains an
    * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
@@ -1870,8 +1848,7 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.AdminUser} request.user
    *   Admin user information.
    * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   post it.
+   *   Validate the request and preview the review, but do not post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2014,39 +1991,36 @@ export class CloudChannelServiceClient {
   /**
    * Creates an entitlement for a customer.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: It can happen in below scenarios -
-   *     * Missing or invalid required parameters in the request.
-   *     * Cannot purchase an entitlement if there is already an entitlement for
-   *     customer, for a SKU from the same product family.
-   *     * INVALID_VALUE: Offer passed in isn't valid. Make sure OfferId is
-   *     valid. If it is valid, then contact Google Channel support for further
-   *     troubleshooting.
-   * * NOT_FOUND: If the customer or offer resource is not found for the
-   * reseller.
-   * * ALREADY_EXISTS: This failure can happen in the following cases:
-   *     * If the SKU has been already purchased for the customer.
-   *     * If the customer's primary email already exists. In this case retry
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT:
+   *     * Required request parameters are missing or invalid.
+   *     * There is already a customer entitlement for a SKU from the same
+   *     product family.
+   * * INVALID_VALUE: Make sure the OfferId is valid. If it is, contact
+   * Google Channel support for further troubleshooting.
+   * * NOT_FOUND: The customer or offer resource was not found.
+   * * ALREADY_EXISTS:
+   *     * The SKU was already purchased for the customer.
+   *     * The customer's primary email already exists. Retry
    *     after changing the customer's primary contact email.
-   * * CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in the
-   * following cases:
-   *     * Purchasing a SKU that requires domain verification and the domain has
-   *     not been verified.
-   *     * Purchasing an Add-On SKU like Vault or Drive without purchasing the
-   *     pre-requisite SKU, such as Google Workspace Business Starter.
-   *     * Applicable only for developer accounts: reseller and resold domain.
-   *     Must meet the following domain naming requirements:
+   * * CONDITION_NOT_MET or FAILED_PRECONDITION:
+   *     * The domain required for purchasing a SKU has not been verified.
+   *     * A pre-requisite SKU required to purchase an Add-On SKU is missing.
+   *     For example, Google Workspace Business Starter is required to purchase
+   *     Vault or Drive.
+   *     * (Developer accounts only) Reseller and resold domain must meet the
+   *     following naming requirements:
    *         * Domain names must start with goog-test.
-   *         * Resold domain names must include the reseller domain.
+   *         * Domain names must include the reseller domain.
    * * INTERNAL: Any non-user error related to a technical issue in the
-   * backend. Contact Cloud Channel Support in this case.
-   * * UNKNOWN: Any non-user error related to a technical issue in the
-   * backend. Contact Cloud Channel Support in this case.
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -2055,20 +2029,19 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of reseller's customer account in which to create the
+   *   Required. The resource name of the reseller's customer account in which to create the
    *   entitlement.
-   *   The parent takes the format: accounts/{account_id}/customers/{customer_id}
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {google.cloud.channel.v1.Entitlement} request.entitlement
    *   Required. The entitlement to create.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -2209,26 +2182,25 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Change parameters of the entitlement
+   * Change parameters of the entitlement.
    *
-   * An entitlement parameters update is a long-running operation and results in
-   * updates to the entitlement as a result of fulfillment.
+   * An entitlement update is a long-running operation and it updates the
+   * entitlement as a result of fulfillment.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request. For example, if the number of seats being changed to is greater
-   * than the allowed number of max seats for the resource. Or decreasing seats
-   * for a commitment based plan.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * For example, the number of seats being changed is greater than the allowed
+   * number of max seats, or decreasing seats for a commitment based plan.
    * * NOT_FOUND: Entitlement resource not found.
-   * * INTERNAL: Any non-user error related to a technical issue
-   * in the backend. In this case, contact Cloud Channel support.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -2238,24 +2210,21 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entitlement to update.
-   *   The name takes the format:
+   *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {number[]} request.parameters
-   *   Required. Entitlement parameters to update. Only editable parameters are allowed to
-   *   be changed.
+   *   Required. Entitlement parameters to update. You can only change editable parameters.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
-   *   The request ID must be
-   *   a valid [UUID](https://tools.ietf.org/html/rfc4122) with the exception that
-   *   zero UUID is not supported
+   *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
+   *   with the exception that zero UUID is not supported
    *   (`00000000-0000-0000-0000-000000000000`).
    * @param {string} [request.purchaseOrderId]
    *   Optional. Purchase order ID provided by the reseller.
@@ -2397,24 +2366,23 @@ export class CloudChannelServiceClient {
   /**
    * Updates the renewal settings for an existing customer entitlement.
    *
-   * An entitlement update is a long-running operation and results in updates to
-   * the entitlement as a result of fulfillment.
+   * An entitlement update is a long-running operation and it updates the
+   * entitlement as a result of fulfillment.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * NOT_FOUND: Entitlement resource not found.
    * * NOT_COMMITMENT_PLAN: Renewal Settings are only applicable for a
-   * commitment plan. Can't enable or disable renewal for non-commitment plans.
-   * * INTERNAL: Any non user error related to a technical issue in the
-   * backend. In this case, contact Cloud Channel support.
-   * * UNKNOWN: Any non user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * commitment plan. Can't enable or disable renewals for non-commitment plans.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   *   Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -2424,19 +2392,18 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entitlement to update.
-   *   The name takes the format:
+   *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {google.cloud.channel.v1.RenewalSettings} request.renewalSettings
    *   Required. New renewal settings.
    * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -2579,22 +2546,21 @@ export class CloudChannelServiceClient {
   /**
    * Updates the Offer for an existing customer entitlement.
    *
-   * An entitlement update is a long-running operation and results in updates to
-   * the entitlement as a result of fulfillment.
+   * An entitlement update is a long-running operation and it updates the
+   * entitlement as a result of fulfillment.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * NOT_FOUND: Offer or Entitlement resource not found.
-   * * INTERNAL: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -2603,8 +2569,8 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entitlement to update.
-   *   Format:
+   *   Required. The resource name of the entitlement to update.
+   *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} request.offer
    *   Required. New Offer.
@@ -2614,14 +2580,13 @@ export class CloudChannelServiceClient {
    * @param {string} [request.purchaseOrderId]
    *   Optional. Purchase order id provided by the reseller.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -2765,24 +2730,23 @@ export class CloudChannelServiceClient {
    * Starts paid service for a trial entitlement.
    *
    * Starts paid service for a trial entitlement immediately. This method is
-   * only applicable if a plan has already been set up for a trial entitlement
-   * but has some trial days remaining.
+   * only applicable if a plan is set up for a trial entitlement but has some
+   * trial days remaining.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * NOT_FOUND: Entitlement resource not found.
    * * FAILED_PRECONDITION/NOT_IN_TRIAL: This method only works for
    * entitlement on trial plans.
-   * * INTERNAL: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
-   * * UNKNOWN: Any non-user error related to a technical issue
-   * in the backend. In this case, contact Cloud Channel support.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -2791,18 +2755,17 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entitlement for which paid service is being started.
-   *   The name takes the format:
+   *   Required. The name of the entitlement to start a paid service for.
+   *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -2944,22 +2907,22 @@ export class CloudChannelServiceClient {
   ): void;
   /**
    * Suspends a previously fulfilled entitlement.
+   *
    * An entitlement suspension is a long-running operation.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * NOT_FOUND: Entitlement resource not found.
    * * NOT_ACTIVE: Entitlement is not active.
-   * * INTERNAL: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -2969,17 +2932,16 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the entitlement to suspend.
-   *   The name takes the format:
+   *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -3121,27 +3083,26 @@ export class CloudChannelServiceClient {
   ): void;
   /**
    * Cancels a previously fulfilled entitlement.
+   *
    * An entitlement cancellation is a long-running operation.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller or
-   * if the reseller account making the request and reseller account being
-   * queried for are different.
-   * * FAILED_PRECONDITION: If there are any Google Cloud projects linked to the
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * FAILED_PRECONDITION: There are Google Cloud projects linked to the
    * Google Cloud entitlement's Cloud Billing subaccount.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * NOT_FOUND: Entitlement resource not found.
    * * DELETION_TYPE_NOT_ALLOWED: Cancel is only allowed for Google Workspace
-   * add-ons or entitlements for Google Cloud's development platform.
+   * add-ons, or entitlements for Google Cloud's development platform.
    * * INTERNAL: Any non-user error related to a technical issue in the
-   * backend. In this case, contact Cloud Channel support.
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The response will contain
@@ -3152,17 +3113,16 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the entitlement to cancel.
-   *   The name takes the format:
+   *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -3303,32 +3263,29 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Activates a previously suspended entitlement. The entitlement must be in a
-   * suspended state for it to be activated. Entitlements suspended for pending
-   * ToS acceptance can't be activated using this method. An entitlement
-   * activation is a long-running operation and can result in updates to
+   * Activates a previously suspended entitlement. Entitlements suspended for
+   * pending ToS acceptance can't be activated using this method.
+   *
+   * An entitlement activation is a long-running operation and it updates
    * the state of the customer entitlement.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller or
-   * if the reseller account making the request and reseller account being
-   * queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * NOT_FOUND: Entitlement resource not found.
-   * * SUSPENSION_NOT_RESELLER_INITIATED: Can't activate an
-   * entitlement that is pending TOS acceptance. Only reseller initiated
-   * suspensions can be activated.
-   * * NOT_SUSPENDED: Can't activate entitlements that are already in ACTIVE
-   * state. Can only activate suspended entitlements.
-   * * INTERNAL: Any non-user error related to a technical issue
-   * in the backend. In this case, contact Cloud Channel support.
+   * * SUSPENSION_NOT_RESELLER_INITIATED: Can only activate reseller-initiated
+   * suspensions and entitlements that have accepted the TOS.
+   * * NOT_SUSPENDED: Can only activate suspended entitlements not in an ACTIVE
+   * state.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * In this case, contact Cloud Channel support.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -3338,17 +3295,16 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the entitlement to activate.
-   *   The name takes the format:
+   *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -3491,31 +3447,29 @@ export class CloudChannelServiceClient {
   /**
    * Transfers customer entitlements to new reseller.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the request.
-   * * NOT_FOUND: If the customer or offer resource is not found for the
-   * reseller.
-   * * ALREADY_EXISTS: If the SKU has been already transferred for the customer.
-   * * CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in the
-   * following cases:
-   *     * Transferring a SKU that requires domain verification and the domain
-   *     has not been verified.
-   *     * Transferring an Add-On SKU like Vault or Drive without transferring
-   *     the pre-requisite SKU, such as G Suite Basic.
-   *     * Applicable only for developer accounts: reseller and resold domain
-   *     must follow the domain naming convention as follows:
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The customer or offer resource was not found.
+   * * ALREADY_EXISTS: The SKU was already transferred for the customer.
+   * * CONDITION_NOT_MET or FAILED_PRECONDITION:
+   *     * The SKU requires domain verification to transfer, but the domain is
+   *     not verified.
+   *     * An Add-On SKU (example, Vault or Drive) is missing the
+   *     pre-requisite SKU (example, G Suite Basic).
+   *     * (Developer accounts only) Reseller and resold domain must meet the
+   *     following naming requirements:
    *         * Domain names must start with goog-test.
-   *         * Resold domain names must include the reseller domain.
-   *     * All transferring entitlements must be specified.
-   * * INTERNAL: Any non-user error related to a technical issue in the backend.
-   * Please contact Cloud Channel Support in this case.
+   *         * Domain names must include the reseller domain.
+   *     * Specify all transferring entitlements.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * Please contact Cloud Channel Support in this case.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
@@ -3524,26 +3478,24 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of reseller's customer account where the entitlements
-   *   transfer to.
-   *   The parent takes the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the reseller's customer account that will receive
+   *   transferred entitlements.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number[]} request.entitlements
-   *   Required. The new entitlements to be created or transferred.
+   *   Required. The new entitlements to create or transfer.
    * @param {string} request.authToken
-   *   This token is generated by the Super Admin of the resold customer to
+   *   The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
-   *   entitlements on their behalf. This token can be omitted once the
-   *   authorization is generated. See https://support.google.com/a/answer/7643790
-   *   for more details.
+   *   entitlements on their behalf. You can omit this token after authorization.
+   *   See https://support.google.com/a/answer/7643790 for more details.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -3684,32 +3636,30 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Transfers customer entitlements from current reseller to Google.
+   * Transfers customer entitlements from their current reseller to Google.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the request.
-   * * NOT_FOUND: If the customer or offer resource is not found for the
-   * reseller.
-   * * ALREADY_EXISTS: If the SKU has been already transferred for the customer.
-   * * CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in
-   * the following cases:
-   *     * Transferring a SKU that requires domain verification and the domain
-   *     has not been verified.
-   *     * Transferring an Add-On SKU like Vault or Drive without purchasing the
-   *     pre-requisite SKU, such as G Suite Basic.
-   *     * Applicable only for developer accounts: reseller and resold domain
-   *     must follow the domain naming convention as follows:
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The customer or offer resource was not found.
+   * * ALREADY_EXISTS: The SKU was already transferred for the customer.
+   * * CONDITION_NOT_MET or FAILED_PRECONDITION:
+   *     * The SKU requires domain verification to transfer, but the domain is
+   *     not verified.
+   *     * An Add-On SKU (example, Vault or Drive) is missing the
+   *     pre-requisite SKU (example, G Suite Basic).
+   *     * (Developer accounts only) Reseller and resold domain must meet the
+   *     following naming requirements:
    *         * Domain names must start with goog-test.
-   *         * Resold domain names must include the reseller domain.
-   * * INTERNAL: Any non-user error related to a technical issue in the backend.
-   * Please contact Cloud Channel Support in this case.
+   *         * Domain names must include the reseller domain.
+   * * INTERNAL: Any non-user error related to a technical issue in the
+   * backend. Contact Cloud Channel support.
    * * UNKNOWN: Any non-user error related to a technical issue in the backend.
-   * Please contact Cloud Channel Support in this case.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * Long Running Operation ID.
+   * Return value:
+   * The ID of a long-running operation.
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The response will contain
@@ -3719,20 +3669,19 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of reseller's customer account where the entitlements
+   *   Required. The resource name of the reseller's customer account where the entitlements
    *   transfer from.
-   *   The parent takes the format: accounts/{account_id}/customers/{customer_id}
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number[]} request.entitlements
-   *   Required. The entitlements to be transferred to Google.
+   *   Required. The entitlements to transfer to Google.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID so
-   *   that if you must retry your request, the server will know to ignore the
-   *   request if it has already been completed.
+   *   Optional. You can specify an optional unique request ID, and if you need to retry
+   *   your request, the server will know to ignore the request if it's complete.
    *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same
-   *   request ID, the server can check if the original operation with the same
-   *   request ID was received, and if so, will ignore the second request.
+   *   For example, you make an initial request and the request times out. If you
+   *   make the request again with the same request ID, the server can check if
+   *   it received the original operation with the same request ID. If it did, it
+   *   will ignore the second request.
    *
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
@@ -3868,31 +3817,29 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * List downstream {@link google.cloud.channel.v1.Customer|Customer}s.
+   * List {@link google.cloud.channel.v1.Customer|Customer}s.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
-   * Return Value:
-   * List of {@link google.cloud.channel.v1.Customer|Customer}s pertaining to the reseller or empty list if
-   * there are none.
+   * Return value:
+   * List of {@link google.cloud.channel.v1.Customer|Customer}s, or an empty list if there are no customers.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account from which to list customers.
-   *   The parent takes the format: accounts/{account_id}.
+   *   Required. The resource name of the reseller account to list customers from.
+   *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of customers to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 customers will be returned. The
-   *   maximum value is 50; values about 50 will be coerced to 50.
+   *   than this value. If unspecified, returns at most 10 customers. The
+   *   maximum value is 50.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token identifying a page of results other than the first page.
+   *   Obtained through
    *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
    * @param {object} [options]
@@ -3956,15 +3903,15 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account from which to list customers.
-   *   The parent takes the format: accounts/{account_id}.
+   *   Required. The resource name of the reseller account to list customers from.
+   *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of customers to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 customers will be returned. The
-   *   maximum value is 50; values about 50 will be coerced to 50.
+   *   than this value. If unspecified, returns at most 10 customers. The
+   *   maximum value is 50.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token identifying a page of results other than the first page.
+   *   Obtained through
    *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
    * @param {object} [options]
@@ -4008,15 +3955,15 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account from which to list customers.
-   *   The parent takes the format: accounts/{account_id}.
+   *   Required. The resource name of the reseller account to list customers from.
+   *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of customers to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 customers will be returned. The
-   *   maximum value is 50; values about 50 will be coerced to 50.
+   *   than this value. If unspecified, returns at most 10 customers. The
+   *   maximum value is 50.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token identifying a page of results other than the first page.
+   *   Obtained through
    *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
    * @param {object} [options]
@@ -4089,30 +4036,29 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * List {@link google.cloud.channel.v1.Entitlement|Entitlement}s belonging to a customer.
+   * Lists {@link google.cloud.channel.v1.Entitlement|Entitlement}s belonging to a customer.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the request.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
-   * Return Value:
-   * List of {@link google.cloud.channel.v1.Entitlement|Entitlement}s belonging to the customer, or empty list if
-   * there are none.
+   * Return value:
+   * A list of the customer's {@link google.cloud.channel.v1.Entitlement|Entitlement}s.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's customer account for which to list
-   *   entitlements.
-   *   The parent takes the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the reseller's customer account to list
+   *   entitlements for.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 50 entitlements will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, return at most 50 entitlements.
+   *   The maximum value is 100; the server will coerce values above 100.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements} call.
    * @param {object} [options]
@@ -4178,16 +4124,16 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's customer account for which to list
-   *   entitlements.
-   *   The parent takes the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the reseller's customer account to list
+   *   entitlements for.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 50 entitlements will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, return at most 50 entitlements.
+   *   The maximum value is 100; the server will coerce values above 100.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements} call.
    * @param {object} [options]
@@ -4231,16 +4177,16 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's customer account for which to list
-   *   entitlements.
-   *   The parent takes the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the reseller's customer account to list
+   *   entitlements for.
+   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 50 entitlements will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
+   *   If unspecified, return at most 50 entitlements.
+   *   The maximum value is 100; the server will coerce values above 100.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements} call.
    * @param {object} [options]
@@ -4313,24 +4259,24 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * List {@link google.cloud.channel.v1.TransferableSku|TransferableSku}s of a customer based on Cloud Identity ID or
+   * List {@link google.cloud.channel.v1.TransferableSku|TransferableSku}s of a customer based on the Cloud Identity ID or
    * Customer Name in the request.
    *
-   * This method is used when a reseller lists the entitlements
-   * information of a customer that is not owned. The reseller should provide
-   * the customer's Cloud Identity ID or Customer Name.
+   * Use this method to list the entitlements information of an
+   * unowned customer. You should provide the customer's
+   * Cloud Identity ID or Customer Name.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: Appears because of one of the following -
-   *     * The customer doesn't belong to the reseller and no auth token.
+   * * PERMISSION_DENIED:
+   *     * The customer doesn't belong to the reseller and has no auth token.
    *     * The supplied auth token is invalid.
-   *     * The reseller account making the request and the queries reseller
-   *     account are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the request.
+   *     * The reseller account making the request is different
+   *     from the reseller account in the query.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
-   * Return Value:
-   * List of {@link google.cloud.channel.v1.TransferableSku|TransferableSku} for the given customer.
+   * Return value:
+   * A list of the customer's {@link google.cloud.channel.v1.TransferableSku|TransferableSku}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4339,32 +4285,31 @@ export class CloudChannelServiceClient {
    * @param {string} request.customerName
    *   A reseller is required to create a customer and use the resource name of
    *   the created customer here.
-   *   The customer_name takes the format:
+   *   Customer_name uses the format:
    *   accounts/{account_id}/customers/{customer_id}
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's account.
-   *   The parent takes the format: accounts/{account_id}
+   *   Required. The reseller account's resource name.
+   *   Parent uses the format: accounts/{account_id}
    * @param {number} request.pageSize
-   *   Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   The requested page size. Server might return fewer results than requested.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    *   Optional.
    * @param {string} request.pageToken
-   *   A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
    *   Optional.
    * @param {string} request.authToken
-   *   This token is generated by the Super Admin of the resold customer to
+   *   The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
-   *   entitlements on their behalf. This token can be omitted once the
-   *   authorization is generated. See https://support.google.com/a/answer/7643790
-   *   for more details.
+   *   entitlements on their behalf. You can omit this token after authorization.
+   *   See https://support.google.com/a/answer/7643790 for more details.
    * @param {string} request.languageCode
-   *   The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    *   Optional.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4433,32 +4378,31 @@ export class CloudChannelServiceClient {
    * @param {string} request.customerName
    *   A reseller is required to create a customer and use the resource name of
    *   the created customer here.
-   *   The customer_name takes the format:
+   *   Customer_name uses the format:
    *   accounts/{account_id}/customers/{customer_id}
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's account.
-   *   The parent takes the format: accounts/{account_id}
+   *   Required. The reseller account's resource name.
+   *   Parent uses the format: accounts/{account_id}
    * @param {number} request.pageSize
-   *   Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   The requested page size. Server might return fewer results than requested.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    *   Optional.
    * @param {string} request.pageToken
-   *   A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
    *   Optional.
    * @param {string} request.authToken
-   *   This token is generated by the Super Admin of the resold customer to
+   *   The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
-   *   entitlements on their behalf. This token can be omitted once the
-   *   authorization is generated. See https://support.google.com/a/answer/7643790
-   *   for more details.
+   *   entitlements on their behalf. You can omit this token after authorization.
+   *   See https://support.google.com/a/answer/7643790 for more details.
    * @param {string} request.languageCode
-   *   The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    *   Optional.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4505,32 +4449,31 @@ export class CloudChannelServiceClient {
    * @param {string} request.customerName
    *   A reseller is required to create a customer and use the resource name of
    *   the created customer here.
-   *   The customer_name takes the format:
+   *   Customer_name uses the format:
    *   accounts/{account_id}/customers/{customer_id}
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's account.
-   *   The parent takes the format: accounts/{account_id}
+   *   Required. The reseller account's resource name.
+   *   Parent uses the format: accounts/{account_id}
    * @param {number} request.pageSize
-   *   Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   The requested page size. Server might return fewer results than requested.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    *   Optional.
    * @param {string} request.pageToken
-   *   A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
    *   Optional.
    * @param {string} request.authToken
-   *   This token is generated by the Super Admin of the resold customer to
+   *   The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
-   *   entitlements on their behalf. This token can be omitted once the
-   *   authorization is generated. See https://support.google.com/a/answer/7643790
-   *   for more details.
+   *   entitlements on their behalf. You can omit this token after authorization.
+   *   See https://support.google.com/a/answer/7643790 for more details.
    * @param {string} request.languageCode
-   *   The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    *   Optional.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4605,21 +4548,20 @@ export class CloudChannelServiceClient {
    * List {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer}s of a customer based on Cloud Identity ID or
    * Customer Name in the request.
    *
-   * This method is used when a reseller gets the entitlement
-   * information of a customer that is not owned. The reseller should provide
-   * the customer's Cloud Identity ID or Customer Name.
+   * Use this method when a reseller gets the entitlement information of an
+   * unowned customer. The reseller should provide the customer's
+   * Cloud Identity ID or Customer Name.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: Appears because of one of the following:
-   *     * If the customer doesn't belong to the reseller and no auth token or
-   *     invalid auth token is supplied.
-   *     * If the reseller account making the request and the reseller account
-   *     being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED:
+   *     * The customer doesn't belong to the reseller and has no auth token.
+   *     * The supplied auth token is invalid.
+   *     * The reseller account making the request is different
+   *     from the reseller account in the query.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
-   * Return Value:
+   * Return value:
    * List of {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer} for the given customer and SKU.
    *
    * @param {Object} request
@@ -4628,24 +4570,24 @@ export class CloudChannelServiceClient {
    *   Customer's Cloud Identity ID
    * @param {string} request.customerName
    *   A reseller should create a customer and use the resource name of
-   *   the created customer here.
+   *   that customer here.
    * @param {string} request.parent
    *   Required. The resource name of the reseller's account.
    * @param {number} request.pageSize
    *   Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} request.pageToken
-   *   A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
    * @param {string} request.sku
-   *   Required. SKU for which the Offers are being looked up.
+   *   Required. The SKU to look up Offers for.
    * @param {string} request.languageCode
-   *   The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4716,24 +4658,24 @@ export class CloudChannelServiceClient {
    *   Customer's Cloud Identity ID
    * @param {string} request.customerName
    *   A reseller should create a customer and use the resource name of
-   *   the created customer here.
+   *   that customer here.
    * @param {string} request.parent
    *   Required. The resource name of the reseller's account.
    * @param {number} request.pageSize
    *   Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} request.pageToken
-   *   A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
    * @param {string} request.sku
-   *   Required. SKU for which the Offers are being looked up.
+   *   Required. The SKU to look up Offers for.
    * @param {string} request.languageCode
-   *   The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4778,24 +4720,24 @@ export class CloudChannelServiceClient {
    *   Customer's Cloud Identity ID
    * @param {string} request.customerName
    *   A reseller should create a customer and use the resource name of
-   *   the created customer here.
+   *   that customer here.
    * @param {string} request.parent
    *   Required. The resource name of the reseller's account.
    * @param {number} request.pageSize
    *   Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} request.pageToken
-   *   A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
    * @param {string} request.sku
-   *   Required. SKU for which the Offers are being looked up.
+   *   Required. The SKU to look up Offers for.
    * @param {string} request.languageCode
-   *   The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4867,32 +4809,30 @@ export class CloudChannelServiceClient {
   ): void;
   /**
    * List {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s belonging to a distributor.
-   * To call this method, you must be a distributor.
+   * You must be a distributor to call this method.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being queried for are different.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
-   * Return Value:
-   * If successful, returns the list of {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resources
-   * for the distributor account, otherwise returns an error.
+   * Return value:
+   * The list of the distributor account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resources.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the reseller account for listing channel partner
    *   links.
-   *   The parent takes the format: accounts/{account_id}
+   *   Parent uses the format: accounts/{account_id}
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
    *   If unspecified, server will pick a default size (25).
-   *   The maximum value is 200, values above 200 will be coerced to 200.
+   *   The maximum value is 200; the server will coerce values above 200.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks} call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
@@ -4966,14 +4906,14 @@ export class CloudChannelServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the reseller account for listing channel partner
    *   links.
-   *   The parent takes the format: accounts/{account_id}
+   *   Parent uses the format: accounts/{account_id}
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
    *   If unspecified, server will pick a default size (25).
-   *   The maximum value is 200, values above 200 will be coerced to 200.
+   *   The maximum value is 200; the server will coerce values above 200.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks} call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
@@ -5021,14 +4961,14 @@ export class CloudChannelServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the reseller account for listing channel partner
    *   links.
-   *   The parent takes the format: accounts/{account_id}
+   *   Parent uses the format: accounts/{account_id}
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
    *   If unspecified, server will pick a default size (25).
-   *   The maximum value is 200, values above 200 will be coerced to 200.
+   *   The maximum value is 200; the server will coerce values above 200.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
-   *   Typically obtained via
+   *   Optional. A token for a page of results other than the first page.
+   *   Obtained using
    *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks} call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
@@ -5101,10 +5041,9 @@ export class CloudChannelServiceClient {
   /**
    * Lists the Products the reseller is authorized to sell.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5113,14 +5052,14 @@ export class CloudChannelServiceClient {
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Products will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 Products.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5179,14 +5118,14 @@ export class CloudChannelServiceClient {
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Products will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 Products.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5225,14 +5164,14 @@ export class CloudChannelServiceClient {
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Products will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 Products.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5294,31 +5233,30 @@ export class CloudChannelServiceClient {
   /**
    * Lists the SKUs for a product the reseller is authorized to sell.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Product for which to list SKUs.
-   *   The parent takes the format: products/{product_id}.
+   *   Required. The resource name of the Product to list SKUs for.
+   *   Parent uses the format: products/{product_id}.
    *   Supports products/- to retrieve SKUs for all products.
    * @param {string} request.account
    *   Required. Resource name of the reseller.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    *   Optional.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5378,23 +5316,23 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Product for which to list SKUs.
-   *   The parent takes the format: products/{product_id}.
+   *   Required. The resource name of the Product to list SKUs for.
+   *   Parent uses the format: products/{product_id}.
    *   Supports products/- to retrieve SKUs for all products.
    * @param {string} request.account
    *   Required. Resource name of the reseller.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    *   Optional.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5436,23 +5374,23 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Product for which to list SKUs.
-   *   The parent takes the format: products/{product_id}.
+   *   Required. The resource name of the Product to list SKUs for.
+   *   Parent uses the format: products/{product_id}.
    *   Supports products/- to retrieve SKUs for all products.
    * @param {string} request.account
    *   Required. Resource name of the reseller.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    *   Optional.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5521,32 +5459,31 @@ export class CloudChannelServiceClient {
   /**
    * Lists the Offers the reseller can sell.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the reseller account from which to list Offers.
-   *   The parent takes the format: accounts/{account_id}.
+   *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 500 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 500 Offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.filter]
    *   Optional. The expression to filter results by name (name of
-   *   the Offer), sku.name (name of the SKU) or sku.product.name (name of the
+   *   the Offer), sku.name (name of the SKU), or sku.product.name (name of the
    *   Product).
    *   Example 1: sku.product.name=products/p1 AND sku.name!=products/p1/skus/s1
    *   Example 2: name=accounts/a1/offers/o1
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5607,23 +5544,23 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the reseller account from which to list Offers.
-   *   The parent takes the format: accounts/{account_id}.
+   *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 500 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 500 Offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.filter]
    *   Optional. The expression to filter results by name (name of
-   *   the Offer), sku.name (name of the SKU) or sku.product.name (name of the
+   *   the Offer), sku.name (name of the SKU), or sku.product.name (name of the
    *   Product).
    *   Example 1: sku.product.name=products/p1 AND sku.name!=products/p1/skus/s1
    *   Example 2: name=accounts/a1/offers/o1
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5666,23 +5603,23 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the reseller account from which to list Offers.
-   *   The parent takes the format: accounts/{account_id}.
+   *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 500 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 500 Offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.filter]
    *   Optional. The expression to filter results by name (name of
-   *   the Offer), sku.name (name of the SKU) or sku.product.name (name of the
+   *   the Offer), sku.name (name of the SKU), or sku.product.name (name of the
    *   Product).
    *   Example 1: sku.product.name=products/p1 AND sku.name!=products/p1/skus/s1
    *   Example 2: name=accounts/a1/offers/o1
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5753,16 +5690,15 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Lists the Purchasable SKUs for following cases:
+   * Lists the following:
    *
-   * * SKUs that can be newly purchased for a customer
-   * * SKUs that can be upgraded/downgraded to, for an entitlement.
+   * * SKUs that you can purchase for a customer
+   * * SKUs that you can upgrade or downgrade for an entitlement.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5771,18 +5707,18 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.ListPurchasableSkusRequest.ChangeOfferPurchase} request.changeOfferPurchase
    *   List SKUs for ChangeOffer purchase with a new SKU.
    * @param {string} request.customer
-   *   Required. The resource name of the customer for which to list SKUs.
+   *   Required. The resource name of the customer to list SKUs for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5850,18 +5786,18 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.ListPurchasableSkusRequest.ChangeOfferPurchase} request.changeOfferPurchase
    *   List SKUs for ChangeOffer purchase with a new SKU.
    * @param {string} request.customer
-   *   Required. The resource name of the customer for which to list SKUs.
+   *   Required. The resource name of the customer to list SKUs for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5907,18 +5843,18 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.ListPurchasableSkusRequest.ChangeOfferPurchase} request.changeOfferPurchase
    *   List SKUs for ChangeOffer purchase with a new SKU.
    * @param {string} request.customer
-   *   Required. The resource name of the customer for which to list SKUs.
+   *   Required. The resource name of the customer to list SKUs for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 SKUs will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 SKUs.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5989,16 +5925,15 @@ export class CloudChannelServiceClient {
     >
   ): void;
   /**
-   * Lists the Purchasable Offers for the following cases:
+   * Lists the following:
    *
-   * * Offers that can be newly purchased for a customer
-   * * Offers that can be changed to, for an entitlement.
+   * * Offers that you can purchase for a customer.
+   * * Offers that you can change for an entitlement.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the customer doesn't belong to the reseller
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -6007,18 +5942,18 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.ListPurchasableOffersRequest.ChangeOfferPurchase} request.changeOfferPurchase
    *   List Offers for ChangeOffer purchase.
    * @param {string} request.customer
-   *   Required. The resource name of the customer for which to list Offers.
+   *   Required. The resource name of the customer to list Offers for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 Offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6086,18 +6021,18 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.ListPurchasableOffersRequest.ChangeOfferPurchase} request.changeOfferPurchase
    *   List Offers for ChangeOffer purchase.
    * @param {string} request.customer
-   *   Required. The resource name of the customer for which to list Offers.
+   *   Required. The resource name of the customer to list Offers for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 Offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6143,18 +6078,18 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.ListPurchasableOffersRequest.ChangeOfferPurchase} request.changeOfferPurchase
    *   List Offers for ChangeOffer purchase.
    * @param {string} request.customer
-   *   Required. The resource name of the customer for which to list Offers.
+   *   Required. The resource name of the customer to list Offers for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, at most 100 Offers will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 Offers.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results, if other than the first one.
+   *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US".  If specified, the
-   *   response will be localized to the corresponding language code. Default is
-   *   "en-US".
+   *   Optional. The BCP-47 language code. For example, "en-US". The
+   *   response will localize in the corresponding language code, if specified.
+   *   The default value is "en-US".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -6228,22 +6163,20 @@ export class CloudChannelServiceClient {
    * Lists service accounts with subscriber privileges on the Cloud Pub/Sub
    * topic created for this Channel Services account.
    *
-   * Possible Error Codes:
+   * Possible error codes:
    *
-   * * PERMISSION_DENIED: If the reseller account making the request and the
-   * reseller account being provided are different, or if the account is not
-   * a super admin.
-   * * INVALID_ARGUMENT: Missing or invalid required parameters in the
-   * request.
-   * * NOT_FOUND: If the topic resource doesn't exist.
+   * * PERMISSION_DENIED: The reseller account making the request and the
+   * provided reseller account are different, or the impersonated user
+   * is not a super admin.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The topic resource doesn't exist.
    * * INTERNAL: Any non-user error related to a technical issue in the
-   * backend. In this case, contact Cloud Channel support.
-   * * UNKNOWN: Any non-user error related to a technical issue in
-   * the backend. In this case, contact Cloud Channel support.
+   * backend. Contact Cloud Channel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * Contact Cloud Channel support.
    *
-   * Return Value:
-   * List of service email addresses if successful, otherwise error is
-   * returned.
+   * Return value:
+   * A list of service email addresses.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -6252,14 +6185,14 @@ export class CloudChannelServiceClient {
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of service accounts to return. The service may return
    *   fewer than this value.
-   *   If unspecified, at most 100 service accounts will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 service accounts.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSubscribers` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListSubscribers` must
-   *    match the call that provided the page token.
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6327,14 +6260,14 @@ export class CloudChannelServiceClient {
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of service accounts to return. The service may return
    *   fewer than this value.
-   *   If unspecified, at most 100 service accounts will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 service accounts.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSubscribers` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListSubscribers` must
-   *    match the call that provided the page token.
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6380,14 +6313,14 @@ export class CloudChannelServiceClient {
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of service accounts to return. The service may return
    *   fewer than this value.
-   *   If unspecified, at most 100 service accounts will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If unspecified, returns at most 100 service accounts.
+   *   The maximum value is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSubscribers` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListSubscribers` must
-   *    match the call that provided the page token.
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

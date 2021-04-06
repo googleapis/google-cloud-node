@@ -142,7 +142,10 @@
                         },
                         "isDomainVerified": {
                           "type": "bool",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "alternateEmail": {
                           "type": "string",
@@ -185,7 +188,8 @@
                             "int64Value",
                             "stringValue",
                             "doubleValue",
-                            "protoValue"
+                            "protoValue",
+                            "boolValue"
                           ]
                         }
                       },
@@ -205,6 +209,10 @@
                         "protoValue": {
                           "type": "google.protobuf.Any",
                           "id": 4
+                        },
+                        "boolValue": {
+                          "type": "bool",
+                          "id": 5
                         }
                       }
                     },
@@ -567,6 +575,13 @@
                         "sku": {
                           "type": "Sku",
                           "id": 11
+                        },
+                        "legacySku": {
+                          "type": "Sku",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2756,7 +2771,9 @@
                       "nested": {
                         "Type": {
                           "values": {
-                            "TYPE_UNSPECIFIED": 0
+                            "TYPE_UNSPECIFIED": 0,
+                            "PRIMARY_DOMAIN_CHANGED": 1,
+                            "PRIMARY_DOMAIN_VERIFIED": 2
                           }
                         }
                       }

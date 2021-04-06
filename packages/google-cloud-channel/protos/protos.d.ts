@@ -454,6 +454,9 @@ export namespace google {
 
                     /** Value protoValue */
                     protoValue?: (google.protobuf.IAny|null);
+
+                    /** Value boolValue */
+                    boolValue?: (boolean|null);
                 }
 
                 /** Represents a Value. */
@@ -477,8 +480,11 @@ export namespace google {
                     /** Value protoValue. */
                     public protoValue?: (google.protobuf.IAny|null);
 
+                    /** Value boolValue. */
+                    public boolValue: boolean;
+
                     /** Value kind. */
-                    public kind?: ("int64Value"|"stringValue"|"doubleValue"|"protoValue");
+                    public kind?: ("int64Value"|"stringValue"|"doubleValue"|"protoValue"|"boolValue");
 
                     /**
                      * Creates a new Value instance using the specified properties.
@@ -1713,6 +1719,9 @@ export namespace google {
 
                     /** TransferableSku sku */
                     sku?: (google.cloud.channel.v1.ISku|null);
+
+                    /** TransferableSku legacySku */
+                    legacySku?: (google.cloud.channel.v1.ISku|null);
                 }
 
                 /** Represents a TransferableSku. */
@@ -1729,6 +1738,9 @@ export namespace google {
 
                     /** TransferableSku sku. */
                     public sku?: (google.cloud.channel.v1.ISku|null);
+
+                    /** TransferableSku legacySku. */
+                    public legacySku?: (google.cloud.channel.v1.ISku|null);
 
                     /**
                      * Creates a new TransferableSku instance using the specified properties.
@@ -10004,7 +10016,9 @@ export namespace google {
 
                     /** Type enum. */
                     enum Type {
-                        TYPE_UNSPECIFIED = 0
+                        TYPE_UNSPECIFIED = 0,
+                        PRIMARY_DOMAIN_CHANGED = 1,
+                        PRIMARY_DOMAIN_VERIFIED = 2
                     }
                 }
 
