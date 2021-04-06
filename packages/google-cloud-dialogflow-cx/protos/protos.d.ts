@@ -26186,6 +26186,9 @@ export namespace google {
                         /** Flow eventHandlers */
                         eventHandlers?: (google.cloud.dialogflow.cx.v3beta1.IEventHandler[]|null);
 
+                        /** Flow transitionRouteGroups */
+                        transitionRouteGroups?: (string[]|null);
+
                         /** Flow nluSettings */
                         nluSettings?: (google.cloud.dialogflow.cx.v3beta1.INluSettings|null);
                     }
@@ -26213,6 +26216,9 @@ export namespace google {
 
                         /** Flow eventHandlers. */
                         public eventHandlers: google.cloud.dialogflow.cx.v3beta1.IEventHandler[];
+
+                        /** Flow transitionRouteGroups. */
+                        public transitionRouteGroups: string[];
 
                         /** Flow nluSettings. */
                         public nluSettings?: (google.cloud.dialogflow.cx.v3beta1.INluSettings|null);
@@ -40131,6 +40137,9 @@ export namespace google {
                         /** QueryParameters parameters */
                         parameters?: (google.protobuf.IStruct|null);
 
+                        /** QueryParameters currentPage */
+                        currentPage?: (string|null);
+
                         /** QueryParameters disableWebhook */
                         disableWebhook?: (boolean|null);
 
@@ -40164,6 +40173,9 @@ export namespace google {
 
                         /** QueryParameters parameters. */
                         public parameters?: (google.protobuf.IStruct|null);
+
+                        /** QueryParameters currentPage. */
+                        public currentPage: string;
 
                         /** QueryParameters disableWebhook. */
                         public disableWebhook: boolean;
@@ -47227,6 +47239,9 @@ export namespace google {
                         /** WebhookRequest triggerEvent */
                         triggerEvent?: (string|null);
 
+                        /** WebhookRequest languageCode */
+                        languageCode?: (string|null);
+
                         /** WebhookRequest fulfillmentInfo */
                         fulfillmentInfo?: (google.cloud.dialogflow.cx.v3beta1.WebhookRequest.IFulfillmentInfo|null);
 
@@ -47272,6 +47287,9 @@ export namespace google {
 
                         /** WebhookRequest triggerEvent. */
                         public triggerEvent: string;
+
+                        /** WebhookRequest languageCode. */
+                        public languageCode: string;
 
                         /** WebhookRequest fulfillmentInfo. */
                         public fulfillmentInfo?: (google.cloud.dialogflow.cx.v3beta1.WebhookRequest.IFulfillmentInfo|null);
