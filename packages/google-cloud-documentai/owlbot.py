@@ -17,15 +17,32 @@ import os
 import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.node as node
+import json
 import logging
+from pathlib import Path
 
-# Infer version from src directory:
-versions = []
-default_version = 'v1beta3'
-for directory in os.listdir('./src'):
-  if os.path.isdir(os.path.join('./src', directory)):
-    versions.append(directory)
-name = 'documentai'
+# Load the default version defined in .repo-metadata.json.
+default_version = json.load(open(".repo-metadata.json", "rt"))["default_version"]
+staging = Path("owl-bot-staging")
+
+if staging.is_dir():
+  # Collect the subdirectories of the staging directory.
+  versions = [v.name for v in staging.iterdir() if v.is_dir()]
+  # Reorder the versions so the default version always comes last.
+  versions = [v for v in versions if v != default_version] + [default_version]
+  # Copy each version directory into the root.
+  for version in versions:
+      library = staging / version
+      _tracked_paths.add(library)
+      s_copy([library], excludes=["README.md", "package.json", "src/index.ts"])
+  # The staging directory should never be merged into the main branch.
+  shutil.rmtree(staging)
+else:
+  # Collect the subdirectories of the src directory.
+  src = Path("src")
+  versions = [v.name for v in src.iterdir() if v.is_dir()]
+  # Reorder the versions so the default version always comes last.
+  versions = [v for v in versions if v != default_version] + [default_version]
 
 ## Note: this API only supports regional endpoints and does not support default scopes.
 s.replace(f"src/*/document_*_service_client.ts",
