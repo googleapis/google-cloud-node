@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.4.0...v3.5.0) (2021-04-06)
+
+
+### Features
+
+* expose MP3_64_KBPS and MULAW for output audio encodings. ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+* expose MP3_64_KBPS and MULAW for output audio encodings. ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+
+
+### Bug Fixes
+
+* Add all missing regional HTTP bindings in DF API. ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+* remove `input_audio` field from AnalyzeContentRequest from v2/v2beta1 ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+* remove proto message CreateCallMatcherRequest, CreateCallMatcherResponse, ListCallMatchersRequest, ListCallMatchersResponse, DeleteCallMatcherRequest, DeleteCallMatcherResponse, CallMatcher, StreamingAnalyzeContentRequest, StreamingAnalyzeContentResponse, AudioInput from v2/v2beta1, TelephonyDtmfEvents, TelephonyDtmf from v2 ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+* remove resource_reference for invisible resources. ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+* Remove resource_reference from UpdateAnswerRecord. ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+* remove rpc or fields that are unintended to release ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+* remove StreamingAnalyzeContent, CreateCallMatcher, ListCallMatchers, DeleteCallMatcher rpc from v2/v2beta1 ([b07f89d](https://www.github.com/googleapis/nodejs-dialogflow/commit/b07f89dd9fecb345391c24f936cbcdfe11745921))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.3.0...v3.4.0) (2021-03-15)
 
 
