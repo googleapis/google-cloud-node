@@ -7949,7 +7949,8 @@ export namespace google {
                             REMOVE = 2,
                             REPLACE = 3,
                             EVAL_REQUESTED = 4,
-                            EVAL_APPROVED = 5
+                            EVAL_APPROVED = 5,
+                            EVAL_SKIPPED = 6
                         }
                     }
 

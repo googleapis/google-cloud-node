@@ -1023,11 +1023,17 @@
                       "fields": {
                         "uri": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "bytes",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "mimeType": {
                           "type": "string",
@@ -1035,7 +1041,10 @@
                         },
                         "text": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "textStyles": {
                           "rule": "repeated",
@@ -1499,7 +1508,10 @@
                           "fields": {
                             "textAnchor": {
                               "type": "TextAnchor",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "type": {
                               "type": "string",
@@ -1507,11 +1519,17 @@
                             },
                             "mentionText": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "mentionId": {
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "confidence": {
                               "type": "float",
@@ -1750,7 +1768,8 @@
                                 "REMOVE": 2,
                                 "REPLACE": 3,
                                 "EVAL_REQUESTED": 4,
-                                "EVAL_APPROVED": 5
+                                "EVAL_APPROVED": 5,
+                                "EVAL_SKIPPED": 6
                               }
                             }
                           }
