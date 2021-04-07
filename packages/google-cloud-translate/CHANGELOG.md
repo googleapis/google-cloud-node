@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [6.2.0](https://www.github.com/googleapis/nodejs-translate/compare/v6.1.0...v6.2.0) (2021-04-07)
+
+
+### Features
+
+* added v3beta1 proto for online and batch document translation ([#639](https://www.github.com/googleapis/nodejs-translate/issues/639)) ([513c21a](https://www.github.com/googleapis/nodejs-translate/commit/513c21aabf2ece278708bca56a94bde33e80f072))
+
 ## [6.1.0](https://www.github.com/googleapis/nodejs-translate/compare/v6.0.5...v6.1.0) (2021-01-09)
 
 
