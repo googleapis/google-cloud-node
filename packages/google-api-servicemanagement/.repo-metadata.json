@@ -7,7 +7,7 @@
   "release_level": "GA",
   "language": "nodejs",
   "repo": "googleapis/nodejs-service-management",
-  "distribution_name": "",
+  "distribution_name": "@google-cloud/service-management",
   "api_id": "servicemanagement.googleapis.com",
   "requires_billing": true
 }
