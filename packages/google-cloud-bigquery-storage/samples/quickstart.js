@@ -19,7 +19,7 @@
 //   description: Read data from a table via read stream.
 //   usage: node quickstart.js
 async function main() {
-  // [START bigquery_storage_quickstart]
+  // [START bigquerystorage_quickstart]
 
   // The read stream contains blocks of Avro-encoded bytes. We use the
   // 'avsc' library to decode these blocks. Install avsc with the following
@@ -137,7 +137,7 @@ async function main() {
         console.log(`Last offset: ${offset}`);
       });
   }
-  // [END bigquery_storage_quickstart]
+  // [END bigquerystorage_quickstart]
   bigqueryStorageQuickstart();
 }
 
