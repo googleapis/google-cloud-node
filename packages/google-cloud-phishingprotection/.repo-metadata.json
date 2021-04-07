@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-phishing-protection",
   "distribution_name": "@google-cloud/phishing-protection",
   "api_id": "phishingprotection.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "default_version": "v1beta1"
 }

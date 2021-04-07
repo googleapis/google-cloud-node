@@ -14,7 +14,9 @@
 docker:
   image: gcr.io/repo-automation-bots/owlbot-nodejs:latest
 
+deep-remove-regex:
+  - /owl-bot-staging
+
 deep-copy-regex:
-  - source: /google/cloud/phishingprotection/.*/phishingprotection-.*-nodejs/src/(.*)
-    dest: /src/$1
-    rm-dest: /src/.*
+  - source: /google/cloud/phishingprotection/(.*)/.*-nodejs/(.*)
+    dest: /owl-bot-staging/$1/$2
