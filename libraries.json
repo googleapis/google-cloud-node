@@ -303,17 +303,18 @@
     "support_documentation": "https://cloud.google.com/dlp/docs/"
   },
   {
-    "name": "dataqna",
-    "name_pretty": "Data QnA",
-    "product_documentation": "https://cloud.google.com/bigquery/docs/dataqna",
-    "client_documentation": "https://googleapis.dev/nodejs/dataqna/latest",
-    "issue_tracker": "",
-    "release_level": "alpha",
     "language": "nodejs",
-    "repo": "googleapis/nodejs-data-qna",
-    "distribution_name": "@google-cloud/data-qna",
-    "api_id": "dataqna.googleapis.com",
     "requires_billing": true,
+    "product_documentation": "https://cloud.google.com/bigquery/docs",
+    "repo": "googleapis/nodejs-data-qna",
+    "default_version": "v1alpha",
+    "name_pretty": "Data QnA",
+    "release_level": "alpha",
+    "distribution_name": "@google-cloud/data-qna",
+    "name": "dataqna",
+    "client_documentation": "https://googleapis.dev/nodejs/dataqna/latest",
+    "api_id": "dataqna.googleapis.com",
+    "issue_tracker": "",
     "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
@@ -431,6 +432,7 @@
     "api_id": "documentai.googleapis.com",
     "requires_billing": true,
     "codeowner_team": "@googleapis/ml-apis",
+    "default_version": "v1beta3",
     "support_documentation": "https://cloud.google.com/document-understanding/docs/"
   },
   {
@@ -953,6 +955,7 @@
     "distribution_name": "@google-cloud/phishing-protection",
     "api_id": "phishingprotection.googleapis.com",
     "requires_billing": true,
+    "default_version": "v1beta1",
     "support_documentation": "https://cloud.google.com/phishing-protection/docs/getting-support"
   },
   {
@@ -1115,17 +1118,18 @@
     "support_documentation": "https://cloud.google.com/security-command-center/docs/getting-support"
   },
   {
-    "name": "service-control",
-    "name_pretty": "Service Control API",
-    "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
     "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-control/reference",
-    "issue_tracker": "https://github.com/googleapis/nodejs-service-control/issues",
-    "release_level": "GA",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-service-control",
-    "distribution_name": "@google-cloud/service-control",
-    "api_id": "servicecontrol.googleapis.com",
     "requires_billing": true,
+    "distribution_name": "@google-cloud/service-control",
+    "release_level": "GA",
+    "api_id": "servicecontrol.googleapis.com",
+    "name": "service-control",
+    "language": "nodejs",
+    "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
+    "default_version": "v1",
+    "issue_tracker": "https://github.com/googleapis/nodejs-service-control/issues",
+    "name_pretty": "Service Control API",
+    "repo": "googleapis/nodejs-service-control",
     "support_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/"
   },
   {
