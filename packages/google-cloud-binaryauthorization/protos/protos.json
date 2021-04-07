@@ -11,6 +11,9 @@
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.BinaryAuthorization.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/binaryauthorization/v1beta1;binaryauthorization",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "BinaryAuthorizationServiceProto",
+                    "java_package": "com.google.cloud.binaryauthorization.v1beta1",
                     "php_namespace": "Google\\Cloud\\BinaryAuthorization\\V1beta1",
                     "ruby_package": "Google::Cloud::BinaryAuthorization::V1beta1"
                   },
