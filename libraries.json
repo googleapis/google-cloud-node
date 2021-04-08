@@ -61,7 +61,7 @@
     "support_documentation": "https://cloud.google.com/api-gateway/docs/getting-support"
   },
   {
-    "name": "appengine",
+    "name": "appengine-admin",
     "name_pretty": "App Engine Admin API",
     "product_documentation": "https://cloud.google.com/appengine/docs/admin-api/",
     "client_documentation": "https://cloud.google.com/appengine/docs/admin-api",
@@ -1155,7 +1155,7 @@
     "release_level": "GA",
     "language": "nodejs",
     "repo": "googleapis/nodejs-service-management",
-    "distribution_name": "",
+    "distribution_name": "@google-cloud/service-management",
     "api_id": "servicemanagement.googleapis.com",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/"
