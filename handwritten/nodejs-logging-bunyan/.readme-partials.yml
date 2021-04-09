@@ -1,4 +1,4 @@
-title: |-
+introduction: |-
   This module provides an easy to use, higher-level layer for working with [Cloud Logging](https://cloud.google.com/logging/docs),
   compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a transport to your existing Bunyan loggers.
 body: |-
