@@ -114,7 +114,7 @@ describe('v4 conformance test', () => {
         const fakeTimer = sinon.useFakeTimers(NOW);
         const bucket = storage.bucket(testCase.bucket);
         const expires = NOW.valueOf() + testCase.expiration * 1000;
-        const version = 'v4' as 'v4';
+        const version = 'v4' as const;
         const origin = testCase.bucketBoundHostname
           ? `${testCase.scheme}://${testCase.bucketBoundHostname}`
           : undefined;

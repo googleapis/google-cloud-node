@@ -19,8 +19,6 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-AUTOSYNTH_MULTIPLE_COMMITS = True
-
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=['.jsdoc.js'])
@@ -31,5 +29,4 @@ s.replace(
     ".circleci/config.yml",
     "command: npm run system-test",
     "command: mkdir $HOME/.config && npm run system-test")
-node.install()
-node.fix()
+node.fix_hermetic()
