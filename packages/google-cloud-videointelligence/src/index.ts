@@ -18,8 +18,8 @@
 
 import * as v1p1beta1 from './v1p1beta1';
 import * as v1p3beta1 from './v1p3beta1';
-import * as v1p2beta1 from './v1p2beta1';
 import * as v1beta2 from './v1beta2';
+import * as v1p2beta1 from './v1p2beta1';
 import * as v1 from './v1';
 
 const VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
@@ -28,16 +28,16 @@ type VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 export {
   v1p1beta1,
   v1p3beta1,
-  v1p2beta1,
   v1beta2,
+  v1p2beta1,
   v1,
   VideoIntelligenceServiceClient,
 };
 export default {
   v1p1beta1,
   v1p3beta1,
-  v1p2beta1,
   v1beta2,
+  v1p2beta1,
   v1,
   VideoIntelligenceServiceClient,
 };
