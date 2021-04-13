@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.7.0...v2.8.0) (2021-04-13)
+
+
+### Features
+
+* add v1 API surface ([#196](https://www.github.com/googleapis/nodejs-document-ai/issues/196)) ([54b1dc4](https://www.github.com/googleapis/nodejs-document-ai/commit/54b1dc4354c3700d2d729d745edf0de0657d1014))
+
 ## [2.7.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.6.0...v2.7.0) (2021-04-12)
 
 
