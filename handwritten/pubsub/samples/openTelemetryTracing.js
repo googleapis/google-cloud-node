@@ -62,9 +62,13 @@ function main(
   const provider = new BasicTracerProvider();
   const exporter = new ConsoleSpanExporter();
   provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
+  // Enable the diagnostic logger for Opentelemetry
+  opentelemetry.diag.setLogger(
+    new opentelemetry.DiagConsoleLogger(),
+    opentelemetry.DiagLogLevel.INFO
+  );
 
   provider.register();
-  opentelemetry.trace.setGlobalTracerProvider(provider);
 
   // OpenTelemetry tracing is an optional feature and can be enabled by setting
   // enableOpenTelemetryTraceing as a publisher or subscriber option
@@ -89,17 +93,32 @@ function main(
     const messageHandler = message => {
       console.log(`Message ${message.id} received.`);
       message.ack();
-      process.exit(0);
+
+      // Ensure that all spans got flushed by the exporter
+      console.log('Cleaning up Opentelemetry exporter...');
+      exporter.shutdown().then(() => {
+        // Cleaned up exporter.
+        process.exit(0);
+      });
     };
 
     const errorHandler = error => {
       console.log('Received error:', error);
-      process.exit(0);
+
+      console.log('Cleaning up Opentelemetry exporter...');
+      exporter.shutdown().then(() => {
+        // Cleaned up exporter.
+        process.exit(0);
+      });
     };
 
     // Listens for new messages from the topic
-    pubSubClient.subscription(subscriptionName).on('message', messageHandler);
-    pubSubClient.subscription(subscriptionName).on('error', errorHandler);
+    pubSubClient
+      .subscription(subscriptionName, enableOpenTelemetryTracing)
+      .on('message', messageHandler);
+    pubSubClient
+      .subscription(subscriptionName, enableOpenTelemetryTracing)
+      .on('error', errorHandler);
 
     setTimeout(() => {
       pubSubClient

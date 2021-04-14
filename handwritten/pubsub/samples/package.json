@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@google-cloud/pubsub": "^2.10.0",
-    "@opentelemetry/api": "^0.11.0",
-    "@opentelemetry/tracing": "^0.11.0"
+    "@opentelemetry/api": "^0.18.1",
+    "@opentelemetry/tracing": "^0.18.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",

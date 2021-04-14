@@ -42,7 +42,6 @@ describe('openTelemetry', () => {
     const stdout = execSync(
       `node openTelemetryTracing ${topicName} ${subName}`
     );
-    assert.match(stdout, /traceId/);
     assert.match(stdout, /Message .* published./);
     assert.match(stdout, /Message .* received/);
     assert.notMatch(stdout, /Received error/);
