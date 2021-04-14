@@ -60,6 +60,7 @@ function main(
     const request = {
       subscription: formattedSubscription,
       maxMessages: maxMessages,
+      allowExcessMessages: false,
     };
 
     let isProcessed = false;
