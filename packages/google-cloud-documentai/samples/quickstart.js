@@ -27,7 +27,7 @@ async function main(projectId, location, processorId, filePath) {
 
   const {
     DocumentProcessorServiceClient,
-  } = require('@google-cloud/documentai').v1beta3;
+  } = require('@google-cloud/documentai').v1;
 
   // Instantiates a client
   const client = new DocumentProcessorServiceClient();
@@ -47,7 +47,7 @@ async function main(projectId, location, processorId, filePath) {
 
     const request = {
       name,
-      document: {
+      rawDocument: {
         content: encodedImage,
         mimeType: 'application/pdf',
       },
