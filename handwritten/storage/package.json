@@ -94,7 +94,7 @@
     "@types/node-fetch": "^2.1.3",
     "@types/proxyquire": "^1.3.28",
     "@types/pumpify": "^1.4.1",
-    "@types/sinon": "^9.0.0",
+    "@types/sinon": "^10.0.0",
     "@types/tmp": "0.2.0",
     "@types/uuid": "^8.0.0",
     "@types/xdg-basedir": "^2.0.0",
