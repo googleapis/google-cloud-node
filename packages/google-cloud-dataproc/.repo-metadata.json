@@ -10,5 +10,6 @@
   "product_documentation": "https://cloud.google.com/dataproc",
   "requires_billing": true,
   "name": "dataproc",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559745"
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559745",
+  "codeowner_team": "@googleapis/api-dataproc"
 }
