@@ -307,6 +307,7 @@ export interface CopyOptions {
   cacheControl?: string;
   contentEncoding?: string;
   contentType?: string;
+  contentDisposition?: string;
   destinationKmsKeyName?: string;
   metadata?: Metadata;
   predefinedAcl?: string;
