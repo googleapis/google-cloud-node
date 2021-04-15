@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.1.0...v2.2.0) (2021-04-14)
+
+
+### Features
+
+* Publish Certificate Authority Service V1 API ([#62](https://www.github.com/googleapis/nodejs-security-private-ca/issues/62)) ([5a7d9ca](https://www.github.com/googleapis/nodejs-security-private-ca/commit/5a7d9ca566c7241ced4f836d054386e3e1843e8f))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.0.1...v2.1.0) (2021-01-09)
 
 
