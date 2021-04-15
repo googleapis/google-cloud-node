@@ -49,11 +49,12 @@
   },
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
+    "@types/pumpify": "^1.4.1",
     "google-gax": "^2.9.2",
     "protobufjs": "^6.8.6",
     "pumpify": "^2.0.0",
     "stream-events": "^1.0.4",
-    "@types/pumpify": "^1.4.1"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.0",
