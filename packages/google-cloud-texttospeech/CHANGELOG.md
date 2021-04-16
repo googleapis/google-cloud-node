@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.1.3...v3.2.0) (2021-04-16)
+
+
+### Features
+
+* add ALAW support on client library. And improve the ListVoiceRequest message's documentation ([#490](https://www.github.com/googleapis/nodejs-text-to-speech/issues/490)) ([0c5217c](https://www.github.com/googleapis/nodejs-text-to-speech/commit/0c5217ce2882297aae399f83a444eaa6a7483811))
+
 ### [3.1.3](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.1.2...v3.1.3) (2020-11-25)
 
 
