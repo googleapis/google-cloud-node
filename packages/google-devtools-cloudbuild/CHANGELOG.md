@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.1.0...v2.2.0) (2021-04-16)
+
+
+### Features
+
+* Add fields for Pub/Sub triggers ([#211](https://www.github.com/googleapis/nodejs-cloudbuild/issues/211)) ([0cbc740](https://www.github.com/googleapis/nodejs-cloudbuild/commit/0cbc740e7306388104a5a71c412732ac1c097528))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.0.6...v2.1.0) (2021-04-01)
 
 
