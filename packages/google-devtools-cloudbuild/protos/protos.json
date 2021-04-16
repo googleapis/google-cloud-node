@@ -14,8 +14,8 @@
                     "java_package": "com.google.cloudbuild.v1",
                     "objc_class_prefix": "GCB",
                     "ruby_package": "Google::Cloud::Build::V1",
-                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}"
+                    "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
+                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
                   "nested": {
                     "CloudBuild": {
@@ -1094,6 +1094,13 @@
                           "type": "GitHubEventsConfig",
                           "id": 13
                         },
+                        "pubsubConfig": {
+                          "type": "PubsubConfig",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "build": {
                           "type": "Build",
                           "id": 4
@@ -1127,6 +1134,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 16
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1162,6 +1176,47 @@
                         "push": {
                           "type": "PushFilter",
                           "id": 5
+                        }
+                      }
+                    },
+                    "PubsubConfig": {
+                      "fields": {
+                        "subscription": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "pubsub.googleapis.com/Subscription"
+                          }
+                        },
+                        "topic": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "pubsub.googleapis.com/Topic"
+                          }
+                        },
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "OK": 1,
+                            "SUBSCRIPTION_DELETED": 2,
+                            "TOPIC_DELETED": 3,
+                            "SUBSCRIPTION_MISCONFIGURED": 4
+                          }
                         }
                       }
                     },

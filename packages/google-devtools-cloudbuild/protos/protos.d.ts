@@ -3385,6 +3385,9 @@ export namespace google {
                     /** BuildTrigger github */
                     github?: (google.devtools.cloudbuild.v1.IGitHubEventsConfig|null);
 
+                    /** BuildTrigger pubsubConfig */
+                    pubsubConfig?: (google.devtools.cloudbuild.v1.IPubsubConfig|null);
+
                     /** BuildTrigger build */
                     build?: (google.devtools.cloudbuild.v1.IBuild|null);
 
@@ -3405,6 +3408,9 @@ export namespace google {
 
                     /** BuildTrigger includedFiles */
                     includedFiles?: (string[]|null);
+
+                    /** BuildTrigger filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a BuildTrigger. */
@@ -3434,6 +3440,9 @@ export namespace google {
                     /** BuildTrigger github. */
                     public github?: (google.devtools.cloudbuild.v1.IGitHubEventsConfig|null);
 
+                    /** BuildTrigger pubsubConfig. */
+                    public pubsubConfig?: (google.devtools.cloudbuild.v1.IPubsubConfig|null);
+
                     /** BuildTrigger build. */
                     public build?: (google.devtools.cloudbuild.v1.IBuild|null);
 
@@ -3454,6 +3463,9 @@ export namespace google {
 
                     /** BuildTrigger includedFiles. */
                     public includedFiles: string[];
+
+                    /** BuildTrigger filter. */
+                    public filter: string;
 
                     /** BuildTrigger buildTemplate. */
                     public buildTemplate?: ("build"|"filename");
@@ -3644,6 +3656,126 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PubsubConfig. */
+                interface IPubsubConfig {
+
+                    /** PubsubConfig subscription */
+                    subscription?: (string|null);
+
+                    /** PubsubConfig topic */
+                    topic?: (string|null);
+
+                    /** PubsubConfig serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** PubsubConfig state */
+                    state?: (google.devtools.cloudbuild.v1.PubsubConfig.State|keyof typeof google.devtools.cloudbuild.v1.PubsubConfig.State|null);
+                }
+
+                /** Represents a PubsubConfig. */
+                class PubsubConfig implements IPubsubConfig {
+
+                    /**
+                     * Constructs a new PubsubConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IPubsubConfig);
+
+                    /** PubsubConfig subscription. */
+                    public subscription: string;
+
+                    /** PubsubConfig topic. */
+                    public topic: string;
+
+                    /** PubsubConfig serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** PubsubConfig state. */
+                    public state: (google.devtools.cloudbuild.v1.PubsubConfig.State|keyof typeof google.devtools.cloudbuild.v1.PubsubConfig.State);
+
+                    /**
+                     * Creates a new PubsubConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PubsubConfig instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IPubsubConfig): google.devtools.cloudbuild.v1.PubsubConfig;
+
+                    /**
+                     * Encodes the specified PubsubConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.PubsubConfig.verify|verify} messages.
+                     * @param message PubsubConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IPubsubConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PubsubConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.PubsubConfig.verify|verify} messages.
+                     * @param message PubsubConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IPubsubConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PubsubConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PubsubConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.PubsubConfig;
+
+                    /**
+                     * Decodes a PubsubConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PubsubConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.PubsubConfig;
+
+                    /**
+                     * Verifies a PubsubConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PubsubConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PubsubConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.PubsubConfig;
+
+                    /**
+                     * Creates a plain object from a PubsubConfig message. Also converts values to other types if specified.
+                     * @param message PubsubConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.PubsubConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PubsubConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace PubsubConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        OK = 1,
+                        SUBSCRIPTION_DELETED = 2,
+                        TOPIC_DELETED = 3,
+                        SUBSCRIPTION_MISCONFIGURED = 4
+                    }
                 }
 
                 /** Properties of a PullRequestFilter. */

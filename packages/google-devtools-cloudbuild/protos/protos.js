@@ -8530,6 +8530,7 @@
                          * @property {Array.<string>|null} [tags] BuildTrigger tags
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [triggerTemplate] BuildTrigger triggerTemplate
                          * @property {google.devtools.cloudbuild.v1.IGitHubEventsConfig|null} [github] BuildTrigger github
+                         * @property {google.devtools.cloudbuild.v1.IPubsubConfig|null} [pubsubConfig] BuildTrigger pubsubConfig
                          * @property {google.devtools.cloudbuild.v1.IBuild|null} [build] BuildTrigger build
                          * @property {string|null} [filename] BuildTrigger filename
                          * @property {google.protobuf.ITimestamp|null} [createTime] BuildTrigger createTime
@@ -8537,6 +8538,7 @@
                          * @property {Object.<string,string>|null} [substitutions] BuildTrigger substitutions
                          * @property {Array.<string>|null} [ignoredFiles] BuildTrigger ignoredFiles
                          * @property {Array.<string>|null} [includedFiles] BuildTrigger includedFiles
+                         * @property {string|null} [filter] BuildTrigger filter
                          */
     
                         /**
@@ -8607,6 +8609,14 @@
                         BuildTrigger.prototype.github = null;
     
                         /**
+                         * BuildTrigger pubsubConfig.
+                         * @member {google.devtools.cloudbuild.v1.IPubsubConfig|null|undefined} pubsubConfig
+                         * @memberof google.devtools.cloudbuild.v1.BuildTrigger
+                         * @instance
+                         */
+                        BuildTrigger.prototype.pubsubConfig = null;
+    
+                        /**
                          * BuildTrigger build.
                          * @member {google.devtools.cloudbuild.v1.IBuild|null|undefined} build
                          * @memberof google.devtools.cloudbuild.v1.BuildTrigger
@@ -8661,6 +8671,14 @@
                          * @instance
                          */
                         BuildTrigger.prototype.includedFiles = $util.emptyArray;
+    
+                        /**
+                         * BuildTrigger filter.
+                         * @member {string} filter
+                         * @memberof google.devtools.cloudbuild.v1.BuildTrigger
+                         * @instance
+                         */
+                        BuildTrigger.prototype.filter = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -8730,6 +8748,10 @@
                                     writer.uint32(/* id 19, wireType 2 =*/154).string(message.tags[i]);
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.name);
+                            if (message.pubsubConfig != null && Object.hasOwnProperty.call(message, "pubsubConfig"))
+                                $root.google.devtools.cloudbuild.v1.PubsubConfig.encode(message.pubsubConfig, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 30, wireType 2 =*/242).string(message.filter);
                             return writer;
                         };
     
@@ -8784,6 +8806,9 @@
                                 case 13:
                                     message.github = $root.google.devtools.cloudbuild.v1.GitHubEventsConfig.decode(reader, reader.uint32());
                                     break;
+                                case 29:
+                                    message.pubsubConfig = $root.google.devtools.cloudbuild.v1.PubsubConfig.decode(reader, reader.uint32());
+                                    break;
                                 case 4:
                                     message.build = $root.google.devtools.cloudbuild.v1.Build.decode(reader, reader.uint32());
                                     break;
@@ -8827,6 +8852,9 @@
                                     if (!(message.includedFiles && message.includedFiles.length))
                                         message.includedFiles = [];
                                     message.includedFiles.push(reader.string());
+                                    break;
+                                case 30:
+                                    message.filter = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8890,6 +8918,11 @@
                                 if (error)
                                     return "github." + error;
                             }
+                            if (message.pubsubConfig != null && message.hasOwnProperty("pubsubConfig")) {
+                                var error = $root.google.devtools.cloudbuild.v1.PubsubConfig.verify(message.pubsubConfig);
+                                if (error)
+                                    return "pubsubConfig." + error;
+                            }
                             if (message.build != null && message.hasOwnProperty("build")) {
                                 properties.buildTemplate = 1;
                                 {
@@ -8935,6 +8968,9 @@
                                     if (!$util.isString(message.includedFiles[i]))
                                         return "includedFiles: string[] expected";
                             }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -8973,6 +9009,11 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.BuildTrigger.github: object expected");
                                 message.github = $root.google.devtools.cloudbuild.v1.GitHubEventsConfig.fromObject(object.github);
                             }
+                            if (object.pubsubConfig != null) {
+                                if (typeof object.pubsubConfig !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.BuildTrigger.pubsubConfig: object expected");
+                                message.pubsubConfig = $root.google.devtools.cloudbuild.v1.PubsubConfig.fromObject(object.pubsubConfig);
+                            }
                             if (object.build != null) {
                                 if (typeof object.build !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.BuildTrigger.build: object expected");
@@ -9008,6 +9049,8 @@
                                 for (var i = 0; i < object.includedFiles.length; ++i)
                                     message.includedFiles[i] = String(object.includedFiles[i]);
                             }
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -9039,6 +9082,8 @@
                                 object.description = "";
                                 object.github = null;
                                 object.name = "";
+                                object.pubsubConfig = null;
+                                object.filter = "";
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -9085,6 +9130,10 @@
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.pubsubConfig != null && message.hasOwnProperty("pubsubConfig"))
+                                object.pubsubConfig = $root.google.devtools.cloudbuild.v1.PubsubConfig.toObject(message.pubsubConfig, options);
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -9427,6 +9476,308 @@
                         };
     
                         return GitHubEventsConfig;
+                    })();
+    
+                    v1.PubsubConfig = (function() {
+    
+                        /**
+                         * Properties of a PubsubConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IPubsubConfig
+                         * @property {string|null} [subscription] PubsubConfig subscription
+                         * @property {string|null} [topic] PubsubConfig topic
+                         * @property {string|null} [serviceAccountEmail] PubsubConfig serviceAccountEmail
+                         * @property {google.devtools.cloudbuild.v1.PubsubConfig.State|null} [state] PubsubConfig state
+                         */
+    
+                        /**
+                         * Constructs a new PubsubConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a PubsubConfig.
+                         * @implements IPubsubConfig
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IPubsubConfig=} [properties] Properties to set
+                         */
+                        function PubsubConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PubsubConfig subscription.
+                         * @member {string} subscription
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @instance
+                         */
+                        PubsubConfig.prototype.subscription = "";
+    
+                        /**
+                         * PubsubConfig topic.
+                         * @member {string} topic
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @instance
+                         */
+                        PubsubConfig.prototype.topic = "";
+    
+                        /**
+                         * PubsubConfig serviceAccountEmail.
+                         * @member {string} serviceAccountEmail
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @instance
+                         */
+                        PubsubConfig.prototype.serviceAccountEmail = "";
+    
+                        /**
+                         * PubsubConfig state.
+                         * @member {google.devtools.cloudbuild.v1.PubsubConfig.State} state
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @instance
+                         */
+                        PubsubConfig.prototype.state = 0;
+    
+                        /**
+                         * Creates a new PubsubConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IPubsubConfig=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.PubsubConfig} PubsubConfig instance
+                         */
+                        PubsubConfig.create = function create(properties) {
+                            return new PubsubConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PubsubConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.PubsubConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IPubsubConfig} message PubsubConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PubsubConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscription);
+                            if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.topic);
+                            if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceAccountEmail);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PubsubConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.PubsubConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IPubsubConfig} message PubsubConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PubsubConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PubsubConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.PubsubConfig} PubsubConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PubsubConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PubsubConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.subscription = reader.string();
+                                    break;
+                                case 2:
+                                    message.topic = reader.string();
+                                    break;
+                                case 3:
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                case 4:
+                                    message.state = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PubsubConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.PubsubConfig} PubsubConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PubsubConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PubsubConfig message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PubsubConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subscription != null && message.hasOwnProperty("subscription"))
+                                if (!$util.isString(message.subscription))
+                                    return "subscription: string expected";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                if (!$util.isString(message.topic))
+                                    return "topic: string expected";
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                if (!$util.isString(message.serviceAccountEmail))
+                                    return "serviceAccountEmail: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PubsubConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.PubsubConfig} PubsubConfig
+                         */
+                        PubsubConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.PubsubConfig)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.PubsubConfig();
+                            if (object.subscription != null)
+                                message.subscription = String(object.subscription);
+                            if (object.topic != null)
+                                message.topic = String(object.topic);
+                            if (object.serviceAccountEmail != null)
+                                message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OK":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUBSCRIPTION_DELETED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "TOPIC_DELETED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "SUBSCRIPTION_MISCONFIGURED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PubsubConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.PubsubConfig} message PubsubConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PubsubConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.subscription = "";
+                                object.topic = "";
+                                object.serviceAccountEmail = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.subscription != null && message.hasOwnProperty("subscription"))
+                                object.subscription = message.subscription;
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                object.topic = message.topic;
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                object.serviceAccountEmail = message.serviceAccountEmail;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.devtools.cloudbuild.v1.PubsubConfig.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PubsubConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.PubsubConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PubsubConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.devtools.cloudbuild.v1.PubsubConfig.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} OK=1 OK value
+                         * @property {number} SUBSCRIPTION_DELETED=2 SUBSCRIPTION_DELETED value
+                         * @property {number} TOPIC_DELETED=3 TOPIC_DELETED value
+                         * @property {number} SUBSCRIPTION_MISCONFIGURED=4 SUBSCRIPTION_MISCONFIGURED value
+                         */
+                        PubsubConfig.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "OK"] = 1;
+                            values[valuesById[2] = "SUBSCRIPTION_DELETED"] = 2;
+                            values[valuesById[3] = "TOPIC_DELETED"] = 3;
+                            values[valuesById[4] = "SUBSCRIPTION_MISCONFIGURED"] = 4;
+                            return values;
+                        })();
+    
+                        return PubsubConfig;
                     })();
     
                     v1.PullRequestFilter = (function() {

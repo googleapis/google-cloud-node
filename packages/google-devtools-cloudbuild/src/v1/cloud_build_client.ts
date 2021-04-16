@@ -196,6 +196,12 @@ export class CloudBuildClient {
       serviceAccountPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/serviceAccounts/{service_account}'
       ),
+      subscriptionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/subscriptions/{subscription}'
+      ),
+      topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -2784,6 +2790,80 @@ export class CloudBuildClient {
     return this.pathTemplates.serviceAccountPathTemplate.match(
       serviceAccountName
     ).service_account;
+  }
+
+  /**
+   * Return a fully-qualified subscription resource name string.
+   *
+   * @param {string} project
+   * @param {string} subscription
+   * @returns {string} Resource name string.
+   */
+  subscriptionPath(project: string, subscription: string) {
+    return this.pathTemplates.subscriptionPathTemplate.render({
+      project: project,
+      subscription: subscription,
+    });
+  }
+
+  /**
+   * Parse the project from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .project;
+  }
+
+  /**
+   * Parse the subscription from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscription.
+   */
+  matchSubscriptionFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscription;
+  }
+
+  /**
+   * Return a fully-qualified topic resource name string.
+   *
+   * @param {string} project
+   * @param {string} topic
+   * @returns {string} Resource name string.
+   */
+  topicPath(project: string, topic: string) {
+    return this.pathTemplates.topicPathTemplate.render({
+      project: project,
+      topic: topic,
+    });
+  }
+
+  /**
+   * Parse the project from Topic resource.
+   *
+   * @param {string} topicName
+   *   A fully-qualified path representing Topic resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTopicName(topicName: string) {
+    return this.pathTemplates.topicPathTemplate.match(topicName).project;
+  }
+
+  /**
+   * Parse the topic from Topic resource.
+   *
+   * @param {string} topicName
+   *   A fully-qualified path representing Topic resource.
+   * @returns {string} A string representing the topic.
+   */
+  matchTopicFromTopicName(topicName: string) {
+    return this.pathTemplates.topicPathTemplate.match(topicName).topic;
   }
 
   /**

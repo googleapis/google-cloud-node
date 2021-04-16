@@ -3061,5 +3061,106 @@ describe('v1.CloudBuildClient', () => {
         );
       });
     });
+
+    describe('subscription', () => {
+      const fakePath = '/rendered/path/subscription';
+      const expectedParameters = {
+        project: 'projectValue',
+        subscription: 'subscriptionValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.subscriptionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.subscriptionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('subscriptionPath', () => {
+        const result = client.subscriptionPath(
+          'projectValue',
+          'subscriptionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSubscriptionName', () => {
+        const result = client.matchProjectFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSubscriptionFromSubscriptionName', () => {
+        const result = client.matchSubscriptionFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriptionValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('topic', () => {
+      const fakePath = '/rendered/path/topic';
+      const expectedParameters = {
+        project: 'projectValue',
+        topic: 'topicValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.topicPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.topicPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('topicPath', () => {
+        const result = client.topicPath('projectValue', 'topicValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.topicPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTopicName', () => {
+        const result = client.matchProjectFromTopicName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.topicPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTopicFromTopicName', () => {
+        const result = client.matchTopicFromTopicName(fakePath);
+        assert.strictEqual(result, 'topicValue');
+        assert(
+          (client.pathTemplates.topicPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });
