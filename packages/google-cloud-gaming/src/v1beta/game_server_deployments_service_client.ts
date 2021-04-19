@@ -458,7 +458,8 @@ export class GameServerDeploymentsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the game server delpoyment to retrieve. Uses the form:
+   *   Required. The name of the game server delpoyment to retrieve. Uses the
+   *   form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
    * @param {object} [options]
@@ -562,7 +563,8 @@ export class GameServerDeploymentsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the game server delpoyment to retrieve. Uses the form:
+   *   Required. The name of the game server delpoyment to retrieve. Uses the
+   *   form:
    *
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.
    * @param {object} [options]
@@ -677,8 +679,8 @@ export class GameServerDeploymentsServiceClient {
    *   //developers.google.com/protocol-buffers
    *   // /docs/reference/google.protobuf#fieldmask
    * @param {google.protobuf.Timestamp} [request.previewTime]
-   *   Optional. The target timestamp to compute the preview. Defaults to the immediately
-   *   after the proposed rollout completes.
+   *   Optional. The target timestamp to compute the preview. Defaults to the
+   *   immediately after the proposed rollout completes.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1495,11 +1497,11 @@ export class GameServerDeploymentsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
-   *   will pick an appropriate default. The server may return fewer items than
-   *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerDeployments left to be queried.
+   *   Optional. The maximum number of items to return.  If unspecified, the
+   *   server will pick an appropriate default. The server may return fewer items
+   *   than requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerDeployments left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.
@@ -1578,11 +1580,11 @@ export class GameServerDeploymentsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
-   *   will pick an appropriate default. The server may return fewer items than
-   *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerDeployments left to be queried.
+   *   Optional. The maximum number of items to return.  If unspecified, the
+   *   server will pick an appropriate default. The server may return fewer items
+   *   than requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerDeployments left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.
@@ -1635,11 +1637,11 @@ export class GameServerDeploymentsServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
-   *   will pick an appropriate default. The server may return fewer items than
-   *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerDeployments left to be queried.
+   *   Optional. The maximum number of items to return.  If unspecified, the
+   *   server will pick an appropriate default. The server may return fewer items
+   *   than requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerDeploymentsResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerDeployments left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.

@@ -1053,8 +1053,8 @@ export class RealmsServiceClient {
    *   Optional. The maximum number of items to return.  If unspecified, server
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token} to
-   *   determine if there are more realms left to be queried.
+   *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token}
+   *   to determine if there are more realms left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.
@@ -1130,8 +1130,8 @@ export class RealmsServiceClient {
    *   Optional. The maximum number of items to return.  If unspecified, server
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token} to
-   *   determine if there are more realms left to be queried.
+   *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token}
+   *   to determine if there are more realms left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.
@@ -1187,8 +1187,8 @@ export class RealmsServiceClient {
    *   Optional. The maximum number of items to return.  If unspecified, server
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token} to
-   *   determine if there are more realms left to be queried.
+   *   {@link google.cloud.gaming.v1beta.ListRealmsResponse.next_page_token|next_page_token}
+   *   to determine if there are more realms left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous List request,
    *   if any.

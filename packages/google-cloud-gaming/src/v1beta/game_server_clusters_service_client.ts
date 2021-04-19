@@ -1322,13 +1322,14 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
-   *   will pick an appropriate default. The server may return fewer items than
-   *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerClusters left to be queried.
+   *   Optional. The maximum number of items to return.  If unspecified, the
+   *   server will pick an appropriate default. The server may return fewer items
+   *   than requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerClusters left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -1404,13 +1405,14 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
-   *   will pick an appropriate default. The server may return fewer items than
-   *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerClusters left to be queried.
+   *   Optional. The maximum number of items to return.  If unspecified, the
+   *   server will pick an appropriate default. The server may return fewer items
+   *   than requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerClusters left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -1460,13 +1462,14 @@ export class GameServerClustersServiceClient {
    *   Required. The parent resource name. Uses the form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
-   *   will pick an appropriate default. The server may return fewer items than
-   *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerClusters left to be queried.
+   *   Optional. The maximum number of items to return.  If unspecified, the
+   *   server will pick an appropriate default. The server may return fewer items
+   *   than requested. A caller should only rely on response's
+   *   {@link google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerClusters left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]

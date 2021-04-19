@@ -825,10 +825,11 @@ export class GameServerConfigsServiceClient {
    *   Optional. The maximum number of items to return.  If unspecified, server
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerConfigs left to be queried.
+   *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerConfigs left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request, if any.
+   *   Optional. The next_page_token value returned from a previous list request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -904,10 +905,11 @@ export class GameServerConfigsServiceClient {
    *   Optional. The maximum number of items to return.  If unspecified, server
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerConfigs left to be queried.
+   *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerConfigs left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request, if any.
+   *   Optional. The next_page_token value returned from a previous list request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -961,10 +963,11 @@ export class GameServerConfigsServiceClient {
    *   Optional. The maximum number of items to return.  If unspecified, server
    *   will pick an appropriate default. Server may return fewer items than
    *   requested. A caller should only rely on response's
-   *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token} to
-   *   determine if there are more GameServerConfigs left to be queried.
+   *   {@link google.cloud.gaming.v1beta.ListGameServerConfigsResponse.next_page_token|next_page_token}
+   *   to determine if there are more GameServerConfigs left to be queried.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request, if any.
+   *   Optional. The next_page_token value returned from a previous list request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]

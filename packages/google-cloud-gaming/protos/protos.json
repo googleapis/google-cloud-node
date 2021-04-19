@@ -1975,7 +1975,8 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/gaming/v1beta;gaming",
                     "java_multiple_files": true,
-                    "java_package": "com.google.cloud.gaming.v1beta"
+                    "java_package": "com.google.cloud.gaming.v1beta",
+                    "php_namespace": "Google\\Cloud\\Gaming\\V1beta"
                   },
                   "nested": {
                     "OperationMetadata": {
