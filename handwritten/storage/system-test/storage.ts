@@ -18,8 +18,6 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import fetch from 'node-fetch';
 import * as FormData from 'form-data';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const normalizeNewline = require('normalize-newline');
 import pLimit = require('p-limit');
 import {promisify} from 'util';
 import * as path from 'path';
@@ -2302,9 +2300,10 @@ describe('storage', () => {
         },
       };
 
-      const expectedContents = normalizeNewline(
-        fs.readFileSync(FILES.html.path, 'utf-8')
-      );
+      const expectedContents = fs
+        .readFileSync(FILES.html.path, 'utf-8')
+        // eslint-disable-next-line no-control-regex
+        .replace(new RegExp('\r\n', 'g'), '\n');
 
       bucket.upload(FILES.gzip.path, options, (err, file) => {
         assert.ifError(err);
