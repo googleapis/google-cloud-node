@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.8.4](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.3...v5.8.4) (2021-04-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-and-time to v1 ([#1434](https://www.github.com/googleapis/nodejs-storage/issues/1434)) ([91ee6ca](https://www.github.com/googleapis/nodejs-storage/commit/91ee6cab38769d36b00d702e17b222518ad4e752))
+* don't fail if ~/.config doesn't exist ([#1428](https://www.github.com/googleapis/nodejs-storage/issues/1428)) ([3cfaba1](https://www.github.com/googleapis/nodejs-storage/commit/3cfaba19d4223c68f4382c06674f135838d32eb8))
+
 ### [5.8.3](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.2...v5.8.3) (2021-03-29)
 
 
