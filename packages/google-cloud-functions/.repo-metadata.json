@@ -1,14 +1,15 @@
 {
-  "name": "nodejs-functions",
-  "name_pretty": "Google Cloud Functions",
-  "product_documentation": "https://cloud.google.com/functions",
-  "client_documentation": "https://googleapis.dev/nodejs/nodejs-functions/latest/index.html",
   "issue_tracker": "",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-functions",
   "distribution_name": "@google-cloud/functions",
+  "product_documentation": "https://cloud.google.com/functions",
   "api_id": "cloudfunctions.googleapis.com",
+  "client_documentation": "https://googleapis.dev/nodejs/nodejs-functions/latest/index.html",
+  "repo": "googleapis/nodejs-functions",
+  "release_level": "ga",
   "requires_billing": false,
-  "codeowner_team": "@googleapis/serverless-team"
+  "name_pretty": "Google Cloud Functions",
+  "name": "nodejs-functions",
+  "codeowner_team": "@googleapis/serverless-team",
+  "default_version": "v1",
+  "language": "nodejs"
 }
