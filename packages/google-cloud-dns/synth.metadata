@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-dns.git",
-        "sha": "c3a99c8359493ff91ee4c4bdfc5c6ecbe6679e4a"
+        "sha": "087e91d6841cfab170a1b6811c94619358b33eac"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
+        "sha": "c6706ee5d693e9ae5967614170732646590d8374"
       }
     }
   ]
