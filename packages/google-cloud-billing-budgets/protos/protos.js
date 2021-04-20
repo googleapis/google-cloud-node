@@ -4572,6 +4572,8 @@
                              * @property {Array.<string>|null} [services] Filter services
                              * @property {Array.<string>|null} [subaccounts] Filter subaccounts
                              * @property {Object.<string,google.protobuf.IListValue>|null} [labels] Filter labels
+                             * @property {google.cloud.billing.budgets.v1beta1.CalendarPeriod|null} [calendarPeriod] Filter calendarPeriod
+                             * @property {google.cloud.billing.budgets.v1beta1.ICustomPeriod|null} [customPeriod] Filter customPeriod
                              */
     
                             /**
@@ -4643,6 +4645,36 @@
                             Filter.prototype.labels = $util.emptyObject;
     
                             /**
+                             * Filter calendarPeriod.
+                             * @member {google.cloud.billing.budgets.v1beta1.CalendarPeriod} calendarPeriod
+                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
+                             * @instance
+                             */
+                            Filter.prototype.calendarPeriod = 0;
+    
+                            /**
+                             * Filter customPeriod.
+                             * @member {google.cloud.billing.budgets.v1beta1.ICustomPeriod|null|undefined} customPeriod
+                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
+                             * @instance
+                             */
+                            Filter.prototype.customPeriod = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Filter usagePeriod.
+                             * @member {"calendarPeriod"|"customPeriod"|undefined} usagePeriod
+                             * @memberof google.cloud.billing.budgets.v1beta1.Filter
+                             * @instance
+                             */
+                            Object.defineProperty(Filter.prototype, "usagePeriod", {
+                                get: $util.oneOfGetter($oneOfFields = ["calendarPeriod", "customPeriod"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new Filter instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.billing.budgets.v1beta1.Filter
@@ -4685,6 +4717,10 @@
                                 if (message.creditTypes != null && message.creditTypes.length)
                                     for (var i = 0; i < message.creditTypes.length; ++i)
                                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.creditTypes[i]);
+                                if (message.calendarPeriod != null && Object.hasOwnProperty.call(message, "calendarPeriod"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.calendarPeriod);
+                                if (message.customPeriod != null && Object.hasOwnProperty.call(message, "customPeriod"))
+                                    $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.encode(message.customPeriod, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4764,6 +4800,12 @@
                                         }
                                         message.labels[key] = value;
                                         break;
+                                    case 8:
+                                        message.calendarPeriod = reader.int32();
+                                        break;
+                                    case 9:
+                                        message.customPeriod = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.decode(reader, reader.uint32());
+                                        break;
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -4799,6 +4841,7 @@
                             Filter.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.projects != null && message.hasOwnProperty("projects")) {
                                     if (!Array.isArray(message.projects))
                                         return "projects: array expected";
@@ -4845,6 +4888,28 @@
                                         var error = $root.google.protobuf.ListValue.verify(message.labels[key[i]]);
                                         if (error)
                                             return "labels." + error;
+                                    }
+                                }
+                                if (message.calendarPeriod != null && message.hasOwnProperty("calendarPeriod")) {
+                                    properties.usagePeriod = 1;
+                                    switch (message.calendarPeriod) {
+                                    default:
+                                        return "calendarPeriod: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.customPeriod != null && message.hasOwnProperty("customPeriod")) {
+                                    if (properties.usagePeriod === 1)
+                                        return "usagePeriod: multiple values";
+                                    properties.usagePeriod = 1;
+                                    {
+                                        var error = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.verify(message.customPeriod);
+                                        if (error)
+                                            return "customPeriod." + error;
                                     }
                                 }
                                 return null;
@@ -4918,6 +4983,29 @@
                                         message.labels[keys[i]] = $root.google.protobuf.ListValue.fromObject(object.labels[keys[i]]);
                                     }
                                 }
+                                switch (object.calendarPeriod) {
+                                case "CALENDAR_PERIOD_UNSPECIFIED":
+                                case 0:
+                                    message.calendarPeriod = 0;
+                                    break;
+                                case "MONTH":
+                                case 1:
+                                    message.calendarPeriod = 1;
+                                    break;
+                                case "QUARTER":
+                                case 2:
+                                    message.calendarPeriod = 2;
+                                    break;
+                                case "YEAR":
+                                case 3:
+                                    message.calendarPeriod = 3;
+                                    break;
+                                }
+                                if (object.customPeriod != null) {
+                                    if (typeof object.customPeriod !== "object")
+                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.Filter.customPeriod: object expected");
+                                    message.customPeriod = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.fromObject(object.customPeriod);
+                                }
                                 return message;
                             };
     
@@ -4972,6 +5060,16 @@
                                     for (var j = 0; j < message.creditTypes.length; ++j)
                                         object.creditTypes[j] = message.creditTypes[j];
                                 }
+                                if (message.calendarPeriod != null && message.hasOwnProperty("calendarPeriod")) {
+                                    object.calendarPeriod = options.enums === String ? $root.google.cloud.billing.budgets.v1beta1.CalendarPeriod[message.calendarPeriod] : message.calendarPeriod;
+                                    if (options.oneofs)
+                                        object.usagePeriod = "calendarPeriod";
+                                }
+                                if (message.customPeriod != null && message.hasOwnProperty("customPeriod")) {
+                                    object.customPeriod = $root.google.cloud.billing.budgets.v1beta1.CustomPeriod.toObject(message.customPeriod, options);
+                                    if (options.oneofs)
+                                        object.usagePeriod = "customPeriod";
+                                }
                                 return object;
                             };
     
@@ -5005,6 +5103,244 @@
                             })();
     
                             return Filter;
+                        })();
+    
+                        v1beta1.CustomPeriod = (function() {
+    
+                            /**
+                             * Properties of a CustomPeriod.
+                             * @memberof google.cloud.billing.budgets.v1beta1
+                             * @interface ICustomPeriod
+                             * @property {google.type.IDate|null} [startDate] CustomPeriod startDate
+                             * @property {google.type.IDate|null} [endDate] CustomPeriod endDate
+                             */
+    
+                            /**
+                             * Constructs a new CustomPeriod.
+                             * @memberof google.cloud.billing.budgets.v1beta1
+                             * @classdesc Represents a CustomPeriod.
+                             * @implements ICustomPeriod
+                             * @constructor
+                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod=} [properties] Properties to set
+                             */
+                            function CustomPeriod(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CustomPeriod startDate.
+                             * @member {google.type.IDate|null|undefined} startDate
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @instance
+                             */
+                            CustomPeriod.prototype.startDate = null;
+    
+                            /**
+                             * CustomPeriod endDate.
+                             * @member {google.type.IDate|null|undefined} endDate
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @instance
+                             */
+                            CustomPeriod.prototype.endDate = null;
+    
+                            /**
+                             * Creates a new CustomPeriod instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod=} [properties] Properties to set
+                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod instance
+                             */
+                            CustomPeriod.create = function create(properties) {
+                                return new CustomPeriod(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CustomPeriod message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CustomPeriod.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod} message CustomPeriod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomPeriod.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
+                                    $root.google.type.Date.encode(message.startDate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
+                                    $root.google.type.Date.encode(message.endDate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CustomPeriod message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CustomPeriod.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {google.cloud.billing.budgets.v1beta1.ICustomPeriod} message CustomPeriod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomPeriod.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CustomPeriod message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomPeriod.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.budgets.v1beta1.CustomPeriod();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.startDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.endDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CustomPeriod message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomPeriod.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CustomPeriod message.
+                             * @function verify
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CustomPeriod.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.startDate != null && message.hasOwnProperty("startDate")) {
+                                    var error = $root.google.type.Date.verify(message.startDate);
+                                    if (error)
+                                        return "startDate." + error;
+                                }
+                                if (message.endDate != null && message.hasOwnProperty("endDate")) {
+                                    var error = $root.google.type.Date.verify(message.endDate);
+                                    if (error)
+                                        return "endDate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CustomPeriod message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.billing.budgets.v1beta1.CustomPeriod} CustomPeriod
+                             */
+                            CustomPeriod.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.billing.budgets.v1beta1.CustomPeriod)
+                                    return object;
+                                var message = new $root.google.cloud.billing.budgets.v1beta1.CustomPeriod();
+                                if (object.startDate != null) {
+                                    if (typeof object.startDate !== "object")
+                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.CustomPeriod.startDate: object expected");
+                                    message.startDate = $root.google.type.Date.fromObject(object.startDate);
+                                }
+                                if (object.endDate != null) {
+                                    if (typeof object.endDate !== "object")
+                                        throw TypeError(".google.cloud.billing.budgets.v1beta1.CustomPeriod.endDate: object expected");
+                                    message.endDate = $root.google.type.Date.fromObject(object.endDate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CustomPeriod message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @static
+                             * @param {google.cloud.billing.budgets.v1beta1.CustomPeriod} message CustomPeriod
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CustomPeriod.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.startDate = null;
+                                    object.endDate = null;
+                                }
+                                if (message.startDate != null && message.hasOwnProperty("startDate"))
+                                    object.startDate = $root.google.type.Date.toObject(message.startDate, options);
+                                if (message.endDate != null && message.hasOwnProperty("endDate"))
+                                    object.endDate = $root.google.type.Date.toObject(message.endDate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CustomPeriod to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.billing.budgets.v1beta1.CustomPeriod
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CustomPeriod.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return CustomPeriod;
+                        })();
+    
+                        /**
+                         * CalendarPeriod enum.
+                         * @name google.cloud.billing.budgets.v1beta1.CalendarPeriod
+                         * @enum {number}
+                         * @property {number} CALENDAR_PERIOD_UNSPECIFIED=0 CALENDAR_PERIOD_UNSPECIFIED value
+                         * @property {number} MONTH=1 MONTH value
+                         * @property {number} QUARTER=2 QUARTER value
+                         * @property {number} YEAR=3 YEAR value
+                         */
+                        v1beta1.CalendarPeriod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CALENDAR_PERIOD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MONTH"] = 1;
+                            values[valuesById[2] = "QUARTER"] = 2;
+                            values[valuesById[3] = "YEAR"] = 3;
+                            return values;
                         })();
     
                         v1beta1.BudgetService = (function() {
@@ -18188,6 +18524,238 @@
                 };
     
                 return Money;
+            })();
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.year = reader.int32();
+                            break;
+                        case 2:
+                            message.month = reader.int32();
+                            break;
+                        case 3:
+                            message.day = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Date;
             })();
     
             return type;

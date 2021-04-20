@@ -565,6 +565,14 @@
                           }
                         },
                         "Filter": {
+                          "oneofs": {
+                            "usagePeriod": {
+                              "oneof": [
+                                "calendarPeriod",
+                                "customPeriod"
+                              ]
+                            }
+                          },
                           "fields": {
                             "projects": {
                               "rule": "repeated",
@@ -612,6 +620,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "calendarPeriod": {
+                              "type": "CalendarPeriod",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customPeriod": {
+                              "type": "CustomPeriod",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -623,6 +645,32 @@
                                 "INCLUDE_SPECIFIED_CREDITS": 3
                               }
                             }
+                          }
+                        },
+                        "CustomPeriod": {
+                          "fields": {
+                            "startDate": {
+                              "type": "google.type.Date",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "endDate": {
+                              "type": "google.type.Date",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "CalendarPeriod": {
+                          "values": {
+                            "CALENDAR_PERIOD_UNSPECIFIED": 0,
+                            "MONTH": 1,
+                            "QUARTER": 2,
+                            "YEAR": 3
                           }
                         },
                         "BudgetService": {
@@ -1999,9 +2047,9 @@
         "type": {
           "options": {
             "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/type/money;money",
+            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
             "java_multiple_files": true,
-            "java_outer_classname": "MoneyProto",
+            "java_outer_classname": "DateProto",
             "java_package": "com.google.type",
             "objc_class_prefix": "GTP"
           },
@@ -2017,6 +2065,22 @@
                   "id": 2
                 },
                 "nanos": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
                   "type": "int32",
                   "id": 3
                 }

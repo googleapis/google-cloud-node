@@ -1929,6 +1929,12 @@ export namespace google {
 
                         /** Filter labels */
                         labels?: ({ [k: string]: google.protobuf.IListValue }|null);
+
+                        /** Filter calendarPeriod */
+                        calendarPeriod?: (google.cloud.billing.budgets.v1beta1.CalendarPeriod|keyof typeof google.cloud.billing.budgets.v1beta1.CalendarPeriod|null);
+
+                        /** Filter customPeriod */
+                        customPeriod?: (google.cloud.billing.budgets.v1beta1.ICustomPeriod|null);
                     }
 
                     /** Represents a Filter. */
@@ -1957,6 +1963,15 @@ export namespace google {
 
                         /** Filter labels. */
                         public labels: { [k: string]: google.protobuf.IListValue };
+
+                        /** Filter calendarPeriod. */
+                        public calendarPeriod: (google.cloud.billing.budgets.v1beta1.CalendarPeriod|keyof typeof google.cloud.billing.budgets.v1beta1.CalendarPeriod);
+
+                        /** Filter customPeriod. */
+                        public customPeriod?: (google.cloud.billing.budgets.v1beta1.ICustomPeriod|null);
+
+                        /** Filter usagePeriod. */
+                        public usagePeriod?: ("calendarPeriod"|"customPeriod");
 
                         /**
                          * Creates a new Filter instance using the specified properties.
@@ -2038,6 +2053,110 @@ export namespace google {
                             EXCLUDE_ALL_CREDITS = 2,
                             INCLUDE_SPECIFIED_CREDITS = 3
                         }
+                    }
+
+                    /** Properties of a CustomPeriod. */
+                    interface ICustomPeriod {
+
+                        /** CustomPeriod startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** CustomPeriod endDate */
+                        endDate?: (google.type.IDate|null);
+                    }
+
+                    /** Represents a CustomPeriod. */
+                    class CustomPeriod implements ICustomPeriod {
+
+                        /**
+                         * Constructs a new CustomPeriod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1beta1.ICustomPeriod);
+
+                        /** CustomPeriod startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** CustomPeriod endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /**
+                         * Creates a new CustomPeriod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomPeriod instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1beta1.ICustomPeriod): google.cloud.billing.budgets.v1beta1.CustomPeriod;
+
+                        /**
+                         * Encodes the specified CustomPeriod message. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CustomPeriod.verify|verify} messages.
+                         * @param message CustomPeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1beta1.ICustomPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomPeriod message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1beta1.CustomPeriod.verify|verify} messages.
+                         * @param message CustomPeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1beta1.ICustomPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomPeriod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomPeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1beta1.CustomPeriod;
+
+                        /**
+                         * Decodes a CustomPeriod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomPeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1beta1.CustomPeriod;
+
+                        /**
+                         * Verifies a CustomPeriod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomPeriod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomPeriod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1beta1.CustomPeriod;
+
+                        /**
+                         * Creates a plain object from a CustomPeriod message. Also converts values to other types if specified.
+                         * @param message CustomPeriod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1beta1.CustomPeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomPeriod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** CalendarPeriod enum. */
+                    enum CalendarPeriod {
+                        CALENDAR_PERIOD_UNSPECIFIED = 0,
+                        MONTH = 1,
+                        QUARTER = 2,
+                        YEAR = 3
                     }
 
                     /** Represents a BudgetService */
@@ -7047,6 +7166,108 @@ export namespace google {
 
             /**
              * Converts this Money to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
