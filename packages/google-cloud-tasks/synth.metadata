@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-tasks.git",
-        "sha": "f00fb5c5ba21f320bb2501995f8793a2763e329a"
+        "sha": "29daa3ea70f380cb5942b22cd798f65495fd7e52"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "57c23fa5705499a4181095ced81f0ee0933b64f6"
+        "sha": "c6706ee5d693e9ae5967614170732646590d8374"
       }
     }
   ],
