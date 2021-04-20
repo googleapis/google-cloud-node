@@ -1,14 +1,15 @@
 {
+  "distribution_name": "@google-cloud/translate",
+  "release_level": "ga",
+  "product_documentation": "https://cloud.google.com/translate/docs/",
+  "repo": "googleapis/nodejs-translate",
+  "default_version": "v3",
+  "language": "nodejs",
+  "requires_billing": true,
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
+  "client_documentation": "https://googleapis.dev/nodejs/translate/latest",
   "name": "translate",
   "name_pretty": "Cloud Translation",
-  "product_documentation": "https://cloud.google.com/translate/docs/",
-  "client_documentation": "https://googleapis.dev/nodejs/translate/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-translate",
-  "distribution_name": "@google-cloud/translate",
   "api_id": "translate.googleapis.com",
-  "requires_billing": true,
   "codeowner_team": "@googleapis/ml-apis"
 }
