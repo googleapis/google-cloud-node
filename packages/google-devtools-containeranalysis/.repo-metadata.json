@@ -1,14 +1,15 @@
 {
+  "repo": "googleapis/nodejs-containeranalysis",
+  "default_version": "v1",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559742",
+  "language": "nodejs",
+  "api_id": "containeranalysis.googleapis.com",
+  "release_level": "ga",
   "name": "containeranalysis",
+  "client_documentation": "https://googleapis.dev/nodejs/containeranalysis/latest",
+  "requires_billing": true,
+  "distribution_name": "@google-cloud/containeranalysis",
   "name_pretty": "Google Container Analysis",
   "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
-  "client_documentation": "https://googleapis.dev/nodejs/containeranalysis/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559742",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-containeranalysis",
-  "distribution_name": "@google-cloud/containeranalysis",
-  "api_id": "containeranalysis.googleapis.com",
-  "requires_billing": true,
   "codeowner_team": "@googleapis/cicd"
 }
