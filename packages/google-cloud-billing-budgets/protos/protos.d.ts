@@ -572,6 +572,12 @@ export namespace google {
 
                         /** Filter labels */
                         labels?: ({ [k: string]: google.protobuf.IListValue }|null);
+
+                        /** Filter calendarPeriod */
+                        calendarPeriod?: (google.cloud.billing.budgets.v1.CalendarPeriod|keyof typeof google.cloud.billing.budgets.v1.CalendarPeriod|null);
+
+                        /** Filter customPeriod */
+                        customPeriod?: (google.cloud.billing.budgets.v1.ICustomPeriod|null);
                     }
 
                     /** Represents a Filter. */
@@ -600,6 +606,15 @@ export namespace google {
 
                         /** Filter labels. */
                         public labels: { [k: string]: google.protobuf.IListValue };
+
+                        /** Filter calendarPeriod. */
+                        public calendarPeriod: (google.cloud.billing.budgets.v1.CalendarPeriod|keyof typeof google.cloud.billing.budgets.v1.CalendarPeriod);
+
+                        /** Filter customPeriod. */
+                        public customPeriod?: (google.cloud.billing.budgets.v1.ICustomPeriod|null);
+
+                        /** Filter usagePeriod. */
+                        public usagePeriod?: ("calendarPeriod"|"customPeriod");
 
                         /**
                          * Creates a new Filter instance using the specified properties.
@@ -681,6 +696,110 @@ export namespace google {
                             EXCLUDE_ALL_CREDITS = 2,
                             INCLUDE_SPECIFIED_CREDITS = 3
                         }
+                    }
+
+                    /** Properties of a CustomPeriod. */
+                    interface ICustomPeriod {
+
+                        /** CustomPeriod startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** CustomPeriod endDate */
+                        endDate?: (google.type.IDate|null);
+                    }
+
+                    /** Represents a CustomPeriod. */
+                    class CustomPeriod implements ICustomPeriod {
+
+                        /**
+                         * Constructs a new CustomPeriod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.billing.budgets.v1.ICustomPeriod);
+
+                        /** CustomPeriod startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** CustomPeriod endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /**
+                         * Creates a new CustomPeriod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomPeriod instance
+                         */
+                        public static create(properties?: google.cloud.billing.budgets.v1.ICustomPeriod): google.cloud.billing.budgets.v1.CustomPeriod;
+
+                        /**
+                         * Encodes the specified CustomPeriod message. Does not implicitly {@link google.cloud.billing.budgets.v1.CustomPeriod.verify|verify} messages.
+                         * @param message CustomPeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.billing.budgets.v1.ICustomPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomPeriod message, length delimited. Does not implicitly {@link google.cloud.billing.budgets.v1.CustomPeriod.verify|verify} messages.
+                         * @param message CustomPeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.billing.budgets.v1.ICustomPeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomPeriod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomPeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.budgets.v1.CustomPeriod;
+
+                        /**
+                         * Decodes a CustomPeriod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomPeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.budgets.v1.CustomPeriod;
+
+                        /**
+                         * Verifies a CustomPeriod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomPeriod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomPeriod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.billing.budgets.v1.CustomPeriod;
+
+                        /**
+                         * Creates a plain object from a CustomPeriod message. Also converts values to other types if specified.
+                         * @param message CustomPeriod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.billing.budgets.v1.CustomPeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomPeriod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** CalendarPeriod enum. */
+                    enum CalendarPeriod {
+                        CALENDAR_PERIOD_UNSPECIFIED = 0,
+                        MONTH = 1,
+                        QUARTER = 2,
+                        YEAR = 3
                     }
 
                     /** Represents a BudgetService */
@@ -7069,108 +7188,6 @@ export namespace google {
     /** Namespace type. */
     namespace type {
 
-        /** Properties of a Money. */
-        interface IMoney {
-
-            /** Money currencyCode */
-            currencyCode?: (string|null);
-
-            /** Money units */
-            units?: (number|Long|string|null);
-
-            /** Money nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Money. */
-        class Money implements IMoney {
-
-            /**
-             * Constructs a new Money.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.IMoney);
-
-            /** Money currencyCode. */
-            public currencyCode: string;
-
-            /** Money units. */
-            public units: (number|Long|string);
-
-            /** Money nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Money instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Money instance
-             */
-            public static create(properties?: google.type.IMoney): google.type.Money;
-
-            /**
-             * Encodes the specified Money message. Does not implicitly {@link google.type.Money.verify|verify} messages.
-             * @param message Money message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Money message, length delimited. Does not implicitly {@link google.type.Money.verify|verify} messages.
-             * @param message Money message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Money message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Money
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Money;
-
-            /**
-             * Decodes a Money message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Money
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Money;
-
-            /**
-             * Verifies a Money message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Money message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Money
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.Money;
-
-            /**
-             * Creates a plain object from a Money message. Also converts values to other types if specified.
-             * @param message Money
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.Money, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Money to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a Date. */
         interface IDate {
 
@@ -7268,6 +7285,108 @@ export namespace google {
 
             /**
              * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Money. */
+        interface IMoney {
+
+            /** Money currencyCode */
+            currencyCode?: (string|null);
+
+            /** Money units */
+            units?: (number|Long|string|null);
+
+            /** Money nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Money. */
+        class Money implements IMoney {
+
+            /**
+             * Constructs a new Money.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IMoney);
+
+            /** Money currencyCode. */
+            public currencyCode: string;
+
+            /** Money units. */
+            public units: (number|Long|string);
+
+            /** Money nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Money instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Money instance
+             */
+            public static create(properties?: google.type.IMoney): google.type.Money;
+
+            /**
+             * Encodes the specified Money message. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Money message, length delimited. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Money message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Money
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Money;
+
+            /**
+             * Decodes a Money message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Money
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Money;
+
+            /**
+             * Verifies a Money message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Money message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Money
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Money;
+
+            /**
+             * Creates a plain object from a Money message. Also converts values to other types if specified.
+             * @param message Money
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Money, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Money to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
