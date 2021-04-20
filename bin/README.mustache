@@ -25,14 +25,19 @@ each libraries README.md.
 
 ## Authentication
 
-### Download your Service Account Credentials JSON file
+- When **developing locally**, install the [Google Cloud SDK](https://cloud.google.com/sdk) and authenticate using your Google account:
 
-To use Application Default Credentials, You first need to download a set of JSON credentials for your project. Go to **APIs & Auth** > **Credentials** in the [Google Developers Console][devconsole] and select **Service account** from the **Add credentials** dropdown.
+    ```sh
+    gcloud auth login --update-adc
+    ```
+    
+- When **on Google Cloud**, this library will automatically detect the identity of the machine.
 
-> This file is your *only copy* of these credentials. It should never be
-> committed with your source code, and should be stored securely.
+- When **outside Google Cloud**, configure [Federated workload identity](https://cloud.google.com/iam/docs/workload-identity-federation).
 
-Once downloaded, store the path to this file in the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
+If all of the above are impossible, you can
+[download a service account JSON file](https://cloud.google.com/iam/docs/creating-managing-service-account-keys), but this may be
+forbidden by your organization's policies.
 
 ### Other Authentication Methods
 
