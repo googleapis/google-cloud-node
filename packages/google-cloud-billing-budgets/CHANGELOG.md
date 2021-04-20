@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.1.0...v3.2.0) (2021-04-20)
+
+
+### Features
+
+* Added support for configurable budget time period ([#217](https://www.github.com/googleapis/nodejs-billing-budgets/issues/217)) ([5c0575b](https://www.github.com/googleapis/nodejs-billing-budgets/commit/5c0575bdabf90674aa2c3a703a01aac37c06f57f))
+* Added support for configurable budget time period ([#218](https://www.github.com/googleapis/nodejs-billing-budgets/issues/218)) ([c797540](https://www.github.com/googleapis/nodejs-billing-budgets/commit/c797540f4b987821064ba8564c9e86091fab435a))
+
+
+### Bug Fixes
+
+* **docs:** Updated some documentation links ([5c0575b](https://www.github.com/googleapis/nodejs-billing-budgets/commit/5c0575bdabf90674aa2c3a703a01aac37c06f57f))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.0.2...v3.1.0) (2021-01-09)
 
 
