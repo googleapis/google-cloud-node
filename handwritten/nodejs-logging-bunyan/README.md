@@ -2,9 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-This module provides an easy to use, higher-level layer for working with [Cloud Logging](https://cloud.google.com/logging/docs),
-compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a transport to your existing Bunyan loggers.
-
+# [Cloud Logging for Bunyan: Node.js Client](https://github.com/googleapis/nodejs-logging-bunyan)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/logging-bunyan.svg)](https://www.npmjs.org/package/@google-cloud/logging-bunyan)
@@ -13,7 +11,8 @@ compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach th
 
 
 
-Cloud Logging stream for Bunyan
+This module provides an easy to use, higher-level layer for working with [Cloud Logging](https://cloud.google.com/logging/docs),
+compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a transport to your existing Bunyan loggers.
 
 
 A comprehensive list of changes in each version may be found in
