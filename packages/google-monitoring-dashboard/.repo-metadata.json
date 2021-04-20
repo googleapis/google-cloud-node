@@ -1,13 +1,14 @@
 {
-  "name": "monitoring-dashboards",
-  "name_pretty": "Monitoring Dashboards",
-  "product_documentation": "https://cloud.google.com/monitoring/docs",
-  "client_documentation": "https://googleapis.dev/nodejs/monitoring-dashboards/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
-  "release_level": "ga",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-monitoring-dashboards",
-  "distribution_name": "@google-cloud/monitoring-dashboards",
   "api_id": "monitoring.googleapis.com",
+  "name": "monitoring-dashboards",
+  "language": "nodejs",
+  "product_documentation": "https://cloud.google.com/monitoring/docs",
+  "distribution_name": "@google-cloud/monitoring-dashboards",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
+  "name_pretty": "Monitoring Dashboards",
+  "default_version": "v1",
+  "release_level": "ga",
+  "repo": "googleapis/nodejs-monitoring-dashboards",
+  "client_documentation": "https://googleapis.dev/nodejs/monitoring-dashboards/latest",
   "requires_billing": true
 }
