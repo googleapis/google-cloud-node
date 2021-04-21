@@ -1,13 +1,14 @@
 {
-  "name": "transcoder",
-  "name_pretty": "Transcoder API",
-  "product_documentation": "https://googleapis.dev/nodejs/transcoder/latest",
   "client_documentation": "https://googleapis.dev/nodejs/transcoder/latest",
-  "issue_tracker": "https://github.com/googleapis/nodejs-video-transcoder/issues",
+  "product_documentation": "https://googleapis.dev/nodejs/transcoder/latest",
+  "name": "transcoder",
+  "requires_billing": true,
   "release_level": "beta",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-video-transcoder",
-  "distribution_name": "@google-cloud/video-transcoder",
   "api_id": "transcoder.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/video-transcoder",
+  "repo": "googleapis/nodejs-video-transcoder",
+  "issue_tracker": "https://github.com/googleapis/nodejs-video-transcoder/issues",
+  "name_pretty": "Transcoder API",
+  "default_version": "v1beta1"
 }
