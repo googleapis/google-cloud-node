@@ -2273,7 +2273,7 @@
                                      * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy
                                      * @interface IAllowedKeyType
                                      * @property {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IRsaKeyType|null} [rsa] AllowedKeyType rsa
-                                     * @property {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve|null} [ellipticCurve] AllowedKeyType ellipticCurve
+                                     * @property {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IEcKeyType|null} [ellipticCurve] AllowedKeyType ellipticCurve
                                      */
     
                                     /**
@@ -2301,11 +2301,11 @@
     
                                     /**
                                      * AllowedKeyType ellipticCurve.
-                                     * @member {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve} ellipticCurve
+                                     * @member {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IEcKeyType|null|undefined} ellipticCurve
                                      * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType
                                      * @instance
                                      */
-                                    AllowedKeyType.prototype.ellipticCurve = 0;
+                                    AllowedKeyType.prototype.ellipticCurve = null;
     
                                     // OneOf field names bound to virtual getters and setters
                                     var $oneOfFields;
@@ -2348,7 +2348,7 @@
                                         if (message.rsa != null && Object.hasOwnProperty.call(message, "rsa"))
                                             $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType.encode(message.rsa, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                         if (message.ellipticCurve != null && Object.hasOwnProperty.call(message, "ellipticCurve"))
-                                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.ellipticCurve);
+                                            $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.encode(message.ellipticCurve, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                         return writer;
                                     };
     
@@ -2387,7 +2387,7 @@
                                                 message.rsa = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType.decode(reader, reader.uint32());
                                                 break;
                                             case 2:
-                                                message.ellipticCurve = reader.int32();
+                                                message.ellipticCurve = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.decode(reader, reader.uint32());
                                                 break;
                                             default:
                                                 reader.skipType(tag & 7);
@@ -2437,14 +2437,10 @@
                                             if (properties.keyType === 1)
                                                 return "keyType: multiple values";
                                             properties.keyType = 1;
-                                            switch (message.ellipticCurve) {
-                                            default:
-                                                return "ellipticCurve: enum value expected";
-                                            case 0:
-                                            case 2:
-                                            case 3:
-                                            case 4:
-                                                break;
+                                            {
+                                                var error = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.verify(message.ellipticCurve);
+                                                if (error)
+                                                    return "ellipticCurve." + error;
                                             }
                                         }
                                         return null;
@@ -2467,23 +2463,10 @@
                                                 throw TypeError(".google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.rsa: object expected");
                                             message.rsa = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType.fromObject(object.rsa);
                                         }
-                                        switch (object.ellipticCurve) {
-                                        case "NAMED_CURVE_UNSPECIFIED":
-                                        case 0:
-                                            message.ellipticCurve = 0;
-                                            break;
-                                        case "ECDSA_P256":
-                                        case 2:
-                                            message.ellipticCurve = 2;
-                                            break;
-                                        case "ECDSA_P384":
-                                        case 3:
-                                            message.ellipticCurve = 3;
-                                            break;
-                                        case "EDDSA_25519":
-                                        case 4:
-                                            message.ellipticCurve = 4;
-                                            break;
+                                        if (object.ellipticCurve != null) {
+                                            if (typeof object.ellipticCurve !== "object")
+                                                throw TypeError(".google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.ellipticCurve: object expected");
+                                            message.ellipticCurve = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.fromObject(object.ellipticCurve);
                                         }
                                         return message;
                                     };
@@ -2507,7 +2490,7 @@
                                                 object.keyType = "rsa";
                                         }
                                         if (message.ellipticCurve != null && message.hasOwnProperty("ellipticCurve")) {
-                                            object.ellipticCurve = options.enums === String ? $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve[message.ellipticCurve] : message.ellipticCurve;
+                                            object.ellipticCurve = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.toObject(message.ellipticCurve, options);
                                             if (options.oneofs)
                                                 object.keyType = "ellipticCurve";
                                         }
@@ -2763,22 +2746,232 @@
                                         return RsaKeyType;
                                     })();
     
-                                    /**
-                                     * NamedCurve enum.
-                                     * @name google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.NamedCurve
-                                     * @enum {number}
-                                     * @property {number} NAMED_CURVE_UNSPECIFIED=0 NAMED_CURVE_UNSPECIFIED value
-                                     * @property {number} ECDSA_P256=2 ECDSA_P256 value
-                                     * @property {number} ECDSA_P384=3 ECDSA_P384 value
-                                     * @property {number} EDDSA_25519=4 EDDSA_25519 value
-                                     */
-                                    AllowedKeyType.NamedCurve = (function() {
-                                        var valuesById = {}, values = Object.create(valuesById);
-                                        values[valuesById[0] = "NAMED_CURVE_UNSPECIFIED"] = 0;
-                                        values[valuesById[2] = "ECDSA_P256"] = 2;
-                                        values[valuesById[3] = "ECDSA_P384"] = 3;
-                                        values[valuesById[4] = "EDDSA_25519"] = 4;
-                                        return values;
+                                    AllowedKeyType.EcKeyType = (function() {
+    
+                                        /**
+                                         * Properties of an EcKeyType.
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType
+                                         * @interface IEcKeyType
+                                         * @property {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.EcSignatureAlgorithm|null} [signatureAlgorithm] EcKeyType signatureAlgorithm
+                                         */
+    
+                                        /**
+                                         * Constructs a new EcKeyType.
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType
+                                         * @classdesc Represents an EcKeyType.
+                                         * @implements IEcKeyType
+                                         * @constructor
+                                         * @param {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IEcKeyType=} [properties] Properties to set
+                                         */
+                                        function EcKeyType(properties) {
+                                            if (properties)
+                                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                    if (properties[keys[i]] != null)
+                                                        this[keys[i]] = properties[keys[i]];
+                                        }
+    
+                                        /**
+                                         * EcKeyType signatureAlgorithm.
+                                         * @member {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.EcSignatureAlgorithm} signatureAlgorithm
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @instance
+                                         */
+                                        EcKeyType.prototype.signatureAlgorithm = 0;
+    
+                                        /**
+                                         * Creates a new EcKeyType instance using the specified properties.
+                                         * @function create
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IEcKeyType=} [properties] Properties to set
+                                         * @returns {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType} EcKeyType instance
+                                         */
+                                        EcKeyType.create = function create(properties) {
+                                            return new EcKeyType(properties);
+                                        };
+    
+                                        /**
+                                         * Encodes the specified EcKeyType message. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.verify|verify} messages.
+                                         * @function encode
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IEcKeyType} message EcKeyType message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        EcKeyType.encode = function encode(message, writer) {
+                                            if (!writer)
+                                                writer = $Writer.create();
+                                            if (message.signatureAlgorithm != null && Object.hasOwnProperty.call(message, "signatureAlgorithm"))
+                                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.signatureAlgorithm);
+                                            return writer;
+                                        };
+    
+                                        /**
+                                         * Encodes the specified EcKeyType message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.verify|verify} messages.
+                                         * @function encodeDelimited
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.IEcKeyType} message EcKeyType message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        EcKeyType.encodeDelimited = function encodeDelimited(message, writer) {
+                                            return this.encode(message, writer).ldelim();
+                                        };
+    
+                                        /**
+                                         * Decodes an EcKeyType message from the specified reader or buffer.
+                                         * @function decode
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @param {number} [length] Message length if known beforehand
+                                         * @returns {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType} EcKeyType
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        EcKeyType.decode = function decode(reader, length) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = $Reader.create(reader);
+                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType();
+                                            while (reader.pos < end) {
+                                                var tag = reader.uint32();
+                                                switch (tag >>> 3) {
+                                                case 1:
+                                                    message.signatureAlgorithm = reader.int32();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag & 7);
+                                                    break;
+                                                }
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Decodes an EcKeyType message from the specified reader or buffer, length delimited.
+                                         * @function decodeDelimited
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @returns {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType} EcKeyType
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        EcKeyType.decodeDelimited = function decodeDelimited(reader) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = new $Reader(reader);
+                                            return this.decode(reader, reader.uint32());
+                                        };
+    
+                                        /**
+                                         * Verifies an EcKeyType message.
+                                         * @function verify
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {Object.<string,*>} message Plain object to verify
+                                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                         */
+                                        EcKeyType.verify = function verify(message) {
+                                            if (typeof message !== "object" || message === null)
+                                                return "object expected";
+                                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
+                                                switch (message.signatureAlgorithm) {
+                                                default:
+                                                    return "signatureAlgorithm: enum value expected";
+                                                case 0:
+                                                case 1:
+                                                case 2:
+                                                case 3:
+                                                    break;
+                                                }
+                                            return null;
+                                        };
+    
+                                        /**
+                                         * Creates an EcKeyType message from a plain object. Also converts values to their respective internal types.
+                                         * @function fromObject
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {Object.<string,*>} object Plain object
+                                         * @returns {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType} EcKeyType
+                                         */
+                                        EcKeyType.fromObject = function fromObject(object) {
+                                            if (object instanceof $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType)
+                                                return object;
+                                            var message = new $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType();
+                                            switch (object.signatureAlgorithm) {
+                                            case "EC_SIGNATURE_ALGORITHM_UNSPECIFIED":
+                                            case 0:
+                                                message.signatureAlgorithm = 0;
+                                                break;
+                                            case "ECDSA_P256":
+                                            case 1:
+                                                message.signatureAlgorithm = 1;
+                                                break;
+                                            case "ECDSA_P384":
+                                            case 2:
+                                                message.signatureAlgorithm = 2;
+                                                break;
+                                            case "EDDSA_25519":
+                                            case 3:
+                                                message.signatureAlgorithm = 3;
+                                                break;
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Creates a plain object from an EcKeyType message. Also converts values to other types if specified.
+                                         * @function toObject
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @static
+                                         * @param {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType} message EcKeyType
+                                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                         * @returns {Object.<string,*>} Plain object
+                                         */
+                                        EcKeyType.toObject = function toObject(message, options) {
+                                            if (!options)
+                                                options = {};
+                                            var object = {};
+                                            if (options.defaults)
+                                                object.signatureAlgorithm = options.enums === String ? "EC_SIGNATURE_ALGORITHM_UNSPECIFIED" : 0;
+                                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
+                                                object.signatureAlgorithm = options.enums === String ? $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.EcSignatureAlgorithm[message.signatureAlgorithm] : message.signatureAlgorithm;
+                                            return object;
+                                        };
+    
+                                        /**
+                                         * Converts this EcKeyType to JSON.
+                                         * @function toJSON
+                                         * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType
+                                         * @instance
+                                         * @returns {Object.<string,*>} JSON object
+                                         */
+                                        EcKeyType.prototype.toJSON = function toJSON() {
+                                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                        };
+    
+                                        /**
+                                         * EcSignatureAlgorithm enum.
+                                         * @name google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.EcSignatureAlgorithm
+                                         * @enum {number}
+                                         * @property {number} EC_SIGNATURE_ALGORITHM_UNSPECIFIED=0 EC_SIGNATURE_ALGORITHM_UNSPECIFIED value
+                                         * @property {number} ECDSA_P256=1 ECDSA_P256 value
+                                         * @property {number} ECDSA_P384=2 ECDSA_P384 value
+                                         * @property {number} EDDSA_25519=3 EDDSA_25519 value
+                                         */
+                                        EcKeyType.EcSignatureAlgorithm = (function() {
+                                            var valuesById = {}, values = Object.create(valuesById);
+                                            values[valuesById[0] = "EC_SIGNATURE_ALGORITHM_UNSPECIFIED"] = 0;
+                                            values[valuesById[1] = "ECDSA_P256"] = 1;
+                                            values[valuesById[2] = "ECDSA_P384"] = 2;
+                                            values[valuesById[3] = "EDDSA_25519"] = 3;
+                                            return values;
+                                        })();
+    
+                                        return EcKeyType;
                                     })();
     
                                     return AllowedKeyType;
