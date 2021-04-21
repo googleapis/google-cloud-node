@@ -1,13 +1,14 @@
 {
-  "name": "web-risk",
   "name_pretty": "Web Risk API",
-  "product_documentation": "https://cloud.google.com/web-risk/docs/",
-  "client_documentation": "https://googleapis.dev/nodejs/web-risk/latest",
-  "issue_tracker": "",
-  "release_level": "ga",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-web-risk",
-  "distribution_name": "@google-cloud/web-risk",
+  "name": "web-risk",
+  "release_level": "ga",
+  "client_documentation": "https://googleapis.dev/nodejs/web-risk/latest",
   "api_id": "webrisk.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/web-risk",
+  "product_documentation": "https://cloud.google.com/web-risk/docs/",
+  "requires_billing": true,
+  "default_version": "v1",
+  "issue_tracker": "",
+  "repo": "googleapis/nodejs-web-risk"
 }
