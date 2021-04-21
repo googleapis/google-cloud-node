@@ -16,14 +16,14 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v2 from './v2';
-import * as v2beta2 from './v2beta2';
 import * as v2beta3 from './v2beta3';
+import * as v2beta2 from './v2beta2';
+import * as v2 from './v2';
 
 const CloudTasksClient = v2.CloudTasksClient;
 type CloudTasksClient = v2.CloudTasksClient;
 
-export {v2, v2beta2, v2beta3, CloudTasksClient};
-export default {v2, v2beta2, v2beta3, CloudTasksClient};
+export {v2beta3, v2beta2, v2, CloudTasksClient};
+export default {v2beta3, v2beta2, v2, CloudTasksClient};
 import * as protos from '../protos/protos';
 export {protos};
