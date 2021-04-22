@@ -23,6 +23,7 @@ import {ErrorMessage} from '../src/classes/error-message';
 import {RequestHandler} from '../src/google-apis/auth-client';
 import {createLogger} from '../src/logger';
 import {FakeConfiguration as Configuration} from '../test/fixtures/configuration';
+import {ReportMode} from 'src/configuration';
 import {deepStrictEqual} from '../test/util';
 import {
   ErrorGroupStats,
@@ -463,7 +464,7 @@ describe('error-reporting', () => {
 
     const initConfiguration = Object.assign(
       {
-        reportMode: 'always' as 'always',
+        reportMode: 'always' as ReportMode,
         serviceContext: {
           service: SERVICE,
           version: VERSION,
