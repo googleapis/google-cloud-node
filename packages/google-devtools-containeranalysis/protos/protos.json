@@ -3775,7 +3775,8 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.containeranalysis.v1",
                     "objc_class_prefix": "GCA",
-                    "ruby_package": "Google::Cloud::ContainerAnalysis::V1"
+                    "ruby_package": "Google::Cloud::ContainerAnalysis::V1",
+                    "php_namespace": "Google\\Cloud\\ContainerAnalysis\\V1"
                   },
                   "nested": {
                     "ContainerAnalysis": {
