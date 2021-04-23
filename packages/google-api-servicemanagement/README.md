@@ -69,8 +69,10 @@ const {ServiceManagerClient} = require('@google-cloud/service-management');
 const client = new ServiceManagerClient();
 
 async function listServices() {
-  const [thing] = await client.listServices({producerProjectId: projectId});
-  console.info(thing);
+  const [services] = await client.listServices({
+    producerProjectId: projectId,
+  });
+  console.info(services);
 }
 listServices();
 

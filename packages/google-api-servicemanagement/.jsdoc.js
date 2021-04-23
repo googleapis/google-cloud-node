@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2021 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'servicemanagement',
+    systemName: '@google-cloud/service-management',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
