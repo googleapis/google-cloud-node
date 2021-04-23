@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.2.0...v2.3.0) (2021-04-21)
+
+
+### Features
+
+* Refactored Elliptic Key curves to provide additional options, the NamedCurve enum is replaced by the EcKeyType message. ([#70](https://www.github.com/googleapis/nodejs-security-private-ca/issues/70)) ([567a792](https://www.github.com/googleapis/nodejs-security-private-ca/commit/567a7925e7510b0a1782e894cf7f718d211643ab))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.1.0...v2.2.0) (2021-04-14)
 
 
