@@ -13,53 +13,29 @@
 # limitations under the License.
 """This script is used to synthesize generated parts of this library."""
 
-import synthtool as s
-import synthtool.gcp as gcp
 import synthtool.languages.node as node
-import subprocess
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
 # List of excludes for the enhanced library
-excludes = [
-    ".kokoro/presubmit/node12/samples-test.cfg",
-    "package.json",
-    "README.md",
-    "src/decorator.ts",
-    "src/enhanced-types.json",
-    "src/helpers.ts",
-    "src/index.ts",
-    "src/value-converter.ts",
-    "test/helpers.test.ts",
-    "test/index.test.ts",
-    "tsconfig.json",
-]
-
-# run the gapic generator
-gapic = gcp.GAPICBazel()
-versions = ["v1beta1", "v1"]
-default_version = "v1"
-
-name = "aiplatform"
-for version in versions:
-    library = gapic.node_library(name, version)
-    s.copy(library, excludes=excludes)
-
-# Copy common templates
-common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(
-    source_location="build/src"
-)
-# We override the default sample configuration with a custom
-# environment file:
-s.copy(
-    templates,
-    excludes=[
+node.owlbot_main(
+    staging_excludes = [
+        ".kokoro/presubmit/node12/samples-test.cfg",
+        "package.json",
+        "README.md",
+        "src/decorator.ts",
+        "src/enhanced-types.json",
+        "src/helpers.ts",
+        "src/index.ts",
+        "src/value-converter.ts",
+        "test/helpers.test.ts",
+        "test/index.test.ts",
+        "tsconfig.json",
+    ],
+    templates_excludes=[
         ".kokoro/continuous/node12/samples-test.cfg",
         ".kokoro/presubmit/node12/samples-test.cfg",
         "src/index.ts",
     ],
 )
-
-node.postprocess_gapic_library()
