@@ -8567,30 +8567,6 @@
                         }
                       }
                     },
-                    "InputText": {
-                      "fields": {
-                        "text": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "InputAudio": {
-                      "fields": {
-                        "config": {
-                          "type": "InputAudioConfig",
-                          "id": 1
-                        },
-                        "audio": {
-                          "type": "bytes",
-                          "id": 2
-                        }
-                      }
-                    },
                     "OutputAudio": {
                       "fields": {
                         "config": {
