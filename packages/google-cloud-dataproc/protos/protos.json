@@ -12,8 +12,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowTemplatesProto",
                     "java_package": "com.google.cloud.dataproc.v1",
-                    "(google.api.resource_definition).type": "dataproc.googleapis.com/Region",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}"
+                    "(google.api.resource_definition).type": "metastore.googleapis.com/Service",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/services/{service}"
                   },
                   "nested": {
                     "AutoscalingPolicyService": {
@@ -432,6 +432,54 @@
                             }
                           ]
                         },
+                        "StopCluster": {
+                          "requestType": "StopClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "StartCluster": {
+                          "requestType": "StartClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}:start",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project_id}/regions/{region}/clusters/{cluster_name}:start",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "google.cloud.dataproc.v1.ClusterOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteCluster": {
                           "requestType": "DeleteClusterRequest",
                           "responseType": "google.longrunning.Operation",
@@ -682,6 +730,52 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "metastoreConfig": {
+                          "type": "MetastoreConfig",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gkeClusterConfig": {
+                          "type": "GkeClusterConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GkeClusterConfig": {
+                      "fields": {
+                        "namespacedGkeDeploymentTarget": {
+                          "type": "NamespacedGkeDeploymentTarget",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "NamespacedGkeDeploymentTarget": {
+                          "fields": {
+                            "targetGkeCluster": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "container.googleapis.com/Cluster"
+                              }
+                            },
+                            "clusterNamespace": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -756,6 +850,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "privateIpv6GoogleAccess": {
+                          "type": "PrivateIpv6GoogleAccess",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "serviceAccount": {
                           "type": "string",
                           "id": 8,
@@ -784,6 +885,66 @@
                         "reservationAffinity": {
                           "type": "ReservationAffinity",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nodeGroupAffinity": {
+                          "type": "NodeGroupAffinity",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "shieldedInstanceConfig": {
+                          "type": "ShieldedInstanceConfig",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PrivateIpv6GoogleAccess": {
+                          "values": {
+                            "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED": 0,
+                            "INHERIT_FROM_SUBNETWORK": 1,
+                            "OUTBOUND": 2,
+                            "BIDIRECTIONAL": 3
+                          }
+                        }
+                      }
+                    },
+                    "NodeGroupAffinity": {
+                      "fields": {
+                        "nodeGroupUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ShieldedInstanceConfig": {
+                      "fields": {
+                        "enableSecureBoot": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableVtpm": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableIntegrityMonitoring": {
+                          "type": "bool",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -987,7 +1148,10 @@
                             "RUNNING": 2,
                             "ERROR": 3,
                             "DELETING": 4,
-                            "UPDATING": 5
+                            "UPDATING": 5,
+                            "STOPPING": 6,
+                            "STOPPED": 7,
+                            "STARTING": 8
                           }
                         },
                         "Substate": {
@@ -1003,7 +1167,17 @@
                       "fields": {
                         "kerberosConfig": {
                           "type": "KerberosConfig",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "identityConfig": {
+                          "type": "IdentityConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1020,14 +1194,14 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "kmsKeyUri": {
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "keystoreUri": {
@@ -1116,6 +1290,18 @@
                         }
                       }
                     },
+                    "IdentityConfig": {
+                      "fields": {
+                        "userServiceAccountMapping": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SoftwareConfig": {
                       "fields": {
                         "imageVersion": {
@@ -1179,6 +1365,18 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MetastoreConfig": {
+                      "fields": {
+                        "dataprocMetastoreService": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
                           }
                         }
                       }
@@ -1276,6 +1474,84 @@
                         "requestId": {
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StopClusterRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clusterUuid": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StartClusterRequest": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clusterUuid": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1480,9 +1756,15 @@
                       "values": {
                         "COMPONENT_UNSPECIFIED": 0,
                         "ANACONDA": 5,
+                        "DOCKER": 13,
+                        "DRUID": 9,
+                        "FLINK": 14,
+                        "HBASE": 11,
                         "HIVE_WEBHCAT": 3,
                         "JUPYTER": 1,
                         "PRESTO": 6,
+                        "RANGER": 12,
+                        "SOLR": 10,
                         "ZEPPELIN": 4,
                         "ZOOKEEPER": 8
                       }
@@ -2154,6 +2436,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "clusterLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2437,6 +2727,13 @@
                         "maxFailuresPerHour": {
                           "type": "int32",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxFailuresTotal": {
+                          "type": "int32",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3076,6 +3373,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "dagTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3398,6 +3702,27 @@
                         "clusterUuid": {
                           "type": "string",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dagTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dagStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dagEndTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

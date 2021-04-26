@@ -38,6 +38,14 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "StopCluster": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StartCluster": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteCluster": {
           "timeout_millis": 300000,
           "retry_codes_name": "unavailable",

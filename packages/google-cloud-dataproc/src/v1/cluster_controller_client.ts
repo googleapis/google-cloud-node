@@ -181,6 +181,9 @@ export class ClusterControllerClient {
       projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
       ),
+      servicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/services/{service}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -222,6 +225,18 @@ export class ClusterControllerClient {
     const updateClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataproc.v1.ClusterOperationMetadata'
     ) as gax.protobuf.Type;
+    const stopClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1.Cluster'
+    ) as gax.protobuf.Type;
+    const stopClusterMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1.ClusterOperationMetadata'
+    ) as gax.protobuf.Type;
+    const startClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1.Cluster'
+    ) as gax.protobuf.Type;
+    const startClusterMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1.ClusterOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteClusterResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -245,6 +260,16 @@ export class ClusterControllerClient {
         this.operationsClient,
         updateClusterResponse.decode.bind(updateClusterResponse),
         updateClusterMetadata.decode.bind(updateClusterMetadata)
+      ),
+      stopCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        stopClusterResponse.decode.bind(stopClusterResponse),
+        stopClusterMetadata.decode.bind(stopClusterMetadata)
+      ),
+      startCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        startClusterResponse.decode.bind(startClusterResponse),
+        startClusterMetadata.decode.bind(startClusterMetadata)
       ),
       deleteCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -306,6 +331,8 @@ export class ClusterControllerClient {
     const clusterControllerStubMethods = [
       'createCluster',
       'updateCluster',
+      'stopCluster',
+      'startCluster',
       'deleteCluster',
       'getCluster',
       'listClusters',
@@ -535,9 +562,9 @@ export class ClusterControllerClient {
    * @param {google.cloud.dataproc.v1.Cluster} request.cluster
    *   Required. The cluster to create.
    * @param {string} [request.requestId]
-   *   Optional. A unique id used to identify the request. If the server
-   *   receives two {@link google.cloud.dataproc.v1.CreateClusterRequest|CreateClusterRequest} requests  with the same
-   *   id, then the second request will be ignored and the
+   *   Optional. A unique id used to identify the request. If the server receives two
+   *   [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
+   *   with the same id, then the second request will be ignored and the
    *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the backend
    *   is returned.
    *
@@ -761,8 +788,9 @@ export class ClusterControllerClient {
    *    </table>
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
-   *   receives two {@link google.cloud.dataproc.v1.UpdateClusterRequest|UpdateClusterRequest} requests  with the same
-   *   id, then the second request will be ignored and the
+   *   receives two
+   *   [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
+   *   with the same id, then the second request will be ignored and the
    *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
    *   backend is returned.
    *
@@ -870,6 +898,332 @@ export class ClusterControllerClient {
       protos.google.cloud.dataproc.v1.ClusterOperationMetadata
     >;
   }
+  stopCluster(
+    request: protos.google.cloud.dataproc.v1.IStopClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  stopCluster(
+    request: protos.google.cloud.dataproc.v1.IStopClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopCluster(
+    request: protos.google.cloud.dataproc.v1.IStopClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Stops a cluster in a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project the
+   *   cluster belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} request.clusterName
+   *   Required. The cluster name.
+   * @param {string} [request.clusterUuid]
+   *   Optional. Specifying the `cluster_uuid` means the RPC will fail
+   *   (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two
+   *   [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
+   *   with the same id, then the second request will be ignored and the
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
+   *   backend is returned.
+   *
+   *   Recommendation: Set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.stopCluster(request);
+   * const [response] = await operation.promise();
+   */
+  stopCluster(
+    request: protos.google.cloud.dataproc.v1.IStopClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ICluster,
+            protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.stopCluster(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `stopCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkStopClusterProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkStopClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.stopCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >;
+  }
+  startCluster(
+    request: protos.google.cloud.dataproc.v1.IStartClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  startCluster(
+    request: protos.google.cloud.dataproc.v1.IStartClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startCluster(
+    request: protos.google.cloud.dataproc.v1.IStartClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Starts a cluster in a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform project the
+   *   cluster belongs to.
+   * @param {string} request.region
+   *   Required. The Dataproc region in which to handle the request.
+   * @param {string} request.clusterName
+   *   Required. The cluster name.
+   * @param {string} [request.clusterUuid]
+   *   Optional. Specifying the `cluster_uuid` means the RPC will fail
+   *   (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two
+   *   [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
+   *   with the same id, then the second request will be ignored and the
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
+   *   backend is returned.
+   *
+   *   Recommendation: Set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.startCluster(request);
+   * const [response] = await operation.promise();
+   */
+  startCluster(
+    request: protos.google.cloud.dataproc.v1.IStartClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ICluster,
+            protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ICluster,
+        protos.google.cloud.dataproc.v1.IClusterOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      project_id: request.projectId || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.startCluster(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `startCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkStartClusterProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkStartClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.startCluster,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Cluster,
+      protos.google.cloud.dataproc.v1.ClusterOperationMetadata
+    >;
+  }
   deleteCluster(
     request: protos.google.cloud.dataproc.v1.IDeleteClusterRequest,
     options?: CallOptions
@@ -925,8 +1279,9 @@ export class ClusterControllerClient {
    *   (with error NOT_FOUND) if cluster with specified UUID does not exist.
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
-   *   receives two {@link google.cloud.dataproc.v1.DeleteClusterRequest|DeleteClusterRequest} requests  with the same
-   *   id, then the second request will be ignored and the
+   *   receives two
+   *   [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
+   *   with the same id, then the second request will be ignored and the
    *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
    *   backend is returned.
    *
@@ -1712,6 +2067,55 @@ export class ClusterControllerClient {
     return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
       projectRegionWorkflowTemplateName
     ).workflow_template;
+  }
+
+  /**
+   * Return a fully-qualified service resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  servicePath(project: string, location: string, service: string) {
+    return this.pathTemplates.servicePathTemplate.render({
+      project: project,
+      location: location,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the project from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).project;
+  }
+
+  /**
+   * Parse the location from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).location;
+  }
+
+  /**
+   * Parse the service from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**

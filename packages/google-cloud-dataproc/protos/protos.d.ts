@@ -1197,6 +1197,34 @@ export namespace google {
                     public updateCluster(request: google.cloud.dataproc.v1.IUpdateClusterRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls StopCluster.
+                     * @param request StopClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public stopCluster(request: google.cloud.dataproc.v1.IStopClusterRequest, callback: google.cloud.dataproc.v1.ClusterController.StopClusterCallback): void;
+
+                    /**
+                     * Calls StopCluster.
+                     * @param request StopClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public stopCluster(request: google.cloud.dataproc.v1.IStopClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StartCluster.
+                     * @param request StartClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public startCluster(request: google.cloud.dataproc.v1.IStartClusterRequest, callback: google.cloud.dataproc.v1.ClusterController.StartClusterCallback): void;
+
+                    /**
+                     * Calls StartCluster.
+                     * @param request StartClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public startCluster(request: google.cloud.dataproc.v1.IStartClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteCluster.
                      * @param request DeleteClusterRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -1268,6 +1296,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.ClusterController#stopCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StopClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.ClusterController#startCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StartClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataproc.v1.ClusterController#deleteCluster}.
@@ -1471,6 +1513,12 @@ export namespace google {
 
                     /** ClusterConfig endpointConfig */
                     endpointConfig?: (google.cloud.dataproc.v1.IEndpointConfig|null);
+
+                    /** ClusterConfig metastoreConfig */
+                    metastoreConfig?: (google.cloud.dataproc.v1.IMetastoreConfig|null);
+
+                    /** ClusterConfig gkeClusterConfig */
+                    gkeClusterConfig?: (google.cloud.dataproc.v1.IGkeClusterConfig|null);
                 }
 
                 /** Represents a ClusterConfig. */
@@ -1520,6 +1568,12 @@ export namespace google {
 
                     /** ClusterConfig endpointConfig. */
                     public endpointConfig?: (google.cloud.dataproc.v1.IEndpointConfig|null);
+
+                    /** ClusterConfig metastoreConfig. */
+                    public metastoreConfig?: (google.cloud.dataproc.v1.IMetastoreConfig|null);
+
+                    /** ClusterConfig gkeClusterConfig. */
+                    public gkeClusterConfig?: (google.cloud.dataproc.v1.IGkeClusterConfig|null);
 
                     /**
                      * Creates a new ClusterConfig instance using the specified properties.
@@ -1590,6 +1644,195 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GkeClusterConfig. */
+                interface IGkeClusterConfig {
+
+                    /** GkeClusterConfig namespacedGkeDeploymentTarget */
+                    namespacedGkeDeploymentTarget?: (google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null);
+                }
+
+                /** Represents a GkeClusterConfig. */
+                class GkeClusterConfig implements IGkeClusterConfig {
+
+                    /**
+                     * Constructs a new GkeClusterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IGkeClusterConfig);
+
+                    /** GkeClusterConfig namespacedGkeDeploymentTarget. */
+                    public namespacedGkeDeploymentTarget?: (google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null);
+
+                    /**
+                     * Creates a new GkeClusterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeClusterConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IGkeClusterConfig): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                     * @param message GkeClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                     * @param message GkeClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGkeClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Verifies a GkeClusterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeClusterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeClusterConfig;
+
+                    /**
+                     * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
+                     * @param message GkeClusterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.GkeClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeClusterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace GkeClusterConfig {
+
+                    /** Properties of a NamespacedGkeDeploymentTarget. */
+                    interface INamespacedGkeDeploymentTarget {
+
+                        /** NamespacedGkeDeploymentTarget targetGkeCluster */
+                        targetGkeCluster?: (string|null);
+
+                        /** NamespacedGkeDeploymentTarget clusterNamespace */
+                        clusterNamespace?: (string|null);
+                    }
+
+                    /** Represents a NamespacedGkeDeploymentTarget. */
+                    class NamespacedGkeDeploymentTarget implements INamespacedGkeDeploymentTarget {
+
+                        /**
+                         * Constructs a new NamespacedGkeDeploymentTarget.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget);
+
+                        /** NamespacedGkeDeploymentTarget targetGkeCluster. */
+                        public targetGkeCluster: string;
+
+                        /** NamespacedGkeDeploymentTarget clusterNamespace. */
+                        public clusterNamespace: string;
+
+                        /**
+                         * Creates a new NamespacedGkeDeploymentTarget instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NamespacedGkeDeploymentTarget instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Encodes the specified NamespacedGkeDeploymentTarget message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                         * @param message NamespacedGkeDeploymentTarget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NamespacedGkeDeploymentTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                         * @param message NamespacedGkeDeploymentTarget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NamespacedGkeDeploymentTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NamespacedGkeDeploymentTarget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Verifies a NamespacedGkeDeploymentTarget message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NamespacedGkeDeploymentTarget message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NamespacedGkeDeploymentTarget
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget;
+
+                        /**
+                         * Creates a plain object from a NamespacedGkeDeploymentTarget message. Also converts values to other types if specified.
+                         * @param message NamespacedGkeDeploymentTarget
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NamespacedGkeDeploymentTarget to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** Properties of an EndpointConfig. */
@@ -1883,6 +2126,9 @@ export namespace google {
                     /** GceClusterConfig internalIpOnly */
                     internalIpOnly?: (boolean|null);
 
+                    /** GceClusterConfig privateIpv6GoogleAccess */
+                    privateIpv6GoogleAccess?: (google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess|keyof typeof google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess|null);
+
                     /** GceClusterConfig serviceAccount */
                     serviceAccount?: (string|null);
 
@@ -1897,6 +2143,12 @@ export namespace google {
 
                     /** GceClusterConfig reservationAffinity */
                     reservationAffinity?: (google.cloud.dataproc.v1.IReservationAffinity|null);
+
+                    /** GceClusterConfig nodeGroupAffinity */
+                    nodeGroupAffinity?: (google.cloud.dataproc.v1.INodeGroupAffinity|null);
+
+                    /** GceClusterConfig shieldedInstanceConfig */
+                    shieldedInstanceConfig?: (google.cloud.dataproc.v1.IShieldedInstanceConfig|null);
                 }
 
                 /** Represents a GceClusterConfig. */
@@ -1920,6 +2172,9 @@ export namespace google {
                     /** GceClusterConfig internalIpOnly. */
                     public internalIpOnly: boolean;
 
+                    /** GceClusterConfig privateIpv6GoogleAccess. */
+                    public privateIpv6GoogleAccess: (google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess|keyof typeof google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess);
+
                     /** GceClusterConfig serviceAccount. */
                     public serviceAccount: string;
 
@@ -1934,6 +2189,12 @@ export namespace google {
 
                     /** GceClusterConfig reservationAffinity. */
                     public reservationAffinity?: (google.cloud.dataproc.v1.IReservationAffinity|null);
+
+                    /** GceClusterConfig nodeGroupAffinity. */
+                    public nodeGroupAffinity?: (google.cloud.dataproc.v1.INodeGroupAffinity|null);
+
+                    /** GceClusterConfig shieldedInstanceConfig. */
+                    public shieldedInstanceConfig?: (google.cloud.dataproc.v1.IShieldedInstanceConfig|null);
 
                     /**
                      * Creates a new GceClusterConfig instance using the specified properties.
@@ -2001,6 +2262,209 @@ export namespace google {
 
                     /**
                      * Converts this GceClusterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace GceClusterConfig {
+
+                    /** PrivateIpv6GoogleAccess enum. */
+                    enum PrivateIpv6GoogleAccess {
+                        PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED = 0,
+                        INHERIT_FROM_SUBNETWORK = 1,
+                        OUTBOUND = 2,
+                        BIDIRECTIONAL = 3
+                    }
+                }
+
+                /** Properties of a NodeGroupAffinity. */
+                interface INodeGroupAffinity {
+
+                    /** NodeGroupAffinity nodeGroupUri */
+                    nodeGroupUri?: (string|null);
+                }
+
+                /** Represents a NodeGroupAffinity. */
+                class NodeGroupAffinity implements INodeGroupAffinity {
+
+                    /**
+                     * Constructs a new NodeGroupAffinity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.INodeGroupAffinity);
+
+                    /** NodeGroupAffinity nodeGroupUri. */
+                    public nodeGroupUri: string;
+
+                    /**
+                     * Creates a new NodeGroupAffinity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeGroupAffinity instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.INodeGroupAffinity): google.cloud.dataproc.v1.NodeGroupAffinity;
+
+                    /**
+                     * Encodes the specified NodeGroupAffinity message. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroupAffinity.verify|verify} messages.
+                     * @param message NodeGroupAffinity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.INodeGroupAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeGroupAffinity message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroupAffinity.verify|verify} messages.
+                     * @param message NodeGroupAffinity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.INodeGroupAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeGroupAffinity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeGroupAffinity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.NodeGroupAffinity;
+
+                    /**
+                     * Decodes a NodeGroupAffinity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeGroupAffinity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.NodeGroupAffinity;
+
+                    /**
+                     * Verifies a NodeGroupAffinity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeGroupAffinity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeGroupAffinity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.NodeGroupAffinity;
+
+                    /**
+                     * Creates a plain object from a NodeGroupAffinity message. Also converts values to other types if specified.
+                     * @param message NodeGroupAffinity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.NodeGroupAffinity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeGroupAffinity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ShieldedInstanceConfig. */
+                interface IShieldedInstanceConfig {
+
+                    /** ShieldedInstanceConfig enableSecureBoot */
+                    enableSecureBoot?: (boolean|null);
+
+                    /** ShieldedInstanceConfig enableVtpm */
+                    enableVtpm?: (boolean|null);
+
+                    /** ShieldedInstanceConfig enableIntegrityMonitoring */
+                    enableIntegrityMonitoring?: (boolean|null);
+                }
+
+                /** Represents a ShieldedInstanceConfig. */
+                class ShieldedInstanceConfig implements IShieldedInstanceConfig {
+
+                    /**
+                     * Constructs a new ShieldedInstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IShieldedInstanceConfig);
+
+                    /** ShieldedInstanceConfig enableSecureBoot. */
+                    public enableSecureBoot: boolean;
+
+                    /** ShieldedInstanceConfig enableVtpm. */
+                    public enableVtpm: boolean;
+
+                    /** ShieldedInstanceConfig enableIntegrityMonitoring. */
+                    public enableIntegrityMonitoring: boolean;
+
+                    /**
+                     * Creates a new ShieldedInstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShieldedInstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IShieldedInstanceConfig): google.cloud.dataproc.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message. Does not implicitly {@link google.cloud.dataproc.v1.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Verifies a ShieldedInstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShieldedInstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ShieldedInstanceConfig;
+
+                    /**
+                     * Creates a plain object from a ShieldedInstanceConfig message. Also converts values to other types if specified.
+                     * @param message ShieldedInstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.ShieldedInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShieldedInstanceConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2667,7 +3131,10 @@ export namespace google {
                         RUNNING = 2,
                         ERROR = 3,
                         DELETING = 4,
-                        UPDATING = 5
+                        UPDATING = 5,
+                        STOPPING = 6,
+                        STOPPED = 7,
+                        STARTING = 8
                     }
 
                     /** Substate enum. */
@@ -2683,6 +3150,9 @@ export namespace google {
 
                     /** SecurityConfig kerberosConfig */
                     kerberosConfig?: (google.cloud.dataproc.v1.IKerberosConfig|null);
+
+                    /** SecurityConfig identityConfig */
+                    identityConfig?: (google.cloud.dataproc.v1.IIdentityConfig|null);
                 }
 
                 /** Represents a SecurityConfig. */
@@ -2696,6 +3166,9 @@ export namespace google {
 
                     /** SecurityConfig kerberosConfig. */
                     public kerberosConfig?: (google.cloud.dataproc.v1.IKerberosConfig|null);
+
+                    /** SecurityConfig identityConfig. */
+                    public identityConfig?: (google.cloud.dataproc.v1.IIdentityConfig|null);
 
                     /**
                      * Creates a new SecurityConfig instance using the specified properties.
@@ -2942,6 +3415,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an IdentityConfig. */
+                interface IIdentityConfig {
+
+                    /** IdentityConfig userServiceAccountMapping */
+                    userServiceAccountMapping?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an IdentityConfig. */
+                class IdentityConfig implements IIdentityConfig {
+
+                    /**
+                     * Constructs a new IdentityConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IIdentityConfig);
+
+                    /** IdentityConfig userServiceAccountMapping. */
+                    public userServiceAccountMapping: { [k: string]: string };
+
+                    /**
+                     * Creates a new IdentityConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IdentityConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IIdentityConfig): google.cloud.dataproc.v1.IdentityConfig;
+
+                    /**
+                     * Encodes the specified IdentityConfig message. Does not implicitly {@link google.cloud.dataproc.v1.IdentityConfig.verify|verify} messages.
+                     * @param message IdentityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IIdentityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IdentityConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.IdentityConfig.verify|verify} messages.
+                     * @param message IdentityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IIdentityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IdentityConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IdentityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.IdentityConfig;
+
+                    /**
+                     * Decodes an IdentityConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IdentityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.IdentityConfig;
+
+                    /**
+                     * Verifies an IdentityConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IdentityConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IdentityConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.IdentityConfig;
+
+                    /**
+                     * Creates a plain object from an IdentityConfig message. Also converts values to other types if specified.
+                     * @param message IdentityConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.IdentityConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IdentityConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a SoftwareConfig. */
                 interface ISoftwareConfig {
 
@@ -3150,6 +3713,96 @@ export namespace google {
 
                     /**
                      * Converts this LifecycleConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetastoreConfig. */
+                interface IMetastoreConfig {
+
+                    /** MetastoreConfig dataprocMetastoreService */
+                    dataprocMetastoreService?: (string|null);
+                }
+
+                /** Represents a MetastoreConfig. */
+                class MetastoreConfig implements IMetastoreConfig {
+
+                    /**
+                     * Constructs a new MetastoreConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IMetastoreConfig);
+
+                    /** MetastoreConfig dataprocMetastoreService. */
+                    public dataprocMetastoreService: string;
+
+                    /**
+                     * Creates a new MetastoreConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetastoreConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IMetastoreConfig): google.cloud.dataproc.v1.MetastoreConfig;
+
+                    /**
+                     * Encodes the specified MetastoreConfig message. Does not implicitly {@link google.cloud.dataproc.v1.MetastoreConfig.verify|verify} messages.
+                     * @param message MetastoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IMetastoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetastoreConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.MetastoreConfig.verify|verify} messages.
+                     * @param message MetastoreConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IMetastoreConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetastoreConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetastoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.MetastoreConfig;
+
+                    /**
+                     * Decodes a MetastoreConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetastoreConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.MetastoreConfig;
+
+                    /**
+                     * Verifies a MetastoreConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetastoreConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetastoreConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.MetastoreConfig;
+
+                    /**
+                     * Creates a plain object from a MetastoreConfig message. Also converts values to other types if specified.
+                     * @param message MetastoreConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.MetastoreConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetastoreConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -3480,6 +4133,234 @@ export namespace google {
 
                     /**
                      * Converts this UpdateClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StopClusterRequest. */
+                interface IStopClusterRequest {
+
+                    /** StopClusterRequest projectId */
+                    projectId?: (string|null);
+
+                    /** StopClusterRequest region */
+                    region?: (string|null);
+
+                    /** StopClusterRequest clusterName */
+                    clusterName?: (string|null);
+
+                    /** StopClusterRequest clusterUuid */
+                    clusterUuid?: (string|null);
+
+                    /** StopClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a StopClusterRequest. */
+                class StopClusterRequest implements IStopClusterRequest {
+
+                    /**
+                     * Constructs a new StopClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IStopClusterRequest);
+
+                    /** StopClusterRequest projectId. */
+                    public projectId: string;
+
+                    /** StopClusterRequest region. */
+                    public region: string;
+
+                    /** StopClusterRequest clusterName. */
+                    public clusterName: string;
+
+                    /** StopClusterRequest clusterUuid. */
+                    public clusterUuid: string;
+
+                    /** StopClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new StopClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IStopClusterRequest): google.cloud.dataproc.v1.StopClusterRequest;
+
+                    /**
+                     * Encodes the specified StopClusterRequest message. Does not implicitly {@link google.cloud.dataproc.v1.StopClusterRequest.verify|verify} messages.
+                     * @param message StopClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IStopClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopClusterRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.StopClusterRequest.verify|verify} messages.
+                     * @param message StopClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IStopClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.StopClusterRequest;
+
+                    /**
+                     * Decodes a StopClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.StopClusterRequest;
+
+                    /**
+                     * Verifies a StopClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.StopClusterRequest;
+
+                    /**
+                     * Creates a plain object from a StopClusterRequest message. Also converts values to other types if specified.
+                     * @param message StopClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.StopClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StartClusterRequest. */
+                interface IStartClusterRequest {
+
+                    /** StartClusterRequest projectId */
+                    projectId?: (string|null);
+
+                    /** StartClusterRequest region */
+                    region?: (string|null);
+
+                    /** StartClusterRequest clusterName */
+                    clusterName?: (string|null);
+
+                    /** StartClusterRequest clusterUuid */
+                    clusterUuid?: (string|null);
+
+                    /** StartClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a StartClusterRequest. */
+                class StartClusterRequest implements IStartClusterRequest {
+
+                    /**
+                     * Constructs a new StartClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IStartClusterRequest);
+
+                    /** StartClusterRequest projectId. */
+                    public projectId: string;
+
+                    /** StartClusterRequest region. */
+                    public region: string;
+
+                    /** StartClusterRequest clusterName. */
+                    public clusterName: string;
+
+                    /** StartClusterRequest clusterUuid. */
+                    public clusterUuid: string;
+
+                    /** StartClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new StartClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IStartClusterRequest): google.cloud.dataproc.v1.StartClusterRequest;
+
+                    /**
+                     * Encodes the specified StartClusterRequest message. Does not implicitly {@link google.cloud.dataproc.v1.StartClusterRequest.verify|verify} messages.
+                     * @param message StartClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IStartClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartClusterRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.StartClusterRequest.verify|verify} messages.
+                     * @param message StartClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IStartClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.StartClusterRequest;
+
+                    /**
+                     * Decodes a StartClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.StartClusterRequest;
+
+                    /**
+                     * Verifies a StartClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.StartClusterRequest;
+
+                    /**
+                     * Creates a plain object from a StartClusterRequest message. Also converts values to other types if specified.
+                     * @param message StartClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.StartClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartClusterRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -4220,9 +5101,15 @@ export namespace google {
                 enum Component {
                     COMPONENT_UNSPECIFIED = 0,
                     ANACONDA = 5,
+                    DOCKER = 13,
+                    DRUID = 9,
+                    FLINK = 14,
+                    HBASE = 11,
                     HIVE_WEBHCAT = 3,
                     JUPYTER = 1,
                     PRESTO = 6,
+                    RANGER = 12,
+                    SOLR = 10,
                     ZEPPELIN = 4,
                     ZOOKEEPER = 8
                 }
@@ -5628,6 +6515,9 @@ export namespace google {
 
                     /** JobPlacement clusterUuid */
                     clusterUuid?: (string|null);
+
+                    /** JobPlacement clusterLabels */
+                    clusterLabels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a JobPlacement. */
@@ -5644,6 +6534,9 @@ export namespace google {
 
                     /** JobPlacement clusterUuid. */
                     public clusterUuid: string;
+
+                    /** JobPlacement clusterLabels. */
+                    public clusterLabels: { [k: string]: string };
 
                     /**
                      * Creates a new JobPlacement instance using the specified properties.
@@ -6275,6 +7168,9 @@ export namespace google {
 
                     /** JobScheduling maxFailuresPerHour */
                     maxFailuresPerHour?: (number|null);
+
+                    /** JobScheduling maxFailuresTotal */
+                    maxFailuresTotal?: (number|null);
                 }
 
                 /** Represents a JobScheduling. */
@@ -6288,6 +7184,9 @@ export namespace google {
 
                     /** JobScheduling maxFailuresPerHour. */
                     public maxFailuresPerHour: number;
+
+                    /** JobScheduling maxFailuresTotal. */
+                    public maxFailuresTotal: number;
 
                     /**
                      * Creates a new JobScheduling instance using the specified properties.
@@ -7679,6 +8578,9 @@ export namespace google {
 
                     /** WorkflowTemplate parameters */
                     parameters?: (google.cloud.dataproc.v1.ITemplateParameter[]|null);
+
+                    /** WorkflowTemplate dagTimeout */
+                    dagTimeout?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a WorkflowTemplate. */
@@ -7716,6 +8618,9 @@ export namespace google {
 
                     /** WorkflowTemplate parameters. */
                     public parameters: google.cloud.dataproc.v1.ITemplateParameter[];
+
+                    /** WorkflowTemplate dagTimeout. */
+                    public dagTimeout?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new WorkflowTemplate instance using the specified properties.
@@ -8666,6 +9571,15 @@ export namespace google {
 
                     /** WorkflowMetadata clusterUuid */
                     clusterUuid?: (string|null);
+
+                    /** WorkflowMetadata dagTimeout */
+                    dagTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkflowMetadata dagStartTime */
+                    dagStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkflowMetadata dagEndTime */
+                    dagEndTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a WorkflowMetadata. */
@@ -8709,6 +9623,15 @@ export namespace google {
 
                     /** WorkflowMetadata clusterUuid. */
                     public clusterUuid: string;
+
+                    /** WorkflowMetadata dagTimeout. */
+                    public dagTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkflowMetadata dagStartTime. */
+                    public dagStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkflowMetadata dagEndTime. */
+                    public dagEndTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new WorkflowMetadata instance using the specified properties.

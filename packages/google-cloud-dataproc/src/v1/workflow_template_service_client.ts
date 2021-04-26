@@ -922,7 +922,7 @@ export class WorkflowTemplateServiceClient {
    *   underscores (_), and hyphens (-). The maximum length is 40 characters.
    * @param {number[]} [request.parameters]
    *   Optional. Map from parameter names to values that should be used for those
-   *   parameters. Values may not exceed 100 characters.
+   *   parameters. Values may not exceed 1000 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1066,7 +1066,8 @@ export class WorkflowTemplateServiceClient {
    * Instantiates a template and begins execution.
    *
    * This method is equivalent to executing the sequence
-   * {@link google.cloud.dataproc.v1.WorkflowTemplateService.CreateWorkflowTemplate|CreateWorkflowTemplate}, {@link google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate|InstantiateWorkflowTemplate},
+   * {@link google.cloud.dataproc.v1.WorkflowTemplateService.CreateWorkflowTemplate|CreateWorkflowTemplate},
+   * {@link google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate|InstantiateWorkflowTemplate},
    * {@link google.cloud.dataproc.v1.WorkflowTemplateService.DeleteWorkflowTemplate|DeleteWorkflowTemplate}.
    *
    * The returned Operation can be used to track execution of

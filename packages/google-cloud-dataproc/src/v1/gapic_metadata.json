@@ -93,6 +93,16 @@
                 "updateCluster"
               ]
             },
+            "StopCluster": {
+              "methods": [
+                "stopCluster"
+              ]
+            },
+            "StartCluster": {
+              "methods": [
+                "startCluster"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "deleteCluster"
@@ -128,6 +138,16 @@
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
+              ]
+            },
+            "StopCluster": {
+              "methods": [
+                "stopCluster"
+              ]
+            },
+            "StartCluster": {
+              "methods": [
+                "startCluster"
               ]
             },
             "DeleteCluster": {

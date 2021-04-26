@@ -2653,6 +2653,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.dataproc.v1.ClusterController#stopCluster}.
+                         * @memberof google.cloud.dataproc.v1.ClusterController
+                         * @typedef StopClusterCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls StopCluster.
+                         * @function stopCluster
+                         * @memberof google.cloud.dataproc.v1.ClusterController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1.IStopClusterRequest} request StopClusterRequest message or plain object
+                         * @param {google.cloud.dataproc.v1.ClusterController.StopClusterCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ClusterController.prototype.stopCluster = function stopCluster(request, callback) {
+                            return this.rpcCall(stopCluster, $root.google.cloud.dataproc.v1.StopClusterRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "StopCluster" });
+    
+                        /**
+                         * Calls StopCluster.
+                         * @function stopCluster
+                         * @memberof google.cloud.dataproc.v1.ClusterController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1.IStopClusterRequest} request StopClusterRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.dataproc.v1.ClusterController#startCluster}.
+                         * @memberof google.cloud.dataproc.v1.ClusterController
+                         * @typedef StartClusterCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls StartCluster.
+                         * @function startCluster
+                         * @memberof google.cloud.dataproc.v1.ClusterController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1.IStartClusterRequest} request StartClusterRequest message or plain object
+                         * @param {google.cloud.dataproc.v1.ClusterController.StartClusterCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ClusterController.prototype.startCluster = function startCluster(request, callback) {
+                            return this.rpcCall(startCluster, $root.google.cloud.dataproc.v1.StartClusterRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "StartCluster" });
+    
+                        /**
+                         * Calls StartCluster.
+                         * @function startCluster
+                         * @memberof google.cloud.dataproc.v1.ClusterController
+                         * @instance
+                         * @param {google.cloud.dataproc.v1.IStartClusterRequest} request StartClusterRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.dataproc.v1.ClusterController#deleteCluster}.
                          * @memberof google.cloud.dataproc.v1.ClusterController
                          * @typedef DeleteClusterCallback
@@ -3221,6 +3287,8 @@
                          * @property {google.cloud.dataproc.v1.ISecurityConfig|null} [securityConfig] ClusterConfig securityConfig
                          * @property {google.cloud.dataproc.v1.ILifecycleConfig|null} [lifecycleConfig] ClusterConfig lifecycleConfig
                          * @property {google.cloud.dataproc.v1.IEndpointConfig|null} [endpointConfig] ClusterConfig endpointConfig
+                         * @property {google.cloud.dataproc.v1.IMetastoreConfig|null} [metastoreConfig] ClusterConfig metastoreConfig
+                         * @property {google.cloud.dataproc.v1.IGkeClusterConfig|null} [gkeClusterConfig] ClusterConfig gkeClusterConfig
                          */
     
                         /**
@@ -3344,6 +3412,22 @@
                         ClusterConfig.prototype.endpointConfig = null;
     
                         /**
+                         * ClusterConfig metastoreConfig.
+                         * @member {google.cloud.dataproc.v1.IMetastoreConfig|null|undefined} metastoreConfig
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.metastoreConfig = null;
+    
+                        /**
+                         * ClusterConfig gkeClusterConfig.
+                         * @member {google.cloud.dataproc.v1.IGkeClusterConfig|null|undefined} gkeClusterConfig
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.gkeClusterConfig = null;
+    
+                        /**
                          * Creates a new ClusterConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ClusterConfig
@@ -3394,6 +3478,10 @@
                                 $root.google.cloud.dataproc.v1.AutoscalingConfig.encode(message.autoscalingConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.endpointConfig != null && Object.hasOwnProperty.call(message, "endpointConfig"))
                                 $root.google.cloud.dataproc.v1.EndpointConfig.encode(message.endpointConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.metastoreConfig != null && Object.hasOwnProperty.call(message, "metastoreConfig"))
+                                $root.google.cloud.dataproc.v1.MetastoreConfig.encode(message.metastoreConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.gkeClusterConfig != null && Object.hasOwnProperty.call(message, "gkeClusterConfig"))
+                                $root.google.cloud.dataproc.v1.GkeClusterConfig.encode(message.gkeClusterConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -3468,6 +3556,12 @@
                                     break;
                                 case 19:
                                     message.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 20:
+                                    message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 21:
+                                    message.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3569,6 +3663,16 @@
                                 if (error)
                                     return "endpointConfig." + error;
                             }
+                            if (message.metastoreConfig != null && message.hasOwnProperty("metastoreConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.MetastoreConfig.verify(message.metastoreConfig);
+                                if (error)
+                                    return "metastoreConfig." + error;
+                            }
+                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.GkeClusterConfig.verify(message.gkeClusterConfig);
+                                if (error)
+                                    return "gkeClusterConfig." + error;
+                            }
                             return null;
                         };
     
@@ -3648,6 +3752,16 @@
                                     throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.endpointConfig: object expected");
                                 message.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.fromObject(object.endpointConfig);
                             }
+                            if (object.metastoreConfig != null) {
+                                if (typeof object.metastoreConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.metastoreConfig: object expected");
+                                message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.fromObject(object.metastoreConfig);
+                            }
+                            if (object.gkeClusterConfig != null) {
+                                if (typeof object.gkeClusterConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.gkeClusterConfig: object expected");
+                                message.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.fromObject(object.gkeClusterConfig);
+                            }
                             return message;
                         };
     
@@ -3679,6 +3793,8 @@
                                 object.lifecycleConfig = null;
                                 object.autoscalingConfig = null;
                                 object.endpointConfig = null;
+                                object.metastoreConfig = null;
+                                object.gkeClusterConfig = null;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -3709,6 +3825,10 @@
                                 object.autoscalingConfig = $root.google.cloud.dataproc.v1.AutoscalingConfig.toObject(message.autoscalingConfig, options);
                             if (message.endpointConfig != null && message.hasOwnProperty("endpointConfig"))
                                 object.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.toObject(message.endpointConfig, options);
+                            if (message.metastoreConfig != null && message.hasOwnProperty("metastoreConfig"))
+                                object.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.toObject(message.metastoreConfig, options);
+                            if (message.gkeClusterConfig != null && message.hasOwnProperty("gkeClusterConfig"))
+                                object.gkeClusterConfig = $root.google.cloud.dataproc.v1.GkeClusterConfig.toObject(message.gkeClusterConfig, options);
                             return object;
                         };
     
@@ -3724,6 +3844,408 @@
                         };
     
                         return ClusterConfig;
+                    })();
+    
+                    v1.GkeClusterConfig = (function() {
+    
+                        /**
+                         * Properties of a GkeClusterConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IGkeClusterConfig
+                         * @property {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null} [namespacedGkeDeploymentTarget] GkeClusterConfig namespacedGkeDeploymentTarget
+                         */
+    
+                        /**
+                         * Constructs a new GkeClusterConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a GkeClusterConfig.
+                         * @implements IGkeClusterConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig=} [properties] Properties to set
+                         */
+                        function GkeClusterConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeClusterConfig namespacedGkeDeploymentTarget.
+                         * @member {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget|null|undefined} namespacedGkeDeploymentTarget
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @instance
+                         */
+                        GkeClusterConfig.prototype.namespacedGkeDeploymentTarget = null;
+    
+                        /**
+                         * Creates a new GkeClusterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig instance
+                         */
+                        GkeClusterConfig.create = function create(properties) {
+                            return new GkeClusterConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeClusterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeClusterConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespacedGkeDeploymentTarget != null && Object.hasOwnProperty.call(message, "namespacedGkeDeploymentTarget"))
+                                $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.encode(message.namespacedGkeDeploymentTarget, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeClusterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IGkeClusterConfig} message GkeClusterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeClusterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeClusterConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeClusterConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeClusterConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeClusterConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeClusterConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeClusterConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeClusterConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.namespacedGkeDeploymentTarget != null && message.hasOwnProperty("namespacedGkeDeploymentTarget")) {
+                                var error = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify(message.namespacedGkeDeploymentTarget);
+                                if (error)
+                                    return "namespacedGkeDeploymentTarget." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeClusterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.GkeClusterConfig} GkeClusterConfig
+                         */
+                        GkeClusterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.GkeClusterConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.GkeClusterConfig();
+                            if (object.namespacedGkeDeploymentTarget != null) {
+                                if (typeof object.namespacedGkeDeploymentTarget !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GkeClusterConfig.namespacedGkeDeploymentTarget: object expected");
+                                message.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.fromObject(object.namespacedGkeDeploymentTarget);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeClusterConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.GkeClusterConfig} message GkeClusterConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeClusterConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.namespacedGkeDeploymentTarget = null;
+                            if (message.namespacedGkeDeploymentTarget != null && message.hasOwnProperty("namespacedGkeDeploymentTarget"))
+                                object.namespacedGkeDeploymentTarget = $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.toObject(message.namespacedGkeDeploymentTarget, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeClusterConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeClusterConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        GkeClusterConfig.NamespacedGkeDeploymentTarget = (function() {
+    
+                            /**
+                             * Properties of a NamespacedGkeDeploymentTarget.
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                             * @interface INamespacedGkeDeploymentTarget
+                             * @property {string|null} [targetGkeCluster] NamespacedGkeDeploymentTarget targetGkeCluster
+                             * @property {string|null} [clusterNamespace] NamespacedGkeDeploymentTarget clusterNamespace
+                             */
+    
+                            /**
+                             * Constructs a new NamespacedGkeDeploymentTarget.
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig
+                             * @classdesc Represents a NamespacedGkeDeploymentTarget.
+                             * @implements INamespacedGkeDeploymentTarget
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget=} [properties] Properties to set
+                             */
+                            function NamespacedGkeDeploymentTarget(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NamespacedGkeDeploymentTarget targetGkeCluster.
+                             * @member {string} targetGkeCluster
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @instance
+                             */
+                            NamespacedGkeDeploymentTarget.prototype.targetGkeCluster = "";
+    
+                            /**
+                             * NamespacedGkeDeploymentTarget clusterNamespace.
+                             * @member {string} clusterNamespace
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @instance
+                             */
+                            NamespacedGkeDeploymentTarget.prototype.clusterNamespace = "";
+    
+                            /**
+                             * Creates a new NamespacedGkeDeploymentTarget instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget instance
+                             */
+                            NamespacedGkeDeploymentTarget.create = function create(properties) {
+                                return new NamespacedGkeDeploymentTarget(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NamespacedGkeDeploymentTarget message. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NamespacedGkeDeploymentTarget.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.targetGkeCluster != null && Object.hasOwnProperty.call(message, "targetGkeCluster"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetGkeCluster);
+                                if (message.clusterNamespace != null && Object.hasOwnProperty.call(message, "clusterNamespace"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.clusterNamespace);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NamespacedGkeDeploymentTarget message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.INamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NamespacedGkeDeploymentTarget.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NamespacedGkeDeploymentTarget.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.targetGkeCluster = reader.string();
+                                        break;
+                                    case 2:
+                                        message.clusterNamespace = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NamespacedGkeDeploymentTarget message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NamespacedGkeDeploymentTarget.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NamespacedGkeDeploymentTarget message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NamespacedGkeDeploymentTarget.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.targetGkeCluster != null && message.hasOwnProperty("targetGkeCluster"))
+                                    if (!$util.isString(message.targetGkeCluster))
+                                        return "targetGkeCluster: string expected";
+                                if (message.clusterNamespace != null && message.hasOwnProperty("clusterNamespace"))
+                                    if (!$util.isString(message.clusterNamespace))
+                                        return "clusterNamespace: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NamespacedGkeDeploymentTarget message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} NamespacedGkeDeploymentTarget
+                             */
+                            NamespacedGkeDeploymentTarget.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget();
+                                if (object.targetGkeCluster != null)
+                                    message.targetGkeCluster = String(object.targetGkeCluster);
+                                if (object.clusterNamespace != null)
+                                    message.clusterNamespace = String(object.clusterNamespace);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NamespacedGkeDeploymentTarget message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @static
+                             * @param {google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget} message NamespacedGkeDeploymentTarget
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NamespacedGkeDeploymentTarget.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.targetGkeCluster = "";
+                                    object.clusterNamespace = "";
+                                }
+                                if (message.targetGkeCluster != null && message.hasOwnProperty("targetGkeCluster"))
+                                    object.targetGkeCluster = message.targetGkeCluster;
+                                if (message.clusterNamespace != null && message.hasOwnProperty("clusterNamespace"))
+                                    object.clusterNamespace = message.clusterNamespace;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NamespacedGkeDeploymentTarget to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NamespacedGkeDeploymentTarget.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return NamespacedGkeDeploymentTarget;
+                        })();
+    
+                        return GkeClusterConfig;
                     })();
     
                     v1.EndpointConfig = (function() {
@@ -4355,11 +4877,14 @@
                          * @property {string|null} [networkUri] GceClusterConfig networkUri
                          * @property {string|null} [subnetworkUri] GceClusterConfig subnetworkUri
                          * @property {boolean|null} [internalIpOnly] GceClusterConfig internalIpOnly
+                         * @property {google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess|null} [privateIpv6GoogleAccess] GceClusterConfig privateIpv6GoogleAccess
                          * @property {string|null} [serviceAccount] GceClusterConfig serviceAccount
                          * @property {Array.<string>|null} [serviceAccountScopes] GceClusterConfig serviceAccountScopes
                          * @property {Array.<string>|null} [tags] GceClusterConfig tags
                          * @property {Object.<string,string>|null} [metadata] GceClusterConfig metadata
                          * @property {google.cloud.dataproc.v1.IReservationAffinity|null} [reservationAffinity] GceClusterConfig reservationAffinity
+                         * @property {google.cloud.dataproc.v1.INodeGroupAffinity|null} [nodeGroupAffinity] GceClusterConfig nodeGroupAffinity
+                         * @property {google.cloud.dataproc.v1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] GceClusterConfig shieldedInstanceConfig
                          */
     
                         /**
@@ -4413,6 +4938,14 @@
                         GceClusterConfig.prototype.internalIpOnly = false;
     
                         /**
+                         * GceClusterConfig privateIpv6GoogleAccess.
+                         * @member {google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess} privateIpv6GoogleAccess
+                         * @memberof google.cloud.dataproc.v1.GceClusterConfig
+                         * @instance
+                         */
+                        GceClusterConfig.prototype.privateIpv6GoogleAccess = 0;
+    
+                        /**
                          * GceClusterConfig serviceAccount.
                          * @member {string} serviceAccount
                          * @memberof google.cloud.dataproc.v1.GceClusterConfig
@@ -4451,6 +4984,22 @@
                          * @instance
                          */
                         GceClusterConfig.prototype.reservationAffinity = null;
+    
+                        /**
+                         * GceClusterConfig nodeGroupAffinity.
+                         * @member {google.cloud.dataproc.v1.INodeGroupAffinity|null|undefined} nodeGroupAffinity
+                         * @memberof google.cloud.dataproc.v1.GceClusterConfig
+                         * @instance
+                         */
+                        GceClusterConfig.prototype.nodeGroupAffinity = null;
+    
+                        /**
+                         * GceClusterConfig shieldedInstanceConfig.
+                         * @member {google.cloud.dataproc.v1.IShieldedInstanceConfig|null|undefined} shieldedInstanceConfig
+                         * @memberof google.cloud.dataproc.v1.GceClusterConfig
+                         * @instance
+                         */
+                        GceClusterConfig.prototype.shieldedInstanceConfig = null;
     
                         /**
                          * Creates a new GceClusterConfig instance using the specified properties.
@@ -4497,6 +5046,12 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.serviceAccount);
                             if (message.reservationAffinity != null && Object.hasOwnProperty.call(message, "reservationAffinity"))
                                 $root.google.cloud.dataproc.v1.ReservationAffinity.encode(message.reservationAffinity, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.privateIpv6GoogleAccess != null && Object.hasOwnProperty.call(message, "privateIpv6GoogleAccess"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.privateIpv6GoogleAccess);
+                            if (message.nodeGroupAffinity != null && Object.hasOwnProperty.call(message, "nodeGroupAffinity"))
+                                $root.google.cloud.dataproc.v1.NodeGroupAffinity.encode(message.nodeGroupAffinity, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
+                                $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -4543,6 +5098,9 @@
                                 case 7:
                                     message.internalIpOnly = reader.bool();
                                     break;
+                                case 12:
+                                    message.privateIpv6GoogleAccess = reader.int32();
+                                    break;
                                 case 8:
                                     message.serviceAccount = reader.string();
                                     break;
@@ -4580,6 +5138,12 @@
                                     break;
                                 case 11:
                                     message.reservationAffinity = $root.google.cloud.dataproc.v1.ReservationAffinity.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.nodeGroupAffinity = $root.google.cloud.dataproc.v1.NodeGroupAffinity.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    message.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4628,6 +5192,16 @@
                             if (message.internalIpOnly != null && message.hasOwnProperty("internalIpOnly"))
                                 if (typeof message.internalIpOnly !== "boolean")
                                     return "internalIpOnly: boolean expected";
+                            if (message.privateIpv6GoogleAccess != null && message.hasOwnProperty("privateIpv6GoogleAccess"))
+                                switch (message.privateIpv6GoogleAccess) {
+                                default:
+                                    return "privateIpv6GoogleAccess: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
@@ -4658,6 +5232,16 @@
                                 if (error)
                                     return "reservationAffinity." + error;
                             }
+                            if (message.nodeGroupAffinity != null && message.hasOwnProperty("nodeGroupAffinity")) {
+                                var error = $root.google.cloud.dataproc.v1.NodeGroupAffinity.verify(message.nodeGroupAffinity);
+                                if (error)
+                                    return "nodeGroupAffinity." + error;
+                            }
+                            if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.verify(message.shieldedInstanceConfig);
+                                if (error)
+                                    return "shieldedInstanceConfig." + error;
+                            }
                             return null;
                         };
     
@@ -4681,6 +5265,24 @@
                                 message.subnetworkUri = String(object.subnetworkUri);
                             if (object.internalIpOnly != null)
                                 message.internalIpOnly = Boolean(object.internalIpOnly);
+                            switch (object.privateIpv6GoogleAccess) {
+                            case "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED":
+                            case 0:
+                                message.privateIpv6GoogleAccess = 0;
+                                break;
+                            case "INHERIT_FROM_SUBNETWORK":
+                            case 1:
+                                message.privateIpv6GoogleAccess = 1;
+                                break;
+                            case "OUTBOUND":
+                            case 2:
+                                message.privateIpv6GoogleAccess = 2;
+                                break;
+                            case "BIDIRECTIONAL":
+                            case 3:
+                                message.privateIpv6GoogleAccess = 3;
+                                break;
+                            }
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
                             if (object.serviceAccountScopes) {
@@ -4708,6 +5310,16 @@
                                 if (typeof object.reservationAffinity !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.reservationAffinity: object expected");
                                 message.reservationAffinity = $root.google.cloud.dataproc.v1.ReservationAffinity.fromObject(object.reservationAffinity);
+                            }
+                            if (object.nodeGroupAffinity != null) {
+                                if (typeof object.nodeGroupAffinity !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.nodeGroupAffinity: object expected");
+                                message.nodeGroupAffinity = $root.google.cloud.dataproc.v1.NodeGroupAffinity.fromObject(object.nodeGroupAffinity);
+                            }
+                            if (object.shieldedInstanceConfig != null) {
+                                if (typeof object.shieldedInstanceConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.shieldedInstanceConfig: object expected");
+                                message.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.fromObject(object.shieldedInstanceConfig);
                             }
                             return message;
                         };
@@ -4738,6 +5350,9 @@
                                 object.internalIpOnly = false;
                                 object.serviceAccount = "";
                                 object.reservationAffinity = null;
+                                object.privateIpv6GoogleAccess = options.enums === String ? "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED" : 0;
+                                object.nodeGroupAffinity = null;
+                                object.shieldedInstanceConfig = null;
                             }
                             if (message.zoneUri != null && message.hasOwnProperty("zoneUri"))
                                 object.zoneUri = message.zoneUri;
@@ -4767,6 +5382,12 @@
                                 object.serviceAccount = message.serviceAccount;
                             if (message.reservationAffinity != null && message.hasOwnProperty("reservationAffinity"))
                                 object.reservationAffinity = $root.google.cloud.dataproc.v1.ReservationAffinity.toObject(message.reservationAffinity, options);
+                            if (message.privateIpv6GoogleAccess != null && message.hasOwnProperty("privateIpv6GoogleAccess"))
+                                object.privateIpv6GoogleAccess = options.enums === String ? $root.google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess[message.privateIpv6GoogleAccess] : message.privateIpv6GoogleAccess;
+                            if (message.nodeGroupAffinity != null && message.hasOwnProperty("nodeGroupAffinity"))
+                                object.nodeGroupAffinity = $root.google.cloud.dataproc.v1.NodeGroupAffinity.toObject(message.nodeGroupAffinity, options);
+                            if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
+                                object.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                             return object;
                         };
     
@@ -4781,7 +5402,444 @@
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
+                        /**
+                         * PrivateIpv6GoogleAccess enum.
+                         * @name google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess
+                         * @enum {number}
+                         * @property {number} PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED=0 PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED value
+                         * @property {number} INHERIT_FROM_SUBNETWORK=1 INHERIT_FROM_SUBNETWORK value
+                         * @property {number} OUTBOUND=2 OUTBOUND value
+                         * @property {number} BIDIRECTIONAL=3 BIDIRECTIONAL value
+                         */
+                        GceClusterConfig.PrivateIpv6GoogleAccess = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INHERIT_FROM_SUBNETWORK"] = 1;
+                            values[valuesById[2] = "OUTBOUND"] = 2;
+                            values[valuesById[3] = "BIDIRECTIONAL"] = 3;
+                            return values;
+                        })();
+    
                         return GceClusterConfig;
+                    })();
+    
+                    v1.NodeGroupAffinity = (function() {
+    
+                        /**
+                         * Properties of a NodeGroupAffinity.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface INodeGroupAffinity
+                         * @property {string|null} [nodeGroupUri] NodeGroupAffinity nodeGroupUri
+                         */
+    
+                        /**
+                         * Constructs a new NodeGroupAffinity.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a NodeGroupAffinity.
+                         * @implements INodeGroupAffinity
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.INodeGroupAffinity=} [properties] Properties to set
+                         */
+                        function NodeGroupAffinity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NodeGroupAffinity nodeGroupUri.
+                         * @member {string} nodeGroupUri
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @instance
+                         */
+                        NodeGroupAffinity.prototype.nodeGroupUri = "";
+    
+                        /**
+                         * Creates a new NodeGroupAffinity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {google.cloud.dataproc.v1.INodeGroupAffinity=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.NodeGroupAffinity} NodeGroupAffinity instance
+                         */
+                        NodeGroupAffinity.create = function create(properties) {
+                            return new NodeGroupAffinity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NodeGroupAffinity message. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroupAffinity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {google.cloud.dataproc.v1.INodeGroupAffinity} message NodeGroupAffinity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeGroupAffinity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.nodeGroupUri != null && Object.hasOwnProperty.call(message, "nodeGroupUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.nodeGroupUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NodeGroupAffinity message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroupAffinity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {google.cloud.dataproc.v1.INodeGroupAffinity} message NodeGroupAffinity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeGroupAffinity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NodeGroupAffinity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.NodeGroupAffinity} NodeGroupAffinity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeGroupAffinity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.NodeGroupAffinity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.nodeGroupUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NodeGroupAffinity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.NodeGroupAffinity} NodeGroupAffinity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeGroupAffinity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NodeGroupAffinity message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NodeGroupAffinity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.nodeGroupUri != null && message.hasOwnProperty("nodeGroupUri"))
+                                if (!$util.isString(message.nodeGroupUri))
+                                    return "nodeGroupUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NodeGroupAffinity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.NodeGroupAffinity} NodeGroupAffinity
+                         */
+                        NodeGroupAffinity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.NodeGroupAffinity)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.NodeGroupAffinity();
+                            if (object.nodeGroupUri != null)
+                                message.nodeGroupUri = String(object.nodeGroupUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NodeGroupAffinity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @static
+                         * @param {google.cloud.dataproc.v1.NodeGroupAffinity} message NodeGroupAffinity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NodeGroupAffinity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.nodeGroupUri = "";
+                            if (message.nodeGroupUri != null && message.hasOwnProperty("nodeGroupUri"))
+                                object.nodeGroupUri = message.nodeGroupUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NodeGroupAffinity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.NodeGroupAffinity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NodeGroupAffinity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return NodeGroupAffinity;
+                    })();
+    
+                    v1.ShieldedInstanceConfig = (function() {
+    
+                        /**
+                         * Properties of a ShieldedInstanceConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IShieldedInstanceConfig
+                         * @property {boolean|null} [enableSecureBoot] ShieldedInstanceConfig enableSecureBoot
+                         * @property {boolean|null} [enableVtpm] ShieldedInstanceConfig enableVtpm
+                         * @property {boolean|null} [enableIntegrityMonitoring] ShieldedInstanceConfig enableIntegrityMonitoring
+                         */
+    
+                        /**
+                         * Constructs a new ShieldedInstanceConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a ShieldedInstanceConfig.
+                         * @implements IShieldedInstanceConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IShieldedInstanceConfig=} [properties] Properties to set
+                         */
+                        function ShieldedInstanceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ShieldedInstanceConfig enableSecureBoot.
+                         * @member {boolean} enableSecureBoot
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @instance
+                         */
+                        ShieldedInstanceConfig.prototype.enableSecureBoot = false;
+    
+                        /**
+                         * ShieldedInstanceConfig enableVtpm.
+                         * @member {boolean} enableVtpm
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @instance
+                         */
+                        ShieldedInstanceConfig.prototype.enableVtpm = false;
+    
+                        /**
+                         * ShieldedInstanceConfig enableIntegrityMonitoring.
+                         * @member {boolean} enableIntegrityMonitoring
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @instance
+                         */
+                        ShieldedInstanceConfig.prototype.enableIntegrityMonitoring = false;
+    
+                        /**
+                         * Creates a new ShieldedInstanceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IShieldedInstanceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.ShieldedInstanceConfig} ShieldedInstanceConfig instance
+                         */
+                        ShieldedInstanceConfig.create = function create(properties) {
+                            return new ShieldedInstanceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ShieldedInstanceConfig message. Does not implicitly {@link google.cloud.dataproc.v1.ShieldedInstanceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IShieldedInstanceConfig} message ShieldedInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShieldedInstanceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enableSecureBoot != null && Object.hasOwnProperty.call(message, "enableSecureBoot"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableSecureBoot);
+                            if (message.enableVtpm != null && Object.hasOwnProperty.call(message, "enableVtpm"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableVtpm);
+                            if (message.enableIntegrityMonitoring != null && Object.hasOwnProperty.call(message, "enableIntegrityMonitoring"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableIntegrityMonitoring);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ShieldedInstanceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IShieldedInstanceConfig} message ShieldedInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShieldedInstanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ShieldedInstanceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.ShieldedInstanceConfig} ShieldedInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShieldedInstanceConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ShieldedInstanceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.enableSecureBoot = reader.bool();
+                                    break;
+                                case 2:
+                                    message.enableVtpm = reader.bool();
+                                    break;
+                                case 3:
+                                    message.enableIntegrityMonitoring = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.ShieldedInstanceConfig} ShieldedInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShieldedInstanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ShieldedInstanceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ShieldedInstanceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
+                                if (typeof message.enableSecureBoot !== "boolean")
+                                    return "enableSecureBoot: boolean expected";
+                            if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm"))
+                                if (typeof message.enableVtpm !== "boolean")
+                                    return "enableVtpm: boolean expected";
+                            if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
+                                if (typeof message.enableIntegrityMonitoring !== "boolean")
+                                    return "enableIntegrityMonitoring: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.ShieldedInstanceConfig} ShieldedInstanceConfig
+                         */
+                        ShieldedInstanceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.ShieldedInstanceConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.ShieldedInstanceConfig();
+                            if (object.enableSecureBoot != null)
+                                message.enableSecureBoot = Boolean(object.enableSecureBoot);
+                            if (object.enableVtpm != null)
+                                message.enableVtpm = Boolean(object.enableVtpm);
+                            if (object.enableIntegrityMonitoring != null)
+                                message.enableIntegrityMonitoring = Boolean(object.enableIntegrityMonitoring);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ShieldedInstanceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ShieldedInstanceConfig} message ShieldedInstanceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ShieldedInstanceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.enableSecureBoot = false;
+                                object.enableVtpm = false;
+                                object.enableIntegrityMonitoring = false;
+                            }
+                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
+                                object.enableSecureBoot = message.enableSecureBoot;
+                            if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm"))
+                                object.enableVtpm = message.enableVtpm;
+                            if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
+                                object.enableIntegrityMonitoring = message.enableIntegrityMonitoring;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ShieldedInstanceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ShieldedInstanceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ShieldedInstanceConfig;
                     })();
     
                     v1.InstanceGroupConfig = (function() {
@@ -6302,6 +7360,9 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.detail != null && message.hasOwnProperty("detail"))
@@ -6360,6 +7421,18 @@
                             case "UPDATING":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "STOPPING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "STOPPED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "STARTING":
+                            case 8:
+                                message.state = 8;
                                 break;
                             }
                             if (object.detail != null)
@@ -6437,6 +7510,9 @@
                          * @property {number} ERROR=3 ERROR value
                          * @property {number} DELETING=4 DELETING value
                          * @property {number} UPDATING=5 UPDATING value
+                         * @property {number} STOPPING=6 STOPPING value
+                         * @property {number} STOPPED=7 STOPPED value
+                         * @property {number} STARTING=8 STARTING value
                          */
                         ClusterStatus.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6446,6 +7522,9 @@
                             values[valuesById[3] = "ERROR"] = 3;
                             values[valuesById[4] = "DELETING"] = 4;
                             values[valuesById[5] = "UPDATING"] = 5;
+                            values[valuesById[6] = "STOPPING"] = 6;
+                            values[valuesById[7] = "STOPPED"] = 7;
+                            values[valuesById[8] = "STARTING"] = 8;
                             return values;
                         })();
     
@@ -6475,6 +7554,7 @@
                          * @memberof google.cloud.dataproc.v1
                          * @interface ISecurityConfig
                          * @property {google.cloud.dataproc.v1.IKerberosConfig|null} [kerberosConfig] SecurityConfig kerberosConfig
+                         * @property {google.cloud.dataproc.v1.IIdentityConfig|null} [identityConfig] SecurityConfig identityConfig
                          */
     
                         /**
@@ -6499,6 +7579,14 @@
                          * @instance
                          */
                         SecurityConfig.prototype.kerberosConfig = null;
+    
+                        /**
+                         * SecurityConfig identityConfig.
+                         * @member {google.cloud.dataproc.v1.IIdentityConfig|null|undefined} identityConfig
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @instance
+                         */
+                        SecurityConfig.prototype.identityConfig = null;
     
                         /**
                          * Creates a new SecurityConfig instance using the specified properties.
@@ -6526,6 +7614,8 @@
                                 writer = $Writer.create();
                             if (message.kerberosConfig != null && Object.hasOwnProperty.call(message, "kerberosConfig"))
                                 $root.google.cloud.dataproc.v1.KerberosConfig.encode(message.kerberosConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.identityConfig != null && Object.hasOwnProperty.call(message, "identityConfig"))
+                                $root.google.cloud.dataproc.v1.IdentityConfig.encode(message.identityConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -6562,6 +7652,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.kerberosConfig = $root.google.cloud.dataproc.v1.KerberosConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.identityConfig = $root.google.cloud.dataproc.v1.IdentityConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6603,6 +7696,11 @@
                                 if (error)
                                     return "kerberosConfig." + error;
                             }
+                            if (message.identityConfig != null && message.hasOwnProperty("identityConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.IdentityConfig.verify(message.identityConfig);
+                                if (error)
+                                    return "identityConfig." + error;
+                            }
                             return null;
                         };
     
@@ -6623,6 +7721,11 @@
                                     throw TypeError(".google.cloud.dataproc.v1.SecurityConfig.kerberosConfig: object expected");
                                 message.kerberosConfig = $root.google.cloud.dataproc.v1.KerberosConfig.fromObject(object.kerberosConfig);
                             }
+                            if (object.identityConfig != null) {
+                                if (typeof object.identityConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.SecurityConfig.identityConfig: object expected");
+                                message.identityConfig = $root.google.cloud.dataproc.v1.IdentityConfig.fromObject(object.identityConfig);
+                            }
                             return message;
                         };
     
@@ -6639,10 +7742,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.kerberosConfig = null;
+                                object.identityConfig = null;
+                            }
                             if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig"))
                                 object.kerberosConfig = $root.google.cloud.dataproc.v1.KerberosConfig.toObject(message.kerberosConfig, options);
+                            if (message.identityConfig != null && message.hasOwnProperty("identityConfig"))
+                                object.identityConfig = $root.google.cloud.dataproc.v1.IdentityConfig.toObject(message.identityConfig, options);
                             return object;
                         };
     
@@ -7156,6 +8263,228 @@
                         return KerberosConfig;
                     })();
     
+                    v1.IdentityConfig = (function() {
+    
+                        /**
+                         * Properties of an IdentityConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IIdentityConfig
+                         * @property {Object.<string,string>|null} [userServiceAccountMapping] IdentityConfig userServiceAccountMapping
+                         */
+    
+                        /**
+                         * Constructs a new IdentityConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an IdentityConfig.
+                         * @implements IIdentityConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IIdentityConfig=} [properties] Properties to set
+                         */
+                        function IdentityConfig(properties) {
+                            this.userServiceAccountMapping = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IdentityConfig userServiceAccountMapping.
+                         * @member {Object.<string,string>} userServiceAccountMapping
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @instance
+                         */
+                        IdentityConfig.prototype.userServiceAccountMapping = $util.emptyObject;
+    
+                        /**
+                         * Creates a new IdentityConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IIdentityConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.IdentityConfig} IdentityConfig instance
+                         */
+                        IdentityConfig.create = function create(properties) {
+                            return new IdentityConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IdentityConfig message. Does not implicitly {@link google.cloud.dataproc.v1.IdentityConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IIdentityConfig} message IdentityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IdentityConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.userServiceAccountMapping != null && Object.hasOwnProperty.call(message, "userServiceAccountMapping"))
+                                for (var keys = Object.keys(message.userServiceAccountMapping), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userServiceAccountMapping[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IdentityConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.IdentityConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IIdentityConfig} message IdentityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IdentityConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IdentityConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.IdentityConfig} IdentityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IdentityConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.IdentityConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (message.userServiceAccountMapping === $util.emptyObject)
+                                        message.userServiceAccountMapping = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.userServiceAccountMapping[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IdentityConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.IdentityConfig} IdentityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IdentityConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IdentityConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IdentityConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.userServiceAccountMapping != null && message.hasOwnProperty("userServiceAccountMapping")) {
+                                if (!$util.isObject(message.userServiceAccountMapping))
+                                    return "userServiceAccountMapping: object expected";
+                                var key = Object.keys(message.userServiceAccountMapping);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.userServiceAccountMapping[key[i]]))
+                                        return "userServiceAccountMapping: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IdentityConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.IdentityConfig} IdentityConfig
+                         */
+                        IdentityConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.IdentityConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.IdentityConfig();
+                            if (object.userServiceAccountMapping) {
+                                if (typeof object.userServiceAccountMapping !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.IdentityConfig.userServiceAccountMapping: object expected");
+                                message.userServiceAccountMapping = {};
+                                for (var keys = Object.keys(object.userServiceAccountMapping), i = 0; i < keys.length; ++i)
+                                    message.userServiceAccountMapping[keys[i]] = String(object.userServiceAccountMapping[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IdentityConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IdentityConfig} message IdentityConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IdentityConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.userServiceAccountMapping = {};
+                            var keys2;
+                            if (message.userServiceAccountMapping && (keys2 = Object.keys(message.userServiceAccountMapping)).length) {
+                                object.userServiceAccountMapping = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.userServiceAccountMapping[keys2[j]] = message.userServiceAccountMapping[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IdentityConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.IdentityConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IdentityConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return IdentityConfig;
+                    })();
+    
                     v1.SoftwareConfig = (function() {
     
                         /**
@@ -7367,9 +8696,15 @@
                                         return "optionalComponents: enum value[] expected";
                                     case 0:
                                     case 5:
+                                    case 13:
+                                    case 9:
+                                    case 14:
+                                    case 11:
                                     case 3:
                                     case 1:
                                     case 6:
+                                    case 12:
+                                    case 10:
                                     case 4:
                                     case 8:
                                         break;
@@ -7414,6 +8749,22 @@
                                     case 5:
                                         message.optionalComponents[i] = 5;
                                         break;
+                                    case "DOCKER":
+                                    case 13:
+                                        message.optionalComponents[i] = 13;
+                                        break;
+                                    case "DRUID":
+                                    case 9:
+                                        message.optionalComponents[i] = 9;
+                                        break;
+                                    case "FLINK":
+                                    case 14:
+                                        message.optionalComponents[i] = 14;
+                                        break;
+                                    case "HBASE":
+                                    case 11:
+                                        message.optionalComponents[i] = 11;
+                                        break;
                                     case "HIVE_WEBHCAT":
                                     case 3:
                                         message.optionalComponents[i] = 3;
@@ -7425,6 +8776,14 @@
                                     case "PRESTO":
                                     case 6:
                                         message.optionalComponents[i] = 6;
+                                        break;
+                                    case "RANGER":
+                                    case 12:
+                                        message.optionalComponents[i] = 12;
+                                        break;
+                                    case "SOLR":
+                                    case 10:
+                                        message.optionalComponents[i] = 10;
                                         break;
                                     case "ZEPPELIN":
                                     case 4:
@@ -7787,6 +9146,193 @@
                         };
     
                         return LifecycleConfig;
+                    })();
+    
+                    v1.MetastoreConfig = (function() {
+    
+                        /**
+                         * Properties of a MetastoreConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IMetastoreConfig
+                         * @property {string|null} [dataprocMetastoreService] MetastoreConfig dataprocMetastoreService
+                         */
+    
+                        /**
+                         * Constructs a new MetastoreConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a MetastoreConfig.
+                         * @implements IMetastoreConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IMetastoreConfig=} [properties] Properties to set
+                         */
+                        function MetastoreConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetastoreConfig dataprocMetastoreService.
+                         * @member {string} dataprocMetastoreService
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @instance
+                         */
+                        MetastoreConfig.prototype.dataprocMetastoreService = "";
+    
+                        /**
+                         * Creates a new MetastoreConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IMetastoreConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.MetastoreConfig} MetastoreConfig instance
+                         */
+                        MetastoreConfig.create = function create(properties) {
+                            return new MetastoreConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetastoreConfig message. Does not implicitly {@link google.cloud.dataproc.v1.MetastoreConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IMetastoreConfig} message MetastoreConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetastoreConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataprocMetastoreService != null && Object.hasOwnProperty.call(message, "dataprocMetastoreService"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataprocMetastoreService);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetastoreConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.MetastoreConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IMetastoreConfig} message MetastoreConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetastoreConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetastoreConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.MetastoreConfig} MetastoreConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetastoreConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.MetastoreConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dataprocMetastoreService = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetastoreConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.MetastoreConfig} MetastoreConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetastoreConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetastoreConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetastoreConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataprocMetastoreService != null && message.hasOwnProperty("dataprocMetastoreService"))
+                                if (!$util.isString(message.dataprocMetastoreService))
+                                    return "dataprocMetastoreService: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetastoreConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.MetastoreConfig} MetastoreConfig
+                         */
+                        MetastoreConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.MetastoreConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.MetastoreConfig();
+                            if (object.dataprocMetastoreService != null)
+                                message.dataprocMetastoreService = String(object.dataprocMetastoreService);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetastoreConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.MetastoreConfig} message MetastoreConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetastoreConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.dataprocMetastoreService = "";
+                            if (message.dataprocMetastoreService != null && message.hasOwnProperty("dataprocMetastoreService"))
+                                object.dataprocMetastoreService = message.dataprocMetastoreService;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetastoreConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.MetastoreConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetastoreConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetastoreConfig;
                     })();
     
                     v1.ClusterMetrics = (function() {
@@ -8680,6 +10226,558 @@
                         };
     
                         return UpdateClusterRequest;
+                    })();
+    
+                    v1.StopClusterRequest = (function() {
+    
+                        /**
+                         * Properties of a StopClusterRequest.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IStopClusterRequest
+                         * @property {string|null} [projectId] StopClusterRequest projectId
+                         * @property {string|null} [region] StopClusterRequest region
+                         * @property {string|null} [clusterName] StopClusterRequest clusterName
+                         * @property {string|null} [clusterUuid] StopClusterRequest clusterUuid
+                         * @property {string|null} [requestId] StopClusterRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new StopClusterRequest.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a StopClusterRequest.
+                         * @implements IStopClusterRequest
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IStopClusterRequest=} [properties] Properties to set
+                         */
+                        function StopClusterRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StopClusterRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @instance
+                         */
+                        StopClusterRequest.prototype.projectId = "";
+    
+                        /**
+                         * StopClusterRequest region.
+                         * @member {string} region
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @instance
+                         */
+                        StopClusterRequest.prototype.region = "";
+    
+                        /**
+                         * StopClusterRequest clusterName.
+                         * @member {string} clusterName
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @instance
+                         */
+                        StopClusterRequest.prototype.clusterName = "";
+    
+                        /**
+                         * StopClusterRequest clusterUuid.
+                         * @member {string} clusterUuid
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @instance
+                         */
+                        StopClusterRequest.prototype.clusterUuid = "";
+    
+                        /**
+                         * StopClusterRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @instance
+                         */
+                        StopClusterRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new StopClusterRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IStopClusterRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.StopClusterRequest} StopClusterRequest instance
+                         */
+                        StopClusterRequest.create = function create(properties) {
+                            return new StopClusterRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StopClusterRequest message. Does not implicitly {@link google.cloud.dataproc.v1.StopClusterRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IStopClusterRequest} message StopClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StopClusterRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.region);
+                            if (message.clusterName != null && Object.hasOwnProperty.call(message, "clusterName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clusterName);
+                            if (message.clusterUuid != null && Object.hasOwnProperty.call(message, "clusterUuid"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.clusterUuid);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StopClusterRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.StopClusterRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IStopClusterRequest} message StopClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StopClusterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StopClusterRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.StopClusterRequest} StopClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StopClusterRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.StopClusterRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 2:
+                                    message.region = reader.string();
+                                    break;
+                                case 3:
+                                    message.clusterName = reader.string();
+                                    break;
+                                case 4:
+                                    message.clusterUuid = reader.string();
+                                    break;
+                                case 5:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StopClusterRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.StopClusterRequest} StopClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StopClusterRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StopClusterRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StopClusterRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                if (!$util.isString(message.clusterName))
+                                    return "clusterName: string expected";
+                            if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
+                                if (!$util.isString(message.clusterUuid))
+                                    return "clusterUuid: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StopClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.StopClusterRequest} StopClusterRequest
+                         */
+                        StopClusterRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.StopClusterRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.StopClusterRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.clusterName != null)
+                                message.clusterName = String(object.clusterName);
+                            if (object.clusterUuid != null)
+                                message.clusterUuid = String(object.clusterUuid);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StopClusterRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.StopClusterRequest} message StopClusterRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StopClusterRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.region = "";
+                                object.clusterName = "";
+                                object.clusterUuid = "";
+                                object.requestId = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                object.clusterName = message.clusterName;
+                            if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
+                                object.clusterUuid = message.clusterUuid;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StopClusterRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.StopClusterRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StopClusterRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return StopClusterRequest;
+                    })();
+    
+                    v1.StartClusterRequest = (function() {
+    
+                        /**
+                         * Properties of a StartClusterRequest.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IStartClusterRequest
+                         * @property {string|null} [projectId] StartClusterRequest projectId
+                         * @property {string|null} [region] StartClusterRequest region
+                         * @property {string|null} [clusterName] StartClusterRequest clusterName
+                         * @property {string|null} [clusterUuid] StartClusterRequest clusterUuid
+                         * @property {string|null} [requestId] StartClusterRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new StartClusterRequest.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a StartClusterRequest.
+                         * @implements IStartClusterRequest
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IStartClusterRequest=} [properties] Properties to set
+                         */
+                        function StartClusterRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StartClusterRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @instance
+                         */
+                        StartClusterRequest.prototype.projectId = "";
+    
+                        /**
+                         * StartClusterRequest region.
+                         * @member {string} region
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @instance
+                         */
+                        StartClusterRequest.prototype.region = "";
+    
+                        /**
+                         * StartClusterRequest clusterName.
+                         * @member {string} clusterName
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @instance
+                         */
+                        StartClusterRequest.prototype.clusterName = "";
+    
+                        /**
+                         * StartClusterRequest clusterUuid.
+                         * @member {string} clusterUuid
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @instance
+                         */
+                        StartClusterRequest.prototype.clusterUuid = "";
+    
+                        /**
+                         * StartClusterRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @instance
+                         */
+                        StartClusterRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new StartClusterRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IStartClusterRequest=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.StartClusterRequest} StartClusterRequest instance
+                         */
+                        StartClusterRequest.create = function create(properties) {
+                            return new StartClusterRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StartClusterRequest message. Does not implicitly {@link google.cloud.dataproc.v1.StartClusterRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IStartClusterRequest} message StartClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartClusterRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.region);
+                            if (message.clusterName != null && Object.hasOwnProperty.call(message, "clusterName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clusterName);
+                            if (message.clusterUuid != null && Object.hasOwnProperty.call(message, "clusterUuid"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.clusterUuid);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StartClusterRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.StartClusterRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IStartClusterRequest} message StartClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartClusterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StartClusterRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.StartClusterRequest} StartClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartClusterRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.StartClusterRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 2:
+                                    message.region = reader.string();
+                                    break;
+                                case 3:
+                                    message.clusterName = reader.string();
+                                    break;
+                                case 4:
+                                    message.clusterUuid = reader.string();
+                                    break;
+                                case 5:
+                                    message.requestId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StartClusterRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.StartClusterRequest} StartClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartClusterRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StartClusterRequest message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StartClusterRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                if (!$util.isString(message.clusterName))
+                                    return "clusterName: string expected";
+                            if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
+                                if (!$util.isString(message.clusterUuid))
+                                    return "clusterUuid: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StartClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.StartClusterRequest} StartClusterRequest
+                         */
+                        StartClusterRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.StartClusterRequest)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.StartClusterRequest();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.clusterName != null)
+                                message.clusterName = String(object.clusterName);
+                            if (object.clusterUuid != null)
+                                message.clusterUuid = String(object.clusterUuid);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StartClusterRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @static
+                         * @param {google.cloud.dataproc.v1.StartClusterRequest} message StartClusterRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StartClusterRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.region = "";
+                                object.clusterName = "";
+                                object.clusterUuid = "";
+                                object.requestId = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                object.clusterName = message.clusterName;
+                            if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
+                                object.clusterUuid = message.clusterUuid;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StartClusterRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.StartClusterRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StartClusterRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return StartClusterRequest;
                     })();
     
                     v1.DeleteClusterRequest = (function() {
@@ -10412,9 +12510,15 @@
                      * @enum {number}
                      * @property {number} COMPONENT_UNSPECIFIED=0 COMPONENT_UNSPECIFIED value
                      * @property {number} ANACONDA=5 ANACONDA value
+                     * @property {number} DOCKER=13 DOCKER value
+                     * @property {number} DRUID=9 DRUID value
+                     * @property {number} FLINK=14 FLINK value
+                     * @property {number} HBASE=11 HBASE value
                      * @property {number} HIVE_WEBHCAT=3 HIVE_WEBHCAT value
                      * @property {number} JUPYTER=1 JUPYTER value
                      * @property {number} PRESTO=6 PRESTO value
+                     * @property {number} RANGER=12 RANGER value
+                     * @property {number} SOLR=10 SOLR value
                      * @property {number} ZEPPELIN=4 ZEPPELIN value
                      * @property {number} ZOOKEEPER=8 ZOOKEEPER value
                      */
@@ -10422,9 +12526,15 @@
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "COMPONENT_UNSPECIFIED"] = 0;
                         values[valuesById[5] = "ANACONDA"] = 5;
+                        values[valuesById[13] = "DOCKER"] = 13;
+                        values[valuesById[9] = "DRUID"] = 9;
+                        values[valuesById[14] = "FLINK"] = 14;
+                        values[valuesById[11] = "HBASE"] = 11;
                         values[valuesById[3] = "HIVE_WEBHCAT"] = 3;
                         values[valuesById[1] = "JUPYTER"] = 1;
                         values[valuesById[6] = "PRESTO"] = 6;
+                        values[valuesById[12] = "RANGER"] = 12;
+                        values[valuesById[10] = "SOLR"] = 10;
                         values[valuesById[4] = "ZEPPELIN"] = 4;
                         values[valuesById[8] = "ZOOKEEPER"] = 8;
                         return values;
@@ -14696,6 +16806,7 @@
                          * @interface IJobPlacement
                          * @property {string|null} [clusterName] JobPlacement clusterName
                          * @property {string|null} [clusterUuid] JobPlacement clusterUuid
+                         * @property {Object.<string,string>|null} [clusterLabels] JobPlacement clusterLabels
                          */
     
                         /**
@@ -14707,6 +16818,7 @@
                          * @param {google.cloud.dataproc.v1.IJobPlacement=} [properties] Properties to set
                          */
                         function JobPlacement(properties) {
+                            this.clusterLabels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -14728,6 +16840,14 @@
                          * @instance
                          */
                         JobPlacement.prototype.clusterUuid = "";
+    
+                        /**
+                         * JobPlacement clusterLabels.
+                         * @member {Object.<string,string>} clusterLabels
+                         * @memberof google.cloud.dataproc.v1.JobPlacement
+                         * @instance
+                         */
+                        JobPlacement.prototype.clusterLabels = $util.emptyObject;
     
                         /**
                          * Creates a new JobPlacement instance using the specified properties.
@@ -14757,6 +16877,9 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.clusterName);
                             if (message.clusterUuid != null && Object.hasOwnProperty.call(message, "clusterUuid"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.clusterUuid);
+                            if (message.clusterLabels != null && Object.hasOwnProperty.call(message, "clusterLabels"))
+                                for (var keys = Object.keys(message.clusterLabels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.clusterLabels[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -14787,7 +16910,7 @@
                         JobPlacement.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.JobPlacement();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.JobPlacement(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -14796,6 +16919,28 @@
                                     break;
                                 case 2:
                                     message.clusterUuid = reader.string();
+                                    break;
+                                case 3:
+                                    if (message.clusterLabels === $util.emptyObject)
+                                        message.clusterLabels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.clusterLabels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -14838,6 +16983,14 @@
                             if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
                                 if (!$util.isString(message.clusterUuid))
                                     return "clusterUuid: string expected";
+                            if (message.clusterLabels != null && message.hasOwnProperty("clusterLabels")) {
+                                if (!$util.isObject(message.clusterLabels))
+                                    return "clusterLabels: object expected";
+                                var key = Object.keys(message.clusterLabels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.clusterLabels[key[i]]))
+                                        return "clusterLabels: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -14857,6 +17010,13 @@
                                 message.clusterName = String(object.clusterName);
                             if (object.clusterUuid != null)
                                 message.clusterUuid = String(object.clusterUuid);
+                            if (object.clusterLabels) {
+                                if (typeof object.clusterLabels !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.JobPlacement.clusterLabels: object expected");
+                                message.clusterLabels = {};
+                                for (var keys = Object.keys(object.clusterLabels), i = 0; i < keys.length; ++i)
+                                    message.clusterLabels[keys[i]] = String(object.clusterLabels[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -14873,6 +17033,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.clusterLabels = {};
                             if (options.defaults) {
                                 object.clusterName = "";
                                 object.clusterUuid = "";
@@ -14881,6 +17043,12 @@
                                 object.clusterName = message.clusterName;
                             if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
                                 object.clusterUuid = message.clusterUuid;
+                            var keys2;
+                            if (message.clusterLabels && (keys2 = Object.keys(message.clusterLabels)).length) {
+                                object.clusterLabels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.clusterLabels[keys2[j]] = message.clusterLabels[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -16621,6 +18789,7 @@
                          * @memberof google.cloud.dataproc.v1
                          * @interface IJobScheduling
                          * @property {number|null} [maxFailuresPerHour] JobScheduling maxFailuresPerHour
+                         * @property {number|null} [maxFailuresTotal] JobScheduling maxFailuresTotal
                          */
     
                         /**
@@ -16645,6 +18814,14 @@
                          * @instance
                          */
                         JobScheduling.prototype.maxFailuresPerHour = 0;
+    
+                        /**
+                         * JobScheduling maxFailuresTotal.
+                         * @member {number} maxFailuresTotal
+                         * @memberof google.cloud.dataproc.v1.JobScheduling
+                         * @instance
+                         */
+                        JobScheduling.prototype.maxFailuresTotal = 0;
     
                         /**
                          * Creates a new JobScheduling instance using the specified properties.
@@ -16672,6 +18849,8 @@
                                 writer = $Writer.create();
                             if (message.maxFailuresPerHour != null && Object.hasOwnProperty.call(message, "maxFailuresPerHour"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxFailuresPerHour);
+                            if (message.maxFailuresTotal != null && Object.hasOwnProperty.call(message, "maxFailuresTotal"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxFailuresTotal);
                             return writer;
                         };
     
@@ -16708,6 +18887,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.maxFailuresPerHour = reader.int32();
+                                    break;
+                                case 2:
+                                    message.maxFailuresTotal = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -16747,6 +18929,9 @@
                             if (message.maxFailuresPerHour != null && message.hasOwnProperty("maxFailuresPerHour"))
                                 if (!$util.isInteger(message.maxFailuresPerHour))
                                     return "maxFailuresPerHour: integer expected";
+                            if (message.maxFailuresTotal != null && message.hasOwnProperty("maxFailuresTotal"))
+                                if (!$util.isInteger(message.maxFailuresTotal))
+                                    return "maxFailuresTotal: integer expected";
                             return null;
                         };
     
@@ -16764,6 +18949,8 @@
                             var message = new $root.google.cloud.dataproc.v1.JobScheduling();
                             if (object.maxFailuresPerHour != null)
                                 message.maxFailuresPerHour = object.maxFailuresPerHour | 0;
+                            if (object.maxFailuresTotal != null)
+                                message.maxFailuresTotal = object.maxFailuresTotal | 0;
                             return message;
                         };
     
@@ -16780,10 +18967,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.maxFailuresPerHour = 0;
+                                object.maxFailuresTotal = 0;
+                            }
                             if (message.maxFailuresPerHour != null && message.hasOwnProperty("maxFailuresPerHour"))
                                 object.maxFailuresPerHour = message.maxFailuresPerHour;
+                            if (message.maxFailuresTotal != null && message.hasOwnProperty("maxFailuresTotal"))
+                                object.maxFailuresTotal = message.maxFailuresTotal;
                             return object;
                         };
     
@@ -19894,6 +22085,7 @@
                          * @property {google.cloud.dataproc.v1.IWorkflowTemplatePlacement|null} [placement] WorkflowTemplate placement
                          * @property {Array.<google.cloud.dataproc.v1.IOrderedJob>|null} [jobs] WorkflowTemplate jobs
                          * @property {Array.<google.cloud.dataproc.v1.ITemplateParameter>|null} [parameters] WorkflowTemplate parameters
+                         * @property {google.protobuf.IDuration|null} [dagTimeout] WorkflowTemplate dagTimeout
                          */
     
                         /**
@@ -19987,6 +22179,14 @@
                         WorkflowTemplate.prototype.parameters = $util.emptyArray;
     
                         /**
+                         * WorkflowTemplate dagTimeout.
+                         * @member {google.protobuf.IDuration|null|undefined} dagTimeout
+                         * @memberof google.cloud.dataproc.v1.WorkflowTemplate
+                         * @instance
+                         */
+                        WorkflowTemplate.prototype.dagTimeout = null;
+    
+                        /**
                          * Creates a new WorkflowTemplate instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.WorkflowTemplate
@@ -20031,6 +22231,8 @@
                             if (message.parameters != null && message.parameters.length)
                                 for (var i = 0; i < message.parameters.length; ++i)
                                     $root.google.cloud.dataproc.v1.TemplateParameter.encode(message.parameters[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.dagTimeout != null && Object.hasOwnProperty.call(message, "dagTimeout"))
+                                $root.google.protobuf.Duration.encode(message.dagTimeout, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -20114,6 +22316,9 @@
                                     if (!(message.parameters && message.parameters.length))
                                         message.parameters = [];
                                     message.parameters.push($root.google.cloud.dataproc.v1.TemplateParameter.decode(reader, reader.uint32()));
+                                    break;
+                                case 10:
+                                    message.dagTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -20200,6 +22405,11 @@
                                         return "parameters." + error;
                                 }
                             }
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.dagTimeout);
+                                if (error)
+                                    return "dagTimeout." + error;
+                            }
                             return null;
                         };
     
@@ -20263,6 +22473,11 @@
                                     message.parameters[i] = $root.google.cloud.dataproc.v1.TemplateParameter.fromObject(object.parameters[i]);
                                 }
                             }
+                            if (object.dagTimeout != null) {
+                                if (typeof object.dagTimeout !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.WorkflowTemplate.dagTimeout: object expected");
+                                message.dagTimeout = $root.google.protobuf.Duration.fromObject(object.dagTimeout);
+                            }
                             return message;
                         };
     
@@ -20292,6 +22507,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.placement = null;
+                                object.dagTimeout = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20321,6 +22537,8 @@
                                 for (var j = 0; j < message.parameters.length; ++j)
                                     object.parameters[j] = $root.google.cloud.dataproc.v1.TemplateParameter.toObject(message.parameters[j], options);
                             }
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout"))
+                                object.dagTimeout = $root.google.protobuf.Duration.toObject(message.dagTimeout, options);
                             return object;
                         };
     
@@ -22642,6 +24860,9 @@
                          * @property {google.protobuf.ITimestamp|null} [startTime] WorkflowMetadata startTime
                          * @property {google.protobuf.ITimestamp|null} [endTime] WorkflowMetadata endTime
                          * @property {string|null} [clusterUuid] WorkflowMetadata clusterUuid
+                         * @property {google.protobuf.IDuration|null} [dagTimeout] WorkflowMetadata dagTimeout
+                         * @property {google.protobuf.ITimestamp|null} [dagStartTime] WorkflowMetadata dagStartTime
+                         * @property {google.protobuf.ITimestamp|null} [dagEndTime] WorkflowMetadata dagEndTime
                          */
     
                         /**
@@ -22749,6 +24970,30 @@
                         WorkflowMetadata.prototype.clusterUuid = "";
     
                         /**
+                         * WorkflowMetadata dagTimeout.
+                         * @member {google.protobuf.IDuration|null|undefined} dagTimeout
+                         * @memberof google.cloud.dataproc.v1.WorkflowMetadata
+                         * @instance
+                         */
+                        WorkflowMetadata.prototype.dagTimeout = null;
+    
+                        /**
+                         * WorkflowMetadata dagStartTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} dagStartTime
+                         * @memberof google.cloud.dataproc.v1.WorkflowMetadata
+                         * @instance
+                         */
+                        WorkflowMetadata.prototype.dagStartTime = null;
+    
+                        /**
+                         * WorkflowMetadata dagEndTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} dagEndTime
+                         * @memberof google.cloud.dataproc.v1.WorkflowMetadata
+                         * @instance
+                         */
+                        WorkflowMetadata.prototype.dagEndTime = null;
+    
+                        /**
                          * Creates a new WorkflowMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.WorkflowMetadata
@@ -22795,6 +25040,12 @@
                                 $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.clusterUuid != null && Object.hasOwnProperty.call(message, "clusterUuid"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.clusterUuid);
+                            if (message.dagTimeout != null && Object.hasOwnProperty.call(message, "dagTimeout"))
+                                $root.google.protobuf.Duration.encode(message.dagTimeout, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.dagStartTime != null && Object.hasOwnProperty.call(message, "dagStartTime"))
+                                $root.google.protobuf.Timestamp.encode(message.dagStartTime, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.dagEndTime != null && Object.hasOwnProperty.call(message, "dagEndTime"))
+                                $root.google.protobuf.Timestamp.encode(message.dagEndTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -22880,6 +25131,15 @@
                                     break;
                                 case 11:
                                     message.clusterUuid = reader.string();
+                                    break;
+                                case 12:
+                                    message.dagTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.dagStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    message.dagEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -22971,6 +25231,21 @@
                             if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
                                 if (!$util.isString(message.clusterUuid))
                                     return "clusterUuid: string expected";
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.dagTimeout);
+                                if (error)
+                                    return "dagTimeout." + error;
+                            }
+                            if (message.dagStartTime != null && message.hasOwnProperty("dagStartTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.dagStartTime);
+                                if (error)
+                                    return "dagStartTime." + error;
+                            }
+                            if (message.dagEndTime != null && message.hasOwnProperty("dagEndTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.dagEndTime);
+                                if (error)
+                                    return "dagEndTime." + error;
+                            }
                             return null;
                         };
     
@@ -23044,6 +25319,21 @@
                             }
                             if (object.clusterUuid != null)
                                 message.clusterUuid = String(object.clusterUuid);
+                            if (object.dagTimeout != null) {
+                                if (typeof object.dagTimeout !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.WorkflowMetadata.dagTimeout: object expected");
+                                message.dagTimeout = $root.google.protobuf.Duration.fromObject(object.dagTimeout);
+                            }
+                            if (object.dagStartTime != null) {
+                                if (typeof object.dagStartTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.WorkflowMetadata.dagStartTime: object expected");
+                                message.dagStartTime = $root.google.protobuf.Timestamp.fromObject(object.dagStartTime);
+                            }
+                            if (object.dagEndTime != null) {
+                                if (typeof object.dagEndTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.WorkflowMetadata.dagEndTime: object expected");
+                                message.dagEndTime = $root.google.protobuf.Timestamp.fromObject(object.dagEndTime);
+                            }
                             return message;
                         };
     
@@ -23073,6 +25363,9 @@
                                 object.startTime = null;
                                 object.endTime = null;
                                 object.clusterUuid = "";
+                                object.dagTimeout = null;
+                                object.dagStartTime = null;
+                                object.dagEndTime = null;
                             }
                             if (message.template != null && message.hasOwnProperty("template"))
                                 object.template = message.template;
@@ -23100,6 +25393,12 @@
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.clusterUuid != null && message.hasOwnProperty("clusterUuid"))
                                 object.clusterUuid = message.clusterUuid;
+                            if (message.dagTimeout != null && message.hasOwnProperty("dagTimeout"))
+                                object.dagTimeout = $root.google.protobuf.Duration.toObject(message.dagTimeout, options);
+                            if (message.dagStartTime != null && message.hasOwnProperty("dagStartTime"))
+                                object.dagStartTime = $root.google.protobuf.Timestamp.toObject(message.dagStartTime, options);
+                            if (message.dagEndTime != null && message.hasOwnProperty("dagEndTime"))
+                                object.dagEndTime = $root.google.protobuf.Timestamp.toObject(message.dagEndTime, options);
                             return object;
                         };
     
