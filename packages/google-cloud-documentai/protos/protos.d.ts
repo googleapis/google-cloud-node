@@ -17566,6 +17566,9 @@ export namespace google {
 
                             /** PageRef boundingPoly */
                             boundingPoly?: (google.cloud.documentai.v1beta3.IBoundingPoly|null);
+
+                            /** PageRef confidence */
+                            confidence?: (number|null);
                         }
 
                         /** Represents a PageRef. */
@@ -17588,6 +17591,9 @@ export namespace google {
 
                             /** PageRef boundingPoly. */
                             public boundingPoly?: (google.cloud.documentai.v1beta3.IBoundingPoly|null);
+
+                            /** PageRef confidence. */
+                            public confidence: number;
 
                             /**
                              * Creates a new PageRef instance using the specified properties.
