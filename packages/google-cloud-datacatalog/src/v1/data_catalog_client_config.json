@@ -118,6 +118,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RenameTagTemplateFieldEnumValue": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteTagTemplateField": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",

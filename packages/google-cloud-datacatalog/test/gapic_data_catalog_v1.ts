@@ -1983,6 +1983,123 @@ describe('v1.DataCatalogClient', () => {
     });
   });
 
+  describe('renameTagTemplateFieldEnumValue', () => {
+    it('invokes renameTagTemplateFieldEnumValue without error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+      );
+      client.innerApiCalls.renameTagTemplateFieldEnumValue = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.renameTagTemplateFieldEnumValue(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes renameTagTemplateFieldEnumValue without error using callback', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+      );
+      client.innerApiCalls.renameTagTemplateFieldEnumValue = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.renameTagTemplateFieldEnumValue(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1.ITagTemplateField | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes renameTagTemplateFieldEnumValue with error', async () => {
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.renameTagTemplateFieldEnumValue = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.renameTagTemplateFieldEnumValue(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.renameTagTemplateFieldEnumValue as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('deleteTagTemplateField', () => {
     it('invokes deleteTagTemplateField without error', async () => {
       const client = new datacatalogModule.v1.DataCatalogClient({
@@ -4099,6 +4216,82 @@ describe('v1.DataCatalogClient', () => {
       });
     });
 
+    describe('policyTag', () => {
+      const fakePath = '/rendered/path/policyTag';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        taxonomy: 'taxonomyValue',
+        policy_tag: 'policyTagValue',
+      };
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.policyTagPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.policyTagPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('policyTagPath', () => {
+        const result = client.policyTagPath(
+          'projectValue',
+          'locationValue',
+          'taxonomyValue',
+          'policyTagValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.policyTagPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPolicyTagName', () => {
+        const result = client.matchProjectFromPolicyTagName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPolicyTagName', () => {
+        const result = client.matchLocationFromPolicyTagName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTaxonomyFromPolicyTagName', () => {
+        const result = client.matchTaxonomyFromPolicyTagName(fakePath);
+        assert.strictEqual(result, 'taxonomyValue');
+        assert(
+          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPolicyTagFromPolicyTagName', () => {
+        const result = client.matchPolicyTagFromPolicyTagName(fakePath);
+        assert.strictEqual(result, 'policyTagValue');
+        assert(
+          (client.pathTemplates.policyTagPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -4362,6 +4555,174 @@ describe('v1.DataCatalogClient', () => {
         assert.strictEqual(result, 'fieldValue');
         assert(
           (client.pathTemplates.tagTemplateFieldPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tagTemplateFieldEnumValue', () => {
+      const fakePath = '/rendered/path/tagTemplateFieldEnumValue';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tag_template: 'tagTemplateValue',
+        tag_template_field_id: 'tagTemplateFieldIdValue',
+        enum_value_display_name: 'enumValueDisplayNameValue',
+      };
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tagTemplateFieldEnumValuePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tagTemplateFieldEnumValuePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tagTemplateFieldEnumValuePath', () => {
+        const result = client.tagTemplateFieldEnumValuePath(
+          'projectValue',
+          'locationValue',
+          'tagTemplateValue',
+          'tagTemplateFieldIdValue',
+          'enumValueDisplayNameValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+            .render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTagTemplateFieldEnumValueName', () => {
+        const result = client.matchProjectFromTagTemplateFieldEnumValueName(
+          fakePath
+        );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTagTemplateFieldEnumValueName', () => {
+        const result = client.matchLocationFromTagTemplateFieldEnumValueName(
+          fakePath
+        );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTagTemplateFromTagTemplateFieldEnumValueName', () => {
+        const result = client.matchTagTemplateFromTagTemplateFieldEnumValueName(
+          fakePath
+        );
+        assert.strictEqual(result, 'tagTemplateValue');
+        assert(
+          (client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTagTemplateFieldIdFromTagTemplateFieldEnumValueName', () => {
+        const result = client.matchTagTemplateFieldIdFromTagTemplateFieldEnumValueName(
+          fakePath
+        );
+        assert.strictEqual(result, 'tagTemplateFieldIdValue');
+        assert(
+          (client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnumValueDisplayNameFromTagTemplateFieldEnumValueName', () => {
+        const result = client.matchEnumValueDisplayNameFromTagTemplateFieldEnumValueName(
+          fakePath
+        );
+        assert.strictEqual(result, 'enumValueDisplayNameValue');
+        assert(
+          (client.pathTemplates.tagTemplateFieldEnumValuePathTemplate
+            .match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('taxonomy', () => {
+      const fakePath = '/rendered/path/taxonomy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        taxonomy: 'taxonomyValue',
+      };
+      const client = new datacatalogModule.v1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.taxonomyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.taxonomyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('taxonomyPath', () => {
+        const result = client.taxonomyPath(
+          'projectValue',
+          'locationValue',
+          'taxonomyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.taxonomyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTaxonomyName', () => {
+        const result = client.matchProjectFromTaxonomyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTaxonomyName', () => {
+        const result = client.matchLocationFromTaxonomyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTaxonomyFromTaxonomyName', () => {
+        const result = client.matchTaxonomyFromTaxonomyName(fakePath);
+        assert.strictEqual(result, 'taxonomyValue');
+        assert(
+          (client.pathTemplates.taxonomyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

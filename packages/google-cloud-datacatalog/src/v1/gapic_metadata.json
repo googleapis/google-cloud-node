@@ -90,6 +90,11 @@
                 "renameTagTemplateField"
               ]
             },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "renameTagTemplateFieldEnumValue"
+              ]
+            },
             "DeleteTagTemplateField": {
               "methods": [
                 "deleteTagTemplateField"
@@ -238,6 +243,11 @@
                 "renameTagTemplateField"
               ]
             },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "renameTagTemplateFieldEnumValue"
+              ]
+            },
             "DeleteTagTemplateField": {
               "methods": [
                 "deleteTagTemplateField"
@@ -299,6 +309,192 @@
                 "listTags",
                 "listTagsStream",
                 "listTagsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PolicyTagManagerClient",
+          "rpcs": {
+            "CreateTaxonomy": {
+              "methods": [
+                "createTaxonomy"
+              ]
+            },
+            "DeleteTaxonomy": {
+              "methods": [
+                "deleteTaxonomy"
+              ]
+            },
+            "UpdateTaxonomy": {
+              "methods": [
+                "updateTaxonomy"
+              ]
+            },
+            "GetTaxonomy": {
+              "methods": [
+                "getTaxonomy"
+              ]
+            },
+            "CreatePolicyTag": {
+              "methods": [
+                "createPolicyTag"
+              ]
+            },
+            "DeletePolicyTag": {
+              "methods": [
+                "deletePolicyTag"
+              ]
+            },
+            "UpdatePolicyTag": {
+              "methods": [
+                "updatePolicyTag"
+              ]
+            },
+            "GetPolicyTag": {
+              "methods": [
+                "getPolicyTag"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListTaxonomies": {
+              "methods": [
+                "listTaxonomies",
+                "listTaxonomiesStream",
+                "listTaxonomiesAsync"
+              ]
+            },
+            "ListPolicyTags": {
+              "methods": [
+                "listPolicyTags",
+                "listPolicyTagsStream",
+                "listPolicyTagsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PolicyTagManagerClient",
+          "rpcs": {
+            "CreateTaxonomy": {
+              "methods": [
+                "createTaxonomy"
+              ]
+            },
+            "DeleteTaxonomy": {
+              "methods": [
+                "deleteTaxonomy"
+              ]
+            },
+            "UpdateTaxonomy": {
+              "methods": [
+                "updateTaxonomy"
+              ]
+            },
+            "GetTaxonomy": {
+              "methods": [
+                "getTaxonomy"
+              ]
+            },
+            "CreatePolicyTag": {
+              "methods": [
+                "createPolicyTag"
+              ]
+            },
+            "DeletePolicyTag": {
+              "methods": [
+                "deletePolicyTag"
+              ]
+            },
+            "UpdatePolicyTag": {
+              "methods": [
+                "updatePolicyTag"
+              ]
+            },
+            "GetPolicyTag": {
+              "methods": [
+                "getPolicyTag"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListTaxonomies": {
+              "methods": [
+                "listTaxonomies",
+                "listTaxonomiesStream",
+                "listTaxonomiesAsync"
+              ]
+            },
+            "ListPolicyTags": {
+              "methods": [
+                "listPolicyTags",
+                "listPolicyTagsStream",
+                "listPolicyTagsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManagerSerialization": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PolicyTagManagerSerializationClient",
+          "rpcs": {
+            "ImportTaxonomies": {
+              "methods": [
+                "importTaxonomies"
+              ]
+            },
+            "ExportTaxonomies": {
+              "methods": [
+                "exportTaxonomies"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PolicyTagManagerSerializationClient",
+          "rpcs": {
+            "ImportTaxonomies": {
+              "methods": [
+                "importTaxonomies"
+              ]
+            },
+            "ExportTaxonomies": {
+              "methods": [
+                "exportTaxonomies"
               ]
             }
           }

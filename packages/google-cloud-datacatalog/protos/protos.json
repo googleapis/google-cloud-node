@@ -14,14 +14,39 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datacatalog.v1",
                     "php_namespace": "Google\\Cloud\\DataCatalog\\V1",
-                    "ruby_package": "Google::Cloud::DataCatalog::V1"
+                    "ruby_package": "Google::Cloud::DataCatalog::V1",
+                    "java_outer_classname": "PolicyTagManagerSerializationProto",
+                    "(google.api.resource_definition).type": "datacatalog.googleapis.com/TagTemplateFieldEnumValue",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}"
                   },
                   "nested": {
                     "IntegratedSystem": {
                       "values": {
                         "INTEGRATED_SYSTEM_UNSPECIFIED": 0,
                         "BIGQUERY": 1,
-                        "CLOUD_PUBSUB": 2
+                        "CLOUD_PUBSUB": 2,
+                        "DATAPROC_METASTORE": 3
+                      }
+                    },
+                    "DataSource": {
+                      "fields": {
+                        "service": {
+                          "type": "Service",
+                          "id": 1
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Service": {
+                          "values": {
+                            "SERVICE_UNSPECIFIED": 0,
+                            "CLOUD_STORAGE": 1,
+                            "BIGQUERY": 2
+                          }
+                        }
                       }
                     },
                     "DataCatalog": {
@@ -403,6 +428,26 @@
                             }
                           ]
                         },
+                        "RenameTagTemplateFieldEnumValue": {
+                          "requestType": "RenameTagTemplateFieldEnumValueRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/tagTemplates/*/fields/*/enumValues/*}:rename",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_enum_value_display_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/tagTemplates/*/fields/*/enumValues/*}:rename",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,new_enum_value_display_name"
+                            }
+                          ]
+                        },
                         "DeleteTagTemplateField": {
                           "requestType": "DeleteTagTemplateFieldRequest",
                           "responseType": "google.protobuf.Empty",
@@ -621,7 +666,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "pageSize": {
@@ -869,7 +914,8 @@
                         "targetName": {
                           "oneof": [
                             "linkedResource",
-                            "sqlResource"
+                            "sqlResource",
+                            "fullyQualifiedName"
                           ]
                         }
                       },
@@ -881,6 +927,10 @@
                         "sqlResource": {
                           "type": "string",
                           "id": 3
+                        },
+                        "fullyQualifiedName": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -908,6 +958,11 @@
                             "bigqueryTableSpec",
                             "bigqueryDateShardedSpec"
                           ]
+                        },
+                        "spec": {
+                          "oneof": [
+                            "databaseTableSpec"
+                          ]
                         }
                       },
                       "fields": {
@@ -915,12 +970,17 @@
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
                           }
                         },
                         "linkedResource": {
                           "type": "string",
                           "id": 9
+                        },
+                        "fullyQualifiedName": {
+                          "type": "string",
+                          "id": 29
                         },
                         "type": {
                           "type": "EntryType",
@@ -953,6 +1013,10 @@
                           "type": "BigQueryDateShardedSpec",
                           "id": 15
                         },
+                        "databaseTableSpec": {
+                          "type": "DatabaseTableSpec",
+                          "id": 24
+                        },
                         "displayName": {
                           "type": "string",
                           "id": 3
@@ -968,6 +1032,30 @@
                         "sourceSystemTimestamps": {
                           "type": "SystemTimestamps",
                           "id": 7
+                        },
+                        "dataSource": {
+                          "type": "DataSource",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "DatabaseTableSpec": {
+                      "fields": {
+                        "type": {
+                          "type": "TableType",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "TableType": {
+                          "values": {
+                            "TABLE_TYPE_UNSPECIFIED": 0,
+                            "NATIVE": 1,
+                            "EXTERNAL": 2
+                          }
                         }
                       }
                     },
@@ -1187,6 +1275,25 @@
                         }
                       }
                     },
+                    "RenameTagTemplateFieldEnumValueRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateFieldEnumValue"
+                          }
+                        },
+                        "newEnumValueDisplayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "DeleteTagTemplateFieldRequest": {
                       "fields": {
                         "name": {
@@ -1282,7 +1389,9 @@
                         "TABLE": 2,
                         "MODEL": 5,
                         "DATA_STREAM": 3,
-                        "FILESET": 4
+                        "FILESET": 4,
+                        "DATABASE": 7,
+                        "SERVICE": 14
                       }
                     },
                     "GcsFilesetSpec": {
@@ -1354,10 +1463,7 @@
                         "columns": {
                           "rule": "repeated",
                           "type": "ColumnSchema",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 2
                         }
                       }
                     },
@@ -1427,6 +1533,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "modifyTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
                         "integratedSystem": {
                           "type": "IntegratedSystem",
                           "id": 8,
@@ -1437,6 +1547,10 @@
                         "userSpecifiedSystem": {
                           "type": "string",
                           "id": 9
+                        },
+                        "fullyQualifiedName": {
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -1479,7 +1593,8 @@
                       "values": {
                         "TABLE_SOURCE_TYPE_UNSPECIFIED": 0,
                         "BIGQUERY_VIEW": 2,
-                        "BIGQUERY_TABLE": 5
+                        "BIGQUERY_TABLE": 5,
+                        "BIGQUERY_MATERIALIZED_VIEW": 7
                       }
                     },
                     "ViewSpec": {
@@ -1687,6 +1802,10 @@
                           "type": "bool",
                           "id": 3
                         },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        },
                         "order": {
                           "type": "int32",
                           "id": 5
@@ -1743,6 +1862,724 @@
                             "BOOL": 3,
                             "TIMESTAMP": 4
                           }
+                        }
+                      }
+                    },
+                    "PolicyTagManager": {
+                      "options": {
+                        "(google.api.default_host)": "datacatalog.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateTaxonomy": {
+                          "requestType": "CreateTaxonomyRequest",
+                          "responseType": "Taxonomy",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/taxonomies",
+                            "(google.api.http).body": "taxonomy",
+                            "(google.api.method_signature)": "parent,taxonomy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/taxonomies",
+                                "body": "taxonomy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,taxonomy"
+                            }
+                          ]
+                        },
+                        "DeleteTaxonomy": {
+                          "requestType": "DeleteTaxonomyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/taxonomies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/taxonomies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateTaxonomy": {
+                          "requestType": "UpdateTaxonomyRequest",
+                          "responseType": "Taxonomy",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{taxonomy.name=projects/*/locations/*/taxonomies/*}",
+                            "(google.api.http).body": "taxonomy",
+                            "(google.api.method_signature)": "taxonomy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{taxonomy.name=projects/*/locations/*/taxonomies/*}",
+                                "body": "taxonomy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "taxonomy"
+                            }
+                          ]
+                        },
+                        "ListTaxonomies": {
+                          "requestType": "ListTaxonomiesRequest",
+                          "responseType": "ListTaxonomiesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/taxonomies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/taxonomies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetTaxonomy": {
+                          "requestType": "GetTaxonomyRequest",
+                          "responseType": "Taxonomy",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/taxonomies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/taxonomies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreatePolicyTag": {
+                          "requestType": "CreatePolicyTagRequest",
+                          "responseType": "PolicyTag",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/taxonomies/*}/policyTags",
+                            "(google.api.http).body": "policy_tag",
+                            "(google.api.method_signature)": "parent,policy_tag"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/taxonomies/*}/policyTags",
+                                "body": "policy_tag"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,policy_tag"
+                            }
+                          ]
+                        },
+                        "DeletePolicyTag": {
+                          "requestType": "DeletePolicyTagRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/taxonomies/*/policyTags/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/taxonomies/*/policyTags/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdatePolicyTag": {
+                          "requestType": "UpdatePolicyTagRequest",
+                          "responseType": "PolicyTag",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{policy_tag.name=projects/*/locations/*/taxonomies/*/policyTags/*}",
+                            "(google.api.http).body": "policy_tag",
+                            "(google.api.method_signature)": "policy_tag"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{policy_tag.name=projects/*/locations/*/taxonomies/*/policyTags/*}",
+                                "body": "policy_tag"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "policy_tag"
+                            }
+                          ]
+                        },
+                        "ListPolicyTags": {
+                          "requestType": "ListPolicyTagsRequest",
+                          "responseType": "ListPolicyTagsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/taxonomies/*}/policyTags",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/taxonomies/*}/policyTags"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetPolicyTag": {
+                          "requestType": "GetPolicyTagRequest",
+                          "responseType": "PolicyTag",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/taxonomies/*/policyTags/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/taxonomies/*/policyTags/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1/{resource=projects/*/locations/*/taxonomies/*}:getIamPolicy",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/taxonomies/*/policyTags/*}:getIamPolicy",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/taxonomies/*}:getIamPolicy",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{resource=projects/*/locations/*/taxonomies/*/policyTags/*}:getIamPolicy",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1/{resource=projects/*/locations/*/taxonomies/*}:setIamPolicy",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/taxonomies/*/policyTags/*}:setIamPolicy",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/taxonomies/*}:setIamPolicy",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{resource=projects/*/locations/*/taxonomies/*/policyTags/*}:setIamPolicy",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{resource=projects/*/locations/*/taxonomies/*}:testIamPermissions",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/taxonomies/*/policyTags/*}:testIamPermissions",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{resource=projects/*/locations/*/taxonomies/*}:testIamPermissions",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{resource=projects/*/locations/*/taxonomies/*/policyTags/*}:testIamPermissions",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Taxonomy": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/Taxonomy",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/taxonomies/{taxonomy}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "policyTagCount": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taxonomyTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "activatedPolicyTypes": {
+                          "rule": "repeated",
+                          "type": "PolicyType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PolicyType": {
+                          "values": {
+                            "POLICY_TYPE_UNSPECIFIED": 0,
+                            "FINE_GRAINED_ACCESS_CONTROL": 1
+                          }
+                        }
+                      }
+                    },
+                    "PolicyTag": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/PolicyTag",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/taxonomies/{taxonomy}/policyTags/{policy_tag}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "parentPolicyTag": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "childPolicyTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTaxonomyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        },
+                        "taxonomy": {
+                          "type": "Taxonomy",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteTaxonomyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateTaxonomyRequest": {
+                      "fields": {
+                        "taxonomy": {
+                          "type": "Taxonomy",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListTaxonomiesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListTaxonomiesResponse": {
+                      "fields": {
+                        "taxonomies": {
+                          "rule": "repeated",
+                          "type": "Taxonomy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetTaxonomyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        }
+                      }
+                    },
+                    "CreatePolicyTagRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/PolicyTag"
+                          }
+                        },
+                        "policyTag": {
+                          "type": "PolicyTag",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeletePolicyTagRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/PolicyTag"
+                          }
+                        }
+                      }
+                    },
+                    "UpdatePolicyTagRequest": {
+                      "fields": {
+                        "policyTag": {
+                          "type": "PolicyTag",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListPolicyTagsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/PolicyTag"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListPolicyTagsResponse": {
+                      "fields": {
+                        "policyTags": {
+                          "rule": "repeated",
+                          "type": "PolicyTag",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetPolicyTagRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/PolicyTag"
+                          }
+                        }
+                      }
+                    },
+                    "PolicyTagManagerSerialization": {
+                      "options": {
+                        "(google.api.default_host)": "datacatalog.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ImportTaxonomies": {
+                          "requestType": "ImportTaxonomiesRequest",
+                          "responseType": "ImportTaxonomiesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/taxonomies:import",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/taxonomies:import",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportTaxonomies": {
+                          "requestType": "ExportTaxonomiesRequest",
+                          "responseType": "ExportTaxonomiesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/taxonomies:export"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/taxonomies:export"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "SerializedTaxonomy": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "policyTags": {
+                          "rule": "repeated",
+                          "type": "SerializedPolicyTag",
+                          "id": 3
+                        },
+                        "activatedPolicyTypes": {
+                          "rule": "repeated",
+                          "type": "Taxonomy.PolicyType",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SerializedPolicyTag": {
+                      "fields": {
+                        "policyTag": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "childPolicyTags": {
+                          "rule": "repeated",
+                          "type": "SerializedPolicyTag",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ImportTaxonomiesRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "inlineSource",
+                            "crossRegionalSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        },
+                        "inlineSource": {
+                          "type": "InlineSource",
+                          "id": 2
+                        },
+                        "crossRegionalSource": {
+                          "type": "CrossRegionalSource",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "InlineSource": {
+                      "fields": {
+                        "taxonomies": {
+                          "rule": "repeated",
+                          "type": "SerializedTaxonomy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CrossRegionalSource": {
+                      "fields": {
+                        "taxonomy": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        }
+                      }
+                    },
+                    "ImportTaxonomiesResponse": {
+                      "fields": {
+                        "taxonomies": {
+                          "rule": "repeated",
+                          "type": "Taxonomy",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportTaxonomiesRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "serializedTaxonomies"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        },
+                        "taxonomies": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        },
+                        "serializedTaxonomies": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExportTaxonomiesResponse": {
+                      "fields": {
+                        "taxonomies": {
+                          "rule": "repeated",
+                          "type": "SerializedTaxonomy",
+                          "id": 1
                         }
                       }
                     }
@@ -4154,6 +4991,23 @@
             "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -4256,23 +5110,6 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
-              }
             },
             "resourceReference": {
               "type": "google.api.ResourceReference",

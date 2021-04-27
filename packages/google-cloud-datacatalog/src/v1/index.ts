@@ -17,3 +17,5 @@
 // ** All changes to this file may be overwritten. **
 
 export {DataCatalogClient} from './data_catalog_client';
+export {PolicyTagManagerClient} from './policy_tag_manager_client';
+export {PolicyTagManagerSerializationClient} from './policy_tag_manager_serialization_client';
