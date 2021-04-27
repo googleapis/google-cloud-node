@@ -72,7 +72,7 @@ async function listVersions() {
   const [versions] = await client.listServices({
     parent: `apps/${projectId}`,
   });
-  console.info([versions]);
+  console.info(versions);
 }
 listVersions();
 
