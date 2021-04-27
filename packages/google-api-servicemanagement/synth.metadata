@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-service-management.git",
-        "sha": "2cc8c9375e2e9827626f2758ac61fa5e3a75b942"
+        "sha": "13f1d7c5eedae569b7cd09e852d304d5540dd49a"
       }
     },
     {
@@ -19,7 +19,7 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "79c8dd7ee768292f933012d3a69a5b4676404cda"
+        "sha": "c6706ee5d693e9ae5967614170732646590d8374"
       }
     }
   ],
