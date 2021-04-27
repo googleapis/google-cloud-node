@@ -3635,7 +3635,7 @@
             },
             "package": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/package;package",
+                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/package",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.pkg",
                 "objc_class_prefix": "GRA"
