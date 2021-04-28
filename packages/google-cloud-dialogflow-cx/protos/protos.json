@@ -237,6 +237,11 @@
                                 "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             },
+                            "supportedLanguageCodes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
                             "timeZone": {
                               "type": "string",
                               "id": 5,
@@ -387,6 +392,14 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "environment": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
                               }
                             }
                           }
@@ -662,6 +675,54 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "ImportFlow": {
+                              "requestType": "ImportFlowRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/flows:import",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ImportFlowResponse",
+                                "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/flows:import",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ImportFlowResponse",
+                                    "metadata_type": "google.protobuf.Struct"
+                                  }
+                                }
+                              ]
+                            },
+                            "ExportFlow": {
+                              "requestType": "ExportFlowRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3/{name=projects/*/locations/*/agents/*/flows/*}:export",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ExportFlowResponse",
+                                "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{name=projects/*/locations/*/agents/*/flows/*}:export",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ExportFlowResponse",
+                                    "metadata_type": "google.protobuf.Struct"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -918,6 +979,104 @@
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 3
+                            }
+                          }
+                        },
+                        "ImportFlowRequest": {
+                          "oneofs": {
+                            "flow": {
+                              "oneof": [
+                                "flowUri",
+                                "flowContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "flowUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "flowContent": {
+                              "type": "bytes",
+                              "id": 3
+                            },
+                            "importOption": {
+                              "type": "ImportOption",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "ImportOption": {
+                              "values": {
+                                "IMPORT_OPTION_UNSPECIFIED": 0,
+                                "KEEP": 1,
+                                "FALLBACK": 2
+                              }
+                            }
+                          }
+                        },
+                        "ImportFlowResponse": {
+                          "fields": {
+                            "flow": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            }
+                          }
+                        },
+                        "ExportFlowRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "flowUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "includeReferencedFlows": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ExportFlowResponse": {
+                          "oneofs": {
+                            "flow": {
+                              "oneof": [
+                                "flowUri",
+                                "flowContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "flowUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "flowContent": {
+                              "type": "bytes",
+                              "id": 2
                             }
                           }
                         },
@@ -1677,6 +1836,272 @@
                             "displayName": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "SecuritySettingsService": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "CreateSecuritySettings": {
+                              "requestType": "CreateSecuritySettingsRequest",
+                              "responseType": "SecuritySettings",
+                              "options": {
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/securitySettings",
+                                "(google.api.http).body": "security_settings",
+                                "(google.api.method_signature)": "parent,security_settings"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{parent=projects/*/locations/*}/securitySettings",
+                                    "body": "security_settings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,security_settings"
+                                }
+                              ]
+                            },
+                            "GetSecuritySettings": {
+                              "requestType": "GetSecuritySettingsRequest",
+                              "responseType": "SecuritySettings",
+                              "options": {
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/securitySettings/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{name=projects/*/locations/*/securitySettings/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "UpdateSecuritySettings": {
+                              "requestType": "UpdateSecuritySettingsRequest",
+                              "responseType": "SecuritySettings",
+                              "options": {
+                                "(google.api.http).patch": "/v3/{security_settings.name=projects/*/locations/*/securitySettings/*}",
+                                "(google.api.http).body": "security_settings",
+                                "(google.api.method_signature)": "security_settings,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3/{security_settings.name=projects/*/locations/*/securitySettings/*}",
+                                    "body": "security_settings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "security_settings,update_mask"
+                                }
+                              ]
+                            },
+                            "ListSecuritySettings": {
+                              "requestType": "ListSecuritySettingsRequest",
+                              "responseType": "ListSecuritySettingsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/securitySettings",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{parent=projects/*/locations/*}/securitySettings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "DeleteSecuritySettings": {
+                              "requestType": "DeleteSecuritySettingsRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/securitySettings/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v3/{name=projects/*/locations/*/securitySettings/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "GetSecuritySettingsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateSecuritySettingsRequest": {
+                          "fields": {
+                            "securitySettings": {
+                              "type": "SecuritySettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListSecuritySettingsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ListSecuritySettingsResponse": {
+                          "fields": {
+                            "securitySettings": {
+                              "rule": "repeated",
+                              "type": "SecuritySettings",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "CreateSecuritySettingsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            },
+                            "securitySettings": {
+                              "type": "SecuritySettings",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteSecuritySettingsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/SecuritySettings"
+                              }
+                            }
+                          }
+                        },
+                        "SecuritySettings": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/SecuritySettings",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/securitySettings/{security_settings}"
+                          },
+                          "oneofs": {
+                            "dataRetention": {
+                              "oneof": [
+                                "retentionWindowDays"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "redactionStrategy": {
+                              "type": "RedactionStrategy",
+                              "id": 3
+                            },
+                            "redactionScope": {
+                              "type": "RedactionScope",
+                              "id": 4
+                            },
+                            "inspectTemplate": {
+                              "type": "string",
+                              "id": 9
+                            },
+                            "retentionWindowDays": {
+                              "type": "int32",
+                              "id": 6
+                            },
+                            "purgeDataTypes": {
+                              "rule": "repeated",
+                              "type": "PurgeDataType",
+                              "id": 8
+                            }
+                          },
+                          "nested": {
+                            "RedactionStrategy": {
+                              "values": {
+                                "REDACTION_STRATEGY_UNSPECIFIED": 0,
+                                "REDACT_WITH_SERVICE": 1
+                              }
+                            },
+                            "RedactionScope": {
+                              "values": {
+                                "REDACTION_SCOPE_UNSPECIFIED": 0,
+                                "REDACT_DISK_STORAGE": 2
+                              }
+                            },
+                            "PurgeDataType": {
+                              "values": {
+                                "PURGE_DATA_TYPE_UNSPECIFIED": 0,
+                                "DIALOGFLOW_HISTORY": 1
+                              }
                             }
                           }
                         },
@@ -5413,272 +5838,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Experiment"
-                              }
-                            }
-                          }
-                        },
-                        "SecuritySettingsService": {
-                          "options": {
-                            "(google.api.default_host)": "dialogflow.googleapis.com",
-                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
-                          },
-                          "methods": {
-                            "CreateSecuritySettings": {
-                              "requestType": "CreateSecuritySettingsRequest",
-                              "responseType": "SecuritySettings",
-                              "options": {
-                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/securitySettings",
-                                "(google.api.http).body": "security_settings",
-                                "(google.api.method_signature)": "parent,security_settings"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "post": "/v3/{parent=projects/*/locations/*}/securitySettings",
-                                    "body": "security_settings"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent,security_settings"
-                                }
-                              ]
-                            },
-                            "GetSecuritySettings": {
-                              "requestType": "GetSecuritySettingsRequest",
-                              "responseType": "SecuritySettings",
-                              "options": {
-                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/securitySettings/*}",
-                                "(google.api.method_signature)": "name"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v3/{name=projects/*/locations/*/securitySettings/*}"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "name"
-                                }
-                              ]
-                            },
-                            "UpdateSecuritySettings": {
-                              "requestType": "UpdateSecuritySettingsRequest",
-                              "responseType": "SecuritySettings",
-                              "options": {
-                                "(google.api.http).patch": "/v3/{security_settings.name=projects/*/locations/*/securitySettings/*}",
-                                "(google.api.http).body": "security_settings",
-                                "(google.api.method_signature)": "security_settings,update_mask"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "patch": "/v3/{security_settings.name=projects/*/locations/*/securitySettings/*}",
-                                    "body": "security_settings"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "security_settings,update_mask"
-                                }
-                              ]
-                            },
-                            "ListSecuritySettings": {
-                              "requestType": "ListSecuritySettingsRequest",
-                              "responseType": "ListSecuritySettingsResponse",
-                              "options": {
-                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/securitySettings",
-                                "(google.api.method_signature)": "parent"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v3/{parent=projects/*/locations/*}/securitySettings"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "parent"
-                                }
-                              ]
-                            },
-                            "DeleteSecuritySettings": {
-                              "requestType": "DeleteSecuritySettingsRequest",
-                              "responseType": "google.protobuf.Empty",
-                              "options": {
-                                "(google.api.http).delete": "/v3/{name=projects/*/locations/*/securitySettings/*}",
-                                "(google.api.method_signature)": "name"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "delete": "/v3/{name=projects/*/locations/*/securitySettings/*}"
-                                  }
-                                },
-                                {
-                                  "(google.api.method_signature)": "name"
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        "GetSecuritySettingsRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/SecuritySettings"
-                              }
-                            }
-                          }
-                        },
-                        "UpdateSecuritySettingsRequest": {
-                          "fields": {
-                            "securitySettings": {
-                              "type": "SecuritySettings",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "updateMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "ListSecuritySettingsRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SecuritySettings"
-                              }
-                            },
-                            "pageSize": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "pageToken": {
-                              "type": "string",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "ListSecuritySettingsResponse": {
-                          "fields": {
-                            "securitySettings": {
-                              "rule": "repeated",
-                              "type": "SecuritySettings",
-                              "id": 1
-                            },
-                            "nextPageToken": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "CreateSecuritySettingsRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/SecuritySettings"
-                              }
-                            },
-                            "securitySettings": {
-                              "type": "SecuritySettings",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "DeleteSecuritySettingsRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/SecuritySettings"
-                              }
-                            }
-                          }
-                        },
-                        "SecuritySettings": {
-                          "options": {
-                            "(google.api.resource).type": "dialogflow.googleapis.com/SecuritySettings",
-                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/securitySettings/{security_settings}"
-                          },
-                          "oneofs": {
-                            "dataRetention": {
-                              "oneof": [
-                                "retentionWindowDays"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "redactionStrategy": {
-                              "type": "RedactionStrategy",
-                              "id": 3
-                            },
-                            "redactionScope": {
-                              "type": "RedactionScope",
-                              "id": 4
-                            },
-                            "inspectTemplate": {
-                              "type": "string",
-                              "id": 9
-                            },
-                            "retentionWindowDays": {
-                              "type": "int32",
-                              "id": 6
-                            },
-                            "purgeDataTypes": {
-                              "rule": "repeated",
-                              "type": "PurgeDataType",
-                              "id": 8
-                            }
-                          },
-                          "nested": {
-                            "RedactionStrategy": {
-                              "values": {
-                                "REDACTION_STRATEGY_UNSPECIFIED": 0,
-                                "REDACT_WITH_SERVICE": 1
-                              }
-                            },
-                            "RedactionScope": {
-                              "values": {
-                                "REDACTION_SCOPE_UNSPECIFIED": 0,
-                                "REDACT_DISK_STORAGE": 2
-                              }
-                            },
-                            "PurgeDataType": {
-                              "values": {
-                                "PURGE_DATA_TYPE_UNSPECIFIED": 0,
-                                "DIALOGFLOW_HISTORY": 1
                               }
                             }
                           }

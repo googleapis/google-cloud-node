@@ -391,6 +391,16 @@
                 "trainFlow"
               ]
             },
+            "ImportFlow": {
+              "methods": [
+                "importFlow"
+              ]
+            },
+            "ExportFlow": {
+              "methods": [
+                "exportFlow"
+              ]
+            },
             "ListFlows": {
               "methods": [
                 "listFlows",
@@ -436,6 +446,16 @@
             "TrainFlow": {
               "methods": [
                 "trainFlow"
+              ]
+            },
+            "ImportFlow": {
+              "methods": [
+                "importFlow"
+              ]
+            },
+            "ExportFlow": {
+              "methods": [
+                "exportFlow"
               ]
             },
             "ListFlows": {

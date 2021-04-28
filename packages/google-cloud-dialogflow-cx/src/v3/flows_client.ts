@@ -260,12 +260,34 @@ export class FlowsClient {
     const trainFlowMetadata = protoFilesRoot.lookup(
       '.google.protobuf.Struct'
     ) as gax.protobuf.Type;
+    const importFlowResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.ImportFlowResponse'
+    ) as gax.protobuf.Type;
+    const importFlowMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct'
+    ) as gax.protobuf.Type;
+    const exportFlowResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.ExportFlowResponse'
+    ) as gax.protobuf.Type;
+    const exportFlowMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       trainFlow: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         trainFlowResponse.decode.bind(trainFlowResponse),
         trainFlowMetadata.decode.bind(trainFlowMetadata)
+      ),
+      importFlow: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importFlowResponse.decode.bind(importFlowResponse),
+        importFlowMetadata.decode.bind(importFlowMetadata)
+      ),
+      exportFlow: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportFlowResponse.decode.bind(exportFlowResponse),
+        exportFlowMetadata.decode.bind(exportFlowMetadata)
       ),
     };
 
@@ -323,6 +345,8 @@ export class FlowsClient {
       'trainFlow',
       'validateFlow',
       'getFlowValidationResult',
+      'importFlow',
+      'exportFlow',
     ];
     for (const methodName of flowsStubMethods) {
       const callPromise = this.flowsStub.then(
@@ -455,7 +479,9 @@ export class FlowsClient {
    *   The language of the following fields in `flow`:
    *
    *   *  `Flow.event_handlers.trigger_fulfillment.messages`
+   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
    *   *  `Flow.transition_routes.trigger_fulfillment.messages`
+   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *
    *   If not specified, the agent's default language is used.
    *   [Many
@@ -662,7 +688,9 @@ export class FlowsClient {
    *   dependent:
    *
    *   *  `Flow.event_handlers.trigger_fulfillment.messages`
+   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
    *   *  `Flow.transition_routes.trigger_fulfillment.messages`
+   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *
    *   If not specified, the agent's default language is used.
    *   [Many
@@ -766,7 +794,9 @@ export class FlowsClient {
    *   The language of the following fields in `flow`:
    *
    *   *  `Flow.event_handlers.trigger_fulfillment.messages`
+   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
    *   *  `Flow.transition_routes.trigger_fulfillment.messages`
+   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *
    *   If not specified, the agent's default language is used.
    *   [Many
@@ -1175,6 +1205,311 @@ export class FlowsClient {
       protos.google.protobuf.Struct
     >;
   }
+  importFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  importFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Imports the specified flow to the specified agent from a binary file.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to import the flow into.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   * @param {string} request.flowUri
+   *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+   *   to import flow from. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   * @param {Buffer} request.flowContent
+   *   Uncompressed raw byte content for flow.
+   * @param {google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption} request.importOption
+   *   Flow import mode. If not specified, `KEEP` is assumed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.importFlow(request);
+   * const [response] = await operation.promise();
+   */
+  importFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.importFlow(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importFlow()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkImportFlowProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkImportFlowProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ImportFlowResponse,
+      protos.google.protobuf.Struct
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.importFlow,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ImportFlowResponse,
+      protos.google.protobuf.Struct
+    >;
+  }
+  exportFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  exportFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Exports the specified flow to a binary file.
+   *
+   * Note that resources (e.g. intents, entities, webhooks) that the flow
+   * references will also be exported.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the flow to export.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/flows/<Flow ID>`.
+   * @param {string} [request.flowUri]
+   *   Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
+   *   export the flow to. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   *   If left unspecified, the serialized flow is returned inline.
+   * @param {boolean} [request.includeReferencedFlows]
+   *   Optional. Whether to export flows referenced by the specified flow.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.exportFlow(request);
+   * const [response] = await operation.promise();
+   */
+  exportFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.exportFlow(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportFlow()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkExportFlowProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkExportFlowProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ExportFlowResponse,
+      protos.google.protobuf.Struct
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.exportFlow,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ExportFlowResponse,
+      protos.google.protobuf.Struct
+    >;
+  }
   listFlows(
     request: protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest,
     options?: CallOptions
@@ -1224,7 +1559,9 @@ export class FlowsClient {
    *   dependent:
    *
    *   *  `Flow.event_handlers.trigger_fulfillment.messages`
+   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
    *   *  `Flow.transition_routes.trigger_fulfillment.messages`
+   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *
    *   If not specified, the agent's default language is used.
    *   [Many
@@ -1306,7 +1643,9 @@ export class FlowsClient {
    *   dependent:
    *
    *   *  `Flow.event_handlers.trigger_fulfillment.messages`
+   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
    *   *  `Flow.transition_routes.trigger_fulfillment.messages`
+   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *
    *   If not specified, the agent's default language is used.
    *   [Many
@@ -1366,7 +1705,9 @@ export class FlowsClient {
    *   dependent:
    *
    *   *  `Flow.event_handlers.trigger_fulfillment.messages`
+   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
    *   *  `Flow.transition_routes.trigger_fulfillment.messages`
+   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *
    *   If not specified, the agent's default language is used.
    *   [Many

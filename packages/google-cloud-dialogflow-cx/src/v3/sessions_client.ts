@@ -33,8 +33,9 @@ const version = require('../../../package.json').version;
 
 /**
  *  A session represents an interaction with a user. You retrieve user input
- *  and pass it to the {@link google.cloud.dialogflow.cx.v3.Sessions.DetectIntent|DetectIntent} method to determine
- *  user intent and respond.
+ *  and pass it to the
+ *  {@link google.cloud.dialogflow.cx.v3.Sessions.DetectIntent|DetectIntent} method to
+ *  determine user intent and respond.
  * @class
  * @memberof v3
  */
@@ -620,9 +621,13 @@ export class SessionsClient {
     >
   ): void;
   /**
-   * Fulfills a matched intent returned by {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}.
-   * Must be called after {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with input from
-   * {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}. Otherwise, the behavior is undefined.
+   * Fulfills a matched intent returned by
+   * {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}. Must be
+   * called after
+   * {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with
+   * input from
+   * {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}.
+   * Otherwise, the behavior is undefined.
    *
    * @param {Object} request
    *   The request object that will be sent.
