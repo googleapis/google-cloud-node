@@ -142,7 +142,6 @@
                          * @interface ITranslateSpeechConfig
                          * @property {string|null} [audioEncoding] TranslateSpeechConfig audioEncoding
                          * @property {string|null} [sourceLanguageCode] TranslateSpeechConfig sourceLanguageCode
-                         * @property {Array.<string>|null} [alternativeSourceLanguageCodes] TranslateSpeechConfig alternativeSourceLanguageCodes
                          * @property {string|null} [targetLanguageCode] TranslateSpeechConfig targetLanguageCode
                          * @property {number|null} [sampleRateHertz] TranslateSpeechConfig sampleRateHertz
                          * @property {string|null} [model] TranslateSpeechConfig model
@@ -157,7 +156,6 @@
                          * @param {google.cloud.mediatranslation.v1beta1.ITranslateSpeechConfig=} [properties] Properties to set
                          */
                         function TranslateSpeechConfig(properties) {
-                            this.alternativeSourceLanguageCodes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -179,14 +177,6 @@
                          * @instance
                          */
                         TranslateSpeechConfig.prototype.sourceLanguageCode = "";
-    
-                        /**
-                         * TranslateSpeechConfig alternativeSourceLanguageCodes.
-                         * @member {Array.<string>} alternativeSourceLanguageCodes
-                         * @memberof google.cloud.mediatranslation.v1beta1.TranslateSpeechConfig
-                         * @instance
-                         */
-                        TranslateSpeechConfig.prototype.alternativeSourceLanguageCodes = $util.emptyArray;
     
                         /**
                          * TranslateSpeechConfig targetLanguageCode.
@@ -246,9 +236,6 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sampleRateHertz);
                             if (message.model != null && Object.hasOwnProperty.call(message, "model"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.model);
-                            if (message.alternativeSourceLanguageCodes != null && message.alternativeSourceLanguageCodes.length)
-                                for (var i = 0; i < message.alternativeSourceLanguageCodes.length; ++i)
-                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.alternativeSourceLanguageCodes[i]);
                             return writer;
                         };
     
@@ -288,11 +275,6 @@
                                     break;
                                 case 2:
                                     message.sourceLanguageCode = reader.string();
-                                    break;
-                                case 6:
-                                    if (!(message.alternativeSourceLanguageCodes && message.alternativeSourceLanguageCodes.length))
-                                        message.alternativeSourceLanguageCodes = [];
-                                    message.alternativeSourceLanguageCodes.push(reader.string());
                                     break;
                                 case 3:
                                     message.targetLanguageCode = reader.string();
@@ -344,13 +326,6 @@
                             if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
                                 if (!$util.isString(message.sourceLanguageCode))
                                     return "sourceLanguageCode: string expected";
-                            if (message.alternativeSourceLanguageCodes != null && message.hasOwnProperty("alternativeSourceLanguageCodes")) {
-                                if (!Array.isArray(message.alternativeSourceLanguageCodes))
-                                    return "alternativeSourceLanguageCodes: array expected";
-                                for (var i = 0; i < message.alternativeSourceLanguageCodes.length; ++i)
-                                    if (!$util.isString(message.alternativeSourceLanguageCodes[i]))
-                                        return "alternativeSourceLanguageCodes: string[] expected";
-                            }
                             if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
                                 if (!$util.isString(message.targetLanguageCode))
                                     return "targetLanguageCode: string expected";
@@ -379,13 +354,6 @@
                                 message.audioEncoding = String(object.audioEncoding);
                             if (object.sourceLanguageCode != null)
                                 message.sourceLanguageCode = String(object.sourceLanguageCode);
-                            if (object.alternativeSourceLanguageCodes) {
-                                if (!Array.isArray(object.alternativeSourceLanguageCodes))
-                                    throw TypeError(".google.cloud.mediatranslation.v1beta1.TranslateSpeechConfig.alternativeSourceLanguageCodes: array expected");
-                                message.alternativeSourceLanguageCodes = [];
-                                for (var i = 0; i < object.alternativeSourceLanguageCodes.length; ++i)
-                                    message.alternativeSourceLanguageCodes[i] = String(object.alternativeSourceLanguageCodes[i]);
-                            }
                             if (object.targetLanguageCode != null)
                                 message.targetLanguageCode = String(object.targetLanguageCode);
                             if (object.sampleRateHertz != null)
@@ -408,8 +376,6 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
-                                object.alternativeSourceLanguageCodes = [];
                             if (options.defaults) {
                                 object.audioEncoding = "";
                                 object.sourceLanguageCode = "";
@@ -427,11 +393,6 @@
                                 object.sampleRateHertz = message.sampleRateHertz;
                             if (message.model != null && message.hasOwnProperty("model"))
                                 object.model = message.model;
-                            if (message.alternativeSourceLanguageCodes && message.alternativeSourceLanguageCodes.length) {
-                                object.alternativeSourceLanguageCodes = [];
-                                for (var j = 0; j < message.alternativeSourceLanguageCodes.length; ++j)
-                                    object.alternativeSourceLanguageCodes[j] = message.alternativeSourceLanguageCodes[j];
-                            }
                             return object;
                         };
     
@@ -913,7 +874,6 @@
                          * @memberof google.cloud.mediatranslation.v1beta1
                          * @interface IStreamingTranslateSpeechResult
                          * @property {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.ITextTranslationResult|null} [textTranslationResult] StreamingTranslateSpeechResult textTranslationResult
-                         * @property {string|null} [recognitionResult] StreamingTranslateSpeechResult recognitionResult
                          */
     
                         /**
@@ -938,14 +898,6 @@
                          * @instance
                          */
                         StreamingTranslateSpeechResult.prototype.textTranslationResult = null;
-    
-                        /**
-                         * StreamingTranslateSpeechResult recognitionResult.
-                         * @member {string} recognitionResult
-                         * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult
-                         * @instance
-                         */
-                        StreamingTranslateSpeechResult.prototype.recognitionResult = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -987,8 +939,6 @@
                                 writer = $Writer.create();
                             if (message.textTranslationResult != null && Object.hasOwnProperty.call(message, "textTranslationResult"))
                                 $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.encode(message.textTranslationResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.recognitionResult != null && Object.hasOwnProperty.call(message, "recognitionResult"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.recognitionResult);
                             return writer;
                         };
     
@@ -1025,9 +975,6 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.textTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.recognitionResult = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1073,9 +1020,6 @@
                                         return "textTranslationResult." + error;
                                 }
                             }
-                            if (message.recognitionResult != null && message.hasOwnProperty("recognitionResult"))
-                                if (!$util.isString(message.recognitionResult))
-                                    return "recognitionResult: string expected";
                             return null;
                         };
     
@@ -1096,8 +1040,6 @@
                                     throw TypeError(".google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.textTranslationResult: object expected");
                                 message.textTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.fromObject(object.textTranslationResult);
                             }
-                            if (object.recognitionResult != null)
-                                message.recognitionResult = String(object.recognitionResult);
                             return message;
                         };
     
@@ -1114,15 +1056,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                object.recognitionResult = "";
                             if (message.textTranslationResult != null && message.hasOwnProperty("textTranslationResult")) {
                                 object.textTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.toObject(message.textTranslationResult, options);
                                 if (options.oneofs)
                                     object.result = "textTranslationResult";
                             }
-                            if (message.recognitionResult != null && message.hasOwnProperty("recognitionResult"))
-                                object.recognitionResult = message.recognitionResult;
                             return object;
                         };
     
@@ -1145,7 +1083,6 @@
                              * @interface ITextTranslationResult
                              * @property {string|null} [translation] TextTranslationResult translation
                              * @property {boolean|null} [isFinal] TextTranslationResult isFinal
-                             * @property {string|null} [detectedSourceLanguageCode] TextTranslationResult detectedSourceLanguageCode
                              */
     
                             /**
@@ -1180,14 +1117,6 @@
                             TextTranslationResult.prototype.isFinal = false;
     
                             /**
-                             * TextTranslationResult detectedSourceLanguageCode.
-                             * @member {string} detectedSourceLanguageCode
-                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult
-                             * @instance
-                             */
-                            TextTranslationResult.prototype.detectedSourceLanguageCode = "";
-    
-                            /**
                              * Creates a new TextTranslationResult instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult
@@ -1215,8 +1144,6 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.translation);
                                 if (message.isFinal != null && Object.hasOwnProperty.call(message, "isFinal"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isFinal);
-                                if (message.detectedSourceLanguageCode != null && Object.hasOwnProperty.call(message, "detectedSourceLanguageCode"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.detectedSourceLanguageCode);
                                 return writer;
                             };
     
@@ -1256,9 +1183,6 @@
                                         break;
                                     case 2:
                                         message.isFinal = reader.bool();
-                                        break;
-                                    case 3:
-                                        message.detectedSourceLanguageCode = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -1301,9 +1225,6 @@
                                 if (message.isFinal != null && message.hasOwnProperty("isFinal"))
                                     if (typeof message.isFinal !== "boolean")
                                         return "isFinal: boolean expected";
-                                if (message.detectedSourceLanguageCode != null && message.hasOwnProperty("detectedSourceLanguageCode"))
-                                    if (!$util.isString(message.detectedSourceLanguageCode))
-                                        return "detectedSourceLanguageCode: string expected";
                                 return null;
                             };
     
@@ -1323,8 +1244,6 @@
                                     message.translation = String(object.translation);
                                 if (object.isFinal != null)
                                     message.isFinal = Boolean(object.isFinal);
-                                if (object.detectedSourceLanguageCode != null)
-                                    message.detectedSourceLanguageCode = String(object.detectedSourceLanguageCode);
                                 return message;
                             };
     
@@ -1344,14 +1263,11 @@
                                 if (options.defaults) {
                                     object.translation = "";
                                     object.isFinal = false;
-                                    object.detectedSourceLanguageCode = "";
                                 }
                                 if (message.translation != null && message.hasOwnProperty("translation"))
                                     object.translation = message.translation;
                                 if (message.isFinal != null && message.hasOwnProperty("isFinal"))
                                     object.isFinal = message.isFinal;
-                                if (message.detectedSourceLanguageCode != null && message.hasOwnProperty("detectedSourceLanguageCode"))
-                                    object.detectedSourceLanguageCode = message.detectedSourceLanguageCode;
                                 return object;
                             };
     

@@ -80,9 +80,6 @@ export namespace google {
                     /** TranslateSpeechConfig sourceLanguageCode */
                     sourceLanguageCode?: (string|null);
 
-                    /** TranslateSpeechConfig alternativeSourceLanguageCodes */
-                    alternativeSourceLanguageCodes?: (string[]|null);
-
                     /** TranslateSpeechConfig targetLanguageCode */
                     targetLanguageCode?: (string|null);
 
@@ -107,9 +104,6 @@ export namespace google {
 
                     /** TranslateSpeechConfig sourceLanguageCode. */
                     public sourceLanguageCode: string;
-
-                    /** TranslateSpeechConfig alternativeSourceLanguageCodes. */
-                    public alternativeSourceLanguageCodes: string[];
 
                     /** TranslateSpeechConfig targetLanguageCode. */
                     public targetLanguageCode: string;
@@ -391,9 +385,6 @@ export namespace google {
 
                     /** StreamingTranslateSpeechResult textTranslationResult */
                     textTranslationResult?: (google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.ITextTranslationResult|null);
-
-                    /** StreamingTranslateSpeechResult recognitionResult */
-                    recognitionResult?: (string|null);
                 }
 
                 /** Represents a StreamingTranslateSpeechResult. */
@@ -407,9 +398,6 @@ export namespace google {
 
                     /** StreamingTranslateSpeechResult textTranslationResult. */
                     public textTranslationResult?: (google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.ITextTranslationResult|null);
-
-                    /** StreamingTranslateSpeechResult recognitionResult. */
-                    public recognitionResult: string;
 
                     /** StreamingTranslateSpeechResult result. */
                     public result?: "textTranslationResult";
@@ -495,9 +483,6 @@ export namespace google {
 
                         /** TextTranslationResult isFinal */
                         isFinal?: (boolean|null);
-
-                        /** TextTranslationResult detectedSourceLanguageCode */
-                        detectedSourceLanguageCode?: (string|null);
                     }
 
                     /** Represents a TextTranslationResult. */
@@ -514,9 +499,6 @@ export namespace google {
 
                         /** TextTranslationResult isFinal. */
                         public isFinal: boolean;
-
-                        /** TextTranslationResult detectedSourceLanguageCode. */
-                        public detectedSourceLanguageCode: string;
 
                         /**
                          * Creates a new TextTranslationResult instance using the specified properties.

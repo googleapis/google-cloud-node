@@ -48,14 +48,6 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "alternativeSourceLanguageCodes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
                         "targetLanguageCode": {
                           "type": "string",
                           "id": 3,
@@ -129,13 +121,6 @@
                         "textTranslationResult": {
                           "type": "TextTranslationResult",
                           "id": 1
-                        },
-                        "recognitionResult": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       },
                       "nested": {
@@ -151,13 +136,6 @@
                             "isFinal": {
                               "type": "bool",
                               "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "detectedSourceLanguageCode": {
-                              "type": "string",
-                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
