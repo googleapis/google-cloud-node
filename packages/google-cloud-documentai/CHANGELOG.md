@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.8.0...v2.9.0) (2021-04-26)
+
+
+### Features
+
+* add confidence field to the PageAnchor.PageRef in document.proto ([#204](https://www.github.com/googleapis/nodejs-document-ai/issues/204)) ([580150b](https://www.github.com/googleapis/nodejs-document-ai/commit/580150bdb3b5f7bfac599ee7c122a3ffb9a624c7))
+
 ## [2.8.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.7.0...v2.8.0) (2021-04-13)
 
 
