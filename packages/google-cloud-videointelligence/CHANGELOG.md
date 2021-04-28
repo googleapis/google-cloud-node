@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.3.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.0...v3.3.1) (2021-04-19)
+
+
+### Bug Fixes
+
+* update region tag from v1beta1 to v1 for analyze-face-detection.js ([#530](https://www.github.com/googleapis/nodejs-video-intelligence/issues/530)) ([4d19f9d](https://www.github.com/googleapis/nodejs-video-intelligence/commit/4d19f9de9e386ee92ed18d9302cddc61c2dc9865))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.2.0...v3.3.0) (2021-01-09)
 
 
