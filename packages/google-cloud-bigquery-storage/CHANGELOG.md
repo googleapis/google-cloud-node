@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.3.0...v2.4.0) (2021-04-20)
+
+
+### Features
+
+* add a Arrow compression options (Only LZ4 for now). ([cd23105](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/cd23105fff40a870888ca4a8608d1b85ed6b3639))
+* Return schema on first ReadRowsResponse ([cd23105](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/cd23105fff40a870888ca4a8608d1b85ed6b3639))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.2.3...v2.3.0) (2021-01-09)
 
 
