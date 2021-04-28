@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.3.0...v2.4.0) (2021-04-26)
+
+
+### Features
+
+* a bundle of new features for Dataproc V1 ([#475](https://www.github.com/googleapis/nodejs-dataproc/issues/475)) ([4803be4](https://www.github.com/googleapis/nodejs-dataproc/commit/4803be4f4b63833072aa50e29e8b081c363f6dde))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.2.1...v2.3.0) (2021-01-14)
 
 
