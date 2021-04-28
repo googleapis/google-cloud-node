@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.2.0...v2.3.0) (2021-04-27)
+
+
+### Features
+
+* new RenameTagTemplateFieldEnumValue API ([#244](https://www.github.com/googleapis/nodejs-datacatalog/issues/244)) ([1efaf9b](https://www.github.com/googleapis/nodejs-datacatalog/commit/1efaf9be12b84135643761cf01372726ec7dd249))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.1.3...v2.2.0) (2021-03-07)
 
 
