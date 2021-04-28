@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.0...v3.1.1) (2021-04-27)
+
+
+### Bug Fixes
+
+* specify valid go_package option ([#293](https://www.github.com/googleapis/nodejs-containeranalysis/issues/293)) ([84ba201](https://www.github.com/googleapis/nodejs-containeranalysis/commit/84ba201c2d2eb81faf36461cf1ff3bfccf33f5ed))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.0.1...v3.1.0) (2021-01-14)
 
 
