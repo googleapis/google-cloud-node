@@ -9,12 +9,12 @@
                 "csharp_namespace": "Google.Cloud.Monitoring.V3",
                 "go_package": "google.golang.org/genproto/googleapis/monitoring/v3;monitoring",
                 "java_multiple_files": true,
-                "java_outer_classname": "UptimeServiceProto",
+                "java_outer_classname": "UptimeProto",
                 "java_package": "com.google.monitoring.v3",
                 "php_namespace": "Google\\Cloud\\Monitoring\\V3",
                 "ruby_package": "Google::Cloud::Monitoring::V3",
-                "(google.api.resource_definition).type": "monitoring.googleapis.com/TimeSeries",
-                "(google.api.resource_definition).pattern": "folders/{folder}/timeSeries/{time_series}",
+                "(google.api.resource_definition).type": "monitoring.googleapis.com/MonitoredResourceDescriptor",
+                "(google.api.resource_definition).pattern": "*",
                 "(google.api.resource_definition).history": "ORIGINALLY_SINGLE_PATTERN"
               },
               "nested": {
@@ -4985,18 +4985,6 @@
                 }
               }
             },
-            "Empty": {
-              "fields": {}
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Struct": {
               "fields": {
                 "fields": {
@@ -5056,6 +5044,18 @@
                 "values": {
                   "rule": "repeated",
                   "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
                   "id": 1
                 }
               }

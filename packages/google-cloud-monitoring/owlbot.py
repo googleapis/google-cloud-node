@@ -14,24 +14,6 @@
 
 """This script is used to synthesize generated parts of this library."""
 
-import synthtool as s
-import synthtool.gcp as gcp
 import synthtool.languages.node as node
-import logging
-logging.basicConfig(level=logging.DEBUG)
 
-AUTOSYNTH_MULTIPLE_COMMITS = True
-
-
-gapic = gcp.GAPICBazel()
-version = "v3"
-library = gapic.node_library("monitoring", version, proto_path=f'google/monitoring/{version}')
-
-s.copy(library, excludes=["README.md", "package.json"])
-
-common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(
-    source_location="build/src", versions=["v3"], default_version="v3")
-s.copy(templates)
-
-node.postprocess_gapic_library()
+node.owlbot_main(staging_excludes=["README.md", "package.json"])

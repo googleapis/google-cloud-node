@@ -1,13 +1,14 @@
 {
-  "name": "monitoring",
-  "name_pretty": "Stackdriver Monitoring",
-  "product_documentation": "https://cloud.google.com/monitoring/docs",
   "client_documentation": "https://googleapis.dev/nodejs/monitoring/latest",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
+  "product_documentation": "https://cloud.google.com/monitoring/docs",
+  "name": "monitoring",
+  "requires_billing": true,
   "release_level": "ga",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-monitoring",
-  "distribution_name": "@google-cloud/monitoring",
   "api_id": "monitoring.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/monitoring",
+  "repo": "googleapis/nodejs-monitoring",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
+  "name_pretty": "Stackdriver Monitoring",
+  "default_version": "v3"
 }
