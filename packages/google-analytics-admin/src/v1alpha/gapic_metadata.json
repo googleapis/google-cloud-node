@@ -125,11 +125,6 @@
                 "updateIosAppDataStream"
               ]
             },
-            "CreateIosAppDataStream": {
-              "methods": [
-                "createIosAppDataStream"
-              ]
-            },
             "GetAndroidAppDataStream": {
               "methods": [
                 "getAndroidAppDataStream"
@@ -143,11 +138,6 @@
             "UpdateAndroidAppDataStream": {
               "methods": [
                 "updateAndroidAppDataStream"
-              ]
-            },
-            "CreateAndroidAppDataStream": {
-              "methods": [
-                "createAndroidAppDataStream"
               ]
             },
             "GetEnhancedMeasurementSettings": {
@@ -268,6 +258,13 @@
                 "listGoogleAdsLinks",
                 "listGoogleAdsLinksStream",
                 "listGoogleAdsLinksAsync"
+              ]
+            },
+            "SearchChangeHistoryEvents": {
+              "methods": [
+                "searchChangeHistoryEvents",
+                "searchChangeHistoryEventsStream",
+                "searchChangeHistoryEventsAsync"
               ]
             }
           }
@@ -390,11 +387,6 @@
                 "updateIosAppDataStream"
               ]
             },
-            "CreateIosAppDataStream": {
-              "methods": [
-                "createIosAppDataStream"
-              ]
-            },
             "GetAndroidAppDataStream": {
               "methods": [
                 "getAndroidAppDataStream"
@@ -408,11 +400,6 @@
             "UpdateAndroidAppDataStream": {
               "methods": [
                 "updateAndroidAppDataStream"
-              ]
-            },
-            "CreateAndroidAppDataStream": {
-              "methods": [
-                "createAndroidAppDataStream"
               ]
             },
             "GetEnhancedMeasurementSettings": {
@@ -533,6 +520,13 @@
                 "listGoogleAdsLinks",
                 "listGoogleAdsLinksStream",
                 "listGoogleAdsLinksAsync"
+              ]
+            },
+            "SearchChangeHistoryEvents": {
+              "methods": [
+                "searchChangeHistoryEvents",
+                "searchChangeHistoryEventsStream",
+                "searchChangeHistoryEventsAsync"
               ]
             }
           }

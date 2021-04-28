@@ -262,6 +262,11 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'googleAdsLinks'
       ),
+      searchChangeHistoryEvents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'changeHistoryEvents'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -340,12 +345,10 @@ export class AnalyticsAdminServiceClient {
       'getIosAppDataStream',
       'deleteIosAppDataStream',
       'updateIosAppDataStream',
-      'createIosAppDataStream',
       'listIosAppDataStreams',
       'getAndroidAppDataStream',
       'deleteAndroidAppDataStream',
       'updateAndroidAppDataStream',
-      'createAndroidAppDataStream',
       'listAndroidAppDataStreams',
       'getEnhancedMeasurementSettings',
       'updateEnhancedMeasurementSettings',
@@ -359,6 +362,7 @@ export class AnalyticsAdminServiceClient {
       'deleteGoogleAdsLink',
       'listGoogleAdsLinks',
       'getDataSharingSettings',
+      'searchChangeHistoryEvents',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -1023,7 +1027,7 @@ export class AnalyticsAdminServiceClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IDeletePropertyRequest | undefined,
       {} | undefined
     ]
@@ -1032,7 +1036,7 @@ export class AnalyticsAdminServiceClient {
     request: protos.google.analytics.admin.v1alpha.IDeletePropertyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1alpha.IProperty,
       | protos.google.analytics.admin.v1alpha.IDeletePropertyRequest
       | null
       | undefined,
@@ -1042,7 +1046,7 @@ export class AnalyticsAdminServiceClient {
   deleteProperty(
     request: protos.google.analytics.admin.v1alpha.IDeletePropertyRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1alpha.IProperty,
       | protos.google.analytics.admin.v1alpha.IDeletePropertyRequest
       | null
       | undefined,
@@ -1071,7 +1075,7 @@ export class AnalyticsAdminServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing [Property]{@link google.analytics.admin.v1alpha.Property}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1083,14 +1087,14 @@ export class AnalyticsAdminServiceClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.analytics.admin.v1alpha.IProperty,
           | protos.google.analytics.admin.v1alpha.IDeletePropertyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1alpha.IProperty,
       | protos.google.analytics.admin.v1alpha.IDeletePropertyRequest
       | null
       | undefined,
@@ -1098,7 +1102,7 @@ export class AnalyticsAdminServiceClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IDeletePropertyRequest | undefined,
       {} | undefined
     ]
@@ -2736,119 +2740,6 @@ export class AnalyticsAdminServiceClient {
       callback
     );
   }
-  createIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IIosAppDataStream,
-      (
-        | protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  createIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IIosAppDataStream,
-      | protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IIosAppDataStream,
-      | protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates an iOS app stream with the specified location and attributes.
-   *
-   * Note that an iOS app stream must be linked to a Firebase app to receive
-   * traffic.
-   *
-   * To create a working app stream, make sure your property is linked to a
-   * Firebase project. Then, use the Firebase API to create a Firebase app,
-   * which will also create an appropriate data stream in Analytics (may take up
-   * to 24 hours).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.analytics.admin.v1alpha.IosAppDataStream} request.iosAppDataStream
-   *   Required. The iOS app data stream to create.
-   * @param {string} request.parent
-   *   Required. The parent resource where this ios app data stream will be created.
-   *   Format: properties/123
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [IosAppDataStream]{@link google.analytics.admin.v1alpha.IosAppDataStream}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createIosAppDataStream(request);
-   */
-  createIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.analytics.admin.v1alpha.IIosAppDataStream,
-          | protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.analytics.admin.v1alpha.IIosAppDataStream,
-      | protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IIosAppDataStream,
-      (
-        | protos.google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.createIosAppDataStream(
-      request,
-      options,
-      callback
-    );
-  }
   getAndroidAppDataStream(
     request: protos.google.analytics.admin.v1alpha.IGetAndroidAppDataStreamRequest,
     options?: CallOptions
@@ -3159,119 +3050,6 @@ export class AnalyticsAdminServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.updateAndroidAppDataStream(
-      request,
-      options,
-      callback
-    );
-  }
-  createAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IAndroidAppDataStream,
-      (
-        | protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  createAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IAndroidAppDataStream,
-      | protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest,
-    callback: Callback<
-      protos.google.analytics.admin.v1alpha.IAndroidAppDataStream,
-      | protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates an Android app stream with the specified location and attributes.
-   *
-   * Note that an Android app stream must be linked to a Firebase app to receive
-   * traffic.
-   *
-   * To create a working app stream, make sure your property is linked to a
-   * Firebase project. Then, use the Firebase API to create a Firebase app,
-   * which will also create an appropriate data stream in Analytics (may take up
-   * to 24 hours).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.analytics.admin.v1alpha.AndroidAppDataStream} request.androidAppDataStream
-   *   Required. The android app stream to create.
-   * @param {string} request.parent
-   *   Required. The parent resource where this android app data stream will be created.
-   *   Format: properties/123
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AndroidAppDataStream]{@link google.analytics.admin.v1alpha.AndroidAppDataStream}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createAndroidAppDataStream(request);
-   */
-  createAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.analytics.admin.v1alpha.IAndroidAppDataStream,
-          | protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.analytics.admin.v1alpha.IAndroidAppDataStream,
-      | protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.analytics.admin.v1alpha.IAndroidAppDataStream,
-      (
-        | protos.google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
-    this.initialize();
-    return this.innerApiCalls.createAndroidAppDataStream(
       request,
       options,
       callback
@@ -6459,6 +6237,268 @@ export class AnalyticsAdminServiceClient {
       (request as unknown) as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IGoogleAdsLink>;
+  }
+  searchChangeHistoryEvents(
+    request: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[],
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest | null,
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+    ]
+  >;
+  searchChangeHistoryEvents(
+    request: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+      | protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IChangeHistoryEvent
+    >
+  ): void;
+  searchChangeHistoryEvents(
+    request: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+      | protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IChangeHistoryEvent
+    >
+  ): void;
+  /**
+   * Searches through all changes to an account or its children given the
+   * specified set of filters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. The account resource for which to return change history resources.
+   * @param {string} [request.property]
+   *   Optional. Resource name for a child property. If set, only return changes
+   *   made to this property or its child resources.
+   * @param {number[]} [request.resourceType]
+   *   Optional. If set, only return changes if they are for a resource that matches at
+   *   least one of these types.
+   * @param {number[]} [request.action]
+   *   Optional. If set, only return changes that match one or more of these types of
+   *   actions.
+   * @param {string[]} [request.actorEmail]
+   *   Optional. If set, only return changes if they are made by a user in this list.
+   * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
+   *   Optional. If set, only return changes made after this time (inclusive).
+   * @param {google.protobuf.Timestamp} [request.latestChangeTime]
+   *   Optional. If set, only return changes made before this time (inclusive).
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ChangeHistoryEvent items to return.
+   *   The service may return fewer than this value, even if there are additional
+   *   pages. If unspecified, at most 50 items will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
+   *   provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ChangeHistoryEvent]{@link google.analytics.admin.v1alpha.ChangeHistoryEvent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchChangeHistoryEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchChangeHistoryEvents(
+    request: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+          | protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IChangeHistoryEvent
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+      | protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IChangeHistoryEvent
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[],
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest | null,
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.searchChangeHistoryEvents(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. The account resource for which to return change history resources.
+   * @param {string} [request.property]
+   *   Optional. Resource name for a child property. If set, only return changes
+   *   made to this property or its child resources.
+   * @param {number[]} [request.resourceType]
+   *   Optional. If set, only return changes if they are for a resource that matches at
+   *   least one of these types.
+   * @param {number[]} [request.action]
+   *   Optional. If set, only return changes that match one or more of these types of
+   *   actions.
+   * @param {string[]} [request.actorEmail]
+   *   Optional. If set, only return changes if they are made by a user in this list.
+   * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
+   *   Optional. If set, only return changes made after this time (inclusive).
+   * @param {google.protobuf.Timestamp} [request.latestChangeTime]
+   *   Optional. If set, only return changes made before this time (inclusive).
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ChangeHistoryEvent items to return.
+   *   The service may return fewer than this value, even if there are additional
+   *   pages. If unspecified, at most 50 items will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
+   *   provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ChangeHistoryEvent]{@link google.analytics.admin.v1alpha.ChangeHistoryEvent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchChangeHistoryEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchChangeHistoryEventsStream(
+    request?: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchChangeHistoryEvents.createStream(
+      this.innerApiCalls.searchChangeHistoryEvents as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchChangeHistoryEvents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.account
+   *   Required. The account resource for which to return change history resources.
+   * @param {string} [request.property]
+   *   Optional. Resource name for a child property. If set, only return changes
+   *   made to this property or its child resources.
+   * @param {number[]} [request.resourceType]
+   *   Optional. If set, only return changes if they are for a resource that matches at
+   *   least one of these types.
+   * @param {number[]} [request.action]
+   *   Optional. If set, only return changes that match one or more of these types of
+   *   actions.
+   * @param {string[]} [request.actorEmail]
+   *   Optional. If set, only return changes if they are made by a user in this list.
+   * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
+   *   Optional. If set, only return changes made after this time (inclusive).
+   * @param {google.protobuf.Timestamp} [request.latestChangeTime]
+   *   Optional. If set, only return changes made before this time (inclusive).
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ChangeHistoryEvent items to return.
+   *   The service may return fewer than this value, even if there are additional
+   *   pages. If unspecified, at most 50 items will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
+   *   provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ChangeHistoryEvent]{@link google.analytics.admin.v1alpha.ChangeHistoryEvent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.searchChangeHistoryEventsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  searchChangeHistoryEventsAsync(
+    request?: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IChangeHistoryEvent> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      account: request.account || '',
+    });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchChangeHistoryEvents.asyncIterate(
+      this.innerApiCalls['searchChangeHistoryEvents'] as GaxCall,
+      (request as unknown) as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IChangeHistoryEvent>;
   }
   // --------------------
   // -- Path templates --

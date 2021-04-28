@@ -899,7 +899,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.analytics.admin.v1alpha.Property()
       );
       client.innerApiCalls.deleteProperty = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteProperty(request);
@@ -932,7 +932,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.analytics.admin.v1alpha.Property()
       );
       client.innerApiCalls.deleteProperty = stubSimpleCallWithCallback(
         expectedResponse
@@ -942,7 +942,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.analytics.admin.v1alpha.IProperty | null
           ) => {
             if (err) {
               reject(err);
@@ -2919,129 +2919,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
-  describe('createIosAppDataStream', () => {
-    it('invokes createIosAppDataStream without error', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.IosAppDataStream()
-      );
-      client.innerApiCalls.createIosAppDataStream = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.createIosAppDataStream(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createIosAppDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes createIosAppDataStream without error using callback', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.IosAppDataStream()
-      );
-      client.innerApiCalls.createIosAppDataStream = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.createIosAppDataStream(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.admin.v1alpha.IIosAppDataStream | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createIosAppDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes createIosAppDataStream with error', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createIosAppDataStream = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createIosAppDataStream(request),
-        expectedError
-      );
-      assert(
-        (client.innerApiCalls.createIosAppDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('getAndroidAppDataStream', () => {
     it('invokes getAndroidAppDataStream without error', async () => {
       const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
@@ -3408,129 +3285,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       assert(
         (client.innerApiCalls.updateAndroidAppDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('createAndroidAppDataStream', () => {
-    it('invokes createAndroidAppDataStream without error', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.AndroidAppDataStream()
-      );
-      client.innerApiCalls.createAndroidAppDataStream = stubSimpleCall(
-        expectedResponse
-      );
-      const [response] = await client.createAndroidAppDataStream(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAndroidAppDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes createAndroidAppDataStream without error using callback', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.AndroidAppDataStream()
-      );
-      client.innerApiCalls.createAndroidAppDataStream = stubSimpleCallWithCallback(
-        expectedResponse
-      );
-      const promise = new Promise((resolve, reject) => {
-        client.createAndroidAppDataStream(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.admin.v1alpha.IAndroidAppDataStream | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAndroidAppDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes createAndroidAppDataStream with error', async () => {
-      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAndroidAppDataStream = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createAndroidAppDataStream(request),
-        expectedError
-      );
-      assert(
-        (client.innerApiCalls.createAndroidAppDataStream as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -7889,6 +7643,347 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       assert.strictEqual(
         (client.descriptors.page.listGoogleAdsLinks
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('searchChangeHistoryEvents', () => {
+    it('invokes searchChangeHistoryEvents without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+      ];
+      client.innerApiCalls.searchChangeHistoryEvents = stubSimpleCall(
+        expectedResponse
+      );
+      const [response] = await client.searchChangeHistoryEvents(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchChangeHistoryEvents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchChangeHistoryEvents without error using callback', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+      ];
+      client.innerApiCalls.searchChangeHistoryEvents = stubSimpleCallWithCallback(
+        expectedResponse
+      );
+      const promise = new Promise((resolve, reject) => {
+        client.searchChangeHistoryEvents(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchChangeHistoryEvents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes searchChangeHistoryEvents with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchChangeHistoryEvents = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.searchChangeHistoryEvents(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.searchChangeHistoryEvents as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchChangeHistoryEventsStream without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+      ];
+      client.descriptors.page.searchChangeHistoryEvents.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
+      const stream = client.searchChangeHistoryEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.ChangeHistoryEvent[] = [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.ChangeHistoryEvent
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.searchChangeHistoryEvents
+          .createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchChangeHistoryEvents, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.searchChangeHistoryEvents
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes searchChangeHistoryEventsStream with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchChangeHistoryEvents.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.searchChangeHistoryEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.ChangeHistoryEvent[] = [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.ChangeHistoryEvent
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.searchChangeHistoryEvents
+          .createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchChangeHistoryEvents, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.searchChangeHistoryEvents
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchChangeHistoryEvents without error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
+        ),
+      ];
+      client.descriptors.page.searchChangeHistoryEvents.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[] = [];
+      const iterable = client.searchChangeHistoryEventsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.searchChangeHistoryEvents
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.searchChangeHistoryEvents
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchChangeHistoryEvents with error', async () => {
+      const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
+      );
+      request.account = '';
+      const expectedHeaderRequestParams = 'account=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchChangeHistoryEvents.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.searchChangeHistoryEventsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.searchChangeHistoryEvents
+          .asyncIterate as SinonStub).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.searchChangeHistoryEvents
           .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
           'x-goog-request-params'
         ],

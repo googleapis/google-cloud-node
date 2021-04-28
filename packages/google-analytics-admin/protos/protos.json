@@ -174,7 +174,7 @@
                         },
                         "DeleteProperty": {
                           "requestType": "DeletePropertyRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "Property",
                           "options": {
                             "(google.api.http).delete": "/v1alpha/{name=properties/*}",
                             "(google.api.method_signature)": "name"
@@ -584,26 +584,6 @@
                             }
                           ]
                         },
-                        "CreateIosAppDataStream": {
-                          "requestType": "CreateIosAppDataStreamRequest",
-                          "responseType": "IosAppDataStream",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/iosAppDataStreams",
-                            "(google.api.http).body": "ios_app_data_stream",
-                            "(google.api.method_signature)": "parent,ios_app_data_stream"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=properties/*}/iosAppDataStreams",
-                                "body": "ios_app_data_stream"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,ios_app_data_stream"
-                            }
-                          ]
-                        },
                         "ListIosAppDataStreams": {
                           "requestType": "ListIosAppDataStreamsRequest",
                           "responseType": "ListIosAppDataStreamsResponse",
@@ -675,26 +655,6 @@
                             },
                             {
                               "(google.api.method_signature)": "android_app_data_stream,update_mask"
-                            }
-                          ]
-                        },
-                        "CreateAndroidAppDataStream": {
-                          "requestType": "CreateAndroidAppDataStreamRequest",
-                          "responseType": "AndroidAppDataStream",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/androidAppDataStreams",
-                            "(google.api.http).body": "android_app_data_stream",
-                            "(google.api.method_signature)": "parent,android_app_data_stream"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=properties/*}/androidAppDataStreams",
-                                "body": "android_app_data_stream"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,android_app_data_stream"
                             }
                           ]
                         },
@@ -939,6 +899,22 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "SearchChangeHistoryEvents": {
+                          "requestType": "SearchChangeHistoryEventsRequest",
+                          "responseType": "SearchChangeHistoryEventsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{account=accounts/*}:searchChangeHistoryEvents",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{account=accounts/*}:searchChangeHistoryEvents",
+                                "body": "*"
+                              }
                             }
                           ]
                         }
@@ -1502,25 +1478,6 @@
                         }
                       }
                     },
-                    "CreateIosAppDataStreamRequest": {
-                      "fields": {
-                        "iosAppDataStream": {
-                          "type": "IosAppDataStream",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/IosAppDataStream"
-                          }
-                        }
-                      }
-                    },
                     "ListIosAppDataStreamsRequest": {
                       "fields": {
                         "parent": {
@@ -1592,25 +1549,6 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "CreateAndroidAppDataStreamRequest": {
-                      "fields": {
-                        "androidAppDataStream": {
-                          "type": "AndroidAppDataStream",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AndroidAppDataStream"
                           }
                         }
                       }
@@ -1888,6 +1826,91 @@
                         }
                       }
                     },
+                    "SearchChangeHistoryEventsRequest": {
+                      "fields": {
+                        "account": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Account"
+                          }
+                        },
+                        "property": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        },
+                        "resourceType": {
+                          "rule": "repeated",
+                          "type": "ChangeHistoryResourceType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "action": {
+                          "rule": "repeated",
+                          "type": "ActionType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "actorEmail": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "earliestChangeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "latestChangeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchChangeHistoryEventsResponse": {
+                      "fields": {
+                        "changeHistoryEvents": {
+                          "rule": "repeated",
+                          "type": "ChangeHistoryEvent",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "MaximumUserAccess": {
                       "values": {
                         "MAXIMUM_USER_ACCESS_UNSPECIFIED": 0,
@@ -1926,6 +1949,34 @@
                         "SPORTS": 24,
                         "JOBS_AND_EDUCATION": 25,
                         "SHOPPING": 26
+                      }
+                    },
+                    "ActorType": {
+                      "values": {
+                        "ACTOR_TYPE_UNSPECIFIED": 0,
+                        "USER": 1,
+                        "SYSTEM": 2,
+                        "SUPPORT": 3
+                      }
+                    },
+                    "ActionType": {
+                      "values": {
+                        "ACTION_TYPE_UNSPECIFIED": 0,
+                        "CREATED": 1,
+                        "UPDATED": 2,
+                        "DELETED": 3
+                      }
+                    },
+                    "ChangeHistoryResourceType": {
+                      "values": {
+                        "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED": 0,
+                        "ACCOUNT": 1,
+                        "PROPERTY": 2,
+                        "WEB_DATA_STREAM": 3,
+                        "ANDROID_APP_DATA_STREAM": 4,
+                        "IOS_APP_DATA_STREAM": 5,
+                        "FIREBASE_LINK": 6,
+                        "GOOGLE_ADS_LINK": 7
                       }
                     },
                     "Account": {
@@ -2022,15 +2073,25 @@
                         },
                         "timeZone": {
                           "type": "string",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "currencyCode": {
                           "type": "string",
                           "id": 8
                         },
-                        "deleted": {
-                          "type": "bool",
-                          "id": 9,
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2483,6 +2544,102 @@
                         "displayName": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ChangeHistoryEvent": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "changeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "actorType": {
+                          "type": "ActorType",
+                          "id": 3
+                        },
+                        "userActorEmail": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "changesFiltered": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "changes": {
+                          "rule": "repeated",
+                          "type": "ChangeHistoryChange",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ChangeHistoryChange": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "action": {
+                          "type": "ActionType",
+                          "id": 2
+                        },
+                        "resourceBeforeChange": {
+                          "type": "ChangeHistoryResource",
+                          "id": 3
+                        },
+                        "resourceAfterChange": {
+                          "type": "ChangeHistoryResource",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ChangeHistoryResource": {
+                          "oneofs": {
+                            "resource": {
+                              "oneof": [
+                                "account",
+                                "property",
+                                "webDataStream",
+                                "androidAppDataStream",
+                                "iosAppDataStream",
+                                "firebaseLink",
+                                "googleAdsLink"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "account": {
+                              "type": "Account",
+                              "id": 1
+                            },
+                            "property": {
+                              "type": "Property",
+                              "id": 2
+                            },
+                            "webDataStream": {
+                              "type": "WebDataStream",
+                              "id": 3
+                            },
+                            "androidAppDataStream": {
+                              "type": "AndroidAppDataStream",
+                              "id": 4
+                            },
+                            "iosAppDataStream": {
+                              "type": "IosAppDataStream",
+                              "id": 5
+                            },
+                            "firebaseLink": {
+                              "type": "FirebaseLink",
+                              "id": 6
+                            },
+                            "googleAdsLink": {
+                              "type": "GoogleAdsLink",
+                              "id": 7
+                            }
+                          }
                         }
                       }
                     }

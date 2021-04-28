@@ -175,7 +175,7 @@ export namespace google {
                     /**
                      * Calls DeleteProperty.
                      * @param request DeletePropertyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
+                     * @param callback Node-style callback called with the error, if any, and Property
                      */
                     public deleteProperty(request: google.analytics.admin.v1alpha.IDeletePropertyRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeletePropertyCallback): void;
 
@@ -184,7 +184,7 @@ export namespace google {
                      * @param request DeletePropertyRequest message or plain object
                      * @returns Promise
                      */
-                    public deleteProperty(request: google.analytics.admin.v1alpha.IDeletePropertyRequest): Promise<google.protobuf.Empty>;
+                    public deleteProperty(request: google.analytics.admin.v1alpha.IDeletePropertyRequest): Promise<google.analytics.admin.v1alpha.Property>;
 
                     /**
                      * Calls UpdateProperty.
@@ -453,20 +453,6 @@ export namespace google {
                     public updateIosAppDataStream(request: google.analytics.admin.v1alpha.IUpdateIosAppDataStreamRequest): Promise<google.analytics.admin.v1alpha.IosAppDataStream>;
 
                     /**
-                     * Calls CreateIosAppDataStream.
-                     * @param request CreateIosAppDataStreamRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IosAppDataStream
-                     */
-                    public createIosAppDataStream(request: google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateIosAppDataStreamCallback): void;
-
-                    /**
-                     * Calls CreateIosAppDataStream.
-                     * @param request CreateIosAppDataStreamRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createIosAppDataStream(request: google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest): Promise<google.analytics.admin.v1alpha.IosAppDataStream>;
-
-                    /**
                      * Calls ListIosAppDataStreams.
                      * @param request ListIosAppDataStreamsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListIosAppDataStreamsResponse
@@ -521,20 +507,6 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateAndroidAppDataStream(request: google.analytics.admin.v1alpha.IUpdateAndroidAppDataStreamRequest): Promise<google.analytics.admin.v1alpha.AndroidAppDataStream>;
-
-                    /**
-                     * Calls CreateAndroidAppDataStream.
-                     * @param request CreateAndroidAppDataStreamRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and AndroidAppDataStream
-                     */
-                    public createAndroidAppDataStream(request: google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateAndroidAppDataStreamCallback): void;
-
-                    /**
-                     * Calls CreateAndroidAppDataStream.
-                     * @param request CreateAndroidAppDataStreamRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createAndroidAppDataStream(request: google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest): Promise<google.analytics.admin.v1alpha.AndroidAppDataStream>;
 
                     /**
                      * Calls ListAndroidAppDataStreams.
@@ -717,6 +689,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getDataSharingSettings(request: google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest): Promise<google.analytics.admin.v1alpha.DataSharingSettings>;
+
+                    /**
+                     * Calls SearchChangeHistoryEvents.
+                     * @param request SearchChangeHistoryEventsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchChangeHistoryEventsResponse
+                     */
+                    public searchChangeHistoryEvents(request: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.SearchChangeHistoryEventsCallback): void;
+
+                    /**
+                     * Calls SearchChangeHistoryEvents.
+                     * @param request SearchChangeHistoryEventsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchChangeHistoryEvents(request: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest): Promise<google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -787,9 +773,9 @@ export namespace google {
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteProperty}.
                      * @param error Error, if any
-                     * @param [response] Empty
+                     * @param [response] Property
                      */
-                    type DeletePropertyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    type DeletePropertyCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.Property) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateProperty}.
@@ -925,13 +911,6 @@ export namespace google {
                     type UpdateIosAppDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.IosAppDataStream) => void;
 
                     /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createIosAppDataStream}.
-                     * @param error Error, if any
-                     * @param [response] IosAppDataStream
-                     */
-                    type CreateIosAppDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.IosAppDataStream) => void;
-
-                    /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listIosAppDataStreams}.
                      * @param error Error, if any
                      * @param [response] ListIosAppDataStreamsResponse
@@ -958,13 +937,6 @@ export namespace google {
                      * @param [response] AndroidAppDataStream
                      */
                     type UpdateAndroidAppDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.AndroidAppDataStream) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createAndroidAppDataStream}.
-                     * @param error Error, if any
-                     * @param [response] AndroidAppDataStream
-                     */
-                    type CreateAndroidAppDataStreamCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.AndroidAppDataStream) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listAndroidAppDataStreams}.
@@ -1056,6 +1028,13 @@ export namespace google {
                      * @param [response] DataSharingSettings
                      */
                     type GetDataSharingSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataSharingSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#searchChangeHistoryEvents}.
+                     * @param error Error, if any
+                     * @param [response] SearchChangeHistoryEventsResponse
+                     */
+                    type SearchChangeHistoryEventsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse) => void;
                 }
 
                 /** Properties of a GetAccountRequest. */
@@ -4562,102 +4541,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a CreateIosAppDataStreamRequest. */
-                interface ICreateIosAppDataStreamRequest {
-
-                    /** CreateIosAppDataStreamRequest iosAppDataStream */
-                    iosAppDataStream?: (google.analytics.admin.v1alpha.IIosAppDataStream|null);
-
-                    /** CreateIosAppDataStreamRequest parent */
-                    parent?: (string|null);
-                }
-
-                /** Represents a CreateIosAppDataStreamRequest. */
-                class CreateIosAppDataStreamRequest implements ICreateIosAppDataStreamRequest {
-
-                    /**
-                     * Constructs a new CreateIosAppDataStreamRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest);
-
-                    /** CreateIosAppDataStreamRequest iosAppDataStream. */
-                    public iosAppDataStream?: (google.analytics.admin.v1alpha.IIosAppDataStream|null);
-
-                    /** CreateIosAppDataStreamRequest parent. */
-                    public parent: string;
-
-                    /**
-                     * Creates a new CreateIosAppDataStreamRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateIosAppDataStreamRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest): google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest;
-
-                    /**
-                     * Encodes the specified CreateIosAppDataStreamRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest.verify|verify} messages.
-                     * @param message CreateIosAppDataStreamRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateIosAppDataStreamRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest.verify|verify} messages.
-                     * @param message CreateIosAppDataStreamRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateIosAppDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateIosAppDataStreamRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateIosAppDataStreamRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest;
-
-                    /**
-                     * Decodes a CreateIosAppDataStreamRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateIosAppDataStreamRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest;
-
-                    /**
-                     * Verifies a CreateIosAppDataStreamRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateIosAppDataStreamRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateIosAppDataStreamRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest;
-
-                    /**
-                     * Creates a plain object from a CreateIosAppDataStreamRequest message. Also converts values to other types if specified.
-                     * @param message CreateIosAppDataStreamRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateIosAppDataStreamRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a ListIosAppDataStreamsRequest. */
                 interface IListIosAppDataStreamsRequest {
 
@@ -5127,102 +5010,6 @@ export namespace google {
 
                     /**
                      * Converts this UpdateAndroidAppDataStreamRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a CreateAndroidAppDataStreamRequest. */
-                interface ICreateAndroidAppDataStreamRequest {
-
-                    /** CreateAndroidAppDataStreamRequest androidAppDataStream */
-                    androidAppDataStream?: (google.analytics.admin.v1alpha.IAndroidAppDataStream|null);
-
-                    /** CreateAndroidAppDataStreamRequest parent */
-                    parent?: (string|null);
-                }
-
-                /** Represents a CreateAndroidAppDataStreamRequest. */
-                class CreateAndroidAppDataStreamRequest implements ICreateAndroidAppDataStreamRequest {
-
-                    /**
-                     * Constructs a new CreateAndroidAppDataStreamRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest);
-
-                    /** CreateAndroidAppDataStreamRequest androidAppDataStream. */
-                    public androidAppDataStream?: (google.analytics.admin.v1alpha.IAndroidAppDataStream|null);
-
-                    /** CreateAndroidAppDataStreamRequest parent. */
-                    public parent: string;
-
-                    /**
-                     * Creates a new CreateAndroidAppDataStreamRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateAndroidAppDataStreamRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest): google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest;
-
-                    /**
-                     * Encodes the specified CreateAndroidAppDataStreamRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest.verify|verify} messages.
-                     * @param message CreateAndroidAppDataStreamRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateAndroidAppDataStreamRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest.verify|verify} messages.
-                     * @param message CreateAndroidAppDataStreamRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateAndroidAppDataStreamRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateAndroidAppDataStreamRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateAndroidAppDataStreamRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest;
-
-                    /**
-                     * Decodes a CreateAndroidAppDataStreamRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateAndroidAppDataStreamRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest;
-
-                    /**
-                     * Verifies a CreateAndroidAppDataStreamRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateAndroidAppDataStreamRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateAndroidAppDataStreamRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest;
-
-                    /**
-                     * Creates a plain object from a CreateAndroidAppDataStreamRequest message. Also converts values to other types if specified.
-                     * @param message CreateAndroidAppDataStreamRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateAndroidAppDataStreamRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -6944,6 +6731,240 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a SearchChangeHistoryEventsRequest. */
+                interface ISearchChangeHistoryEventsRequest {
+
+                    /** SearchChangeHistoryEventsRequest account */
+                    account?: (string|null);
+
+                    /** SearchChangeHistoryEventsRequest property */
+                    property?: (string|null);
+
+                    /** SearchChangeHistoryEventsRequest resourceType */
+                    resourceType?: (google.analytics.admin.v1alpha.ChangeHistoryResourceType[]|null);
+
+                    /** SearchChangeHistoryEventsRequest action */
+                    action?: (google.analytics.admin.v1alpha.ActionType[]|null);
+
+                    /** SearchChangeHistoryEventsRequest actorEmail */
+                    actorEmail?: (string[]|null);
+
+                    /** SearchChangeHistoryEventsRequest earliestChangeTime */
+                    earliestChangeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchChangeHistoryEventsRequest latestChangeTime */
+                    latestChangeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchChangeHistoryEventsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchChangeHistoryEventsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a SearchChangeHistoryEventsRequest. */
+                class SearchChangeHistoryEventsRequest implements ISearchChangeHistoryEventsRequest {
+
+                    /**
+                     * Constructs a new SearchChangeHistoryEventsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest);
+
+                    /** SearchChangeHistoryEventsRequest account. */
+                    public account: string;
+
+                    /** SearchChangeHistoryEventsRequest property. */
+                    public property: string;
+
+                    /** SearchChangeHistoryEventsRequest resourceType. */
+                    public resourceType: google.analytics.admin.v1alpha.ChangeHistoryResourceType[];
+
+                    /** SearchChangeHistoryEventsRequest action. */
+                    public action: google.analytics.admin.v1alpha.ActionType[];
+
+                    /** SearchChangeHistoryEventsRequest actorEmail. */
+                    public actorEmail: string[];
+
+                    /** SearchChangeHistoryEventsRequest earliestChangeTime. */
+                    public earliestChangeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchChangeHistoryEventsRequest latestChangeTime. */
+                    public latestChangeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SearchChangeHistoryEventsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchChangeHistoryEventsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new SearchChangeHistoryEventsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchChangeHistoryEventsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest): google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest;
+
+                    /**
+                     * Encodes the specified SearchChangeHistoryEventsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest.verify|verify} messages.
+                     * @param message SearchChangeHistoryEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchChangeHistoryEventsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest.verify|verify} messages.
+                     * @param message SearchChangeHistoryEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchChangeHistoryEventsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchChangeHistoryEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest;
+
+                    /**
+                     * Decodes a SearchChangeHistoryEventsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchChangeHistoryEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest;
+
+                    /**
+                     * Verifies a SearchChangeHistoryEventsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchChangeHistoryEventsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchChangeHistoryEventsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchChangeHistoryEventsRequest message. Also converts values to other types if specified.
+                     * @param message SearchChangeHistoryEventsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchChangeHistoryEventsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchChangeHistoryEventsResponse. */
+                interface ISearchChangeHistoryEventsResponse {
+
+                    /** SearchChangeHistoryEventsResponse changeHistoryEvents */
+                    changeHistoryEvents?: (google.analytics.admin.v1alpha.IChangeHistoryEvent[]|null);
+
+                    /** SearchChangeHistoryEventsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a SearchChangeHistoryEventsResponse. */
+                class SearchChangeHistoryEventsResponse implements ISearchChangeHistoryEventsResponse {
+
+                    /**
+                     * Constructs a new SearchChangeHistoryEventsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse);
+
+                    /** SearchChangeHistoryEventsResponse changeHistoryEvents. */
+                    public changeHistoryEvents: google.analytics.admin.v1alpha.IChangeHistoryEvent[];
+
+                    /** SearchChangeHistoryEventsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new SearchChangeHistoryEventsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchChangeHistoryEventsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse): google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse;
+
+                    /**
+                     * Encodes the specified SearchChangeHistoryEventsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse.verify|verify} messages.
+                     * @param message SearchChangeHistoryEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchChangeHistoryEventsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse.verify|verify} messages.
+                     * @param message SearchChangeHistoryEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchChangeHistoryEventsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchChangeHistoryEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse;
+
+                    /**
+                     * Decodes a SearchChangeHistoryEventsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchChangeHistoryEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse;
+
+                    /**
+                     * Verifies a SearchChangeHistoryEventsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchChangeHistoryEventsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchChangeHistoryEventsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse;
+
+                    /**
+                     * Creates a plain object from a SearchChangeHistoryEventsResponse message. Also converts values to other types if specified.
+                     * @param message SearchChangeHistoryEventsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchChangeHistoryEventsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** MaximumUserAccess enum. */
                 enum MaximumUserAccess {
                     MAXIMUM_USER_ACCESS_UNSPECIFIED = 0,
@@ -6982,6 +7003,34 @@ export namespace google {
                     SPORTS = 24,
                     JOBS_AND_EDUCATION = 25,
                     SHOPPING = 26
+                }
+
+                /** ActorType enum. */
+                enum ActorType {
+                    ACTOR_TYPE_UNSPECIFIED = 0,
+                    USER = 1,
+                    SYSTEM = 2,
+                    SUPPORT = 3
+                }
+
+                /** ActionType enum. */
+                enum ActionType {
+                    ACTION_TYPE_UNSPECIFIED = 0,
+                    CREATED = 1,
+                    UPDATED = 2,
+                    DELETED = 3
+                }
+
+                /** ChangeHistoryResourceType enum. */
+                enum ChangeHistoryResourceType {
+                    CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED = 0,
+                    ACCOUNT = 1,
+                    PROPERTY = 2,
+                    WEB_DATA_STREAM = 3,
+                    ANDROID_APP_DATA_STREAM = 4,
+                    IOS_APP_DATA_STREAM = 5,
+                    FIREBASE_LINK = 6,
+                    GOOGLE_ADS_LINK = 7
                 }
 
                 /** Properties of an Account. */
@@ -7131,8 +7180,11 @@ export namespace google {
                     /** Property currencyCode */
                     currencyCode?: (string|null);
 
-                    /** Property deleted */
-                    deleted?: (boolean|null);
+                    /** Property deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Property expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a Property. */
@@ -7168,8 +7220,11 @@ export namespace google {
                     /** Property currencyCode. */
                     public currencyCode: string;
 
-                    /** Property deleted. */
-                    public deleted: boolean;
+                    /** Property deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Property expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new Property instance using the specified properties.
@@ -8626,6 +8681,366 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ChangeHistoryEvent. */
+                interface IChangeHistoryEvent {
+
+                    /** ChangeHistoryEvent id */
+                    id?: (string|null);
+
+                    /** ChangeHistoryEvent changeTime */
+                    changeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChangeHistoryEvent actorType */
+                    actorType?: (google.analytics.admin.v1alpha.ActorType|keyof typeof google.analytics.admin.v1alpha.ActorType|null);
+
+                    /** ChangeHistoryEvent userActorEmail */
+                    userActorEmail?: (string|null);
+
+                    /** ChangeHistoryEvent changesFiltered */
+                    changesFiltered?: (boolean|null);
+
+                    /** ChangeHistoryEvent changes */
+                    changes?: (google.analytics.admin.v1alpha.IChangeHistoryChange[]|null);
+                }
+
+                /** Represents a ChangeHistoryEvent. */
+                class ChangeHistoryEvent implements IChangeHistoryEvent {
+
+                    /**
+                     * Constructs a new ChangeHistoryEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IChangeHistoryEvent);
+
+                    /** ChangeHistoryEvent id. */
+                    public id: string;
+
+                    /** ChangeHistoryEvent changeTime. */
+                    public changeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChangeHistoryEvent actorType. */
+                    public actorType: (google.analytics.admin.v1alpha.ActorType|keyof typeof google.analytics.admin.v1alpha.ActorType);
+
+                    /** ChangeHistoryEvent userActorEmail. */
+                    public userActorEmail: string;
+
+                    /** ChangeHistoryEvent changesFiltered. */
+                    public changesFiltered: boolean;
+
+                    /** ChangeHistoryEvent changes. */
+                    public changes: google.analytics.admin.v1alpha.IChangeHistoryChange[];
+
+                    /**
+                     * Creates a new ChangeHistoryEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChangeHistoryEvent instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IChangeHistoryEvent): google.analytics.admin.v1alpha.ChangeHistoryEvent;
+
+                    /**
+                     * Encodes the specified ChangeHistoryEvent message. Does not implicitly {@link google.analytics.admin.v1alpha.ChangeHistoryEvent.verify|verify} messages.
+                     * @param message ChangeHistoryEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IChangeHistoryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChangeHistoryEvent message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ChangeHistoryEvent.verify|verify} messages.
+                     * @param message ChangeHistoryEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IChangeHistoryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChangeHistoryEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChangeHistoryEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ChangeHistoryEvent;
+
+                    /**
+                     * Decodes a ChangeHistoryEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChangeHistoryEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ChangeHistoryEvent;
+
+                    /**
+                     * Verifies a ChangeHistoryEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChangeHistoryEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChangeHistoryEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ChangeHistoryEvent;
+
+                    /**
+                     * Creates a plain object from a ChangeHistoryEvent message. Also converts values to other types if specified.
+                     * @param message ChangeHistoryEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ChangeHistoryEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChangeHistoryEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ChangeHistoryChange. */
+                interface IChangeHistoryChange {
+
+                    /** ChangeHistoryChange resource */
+                    resource?: (string|null);
+
+                    /** ChangeHistoryChange action */
+                    action?: (google.analytics.admin.v1alpha.ActionType|keyof typeof google.analytics.admin.v1alpha.ActionType|null);
+
+                    /** ChangeHistoryChange resourceBeforeChange */
+                    resourceBeforeChange?: (google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource|null);
+
+                    /** ChangeHistoryChange resourceAfterChange */
+                    resourceAfterChange?: (google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource|null);
+                }
+
+                /** Represents a ChangeHistoryChange. */
+                class ChangeHistoryChange implements IChangeHistoryChange {
+
+                    /**
+                     * Constructs a new ChangeHistoryChange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IChangeHistoryChange);
+
+                    /** ChangeHistoryChange resource. */
+                    public resource: string;
+
+                    /** ChangeHistoryChange action. */
+                    public action: (google.analytics.admin.v1alpha.ActionType|keyof typeof google.analytics.admin.v1alpha.ActionType);
+
+                    /** ChangeHistoryChange resourceBeforeChange. */
+                    public resourceBeforeChange?: (google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource|null);
+
+                    /** ChangeHistoryChange resourceAfterChange. */
+                    public resourceAfterChange?: (google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource|null);
+
+                    /**
+                     * Creates a new ChangeHistoryChange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChangeHistoryChange instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IChangeHistoryChange): google.analytics.admin.v1alpha.ChangeHistoryChange;
+
+                    /**
+                     * Encodes the specified ChangeHistoryChange message. Does not implicitly {@link google.analytics.admin.v1alpha.ChangeHistoryChange.verify|verify} messages.
+                     * @param message ChangeHistoryChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IChangeHistoryChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChangeHistoryChange message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ChangeHistoryChange.verify|verify} messages.
+                     * @param message ChangeHistoryChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IChangeHistoryChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChangeHistoryChange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChangeHistoryChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ChangeHistoryChange;
+
+                    /**
+                     * Decodes a ChangeHistoryChange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChangeHistoryChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ChangeHistoryChange;
+
+                    /**
+                     * Verifies a ChangeHistoryChange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChangeHistoryChange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChangeHistoryChange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ChangeHistoryChange;
+
+                    /**
+                     * Creates a plain object from a ChangeHistoryChange message. Also converts values to other types if specified.
+                     * @param message ChangeHistoryChange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ChangeHistoryChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChangeHistoryChange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ChangeHistoryChange {
+
+                    /** Properties of a ChangeHistoryResource. */
+                    interface IChangeHistoryResource {
+
+                        /** ChangeHistoryResource account */
+                        account?: (google.analytics.admin.v1alpha.IAccount|null);
+
+                        /** ChangeHistoryResource property */
+                        property?: (google.analytics.admin.v1alpha.IProperty|null);
+
+                        /** ChangeHistoryResource webDataStream */
+                        webDataStream?: (google.analytics.admin.v1alpha.IWebDataStream|null);
+
+                        /** ChangeHistoryResource androidAppDataStream */
+                        androidAppDataStream?: (google.analytics.admin.v1alpha.IAndroidAppDataStream|null);
+
+                        /** ChangeHistoryResource iosAppDataStream */
+                        iosAppDataStream?: (google.analytics.admin.v1alpha.IIosAppDataStream|null);
+
+                        /** ChangeHistoryResource firebaseLink */
+                        firebaseLink?: (google.analytics.admin.v1alpha.IFirebaseLink|null);
+
+                        /** ChangeHistoryResource googleAdsLink */
+                        googleAdsLink?: (google.analytics.admin.v1alpha.IGoogleAdsLink|null);
+                    }
+
+                    /** Represents a ChangeHistoryResource. */
+                    class ChangeHistoryResource implements IChangeHistoryResource {
+
+                        /**
+                         * Constructs a new ChangeHistoryResource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource);
+
+                        /** ChangeHistoryResource account. */
+                        public account?: (google.analytics.admin.v1alpha.IAccount|null);
+
+                        /** ChangeHistoryResource property. */
+                        public property?: (google.analytics.admin.v1alpha.IProperty|null);
+
+                        /** ChangeHistoryResource webDataStream. */
+                        public webDataStream?: (google.analytics.admin.v1alpha.IWebDataStream|null);
+
+                        /** ChangeHistoryResource androidAppDataStream. */
+                        public androidAppDataStream?: (google.analytics.admin.v1alpha.IAndroidAppDataStream|null);
+
+                        /** ChangeHistoryResource iosAppDataStream. */
+                        public iosAppDataStream?: (google.analytics.admin.v1alpha.IIosAppDataStream|null);
+
+                        /** ChangeHistoryResource firebaseLink. */
+                        public firebaseLink?: (google.analytics.admin.v1alpha.IFirebaseLink|null);
+
+                        /** ChangeHistoryResource googleAdsLink. */
+                        public googleAdsLink?: (google.analytics.admin.v1alpha.IGoogleAdsLink|null);
+
+                        /** ChangeHistoryResource resource. */
+                        public resource?: ("account"|"property"|"webDataStream"|"androidAppDataStream"|"iosAppDataStream"|"firebaseLink"|"googleAdsLink");
+
+                        /**
+                         * Creates a new ChangeHistoryResource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ChangeHistoryResource instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource): google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource;
+
+                        /**
+                         * Encodes the specified ChangeHistoryResource message. Does not implicitly {@link google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.verify|verify} messages.
+                         * @param message ChangeHistoryResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ChangeHistoryResource message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.verify|verify} messages.
+                         * @param message ChangeHistoryResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.ChangeHistoryChange.IChangeHistoryResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ChangeHistoryResource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ChangeHistoryResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource;
+
+                        /**
+                         * Decodes a ChangeHistoryResource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ChangeHistoryResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource;
+
+                        /**
+                         * Verifies a ChangeHistoryResource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ChangeHistoryResource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ChangeHistoryResource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource;
+
+                        /**
+                         * Creates a plain object from a ChangeHistoryResource message. Also converts values to other types if specified.
+                         * @param message ChangeHistoryResource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ChangeHistoryResource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
             }
         }
