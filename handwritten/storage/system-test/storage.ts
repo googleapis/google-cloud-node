@@ -3923,12 +3923,6 @@ describe('storage', () => {
         })
         .map(hmacKey =>
           limit(async () => {
-            console.info(
-              `Will delete HMAC key with access id ${hmacKey.metadata?.accessId} and service account email ${hmacKey.metadata?.serviceAccountEmail}.`
-            );
-            console.info(
-              `This key was created on ${hmacKey.metadata?.timeCreated} which is earlier than ${old}.`
-            );
             await hmacKey.setMetadata({state: 'INACTIVE'});
             await hmacKey.delete();
           })
