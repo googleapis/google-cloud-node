@@ -10,5 +10,6 @@
   "distribution_name": "@google-cloud/speech",
   "api_id": "speech.googleapis.com",
   "requires_billing": false,
-  "codeowner_team": "@googleapis/ml-apis"
+  "codeowner_team": "@googleapis/ml-apis",
+  "default_version": "v1"
 }

@@ -15,6 +15,7 @@
   * [Microphone stream](#microphone-stream)
   * [Beta Features](#beta-features)
   * [Infinite Streaming](#infinite-streaming)
+  * [Model Adaptation](#model-adaptation)
   * [Multi Region](#multi-region)
   * [Profanity Filter](#profanity-filter)
   * [Quickstart](#quickstart)
@@ -85,6 +86,23 @@ __Usage:__
 
 
 `node infiniteStreaming.js <encoding> <sampleRateHertz> <languageCode> <streamingLimit>`
+
+
+-----
+
+
+
+
+### Model Adaptation
+
+View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/modelAdaptation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/modelAdaptation.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/modelAdaptation.js`
 
 
 -----
