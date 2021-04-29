@@ -2,16 +2,15 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
+# [Cloud Translation: Node.js Samples](https://github.com/googleapis/nodejs-translate)
+
+[![Open in Cloud Shell][shell_img]][shell_link]
+
 The [Cloud Translation API](https://cloud.google.com/translate/docs/),
 can dynamically translate text between thousands
 of language pairs. The Cloud Translation API lets websites and programs
 integrate with the translation service programmatically. The Cloud Translation
-API is part of the larger Cloud Machine Learning API family. Samples
-
-
-[![Open in Cloud Shell][shell_img]][shell_link]
-
-
+API is part of the larger Cloud Machine Learning API family.
 
 ## Table of Contents
 

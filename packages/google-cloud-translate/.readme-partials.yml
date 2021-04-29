@@ -1,4 +1,4 @@
-title: |-
+introduction: |-
   The [Cloud Translation API](https://cloud.google.com/translate/docs/),
   can dynamically translate text between thousands
   of language pairs. The Cloud Translation API lets websites and programs
