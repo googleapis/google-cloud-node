@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [6.4.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.3.1...v6.4.0) (2021-04-29)
+
+
+### Features
+
+* Add createIndex, deleteIndex protos ([#797](https://www.github.com/googleapis/nodejs-datastore/issues/797)) ([3ff1f51](https://www.github.com/googleapis/nodejs-datastore/commit/3ff1f51f19297db94a370ec3fc9130f36e25ea70))
+
+
+### Bug Fixes
+
+* **deps:** update dependency sinon to v10 ([#810](https://www.github.com/googleapis/nodejs-datastore/issues/810)) ([267992f](https://www.github.com/googleapis/nodejs-datastore/commit/267992f4f1523fc5038715b009ebc697c5ca8255))
+
 ### [6.3.1](https://www.github.com/googleapis/nodejs-datastore/compare/v6.3.0...v6.3.1) (2020-11-25)
 
 
