@@ -1058,6 +1058,10 @@ export class AgentsClient {
    *   export the agent to. The format of this URI must be
    *   `gs://<bucket-name>/<object-name>`.
    *   If left unspecified, the serialized agent is returned inline.
+   * @param {string} [request.environment]
+   *   Optional. Environment name. If not set, draft environment is assumed.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

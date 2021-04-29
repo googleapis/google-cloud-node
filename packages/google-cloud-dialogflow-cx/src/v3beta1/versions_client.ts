@@ -898,19 +898,19 @@ export class VersionsClient {
     >
   ): void;
   /**
-   * Loads a specified version to draft version.
+   * Loads resources in the specified version to the draft flow.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Version|Version} to be loaded to draft version.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Version|Version} to be loaded to draft flow.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/versions/<Version ID>`.
    * @param {boolean} request.allowOverrideAgentResources
-   *   This field is used to prevent accidental overwrite of other agent resources
-   *   in the draft version, which can potentially impact other flow's behavior.
-   *   If `allow_override_agent_resources` is false, conflicted agent-level
-   *   resources will not be overridden (i.e. intents, entities, webhooks).
+   *   This field is used to prevent accidental overwrite of other agent
+   *   resources, which can potentially impact other flow's behavior. If
+   *   `allow_override_agent_resources` is false, conflicted agent-level resources
+   *   will not be overridden (i.e. intents, entities, webhooks).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

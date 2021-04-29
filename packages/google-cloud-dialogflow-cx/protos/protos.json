@@ -6927,6 +6927,11 @@
                                 "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             },
+                            "supportedLanguageCodes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
                             "timeZone": {
                               "type": "string",
                               "id": 5,
@@ -7077,6 +7082,14 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "environment": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
                               }
                             }
                           }
@@ -7352,6 +7365,54 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "ImportFlow": {
+                              "requestType": "ImportFlowRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/flows:import",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ImportFlowResponse",
+                                "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/flows:import",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ImportFlowResponse",
+                                    "metadata_type": "google.protobuf.Struct"
+                                  }
+                                }
+                              ]
+                            },
+                            "ExportFlow": {
+                              "requestType": "ExportFlowRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}:export",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ExportFlowResponse",
+                                "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*}:export",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ExportFlowResponse",
+                                    "metadata_type": "google.protobuf.Struct"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -7608,6 +7669,104 @@
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 3
+                            }
+                          }
+                        },
+                        "ImportFlowRequest": {
+                          "oneofs": {
+                            "flow": {
+                              "oneof": [
+                                "flowUri",
+                                "flowContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "flowUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "flowContent": {
+                              "type": "bytes",
+                              "id": 3
+                            },
+                            "importOption": {
+                              "type": "ImportOption",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "ImportOption": {
+                              "values": {
+                                "IMPORT_OPTION_UNSPECIFIED": 0,
+                                "KEEP": 1,
+                                "FALLBACK": 2
+                              }
+                            }
+                          }
+                        },
+                        "ImportFlowResponse": {
+                          "fields": {
+                            "flow": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            }
+                          }
+                        },
+                        "ExportFlowRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "flowUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "includeReferencedFlows": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ExportFlowResponse": {
+                          "oneofs": {
+                            "flow": {
+                              "oneof": [
+                                "flowUri",
+                                "flowContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "flowUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "flowContent": {
+                              "type": "bytes",
+                              "id": 2
                             }
                           }
                         },

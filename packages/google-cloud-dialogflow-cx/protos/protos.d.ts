@@ -25011,6 +25011,9 @@ export namespace google {
                         /** Agent defaultLanguageCode */
                         defaultLanguageCode?: (string|null);
 
+                        /** Agent supportedLanguageCodes */
+                        supportedLanguageCodes?: (string[]|null);
+
                         /** Agent timeZone */
                         timeZone?: (string|null);
 
@@ -25053,6 +25056,9 @@ export namespace google {
 
                         /** Agent defaultLanguageCode. */
                         public defaultLanguageCode: string;
+
+                        /** Agent supportedLanguageCodes. */
+                        public supportedLanguageCodes: string[];
 
                         /** Agent timeZone. */
                         public timeZone: string;
@@ -25727,6 +25733,9 @@ export namespace google {
 
                         /** ExportAgentRequest agentUri */
                         agentUri?: (string|null);
+
+                        /** ExportAgentRequest environment */
+                        environment?: (string|null);
                     }
 
                     /** Represents an ExportAgentRequest. */
@@ -25743,6 +25752,9 @@ export namespace google {
 
                         /** ExportAgentRequest agentUri. */
                         public agentUri: string;
+
+                        /** ExportAgentRequest environment. */
+                        public environment: string;
 
                         /**
                          * Creates a new ExportAgentRequest instance using the specified properties.
@@ -26454,6 +26466,34 @@ export namespace google {
                          * @returns Promise
                          */
                         public getFlowValidationResult(request: google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest): Promise<google.cloud.dialogflow.cx.v3beta1.FlowValidationResult>;
+
+                        /**
+                         * Calls ImportFlow.
+                         * @param request ImportFlowRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public importFlow(request: google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest, callback: google.cloud.dialogflow.cx.v3beta1.Flows.ImportFlowCallback): void;
+
+                        /**
+                         * Calls ImportFlow.
+                         * @param request ImportFlowRequest message or plain object
+                         * @returns Promise
+                         */
+                        public importFlow(request: google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ExportFlow.
+                         * @param request ExportFlowRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public exportFlow(request: google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest, callback: google.cloud.dialogflow.cx.v3beta1.Flows.ExportFlowCallback): void;
+
+                        /**
+                         * Calls ExportFlow.
+                         * @param request ExportFlowRequest message or plain object
+                         * @returns Promise
+                         */
+                        public exportFlow(request: google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace Flows {
@@ -26513,6 +26553,20 @@ export namespace google {
                          * @param [response] FlowValidationResult
                          */
                         type GetFlowValidationResultCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.FlowValidationResult) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.Flows#importFlow}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ImportFlowCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.Flows#exportFlow}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ExportFlowCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                     }
 
                     /** Properties of a NluSettings. */
@@ -27739,6 +27793,418 @@ export namespace google {
 
                         /**
                          * Converts this FlowValidationResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an ImportFlowRequest. */
+                    interface IImportFlowRequest {
+
+                        /** ImportFlowRequest parent */
+                        parent?: (string|null);
+
+                        /** ImportFlowRequest flowUri */
+                        flowUri?: (string|null);
+
+                        /** ImportFlowRequest flowContent */
+                        flowContent?: (Uint8Array|string|null);
+
+                        /** ImportFlowRequest importOption */
+                        importOption?: (google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption|null);
+                    }
+
+                    /** Represents an ImportFlowRequest. */
+                    class ImportFlowRequest implements IImportFlowRequest {
+
+                        /**
+                         * Constructs a new ImportFlowRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest);
+
+                        /** ImportFlowRequest parent. */
+                        public parent: string;
+
+                        /** ImportFlowRequest flowUri. */
+                        public flowUri: string;
+
+                        /** ImportFlowRequest flowContent. */
+                        public flowContent: (Uint8Array|string);
+
+                        /** ImportFlowRequest importOption. */
+                        public importOption: (google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption);
+
+                        /** ImportFlowRequest flow. */
+                        public flow?: ("flowUri"|"flowContent");
+
+                        /**
+                         * Creates a new ImportFlowRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportFlowRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest): google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest;
+
+                        /**
+                         * Encodes the specified ImportFlowRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.verify|verify} messages.
+                         * @param message ImportFlowRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportFlowRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.verify|verify} messages.
+                         * @param message ImportFlowRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportFlowRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportFlowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest;
+
+                        /**
+                         * Decodes an ImportFlowRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportFlowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest;
+
+                        /**
+                         * Verifies an ImportFlowRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportFlowRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportFlowRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest;
+
+                        /**
+                         * Creates a plain object from an ImportFlowRequest message. Also converts values to other types if specified.
+                         * @param message ImportFlowRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportFlowRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ImportFlowRequest {
+
+                        /** ImportOption enum. */
+                        enum ImportOption {
+                            IMPORT_OPTION_UNSPECIFIED = 0,
+                            KEEP = 1,
+                            FALLBACK = 2
+                        }
+                    }
+
+                    /** Properties of an ImportFlowResponse. */
+                    interface IImportFlowResponse {
+
+                        /** ImportFlowResponse flow */
+                        flow?: (string|null);
+                    }
+
+                    /** Represents an ImportFlowResponse. */
+                    class ImportFlowResponse implements IImportFlowResponse {
+
+                        /**
+                         * Constructs a new ImportFlowResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse);
+
+                        /** ImportFlowResponse flow. */
+                        public flow: string;
+
+                        /**
+                         * Creates a new ImportFlowResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportFlowResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse): google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse;
+
+                        /**
+                         * Encodes the specified ImportFlowResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse.verify|verify} messages.
+                         * @param message ImportFlowResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportFlowResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse.verify|verify} messages.
+                         * @param message ImportFlowResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportFlowResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportFlowResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse;
+
+                        /**
+                         * Decodes an ImportFlowResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportFlowResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse;
+
+                        /**
+                         * Verifies an ImportFlowResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportFlowResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportFlowResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse;
+
+                        /**
+                         * Creates a plain object from an ImportFlowResponse message. Also converts values to other types if specified.
+                         * @param message ImportFlowResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportFlowResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an ExportFlowRequest. */
+                    interface IExportFlowRequest {
+
+                        /** ExportFlowRequest name */
+                        name?: (string|null);
+
+                        /** ExportFlowRequest flowUri */
+                        flowUri?: (string|null);
+
+                        /** ExportFlowRequest includeReferencedFlows */
+                        includeReferencedFlows?: (boolean|null);
+                    }
+
+                    /** Represents an ExportFlowRequest. */
+                    class ExportFlowRequest implements IExportFlowRequest {
+
+                        /**
+                         * Constructs a new ExportFlowRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest);
+
+                        /** ExportFlowRequest name. */
+                        public name: string;
+
+                        /** ExportFlowRequest flowUri. */
+                        public flowUri: string;
+
+                        /** ExportFlowRequest includeReferencedFlows. */
+                        public includeReferencedFlows: boolean;
+
+                        /**
+                         * Creates a new ExportFlowRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportFlowRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest): google.cloud.dialogflow.cx.v3beta1.ExportFlowRequest;
+
+                        /**
+                         * Encodes the specified ExportFlowRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowRequest.verify|verify} messages.
+                         * @param message ExportFlowRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportFlowRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowRequest.verify|verify} messages.
+                         * @param message ExportFlowRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportFlowRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportFlowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ExportFlowRequest;
+
+                        /**
+                         * Decodes an ExportFlowRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportFlowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ExportFlowRequest;
+
+                        /**
+                         * Verifies an ExportFlowRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportFlowRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportFlowRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ExportFlowRequest;
+
+                        /**
+                         * Creates a plain object from an ExportFlowRequest message. Also converts values to other types if specified.
+                         * @param message ExportFlowRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ExportFlowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportFlowRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an ExportFlowResponse. */
+                    interface IExportFlowResponse {
+
+                        /** ExportFlowResponse flowUri */
+                        flowUri?: (string|null);
+
+                        /** ExportFlowResponse flowContent */
+                        flowContent?: (Uint8Array|string|null);
+                    }
+
+                    /** Represents an ExportFlowResponse. */
+                    class ExportFlowResponse implements IExportFlowResponse {
+
+                        /**
+                         * Constructs a new ExportFlowResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse);
+
+                        /** ExportFlowResponse flowUri. */
+                        public flowUri: string;
+
+                        /** ExportFlowResponse flowContent. */
+                        public flowContent: (Uint8Array|string);
+
+                        /** ExportFlowResponse flow. */
+                        public flow?: ("flowUri"|"flowContent");
+
+                        /**
+                         * Creates a new ExportFlowResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportFlowResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse): google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse;
+
+                        /**
+                         * Encodes the specified ExportFlowResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse.verify|verify} messages.
+                         * @param message ExportFlowResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportFlowResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse.verify|verify} messages.
+                         * @param message ExportFlowResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportFlowResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportFlowResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse;
+
+                        /**
+                         * Decodes an ExportFlowResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportFlowResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse;
+
+                        /**
+                         * Verifies an ExportFlowResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportFlowResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportFlowResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse;
+
+                        /**
+                         * Creates a plain object from an ExportFlowResponse message. Also converts values to other types if specified.
+                         * @param message ExportFlowResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportFlowResponse to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
