@@ -130,13 +130,13 @@ class Notification extends ServiceObject {
        * @method Notification#exists
        *
        * @param {Topic|string} topic The Cloud PubSub topic to which this
-       *     subscription publishes. If the project ID is omitted, the current
-       *     project ID will be used.
+       * subscription publishes. If the project ID is omitted, the current
+       * project ID will be used.
        *
-       *     Acceptable formats are:
-       *     - `projects/grape-spaceship-123/topics/my-topic`
+       * Acceptable formats are:
+       * - `projects/grape-spaceship-123/topics/my-topic`
        *
-       *     - `my-topic`
+       * - `my-topic`
        * @param {CreateNotificationRequest} [options] Metadata to set for
        *     the notification.
        * @param {CreateNotificationCallback} [callback] Callback function.

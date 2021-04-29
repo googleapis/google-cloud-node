@@ -1469,25 +1469,25 @@ class File extends ServiceObject<File> {
    * @property {object} [metadata] Metadata to set on the file.
    * @property {string} [origin] Origin header to set for the upload.
    * @property {string} [predefinedAcl] Apply a predefined set of access
-   *     controls to this object.
+   * controls to this object.
    *
-   *     Acceptable values are:
-   *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
-   *       `allAuthenticatedUsers` get `READER` access.
+   * Acceptable values are:
+   * - **`authenticatedRead`** - Object owner gets `OWNER` access, and
+   *   `allAuthenticatedUsers` get `READER` access.
    *
-   *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
-   *       project team owners get `OWNER` access.
+   * - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
+   *   project team owners get `OWNER` access.
    *
-   *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
-   *       team owners get `READER` access.
+   * - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
+   *   team owners get `READER` access.
    *
-   *     - **`private`** - Object owner gets `OWNER` access.
+   * - **`private`** - Object owner gets `OWNER` access.
    *
-   *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
-   *       team members get access according to their roles.
+   * - **`projectPrivate`** - Object owner gets `OWNER` access, and project
+   *   team members get access according to their roles.
    *
-   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
-   * get `READER` access.
+   * - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+   *   get `READER` access.
    * @property {boolean} [private] Make the uploaded file private. (Alias for
    *     `options.predefinedAcl = 'private'`)
    * @property {boolean} [public] Make the uploaded file public. (Alias for
@@ -1587,25 +1587,25 @@ class File extends ServiceObject<File> {
    * @property {number} [offset] The starting byte of the upload stream, for
    *     resuming an interrupted upload. Defaults to 0.
    * @property {string} [predefinedAcl] Apply a predefined set of access
-   *     controls to this object.
+   * controls to this object.
    *
-   *     Acceptable values are:
-   *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
-   *       `allAuthenticatedUsers` get `READER` access.
+   * Acceptable values are:
+   * - **`authenticatedRead`** - Object owner gets `OWNER` access, and
+   *   `allAuthenticatedUsers` get `READER` access.
    *
-   *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
-   *       project team owners get `OWNER` access.
+   * - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
+   *   project team owners get `OWNER` access.
    *
-   *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
-   *       team owners get `READER` access.
+   * - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
+   *   team owners get `READER` access.
    *
-   *     - **`private`** - Object owner gets `OWNER` access.
+   * - **`private`** - Object owner gets `OWNER` access.
    *
-   *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
-   *       team members get access according to their roles.
+   * - **`projectPrivate`** - Object owner gets `OWNER` access, and project
+   *   team members get access according to their roles.
    *
-   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
-   * get `READER` access.
+   * - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+   *   get `READER` access.
    * @property {boolean} [private] Make the uploaded file private. (Alias for
    *     `options.predefinedAcl = 'private'`)
    * @property {boolean} [public] Make the uploaded file public. (Alias for
@@ -2769,17 +2769,18 @@ class File extends ServiceObject<File> {
    *     this parameter is not provided here, the client must not provide any value
    *     for this HTTP header in its request.
    * @param {object} [config.extensionHeaders] If these headers are used, the
-   *     server will check to make sure that the client provides matching
+   * server will check to make sure that the client provides matching
    * values. See [Canonical extension
    * headers](https://cloud.google.com/storage/docs/access-control/signed-urls#about-canonical-extension-headers)
-   *     for the requirements of this feature, most notably:
-   *       - The header name must be prefixed with `x-goog-`
-   *       - The header name must be all lowercase
-   *     Note: Multi-valued header passed as an array in the extensionHeaders
-   *           object is converted into a string, delimited by `,` with
-   *           no space. Requests made using the signed URL will need to
-   *           delimit multi-valued headers using a single `,` as well, or
-   *           else the server will report a mismatched signature.
+   * for the requirements of this feature, most notably:
+   * - The header name must be prefixed with `x-goog-`
+   * - The header name must be all lowercase
+   *
+   * Note: Multi-valued header passed as an array in the extensionHeaders
+   *       object is converted into a string, delimited by `,` with
+   *       no space. Requests made using the signed URL will need to
+   *       delimit multi-valued headers using a single `,` as well, or
+   *       else the server will report a mismatched signature.
    * @param {object} [config.queryParams] Additional query parameters to include
    *     in the signed URL.
    * @param {string} [config.promptSaveAs] The filename to prompt the user to

@@ -1572,12 +1572,12 @@ class Bucket extends ServiceObject {
    * @property {string} [objectNamePrefix] If present, only apply this
    *     notification configuration to object names that begin with this prefix.
    * @property {string} [payloadFormat] The desired content of the Payload.
-   *     Defaults to `JSON_API_V1`.
+   * Defaults to `JSON_API_V1`.
    *
-   *     Acceptable values are:
-   *     - `JSON_API_V1`
+   * Acceptable values are:
+   * - `JSON_API_V1`
    *
-   *     - `NONE`
+   * - `NONE`
    * @property {string} [userProject] The ID of the project which will be
    *     billed for the request.
    */
@@ -1598,13 +1598,13 @@ class Bucket extends ServiceObject {
    * @see [Notifications: insert]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert}
    *
    * @param {Topic|string} topic The Cloud PubSub topic to which this
-   *     subscription publishes. If the project ID is omitted, the current
+   * subscription publishes. If the project ID is omitted, the current
    * project ID will be used.
    *
-   *     Acceptable formats are:
-   *     - `projects/grape-spaceship-123/topics/my-topic`
+   * Acceptable formats are:
+   * - `projects/grape-spaceship-123/topics/my-topic`
    *
-   *     - `my-topic`
+   * - `my-topic`
    * @param {CreateNotificationOptions} [options] Metadata to set for the
    *     notification.
    * @param {object} [options.customAttributes] An optional list of additional
@@ -1615,12 +1615,12 @@ class Bucket extends ServiceObject {
    * @param {string} [options.objectNamePrefix] If present, only apply this
    *     notification configuration to object names that begin with this prefix.
    * @param {string} [options.payloadFormat] The desired content of the Payload.
-   *     Defaults to `JSON_API_V1`.
+   * Defaults to `JSON_API_V1`.
    *
-   *     Acceptable values are:
-   *     - `JSON_API_V1`
+   * Acceptable values are:
+   * - `JSON_API_V1`
    *
-   *     - `NONE`
+   * - `NONE`
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {CreateNotificationCallback} [callback] Callback function.
@@ -2610,17 +2610,18 @@ class Bucket extends ServiceObject {
    *     "https://cdn.example.com".
    *     See [reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls#example}
    * @property {object} [extensionHeaders] If these headers are used, the
-   *     server will check to make sure that the client provides matching
+   * server will check to make sure that the client provides matching
    * values. See [Canonical extension
    * headers](https://cloud.google.com/storage/docs/access-control/signed-urls#about-canonical-extension-headers)
-   *     for the requirements of this feature, most notably:
-   *       - The header name must be prefixed with `x-goog-`
-   *       - The header name must be all lowercase
-   *     Note: Multi-valued header passed as an array in the extensionHeaders
-   *           object is converted into a string, delimited by `,` with
-   *           no space. Requests made using the signed URL will need to
-   *           delimit multi-valued headers using a single `,` as well, or
-   *           else the server will report a mismatched signature.
+   * for the requirements of this feature, most notably:
+   * - The header name must be prefixed with `x-goog-`
+   * - The header name must be all lowercase
+   *
+   * Note: Multi-valued header passed as an array in the extensionHeaders
+   *       object is converted into a string, delimited by `,` with
+   *       no space. Requests made using the signed URL will need to
+   *       delimit multi-valued headers using a single `,` as well, or
+   *       else the server will report a mismatched signature.
    * @property {object} [queryParams] Additional query parameters to include
    *     in the signed URL.
    */
@@ -2658,17 +2659,18 @@ class Bucket extends ServiceObject {
    *     "https://cdn.example.com".
    *     See [reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls#example}
    * @param {object} [config.extensionHeaders] If these headers are used, the
-   *     server will check to make sure that the client provides matching
+   * server will check to make sure that the client provides matching
    * values. See [Canonical extension
    * headers](https://cloud.google.com/storage/docs/access-control/signed-urls#about-canonical-extension-headers)
-   *     for the requirements of this feature, most notably:
-   *       - The header name must be prefixed with `x-goog-`
-   *       - The header name must be all lowercase
-   *     Note: Multi-valued header passed as an array in the extensionHeaders
-   *           object is converted into a string, delimited by `,` with
-   *           no space. Requests made using the signed URL will need to
-   *           delimit multi-valued headers using a single `,` as well, or
-   *           else the server will report a mismatched signature.
+   * for the requirements of this feature, most notably:
+   * - The header name must be prefixed with `x-goog-`
+   * - The header name must be all lowercase
+   *
+   * Note: Multi-valued header passed as an array in the extensionHeaders
+   *       object is converted into a string, delimited by `,` with
+   *       no space. Requests made using the signed URL will need to
+   *       delimit multi-valued headers using a single `,` as well, or
+   *       else the server will report a mismatched signature.
    * @property {object} [config.queryParams] Additional query parameters to include
    *     in the signed URL.
    * @param {GetSignedUrlCallback} [callback] Callback function.
@@ -3474,25 +3476,25 @@ class Bucket extends ServiceObject {
    * @property {string} [offset] The starting byte of the upload stream, for
    *     resuming an interrupted upload. Defaults to 0.
    * @property {string} [predefinedAcl] Apply a predefined set of access
-   *     controls to this object.
+   * controls to this object.
    *
-   *     Acceptable values are:
-   *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
+   * Acceptable values are:
+   * - **`authenticatedRead`** - Object owner gets `OWNER` access, and
    *       `allAuthenticatedUsers` get `READER` access.
    *
-   *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
+   * - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
    *       project team owners get `OWNER` access.
    *
-   *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
+   * - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
    *       team owners get `READER` access.
    *
-   *     - **`private`** - Object owner gets `OWNER` access.
+   * - **`private`** - Object owner gets `OWNER` access.
    *
-   *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
+   * - **`projectPrivate`** - Object owner gets `OWNER` access, and project
    *       team members get access according to their roles.
    *
-   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
-   * get `READER` access.
+   * - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+   *       get `READER` access.
    * @property {boolean} [private] Make the uploaded file private. (Alias for
    *     `options.predefinedAcl = 'private'`)
    * @property {boolean} [public] Make the uploaded file public. (Alias for
@@ -3562,25 +3564,24 @@ class Bucket extends ServiceObject {
    * @param {string} [options.offset] The starting byte of the upload stream, for
    *     resuming an interrupted upload. Defaults to 0.
    * @param {string} [options.predefinedAcl] Apply a predefined set of access
-   *     controls to this object.
+   * controls to this object.
+   * Acceptable values are:
+   * - **`authenticatedRead`** - Object owner gets `OWNER` access, and
+   *   `allAuthenticatedUsers` get `READER` access.
    *
-   *     Acceptable values are:
-   *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
-   *       `allAuthenticatedUsers` get `READER` access.
+   * - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
+   *   project team owners get `OWNER` access.
    *
-   *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
-   *       project team owners get `OWNER` access.
+   * - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
+   *   team owners get `READER` access.
    *
-   *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
-   *       team owners get `READER` access.
+   * - **`private`** - Object owner gets `OWNER` access.
    *
-   *     - **`private`** - Object owner gets `OWNER` access.
+   * - **`projectPrivate`** - Object owner gets `OWNER` access, and project
+   *   team members get access according to their roles.
    *
-   *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
-   *       team members get access according to their roles.
-   *
-   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
-   * get `READER` access.
+   * - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+   *   get `READER` access.
    * @param {boolean} [options.private] Make the uploaded file private. (Alias for
    *     `options.predefinedAcl = 'private'`)
    * @param {boolean} [options.public] Make the uploaded file public. (Alias for
