@@ -735,6 +735,14 @@
                           "type": "bool",
                           "id": 11
                         },
+                        "enableSpokenPunctuation": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 22
+                        },
+                        "enableSpokenEmojis": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 23
+                        },
                         "enableSpeakerDiarization": {
                           "type": "bool",
                           "id": 16,
@@ -777,7 +785,8 @@
                             "AMR_WB": 5,
                             "OGG_OPUS": 6,
                             "SPEEX_WITH_HEADER_BYTE": 7,
-                            "MP3": 8
+                            "MP3": 8,
+                            "WEBM_OPUS": 9
                           }
                         }
                       }
@@ -2717,6 +2726,78 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
                 }
               }
             },
