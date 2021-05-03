@@ -16,14 +16,14 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1alpha from './v1alpha';
 import * as v1 from './v1';
+import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
 
 const DataprocMetastoreClient = v1beta.DataprocMetastoreClient;
 type DataprocMetastoreClient = v1beta.DataprocMetastoreClient;
 
-export {v1alpha, v1, v1beta, DataprocMetastoreClient};
-export default {v1alpha, v1, v1beta, DataprocMetastoreClient};
+export {v1, v1alpha, v1beta, DataprocMetastoreClient};
+export default {v1, v1alpha, v1beta, DataprocMetastoreClient};
 import * as protos from '../protos/protos';
 export {protos};
