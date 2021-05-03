@@ -13,6 +13,8 @@
     "lint": "semistandard",
     "clean": "gts clean",
     "precompile": "gts clean",
+    "system-test": "echo no system tests 😱",
+    "samples-test": "echo no sample tests 😱",
     "api-extractor": "api-extractor run --local",
     "api-documenter": "api-documenter yaml --input-folder=temp"
   },
