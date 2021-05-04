@@ -1471,41 +1471,58 @@ class Datastore extends DatastoreRequest {
    * @returns {Key} A newly created Key from the options given.
    *
    * @example
-   * <caption>Create an incomplete key with a kind value of `Company`.</caption>
+   * <caption>Create an incomplete key with a kind value of `Company`.
+   * Since no Id is supplied, Datastore will generate one on save.</caption>
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key('Company');
    *
    * @example
-   * <caption>Create a complete key with a kind value of `Company` and id
-   * `123`.</caption> const {Datastore} = require('@google-cloud/datastore');
+   * <caption>Create a complete key with a kind value of `Company` and Id `123`.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key(['Company', 123]);
    *
    * @example
    * <caption>If the ID integer is outside the bounds of a JavaScript Number
-   * object, create an Int.</caption> const {Datastore} =
-   * require('@google-cloud/datastore'); const datastore = new Datastore();
+   * object, create an Int.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
    * const key = datastore.key([
    *   'Company',
    *   datastore.int('100000000000001234')
    * ]);
    *
    * @example
+   * <caption>Create a complete key with a kind value of `Company` and name `Google`.
+   * Because the supplied Id is a string, Datastore will prefix it with "name=".
+   * Had the supplied Id been numeric, Datastore would prefix it with the standard, "id=".</caption>
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
-   * // Create a complete key with a kind value of `Company` and name `Google`.
-   * // Note: `id` is used for numeric identifiers and `name` is used otherwise.
    * const key = datastore.key(['Company', 'Google']);
    *
    * @example
-   * <caption>Create a complete key from a provided namespace and
-   * path.</caption> const {Datastore} = require('@google-cloud/datastore');
+   * <caption>Create a complete key from a provided namespace and path.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key({
    *   namespace: 'My-NS',
    *   path: ['Company', 123]
    * });
+   *
+   * @example
+   * <caption>Create a complete key that specifies an ancestor. This will create a Team entity
+   * with a name of "Datastore", which belongs to the Company with the "name=Google" key.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const key = datastore.key(['Company', 'Google', 'Team', 'Datastore']);
+   *
+   * @example
+   * <caption>Create a incomplete key that specifies an ancestor. This will create an Employee entity
+   * with an auto-generated Id, which belongs to the Company with the "name=Google" key.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const key = datastore.key(['Company', 'Google', 'Employee']);
    */
   key(options: string | entity.KeyOptions | PathType[]): entity.Key {
     const keyOptions = is.object(options)
