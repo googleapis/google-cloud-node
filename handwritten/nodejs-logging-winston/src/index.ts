@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {LEVEL} from 'triple-beam';
 import TransportStream = require('winston-transport');
 
 import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
@@ -23,6 +22,8 @@ import {
   ServiceContext,
   LoggingOptions,
 } from '@google-cloud/logging';
+
+const LEVEL = Symbol.for('level');
 
 // Export the express middleware as 'express'.
 export {express};
