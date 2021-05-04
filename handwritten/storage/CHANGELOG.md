@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.8.5](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.4...v5.8.5) (2021-05-04)
+
+
+### Bug Fixes
+
+* **deps:** updated gcs-resumable-upload dependency ([#1459](https://www.github.com/googleapis/nodejs-storage/issues/1459)) ([afaccc7](https://www.github.com/googleapis/nodejs-storage/commit/afaccc70375a2c778e4306a59bf8a86736c17f6c))
+
 ### [5.8.4](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.3...v5.8.4) (2021-04-19)
 
 
