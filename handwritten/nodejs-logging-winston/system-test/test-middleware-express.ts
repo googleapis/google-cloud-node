@@ -16,7 +16,6 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import delay from 'delay';
 import * as uuid from 'uuid';
 import {express as elb} from '../src/index';
 import * as winston from 'winston';
@@ -28,6 +27,10 @@ const logging = new Logging();
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
 const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + 10 * 1000;
 const LOG_NAME = `winston-system-test-${uuid.v4()}`;
+
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 describe(__filename, () => {
   describe('global logger', () => {

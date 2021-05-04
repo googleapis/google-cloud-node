@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as common from '@google-cloud/common';
-import delay from 'delay';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('../../package.json');
@@ -47,6 +46,10 @@ export interface ApiResponse {
 const API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 
 const ONE_HOUR_API = 'timeRange.period=PERIOD_1_HOUR';
+
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export class ErrorsApiTransport extends common.Service {
   constructor() {
