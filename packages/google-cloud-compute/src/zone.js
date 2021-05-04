@@ -649,13 +649,17 @@ class Zone extends common.ServiceObject {
         }
         delete body.os;
         body.disks = body.disks || [];
-        body.disks.push({
-          autoDelete: true,
-          boot: true,
-          initializeParams: {
-            sourceImage: image.selfLink,
-          },
-        });
+        // Only push an additional disk configuration if the disk provided
+        // is not bootable:
+        if (body.disks.length === 0 || !body.disks[0].boot) {
+          body.disks.unshift({
+            autoDelete: true,
+            boot: true,
+            initializeParams: {
+              sourceImage: image.selfLink,
+            },
+          });
+        }
         self.createVM(name, body, callback);
       });
       return;
