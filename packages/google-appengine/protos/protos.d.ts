@@ -13192,7 +13192,7 @@ export namespace google {
                 constructor(properties?: google.appengine.v1.IEntrypoint);
 
                 /** Entrypoint shell. */
-                public shell?: (string|null);
+                public shell: string;
 
                 /** Entrypoint command. */
                 public command?: "shell";
@@ -14850,19 +14850,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get?: (string|null);
+            public get: string;
 
             /** HttpRule put. */
-            public put?: (string|null);
+            public put: string;
 
             /** HttpRule post. */
-            public post?: (string|null);
+            public post: string;
 
             /** HttpRule delete. */
-            public delete?: (string|null);
+            public delete: string;
 
             /** HttpRule patch. */
-            public patch?: (string|null);
+            public patch: string;
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
