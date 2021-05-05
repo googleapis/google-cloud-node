@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import has = require('lodash.has');
 import * as util from 'util';
 
 import {buildStackTrace} from './build-stack-trace';
@@ -71,12 +70,12 @@ function populateFromError(
 ) {
   errorMessage.setMessage(err.stack!);
 
-  if (has(err, 'user')) {
+  if (err?.user !== undefined) {
     errorMessage.setUser(err.user!);
   }
 
   if (
-    has(err, 'serviceContext') &&
+    err?.serviceContext !== undefined &&
     err.serviceContext?.toString() === '[object Object]'
   ) {
     errorMessage.setServiceContext(
@@ -111,30 +110,30 @@ function populateFromError(
  * @returns {Undefined} - does not return anything
  */
 function populateFromObject(ob: PopulatedObject, errorMessage: ErrorMessage) {
-  if (has(ob, 'message')) {
+  if (ob?.message !== undefined) {
     errorMessage.setMessage(ob.message!);
   } else {
     errorMessage.setMessage(buildStackTrace(util.inspect(ob)));
   }
 
-  if (has(ob, 'user')) {
+  if (ob?.user !== undefined) {
     errorMessage.setUser(ob.user!);
   }
 
-  if (has(ob, 'filePath')) {
+  if (ob?.filePath !== undefined) {
     errorMessage.setFilePath(ob.filePath!);
   }
 
-  if (has(ob, 'lineNumber')) {
+  if (ob?.lineNumber !== undefined) {
     errorMessage.setLineNumber(ob.lineNumber!);
   }
 
-  if (has(ob, 'functionName')) {
+  if (ob?.functionName !== undefined) {
     errorMessage.setFunctionName(ob.functionName!);
   }
 
   if (
-    has(ob, 'serviceContext') &&
+    ob?.serviceContext !== undefined &&
     ob.serviceContext?.toString() === '[object Object]'
   ) {
     errorMessage.setServiceContext(

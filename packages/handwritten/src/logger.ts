@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import has = require('lodash.has');
 import consoleLogLevel = require('console-log-level');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -62,12 +61,12 @@ function logLevelToName(level: number): consoleLogLevel.LogLevelNames {
 export function createLogger(config?: ConfigurationOptions): Logger {
   // Default to log level: warn (2)
   let level = DEFAULT_LEVEL;
-  if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
+  if (process.env.GCLOUD_ERRORS_LOGLEVEL) {
     // Cast env string as integer
     level = ~~process.env.GCLOUD_ERRORS_LOGLEVEL! || DEFAULT_LEVEL;
   } else if (
     config?.toString() === '[object Object]' &&
-    has(config, 'logLevel')
+    config?.logLevel !== undefined
   ) {
     if (typeof config!.logLevel === 'string') {
       // Cast string as integer

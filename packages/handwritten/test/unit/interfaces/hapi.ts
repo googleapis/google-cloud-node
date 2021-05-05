@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import has = require('lodash.has');
 import * as assert from 'assert';
 import {describe, it, beforeEach, before, afterEach} from 'mocha';
 import {makeHapiPlugin as hapiInterface} from '../../../src/interfaces/hapi';
@@ -62,23 +61,19 @@ describe('Hapi interface', () => {
       assert(plugin?.toString() === '[object Object]');
     });
     it('plugin should have a register function property', () => {
-      assert(has(plugin, 'register') && typeof plugin.register === 'function');
+      assert(typeof plugin?.register === 'function');
     });
     it("the plugin's register property should have an attributes property", () => {
-      assert(
-        has(plugin.register, 'attributes') &&
-          plugin.register.attributes?.toString() === '[object Object]'
-      );
+      assert(typeof plugin.register!.attributes === 'object');
     });
     it("the plugin's attribute property should have a name property", () => {
-      assert(has(plugin.register.attributes, 'name'));
       assert.strictEqual(
         plugin.register!.attributes!.name,
         '@google-cloud/error-reporting'
       );
     });
     it("the plugin's attribute property should have a version property", () => {
-      assert(has(plugin.register.attributes, 'version'));
+      assert(plugin.register!.attributes!.version !== undefined);
     });
   });
   describe('hapiRegisterFunction behaviour', () => {
