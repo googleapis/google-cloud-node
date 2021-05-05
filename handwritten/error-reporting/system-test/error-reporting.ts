@@ -15,7 +15,6 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import delay from 'delay';
-import * as is from 'is';
 import * as nock from 'nock';
 
 import {ErrorReporting} from '../src';
@@ -58,7 +57,10 @@ class InstancedEnv {
   }
 
   _captureProcessProperties() {
-    return omitBy(pick(process.env, envKeys), value => !is.string(value));
+    return omitBy(
+      pick(process.env, envKeys),
+      value => typeof value !== 'string'
+    );
   }
 
   sterilizeProcess() {
@@ -114,22 +116,22 @@ const env = new InstancedEnv({
 
 function shouldRun() {
   let shouldRun = true;
-  if (!is.string(env.injected().projectId)) {
+  if (typeof env.injected().projectId !== 'string') {
     console.log('The project id (projectId) was not set in the env');
     shouldRun = false;
   }
 
-  if (!is.string(env.injected().apiKey)) {
+  if (typeof env.injected().apiKey !== 'string') {
     console.log('The api key (apiKey) was not set as an env variable');
     shouldRun = false;
   }
 
-  if (!is.string(env.injected().projectNumber)) {
+  if (typeof env.injected().projectNumber !== 'string') {
     console.log('The project number (projectNumber) was not set in the env');
     shouldRun = false;
   }
 
-  if (!is.string(env.injected().keyFilename)) {
+  if (typeof env.injected().keyFilename !== 'string') {
     console.log('The key filename (keyFilename) was not set in the env');
     shouldRun = false;
   }
@@ -185,7 +187,7 @@ describe('Request/Response lifecycle mocking', () => {
         err!.message.toLowerCase(),
         'message cannot be empty.'
       );
-      assert(is.object(response));
+      assert(response?.toString() === '[object Object]');
       assert.strictEqual(response!.statusCode, 400);
       done();
     });
@@ -268,7 +270,10 @@ describe('Client creation', () => {
           (err, response, body) => {
             assert.strictEqual(err, null);
             assert.strictEqual(response!.statusCode, 200);
-            assert(is.object(body) && is.empty(body));
+            assert(
+              body?.toString() === '[object Object]' &&
+                Object.keys(body).length === 0
+            );
             done();
           }
         );
@@ -290,7 +295,10 @@ describe('Client creation', () => {
           (err, response, body) => {
             assert.strictEqual(err, null);
             assert.strictEqual(response!.statusCode, 200);
-            assert(is.object(body) && is.empty(body));
+            assert(
+              body?.toString() === '[object Object]' &&
+                Object.keys(body).length === 0
+            );
             done();
           }
         );
@@ -318,7 +326,10 @@ describe('Client creation', () => {
           (err, response, body) => {
             assert.strictEqual(err, null);
             assert.strictEqual(response!.statusCode, 200);
-            assert(is.object(body) && is.empty(body));
+            assert(
+              body?.toString() === '[object Object]' &&
+                Object.keys(body).length === 0
+            );
             done();
           }
         );
@@ -340,7 +351,10 @@ describe('Client creation', () => {
           (err, response, body) => {
             assert.strictEqual(err, null);
             assert.strictEqual(response!.statusCode, 200);
-            assert(is.object(body) && is.empty(body));
+            assert(
+              body?.toString() === '[object Object]' &&
+                Object.keys(body).length === 0
+            );
             done();
           }
         );
@@ -394,8 +408,8 @@ describe('Expected Behavior', () => {
 
     client.sendError(em, (err, response, body) => {
       assert.strictEqual(err, null);
-      assert(is.object(body));
-      assert(is.empty(body));
+      assert(body?.toString() === '[object Object]');
+      assert(Object.keys(body).length === 0);
       assert.strictEqual(response!.statusCode, 200);
       done();
     });
@@ -414,8 +428,8 @@ describe('Expected Behavior', () => {
     const client = new RequestHandler(cfg, logger);
     client.sendError(em, (err, response, body) => {
       assert.strictEqual(err, null);
-      assert(is.object(body));
-      assert(is.empty(body));
+      assert(body?.toString() === '[object Object]');
+      assert(Object.keys(body).length === 0);
       assert.strictEqual(response!.statusCode, 200);
       done();
     });
@@ -593,7 +607,7 @@ describe('error-reporting', () => {
           async (err, response, body) => {
             try {
               assert.ifError(err);
-              assert(is.object(response));
+              assert(response?.toString() === '[object Object]');
               deepStrictEqual(body, {});
               await verifyServerResponse(messageTest, maxCount, timeout);
               resolve();

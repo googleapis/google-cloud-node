@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as is from 'is';
 import has = require('lodash.has');
 import {RequestInformationContainer} from '../classes/request-information-container';
 
@@ -46,7 +45,11 @@ export interface Request {
 export function manualRequestInformationExtractor(req: Request) {
   const returnObject = new RequestInformationContainer();
 
-  if (!is.object(req) || is.array(req) || is.function(req)) {
+  if (
+    req?.toString() !== '[object Object]' ||
+    Array.isArray(req) ||
+    typeof req === 'function'
+  ) {
     return returnObject;
   }
 
