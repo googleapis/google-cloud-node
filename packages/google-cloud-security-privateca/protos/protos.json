@@ -16,7 +16,7 @@
                         "java_multiple_files": true,
                         "java_outer_classname": "PrivateCaProto",
                         "java_package": "com.google.cloud.security.privateca.v1",
-                        "php_namespace": "Google\\Cloud\\Security\\PrivateCA\\v1",
+                        "php_namespace": "Google\\Cloud\\Security\\PrivateCA\\V1",
                         "ruby_package": "Google::Cloud::Security::PrivateCA::v1"
                       },
                       "nested": {
