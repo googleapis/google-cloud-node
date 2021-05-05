@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as boom from 'boom';
-import has = require('lodash.has');
 
 import {RequestInformationContainer} from '../classes/request-information-container';
 import * as hapi from '@hapi/hapi';
@@ -30,8 +29,8 @@ import * as hapi from '@hapi/hapi';
 function attemptToExtractStatusCode(req: hapi.Request) {
   // TODO: Handle the cases where `req.response` and `req.response.output` are
   // `null` in this function
-  if (has(req, 'response') && req.response?.toString() === '[object Object]') {
-    if (has(req.response, 'statusCode')) {
+  if (typeof req.response === 'object') {
+    if ('statusCode' in req.response) {
       return (req.response as hapi.ResponseObject).statusCode;
     } else if (
       ((req.response as unknown) as boom).output?.toString() ===
@@ -55,7 +54,7 @@ function attemptToExtractStatusCode(req: hapi.Request) {
  *  a string that represents the remote IP address
  */
 function extractRemoteAddressFromRequest(req: hapi.Request) {
-  if (has(req.headers, 'x-forwarded-for')) {
+  if ('x-forwarded-for' in req.headers) {
     return req.headers['x-forwarded-for'];
   } else if (req.info?.toString() === '[object Object]') {
     return req.info.remoteAddress;

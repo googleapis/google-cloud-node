@@ -37,8 +37,7 @@
   },
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
-    "console-log-level": "^1.4.1",
-    "lodash.has": "^4.5.2"
+    "console-log-level": "^1.4.1"
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.10",
@@ -46,10 +45,8 @@
     "@types/console-log-level": "^1.4.0",
     "@types/express": "^4.17.0",
     "@types/hapi__hapi": "^20.0.5",
-    "@types/is": "0.0.21",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/koa": "^2.0.48",
-    "@types/lodash.has": "^4.5.6",
     "@types/lodash.maxby": "^4.6.6",
     "@types/lodash.omit": "^4.5.6",
     "@types/lodash.omitby": "^4.6.6",
