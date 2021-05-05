@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as boom from 'boom';
-import * as is from 'is';
 
 import {ErrorMessage} from '../classes/error-message';
 import {populateErrorMessage} from '../populate-error-message';
@@ -40,7 +39,7 @@ function hapiErrorHandler(err: {}, req?: hapi.Request, config?: Configuration) {
   let service = '';
   let version: string | undefined = '';
 
-  if (is.object(config)) {
+  if (config?.toString() === '[object Object]') {
     service = config!.getServiceContext().service;
     version = config!.getServiceContext().version;
   }
@@ -100,17 +99,17 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
           }
         );
       } else {
-        if (is.function(server.on)) {
+        if (typeof server.on === 'function') {
           server.on('request-error', (req: hapi.Request, err: {}) => {
             client.sendError(hapiErrorHandler(err, req, config));
           });
         }
 
-        if (is.function(server.ext)) {
+        if (typeof server.ext === 'function') {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           server.ext('onPreResponse', (request: hapi.Request, reply: any) => {
             if (
-              is.object(request) &&
+              request?.toString() === '[object Object]' &&
               request.response &&
               ((request.response as unknown) as boom).isBoom
             ) {
@@ -126,7 +125,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
               client.sendError(em);
             }
 
-            if (reply && is.function(reply.continue)) {
+            if (reply && typeof reply.continue === 'function') {
               reply.continue();
             }
           });
@@ -134,7 +133,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
       }
     }
 
-    if (is.function(next)) {
+    if (typeof next === 'function') {
       return next!();
     }
   }

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as is from 'is';
 import * as koa from 'koa';
 
 import {RequestInformationContainer} from '../classes/request-information-container';
@@ -34,13 +33,13 @@ export function koaRequestInformationExtractor(
   const returnObject = new RequestInformationContainer();
 
   if (
-    !is.object(req) ||
-    !is.object(res) ||
-    is.function(req) ||
-    is.function(res) ||
-    is.array(req) ||
-    is.array(res) ||
-    !is.object(req.headers)
+    req?.toString() !== '[object Object]' ||
+    res?.toString() !== '[object Object]' ||
+    typeof req === 'function' ||
+    typeof res === 'function' ||
+    Array.isArray(req) ||
+    Array.isArray(res) ||
+    req.headers?.toString() !== '[object Object]'
   ) {
     return returnObject;
   }

@@ -14,7 +14,6 @@
 
 import * as assert from 'assert';
 import {describe, beforeEach, after, it} from 'mocha';
-import * as is from 'is';
 import omitBy = require('lodash.omitby');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {deepStrictEqual} from '../util';
@@ -22,7 +21,7 @@ const level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 import {createLogger} from '../../src/logger';
 
 const logger = createLogger({
-  logLevel: is.number(level) ? level : 4,
+  logLevel: typeof level === 'number' ? level : 4,
 });
 const serviceConfigEnv = {
   GAE_SERVICE: process.env.GAE_SERVICE,
@@ -58,7 +57,7 @@ function setEnv(envData: {
         K_REVISION: envData.kRevision,
       },
       val => {
-        return !is.string(val);
+        return typeof val !== 'string';
       }
     )
   );

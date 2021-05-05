@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as express from 'express';
-import * as is from 'is';
 
 import {ErrorMessage} from '../classes/error-message';
 import {Configuration} from '../configuration';
@@ -49,7 +48,7 @@ export function makeExpressHandler(
     let ctxService = '';
     let ctxVersion: string | undefined = '';
 
-    if (is.object(config)) {
+    if (config?.toString() === '[object Object]') {
       ctxService = config.getServiceContext().service;
       ctxVersion = config.getServiceContext().version;
     }
@@ -65,11 +64,14 @@ export function makeExpressHandler(
 
     populateErrorMessage(err, em);
 
-    if (is.object(client) && is.function(client.sendError)) {
+    if (
+      client?.toString() === '[object Object]' &&
+      typeof client.sendError === 'function'
+    ) {
       client.sendError(em);
     }
 
-    if (is.function(next)) {
+    if (typeof next === 'function') {
       next(err);
     }
 

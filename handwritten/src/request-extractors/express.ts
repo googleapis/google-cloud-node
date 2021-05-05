@@ -13,8 +13,6 @@
 // limitations under the License.
 
 import * as express from 'express';
-import * as is from 'is';
-
 import {RequestInformationContainer} from '../classes/request-information-container';
 
 /**
@@ -30,7 +28,7 @@ import {RequestInformationContainer} from '../classes/request-information-contai
 function extractRemoteAddressFromRequest(req: express.Request) {
   if (typeof req.header('x-forwarded-for') !== 'undefined') {
     return req.header('x-forwarded-for');
-  } else if (is.object(req.connection)) {
+  } else if (req.connection?.toString() === '[object Object]') {
     return req.connection.remoteAddress;
   }
 
@@ -54,7 +52,11 @@ export function expressRequestInformationExtractor(
 ) {
   const returnObject = new RequestInformationContainer();
 
-  if (!is.object(req) || !is.function(req.header) || !is.object(res)) {
+  if (
+    req?.toString() !== '[object Object]' ||
+    typeof req.header !== 'function' ||
+    res?.toString() !== '[object Object]'
+  ) {
     return returnObject;
   }
 
