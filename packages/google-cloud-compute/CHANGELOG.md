@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.4.4](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.3...v2.4.4) (2021-05-04)
+
+
+### Bug Fixes
+
+* **disks:** attach default disk first if needed ([#551](https://www.github.com/googleapis/nodejs-compute/issues/551)) ([0523f0e](https://www.github.com/googleapis/nodejs-compute/commit/0523f0e8406df929f97cb92808459b9118bb0ae6)), closes [#518](https://www.github.com/googleapis/nodejs-compute/issues/518)
+
 ### [2.4.3](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.2...v2.4.3) (2021-01-27)
 
 
