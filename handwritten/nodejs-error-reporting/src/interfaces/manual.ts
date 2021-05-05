@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as http from 'http';
-import * as is from 'is';
 
 import {ErrorMessage} from '../classes/error-message';
 import {Configuration, Logger} from '../configuration';
@@ -104,19 +103,19 @@ export function handlerSetup(
     callback?: Callback | {} | string
   ): ErrorMessage {
     let em;
-    if (is.string(request)) {
+    if (typeof request === 'string') {
       // no request given
       callback = customMessage;
       customMessage = request as string;
       request = undefined;
-    } else if (is.function(request)) {
+    } else if (typeof request === 'function') {
       // neither request nor customMessage given
       callback = request;
       request = undefined;
       customMessage = undefined;
     }
 
-    if (is.function(customMessage)) {
+    if (typeof customMessage === 'function') {
       callback = customMessage;
       customMessage = undefined;
     }
@@ -152,14 +151,14 @@ export function handlerSetup(
       populateErrorMessage(err, em);
     }
 
-    if (is.object(request)) {
+    if (request?.toString() === '[object Object]') {
       // TODO: Address this explicit cast
       em.consumeRequestInformation(
         manualRequestInformationExtractor(request as Request)
       );
     }
 
-    if (is.string(customMessage)) {
+    if (typeof customMessage === 'string') {
       em.setMessage(customMessage as string);
     }
 

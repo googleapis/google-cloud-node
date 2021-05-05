@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as boom from 'boom';
-import * as is from 'is';
 import has = require('lodash.has');
 
 import {RequestInformationContainer} from '../classes/request-information-container';
@@ -31,10 +30,13 @@ import * as hapi from '@hapi/hapi';
 function attemptToExtractStatusCode(req: hapi.Request) {
   // TODO: Handle the cases where `req.response` and `req.response.output` are
   // `null` in this function
-  if (has(req, 'response') && is.object(req.response)) {
+  if (has(req, 'response') && req.response?.toString() === '[object Object]') {
     if (has(req.response, 'statusCode')) {
       return (req.response as hapi.ResponseObject).statusCode;
-    } else if (is.object(((req.response as unknown) as boom).output)) {
+    } else if (
+      ((req.response as unknown) as boom).output?.toString() ===
+      '[object Object]'
+    ) {
       return ((req.response as unknown) as boom).output.statusCode;
     }
   }
@@ -55,7 +57,7 @@ function attemptToExtractStatusCode(req: hapi.Request) {
 function extractRemoteAddressFromRequest(req: hapi.Request) {
   if (has(req.headers, 'x-forwarded-for')) {
     return req.headers['x-forwarded-for'];
-  } else if (is.object(req.info)) {
+  } else if (req.info?.toString() === '[object Object]') {
     return req.info.remoteAddress;
   }
 
@@ -75,16 +77,16 @@ export function hapiRequestInformationExtractor(req?: hapi.Request) {
   const returnObject = new RequestInformationContainer();
 
   if (
-    !is.object(req) ||
-    !is.object(req!.headers) ||
-    is.function(req) ||
-    is.array(req)
+    req?.toString() !== '[object Object]' ||
+    req!.headers?.toString() !== '[object Object]' ||
+    typeof req === 'function' ||
+    Array.isArray(req)
   ) {
     return returnObject;
   }
 
   let urlString: string;
-  if (is.string(req!.url)) {
+  if (typeof req!.url === 'string') {
     urlString = (req!.url as {}) as string;
   } else {
     urlString = req!.url.pathname;
