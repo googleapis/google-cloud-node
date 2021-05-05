@@ -14,7 +14,6 @@
 
 import * as assert from 'assert';
 import {describe, it, before, after, afterEach, beforeEach} from 'mocha';
-import merge = require('lodash.merge');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {ConfigurationOptions, Logger} from '../../src/configuration';
 import {Fuzzer} from '../../utils/fuzzer';
@@ -231,7 +230,7 @@ describe('Configuration class', () => {
       });
     });
     describe('with ignoreEnvironmentCheck', () => {
-      const conf = merge(
+      const conf = Object.assign(
         {},
         {projectId: 'some-id'},
         {ignoreEnvironmentCheck: true}
