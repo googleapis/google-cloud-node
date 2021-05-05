@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as is from 'is';
 import has = require('lodash.has');
 import * as util from 'util';
 
@@ -45,7 +44,7 @@ export function populateErrorMessage(ob: any, em: ErrorMessage) {
     em.setMessage(buildStackTrace('' + ob));
   } else if ((ob as {stack: {}}).stack) {
     populateFromError(ob as Error, em);
-  } else if (typeof ob === 'object' && is.object(ob)) {
+  } else if (typeof ob === 'object' && ob?.toString() === '[object Object]') {
     populateFromObject(ob, em);
   } else {
     em.setMessage(buildStackTrace(ob.toString()));
@@ -76,7 +75,10 @@ function populateFromError(
     errorMessage.setUser(err.user!);
   }
 
-  if (has(err, 'serviceContext') && is.object(err.serviceContext)) {
+  if (
+    has(err, 'serviceContext') &&
+    err.serviceContext?.toString() === '[object Object]'
+  ) {
     errorMessage.setServiceContext(
       err.serviceContext!.service!,
       err.serviceContext!.version
@@ -131,7 +133,10 @@ function populateFromObject(ob: PopulatedObject, errorMessage: ErrorMessage) {
     errorMessage.setFunctionName(ob.functionName!);
   }
 
-  if (has(ob, 'serviceContext') && is.object(ob.serviceContext)) {
+  if (
+    has(ob, 'serviceContext') &&
+    ob.serviceContext?.toString() === '[object Object]'
+  ) {
     errorMessage.setServiceContext(
       ob.serviceContext!.service!,
       ob.serviceContext!.version

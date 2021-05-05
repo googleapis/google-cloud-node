@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as is from 'is';
-
 export class RequestInformationContainer {
   url: string;
   method: string;
@@ -58,7 +56,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setUrl(url: string) {
-    this.url = is.string(url) ? url : '';
+    this.url = typeof url === 'string' ? url : '';
 
     return this;
   }
@@ -70,7 +68,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setMethod(method: string) {
-    this.method = is.string(method) ? method : '';
+    this.method = typeof method === 'string' ? method : '';
 
     return this;
   }
@@ -82,7 +80,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setReferrer(referrer?: string) {
-    this.referrer = (is.string(referrer) ? referrer : '')!;
+    this.referrer = (typeof referrer === 'string' ? referrer : '')!;
 
     return this;
   }
@@ -94,7 +92,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setUserAgent(userAgent?: string) {
-    this.userAgent = (is.string(userAgent) ? userAgent : '')!;
+    this.userAgent = (typeof userAgent === 'string' ? userAgent : '')!;
 
     return this;
   }
@@ -106,7 +104,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setRemoteAddress(remoteIp?: string) {
-    this.remoteAddress = (is.string(remoteIp) ? remoteIp : '')!;
+    this.remoteAddress = (typeof remoteIp === 'string' ? remoteIp : '')!;
 
     return this;
   }
@@ -118,7 +116,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setStatusCode(statusCode: number) {
-    this.statusCode = is.number(statusCode) ? statusCode : 0;
+    this.statusCode = typeof statusCode === 'number' ? statusCode : 0;
 
     return this;
   }

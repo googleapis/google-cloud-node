@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as is from 'is';
 import has = require('lodash.has');
 import consoleLogLevel = require('console-log-level');
 
@@ -66,11 +65,14 @@ export function createLogger(config?: ConfigurationOptions): Logger {
   if (has(process.env, 'GCLOUD_ERRORS_LOGLEVEL')) {
     // Cast env string as integer
     level = ~~process.env.GCLOUD_ERRORS_LOGLEVEL! || DEFAULT_LEVEL;
-  } else if (is.object(config) && has(config, 'logLevel')) {
-    if (is.string(config!.logLevel)) {
+  } else if (
+    config?.toString() === '[object Object]' &&
+    has(config, 'logLevel')
+  ) {
+    if (typeof config!.logLevel === 'string') {
       // Cast string as integer
       level = ~~config!.logLevel! || DEFAULT_LEVEL;
-    } else if (is.number(config!.logLevel)) {
+    } else if (typeof config!.logLevel === 'number') {
       level = Number(config!.logLevel!) || DEFAULT_LEVEL;
     } else {
       throw new Error(

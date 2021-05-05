@@ -14,7 +14,6 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
-import * as is from 'is';
 import {Configuration, Logger} from '../configuration';
 import {ErrorMessage} from '../classes/error-message';
 import * as http from 'http';
@@ -68,7 +67,7 @@ export class RequestHandler extends Service {
    * @static
    */
   static manufactureQueryString(key: string | null) {
-    if (is.string(key)) {
+    if (typeof key === 'string') {
       return {key};
     }
     return null;
@@ -172,7 +171,9 @@ export class RequestHandler extends Service {
       body: {}
     ) => void
   ) {
-    const cb: Function = (is.function(userCb) ? userCb : RequestHandler.noOp)!;
+    const cb: Function = (typeof userCb === 'function'
+      ? userCb
+      : RequestHandler.noOp)!;
     if (!this._config.isReportingEnabled()) {
       cb(null, null, {});
       return;

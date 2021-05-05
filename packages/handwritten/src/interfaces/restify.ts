@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import * as express from 'express';
-import * as is from 'is';
 import * as restify from 'restify';
 
 import {ErrorMessage} from '../classes/error-message';
@@ -120,9 +119,9 @@ function restifyRequestHandler(
   let listener = {};
 
   if (
-    is.object(res) &&
-    is.function(res.on) &&
-    is.function(res.removeListener)
+    res?.toString() === '[object Object]' &&
+    typeof res.on === 'function' &&
+    typeof res.removeListener === 'function'
   ) {
     listener = () => {
       restifyRequestFinishHandler(client, config, req, res);

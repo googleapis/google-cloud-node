@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as is from 'is';
 import has = require('lodash.has');
 import * as assert from 'assert';
 import {describe, it, beforeEach, before, afterEach} from 'mocha';
@@ -60,15 +59,15 @@ describe('Hapi interface', () => {
       );
     });
     it('should have plain object as plugin', () => {
-      assert(is.object(plugin));
+      assert(plugin?.toString() === '[object Object]');
     });
     it('plugin should have a register function property', () => {
-      assert(has(plugin, 'register') && is.function(plugin.register));
+      assert(has(plugin, 'register') && typeof plugin.register === 'function');
     });
     it("the plugin's register property should have an attributes property", () => {
       assert(
         has(plugin.register, 'attributes') &&
-          is.object(plugin.register.attributes)
+          plugin.register.attributes?.toString() === '[object Object]'
       );
     });
     it("the plugin's attribute property should have a name property", () => {
