@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import has = require('lodash.has');
-
 const env = process.env;
 
 // The Logger interface defined below matches the interface
@@ -256,7 +254,9 @@ export class Configuration {
         typeof this._givenConfiguration.serviceContext!.service === 'string'
       ) {
         this._serviceContext.service = this._givenConfiguration.serviceContext!.service!;
-      } else if (has(this._givenConfiguration.serviceContext, 'service')) {
+      } else if (
+        this._givenConfiguration.serviceContext?.service !== undefined
+      ) {
         throw new Error('config.serviceContext.service must be a string');
       }
 
@@ -264,7 +264,9 @@ export class Configuration {
         typeof this._givenConfiguration.serviceContext!.version === 'string'
       ) {
         this._serviceContext.version = this._givenConfiguration.serviceContext!.version;
-      } else if (has(this._givenConfiguration.serviceContext, 'version')) {
+      } else if (
+        this._givenConfiguration.serviceContext?.version !== undefined
+      ) {
         throw new Error('config.serviceContext.version must be a string');
       }
     }
@@ -289,7 +291,7 @@ export class Configuration {
    */
   _gatherLocalConfiguration() {
     let isReportModeValid = true;
-    if (has(this._givenConfiguration, 'reportMode')) {
+    if (this._givenConfiguration?.reportMode !== undefined) {
       const reportMode = this._givenConfiguration.reportMode;
       isReportModeValid =
         typeof reportMode === 'string' &&
@@ -305,8 +307,9 @@ export class Configuration {
       );
     }
 
-    const hasEnvCheck = has(this._givenConfiguration, 'ignoreEnvironmentCheck');
-    const hasReportMode = has(this._givenConfiguration, 'reportMode');
+    const hasEnvCheck =
+      this._givenConfiguration?.ignoreEnvironmentCheck !== undefined;
+    const hasReportMode = this._givenConfiguration?.reportMode !== undefined;
     if (hasEnvCheck) {
       this._logger.warn(
         'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
@@ -325,7 +328,7 @@ export class Configuration {
       if (this._givenConfiguration.ignoreEnvironmentCheck === true) {
         this._reportMode = 'always';
       } else if (
-        has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
+        this._givenConfiguration?.ignoreEnvironmentCheck !== undefined &&
         typeof this._givenConfiguration.ignoreEnvironmentCheck !== 'boolean'
       ) {
         throw new Error('config.ignoreEnvironmentCheck must be a boolean');
@@ -349,26 +352,28 @@ export class Configuration {
 
     if (typeof this._givenConfiguration.key === 'string') {
       this._key = this._givenConfiguration.key!;
-    } else if (has(this._givenConfiguration, 'key')) {
+    } else if (this._givenConfiguration?.key !== undefined) {
       throw new Error('config.key must be a string');
     }
     if (typeof this._givenConfiguration.keyFilename === 'string') {
       this.keyFilename = this._givenConfiguration.keyFilename!;
-    } else if (has(this._givenConfiguration, 'keyFilename')) {
+    } else if (this._givenConfiguration?.keyFilename !== undefined) {
       throw new Error('config.keyFilename must be a string');
     }
     if (
       this._givenConfiguration.credentials?.toString() === '[object Object]'
     ) {
       this.credentials = this._givenConfiguration.credentials!;
-    } else if (has(this._givenConfiguration, 'credentials')) {
+    } else if (this._givenConfiguration?.credentials !== undefined) {
       throw new Error('config.credentials must be a valid credentials object');
     }
     if (
       typeof this._givenConfiguration.reportUnhandledRejections === 'boolean'
     ) {
       this._reportUnhandledRejections = this._givenConfiguration.reportUnhandledRejections!;
-    } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
+    } else if (
+      this._givenConfiguration?.reportUnhandledRejections !== undefined
+    ) {
       throw new Error('config.reportUnhandledRejections must be a boolean');
     }
   }
@@ -399,7 +404,7 @@ export class Configuration {
       // already has been set by the metadata service
       return this._projectId;
     }
-    if (has(this._givenConfiguration, 'projectId')) {
+    if (this._givenConfiguration?.projectId !== undefined) {
       if (typeof this._givenConfiguration.projectId === 'string') {
         this._projectId = this._givenConfiguration.projectId!;
       } else if (typeof this._givenConfiguration.projectId === 'number') {

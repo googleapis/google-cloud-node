@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import has = require('lodash.has');
 import {RequestInformationContainer} from '../classes/request-information-container';
 
 export interface Request {
@@ -53,27 +52,27 @@ export function manualRequestInformationExtractor(req: Request) {
     return returnObject;
   }
 
-  if (has(req, 'method')) {
+  if (req?.method !== undefined) {
     returnObject.setMethod(req.method!);
   }
 
-  if (has(req, 'url')) {
+  if (req?.url !== undefined) {
     returnObject.setUrl(req.url!);
   }
 
-  if (has(req, 'userAgent')) {
+  if (req?.userAgent !== undefined) {
     returnObject.setUserAgent(req.userAgent);
   }
 
-  if (has(req, 'referrer')) {
+  if (req?.referrer !== undefined) {
     returnObject.setReferrer(req.referrer);
   }
 
-  if (has(req, 'statusCode')) {
+  if (req?.statusCode !== undefined) {
     returnObject.setStatusCode(req.statusCode!);
   }
 
-  if (has(req, 'remoteAddress')) {
+  if (req?.remoteAddress !== undefined) {
     returnObject.setRemoteAddress(req.remoteAddress);
   }
 
