@@ -14,7 +14,6 @@
 
 const WARNING_HEADER = '\n!! -WARNING-';
 const EXCLAMATION_LN = '\n!!';
-import has = require('lodash.has');
 import * as express from 'express';
 const app = express();
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -31,7 +30,7 @@ const log = console.log;
 app.use(bodyParser.json());
 
 app.post('/testErrorHandling', (req, res, next) => {
-  if (has(req.body, 'test') && req.body.test !== true) {
+  if (req.body?.test !== true) {
     return next!(new Error('Error on Express Regular Error POST Route'));
   } else {
     res.send('Success');
