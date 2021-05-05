@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.5.0...v2.6.0) (2021-05-05)
+
+
+### Features
+
+* Expose supported languages of the agent; feat: add export / import flow API docs: Update docs on Pages, Session, Version, etc. ([#104](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/104)) ([c7ac26e](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/c7ac26ed6118cb8f2ea6ed9d7d6e0ca3421d84ea))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.4.0...v2.5.0) (2021-04-28)
 
 
