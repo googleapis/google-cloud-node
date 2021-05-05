@@ -3,9 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-face-detection-gcs.js",
-    "https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-face-detection.js"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10
