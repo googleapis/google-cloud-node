@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import without = require('lodash.without');
-import maxBy = require('lodash.maxby');
 import random = require('lodash.random');
 
 export class Fuzzer {
@@ -202,10 +201,13 @@ export class Fuzzer {
     },
   };
 
+  _maxBy(arr: Array<Array<{}>>) {
+    const max = Math.max(...arr.map(o => o.length));
+    return arr.find(item => item.length === max);
+  }
+
   _backFillUnevenTypesArrays(argsTypesArray: Array<Array<{}>>) {
-    const largestLength = maxBy(argsTypesArray, o => {
-      return o.length;
-    })!.length;
+    const largestLength = this._maxBy(argsTypesArray)!.length;
 
     for (let i = 0; i < argsTypesArray.length; i++) {
       if (argsTypesArray[i].length !== largestLength) {
