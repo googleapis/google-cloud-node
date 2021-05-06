@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import omit = require('lodash.omit');
 import {manualRequestInformationExtractor} from '../../../src/request-extractors/manual';
 import {Fuzzer} from '../../../utils/fuzzer';
 import {deepStrictEqual} from '../../util';
@@ -58,50 +57,54 @@ describe('manualRequestInformationExtractor', () => {
           'the output of the request extraction',
         ].join(' ')
       );
+      const {method, ...sansMethod} = FULL_VALID_INPUT;
       deepStrictEqual(
-        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'method')),
+        manualRequestInformationExtractor(sansMethod),
         Object.assign({}, FULL_VALID_INPUT, {method: ''}),
         [
           'Given a full valid input object sans the method property values',
           'should be reflected by the output of the request extraction',
         ].join(' ')
       );
+      const {url, ...sansUrl} = FULL_VALID_INPUT;
       deepStrictEqual(
-        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'url')),
+        manualRequestInformationExtractor(sansUrl),
         Object.assign({}, FULL_VALID_INPUT, {url: ''}),
         [
           'Given a valid input sans the url property these values should be',
           'reflected by the output of the request extraction',
         ].join('')
       );
+      const {userAgent, ...sansUserAgent} = FULL_VALID_INPUT;
       deepStrictEqual(
-        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'userAgent')),
+        manualRequestInformationExtractor(sansUserAgent),
         Object.assign({}, FULL_VALID_INPUT, {userAgent: ''}),
         [
           'Given a full valid input sans the userAgent property these values',
           'should be reflected by the output of the request extraction',
         ].join('')
       );
+      const {referrer, ...sansReferrer} = FULL_VALID_INPUT;
       deepStrictEqual(
-        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'referrer')),
+        manualRequestInformationExtractor(sansReferrer),
         Object.assign({}, FULL_VALID_INPUT, {referrer: ''}),
         [
           'Given a full valid input sans the referrer property these values',
           'should be reflected by the output of the request extraction',
         ].join('')
       );
+      const {statusCode, ...sansStatusCode} = FULL_VALID_INPUT;
       deepStrictEqual(
-        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'statusCode')),
+        manualRequestInformationExtractor(sansStatusCode),
         Object.assign({}, FULL_VALID_INPUT, {statusCode: 0}),
         [
           'Given a full valid input sans the statusCode property these values',
           'should be reflected by the output of the request extraction',
         ].join('')
       );
+      const {remoteAddress, ...sansRemoteAddress} = FULL_VALID_INPUT;
       deepStrictEqual(
-        manualRequestInformationExtractor(
-          omit(FULL_VALID_INPUT, 'remoteAddress')
-        ),
+        manualRequestInformationExtractor(sansRemoteAddress),
         Object.assign({}, FULL_VALID_INPUT, {remoteAddress: ''}),
         [
           'Given a valid input sans the remoteAddress property these values',
