@@ -14,7 +14,6 @@
 
 import * as assert from 'assert';
 import {describe, beforeEach, after, it} from 'mocha';
-import omitBy = require('lodash.omitby');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {deepStrictEqual} from '../util';
 const level = process.env.GCLOUD_ERRORS_LOGLEVEL;
@@ -46,20 +45,13 @@ function setEnv(envData: {
 }) {
   Object.assign(
     process.env,
-    omitBy(
-      {
-        GAE_SERVICE: envData.gaeServiceName,
-        GAE_VERSION: envData.gaeServiceVersion,
-        GAE_MODULE_NAME: envData.gaeModuleName,
-        GAE_MODULE_VERSION: envData.gaeModuleVersion,
-        FUNCTION_NAME: envData.functionName,
-        K_SERVICE: envData.kService,
-        K_REVISION: envData.kRevision,
-      },
-      val => {
-        return typeof val !== 'string';
-      }
-    )
+    envData.gaeServiceName && {GAE_SERVICE: envData.gaeServiceName},
+    envData.gaeServiceVersion && {GAE_VERSION: envData.gaeServiceVersion},
+    envData.gaeModuleName && {GAE_MODULE_NAME: envData.gaeModuleName},
+    envData.gaeModuleVersion && {GAE_MODULE_VERSION: envData.gaeModuleVersion},
+    envData.functionName && {FUNCTION_NAME: envData.functionName},
+    envData.kService && {K_SERVICE: envData.kService},
+    envData.kRevision && {K_REVISION: envData.kRevision}
   );
 }
 function restoreServiceConfigEnv() {
