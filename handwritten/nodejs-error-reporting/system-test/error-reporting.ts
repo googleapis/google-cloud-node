@@ -29,8 +29,6 @@ import {
   ErrorsApiTransport,
 } from '../utils/errors-api-transport';
 
-import pick = require('lodash.pick');
-import omitBy = require('lodash.omitby');
 import * as uuid from 'uuid';
 import * as util from 'util';
 import * as path from 'path';
@@ -57,10 +55,14 @@ class InstancedEnv {
   }
 
   _captureProcessProperties() {
-    return omitBy(
-      pick(process.env, envKeys),
-      value => typeof value !== 'string'
+    const envVars = {...process.env};
+    Object.entries(envVars).forEach(
+      ([key, value]) =>
+        envKeys.includes(key) &&
+        typeof value !== 'string' &&
+        delete envVars[key]
     );
+    return envVars;
   }
 
   sterilizeProcess() {
