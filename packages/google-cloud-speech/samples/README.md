@@ -199,6 +199,8 @@ __Usage:__
 
 ### Transcribe Context Classes
 
+Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
+
 View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/transcribeContextClasses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/transcribeContextClasses.js,samples/README.md)
@@ -206,7 +208,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node samples/transcribeContextClasses.js`
+`node samples/transcribeContextClasses.js <storageUri>`
 
 
 
