@@ -22,12 +22,11 @@ const errorHandler = require('../../src/index.js')({
   key: process.env.STUBBED_API_KEY,
   projectId: process.env.STUBBED_PROJECT_NUM,
 });
-import bodyParser = require('body-parser');
 
 // eslint-disable-next-line no-console
 const log = console.log;
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.post('/testErrorHandling', (req, res, next) => {
   if (req.body?.test !== true) {
