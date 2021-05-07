@@ -57,6 +57,7 @@ describe('manualRequestInformationExtractor', () => {
           'the output of the request extraction',
         ].join(' ')
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {method, ...sansMethod} = FULL_VALID_INPUT;
       deepStrictEqual(
         manualRequestInformationExtractor(sansMethod),
@@ -66,6 +67,7 @@ describe('manualRequestInformationExtractor', () => {
           'should be reflected by the output of the request extraction',
         ].join(' ')
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {url, ...sansUrl} = FULL_VALID_INPUT;
       deepStrictEqual(
         manualRequestInformationExtractor(sansUrl),
@@ -75,6 +77,7 @@ describe('manualRequestInformationExtractor', () => {
           'reflected by the output of the request extraction',
         ].join('')
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {userAgent, ...sansUserAgent} = FULL_VALID_INPUT;
       deepStrictEqual(
         manualRequestInformationExtractor(sansUserAgent),
@@ -84,6 +87,7 @@ describe('manualRequestInformationExtractor', () => {
           'should be reflected by the output of the request extraction',
         ].join('')
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {referrer, ...sansReferrer} = FULL_VALID_INPUT;
       deepStrictEqual(
         manualRequestInformationExtractor(sansReferrer),
@@ -93,6 +97,7 @@ describe('manualRequestInformationExtractor', () => {
           'should be reflected by the output of the request extraction',
         ].join('')
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {statusCode, ...sansStatusCode} = FULL_VALID_INPUT;
       deepStrictEqual(
         manualRequestInformationExtractor(sansStatusCode),
@@ -102,6 +107,7 @@ describe('manualRequestInformationExtractor', () => {
           'should be reflected by the output of the request extraction',
         ].join('')
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {remoteAddress, ...sansRemoteAddress} = FULL_VALID_INPUT;
       deepStrictEqual(
         manualRequestInformationExtractor(sansRemoteAddress),
