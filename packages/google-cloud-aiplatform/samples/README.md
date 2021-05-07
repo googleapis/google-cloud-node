@@ -14,6 +14,9 @@
 * [Samples](#samples)
   * [Cancel-batch-prediction-job](#cancel-batch-prediction-job)
   * [Cancel-custom-job](#cancel-custom-job)
+  * [Create-batch-prediction-job-text-classification](#create-batch-prediction-job-text-classification)
+  * [Create-batch-prediction-job-text-entity-extraction](#create-batch-prediction-job-text-entity-extraction)
+  * [Create-batch-prediction-job-text-sentiment-analysis](#create-batch-prediction-job-text-sentiment-analysis)
   * [Create-batch-prediction-job-video-classification](#create-batch-prediction-job-video-classification)
   * [Create-batch-prediction-job-video-object-tracking](#create-batch-prediction-job-video-object-tracking)
   * [Create-custom-job](#create-custom-job)
@@ -120,6 +123,57 @@ __Usage:__
 
 
 `node samples/cancel-custom-job.js`
+
+
+-----
+
+
+
+
+### Create-batch-prediction-job-text-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-text-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-batch-prediction-job-text-classification.js`
+
+
+-----
+
+
+
+
+### Create-batch-prediction-job-text-entity-extraction
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-entity-extraction.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-text-entity-extraction.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-batch-prediction-job-text-entity-extraction.js`
+
+
+-----
+
+
+
+
+### Create-batch-prediction-job-text-sentiment-analysis
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-sentiment-analysis.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-text-sentiment-analysis.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-batch-prediction-job-text-sentiment-analysis.js`
 
 
 -----
