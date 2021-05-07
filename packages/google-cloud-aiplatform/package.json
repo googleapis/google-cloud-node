@@ -46,7 +46,7 @@
     "test": "c8 node build/test/run.js"
   },
   "dependencies": {
-    "google-gax": "^2.9.2",
+    "google-gax": "^2.12.0",
     "protobuf.js": "^1.1.2"
   },
   "devDependencies": {
