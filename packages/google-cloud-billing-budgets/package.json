@@ -51,6 +51,6 @@
     "node": ">=10"
   },
   "dependencies": {
-    "google-gax": "^2.9.2"
+    "google-gax": "^2.12.0"
   }
 }
