@@ -14,7 +14,6 @@
 
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
-import delay from 'delay';
 import * as nock from 'nock';
 
 import {ErrorReporting} from '../src';
@@ -139,6 +138,10 @@ function shouldRun() {
   }
 
   return shouldRun;
+}
+
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 if (!shouldRun()) {
