@@ -12,8 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import without = require('lodash.without');
-import random = require('lodash.random');
+function _random(a: number, b: number) {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  return Math.floor(lower + Math.random() * (upper - lower + 1));
+}
 
 export class Fuzzer {
   generate = {
@@ -35,14 +38,14 @@ export class Fuzzer {
       const chars: string[] = [];
 
       for (let i = 0; i < lenChecked; i++) {
-        chars.push(String.fromCharCode(random(32, 126)));
+        chars.push(String.fromCharCode(_random(32, 126)));
       }
 
       return chars.join('');
     },
 
     boolean() {
-      return !!random(0, 1);
+      return !!_random(0, 1);
     },
 
     alphaNumericString(len?: number) {
@@ -56,16 +59,16 @@ export class Fuzzer {
       ];
 
       for (let i = 0; i < lenChecked; i++) {
-        thisRange = ranges[random(0, 2)];
-        chars.push(String.fromCharCode(random(thisRange[0], thisRange[1])));
+        thisRange = ranges[_random(0, 2)];
+        chars.push(String.fromCharCode(_random(thisRange[0], thisRange[1])));
       }
 
       return chars.join('');
     },
 
     function(this: {[key: string]: () => void; types: () => string[]}) {
-      const availableTypes = without(this.types(), 'function');
-      const typeToGen = this.types()[random(0, availableTypes.length - 1)];
+      const availableTypes = this.types().filter(i => i !== 'function');
+      const typeToGen = this.types()[_random(0, availableTypes.length - 1)];
       const fnToCall = this[typeToGen];
 
       return () => {
@@ -77,7 +80,7 @@ export class Fuzzer {
       const lowerChecked = (typeof lower === 'number' ? lower : 0)!;
       const upperChecked = (typeof upper === 'number' ? upper : 100)!;
 
-      return random(lowerChecked, upperChecked);
+      return _random(lowerChecked, upperChecked);
     },
 
     null() {
@@ -94,7 +97,7 @@ export class Fuzzer {
       currentDepth?: number,
       allowedDepth?: number
     ) {
-      const lenChecked = (typeof len === 'number' ? len : random(1, 10))!;
+      const lenChecked = (typeof len === 'number' ? len : _random(1, 10))!;
       let availableTypes = (typeof ofOneType === 'string' &&
       this.types().indexOf(ofOneType!) > -1
         ? [ofOneType]
@@ -111,12 +114,14 @@ export class Fuzzer {
 
       // Deny the ability to nest more objects
       if (currentDepthChecked >= allowedDepthChecked) {
-        availableTypes = without(this.types(), 'object', 'array');
+        availableTypes = this.types().filter(
+          i => i !== 'object' && i !== 'array'
+        );
       }
 
       for (let i = 0; i < lenChecked; i++) {
         currentTypeBeingGenerated =
-          availableTypes[random(0, availableTypes.length - 1)];
+          availableTypes[_random(0, availableTypes.length - 1)];
 
         if (currentTypeBeingGenerated === 'object') {
           arr.push(
@@ -152,7 +157,7 @@ export class Fuzzer {
     ) {
       const numPropertiesChecked = (typeof numProperties === 'number'
         ? numProperties
-        : random(1, 10))!;
+        : _random(1, 10))!;
       let currentDepthChecked = (typeof currentDepth === 'number'
         ? currentDepth
         : 0)!;
@@ -166,7 +171,9 @@ export class Fuzzer {
 
       // Deny the ability to nest more objects
       if (currentDepth! >= allowedDepth!) {
-        availableTypes = without(availableTypes, 'object', 'array');
+        availableTypes = availableTypes.filter(
+          i => i !== 'object' && i !== 'array'
+        );
       }
 
       let currentTypeBeingGenerated: string | number = 0;
@@ -174,8 +181,8 @@ export class Fuzzer {
 
       for (let i = 0; i < numPropertiesChecked; i++) {
         currentTypeBeingGenerated =
-          availableTypes[random(0, availableTypes.length - 1)];
-        currentKey = this.alphaNumericString(random(1, 10));
+          availableTypes[_random(0, availableTypes.length - 1)];
+        currentKey = this.alphaNumericString(_random(1, 10));
 
         if (currentTypeBeingGenerated === 'object') {
           obj[currentKey] = this[currentTypeBeingGenerated](
@@ -213,7 +220,7 @@ export class Fuzzer {
       if (argsTypesArray[i].length !== largestLength) {
         while (argsTypesArray[i].length < largestLength) {
           argsTypesArray[i].push(
-            argsTypesArray[i][random(0, argsTypesArray[i].length - 1)]
+            argsTypesArray[i][_random(0, argsTypesArray[i].length - 1)]
           );
         }
       }
@@ -246,10 +253,12 @@ export class Fuzzer {
 
     for (let i = 0; i < expectsArgTypes.length; i++) {
       if (!Array.isArray(expectsArgTypes[i])) {
-        argsTypesArray.push(without(this.generate.types(), expectsArgTypes[i]));
+        argsTypesArray.push(
+          this.generate.types().filter(item => item !== expectsArgTypes[i])
+        );
       } else {
         for (let j = 0; j < expectsArgTypes[i].length; j++) {
-          tmpArray = without(tmpArray, expectsArgTypes[i][j]);
+          tmpArray = tmpArray.filter(arg => arg !== expectsArgTypes[i][j]);
         }
 
         argsTypesArray.push(([] as Array<{}>).concat(tmpArray));
