@@ -46,7 +46,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^2.10.3"
+    "google-gax": "^2.12.0"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.1",
