@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v1beta1.BudgetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.Budget()
       );
-      client.innerApiCalls.createBudget = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createBudget =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createBudget(
           request,
@@ -363,9 +361,8 @@ describe('v1beta1.BudgetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.Budget()
       );
-      client.innerApiCalls.updateBudget = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateBudget =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateBudget(
           request,
@@ -476,9 +473,8 @@ describe('v1beta1.BudgetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.Budget()
       );
-      client.innerApiCalls.getBudget = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getBudget =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getBudget(
           request,
@@ -585,9 +581,8 @@ describe('v1beta1.BudgetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteBudget = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteBudget =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteBudget(
           request,
@@ -713,9 +708,8 @@ describe('v1beta1.BudgetServiceClient', () => {
           new protos.google.cloud.billing.budgets.v1beta1.Budget()
         ),
       ];
-      client.innerApiCalls.listBudgets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listBudgets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listBudgets(
           request,
@@ -795,12 +789,12 @@ describe('v1beta1.BudgetServiceClient', () => {
           new protos.google.cloud.billing.budgets.v1beta1.Budget()
         ),
       ];
-      client.descriptors.page.listBudgets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBudgets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listBudgetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.billing.budgets.v1beta1.Budget[] = [];
+        const responses: protos.google.cloud.billing.budgets.v1beta1.Budget[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.billing.budgets.v1beta1.Budget) => {
@@ -847,7 +841,8 @@ describe('v1beta1.BudgetServiceClient', () => {
       );
       const stream = client.listBudgetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.billing.budgets.v1beta1.Budget[] = [];
+        const responses: protos.google.cloud.billing.budgets.v1beta1.Budget[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.billing.budgets.v1beta1.Budget) => {
@@ -897,10 +892,10 @@ describe('v1beta1.BudgetServiceClient', () => {
           new protos.google.cloud.billing.budgets.v1beta1.Budget()
         ),
       ];
-      client.descriptors.page.listBudgets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.billing.budgets.v1beta1.IBudget[] = [];
+      client.descriptors.page.listBudgets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.billing.budgets.v1beta1.IBudget[] =
+        [];
       const iterable = client.listBudgetsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -938,7 +933,8 @@ describe('v1beta1.BudgetServiceClient', () => {
       );
       const iterable = client.listBudgetsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.billing.budgets.v1beta1.IBudget[] = [];
+        const responses: protos.google.cloud.billing.budgets.v1beta1.IBudget[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -987,9 +983,8 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
 
       it('matchBillingAccountFromBillingAccountName', () => {
-        const result = client.matchBillingAccountFromBillingAccountName(
-          fakePath
-        );
+        const result =
+          client.matchBillingAccountFromBillingAccountName(fakePath);
         assert.strictEqual(result, 'billingAccountValue');
         assert(
           (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
