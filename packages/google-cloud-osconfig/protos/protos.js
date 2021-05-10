@@ -12248,19 +12248,19 @@
     
                         /**
                          * FixedOrPercent fixed.
-                         * @member {number} fixed
+                         * @member {number|null|undefined} fixed
                          * @memberof google.cloud.osconfig.v1.FixedOrPercent
                          * @instance
                          */
-                        FixedOrPercent.prototype.fixed = 0;
+                        FixedOrPercent.prototype.fixed = null;
     
                         /**
                          * FixedOrPercent percent.
-                         * @member {number} percent
+                         * @member {number|null|undefined} percent
                          * @memberof google.cloud.osconfig.v1.FixedOrPercent
                          * @instance
                          */
-                        FixedOrPercent.prototype.percent = 0;
+                        FixedOrPercent.prototype.percent = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -14188,11 +14188,11 @@
     
                         /**
                          * MonthlySchedule monthDay.
-                         * @member {number} monthDay
+                         * @member {number|null|undefined} monthDay
                          * @memberof google.cloud.osconfig.v1.MonthlySchedule
                          * @instance
                          */
-                        MonthlySchedule.prototype.monthDay = 0;
+                        MonthlySchedule.prototype.monthDay = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -21458,11 +21458,11 @@
     
                         /**
                          * ExecStepConfig localPath.
-                         * @member {string} localPath
+                         * @member {string|null|undefined} localPath
                          * @memberof google.cloud.osconfig.v1.ExecStepConfig
                          * @instance
                          */
-                        ExecStepConfig.prototype.localPath = "";
+                        ExecStepConfig.prototype.localPath = null;
     
                         /**
                          * ExecStepConfig gcsObject.
@@ -23127,43 +23127,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
