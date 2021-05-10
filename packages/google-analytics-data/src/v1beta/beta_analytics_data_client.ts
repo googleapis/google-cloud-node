@@ -217,13 +217,14 @@ export class BetaAnalyticsDataClient {
     ];
     for (const methodName of betaAnalyticsDataStubMethods) {
       const callPromise = this.betaAnalyticsDataStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -447,11 +448,10 @@ export class BetaAnalyticsDataClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      property: request.property || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        property: request.property || '',
+      });
     this.initialize();
     return this.innerApiCalls.runReport(request, options, callback);
   }
@@ -588,11 +588,10 @@ export class BetaAnalyticsDataClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      property: request.property || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        property: request.property || '',
+      });
     this.initialize();
     return this.innerApiCalls.runPivotReport(request, options, callback);
   }
@@ -692,11 +691,10 @@ export class BetaAnalyticsDataClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      property: request.property || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        property: request.property || '',
+      });
     this.initialize();
     return this.innerApiCalls.batchRunReports(request, options, callback);
   }
@@ -802,11 +800,10 @@ export class BetaAnalyticsDataClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      property: request.property || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        property: request.property || '',
+      });
     this.initialize();
     return this.innerApiCalls.batchRunPivotReports(request, options, callback);
   }
@@ -913,11 +910,10 @@ export class BetaAnalyticsDataClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getMetadata(request, options, callback);
   }
@@ -1041,11 +1037,10 @@ export class BetaAnalyticsDataClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      property: request.property || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        property: request.property || '',
+      });
     this.initialize();
     return this.innerApiCalls.runRealtimeReport(request, options, callback);
   }

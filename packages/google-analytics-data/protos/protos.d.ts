@@ -2512,7 +2512,7 @@ export namespace google {
                     public fieldName: string;
 
                     /** Filter nullFilter. */
-                    public nullFilter: boolean;
+                    public nullFilter?: (boolean|null);
 
                     /** Filter stringFilter. */
                     public stringFilter?: (google.analytics.data.v1alpha.Filter.IStringFilter|null);
@@ -4622,7 +4622,7 @@ export namespace google {
                     constructor(properties?: google.analytics.data.v1alpha.IDimensionValue);
 
                     /** DimensionValue value. */
-                    public value: string;
+                    public value?: (string|null);
 
                     /** DimensionValue oneValue. */
                     public oneValue?: "value";
@@ -4715,7 +4715,7 @@ export namespace google {
                     constructor(properties?: google.analytics.data.v1alpha.IMetricValue);
 
                     /** MetricValue value. */
-                    public value: string;
+                    public value?: (string|null);
 
                     /** MetricValue oneValue. */
                     public oneValue?: "value";
@@ -4811,10 +4811,10 @@ export namespace google {
                     constructor(properties?: google.analytics.data.v1alpha.INumericValue);
 
                     /** NumericValue int64Value. */
-                    public int64Value: (number|Long|string);
+                    public int64Value?: (number|Long|string|null);
 
                     /** NumericValue doubleValue. */
-                    public doubleValue: number;
+                    public doubleValue?: (number|null);
 
                     /** NumericValue oneValue. */
                     public oneValue?: ("int64Value"|"doubleValue");
@@ -9894,7 +9894,7 @@ export namespace google {
                     constructor(properties?: google.analytics.data.v1beta.IDimensionValue);
 
                     /** DimensionValue value. */
-                    public value: string;
+                    public value?: (string|null);
 
                     /** DimensionValue oneValue. */
                     public oneValue?: "value";
@@ -9987,7 +9987,7 @@ export namespace google {
                     constructor(properties?: google.analytics.data.v1beta.IMetricValue);
 
                     /** MetricValue value. */
-                    public value: string;
+                    public value?: (string|null);
 
                     /** MetricValue oneValue. */
                     public oneValue?: "value";
@@ -10083,10 +10083,10 @@ export namespace google {
                     constructor(properties?: google.analytics.data.v1beta.INumericValue);
 
                     /** NumericValue int64Value. */
-                    public int64Value: (number|Long|string);
+                    public int64Value?: (number|Long|string|null);
 
                     /** NumericValue doubleValue. */
-                    public doubleValue: number;
+                    public doubleValue?: (number|null);
 
                     /** NumericValue oneValue. */
                     public oneValue?: ("int64Value"|"doubleValue");
@@ -10787,19 +10787,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

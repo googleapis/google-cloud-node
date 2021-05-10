@@ -26,10 +26,9 @@ import * as alphaanalyticsdataModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -70,49 +69,46 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient();
+    const client =
+      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-      {
+    const client =
+      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-      {
+    const client =
+      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.alphaAnalyticsDataStub, undefined);
     await client.initialize();
     assert(client.alphaAnalyticsDataStub);
   });
 
   it('has close method', () => {
-    const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-      {
+    const client =
+      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-      {
+    const client =
+      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -121,12 +117,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-      {
+    const client =
+      new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -145,12 +140,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
   describe('runReport', () => {
     it('invokes runReport without error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunReportRequest()
@@ -170,12 +164,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes runReport without error using callback', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunReportRequest()
@@ -184,9 +177,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunReportResponse()
       );
-      client.innerApiCalls.runReport = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.runReport =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.runReport(
           request,
@@ -212,12 +204,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes runReport with error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunReportRequest()
@@ -236,12 +227,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
   describe('runPivotReport', () => {
     it('invokes runPivotReport without error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunPivotReportRequest()
@@ -261,12 +251,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes runPivotReport without error using callback', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunPivotReportRequest()
@@ -275,9 +264,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunPivotReportResponse()
       );
-      client.innerApiCalls.runPivotReport = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.runPivotReport =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.runPivotReport(
           request,
@@ -303,12 +291,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes runPivotReport with error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunPivotReportRequest()
@@ -330,12 +317,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
   describe('batchRunReports', () => {
     it('invokes batchRunReports without error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunReportsRequest()
@@ -355,12 +341,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes batchRunReports without error using callback', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunReportsRequest()
@@ -369,9 +354,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunReportsResponse()
       );
-      client.innerApiCalls.batchRunReports = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchRunReports =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchRunReports(
           request,
@@ -397,12 +381,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes batchRunReports with error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunReportsRequest()
@@ -424,12 +407,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
   describe('batchRunPivotReports', () => {
     it('invokes batchRunPivotReports without error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunPivotReportsRequest()
@@ -438,9 +420,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunPivotReportsResponse()
       );
-      client.innerApiCalls.batchRunPivotReports = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchRunPivotReports =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.batchRunPivotReports(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -451,12 +432,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes batchRunPivotReports without error using callback', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunPivotReportsRequest()
@@ -465,9 +445,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunPivotReportsResponse()
       );
-      client.innerApiCalls.batchRunPivotReports = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchRunPivotReports =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchRunPivotReports(
           request,
@@ -493,12 +472,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes batchRunPivotReports with error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.BatchRunPivotReportsRequest()
@@ -520,12 +498,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
   describe('getMetadata', () => {
     it('invokes getMetadata without error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetMetadataRequest()
@@ -553,12 +530,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes getMetadata without error using callback', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetMetadataRequest()
@@ -575,9 +551,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.Metadata()
       );
-      client.innerApiCalls.getMetadata = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getMetadata =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getMetadata(
           request,
@@ -603,12 +578,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes getMetadata with error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetMetadataRequest()
@@ -638,12 +612,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
   describe('runRealtimeReport', () => {
     it('invokes runRealtimeReport without error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
@@ -671,12 +644,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes runRealtimeReport without error using callback', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
@@ -693,9 +665,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunRealtimeReportResponse()
       );
-      client.innerApiCalls.runRealtimeReport = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.runRealtimeReport =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.runRealtimeReport(
           request,
@@ -721,12 +692,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     it('invokes runRealtimeReport with error', async () => {
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunRealtimeReportRequest()
@@ -760,12 +730,11 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedParameters = {
         property: 'propertyValue',
       };
-      const client = new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient(
-        {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.metadataPathTemplate.render = sinon
         .stub()

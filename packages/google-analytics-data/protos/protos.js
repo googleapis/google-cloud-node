@@ -6864,11 +6864,11 @@
     
                         /**
                          * Filter nullFilter.
-                         * @member {boolean} nullFilter
+                         * @member {boolean|null|undefined} nullFilter
                          * @memberof google.analytics.data.v1alpha.Filter
                          * @instance
                          */
-                        Filter.prototype.nullFilter = false;
+                        Filter.prototype.nullFilter = null;
     
                         /**
                          * Filter stringFilter.
@@ -12107,11 +12107,11 @@
     
                         /**
                          * DimensionValue value.
-                         * @member {string} value
+                         * @member {string|null|undefined} value
                          * @memberof google.analytics.data.v1alpha.DimensionValue
                          * @instance
                          */
-                        DimensionValue.prototype.value = "";
+                        DimensionValue.prototype.value = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -12312,11 +12312,11 @@
     
                         /**
                          * MetricValue value.
-                         * @member {string} value
+                         * @member {string|null|undefined} value
                          * @memberof google.analytics.data.v1alpha.MetricValue
                          * @instance
                          */
-                        MetricValue.prototype.value = "";
+                        MetricValue.prototype.value = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -12518,19 +12518,19 @@
     
                         /**
                          * NumericValue int64Value.
-                         * @member {number|Long} int64Value
+                         * @member {number|Long|null|undefined} int64Value
                          * @memberof google.analytics.data.v1alpha.NumericValue
                          * @instance
                          */
-                        NumericValue.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        NumericValue.prototype.int64Value = null;
     
                         /**
                          * NumericValue doubleValue.
-                         * @member {number} doubleValue
+                         * @member {number|null|undefined} doubleValue
                          * @memberof google.analytics.data.v1alpha.NumericValue
                          * @instance
                          */
-                        NumericValue.prototype.doubleValue = 0;
+                        NumericValue.prototype.doubleValue = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -25902,11 +25902,11 @@
     
                         /**
                          * DimensionValue value.
-                         * @member {string} value
+                         * @member {string|null|undefined} value
                          * @memberof google.analytics.data.v1beta.DimensionValue
                          * @instance
                          */
-                        DimensionValue.prototype.value = "";
+                        DimensionValue.prototype.value = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -26107,11 +26107,11 @@
     
                         /**
                          * MetricValue value.
-                         * @member {string} value
+                         * @member {string|null|undefined} value
                          * @memberof google.analytics.data.v1beta.MetricValue
                          * @instance
                          */
-                        MetricValue.prototype.value = "";
+                        MetricValue.prototype.value = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -26313,19 +26313,19 @@
     
                         /**
                          * NumericValue int64Value.
-                         * @member {number|Long} int64Value
+                         * @member {number|Long|null|undefined} int64Value
                          * @memberof google.analytics.data.v1beta.NumericValue
                          * @instance
                          */
-                        NumericValue.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        NumericValue.prototype.int64Value = null;
     
                         /**
                          * NumericValue doubleValue.
-                         * @member {number} doubleValue
+                         * @member {number|null|undefined} doubleValue
                          * @memberof google.analytics.data.v1beta.NumericValue
                          * @instance
                          */
-                        NumericValue.prototype.doubleValue = 0;
+                        NumericValue.prototype.doubleValue = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -28087,43 +28087,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
