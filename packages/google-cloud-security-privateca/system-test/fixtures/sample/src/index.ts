@@ -27,7 +27,8 @@ function doStuffWithCertificateAuthorityServiceClient(
 
 function main() {
   // check that the client instance can be created
-  const certificateAuthorityServiceClient = new CertificateAuthorityServiceClient();
+  const certificateAuthorityServiceClient =
+    new CertificateAuthorityServiceClient();
   doStuffWithCertificateAuthorityServiceClient(
     certificateAuthorityServiceClient
   );

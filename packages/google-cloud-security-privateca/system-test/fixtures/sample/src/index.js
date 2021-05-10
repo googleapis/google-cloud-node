@@ -20,7 +20,8 @@
 const privateca = require('@google-cloud/security-private-ca');
 
 function main() {
-  const certificateAuthorityServiceClient = new privateca.CertificateAuthorityServiceClient();
+  const certificateAuthorityServiceClient =
+    new privateca.CertificateAuthorityServiceClient();
 }
 
 main();

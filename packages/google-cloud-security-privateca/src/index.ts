@@ -21,7 +21,8 @@ import * as v1beta1 from './v1beta1';
 
 const CertificateAuthorityServiceClient =
   v1beta1.CertificateAuthorityServiceClient;
-type CertificateAuthorityServiceClient = v1beta1.CertificateAuthorityServiceClient;
+type CertificateAuthorityServiceClient =
+  v1beta1.CertificateAuthorityServiceClient;
 
 export {v1, v1beta1, CertificateAuthorityServiceClient};
 export default {v1, v1beta1, CertificateAuthorityServiceClient};

@@ -333,10 +333,10 @@ export namespace google {
                             constructor(properties?: google.cloud.security.privateca.v1.CertificateAuthority.IKeyVersionSpec);
 
                             /** KeyVersionSpec cloudKmsKeyVersion. */
-                            public cloudKmsKeyVersion: string;
+                            public cloudKmsKeyVersion?: (string|null);
 
                             /** KeyVersionSpec algorithm. */
-                            public algorithm: (google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm);
+                            public algorithm?: (google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm|keyof typeof google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm|null);
 
                             /** KeyVersionSpec KeyVersion. */
                             public KeyVersion?: ("cloudKmsKeyVersion"|"algorithm");
@@ -1496,7 +1496,7 @@ export namespace google {
                         public name: string;
 
                         /** Certificate pemCsr. */
-                        public pemCsr: string;
+                        public pemCsr?: (string|null);
 
                         /** Certificate config. */
                         public config?: (google.cloud.security.privateca.v1.ICertificateConfig|null);
@@ -1975,10 +1975,16 @@ export namespace google {
                             constructor(properties?: google.cloud.security.privateca.v1.X509Parameters.ICaOptions);
 
                             /** CaOptions isCa. */
-                            public isCa: boolean;
+                            public isCa?: (boolean|null);
 
                             /** CaOptions maxIssuerPathLength. */
-                            public maxIssuerPathLength: number;
+                            public maxIssuerPathLength?: (number|null);
+
+                            /** CaOptions _isCa. */
+                            public _isCa?: "isCa";
+
+                            /** CaOptions _maxIssuerPathLength. */
+                            public _maxIssuerPathLength?: "maxIssuerPathLength";
 
                             /**
                              * Creates a new CaOptions instance using the specified properties.
@@ -2072,7 +2078,7 @@ export namespace google {
                         constructor(properties?: google.cloud.security.privateca.v1.ISubordinateConfig);
 
                         /** SubordinateConfig certificateAuthority. */
-                        public certificateAuthority: string;
+                        public certificateAuthority?: (string|null);
 
                         /** SubordinateConfig pemIssuerChain. */
                         public pemIssuerChain?: (google.cloud.security.privateca.v1.SubordinateConfig.ISubordinateConfigChain|null);
@@ -9359,10 +9365,10 @@ export namespace google {
                             constructor(properties?: google.cloud.security.privateca.v1beta1.CertificateAuthority.IKeyVersionSpec);
 
                             /** KeyVersionSpec cloudKmsKeyVersion. */
-                            public cloudKmsKeyVersion: string;
+                            public cloudKmsKeyVersion?: (string|null);
 
                             /** KeyVersionSpec algorithm. */
-                            public algorithm: (google.cloud.security.privateca.v1beta1.CertificateAuthority.SignHashAlgorithm|keyof typeof google.cloud.security.privateca.v1beta1.CertificateAuthority.SignHashAlgorithm);
+                            public algorithm?: (google.cloud.security.privateca.v1beta1.CertificateAuthority.SignHashAlgorithm|keyof typeof google.cloud.security.privateca.v1beta1.CertificateAuthority.SignHashAlgorithm|null);
 
                             /** KeyVersionSpec KeyVersion. */
                             public KeyVersion?: ("cloudKmsKeyVersion"|"algorithm");
@@ -9775,7 +9781,7 @@ export namespace google {
                         public name: string;
 
                         /** Certificate pemCsr. */
-                        public pemCsr: string;
+                        public pemCsr?: (string|null);
 
                         /** Certificate config. */
                         public config?: (google.cloud.security.privateca.v1beta1.ICertificateConfig|null);
@@ -10330,7 +10336,7 @@ export namespace google {
                         constructor(properties?: google.cloud.security.privateca.v1beta1.IReusableConfigWrapper);
 
                         /** ReusableConfigWrapper reusableConfig. */
-                        public reusableConfig: string;
+                        public reusableConfig?: (string|null);
 
                         /** ReusableConfigWrapper reusableConfigValues. */
                         public reusableConfigValues?: (google.cloud.security.privateca.v1beta1.IReusableConfigValues|null);
@@ -10429,7 +10435,7 @@ export namespace google {
                         constructor(properties?: google.cloud.security.privateca.v1beta1.ISubordinateConfig);
 
                         /** SubordinateConfig certificateAuthority. */
-                        public certificateAuthority: string;
+                        public certificateAuthority?: (string|null);
 
                         /** SubordinateConfig pemIssuerChain. */
                         public pemIssuerChain?: (google.cloud.security.privateca.v1beta1.SubordinateConfig.ISubordinateConfigChain|null);
@@ -15652,19 +15658,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

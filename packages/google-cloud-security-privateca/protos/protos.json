@@ -764,19 +764,33 @@
                           },
                           "nested": {
                             "CaOptions": {
+                              "oneofs": {
+                                "_isCa": {
+                                  "oneof": [
+                                    "isCa"
+                                  ]
+                                },
+                                "_maxIssuerPathLength": {
+                                  "oneof": [
+                                    "maxIssuerPathLength"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "isCa": {
                                   "type": "bool",
                                   "id": 1,
                                   "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
                                   }
                                 },
                                 "maxIssuerPathLength": {
                                   "type": "int32",
                                   "id": 2,
                                   "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
                                   }
                                 }
                               }

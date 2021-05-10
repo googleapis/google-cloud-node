@@ -1054,19 +1054,19 @@
     
                                 /**
                                  * KeyVersionSpec cloudKmsKeyVersion.
-                                 * @member {string} cloudKmsKeyVersion
+                                 * @member {string|null|undefined} cloudKmsKeyVersion
                                  * @memberof google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec
                                  * @instance
                                  */
-                                KeyVersionSpec.prototype.cloudKmsKeyVersion = "";
+                                KeyVersionSpec.prototype.cloudKmsKeyVersion = null;
     
                                 /**
                                  * KeyVersionSpec algorithm.
-                                 * @member {google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm} algorithm
+                                 * @member {google.cloud.security.privateca.v1.CertificateAuthority.SignHashAlgorithm|null|undefined} algorithm
                                  * @memberof google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec
                                  * @instance
                                  */
-                                KeyVersionSpec.prototype.algorithm = 0;
+                                KeyVersionSpec.prototype.algorithm = null;
     
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
@@ -4040,11 +4040,11 @@
     
                             /**
                              * Certificate pemCsr.
-                             * @member {string} pemCsr
+                             * @member {string|null|undefined} pemCsr
                              * @memberof google.cloud.security.privateca.v1.Certificate
                              * @instance
                              */
-                            Certificate.prototype.pemCsr = "";
+                            Certificate.prototype.pemCsr = null;
     
                             /**
                              * Certificate config.
@@ -5628,19 +5628,44 @@
     
                                 /**
                                  * CaOptions isCa.
-                                 * @member {boolean} isCa
+                                 * @member {boolean|null|undefined} isCa
                                  * @memberof google.cloud.security.privateca.v1.X509Parameters.CaOptions
                                  * @instance
                                  */
-                                CaOptions.prototype.isCa = false;
+                                CaOptions.prototype.isCa = null;
     
                                 /**
                                  * CaOptions maxIssuerPathLength.
-                                 * @member {number} maxIssuerPathLength
+                                 * @member {number|null|undefined} maxIssuerPathLength
                                  * @memberof google.cloud.security.privateca.v1.X509Parameters.CaOptions
                                  * @instance
                                  */
-                                CaOptions.prototype.maxIssuerPathLength = 0;
+                                CaOptions.prototype.maxIssuerPathLength = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * CaOptions _isCa.
+                                 * @member {"isCa"|undefined} _isCa
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.CaOptions
+                                 * @instance
+                                 */
+                                Object.defineProperty(CaOptions.prototype, "_isCa", {
+                                    get: $util.oneOfGetter($oneOfFields = ["isCa"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * CaOptions _maxIssuerPathLength.
+                                 * @member {"maxIssuerPathLength"|undefined} _maxIssuerPathLength
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.CaOptions
+                                 * @instance
+                                 */
+                                Object.defineProperty(CaOptions.prototype, "_maxIssuerPathLength", {
+                                    get: $util.oneOfGetter($oneOfFields = ["maxIssuerPathLength"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
     
                                 /**
                                  * Creates a new CaOptions instance using the specified properties.
@@ -5745,12 +5770,17 @@
                                 CaOptions.verify = function verify(message) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
-                                    if (message.isCa != null && message.hasOwnProperty("isCa"))
+                                    var properties = {};
+                                    if (message.isCa != null && message.hasOwnProperty("isCa")) {
+                                        properties._isCa = 1;
                                         if (typeof message.isCa !== "boolean")
                                             return "isCa: boolean expected";
-                                    if (message.maxIssuerPathLength != null && message.hasOwnProperty("maxIssuerPathLength"))
+                                    }
+                                    if (message.maxIssuerPathLength != null && message.hasOwnProperty("maxIssuerPathLength")) {
+                                        properties._maxIssuerPathLength = 1;
                                         if (!$util.isInteger(message.maxIssuerPathLength))
                                             return "maxIssuerPathLength: integer expected";
+                                    }
                                     return null;
                                 };
     
@@ -5786,14 +5816,16 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
-                                    if (options.defaults) {
-                                        object.isCa = false;
-                                        object.maxIssuerPathLength = 0;
-                                    }
-                                    if (message.isCa != null && message.hasOwnProperty("isCa"))
+                                    if (message.isCa != null && message.hasOwnProperty("isCa")) {
                                         object.isCa = message.isCa;
-                                    if (message.maxIssuerPathLength != null && message.hasOwnProperty("maxIssuerPathLength"))
+                                        if (options.oneofs)
+                                            object._isCa = "isCa";
+                                    }
+                                    if (message.maxIssuerPathLength != null && message.hasOwnProperty("maxIssuerPathLength")) {
                                         object.maxIssuerPathLength = message.maxIssuerPathLength;
+                                        if (options.oneofs)
+                                            object._maxIssuerPathLength = "maxIssuerPathLength";
+                                    }
                                     return object;
                                 };
     
@@ -5841,11 +5873,11 @@
     
                             /**
                              * SubordinateConfig certificateAuthority.
-                             * @member {string} certificateAuthority
+                             * @member {string|null|undefined} certificateAuthority
                              * @memberof google.cloud.security.privateca.v1.SubordinateConfig
                              * @instance
                              */
-                            SubordinateConfig.prototype.certificateAuthority = "";
+                            SubordinateConfig.prototype.certificateAuthority = null;
     
                             /**
                              * SubordinateConfig pemIssuerChain.
@@ -23244,19 +23276,19 @@
     
                                 /**
                                  * KeyVersionSpec cloudKmsKeyVersion.
-                                 * @member {string} cloudKmsKeyVersion
+                                 * @member {string|null|undefined} cloudKmsKeyVersion
                                  * @memberof google.cloud.security.privateca.v1beta1.CertificateAuthority.KeyVersionSpec
                                  * @instance
                                  */
-                                KeyVersionSpec.prototype.cloudKmsKeyVersion = "";
+                                KeyVersionSpec.prototype.cloudKmsKeyVersion = null;
     
                                 /**
                                  * KeyVersionSpec algorithm.
-                                 * @member {google.cloud.security.privateca.v1beta1.CertificateAuthority.SignHashAlgorithm} algorithm
+                                 * @member {google.cloud.security.privateca.v1beta1.CertificateAuthority.SignHashAlgorithm|null|undefined} algorithm
                                  * @memberof google.cloud.security.privateca.v1beta1.CertificateAuthority.KeyVersionSpec
                                  * @instance
                                  */
-                                KeyVersionSpec.prototype.algorithm = 0;
+                                KeyVersionSpec.prototype.algorithm = null;
     
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
@@ -24387,11 +24419,11 @@
     
                             /**
                              * Certificate pemCsr.
-                             * @member {string} pemCsr
+                             * @member {string|null|undefined} pemCsr
                              * @memberof google.cloud.security.privateca.v1beta1.Certificate
                              * @instance
                              */
-                            Certificate.prototype.pemCsr = "";
+                            Certificate.prototype.pemCsr = null;
     
                             /**
                              * Certificate config.
@@ -26063,11 +26095,11 @@
     
                             /**
                              * ReusableConfigWrapper reusableConfig.
-                             * @member {string} reusableConfig
+                             * @member {string|null|undefined} reusableConfig
                              * @memberof google.cloud.security.privateca.v1beta1.ReusableConfigWrapper
                              * @instance
                              */
-                            ReusableConfigWrapper.prototype.reusableConfig = "";
+                            ReusableConfigWrapper.prototype.reusableConfig = null;
     
                             /**
                              * ReusableConfigWrapper reusableConfigValues.
@@ -26302,11 +26334,11 @@
     
                             /**
                              * SubordinateConfig certificateAuthority.
-                             * @member {string} certificateAuthority
+                             * @member {string|null|undefined} certificateAuthority
                              * @memberof google.cloud.security.privateca.v1beta1.SubordinateConfig
                              * @instance
                              */
-                            SubordinateConfig.prototype.certificateAuthority = "";
+                            SubordinateConfig.prototype.certificateAuthority = null;
     
                             /**
                              * SubordinateConfig pemIssuerChain.
@@ -38585,43 +38617,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
