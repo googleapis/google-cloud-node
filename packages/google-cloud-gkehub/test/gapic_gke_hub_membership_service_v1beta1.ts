@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -168,49 +167,46 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient();
+    const client =
+      new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-      {
+    const client =
+      new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-      {
+    const client =
+      new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.gkeHubMembershipServiceStub, undefined);
     await client.initialize();
     assert(client.gkeHubMembershipServiceStub);
   });
 
   it('has close method', () => {
-    const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-      {
+    const client =
+      new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-      {
+    const client =
+      new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -219,12 +215,11 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-      {
+    const client =
+      new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -243,12 +238,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('getMembership', () => {
     it('invokes getMembership without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GetMembershipRequest()
@@ -276,12 +272,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes getMembership without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GetMembershipRequest()
@@ -298,9 +295,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.Membership()
       );
-      client.innerApiCalls.getMembership = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getMembership =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getMembership(
           request,
@@ -326,12 +322,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes getMembership with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GetMembershipRequest()
@@ -361,12 +358,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('generateConnectManifest', () => {
     it('invokes generateConnectManifest without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateConnectManifestRequest()
@@ -383,9 +381,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateConnectManifestResponse()
       );
-      client.innerApiCalls.generateConnectManifest = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.generateConnectManifest =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.generateConnectManifest(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -396,12 +393,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes generateConnectManifest without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateConnectManifestRequest()
@@ -418,9 +416,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateConnectManifestResponse()
       );
-      client.innerApiCalls.generateConnectManifest = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.generateConnectManifest =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.generateConnectManifest(
           request,
@@ -446,12 +443,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes generateConnectManifest with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateConnectManifestRequest()
@@ -484,12 +482,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('validateExclusivity', () => {
     it('invokes validateExclusivity without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ValidateExclusivityRequest()
@@ -506,9 +505,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ValidateExclusivityResponse()
       );
-      client.innerApiCalls.validateExclusivity = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.validateExclusivity =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.validateExclusivity(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -519,12 +517,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes validateExclusivity without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ValidateExclusivityRequest()
@@ -541,9 +540,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ValidateExclusivityResponse()
       );
-      client.innerApiCalls.validateExclusivity = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.validateExclusivity =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.validateExclusivity(
           request,
@@ -569,12 +567,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes validateExclusivity with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ValidateExclusivityRequest()
@@ -604,12 +603,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('generateExclusivityManifest', () => {
     it('invokes generateExclusivityManifest without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateExclusivityManifestRequest()
@@ -626,9 +626,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateExclusivityManifestResponse()
       );
-      client.innerApiCalls.generateExclusivityManifest = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.generateExclusivityManifest =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.generateExclusivityManifest(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -639,12 +638,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes generateExclusivityManifest without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateExclusivityManifestRequest()
@@ -661,9 +661,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateExclusivityManifestResponse()
       );
-      client.innerApiCalls.generateExclusivityManifest = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.generateExclusivityManifest =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.generateExclusivityManifest(
           request,
@@ -689,12 +688,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes generateExclusivityManifest with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.GenerateExclusivityManifestRequest()
@@ -727,12 +727,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('createMembership', () => {
     it('invokes createMembership without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.CreateMembershipRequest()
@@ -749,9 +750,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createMembership = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createMembership =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createMembership(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -763,12 +763,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes createMembership without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.CreateMembershipRequest()
@@ -785,9 +786,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createMembership = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createMembership =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createMembership(
           request,
@@ -820,12 +820,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes createMembership with call error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.CreateMembershipRequest()
@@ -853,12 +854,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes createMembership with LRO error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.CreateMembershipRequest()
@@ -888,12 +890,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes checkCreateMembershipProgress without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -912,12 +915,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes checkCreateMembershipProgress with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -935,12 +939,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('deleteMembership', () => {
     it('invokes deleteMembership without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.DeleteMembershipRequest()
@@ -957,9 +962,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteMembership = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteMembership =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteMembership(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -971,12 +975,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes deleteMembership without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.DeleteMembershipRequest()
@@ -993,9 +998,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteMembership = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteMembership =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteMembership(
           request,
@@ -1028,12 +1032,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes deleteMembership with call error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.DeleteMembershipRequest()
@@ -1061,12 +1066,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes deleteMembership with LRO error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.DeleteMembershipRequest()
@@ -1096,12 +1102,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes checkDeleteMembershipProgress without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1120,12 +1127,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes checkDeleteMembershipProgress with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1143,12 +1151,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('updateMembership', () => {
     it('invokes updateMembership without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.UpdateMembershipRequest()
@@ -1165,9 +1174,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateMembership = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateMembership =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateMembership(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1179,12 +1187,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes updateMembership without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.UpdateMembershipRequest()
@@ -1201,9 +1210,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateMembership = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateMembership =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateMembership(
           request,
@@ -1236,12 +1244,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes updateMembership with call error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.UpdateMembershipRequest()
@@ -1269,12 +1278,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes updateMembership with LRO error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.UpdateMembershipRequest()
@@ -1304,12 +1314,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes checkUpdateMembershipProgress without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1328,12 +1339,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes checkUpdateMembershipProgress with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1351,12 +1363,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
 
   describe('listMemberships', () => {
     it('invokes listMemberships without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ListMembershipsRequest()
@@ -1392,12 +1405,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes listMemberships without error using callback', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ListMembershipsRequest()
@@ -1422,9 +1436,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           new protos.google.cloud.gkehub.v1beta1.Membership()
         ),
       ];
-      client.innerApiCalls.listMemberships = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listMemberships =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listMemberships(
           request,
@@ -1450,12 +1463,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes listMemberships with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ListMembershipsRequest()
@@ -1483,12 +1497,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
     });
 
     it('invokes listMembershipsStream without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ListMembershipsRequest()
@@ -1506,9 +1521,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           new protos.google.cloud.gkehub.v1beta1.Membership()
         ),
       ];
-      client.descriptors.page.listMemberships.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listMemberships.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listMembershipsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.gkehub.v1beta1.Membership[] = [];
@@ -1533,21 +1547,21 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           .calledWith(client.innerApiCalls.listMemberships, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMemberships
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMemberships.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listMembershipsStream with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ListMembershipsRequest()
@@ -1555,10 +1569,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMemberships.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMemberships.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listMembershipsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.gkehub.v1beta1.Membership[] = [];
@@ -1582,21 +1594,21 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           .calledWith(client.innerApiCalls.listMemberships, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMemberships
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMemberships.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listMemberships without error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ListMembershipsRequest()
@@ -1614,9 +1626,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
           new protos.google.cloud.gkehub.v1beta1.Membership()
         ),
       ];
-      client.descriptors.page.listMemberships.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listMemberships.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.gkehub.v1beta1.IMembership[] = [];
       const iterable = client.listMembershipsAsync(request);
       for await (const resource of iterable) {
@@ -1624,26 +1635,27 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listMemberships
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMemberships.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMemberships
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMemberships.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listMemberships with error', async () => {
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1beta1.ListMembershipsRequest()
@@ -1651,10 +1663,8 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMemberships.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMemberships.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listMembershipsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.gkehub.v1beta1.IMembership[] = [];
@@ -1663,15 +1673,15 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listMemberships
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMemberships.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMemberships
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMemberships.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1685,12 +1695,13 @@ describe('v1beta1.GkeHubMembershipServiceClient', () => {
         location: 'locationValue',
         membership: 'membershipValue',
       };
-      const client = new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gkehubmembershipserviceModule.v1beta1.GkeHubMembershipServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.membershipPathTemplate.render = sinon
         .stub()
