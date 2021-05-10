@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v1.DashboardsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
-      client.innerApiCalls.createDashboard = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDashboard =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDashboard(
           request,
@@ -361,9 +359,8 @@ describe('v1.DashboardsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
-      client.innerApiCalls.getDashboard = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDashboard =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDashboard(
           request,
@@ -473,9 +470,8 @@ describe('v1.DashboardsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDashboard = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDashboard =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDashboard(
           request,
@@ -587,9 +583,8 @@ describe('v1.DashboardsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
-      client.innerApiCalls.updateDashboard = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDashboard =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDashboard(
           request,
@@ -716,9 +711,8 @@ describe('v1.DashboardsServiceClient', () => {
           new protos.google.monitoring.dashboard.v1.Dashboard()
         ),
       ];
-      client.innerApiCalls.listDashboards = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDashboards =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDashboards(
           request,
@@ -796,9 +790,8 @@ describe('v1.DashboardsServiceClient', () => {
           new protos.google.monitoring.dashboard.v1.Dashboard()
         ),
       ];
-      client.descriptors.page.listDashboards.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDashboards.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDashboardsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.monitoring.dashboard.v1.Dashboard[] = [];
@@ -823,10 +816,9 @@ describe('v1.DashboardsServiceClient', () => {
           .calledWith(client.innerApiCalls.listDashboards, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDashboards
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDashboards.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -843,10 +835,8 @@ describe('v1.DashboardsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDashboards.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDashboards.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDashboardsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.monitoring.dashboard.v1.Dashboard[] = [];
@@ -870,10 +860,9 @@ describe('v1.DashboardsServiceClient', () => {
           .calledWith(client.innerApiCalls.listDashboards, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDashboards
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDashboards.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -900,9 +889,8 @@ describe('v1.DashboardsServiceClient', () => {
           new protos.google.monitoring.dashboard.v1.Dashboard()
         ),
       ];
-      client.descriptors.page.listDashboards.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDashboards.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.monitoring.dashboard.v1.IDashboard[] = [];
       const iterable = client.listDashboardsAsync(request);
       for await (const resource of iterable) {
@@ -910,15 +898,15 @@ describe('v1.DashboardsServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDashboards
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDashboards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDashboards
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDashboards.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -935,27 +923,26 @@ describe('v1.DashboardsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDashboards.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDashboards.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDashboardsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.monitoring.dashboard.v1.IDashboard[] = [];
+        const responses: protos.google.monitoring.dashboard.v1.IDashboard[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDashboards
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDashboards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDashboards
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDashboards.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
