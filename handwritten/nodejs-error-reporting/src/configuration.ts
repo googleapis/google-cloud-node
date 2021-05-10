@@ -241,9 +241,9 @@ export class Configuration {
       version = env.GAE_MODULE_VERSION;
     }
 
-    this._serviceContext.service = (typeof service === 'string'
-      ? service
-      : 'node')!;
+    this._serviceContext.service = (
+      typeof service === 'string' ? service : 'node'
+    )!;
     this._serviceContext.version =
       typeof version === 'string' ? version : undefined;
 
@@ -253,7 +253,8 @@ export class Configuration {
       if (
         typeof this._givenConfiguration.serviceContext!.service === 'string'
       ) {
-        this._serviceContext.service = this._givenConfiguration.serviceContext!.service!;
+        this._serviceContext.service =
+          this._givenConfiguration.serviceContext!.service!;
       } else if (
         this._givenConfiguration.serviceContext?.service !== undefined
       ) {
@@ -263,7 +264,8 @@ export class Configuration {
       if (
         typeof this._givenConfiguration.serviceContext!.version === 'string'
       ) {
-        this._serviceContext.version = this._givenConfiguration.serviceContext!.version;
+        this._serviceContext.version =
+          this._givenConfiguration.serviceContext!.version;
       } else if (
         this._givenConfiguration.serviceContext?.version !== undefined
       ) {
@@ -273,7 +275,8 @@ export class Configuration {
   }
   _determineReportMode() {
     if (this._givenConfiguration.reportMode) {
-      this._reportMode = this._givenConfiguration.reportMode.toLowerCase() as ReportMode;
+      this._reportMode =
+        this._givenConfiguration.reportMode.toLowerCase() as ReportMode;
     }
   }
   /**
@@ -370,7 +373,8 @@ export class Configuration {
     if (
       typeof this._givenConfiguration.reportUnhandledRejections === 'boolean'
     ) {
-      this._reportUnhandledRejections = this._givenConfiguration.reportUnhandledRejections!;
+      this._reportUnhandledRejections =
+        this._givenConfiguration.reportUnhandledRejections!;
     } else if (
       this._givenConfiguration?.reportUnhandledRejections !== undefined
     ) {

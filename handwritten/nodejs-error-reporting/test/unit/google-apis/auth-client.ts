@@ -51,7 +51,7 @@ function verifyReportedMessage(
   }).RequestHandler;
 
   const logs: {error?: string; info?: string; warn?: string} = {};
-  const logger = ({
+  const logger = {
     error(text: string) {
       if (!logs.error) {
         logs.error = '';
@@ -70,7 +70,7 @@ function verifyReportedMessage(
       }
       logs.warn += text;
     },
-  } as {}) as Logger;
+  } as {} as Logger;
   const config2 = new Configuration(config1, logger);
   // tslint:disable-next-line:no-unused-expression
   new RequestHandler(config2, logger);

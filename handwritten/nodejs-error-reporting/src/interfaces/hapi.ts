@@ -111,12 +111,12 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
             if (
               request?.toString() === '[object Object]' &&
               request.response &&
-              ((request.response as unknown) as boom).isBoom
+              (request.response as unknown as boom).isBoom
             ) {
               // Cast to {} is necessary, as@types/hapi@16 incorrectly types
               // response as 'Response | null' instead of 'Response | Boom |
               // null'.
-              const boom = (request.response as {}) as Error;
+              const boom = request.response as {} as Error;
               const em = hapiErrorHandler(
                 new Error(boom.message),
                 request,
@@ -144,7 +144,7 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
     version: packageJson.version,
   };
 
-  ((hapiPlugin.register as {}) as {attributes: {}}).attributes = {
+  (hapiPlugin.register as {} as {attributes: {}}).attributes = {
     name: packageJson.name,
     version: packageJson.version,
   };

@@ -74,19 +74,19 @@ function restifyRequestFinishHandler(
 
   // TODO: Address the fact that `_body` does not exist in `res`
   if (
-    ((res as {}) as {_body: {}})._body instanceof Error ||
+    (res as {} as {_body: {}})._body instanceof Error ||
     (res.statusCode > 309 && res.statusCode < 512)
   ) {
     em = new ErrorMessage().consumeRequestInformation(
       // TODO: Address the type conflict with `req` and `res` and the types
       //       expected for `expressRequestInformationExtractor`
       expressRequestInformationExtractor.expressRequestInformationExtractor(
-        (req as {}) as express.Request,
-        (res as {}) as express.Response
+        req as {} as express.Request,
+        res as {} as express.Response
       )
     );
 
-    restifyErrorHandler(client, config, ((res as {}) as {_body: {}})._body, em);
+    restifyErrorHandler(client, config, (res as {} as {_body: {}})._body, em);
   }
 }
 
@@ -127,11 +127,11 @@ function restifyRequestHandler(
       restifyRequestFinishHandler(client, config, req, res);
       res.removeListener(
         'finish',
-        (listener as {}) as (...args: Array<{}>) => void
+        listener as {} as (...args: Array<{}>) => void
       );
     };
 
-    res.on('finish', (listener as {}) as (...args: Array<{}>) => void);
+    res.on('finish', listener as {} as (...args: Array<{}>) => void);
   }
 
   return next();

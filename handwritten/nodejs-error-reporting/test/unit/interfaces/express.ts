@@ -45,9 +45,11 @@ describe('expressInterface', () => {
       },
       createLogger({logLevel: 4})
     );
-    ((stubbedConfig as {}) as {
-      lacksCredentials: Function;
-    }).lacksCredentials = () => {
+    (
+      stubbedConfig as {} as {
+        lacksCredentials: Function;
+      }
+    ).lacksCredentials = () => {
       return false;
     };
     const client = {
@@ -57,7 +59,7 @@ describe('expressInterface', () => {
     };
     const testError = new Error('This is a test');
     const validBoundHandler = expressInterface(
-      (client as {}) as RequestHandler,
+      client as {} as RequestHandler,
       stubbedConfig
     );
     it('Should return the error message', () => {
@@ -90,7 +92,7 @@ describe('expressInterface', () => {
           sendError,
         };
         const handler = expressInterface(
-          (client as {}) as RequestHandler,
+          client as {} as RequestHandler,
           stubbedConfig
         );
         handler(testError, null!, null!, () => {
