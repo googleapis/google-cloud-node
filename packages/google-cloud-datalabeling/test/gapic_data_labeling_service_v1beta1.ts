@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -166,49 +165,46 @@ describe('v1beta1.DataLabelingServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient();
+    const client =
+      new datalabelingserviceModule.v1beta1.DataLabelingServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-      {
+    const client =
+      new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-      {
+    const client =
+      new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.dataLabelingServiceStub, undefined);
     await client.initialize();
     assert(client.dataLabelingServiceStub);
   });
 
   it('has close method', () => {
-    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-      {
+    const client =
+      new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-      {
+    const client =
+      new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -217,12 +213,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-      {
+    const client =
+      new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -241,12 +236,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('createDataset', () => {
     it('invokes createDataset without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
@@ -274,12 +268,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createDataset without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
@@ -296,9 +289,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Dataset()
       );
-      client.innerApiCalls.createDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDataset(
           request,
@@ -324,12 +316,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createDataset with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
@@ -359,12 +350,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getDataset', () => {
     it('invokes getDataset without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
@@ -392,12 +382,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getDataset without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
@@ -414,9 +403,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Dataset()
       );
-      client.innerApiCalls.getDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDataset(
           request,
@@ -442,12 +430,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getDataset with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
@@ -477,12 +464,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('deleteDataset', () => {
     it('invokes deleteDataset without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
@@ -510,12 +496,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteDataset without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
@@ -532,9 +517,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDataset(
           request,
@@ -560,12 +544,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteDataset with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
@@ -595,12 +578,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getDataItem', () => {
     it('invokes getDataItem without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
@@ -628,12 +610,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getDataItem without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
@@ -650,9 +631,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DataItem()
       );
-      client.innerApiCalls.getDataItem = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDataItem =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDataItem(
           request,
@@ -678,12 +658,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getDataItem with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
@@ -713,12 +692,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getAnnotatedDataset', () => {
     it('invokes getAnnotatedDataset without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
@@ -735,9 +713,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
       );
-      client.innerApiCalls.getAnnotatedDataset = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getAnnotatedDataset =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getAnnotatedDataset(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -748,12 +725,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getAnnotatedDataset without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
@@ -770,9 +746,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
       );
-      client.innerApiCalls.getAnnotatedDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAnnotatedDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAnnotatedDataset(
           request,
@@ -798,12 +773,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getAnnotatedDataset with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
@@ -833,12 +807,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('deleteAnnotatedDataset', () => {
     it('invokes deleteAnnotatedDataset without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
@@ -855,9 +828,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAnnotatedDataset = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAnnotatedDataset =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAnnotatedDataset(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -868,12 +840,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteAnnotatedDataset without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
@@ -890,9 +861,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAnnotatedDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAnnotatedDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteAnnotatedDataset(
           request,
@@ -918,12 +888,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteAnnotatedDataset with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
@@ -956,12 +925,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getExample', () => {
     it('invokes getExample without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
@@ -989,12 +957,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getExample without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
@@ -1011,9 +978,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Example()
       );
-      client.innerApiCalls.getExample = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getExample =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getExample(
           request,
@@ -1039,12 +1005,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getExample with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
@@ -1074,12 +1039,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('createAnnotationSpecSet', () => {
     it('invokes createAnnotationSpecSet without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
@@ -1096,9 +1060,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
-      client.innerApiCalls.createAnnotationSpecSet = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createAnnotationSpecSet =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createAnnotationSpecSet(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1109,12 +1072,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createAnnotationSpecSet without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
@@ -1131,9 +1093,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
-      client.innerApiCalls.createAnnotationSpecSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createAnnotationSpecSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createAnnotationSpecSet(
           request,
@@ -1159,12 +1120,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createAnnotationSpecSet with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
@@ -1197,12 +1157,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getAnnotationSpecSet', () => {
     it('invokes getAnnotationSpecSet without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
@@ -1219,9 +1178,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
-      client.innerApiCalls.getAnnotationSpecSet = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getAnnotationSpecSet =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getAnnotationSpecSet(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1232,12 +1190,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getAnnotationSpecSet without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
@@ -1254,9 +1211,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
-      client.innerApiCalls.getAnnotationSpecSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAnnotationSpecSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAnnotationSpecSet(
           request,
@@ -1282,12 +1238,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getAnnotationSpecSet with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
@@ -1317,12 +1272,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('deleteAnnotationSpecSet', () => {
     it('invokes deleteAnnotationSpecSet without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
@@ -1339,9 +1293,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAnnotationSpecSet = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAnnotationSpecSet =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAnnotationSpecSet(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1352,12 +1305,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteAnnotationSpecSet without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
@@ -1374,9 +1326,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAnnotationSpecSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAnnotationSpecSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteAnnotationSpecSet(
           request,
@@ -1402,12 +1353,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteAnnotationSpecSet with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
@@ -1440,12 +1390,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getInstruction', () => {
     it('invokes getInstruction without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
@@ -1473,12 +1422,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getInstruction without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
@@ -1495,9 +1443,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Instruction()
       );
-      client.innerApiCalls.getInstruction = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getInstruction =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getInstruction(
           request,
@@ -1523,12 +1470,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getInstruction with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
@@ -1558,12 +1504,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('deleteInstruction', () => {
     it('invokes deleteInstruction without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
@@ -1591,12 +1536,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteInstruction without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
@@ -1613,9 +1557,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteInstruction = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstruction =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteInstruction(
           request,
@@ -1641,12 +1584,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteInstruction with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
@@ -1676,12 +1618,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getEvaluation', () => {
     it('invokes getEvaluation without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
@@ -1709,12 +1650,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getEvaluation without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
@@ -1731,9 +1671,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Evaluation()
       );
-      client.innerApiCalls.getEvaluation = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getEvaluation =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getEvaluation(
           request,
@@ -1759,12 +1698,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getEvaluation with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
@@ -1794,12 +1732,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('createEvaluationJob', () => {
     it('invokes createEvaluationJob without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
@@ -1816,9 +1753,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
-      client.innerApiCalls.createEvaluationJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createEvaluationJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createEvaluationJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1829,12 +1765,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createEvaluationJob without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
@@ -1851,9 +1786,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
-      client.innerApiCalls.createEvaluationJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createEvaluationJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createEvaluationJob(
           request,
@@ -1879,12 +1813,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createEvaluationJob with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
@@ -1914,12 +1847,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('updateEvaluationJob', () => {
     it('invokes updateEvaluationJob without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
@@ -1937,9 +1869,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
-      client.innerApiCalls.updateEvaluationJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateEvaluationJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateEvaluationJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1950,12 +1881,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes updateEvaluationJob without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
@@ -1973,9 +1903,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
-      client.innerApiCalls.updateEvaluationJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateEvaluationJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateEvaluationJob(
           request,
@@ -2001,12 +1930,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes updateEvaluationJob with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
@@ -2037,12 +1965,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('getEvaluationJob', () => {
     it('invokes getEvaluationJob without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
@@ -2070,12 +1997,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getEvaluationJob without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
@@ -2092,9 +2018,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
-      client.innerApiCalls.getEvaluationJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getEvaluationJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getEvaluationJob(
           request,
@@ -2120,12 +2045,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes getEvaluationJob with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
@@ -2155,12 +2079,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('pauseEvaluationJob', () => {
     it('invokes pauseEvaluationJob without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
@@ -2177,9 +2100,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.pauseEvaluationJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.pauseEvaluationJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.pauseEvaluationJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2190,12 +2112,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes pauseEvaluationJob without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
@@ -2212,9 +2133,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.pauseEvaluationJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.pauseEvaluationJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.pauseEvaluationJob(
           request,
@@ -2240,12 +2160,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes pauseEvaluationJob with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
@@ -2275,12 +2194,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('resumeEvaluationJob', () => {
     it('invokes resumeEvaluationJob without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
@@ -2297,9 +2215,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.resumeEvaluationJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.resumeEvaluationJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.resumeEvaluationJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2310,12 +2227,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes resumeEvaluationJob without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
@@ -2332,9 +2248,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.resumeEvaluationJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.resumeEvaluationJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.resumeEvaluationJob(
           request,
@@ -2360,12 +2275,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes resumeEvaluationJob with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
@@ -2395,12 +2309,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('deleteEvaluationJob', () => {
     it('invokes deleteEvaluationJob without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
@@ -2417,9 +2330,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteEvaluationJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteEvaluationJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteEvaluationJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2430,12 +2342,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteEvaluationJob without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
@@ -2452,9 +2363,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteEvaluationJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteEvaluationJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteEvaluationJob(
           request,
@@ -2480,12 +2390,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes deleteEvaluationJob with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
@@ -2515,12 +2424,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('importData', () => {
     it('invokes importData without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
@@ -2549,12 +2457,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes importData without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
@@ -2571,9 +2478,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importData = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importData =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importData(
           request,
@@ -2606,12 +2512,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes importData with call error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
@@ -2639,12 +2544,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes importData with LRO error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
@@ -2674,12 +2578,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkImportDataProgress without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2698,12 +2601,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkImportDataProgress with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2718,12 +2620,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('exportData', () => {
     it('invokes exportData without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
@@ -2752,12 +2653,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes exportData without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
@@ -2774,9 +2674,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportData = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportData =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportData(
           request,
@@ -2809,12 +2708,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes exportData with call error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
@@ -2842,12 +2740,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes exportData with LRO error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
@@ -2877,12 +2774,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkExportDataProgress without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2901,12 +2797,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkExportDataProgress with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2921,12 +2816,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('labelImage', () => {
     it('invokes labelImage without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
@@ -2955,12 +2849,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelImage without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
@@ -2977,9 +2870,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.labelImage = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.labelImage =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.labelImage(
           request,
@@ -3012,12 +2904,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelImage with call error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
@@ -3045,12 +2936,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelImage with LRO error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
@@ -3080,12 +2970,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkLabelImageProgress without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -3104,12 +2993,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkLabelImageProgress with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -3124,12 +3012,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('labelVideo', () => {
     it('invokes labelVideo without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
@@ -3158,12 +3045,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelVideo without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
@@ -3180,9 +3066,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.labelVideo = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.labelVideo =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.labelVideo(
           request,
@@ -3215,12 +3100,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelVideo with call error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
@@ -3248,12 +3132,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelVideo with LRO error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
@@ -3283,12 +3166,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkLabelVideoProgress without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -3307,12 +3189,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkLabelVideoProgress with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -3327,12 +3208,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('labelText', () => {
     it('invokes labelText without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
@@ -3361,12 +3241,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelText without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
@@ -3383,9 +3262,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.labelText = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.labelText =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.labelText(
           request,
@@ -3418,12 +3296,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelText with call error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
@@ -3451,12 +3328,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes labelText with LRO error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
@@ -3486,12 +3362,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkLabelTextProgress without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -3510,12 +3385,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkLabelTextProgress with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -3530,12 +3404,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('createInstruction', () => {
     it('invokes createInstruction without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
@@ -3552,9 +3425,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstruction = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstruction =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createInstruction(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -3566,12 +3438,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createInstruction without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
@@ -3588,9 +3459,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstruction = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstruction =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createInstruction(
           request,
@@ -3623,12 +3493,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createInstruction with call error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
@@ -3656,12 +3525,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes createInstruction with LRO error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
@@ -3691,12 +3559,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkCreateInstructionProgress without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -3715,12 +3582,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes checkCreateInstructionProgress with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -3738,12 +3604,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('listDatasets', () => {
     it('invokes listDatasets without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
@@ -3779,12 +3644,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listDatasets without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
@@ -3809,9 +3673,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Dataset()
         ),
       ];
-      client.innerApiCalls.listDatasets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDatasets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDatasets(
           request,
@@ -3837,12 +3700,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listDatasets with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
@@ -3870,12 +3732,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listDatasetsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
@@ -3893,12 +3754,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Dataset()
         ),
       ];
-      client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDatasets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDatasetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Dataset[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Dataset[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Dataset) => {
@@ -3920,21 +3781,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listDatasetsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
@@ -3948,7 +3807,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       const stream = client.listDatasetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Dataset[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Dataset[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Dataset) => {
@@ -3969,21 +3829,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listDatasets without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
@@ -4001,9 +3859,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Dataset()
         ),
       ];
-      client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDatasets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.datalabeling.v1beta1.IDataset[] = [];
       const iterable = client.listDatasetsAsync(request);
       for await (const resource of iterable) {
@@ -4011,26 +3868,25 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listDatasets with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
@@ -4038,27 +3894,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDatasets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDatasetsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IDataset[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IDataset[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4066,12 +3921,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('listDataItems', () => {
     it('invokes listDataItems without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
@@ -4107,12 +3961,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listDataItems without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
@@ -4137,9 +3990,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.DataItem()
         ),
       ];
-      client.innerApiCalls.listDataItems = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDataItems =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDataItems(
           request,
@@ -4165,12 +4017,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listDataItems with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
@@ -4198,12 +4049,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listDataItemsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
@@ -4221,12 +4071,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.DataItem()
         ),
       ];
-      client.descriptors.page.listDataItems.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDataItems.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDataItemsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.DataItem[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.DataItem[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.DataItem) => {
@@ -4248,21 +4098,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataItems, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listDataItemsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
@@ -4270,13 +4118,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataItems.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataItems.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDataItemsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.DataItem[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.DataItem[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.DataItem) => {
@@ -4297,21 +4144,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataItems, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listDataItems without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
@@ -4329,36 +4174,35 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.DataItem()
         ),
       ];
-      client.descriptors.page.listDataItems.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.datalabeling.v1beta1.IDataItem[] = [];
+      client.descriptors.page.listDataItems.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.datalabeling.v1beta1.IDataItem[] =
+        [];
       const iterable = client.listDataItemsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listDataItems with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
@@ -4366,27 +4210,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataItems.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataItems.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDataItemsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IDataItem[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IDataItem[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4394,12 +4237,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('listAnnotatedDatasets', () => {
     it('invokes listAnnotatedDatasets without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
@@ -4424,9 +4266,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
         ),
       ];
-      client.innerApiCalls.listAnnotatedDatasets = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listAnnotatedDatasets =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listAnnotatedDatasets(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4437,12 +4278,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listAnnotatedDatasets without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
@@ -4467,9 +4307,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
         ),
       ];
-      client.innerApiCalls.listAnnotatedDatasets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAnnotatedDatasets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAnnotatedDatasets(
           request,
@@ -4497,12 +4336,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listAnnotatedDatasets with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
@@ -4533,12 +4371,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listAnnotatedDatasetsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
@@ -4556,12 +4393,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
         ),
       ];
-      client.descriptors.page.listAnnotatedDatasets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAnnotatedDatasets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAnnotatedDatasetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset[] =
+          [];
         stream.on(
           'data',
           (
@@ -4580,27 +4417,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listAnnotatedDatasets
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnnotatedDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotatedDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listAnnotatedDatasetsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
@@ -4608,13 +4446,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAnnotatedDatasets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAnnotatedDatasets.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listAnnotatedDatasetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset[] =
+          [];
         stream.on(
           'data',
           (
@@ -4632,27 +4469,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listAnnotatedDatasets
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnnotatedDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotatedDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listAnnotatedDatasets without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
@@ -4670,36 +4508,37 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
         ),
       ];
-      client.descriptors.page.listAnnotatedDatasets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[] = [];
+      client.descriptors.page.listAnnotatedDatasets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[] =
+        [];
       const iterable = client.listAnnotatedDatasetsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listAnnotatedDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotatedDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listAnnotatedDatasets with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
@@ -4707,27 +4546,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAnnotatedDatasets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAnnotatedDatasets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listAnnotatedDatasetsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listAnnotatedDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotatedDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotatedDatasets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4735,12 +4575,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('listExamples', () => {
     it('invokes listExamples without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
@@ -4776,12 +4615,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listExamples without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
@@ -4806,9 +4644,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Example()
         ),
       ];
-      client.innerApiCalls.listExamples = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listExamples =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listExamples(
           request,
@@ -4834,12 +4671,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listExamples with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
@@ -4867,12 +4703,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listExamplesStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
@@ -4890,12 +4725,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Example()
         ),
       ];
-      client.descriptors.page.listExamples.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listExamples.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listExamplesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Example[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Example[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Example) => {
@@ -4917,21 +4752,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listExamples, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listExamples
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExamples.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listExamplesStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
@@ -4945,7 +4778,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       const stream = client.listExamplesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Example[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Example[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Example) => {
@@ -4966,21 +4800,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listExamples, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listExamples
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExamples.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listExamples without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
@@ -4998,9 +4830,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Example()
         ),
       ];
-      client.descriptors.page.listExamples.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listExamples.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.datalabeling.v1beta1.IExample[] = [];
       const iterable = client.listExamplesAsync(request);
       for await (const resource of iterable) {
@@ -5008,26 +4839,25 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listExamples
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listExamples.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listExamples
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExamples.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listExamples with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
@@ -5035,27 +4865,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listExamples.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listExamples.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listExamplesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IExample[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IExample[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listExamples
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listExamples.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listExamples
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExamples.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5063,12 +4892,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('listAnnotationSpecSets', () => {
     it('invokes listAnnotationSpecSets without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
@@ -5093,9 +4921,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
         ),
       ];
-      client.innerApiCalls.listAnnotationSpecSets = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listAnnotationSpecSets =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listAnnotationSpecSets(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -5106,12 +4933,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listAnnotationSpecSets without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
@@ -5136,9 +4962,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
         ),
       ];
-      client.innerApiCalls.listAnnotationSpecSets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAnnotationSpecSets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAnnotationSpecSets(
           request,
@@ -5166,12 +4991,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listAnnotationSpecSets with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
@@ -5202,12 +5026,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listAnnotationSpecSetsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
@@ -5225,12 +5048,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
         ),
       ];
-      client.descriptors.page.listAnnotationSpecSets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAnnotationSpecSets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAnnotationSpecSetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet[] =
+          [];
         stream.on(
           'data',
           (
@@ -5249,27 +5072,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listAnnotationSpecSets
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnnotationSpecSets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotationSpecSets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listAnnotationSpecSetsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
@@ -5277,13 +5101,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAnnotationSpecSets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAnnotationSpecSets.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listAnnotationSpecSetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet[] =
+          [];
         stream.on(
           'data',
           (
@@ -5301,27 +5124,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listAnnotationSpecSets
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnnotationSpecSets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotationSpecSets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listAnnotationSpecSets without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
@@ -5339,36 +5163,37 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
         ),
       ];
-      client.descriptors.page.listAnnotationSpecSets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[] = [];
+      client.descriptors.page.listAnnotationSpecSets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[] =
+        [];
       const iterable = client.listAnnotationSpecSetsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listAnnotationSpecSets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotationSpecSets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listAnnotationSpecSets with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
@@ -5376,27 +5201,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAnnotationSpecSets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAnnotationSpecSets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listAnnotationSpecSetsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listAnnotationSpecSets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotationSpecSets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotationSpecSets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5404,12 +5230,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('listInstructions', () => {
     it('invokes listInstructions without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
@@ -5445,12 +5270,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listInstructions without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
@@ -5475,9 +5299,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Instruction()
         ),
       ];
-      client.innerApiCalls.listInstructions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listInstructions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInstructions(
           request,
@@ -5505,12 +5328,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listInstructions with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
@@ -5538,12 +5360,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listInstructionsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
@@ -5561,12 +5382,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Instruction()
         ),
       ];
-      client.descriptors.page.listInstructions.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInstructions.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listInstructionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Instruction[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Instruction[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Instruction) => {
@@ -5588,21 +5409,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listInstructions, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstructions
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstructions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listInstructionsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
@@ -5610,13 +5429,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstructions.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstructions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listInstructionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Instruction[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Instruction[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Instruction) => {
@@ -5637,21 +5455,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listInstructions, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstructions
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstructions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listInstructions without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
@@ -5669,36 +5485,35 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Instruction()
         ),
       ];
-      client.descriptors.page.listInstructions.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.datalabeling.v1beta1.IInstruction[] = [];
+      client.descriptors.page.listInstructions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.datalabeling.v1beta1.IInstruction[] =
+        [];
       const iterable = client.listInstructionsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstructions
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstructions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstructions
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstructions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listInstructions with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
@@ -5706,27 +5521,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstructions.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstructions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listInstructionsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IInstruction[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IInstruction[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstructions
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstructions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstructions
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstructions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5734,12 +5548,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('searchEvaluations', () => {
     it('invokes searchEvaluations without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
@@ -5775,12 +5588,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes searchEvaluations without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
@@ -5805,9 +5617,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Evaluation()
         ),
       ];
-      client.innerApiCalls.searchEvaluations = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchEvaluations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchEvaluations(
           request,
@@ -5835,12 +5646,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes searchEvaluations with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
@@ -5868,12 +5678,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes searchEvaluationsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
@@ -5891,12 +5700,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Evaluation()
         ),
       ];
-      client.descriptors.page.searchEvaluations.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.searchEvaluations.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.searchEvaluationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Evaluation[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Evaluation[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Evaluation) => {
@@ -5918,21 +5727,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.searchEvaluations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchEvaluations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchEvaluations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes searchEvaluationsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
@@ -5940,13 +5747,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchEvaluations.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchEvaluations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.searchEvaluationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.Evaluation[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.Evaluation[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.datalabeling.v1beta1.Evaluation) => {
@@ -5967,21 +5773,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.searchEvaluations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchEvaluations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchEvaluations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with searchEvaluations without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
@@ -5999,36 +5803,35 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.Evaluation()
         ),
       ];
-      client.descriptors.page.searchEvaluations.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluation[] = [];
+      client.descriptors.page.searchEvaluations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluation[] =
+        [];
       const iterable = client.searchEvaluationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.searchEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with searchEvaluations with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
@@ -6036,27 +5839,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchEvaluations.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchEvaluations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.searchEvaluationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluation[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluation[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.searchEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6064,12 +5866,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('searchExampleComparisons', () => {
     it('invokes searchExampleComparisons without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
@@ -6094,9 +5895,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
         ),
       ];
-      client.innerApiCalls.searchExampleComparisons = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.searchExampleComparisons =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.searchExampleComparisons(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -6107,12 +5907,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes searchExampleComparisons without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
@@ -6137,9 +5936,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
         ),
       ];
-      client.innerApiCalls.searchExampleComparisons = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchExampleComparisons =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchExampleComparisons(
           request,
@@ -6167,12 +5965,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes searchExampleComparisons with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
@@ -6203,12 +6000,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes searchExampleComparisonsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
@@ -6226,12 +6022,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
         ),
       ];
-      client.descriptors.page.searchExampleComparisons.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.searchExampleComparisons.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.searchExampleComparisonsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison[] =
+          [];
         stream.on(
           'data',
           (
@@ -6250,27 +6046,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.searchExampleComparisons
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.searchExampleComparisons
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.searchExampleComparisons, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchExampleComparisons
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchExampleComparisons
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes searchExampleComparisonsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
@@ -6278,13 +6075,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchExampleComparisons.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchExampleComparisons.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.searchExampleComparisonsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison[] =
+          [];
         stream.on(
           'data',
           (
@@ -6302,27 +6098,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.searchExampleComparisons
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.searchExampleComparisons
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.searchExampleComparisons, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchExampleComparisons
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchExampleComparisons
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with searchExampleComparisons without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
@@ -6340,36 +6137,37 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
         ),
       ];
-      client.descriptors.page.searchExampleComparisons.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[] = [];
+      client.descriptors.page.searchExampleComparisons.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[] =
+        [];
       const iterable = client.searchExampleComparisonsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.searchExampleComparisons
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchExampleComparisons
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchExampleComparisons
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchExampleComparisons
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with searchExampleComparisons with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
@@ -6377,27 +6175,28 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchExampleComparisons.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchExampleComparisons.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.searchExampleComparisonsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.searchExampleComparisons
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchExampleComparisons
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchExampleComparisons
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchExampleComparisons
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6405,12 +6204,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
 
   describe('listEvaluationJobs', () => {
     it('invokes listEvaluationJobs without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
@@ -6435,9 +6233,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
         ),
       ];
-      client.innerApiCalls.listEvaluationJobs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listEvaluationJobs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listEvaluationJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -6448,12 +6245,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listEvaluationJobs without error using callback', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
@@ -6478,9 +6274,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
         ),
       ];
-      client.innerApiCalls.listEvaluationJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listEvaluationJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listEvaluationJobs(
           request,
@@ -6508,12 +6303,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listEvaluationJobs with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
@@ -6541,12 +6335,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     });
 
     it('invokes listEvaluationJobsStream without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
@@ -6564,12 +6357,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
         ),
       ];
-      client.descriptors.page.listEvaluationJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listEvaluationJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listEvaluationJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.EvaluationJob[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.EvaluationJob[] =
+          [];
         stream.on(
           'data',
           (
@@ -6593,21 +6386,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listEvaluationJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEvaluationJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEvaluationJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listEvaluationJobsStream with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
@@ -6615,13 +6406,12 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEvaluationJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEvaluationJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listEvaluationJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.EvaluationJob[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.EvaluationJob[] =
+          [];
         stream.on(
           'data',
           (
@@ -6644,21 +6434,19 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           .calledWith(client.innerApiCalls.listEvaluationJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEvaluationJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEvaluationJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listEvaluationJobs without error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
@@ -6676,36 +6464,35 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
         ),
       ];
-      client.descriptors.page.listEvaluationJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[] = [];
+      client.descriptors.page.listEvaluationJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[] =
+        [];
       const iterable = client.listEvaluationJobsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listEvaluationJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEvaluationJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listEvaluationJobs with error', async () => {
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
@@ -6713,27 +6500,26 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEvaluationJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEvaluationJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listEvaluationJobsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[] = [];
+        const responses: protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listEvaluationJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEvaluationJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6747,12 +6533,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         dataset: 'datasetValue',
         annotated_dataset: 'annotatedDatasetValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.annotatedDatasetPathTemplate.render = sinon
         .stub()
@@ -6769,8 +6554,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.annotatedDatasetPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.annotatedDatasetPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -6797,9 +6584,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
 
       it('matchAnnotatedDatasetFromAnnotatedDatasetName', () => {
-        const result = client.matchAnnotatedDatasetFromAnnotatedDatasetName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotatedDatasetFromAnnotatedDatasetName(fakePath);
         assert.strictEqual(result, 'annotatedDatasetValue');
         assert(
           (client.pathTemplates.annotatedDatasetPathTemplate.match as SinonStub)
@@ -6815,12 +6601,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         project: 'projectValue',
         annotation_spec_set: 'annotationSpecSetValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.annotationSpecSetPathTemplate.render = sinon
         .stub()
@@ -6836,8 +6621,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.annotationSpecSetPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.annotationSpecSetPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -6847,21 +6634,24 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         const result = client.matchProjectFromAnnotationSpecSetName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.annotationSpecSetPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.annotationSpecSetPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAnnotationSpecSetFromAnnotationSpecSetName', () => {
-        const result = client.matchAnnotationSpecSetFromAnnotationSpecSetName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecSetFromAnnotationSpecSetName(fakePath);
         assert.strictEqual(result, 'annotationSpecSetValue');
         assert(
-          (client.pathTemplates.annotationSpecSetPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.annotationSpecSetPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6875,12 +6665,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -6940,12 +6729,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         project: 'projectValue',
         dataset: 'datasetValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -6992,12 +6780,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         dataset: 'datasetValue',
         evaluation: 'evaluationValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.evaluationPathTemplate.render = sinon
         .stub()
@@ -7057,12 +6844,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         project: 'projectValue',
         evaluation_job: 'evaluationJobValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.evaluationJobPathTemplate.render = sinon
         .stub()
@@ -7113,12 +6899,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         annotated_dataset: 'annotatedDatasetValue',
         example: 'exampleValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.examplePathTemplate.render = sinon
         .stub()
@@ -7189,12 +6974,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         project: 'projectValue',
         instruction: 'instructionValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.instructionPathTemplate.render = sinon
         .stub()
@@ -7242,12 +7026,11 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new datalabelingserviceModule.v1beta1.DataLabelingServiceClient(
-        {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()

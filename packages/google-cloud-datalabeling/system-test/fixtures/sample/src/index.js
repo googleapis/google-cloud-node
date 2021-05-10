@@ -20,7 +20,8 @@
 const datalabeling = require('@google-cloud/datalabeling');
 
 function main() {
-  const dataLabelingServiceClient = new datalabeling.DataLabelingServiceClient();
+  const dataLabelingServiceClient =
+    new datalabeling.DataLabelingServiceClient();
 }
 
 main();
