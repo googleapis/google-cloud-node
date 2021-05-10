@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Table()
       );
-      client.innerApiCalls.getTable = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTable =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTable(
           request,
@@ -358,9 +356,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Workspace()
       );
-      client.innerApiCalls.getWorkspace = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getWorkspace =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getWorkspace(
           request,
@@ -470,9 +467,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
-      client.innerApiCalls.getRow = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getRow =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getRow(
           request,
@@ -579,9 +575,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
-      client.innerApiCalls.createRow = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createRow =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createRow(
           request,
@@ -688,9 +683,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsResponse()
       );
-      client.innerApiCalls.batchCreateRows = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateRows =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchCreateRows(
           request,
@@ -802,9 +796,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
-      client.innerApiCalls.updateRow = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateRow =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateRow(
           request,
@@ -912,9 +905,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsResponse()
       );
-      client.innerApiCalls.batchUpdateRows = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchUpdateRows =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchUpdateRows(
           request,
@@ -1024,9 +1016,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteRow = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteRow =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteRow(
           request,
@@ -1133,9 +1124,8 @@ describe('v1alpha1.TablesServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.batchDeleteRows = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchDeleteRows =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchDeleteRows(
           request,
@@ -1245,9 +1235,8 @@ describe('v1alpha1.TablesServiceClient', () => {
           new protos.google.area120.tables.v1alpha1.Table()
         ),
       ];
-      client.innerApiCalls.listTables = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTables =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTables(
           request,
@@ -1315,9 +1304,8 @@ describe('v1alpha1.TablesServiceClient', () => {
           new protos.google.area120.tables.v1alpha1.Table()
         ),
       ];
-      client.descriptors.page.listTables.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTables.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTablesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.area120.tables.v1alpha1.Table[] = [];
@@ -1401,9 +1389,8 @@ describe('v1alpha1.TablesServiceClient', () => {
           new protos.google.area120.tables.v1alpha1.Table()
         ),
       ];
-      client.descriptors.page.listTables.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTables.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.area120.tables.v1alpha1.ITable[] = [];
       const iterable = client.listTablesAsync(request);
       for await (const resource of iterable) {
@@ -1501,9 +1488,8 @@ describe('v1alpha1.TablesServiceClient', () => {
           new protos.google.area120.tables.v1alpha1.Workspace()
         ),
       ];
-      client.innerApiCalls.listWorkspaces = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listWorkspaces =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listWorkspaces(
           request,
@@ -1571,9 +1557,8 @@ describe('v1alpha1.TablesServiceClient', () => {
           new protos.google.area120.tables.v1alpha1.Workspace()
         ),
       ];
-      client.descriptors.page.listWorkspaces.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listWorkspaces.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listWorkspacesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.area120.tables.v1alpha1.Workspace[] = [];
@@ -1609,10 +1594,8 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listWorkspaces.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listWorkspaces.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listWorkspacesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.area120.tables.v1alpha1.Workspace[] = [];
@@ -1657,9 +1640,8 @@ describe('v1alpha1.TablesServiceClient', () => {
           new protos.google.area120.tables.v1alpha1.Workspace()
         ),
       ];
-      client.descriptors.page.listWorkspaces.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listWorkspaces.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.area120.tables.v1alpha1.IWorkspace[] = [];
       const iterable = client.listWorkspacesAsync(request);
       for await (const resource of iterable) {
@@ -1667,8 +1649,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listWorkspaces
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listWorkspaces.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -1683,20 +1666,20 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listWorkspaces.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listWorkspaces.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listWorkspacesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.area120.tables.v1alpha1.IWorkspace[] = [];
+        const responses: protos.google.area120.tables.v1alpha1.IWorkspace[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listWorkspaces
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listWorkspaces.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -1759,9 +1742,8 @@ describe('v1alpha1.TablesServiceClient', () => {
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
       ];
-      client.innerApiCalls.listRows = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listRows =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listRows(
           request,
@@ -1830,9 +1812,8 @@ describe('v1alpha1.TablesServiceClient', () => {
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
       ];
-      client.descriptors.page.listRows.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listRows.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listRowsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.area120.tables.v1alpha1.Row[] = [];
@@ -1924,9 +1905,8 @@ describe('v1alpha1.TablesServiceClient', () => {
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
       ];
-      client.descriptors.page.listRows.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listRows.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.area120.tables.v1alpha1.IRow[] = [];
       const iterable = client.listRowsAsync(request);
       for await (const resource of iterable) {
