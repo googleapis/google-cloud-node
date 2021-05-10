@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Gateway()
       );
-      client.innerApiCalls.getGateway = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getGateway =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getGateway(
           request,
@@ -393,9 +391,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Api()
       );
-      client.innerApiCalls.getApi = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getApi =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getApi(
           request,
@@ -502,9 +499,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ApiConfig()
       );
-      client.innerApiCalls.getApiConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getApiConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getApiConfig(
           request,
@@ -583,9 +579,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createGateway = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createGateway =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createGateway(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -617,9 +612,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createGateway = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createGateway =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createGateway(
           request,
@@ -780,9 +774,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateGateway = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateGateway =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateGateway(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -815,9 +808,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateGateway = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateGateway =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateGateway(
           request,
@@ -979,9 +971,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteGateway = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteGateway =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteGateway(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1013,9 +1004,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteGateway = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteGateway =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteGateway(
           request,
@@ -1207,9 +1197,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createApi = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createApi =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createApi(
           request,
@@ -1400,9 +1389,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateApi = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateApi =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateApi(
           request,
@@ -1593,9 +1581,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteApi = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteApi =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteApi(
           request,
@@ -1752,9 +1739,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createApiConfig = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createApiConfig =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createApiConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1786,9 +1772,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createApiConfig = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createApiConfig =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createApiConfig(
           request,
@@ -1949,9 +1934,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateApiConfig = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateApiConfig =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateApiConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1984,9 +1968,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateApiConfig = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateApiConfig =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateApiConfig(
           request,
@@ -2148,9 +2131,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteApiConfig = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteApiConfig =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteApiConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2182,9 +2164,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteApiConfig = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteApiConfig =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteApiConfig(
           request,
@@ -2379,9 +2360,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
       ];
-      client.innerApiCalls.listGateways = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listGateways =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listGateways(
           request,
@@ -2453,9 +2433,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
       ];
-      client.descriptors.page.listGateways.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGateways.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listGatewaysStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.apigateway.v1.Gateway[] = [];
@@ -2480,10 +2459,9 @@ describe('v1.ApiGatewayServiceClient', () => {
           .calledWith(client.innerApiCalls.listGateways, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGateways
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGateways.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2527,10 +2505,9 @@ describe('v1.ApiGatewayServiceClient', () => {
           .calledWith(client.innerApiCalls.listGateways, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGateways
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGateways.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2551,9 +2528,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
       ];
-      client.descriptors.page.listGateways.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGateways.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.apigateway.v1.IGateway[] = [];
       const iterable = client.listGatewaysAsync(request);
       for await (const resource of iterable) {
@@ -2561,15 +2537,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listGateways
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGateways.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGateways
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGateways.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2586,10 +2562,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listGateways.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listGateways.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listGatewaysAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.apigateway.v1.IGateway[] = [];
@@ -2598,15 +2572,15 @@ describe('v1.ApiGatewayServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listGateways
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGateways.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGateways
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGateways.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2669,9 +2643,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
       ];
-      client.innerApiCalls.listApis = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listApis =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listApis(
           request,
@@ -2740,9 +2713,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
       ];
-      client.descriptors.page.listApis.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listApis.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listApisStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.apigateway.v1.Api[] = [];
@@ -2828,9 +2800,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
       ];
-      client.descriptors.page.listApis.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listApis.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.apigateway.v1.IApi[] = [];
       const iterable = client.listApisAsync(request);
       for await (const resource of iterable) {
@@ -2954,9 +2925,8 @@ describe('v1.ApiGatewayServiceClient', () => {
           new protos.google.cloud.apigateway.v1.ApiConfig()
         ),
       ];
-      client.innerApiCalls.listApiConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listApiConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listApiConfigs(
           request,
@@ -3034,9 +3004,8 @@ describe('v1.ApiGatewayServiceClient', () => {
           new protos.google.cloud.apigateway.v1.ApiConfig()
         ),
       ];
-      client.descriptors.page.listApiConfigs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listApiConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listApiConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.apigateway.v1.ApiConfig[] = [];
@@ -3061,10 +3030,9 @@ describe('v1.ApiGatewayServiceClient', () => {
           .calledWith(client.innerApiCalls.listApiConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listApiConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApiConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3081,10 +3049,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listApiConfigs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listApiConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listApiConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.apigateway.v1.ApiConfig[] = [];
@@ -3108,10 +3074,9 @@ describe('v1.ApiGatewayServiceClient', () => {
           .calledWith(client.innerApiCalls.listApiConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listApiConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApiConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3138,9 +3103,8 @@ describe('v1.ApiGatewayServiceClient', () => {
           new protos.google.cloud.apigateway.v1.ApiConfig()
         ),
       ];
-      client.descriptors.page.listApiConfigs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listApiConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.apigateway.v1.IApiConfig[] = [];
       const iterable = client.listApiConfigsAsync(request);
       for await (const resource of iterable) {
@@ -3148,15 +3112,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listApiConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listApiConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listApiConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApiConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3173,10 +3137,8 @@ describe('v1.ApiGatewayServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listApiConfigs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listApiConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listApiConfigsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.apigateway.v1.IApiConfig[] = [];
@@ -3185,15 +3147,15 @@ describe('v1.ApiGatewayServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listApiConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listApiConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listApiConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApiConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
