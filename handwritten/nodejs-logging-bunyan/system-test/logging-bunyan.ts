@@ -78,8 +78,9 @@ describe('LoggingBunyan', function () {
         level: 'error',
         verify: (entry: types.StackdriverEntry) => {
           assert(
-            ((entry.data as types.StackdriverData)
-              .message as string).startsWith('Error: second')
+            (
+              (entry.data as types.StackdriverData).message as string
+            ).startsWith('Error: second')
           );
           assert.strictEqual(
             (entry.data as types.StackdriverData).pid,
@@ -130,8 +131,9 @@ describe('LoggingBunyan', function () {
           process.pid
         );
         assert.strictEqual(
-          ((entry.metadata as types.StackdriverEntryMetadata)
-            .timestamp as Date).toString(),
+          (
+            (entry.metadata as types.StackdriverEntryMetadata).timestamp as Date
+          ).toString(),
           timestamp.toString()
         );
       },
