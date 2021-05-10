@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -251,9 +250,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListClustersResponse()
       );
-      client.innerApiCalls.listClusters = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listClusters =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listClusters(
           request,
@@ -366,9 +364,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Cluster()
       );
-      client.innerApiCalls.getCluster = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getCluster =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getCluster(
           request,
@@ -481,9 +478,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.createCluster = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createCluster =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createCluster(
           request,
@@ -596,9 +592,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.updateCluster = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateCluster =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateCluster(
           request,
@@ -711,9 +706,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.updateNodePool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateNodePool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateNodePool(
           request,
@@ -794,9 +788,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setNodePoolAutoscaling = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setNodePoolAutoscaling =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setNodePoolAutoscaling(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -828,9 +821,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setNodePoolAutoscaling = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setNodePoolAutoscaling =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setNodePoolAutoscaling(
           request,
@@ -946,9 +938,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setLoggingService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setLoggingService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setLoggingService(
           request,
@@ -1029,9 +1020,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setMonitoringService = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setMonitoringService =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setMonitoringService(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1063,9 +1053,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setMonitoringService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setMonitoringService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setMonitoringService(
           request,
@@ -1178,9 +1167,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setAddonsConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setAddonsConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setAddonsConfig(
           request,
@@ -1293,9 +1281,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setLocations = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setLocations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setLocations(
           request,
@@ -1408,9 +1395,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.updateMaster = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateMaster =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateMaster(
           request,
@@ -1523,9 +1509,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setMasterAuth = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setMasterAuth =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setMasterAuth(
           request,
@@ -1638,9 +1623,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.deleteCluster = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCluster =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteCluster(
           request,
@@ -1753,9 +1737,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListOperationsResponse()
       );
-      client.innerApiCalls.listOperations = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listOperations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listOperations(
           request,
@@ -1868,9 +1851,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.getOperation = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getOperation =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getOperation(
           request,
@@ -1983,9 +1965,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelOperation = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelOperation =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelOperation(
           request,
@@ -2098,9 +2079,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ServerConfig()
       );
-      client.innerApiCalls.getServerConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getServerConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getServerConfig(
           request,
@@ -2211,9 +2191,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysResponse()
       );
-      client.innerApiCalls.getJSONWebKeys = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getJSONWebKeys =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getJSONWebKeys(
           request,
@@ -2325,9 +2304,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsResponse()
       );
-      client.innerApiCalls.listNodePools = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listNodePools =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listNodePools(
           request,
@@ -2440,9 +2418,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.NodePool()
       );
-      client.innerApiCalls.getNodePool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getNodePool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getNodePool(
           request,
@@ -2555,9 +2532,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.createNodePool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createNodePool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createNodePool(
           request,
@@ -2670,9 +2646,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.deleteNodePool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteNodePool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteNodePool(
           request,
@@ -2753,9 +2728,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.rollbackNodePoolUpgrade = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.rollbackNodePoolUpgrade =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.rollbackNodePoolUpgrade(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2787,9 +2761,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.rollbackNodePoolUpgrade = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.rollbackNodePoolUpgrade =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.rollbackNodePoolUpgrade(
           request,
@@ -2873,9 +2846,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setNodePoolManagement = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setNodePoolManagement =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setNodePoolManagement(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2907,9 +2879,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setNodePoolManagement = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setNodePoolManagement =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setNodePoolManagement(
           request,
@@ -3025,9 +2996,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setLabels = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setLabels =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setLabels(
           request,
@@ -3137,9 +3107,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setLegacyAbac = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setLegacyAbac =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setLegacyAbac(
           request,
@@ -3252,9 +3221,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.startIPRotation = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.startIPRotation =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.startIPRotation(
           request,
@@ -3335,9 +3303,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.completeIPRotation = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.completeIPRotation =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.completeIPRotation(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3369,9 +3336,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.completeIPRotation = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.completeIPRotation =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.completeIPRotation(
           request,
@@ -3484,9 +3450,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setNodePoolSize = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setNodePoolSize =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setNodePoolSize(
           request,
@@ -3599,9 +3564,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setNetworkPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setNetworkPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setNetworkPolicy(
           request,
@@ -3682,9 +3646,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setMaintenancePolicy = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setMaintenancePolicy =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setMaintenancePolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3716,9 +3679,8 @@ describe('v1.ClusterManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
-      client.innerApiCalls.setMaintenancePolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setMaintenancePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setMaintenancePolicy(
           request,
@@ -3806,9 +3768,8 @@ describe('v1.ClusterManagerClient', () => {
           new protos.google.container.v1.UsableSubnetwork()
         ),
       ];
-      client.innerApiCalls.listUsableSubnetworks = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listUsableSubnetworks =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listUsableSubnetworks(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3847,9 +3808,8 @@ describe('v1.ClusterManagerClient', () => {
           new protos.google.container.v1.UsableSubnetwork()
         ),
       ];
-      client.innerApiCalls.listUsableSubnetworks = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listUsableSubnetworks =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listUsableSubnetworks(
           request,
@@ -3930,9 +3890,8 @@ describe('v1.ClusterManagerClient', () => {
           new protos.google.container.v1.UsableSubnetwork()
         ),
       ];
-      client.descriptors.page.listUsableSubnetworks.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listUsableSubnetworks.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listUsableSubnetworksStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.container.v1.UsableSubnetwork[] = [];
@@ -3952,16 +3911,18 @@ describe('v1.ClusterManagerClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listUsableSubnetworks
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listUsableSubnetworks, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listUsableSubnetworks
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3978,10 +3939,8 @@ describe('v1.ClusterManagerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listUsableSubnetworks.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listUsableSubnetworks.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listUsableSubnetworksStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.container.v1.UsableSubnetwork[] = [];
@@ -4000,16 +3959,18 @@ describe('v1.ClusterManagerClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listUsableSubnetworks
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listUsableSubnetworks, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listUsableSubnetworks
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4036,9 +3997,8 @@ describe('v1.ClusterManagerClient', () => {
           new protos.google.container.v1.UsableSubnetwork()
         ),
       ];
-      client.descriptors.page.listUsableSubnetworks.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listUsableSubnetworks.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.container.v1.IUsableSubnetwork[] = [];
       const iterable = client.listUsableSubnetworksAsync(request);
       for await (const resource of iterable) {
@@ -4046,15 +4006,17 @@ describe('v1.ClusterManagerClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listUsableSubnetworks
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listUsableSubnetworks
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4071,10 +4033,8 @@ describe('v1.ClusterManagerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listUsableSubnetworks.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listUsableSubnetworks.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listUsableSubnetworksAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.container.v1.IUsableSubnetwork[] = [];
@@ -4083,15 +4043,17 @@ describe('v1.ClusterManagerClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listUsableSubnetworks
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listUsableSubnetworks
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listUsableSubnetworks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

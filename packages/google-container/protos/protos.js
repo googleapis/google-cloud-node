@@ -10685,27 +10685,27 @@
     
                         /**
                          * Metric intValue.
-                         * @member {number|Long} intValue
+                         * @member {number|Long|null|undefined} intValue
                          * @memberof google.container.v1.OperationProgress.Metric
                          * @instance
                          */
-                        Metric.prototype.intValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Metric.prototype.intValue = null;
     
                         /**
                          * Metric doubleValue.
-                         * @member {number} doubleValue
+                         * @member {number|null|undefined} doubleValue
                          * @memberof google.container.v1.OperationProgress.Metric
                          * @instance
                          */
-                        Metric.prototype.doubleValue = 0;
+                        Metric.prototype.doubleValue = null;
     
                         /**
                          * Metric stringValue.
-                         * @member {string} stringValue
+                         * @member {string|null|undefined} stringValue
                          * @memberof google.container.v1.OperationProgress.Metric
                          * @instance
                          */
-                        Metric.prototype.stringValue = "";
+                        Metric.prototype.stringValue = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -30235,43 +30235,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
