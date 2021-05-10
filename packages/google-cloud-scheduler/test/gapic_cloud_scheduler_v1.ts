@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v1.CloudSchedulerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.Job()
       );
-      client.innerApiCalls.getJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getJob(
           request,
@@ -358,9 +356,8 @@ describe('v1.CloudSchedulerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.Job()
       );
-      client.innerApiCalls.createJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createJob(
           request,
@@ -469,9 +466,8 @@ describe('v1.CloudSchedulerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.Job()
       );
-      client.innerApiCalls.updateJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateJob(
           request,
@@ -579,9 +575,8 @@ describe('v1.CloudSchedulerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteJob(
           request,
@@ -688,9 +683,8 @@ describe('v1.CloudSchedulerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.Job()
       );
-      client.innerApiCalls.pauseJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.pauseJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.pauseJob(
           request,
@@ -797,9 +791,8 @@ describe('v1.CloudSchedulerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.Job()
       );
-      client.innerApiCalls.resumeJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.resumeJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.resumeJob(
           request,
@@ -906,9 +899,8 @@ describe('v1.CloudSchedulerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.Job()
       );
-      client.innerApiCalls.runJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.runJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.runJob(
           request,
@@ -1019,9 +1011,8 @@ describe('v1.CloudSchedulerClient', () => {
         generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
       ];
-      client.innerApiCalls.listJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listJobs(
           request,
@@ -1090,9 +1081,8 @@ describe('v1.CloudSchedulerClient', () => {
         generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
       ];
-      client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listJobsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.scheduler.v1.Job[] = [];
@@ -1178,9 +1168,8 @@ describe('v1.CloudSchedulerClient', () => {
         generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1.Job()),
       ];
-      client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.scheduler.v1.IJob[] = [];
       const iterable = client.listJobsAsync(request);
       for await (const resource of iterable) {
