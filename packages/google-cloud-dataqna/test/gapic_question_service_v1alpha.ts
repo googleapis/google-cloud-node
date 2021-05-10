@@ -26,10 +26,9 @@ import * as questionserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1alpha.QuestionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
-      client.innerApiCalls.getQuestion = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getQuestion =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getQuestion(
           request,
@@ -298,9 +296,8 @@ describe('v1alpha.QuestionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
-      client.innerApiCalls.createQuestion = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createQuestion =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createQuestion(
           request,
@@ -410,9 +407,8 @@ describe('v1alpha.QuestionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
-      client.innerApiCalls.executeQuestion = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.executeQuestion =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.executeQuestion(
           request,
@@ -522,9 +518,8 @@ describe('v1alpha.QuestionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
-      client.innerApiCalls.getUserFeedback = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getUserFeedback =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getUserFeedback(
           request,
@@ -604,9 +599,8 @@ describe('v1alpha.QuestionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
-      client.innerApiCalls.updateUserFeedback = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateUserFeedback =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateUserFeedback(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -638,9 +632,8 @@ describe('v1alpha.QuestionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
-      client.innerApiCalls.updateUserFeedback = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateUserFeedback =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateUserFeedback(
           request,

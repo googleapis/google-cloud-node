@@ -26,10 +26,9 @@ import * as autosuggestionserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -73,49 +72,46 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient();
+    const client =
+      new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-      {
+    const client =
+      new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-      {
+    const client =
+      new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.autoSuggestionServiceStub, undefined);
     await client.initialize();
     assert(client.autoSuggestionServiceStub);
   });
 
   it('has close method', () => {
-    const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-      {
+    const client =
+      new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-      {
+    const client =
+      new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -124,12 +120,11 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-      {
+    const client =
+      new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -148,12 +143,11 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
 
   describe('suggestQueries', () => {
     it('invokes suggestQueries without error', async () => {
-      const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-        {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
@@ -181,12 +175,11 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
     });
 
     it('invokes suggestQueries without error using callback', async () => {
-      const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-        {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
@@ -203,9 +196,8 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesResponse()
       );
-      client.innerApiCalls.suggestQueries = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.suggestQueries =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.suggestQueries(
           request,
@@ -231,12 +223,11 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
     });
 
     it('invokes suggestQueries with error', async () => {
-      const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-        {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
@@ -271,12 +262,11 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-        {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -323,12 +313,11 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
         location: 'locationValue',
         question: 'questionValue',
       };
-      const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-        {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.questionPathTemplate.render = sinon
         .stub()
@@ -389,12 +378,11 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
         location: 'locationValue',
         question: 'questionValue',
       };
-      const client = new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient(
-        {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.userFeedbackPathTemplate.render = sinon
         .stub()
