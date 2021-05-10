@@ -20,7 +20,8 @@
 const phishingprotection = require('@google-cloud/phishing-protection');
 
 function main() {
-  const phishingProtectionServiceV1Beta1Client = new phishingprotection.PhishingProtectionServiceV1Beta1Client();
+  const phishingProtectionServiceV1Beta1Client =
+    new phishingprotection.PhishingProtectionServiceV1Beta1Client();
 }
 
 main();

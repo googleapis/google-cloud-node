@@ -27,7 +27,8 @@ function doStuffWithPhishingProtectionServiceV1Beta1Client(
 
 function main() {
   // check that the client instance can be created
-  const phishingProtectionServiceV1Beta1Client = new PhishingProtectionServiceV1Beta1Client();
+  const phishingProtectionServiceV1Beta1Client =
+    new PhishingProtectionServiceV1Beta1Client();
   doStuffWithPhishingProtectionServiceV1Beta1Client(
     phishingProtectionServiceV1Beta1Client
   );

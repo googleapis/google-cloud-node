@@ -20,7 +20,8 @@ import * as v1beta1 from './v1beta1';
 
 const PhishingProtectionServiceV1Beta1Client =
   v1beta1.PhishingProtectionServiceV1Beta1Client;
-type PhishingProtectionServiceV1Beta1Client = v1beta1.PhishingProtectionServiceV1Beta1Client;
+type PhishingProtectionServiceV1Beta1Client =
+  v1beta1.PhishingProtectionServiceV1Beta1Client;
 
 export {v1beta1, PhishingProtectionServiceV1Beta1Client};
 export default {v1beta1, PhishingProtectionServiceV1Beta1Client};

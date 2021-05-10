@@ -26,10 +26,9 @@ import * as phishingprotectionservicev1beta1Module from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -74,49 +73,54 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client();
+    const client =
+      new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.phishingProtectionServiceV1Beta1Stub, undefined);
     await client.initialize();
     assert(client.phishingProtectionServiceV1Beta1Stub);
   });
 
   it('has close method', () => {
-    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -125,12 +129,13 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -149,12 +154,13 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
 
   describe('reportPhishing', () => {
     it('invokes reportPhishing without error', async () => {
-      const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
@@ -182,12 +188,13 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
     });
 
     it('invokes reportPhishing without error using callback', async () => {
-      const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
@@ -204,9 +211,8 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingResponse()
       );
-      client.innerApiCalls.reportPhishing = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.reportPhishing =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.reportPhishing(
           request,
@@ -232,12 +238,13 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
     });
 
     it('invokes reportPhishing with error', async () => {
-      const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
@@ -271,12 +278,13 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new phishingprotectionservicev1beta1Module.v1beta1.PhishingProtectionServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
