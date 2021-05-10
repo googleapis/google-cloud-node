@@ -20,10 +20,12 @@
 const dataproc = require('@google-cloud/dataproc');
 
 function main() {
-  const autoscalingPolicyServiceClient = new dataproc.AutoscalingPolicyServiceClient();
+  const autoscalingPolicyServiceClient =
+    new dataproc.AutoscalingPolicyServiceClient();
   const clusterControllerClient = new dataproc.ClusterControllerClient();
   const jobControllerClient = new dataproc.JobControllerClient();
-  const workflowTemplateServiceClient = new dataproc.WorkflowTemplateServiceClient();
+  const workflowTemplateServiceClient =
+    new dataproc.WorkflowTemplateServiceClient();
 }
 
 main();

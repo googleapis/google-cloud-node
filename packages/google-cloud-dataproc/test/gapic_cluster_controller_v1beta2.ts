@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -165,7 +164,8 @@ describe('v1beta2.ClusterControllerClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new clustercontrollerModule.v1beta2.ClusterControllerClient();
+    const client =
+      new clustercontrollerModule.v1beta2.ClusterControllerClient();
     assert(client);
   });
 
@@ -230,12 +230,11 @@ describe('v1beta2.ClusterControllerClient', () => {
 
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetClusterRequest()
@@ -263,12 +262,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes getCluster without error using callback', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetClusterRequest()
@@ -285,9 +283,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.Cluster()
       );
-      client.innerApiCalls.getCluster = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getCluster =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getCluster(
           request,
@@ -313,12 +310,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes getCluster with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetClusterRequest()
@@ -348,12 +344,11 @@ describe('v1beta2.ClusterControllerClient', () => {
 
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
@@ -370,9 +365,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createCluster = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createCluster =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -384,12 +378,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes createCluster without error using callback', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
@@ -406,9 +399,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createCluster = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createCluster =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createCluster(
           request,
@@ -441,12 +433,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes createCluster with call error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
@@ -474,12 +465,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes createCluster with LRO error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateClusterRequest()
@@ -509,12 +499,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkCreateClusterProgress without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -533,12 +522,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkCreateClusterProgress with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -556,12 +544,11 @@ describe('v1beta2.ClusterControllerClient', () => {
 
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
@@ -578,9 +565,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateCluster = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateCluster =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -592,12 +578,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes updateCluster without error using callback', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
@@ -614,9 +599,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateCluster = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateCluster =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateCluster(
           request,
@@ -649,12 +633,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes updateCluster with call error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
@@ -682,12 +665,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes updateCluster with LRO error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateClusterRequest()
@@ -717,12 +699,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkUpdateClusterProgress without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -741,12 +722,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkUpdateClusterProgress with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -764,12 +744,11 @@ describe('v1beta2.ClusterControllerClient', () => {
 
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
@@ -786,9 +765,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteCluster = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCluster =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -800,12 +778,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes deleteCluster without error using callback', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
@@ -822,9 +799,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteCluster = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCluster =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteCluster(
           request,
@@ -857,12 +833,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes deleteCluster with call error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
@@ -890,12 +865,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes deleteCluster with LRO error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteClusterRequest()
@@ -925,12 +899,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkDeleteClusterProgress without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -949,12 +922,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkDeleteClusterProgress with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -972,12 +944,11 @@ describe('v1beta2.ClusterControllerClient', () => {
 
   describe('diagnoseCluster', () => {
     it('invokes diagnoseCluster without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
@@ -994,9 +965,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.diagnoseCluster = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.diagnoseCluster =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.diagnoseCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1008,12 +978,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes diagnoseCluster without error using callback', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
@@ -1030,9 +999,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.diagnoseCluster = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.diagnoseCluster =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.diagnoseCluster(
           request,
@@ -1065,12 +1033,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes diagnoseCluster with call error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
@@ -1098,12 +1065,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes diagnoseCluster with LRO error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DiagnoseClusterRequest()
@@ -1133,12 +1099,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkDiagnoseClusterProgress without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1157,12 +1122,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes checkDiagnoseClusterProgress with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1180,12 +1144,11 @@ describe('v1beta2.ClusterControllerClient', () => {
 
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
@@ -1221,12 +1184,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes listClusters without error using callback', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
@@ -1251,9 +1213,8 @@ describe('v1beta2.ClusterControllerClient', () => {
           new protos.google.cloud.dataproc.v1beta2.Cluster()
         ),
       ];
-      client.innerApiCalls.listClusters = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listClusters =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listClusters(
           request,
@@ -1279,12 +1240,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes listClusters with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
@@ -1312,12 +1272,11 @@ describe('v1beta2.ClusterControllerClient', () => {
     });
 
     it('invokes listClustersStream without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
@@ -1335,9 +1294,8 @@ describe('v1beta2.ClusterControllerClient', () => {
           new protos.google.cloud.dataproc.v1beta2.Cluster()
         ),
       ];
-      client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listClusters.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listClustersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.dataproc.v1beta2.Cluster[] = [];
@@ -1362,21 +1320,19 @@ describe('v1beta2.ClusterControllerClient', () => {
           .calledWith(client.innerApiCalls.listClusters, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listClusters
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listClusters.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listClustersStream with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
@@ -1411,21 +1367,19 @@ describe('v1beta2.ClusterControllerClient', () => {
           .calledWith(client.innerApiCalls.listClusters, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listClusters
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listClusters.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listClusters without error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
@@ -1443,9 +1397,8 @@ describe('v1beta2.ClusterControllerClient', () => {
           new protos.google.cloud.dataproc.v1beta2.Cluster()
         ),
       ];
-      client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listClusters.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.dataproc.v1beta2.ICluster[] = [];
       const iterable = client.listClustersAsync(request);
       for await (const resource of iterable) {
@@ -1453,26 +1406,25 @@ describe('v1beta2.ClusterControllerClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listClusters
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listClusters.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listClusters
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listClusters.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listClusters with error', async () => {
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListClustersRequest()
@@ -1480,10 +1432,8 @@ describe('v1beta2.ClusterControllerClient', () => {
       request.projectId = '';
       const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listClusters.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listClustersAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.dataproc.v1beta2.ICluster[] = [];
@@ -1492,15 +1442,15 @@ describe('v1beta2.ClusterControllerClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listClusters
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listClusters.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listClusters
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listClusters.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1514,19 +1464,16 @@ describe('v1beta2.ClusterControllerClient', () => {
         location: 'locationValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAutoscalingPolicyPath', () => {
         const result = client.projectLocationAutoscalingPolicyPath(
@@ -1536,47 +1483,56 @@ describe('v1beta2.ClusterControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchProjectFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchLocationFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'autoscalingPolicyValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1590,19 +1546,16 @@ describe('v1beta2.ClusterControllerClient', () => {
         location: 'locationValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationWorkflowTemplatePath', () => {
         const result = client.projectLocationWorkflowTemplatePath(
@@ -1612,47 +1565,54 @@ describe('v1beta2.ClusterControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchProjectFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchLocationFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchWorkflowTemplateFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'workflowTemplateValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1666,19 +1626,16 @@ describe('v1beta2.ClusterControllerClient', () => {
         region: 'regionValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectRegionAutoscalingPolicyPath', () => {
         const result = client.projectRegionAutoscalingPolicyPath(
@@ -1688,47 +1645,54 @@ describe('v1beta2.ClusterControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchProjectFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectRegionAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRegionFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchRegionFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchRegionFromProjectRegionAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'autoscalingPolicyValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1742,19 +1706,16 @@ describe('v1beta2.ClusterControllerClient', () => {
         region: 'regionValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client = new clustercontrollerModule.v1beta2.ClusterControllerClient(
-        {
+      const client =
+        new clustercontrollerModule.v1beta2.ClusterControllerClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectRegionWorkflowTemplatePath', () => {
         const result = client.projectRegionWorkflowTemplatePath(
@@ -1764,47 +1725,54 @@ describe('v1beta2.ClusterControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchProjectFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectRegionWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRegionFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchRegionFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchRegionFromProjectRegionWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchWorkflowTemplateFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'workflowTemplateValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

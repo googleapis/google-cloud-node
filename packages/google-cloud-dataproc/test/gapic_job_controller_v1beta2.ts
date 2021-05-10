@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1beta2.JobControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.Job()
       );
-      client.innerApiCalls.submitJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.submitJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.submitJob(
           request,
@@ -390,9 +388,8 @@ describe('v1beta2.JobControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.Job()
       );
-      client.innerApiCalls.getJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getJob(
           request,
@@ -499,9 +496,8 @@ describe('v1beta2.JobControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.Job()
       );
-      client.innerApiCalls.updateJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateJob(
           request,
@@ -608,9 +604,8 @@ describe('v1beta2.JobControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.Job()
       );
-      client.innerApiCalls.cancelJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelJob(
           request,
@@ -717,9 +712,8 @@ describe('v1beta2.JobControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteJob(
           request,
@@ -795,9 +789,8 @@ describe('v1beta2.JobControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.submitJobAsOperation = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.submitJobAsOperation =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.submitJobAsOperation(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -829,9 +822,8 @@ describe('v1beta2.JobControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.submitJobAsOperation = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.submitJobAsOperation =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.submitJobAsOperation(
           request,
@@ -1026,9 +1018,8 @@ describe('v1beta2.JobControllerClient', () => {
         generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.Job()),
       ];
-      client.innerApiCalls.listJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listJobs(
           request,
@@ -1097,9 +1088,8 @@ describe('v1beta2.JobControllerClient', () => {
         generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.Job()),
       ];
-      client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listJobsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.dataproc.v1beta2.Job[] = [];
@@ -1191,9 +1181,8 @@ describe('v1beta2.JobControllerClient', () => {
         generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.Job()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1beta2.Job()),
       ];
-      client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.dataproc.v1beta2.IJob[] = [];
       const iterable = client.listJobsAsync(request);
       for await (const resource of iterable) {
@@ -1261,12 +1250,10 @@ describe('v1beta2.JobControllerClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAutoscalingPolicyPath', () => {
         const result = client.projectLocationAutoscalingPolicyPath(
@@ -1276,47 +1263,56 @@ describe('v1beta2.JobControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchProjectFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchLocationFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'autoscalingPolicyValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1335,12 +1331,10 @@ describe('v1beta2.JobControllerClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationWorkflowTemplatePath', () => {
         const result = client.projectLocationWorkflowTemplatePath(
@@ -1350,47 +1344,54 @@ describe('v1beta2.JobControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchProjectFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchLocationFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchWorkflowTemplateFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'workflowTemplateValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1409,12 +1410,10 @@ describe('v1beta2.JobControllerClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectRegionAutoscalingPolicyPath', () => {
         const result = client.projectRegionAutoscalingPolicyPath(
@@ -1424,47 +1423,54 @@ describe('v1beta2.JobControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchProjectFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectRegionAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRegionFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchRegionFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchRegionFromProjectRegionAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'autoscalingPolicyValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1483,12 +1489,10 @@ describe('v1beta2.JobControllerClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectRegionWorkflowTemplatePath', () => {
         const result = client.projectRegionWorkflowTemplatePath(
@@ -1498,47 +1502,54 @@ describe('v1beta2.JobControllerClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchProjectFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectRegionWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRegionFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchRegionFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchRegionFromProjectRegionWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchWorkflowTemplateFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'workflowTemplateValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

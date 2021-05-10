@@ -169,18 +169,22 @@ export class ClusterControllerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      projectLocationAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
-      ),
-      projectLocationWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
-      ),
-      projectRegionAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
-      ),
-      projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
-      ),
+      projectLocationAutoscalingPolicyPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
+        ),
+      projectLocationWorkflowTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
+        ),
+      projectRegionAutoscalingPolicyPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
+        ),
+      projectRegionWorkflowTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
+        ),
       servicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/services/{service}'
       ),
@@ -340,13 +344,14 @@ export class ClusterControllerClient {
     ];
     for (const methodName of clusterControllerStubMethods) {
       const callPromise = this.clusterControllerStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -502,11 +507,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
   }
@@ -627,11 +631,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.createCluster(request, options, callback);
   }
@@ -853,11 +856,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateCluster(request, options, callback);
   }
@@ -1016,11 +1018,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.stopCluster(request, options, callback);
   }
@@ -1179,11 +1180,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.startCluster(request, options, callback);
   }
@@ -1344,11 +1344,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteCluster(request, options, callback);
   }
@@ -1497,11 +1496,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.diagnoseCluster(request, options, callback);
   }
@@ -1650,11 +1648,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     this.initialize();
     return this.innerApiCalls.listClusters(request, options, callback);
   }
@@ -1712,11 +1709,10 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listClusters.createStream(
@@ -1785,17 +1781,16 @@ export class ClusterControllerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project_id: request.projectId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project_id: request.projectId || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataproc.v1.ICluster>;
   }

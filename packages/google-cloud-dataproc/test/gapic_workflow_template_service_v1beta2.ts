@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -168,49 +167,46 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient();
+    const client =
+      new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-      {
+    const client =
+      new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-      {
+    const client =
+      new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.workflowTemplateServiceStub, undefined);
     await client.initialize();
     assert(client.workflowTemplateServiceStub);
   });
 
   it('has close method', () => {
-    const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-      {
+    const client =
+      new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-      {
+    const client =
+      new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -219,12 +215,11 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-      {
+    const client =
+      new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -243,12 +238,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   describe('createWorkflowTemplate', () => {
     it('invokes createWorkflowTemplate without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateWorkflowTemplateRequest()
@@ -265,9 +261,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
       );
-      client.innerApiCalls.createWorkflowTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createWorkflowTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createWorkflowTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -278,12 +273,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes createWorkflowTemplate without error using callback', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateWorkflowTemplateRequest()
@@ -300,9 +296,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
       );
-      client.innerApiCalls.createWorkflowTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createWorkflowTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createWorkflowTemplate(
           request,
@@ -328,12 +323,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes createWorkflowTemplate with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.CreateWorkflowTemplateRequest()
@@ -366,12 +362,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   describe('getWorkflowTemplate', () => {
     it('invokes getWorkflowTemplate without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetWorkflowTemplateRequest()
@@ -388,9 +385,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
       );
-      client.innerApiCalls.getWorkflowTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getWorkflowTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getWorkflowTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -401,12 +397,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes getWorkflowTemplate without error using callback', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetWorkflowTemplateRequest()
@@ -423,9 +420,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
       );
-      client.innerApiCalls.getWorkflowTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getWorkflowTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getWorkflowTemplate(
           request,
@@ -451,12 +447,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes getWorkflowTemplate with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.GetWorkflowTemplateRequest()
@@ -486,12 +483,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   describe('updateWorkflowTemplate', () => {
     it('invokes updateWorkflowTemplate without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateWorkflowTemplateRequest()
@@ -509,9 +507,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
       );
-      client.innerApiCalls.updateWorkflowTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateWorkflowTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateWorkflowTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -522,12 +519,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes updateWorkflowTemplate without error using callback', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateWorkflowTemplateRequest()
@@ -545,9 +543,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
       );
-      client.innerApiCalls.updateWorkflowTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateWorkflowTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateWorkflowTemplate(
           request,
@@ -573,12 +570,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes updateWorkflowTemplate with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.UpdateWorkflowTemplateRequest()
@@ -612,12 +610,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   describe('deleteWorkflowTemplate', () => {
     it('invokes deleteWorkflowTemplate without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteWorkflowTemplateRequest()
@@ -634,9 +633,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteWorkflowTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteWorkflowTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteWorkflowTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -647,12 +645,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes deleteWorkflowTemplate without error using callback', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteWorkflowTemplateRequest()
@@ -669,9 +668,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteWorkflowTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteWorkflowTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteWorkflowTemplate(
           request,
@@ -697,12 +695,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes deleteWorkflowTemplate with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.DeleteWorkflowTemplateRequest()
@@ -735,12 +734,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   describe('instantiateWorkflowTemplate', () => {
     it('invokes instantiateWorkflowTemplate without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateWorkflowTemplateRequest()
@@ -757,9 +757,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.instantiateWorkflowTemplate = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.instantiateWorkflowTemplate =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.instantiateWorkflowTemplate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -771,12 +770,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes instantiateWorkflowTemplate without error using callback', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateWorkflowTemplateRequest()
@@ -793,9 +793,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.instantiateWorkflowTemplate = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.instantiateWorkflowTemplate =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.instantiateWorkflowTemplate(
           request,
@@ -828,12 +827,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes instantiateWorkflowTemplate with call error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateWorkflowTemplateRequest()
@@ -864,12 +864,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes instantiateWorkflowTemplate with LRO error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateWorkflowTemplateRequest()
@@ -899,12 +900,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes checkInstantiateWorkflowTemplateProgress without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -914,21 +916,23 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkInstantiateWorkflowTemplateProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkInstantiateWorkflowTemplateProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkInstantiateWorkflowTemplateProgress with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -946,12 +950,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   describe('instantiateInlineWorkflowTemplate', () => {
     it('invokes instantiateInlineWorkflowTemplate without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateInlineWorkflowTemplateRequest()
@@ -968,9 +973,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.instantiateInlineWorkflowTemplate = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.instantiateInlineWorkflowTemplate =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.instantiateInlineWorkflowTemplate(
         request
       );
@@ -984,12 +988,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes instantiateInlineWorkflowTemplate without error using callback', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateInlineWorkflowTemplateRequest()
@@ -1006,9 +1011,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.instantiateInlineWorkflowTemplate = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.instantiateInlineWorkflowTemplate =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.instantiateInlineWorkflowTemplate(
           request,
@@ -1041,12 +1045,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes instantiateInlineWorkflowTemplate with call error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateInlineWorkflowTemplateRequest()
@@ -1061,10 +1066,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.instantiateInlineWorkflowTemplate = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
+      client.innerApiCalls.instantiateInlineWorkflowTemplate =
+        stubLongRunningCall(undefined, expectedError);
       await assert.rejects(
         client.instantiateInlineWorkflowTemplate(request),
         expectedError
@@ -1077,12 +1080,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes instantiateInlineWorkflowTemplate with LRO error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.InstantiateInlineWorkflowTemplateRequest()
@@ -1097,11 +1101,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.instantiateInlineWorkflowTemplate = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
+      client.innerApiCalls.instantiateInlineWorkflowTemplate =
+        stubLongRunningCall(undefined, undefined, expectedError);
       const [operation] = await client.instantiateInlineWorkflowTemplate(
         request
       );
@@ -1114,12 +1115,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes checkInstantiateInlineWorkflowTemplateProgress without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1129,21 +1131,23 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkInstantiateInlineWorkflowTemplateProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkInstantiateInlineWorkflowTemplateProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkInstantiateInlineWorkflowTemplateProgress with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1161,12 +1165,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
 
   describe('listWorkflowTemplates', () => {
     it('invokes listWorkflowTemplates without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListWorkflowTemplatesRequest()
@@ -1191,9 +1196,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
           new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
         ),
       ];
-      client.innerApiCalls.listWorkflowTemplates = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listWorkflowTemplates =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listWorkflowTemplates(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1204,12 +1208,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes listWorkflowTemplates without error using callback', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListWorkflowTemplatesRequest()
@@ -1234,9 +1239,8 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
           new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
         ),
       ];
-      client.innerApiCalls.listWorkflowTemplates = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listWorkflowTemplates =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listWorkflowTemplates(
           request,
@@ -1264,12 +1268,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes listWorkflowTemplates with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListWorkflowTemplatesRequest()
@@ -1300,12 +1305,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
     });
 
     it('invokes listWorkflowTemplatesStream without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListWorkflowTemplatesRequest()
@@ -1323,12 +1329,12 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
           new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
         ),
       ];
-      client.descriptors.page.listWorkflowTemplates.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listWorkflowTemplates.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listWorkflowTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataproc.v1beta2.WorkflowTemplate[] = [];
+        const responses: protos.google.cloud.dataproc.v1beta2.WorkflowTemplate[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.dataproc.v1beta2.WorkflowTemplate) => {
@@ -1345,27 +1351,30 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listWorkflowTemplates
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkflowTemplates, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkflowTemplates
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listWorkflowTemplatesStream with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListWorkflowTemplatesRequest()
@@ -1373,13 +1382,12 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listWorkflowTemplates.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listWorkflowTemplates.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listWorkflowTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataproc.v1beta2.WorkflowTemplate[] = [];
+        const responses: protos.google.cloud.dataproc.v1beta2.WorkflowTemplate[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.dataproc.v1beta2.WorkflowTemplate) => {
@@ -1395,27 +1403,30 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listWorkflowTemplates
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkflowTemplates, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkflowTemplates
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listWorkflowTemplates without error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListWorkflowTemplatesRequest()
@@ -1433,36 +1444,39 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
           new protos.google.cloud.dataproc.v1beta2.WorkflowTemplate()
         ),
       ];
-      client.descriptors.page.listWorkflowTemplates.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.dataproc.v1beta2.IWorkflowTemplate[] = [];
+      client.descriptors.page.listWorkflowTemplates.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.dataproc.v1beta2.IWorkflowTemplate[] =
+        [];
       const iterable = client.listWorkflowTemplatesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listWorkflowTemplates
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkflowTemplates
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listWorkflowTemplates with error', async () => {
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1beta2.ListWorkflowTemplatesRequest()
@@ -1470,27 +1484,28 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listWorkflowTemplates.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listWorkflowTemplates.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listWorkflowTemplatesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataproc.v1beta2.IWorkflowTemplate[] = [];
+        const responses: protos.google.cloud.dataproc.v1beta2.IWorkflowTemplate[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listWorkflowTemplates
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkflowTemplates
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkflowTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1502,12 +1517,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -1544,19 +1560,18 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         location: 'locationValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAutoscalingPolicyPath', () => {
         const result = client.projectLocationAutoscalingPolicyPath(
@@ -1566,47 +1581,56 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchProjectFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchLocationFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName', () => {
-        const result = client.matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'autoscalingPolicyValue');
         assert(
-          (client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1620,19 +1644,18 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         location: 'locationValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationWorkflowTemplatePath', () => {
         const result = client.projectLocationWorkflowTemplatePath(
@@ -1642,47 +1665,54 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchProjectFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchLocationFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchWorkflowTemplateFromProjectLocationWorkflowTemplateName', () => {
-        const result = client.matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'workflowTemplateValue');
         assert(
-          (client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1696,19 +1726,18 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         region: 'regionValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectRegionAutoscalingPolicyPath', () => {
         const result = client.projectRegionAutoscalingPolicyPath(
@@ -1718,47 +1747,54 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchProjectFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectRegionAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRegionFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchRegionFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchRegionFromProjectRegionAutoscalingPolicyName(fakePath);
         assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName', () => {
-        const result = client.matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
+            fakePath
+          );
         assert.strictEqual(result, 'autoscalingPolicyValue');
         assert(
-          (client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1772,19 +1808,18 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         region: 'regionValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectRegionWorkflowTemplatePath', () => {
         const result = client.projectRegionWorkflowTemplatePath(
@@ -1794,47 +1829,54 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchProjectFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectRegionWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRegionFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchRegionFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchRegionFromProjectRegionWorkflowTemplateName(fakePath);
         assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchWorkflowTemplateFromProjectRegionWorkflowTemplateName', () => {
-        const result = client.matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'workflowTemplateValue');
         assert(
-          (client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1847,12 +1889,13 @@ describe('v1beta2.WorkflowTemplateServiceClient', () => {
         project: 'projectValue',
         region: 'regionValue',
       };
-      const client = new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new workflowtemplateserviceModule.v1beta2.WorkflowTemplateServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.regionPathTemplate.render = sinon
         .stub()

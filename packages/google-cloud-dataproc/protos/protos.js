@@ -13143,19 +13143,19 @@
     
                         /**
                          * HadoopJob mainJarFileUri.
-                         * @member {string} mainJarFileUri
+                         * @member {string|null|undefined} mainJarFileUri
                          * @memberof google.cloud.dataproc.v1.HadoopJob
                          * @instance
                          */
-                        HadoopJob.prototype.mainJarFileUri = "";
+                        HadoopJob.prototype.mainJarFileUri = null;
     
                         /**
                          * HadoopJob mainClass.
-                         * @member {string} mainClass
+                         * @member {string|null|undefined} mainClass
                          * @memberof google.cloud.dataproc.v1.HadoopJob
                          * @instance
                          */
-                        HadoopJob.prototype.mainClass = "";
+                        HadoopJob.prototype.mainClass = null;
     
                         /**
                          * HadoopJob args.
@@ -13616,19 +13616,19 @@
     
                         /**
                          * SparkJob mainJarFileUri.
-                         * @member {string} mainJarFileUri
+                         * @member {string|null|undefined} mainJarFileUri
                          * @memberof google.cloud.dataproc.v1.SparkJob
                          * @instance
                          */
-                        SparkJob.prototype.mainJarFileUri = "";
+                        SparkJob.prototype.mainJarFileUri = null;
     
                         /**
                          * SparkJob mainClass.
-                         * @member {string} mainClass
+                         * @member {string|null|undefined} mainClass
                          * @memberof google.cloud.dataproc.v1.SparkJob
                          * @instance
                          */
-                        SparkJob.prototype.mainClass = "";
+                        SparkJob.prototype.mainClass = null;
     
                         /**
                          * SparkJob args.
@@ -14753,11 +14753,11 @@
     
                         /**
                          * HiveJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1.HiveJob
                          * @instance
                          */
-                        HiveJob.prototype.queryFileUri = "";
+                        HiveJob.prototype.queryFileUri = null;
     
                         /**
                          * HiveJob queryList.
@@ -15169,11 +15169,11 @@
     
                         /**
                          * SparkSqlJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1.SparkSqlJob
                          * @instance
                          */
-                        SparkSqlJob.prototype.queryFileUri = "";
+                        SparkSqlJob.prototype.queryFileUri = null;
     
                         /**
                          * SparkSqlJob queryList.
@@ -15591,11 +15591,11 @@
     
                         /**
                          * PigJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1.PigJob
                          * @instance
                          */
-                        PigJob.prototype.queryFileUri = "";
+                        PigJob.prototype.queryFileUri = null;
     
                         /**
                          * PigJob queryList.
@@ -16423,11 +16423,11 @@
     
                         /**
                          * PrestoJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1.PrestoJob
                          * @instance
                          */
-                        PrestoJob.prototype.queryFileUri = "";
+                        PrestoJob.prototype.queryFileUri = null;
     
                         /**
                          * PrestoJob queryList.
@@ -39503,19 +39503,19 @@
     
                         /**
                          * HadoopJob mainJarFileUri.
-                         * @member {string} mainJarFileUri
+                         * @member {string|null|undefined} mainJarFileUri
                          * @memberof google.cloud.dataproc.v1beta2.HadoopJob
                          * @instance
                          */
-                        HadoopJob.prototype.mainJarFileUri = "";
+                        HadoopJob.prototype.mainJarFileUri = null;
     
                         /**
                          * HadoopJob mainClass.
-                         * @member {string} mainClass
+                         * @member {string|null|undefined} mainClass
                          * @memberof google.cloud.dataproc.v1beta2.HadoopJob
                          * @instance
                          */
-                        HadoopJob.prototype.mainClass = "";
+                        HadoopJob.prototype.mainClass = null;
     
                         /**
                          * HadoopJob args.
@@ -39976,19 +39976,19 @@
     
                         /**
                          * SparkJob mainJarFileUri.
-                         * @member {string} mainJarFileUri
+                         * @member {string|null|undefined} mainJarFileUri
                          * @memberof google.cloud.dataproc.v1beta2.SparkJob
                          * @instance
                          */
-                        SparkJob.prototype.mainJarFileUri = "";
+                        SparkJob.prototype.mainJarFileUri = null;
     
                         /**
                          * SparkJob mainClass.
-                         * @member {string} mainClass
+                         * @member {string|null|undefined} mainClass
                          * @memberof google.cloud.dataproc.v1beta2.SparkJob
                          * @instance
                          */
-                        SparkJob.prototype.mainClass = "";
+                        SparkJob.prototype.mainClass = null;
     
                         /**
                          * SparkJob args.
@@ -41113,11 +41113,11 @@
     
                         /**
                          * HiveJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1beta2.HiveJob
                          * @instance
                          */
-                        HiveJob.prototype.queryFileUri = "";
+                        HiveJob.prototype.queryFileUri = null;
     
                         /**
                          * HiveJob queryList.
@@ -41529,11 +41529,11 @@
     
                         /**
                          * SparkSqlJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1beta2.SparkSqlJob
                          * @instance
                          */
-                        SparkSqlJob.prototype.queryFileUri = "";
+                        SparkSqlJob.prototype.queryFileUri = null;
     
                         /**
                          * SparkSqlJob queryList.
@@ -41951,11 +41951,11 @@
     
                         /**
                          * PigJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1beta2.PigJob
                          * @instance
                          */
-                        PigJob.prototype.queryFileUri = "";
+                        PigJob.prototype.queryFileUri = null;
     
                         /**
                          * PigJob queryList.
@@ -42783,11 +42783,11 @@
     
                         /**
                          * PrestoJob queryFileUri.
-                         * @member {string} queryFileUri
+                         * @member {string|null|undefined} queryFileUri
                          * @memberof google.cloud.dataproc.v1beta2.PrestoJob
                          * @instance
                          */
-                        PrestoJob.prototype.queryFileUri = "";
+                        PrestoJob.prototype.queryFileUri = null;
     
                         /**
                          * PrestoJob queryList.
@@ -54677,43 +54677,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

@@ -5429,10 +5429,10 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.IHadoopJob);
 
                     /** HadoopJob mainJarFileUri. */
-                    public mainJarFileUri: string;
+                    public mainJarFileUri?: (string|null);
 
                     /** HadoopJob mainClass. */
-                    public mainClass: string;
+                    public mainClass?: (string|null);
 
                     /** HadoopJob args. */
                     public args: string[];
@@ -5564,10 +5564,10 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.ISparkJob);
 
                     /** SparkJob mainJarFileUri. */
-                    public mainJarFileUri: string;
+                    public mainJarFileUri?: (string|null);
 
                     /** SparkJob mainClass. */
-                    public mainClass: string;
+                    public mainClass?: (string|null);
 
                     /** SparkJob args. */
                     public args: string[];
@@ -5915,7 +5915,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.IHiveJob);
 
                     /** HiveJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** HiveJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1.IQueryList|null);
@@ -6038,7 +6038,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.ISparkSqlJob);
 
                     /** SparkSqlJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** SparkSqlJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1.IQueryList|null);
@@ -6164,7 +6164,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.IPigJob);
 
                     /** PigJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** PigJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1.IQueryList|null);
@@ -6413,7 +6413,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.IPrestoJob);
 
                     /** PrestoJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** PrestoJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1.IQueryList|null);
@@ -15543,10 +15543,10 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1beta2.IHadoopJob);
 
                     /** HadoopJob mainJarFileUri. */
-                    public mainJarFileUri: string;
+                    public mainJarFileUri?: (string|null);
 
                     /** HadoopJob mainClass. */
-                    public mainClass: string;
+                    public mainClass?: (string|null);
 
                     /** HadoopJob args. */
                     public args: string[];
@@ -15678,10 +15678,10 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1beta2.ISparkJob);
 
                     /** SparkJob mainJarFileUri. */
-                    public mainJarFileUri: string;
+                    public mainJarFileUri?: (string|null);
 
                     /** SparkJob mainClass. */
-                    public mainClass: string;
+                    public mainClass?: (string|null);
 
                     /** SparkJob args. */
                     public args: string[];
@@ -16029,7 +16029,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1beta2.IHiveJob);
 
                     /** HiveJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** HiveJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1beta2.IQueryList|null);
@@ -16152,7 +16152,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1beta2.ISparkSqlJob);
 
                     /** SparkSqlJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** SparkSqlJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1beta2.IQueryList|null);
@@ -16278,7 +16278,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1beta2.IPigJob);
 
                     /** PigJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** PigJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1beta2.IQueryList|null);
@@ -16527,7 +16527,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1beta2.IPrestoJob);
 
                     /** PrestoJob queryFileUri. */
-                    public queryFileUri: string;
+                    public queryFileUri?: (string|null);
 
                     /** PrestoJob queryList. */
                     public queryList?: (google.cloud.dataproc.v1beta2.IQueryList|null);
@@ -21089,19 +21089,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
