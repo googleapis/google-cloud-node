@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -137,49 +136,54 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client();
+    const client =
+      new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.containerAnalysisV1Beta1Stub, undefined);
     await client.initialize();
     assert(client.containerAnalysisV1Beta1Stub);
   });
 
   it('has close method', () => {
-    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -188,12 +192,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -212,12 +217,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
 
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -245,12 +251,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -267,9 +274,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -295,12 +301,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes setIamPolicy with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -330,12 +337,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -363,12 +371,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -385,9 +394,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -413,12 +421,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes getIamPolicy with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -448,12 +457,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -470,9 +480,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -483,12 +492,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -505,9 +515,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -533,12 +542,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes testIamPermissions with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -568,12 +578,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
 
   describe('getScanConfig', () => {
     it('invokes getScanConfig without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GetScanConfigRequest()
@@ -601,12 +612,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes getScanConfig without error using callback', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GetScanConfigRequest()
@@ -623,9 +635,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ScanConfig()
       );
-      client.innerApiCalls.getScanConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getScanConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getScanConfig(
           request,
@@ -651,12 +662,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes getScanConfig with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GetScanConfigRequest()
@@ -686,12 +698,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
 
   describe('updateScanConfig', () => {
     it('invokes updateScanConfig without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.UpdateScanConfigRequest()
@@ -719,12 +732,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes updateScanConfig without error using callback', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.UpdateScanConfigRequest()
@@ -741,9 +755,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ScanConfig()
       );
-      client.innerApiCalls.updateScanConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateScanConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateScanConfig(
           request,
@@ -769,12 +782,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes updateScanConfig with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.UpdateScanConfigRequest()
@@ -804,12 +818,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
 
   describe('listScanConfigs', () => {
     it('invokes listScanConfigs without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest()
@@ -845,12 +860,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes listScanConfigs without error using callback', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest()
@@ -875,9 +891,8 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           new protos.google.devtools.containeranalysis.v1beta1.ScanConfig()
         ),
       ];
-      client.innerApiCalls.listScanConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listScanConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listScanConfigs(
           request,
@@ -905,12 +920,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes listScanConfigs with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest()
@@ -938,12 +954,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes listScanConfigsStream without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest()
@@ -961,12 +978,12 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           new protos.google.devtools.containeranalysis.v1beta1.ScanConfig()
         ),
       ];
-      client.descriptors.page.listScanConfigs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listScanConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listScanConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.containeranalysis.v1beta1.ScanConfig[] = [];
+        const responses: protos.google.devtools.containeranalysis.v1beta1.ScanConfig[] =
+          [];
         stream.on(
           'data',
           (
@@ -990,21 +1007,21 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           .calledWith(client.innerApiCalls.listScanConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listScanConfigsStream with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest()
@@ -1012,13 +1029,12 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listScanConfigs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listScanConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listScanConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.containeranalysis.v1beta1.ScanConfig[] = [];
+        const responses: protos.google.devtools.containeranalysis.v1beta1.ScanConfig[] =
+          [];
         stream.on(
           'data',
           (
@@ -1041,21 +1057,21 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           .calledWith(client.innerApiCalls.listScanConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listScanConfigs without error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest()
@@ -1073,36 +1089,37 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
           new protos.google.devtools.containeranalysis.v1beta1.ScanConfig()
         ),
       ];
-      client.descriptors.page.listScanConfigs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.devtools.containeranalysis.v1beta1.IScanConfig[] = [];
+      client.descriptors.page.listScanConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.containeranalysis.v1beta1.IScanConfig[] =
+        [];
       const iterable = client.listScanConfigsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listScanConfigs with error', async () => {
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ListScanConfigsRequest()
@@ -1110,27 +1127,26 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listScanConfigs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listScanConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listScanConfigsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.devtools.containeranalysis.v1beta1.IScanConfig[] = [];
+        const responses: protos.google.devtools.containeranalysis.v1beta1.IScanConfig[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1142,12 +1158,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -1183,12 +1200,13 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         project: 'projectValue',
         scan_config: 'scanConfigValue',
       };
-      const client = new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.scanConfigPathTemplate.render = sinon
         .stub()

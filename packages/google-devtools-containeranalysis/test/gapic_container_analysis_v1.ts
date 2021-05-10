@@ -26,10 +26,9 @@ import * as containeranalysisModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1.ContainerAnalysisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -298,9 +296,8 @@ describe('v1.ContainerAnalysisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -379,9 +376,8 @@ describe('v1.ContainerAnalysisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -412,9 +408,8 @@ describe('v1.ContainerAnalysisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -493,9 +488,8 @@ describe('v1.ContainerAnalysisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1.VulnerabilityOccurrencesSummary()
       );
-      client.innerApiCalls.getVulnerabilityOccurrencesSummary = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getVulnerabilityOccurrencesSummary =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getVulnerabilityOccurrencesSummary(
         request
       );
@@ -528,9 +522,8 @@ describe('v1.ContainerAnalysisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1.VulnerabilityOccurrencesSummary()
       );
-      client.innerApiCalls.getVulnerabilityOccurrencesSummary = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getVulnerabilityOccurrencesSummary =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getVulnerabilityOccurrencesSummary(
           request,
