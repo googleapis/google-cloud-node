@@ -64,7 +64,8 @@ function main() {
   const metricServiceClient = new MetricServiceClient();
   doStuffWithMetricServiceClient(metricServiceClient);
   // check that the client instance can be created
-  const notificationChannelServiceClient = new NotificationChannelServiceClient();
+  const notificationChannelServiceClient =
+    new NotificationChannelServiceClient();
   doStuffWithNotificationChannelServiceClient(notificationChannelServiceClient);
   // check that the client instance can be created
   const queryServiceClient = new QueryServiceClient();

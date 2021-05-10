@@ -191,36 +191,42 @@ export class UptimeCheckServiceClient {
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      folderServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-      ),
-      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-      ),
+      organizationAlertPolicyConditionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
+        ),
+      organizationChannelDescriptorPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
+        ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannels/{notification_channel}'
-      ),
+      organizationNotificationChannelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannels/{notification_channel}'
+        ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
-      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-      ),
+      organizationServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
+      organizationUptimeCheckConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -242,9 +248,10 @@ export class UptimeCheckServiceClient {
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      projectServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
@@ -321,13 +328,14 @@ export class UptimeCheckServiceClient {
     ];
     for (const methodName of uptimeCheckServiceStubMethods) {
       const callPromise = this.uptimeCheckServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -489,11 +497,10 @@ export class UptimeCheckServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getUptimeCheckConfig(request, options, callback);
   }
@@ -585,11 +592,10 @@ export class UptimeCheckServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.createUptimeCheckConfig(
       request,
@@ -699,11 +705,10 @@ export class UptimeCheckServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'uptime_check_config.name': request.uptimeCheckConfig!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'uptime_check_config.name': request.uptimeCheckConfig!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateUptimeCheckConfig(
       request,
@@ -799,11 +804,10 @@ export class UptimeCheckServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteUptimeCheckConfig(
       request,
@@ -911,11 +915,10 @@ export class UptimeCheckServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listUptimeCheckConfigs(
       request,
@@ -961,11 +964,10 @@ export class UptimeCheckServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listUptimeCheckConfigs.createStream(
@@ -1018,17 +1020,16 @@ export class UptimeCheckServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listUptimeCheckConfigs.asyncIterate(
       this.innerApiCalls['listUptimeCheckConfigs'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IUptimeCheckConfig>;
   }
@@ -1216,7 +1217,7 @@ export class UptimeCheckServiceClient {
     this.initialize();
     return this.descriptors.page.listUptimeCheckIps.asyncIterate(
       this.innerApiCalls['listUptimeCheckIps'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IUptimeCheckIp>;
   }

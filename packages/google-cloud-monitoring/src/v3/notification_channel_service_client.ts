@@ -186,36 +186,42 @@ export class NotificationChannelServiceClient {
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      folderServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-      ),
-      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-      ),
+      organizationAlertPolicyConditionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
+        ),
+      organizationChannelDescriptorPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
+        ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannels/{notification_channel}'
-      ),
+      organizationNotificationChannelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannels/{notification_channel}'
+        ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
-      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-      ),
+      organizationServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
+      organizationUptimeCheckConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -237,9 +243,10 @@ export class NotificationChannelServiceClient {
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      projectServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
@@ -320,13 +327,14 @@ export class NotificationChannelServiceClient {
     ];
     for (const methodName of notificationChannelServiceStubMethods) {
       const callPromise = this.notificationChannelServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -495,11 +503,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getNotificationChannelDescriptor(
       request,
@@ -597,11 +604,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getNotificationChannel(
       request,
@@ -703,11 +709,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.createNotificationChannel(
       request,
@@ -805,11 +810,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'notification_channel.name': request.notificationChannel!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'notification_channel.name': request.notificationChannel!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateNotificationChannel(
       request,
@@ -908,11 +912,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteNotificationChannel(
       request,
@@ -1011,11 +1014,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.sendNotificationChannelVerificationCode(
       request,
@@ -1145,11 +1147,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getNotificationChannelVerificationCode(
       request,
@@ -1251,11 +1252,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.verifyNotificationChannel(
       request,
@@ -1368,11 +1368,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.listNotificationChannelDescriptors(
       request,
@@ -1423,11 +1422,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listNotificationChannelDescriptors.createStream(
@@ -1485,17 +1483,16 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listNotificationChannelDescriptors.asyncIterate(
       this.innerApiCalls['listNotificationChannelDescriptors'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.INotificationChannelDescriptor>;
   }
@@ -1616,11 +1613,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.listNotificationChannels(
       request,
@@ -1685,11 +1681,10 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listNotificationChannels.createStream(
@@ -1761,17 +1756,16 @@ export class NotificationChannelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listNotificationChannels.asyncIterate(
       this.innerApiCalls['listNotificationChannels'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.INotificationChannel>;
   }

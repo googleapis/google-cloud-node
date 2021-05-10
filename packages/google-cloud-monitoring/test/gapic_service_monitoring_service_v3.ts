@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -136,49 +135,46 @@ describe('v3.ServiceMonitoringServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient();
+    const client =
+      new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-      {
+    const client =
+      new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-      {
+    const client =
+      new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.serviceMonitoringServiceStub, undefined);
     await client.initialize();
     assert(client.serviceMonitoringServiceStub);
   });
 
   it('has close method', () => {
-    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-      {
+    const client =
+      new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-      {
+    const client =
+      new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -187,12 +183,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-      {
+    const client =
+      new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -211,12 +206,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('createService', () => {
     it('invokes createService without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateServiceRequest()
@@ -244,12 +238,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes createService without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateServiceRequest()
@@ -266,9 +259,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Service()
       );
-      client.innerApiCalls.createService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createService(
           request,
@@ -294,12 +286,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes createService with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateServiceRequest()
@@ -329,12 +320,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('getService', () => {
     it('invokes getService without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetServiceRequest()
@@ -362,12 +352,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes getService without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetServiceRequest()
@@ -384,9 +373,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Service()
       );
-      client.innerApiCalls.getService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getService(
           request,
@@ -412,12 +400,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes getService with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetServiceRequest()
@@ -447,12 +434,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('updateService', () => {
     it('invokes updateService without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateServiceRequest()
@@ -481,12 +467,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes updateService without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateServiceRequest()
@@ -504,9 +489,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Service()
       );
-      client.innerApiCalls.updateService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateService(
           request,
@@ -532,12 +516,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes updateService with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateServiceRequest()
@@ -568,12 +551,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('deleteService', () => {
     it('invokes deleteService without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteServiceRequest()
@@ -601,12 +583,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes deleteService without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteServiceRequest()
@@ -623,9 +604,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteService(
           request,
@@ -651,12 +631,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes deleteService with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteServiceRequest()
@@ -686,12 +665,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('createServiceLevelObjective', () => {
     it('invokes createServiceLevelObjective without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateServiceLevelObjectiveRequest()
@@ -708,9 +686,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.ServiceLevelObjective()
       );
-      client.innerApiCalls.createServiceLevelObjective = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createServiceLevelObjective =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createServiceLevelObjective(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -721,12 +698,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes createServiceLevelObjective without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateServiceLevelObjectiveRequest()
@@ -743,9 +719,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.ServiceLevelObjective()
       );
-      client.innerApiCalls.createServiceLevelObjective = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createServiceLevelObjective =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createServiceLevelObjective(
           request,
@@ -771,12 +746,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes createServiceLevelObjective with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateServiceLevelObjectiveRequest()
@@ -809,12 +783,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('getServiceLevelObjective', () => {
     it('invokes getServiceLevelObjective without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetServiceLevelObjectiveRequest()
@@ -831,9 +804,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.ServiceLevelObjective()
       );
-      client.innerApiCalls.getServiceLevelObjective = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getServiceLevelObjective =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getServiceLevelObjective(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -844,12 +816,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes getServiceLevelObjective without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetServiceLevelObjectiveRequest()
@@ -866,9 +837,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.ServiceLevelObjective()
       );
-      client.innerApiCalls.getServiceLevelObjective = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getServiceLevelObjective =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getServiceLevelObjective(
           request,
@@ -894,12 +864,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes getServiceLevelObjective with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetServiceLevelObjectiveRequest()
@@ -932,12 +901,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('updateServiceLevelObjective', () => {
     it('invokes updateServiceLevelObjective without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateServiceLevelObjectiveRequest()
@@ -955,9 +923,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.ServiceLevelObjective()
       );
-      client.innerApiCalls.updateServiceLevelObjective = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateServiceLevelObjective =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateServiceLevelObjective(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -968,12 +935,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes updateServiceLevelObjective without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateServiceLevelObjectiveRequest()
@@ -991,9 +957,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.ServiceLevelObjective()
       );
-      client.innerApiCalls.updateServiceLevelObjective = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateServiceLevelObjective =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateServiceLevelObjective(
           request,
@@ -1019,12 +984,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes updateServiceLevelObjective with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateServiceLevelObjectiveRequest()
@@ -1058,12 +1022,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('deleteServiceLevelObjective', () => {
     it('invokes deleteServiceLevelObjective without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteServiceLevelObjectiveRequest()
@@ -1080,9 +1043,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteServiceLevelObjective = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteServiceLevelObjective =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteServiceLevelObjective(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1093,12 +1055,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes deleteServiceLevelObjective without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteServiceLevelObjectiveRequest()
@@ -1115,9 +1076,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteServiceLevelObjective = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteServiceLevelObjective =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteServiceLevelObjective(
           request,
@@ -1143,12 +1103,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes deleteServiceLevelObjective with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteServiceLevelObjectiveRequest()
@@ -1181,12 +1140,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('listServices', () => {
     it('invokes listServices without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServicesRequest()
@@ -1216,12 +1174,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes listServices without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServicesRequest()
@@ -1240,9 +1197,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         generateSampleMessage(new protos.google.monitoring.v3.Service()),
         generateSampleMessage(new protos.google.monitoring.v3.Service()),
       ];
-      client.innerApiCalls.listServices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServices(
           request,
@@ -1268,12 +1224,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes listServices with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServicesRequest()
@@ -1301,12 +1256,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes listServicesStream without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServicesRequest()
@@ -1318,9 +1272,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         generateSampleMessage(new protos.google.monitoring.v3.Service()),
         generateSampleMessage(new protos.google.monitoring.v3.Service()),
       ];
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServicesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.monitoring.v3.Service[] = [];
@@ -1342,21 +1295,19 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           .calledWith(client.innerApiCalls.listServices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listServicesStream with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServicesRequest()
@@ -1388,21 +1339,19 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           .calledWith(client.innerApiCalls.listServices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listServices without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServicesRequest()
@@ -1414,9 +1363,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         generateSampleMessage(new protos.google.monitoring.v3.Service()),
         generateSampleMessage(new protos.google.monitoring.v3.Service()),
       ];
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.monitoring.v3.IService[] = [];
       const iterable = client.listServicesAsync(request);
       for await (const resource of iterable) {
@@ -1424,26 +1372,25 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listServices with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServicesRequest()
@@ -1451,10 +1398,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServicesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.monitoring.v3.IService[] = [];
@@ -1463,15 +1408,15 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1479,12 +1424,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
 
   describe('listServiceLevelObjectives', () => {
     it('invokes listServiceLevelObjectives without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServiceLevelObjectivesRequest()
@@ -1509,9 +1453,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           new protos.google.monitoring.v3.ServiceLevelObjective()
         ),
       ];
-      client.innerApiCalls.listServiceLevelObjectives = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listServiceLevelObjectives =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listServiceLevelObjectives(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1522,12 +1465,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes listServiceLevelObjectives without error using callback', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServiceLevelObjectivesRequest()
@@ -1552,9 +1494,8 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           new protos.google.monitoring.v3.ServiceLevelObjective()
         ),
       ];
-      client.innerApiCalls.listServiceLevelObjectives = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServiceLevelObjectives =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServiceLevelObjectives(
           request,
@@ -1580,12 +1521,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes listServiceLevelObjectives with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServiceLevelObjectivesRequest()
@@ -1616,12 +1556,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
     });
 
     it('invokes listServiceLevelObjectivesStream without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServiceLevelObjectivesRequest()
@@ -1639,12 +1578,12 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           new protos.google.monitoring.v3.ServiceLevelObjective()
         ),
       ];
-      client.descriptors.page.listServiceLevelObjectives.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServiceLevelObjectives.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServiceLevelObjectivesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.ServiceLevelObjective[] = [];
+        const responses: protos.google.monitoring.v3.ServiceLevelObjective[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.monitoring.v3.ServiceLevelObjective) => {
@@ -1661,27 +1600,28 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listServiceLevelObjectives
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listServiceLevelObjectives, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceLevelObjectives
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listServiceLevelObjectivesStream with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServiceLevelObjectivesRequest()
@@ -1689,13 +1629,12 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServiceLevelObjectives.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServiceLevelObjectives.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listServiceLevelObjectivesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.ServiceLevelObjective[] = [];
+        const responses: protos.google.monitoring.v3.ServiceLevelObjective[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.monitoring.v3.ServiceLevelObjective) => {
@@ -1711,27 +1650,28 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listServiceLevelObjectives
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listServiceLevelObjectives, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceLevelObjectives
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listServiceLevelObjectives without error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServiceLevelObjectivesRequest()
@@ -1749,36 +1689,37 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           new protos.google.monitoring.v3.ServiceLevelObjective()
         ),
       ];
-      client.descriptors.page.listServiceLevelObjectives.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.monitoring.v3.IServiceLevelObjective[] = [];
+      client.descriptors.page.listServiceLevelObjectives.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.monitoring.v3.IServiceLevelObjective[] =
+        [];
       const iterable = client.listServiceLevelObjectivesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServiceLevelObjectives
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceLevelObjectives
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listServiceLevelObjectives with error', async () => {
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListServiceLevelObjectivesRequest()
@@ -1786,27 +1727,28 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServiceLevelObjectives.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServiceLevelObjectives.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServiceLevelObjectivesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.monitoring.v3.IServiceLevelObjective[] = [];
+        const responses: protos.google.monitoring.v3.IServiceLevelObjective[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServiceLevelObjectives
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceLevelObjectives
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceLevelObjectives
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1819,12 +1761,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         folder: 'folderValue',
         alert_policy: 'alertPolicyValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.folderAlertPolicyPathTemplate.render = sinon
         .stub()
@@ -1840,8 +1781,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderAlertPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1851,21 +1794,24 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         const result = client.matchFolderFromFolderAlertPolicyName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromFolderAlertPolicyName', () => {
-        const result = client.matchAlertPolicyFromFolderAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromFolderAlertPolicyName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1879,12 +1825,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         alert_policy: 'alertPolicyValue',
         condition: 'conditionValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.folderAlertPolicyConditionPathTemplate.render = sinon
         .stub()
@@ -1901,47 +1846,52 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderAlertPolicyConditionName', () => {
-        const result = client.matchFolderFromFolderAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromFolderAlertPolicyConditionName', () => {
-        const result = client.matchAlertPolicyFromFolderAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromFolderAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConditionFromFolderAlertPolicyConditionName', () => {
-        const result = client.matchConditionFromFolderAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchConditionFromFolderAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'conditionValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1954,12 +1904,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         folder: 'folderValue',
         channel_descriptor: 'channelDescriptorValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.folderChannelDescriptorPathTemplate.render = sinon
         .stub()
@@ -1975,34 +1924,40 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderChannelDescriptorPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderChannelDescriptorPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderChannelDescriptorName', () => {
-        const result = client.matchFolderFromFolderChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderChannelDescriptorName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchChannelDescriptorFromFolderChannelDescriptorName', () => {
-        const result = client.matchChannelDescriptorFromFolderChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchChannelDescriptorFromFolderChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'channelDescriptorValue');
         assert(
-          (client.pathTemplates.folderChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2015,12 +1970,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         folder: 'folderValue',
         group: 'groupValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.folderGroupPathTemplate.render = sinon
         .stub()
@@ -2066,12 +2020,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         folder: 'folderValue',
         notification_channel: 'notificationChannelValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.folderNotificationChannelPathTemplate.render = sinon
         .stub()
@@ -2087,34 +2040,40 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderNotificationChannelPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderNotificationChannelPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderNotificationChannelName', () => {
-        const result = client.matchFolderFromFolderNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderNotificationChannelName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchNotificationChannelFromFolderNotificationChannelName', () => {
-        const result = client.matchNotificationChannelFromFolderNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchNotificationChannelFromFolderNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'notificationChannelValue');
         assert(
-          (client.pathTemplates.folderNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2127,12 +2086,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         folder: 'folderValue',
         service: 'serviceValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.folderServicePathTemplate.render = sinon
         .stub()
@@ -2179,19 +2137,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         service: 'serviceValue',
         service_level_objective: 'serviceLevelObjectiveValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('folderServiceServiceLevelObjectivePath', () => {
         const result = client.folderServiceServiceLevelObjectivePath(
@@ -2201,47 +2156,58 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderServiceServiceLevelObjectiveName', () => {
-        const result = client.matchFolderFromFolderServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceFromFolderServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceFromFolderServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceFromFolderServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceLevelObjectiveValue');
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2254,12 +2220,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         folder: 'folderValue',
         uptime_check_config: 'uptimeCheckConfigValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.folderUptimeCheckConfigPathTemplate.render = sinon
         .stub()
@@ -2275,34 +2240,40 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderUptimeCheckConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderUptimeCheckConfigName', () => {
-        const result = client.matchFolderFromFolderUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderUptimeCheckConfigName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchUptimeCheckConfigFromFolderUptimeCheckConfigName', () => {
-        const result = client.matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'uptimeCheckConfigValue');
         assert(
-          (client.pathTemplates.folderUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2315,12 +2286,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         organization: 'organizationValue',
         alert_policy: 'alertPolicyValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.organizationAlertPolicyPathTemplate.render = sinon
         .stub()
@@ -2336,34 +2306,38 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationAlertPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationAlertPolicyName', () => {
-        const result = client.matchOrganizationFromOrganizationAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationAlertPolicyName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromOrganizationAlertPolicyName', () => {
-        const result = client.matchAlertPolicyFromOrganizationAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromOrganizationAlertPolicyName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2377,19 +2351,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         alert_policy: 'alertPolicyValue',
         condition: 'conditionValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationAlertPolicyConditionPath', () => {
         const result = client.organizationAlertPolicyConditionPath(
@@ -2399,47 +2370,58 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationAlertPolicyConditionName', () => {
-        const result = client.matchOrganizationFromOrganizationAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationAlertPolicyConditionName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromOrganizationAlertPolicyConditionName', () => {
-        const result = client.matchAlertPolicyFromOrganizationAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromOrganizationAlertPolicyConditionName(
+            fakePath
+          );
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConditionFromOrganizationAlertPolicyConditionName', () => {
-        const result = client.matchConditionFromOrganizationAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchConditionFromOrganizationAlertPolicyConditionName(
+            fakePath
+          );
         assert.strictEqual(result, 'conditionValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2452,19 +2434,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         organization: 'organizationValue',
         channel_descriptor: 'channelDescriptorValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.organizationChannelDescriptorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationChannelDescriptorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationChannelDescriptorPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationChannelDescriptorPath', () => {
         const result = client.organizationChannelDescriptorPath(
@@ -2473,34 +2452,42 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationChannelDescriptorPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationChannelDescriptorPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationChannelDescriptorName', () => {
-        const result = client.matchOrganizationFromOrganizationChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchChannelDescriptorFromOrganizationChannelDescriptorName', () => {
-        const result = client.matchChannelDescriptorFromOrganizationChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchChannelDescriptorFromOrganizationChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'channelDescriptorValue');
         assert(
-          (client.pathTemplates.organizationChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2513,12 +2500,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         organization: 'organizationValue',
         group: 'groupValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.organizationGroupPathTemplate.render = sinon
         .stub()
@@ -2534,21 +2520,24 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationGroupPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationGroupPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationGroupName', () => {
-        const result = client.matchOrganizationFromOrganizationGroupName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationGroupName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2558,8 +2547,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         const result = client.matchGroupFromOrganizationGroupName(fakePath);
         assert.strictEqual(result, 'groupValue');
         assert(
-          (client.pathTemplates.organizationGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2572,19 +2563,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         organization: 'organizationValue',
         notification_channel: 'notificationChannelValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.organizationNotificationChannelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationNotificationChannelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationNotificationChannelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationNotificationChannelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationNotificationChannelPath', () => {
         const result = client.organizationNotificationChannelPath(
@@ -2593,34 +2581,42 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationNotificationChannelPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationNotificationChannelPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationNotificationChannelName', () => {
-        const result = client.matchOrganizationFromOrganizationNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchNotificationChannelFromOrganizationNotificationChannelName', () => {
-        const result = client.matchNotificationChannelFromOrganizationNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchNotificationChannelFromOrganizationNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'notificationChannelValue');
         assert(
-          (client.pathTemplates.organizationNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2633,12 +2629,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         organization: 'organizationValue',
         service: 'serviceValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.organizationServicePathTemplate.render = sinon
         .stub()
@@ -2654,21 +2649,24 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationServicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationServicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationServiceName', () => {
-        const result = client.matchOrganizationFromOrganizationServiceName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationServiceName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationServicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationServicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2678,8 +2676,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         const result = client.matchServiceFromOrganizationServiceName(fakePath);
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates.organizationServicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationServicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2694,19 +2694,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         service: 'serviceValue',
         service_level_objective: 'serviceLevelObjectiveValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationServiceServiceLevelObjectivePath', () => {
         const result = client.organizationServiceServiceLevelObjectivePath(
@@ -2716,51 +2713,62 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result = client.matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceFromOrganizationServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceFromOrganizationServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceLevelObjectiveValue');
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2773,19 +2781,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         organization: 'organizationValue',
         uptime_check_config: 'uptimeCheckConfigValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationUptimeCheckConfigPath', () => {
         const result = client.organizationUptimeCheckConfigPath(
@@ -2794,34 +2799,42 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationUptimeCheckConfigName', () => {
-        const result = client.matchOrganizationFromOrganizationUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName', () => {
-        const result = client.matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'uptimeCheckConfigValue');
         assert(
-          (client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2833,12 +2846,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -2874,12 +2886,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         project: 'projectValue',
         alert_policy: 'alertPolicyValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectAlertPolicyPathTemplate.render = sinon
         .stub()
@@ -2895,8 +2906,10 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectAlertPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2906,21 +2919,24 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         const result = client.matchProjectFromProjectAlertPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromProjectAlertPolicyName', () => {
-        const result = client.matchAlertPolicyFromProjectAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromProjectAlertPolicyName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2934,16 +2950,14 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         alert_policy: 'alertPolicyValue',
         condition: 'conditionValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectAlertPolicyConditionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
+      client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
+        sinon.stub().returns(fakePath);
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
@@ -2956,47 +2970,52 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectAlertPolicyConditionName', () => {
-        const result = client.matchProjectFromProjectAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromProjectAlertPolicyConditionName', () => {
-        const result = client.matchAlertPolicyFromProjectAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromProjectAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConditionFromProjectAlertPolicyConditionName', () => {
-        const result = client.matchConditionFromProjectAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchConditionFromProjectAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'conditionValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3009,12 +3028,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         project: 'projectValue',
         channel_descriptor: 'channelDescriptorValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectChannelDescriptorPathTemplate.render = sinon
         .stub()
@@ -3030,34 +3048,40 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectChannelDescriptorPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectChannelDescriptorPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectChannelDescriptorName', () => {
-        const result = client.matchProjectFromProjectChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectChannelDescriptorName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchChannelDescriptorFromProjectChannelDescriptorName', () => {
-        const result = client.matchChannelDescriptorFromProjectChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchChannelDescriptorFromProjectChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'channelDescriptorValue');
         assert(
-          (client.pathTemplates.projectChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3070,12 +3094,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         project: 'projectValue',
         group: 'groupValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectGroupPathTemplate.render = sinon
         .stub()
@@ -3121,12 +3144,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         project: 'projectValue',
         notification_channel: 'notificationChannelValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectNotificationChannelPathTemplate.render = sinon
         .stub()
@@ -3142,34 +3164,40 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectNotificationChannelPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectNotificationChannelPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectNotificationChannelName', () => {
-        const result = client.matchProjectFromProjectNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectNotificationChannelName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchNotificationChannelFromProjectNotificationChannelName', () => {
-        const result = client.matchNotificationChannelFromProjectNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchNotificationChannelFromProjectNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'notificationChannelValue');
         assert(
-          (client.pathTemplates.projectNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3182,12 +3210,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         project: 'projectValue',
         service: 'serviceValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectServicePathTemplate.render = sinon
         .stub()
@@ -3237,19 +3264,16 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         service: 'serviceValue',
         service_level_objective: 'serviceLevelObjectiveValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectServiceServiceLevelObjectivePath', () => {
         const result = client.projectServiceServiceLevelObjectivePath(
@@ -3259,47 +3283,58 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectServiceServiceLevelObjectiveName', () => {
-        const result = client.matchProjectFromProjectServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceFromProjectServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceFromProjectServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceFromProjectServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceLevelObjectiveValue');
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3312,12 +3347,11 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         project: 'projectValue',
         uptime_check_config: 'uptimeCheckConfigValue',
       };
-      const client = new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient(
-        {
+      const client =
+        new servicemonitoringserviceModule.v3.ServiceMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectUptimeCheckConfigPathTemplate.render = sinon
         .stub()
@@ -3333,34 +3367,40 @@ describe('v3.ServiceMonitoringServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectUptimeCheckConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectUptimeCheckConfigName', () => {
-        const result = client.matchProjectFromProjectUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectUptimeCheckConfigName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchUptimeCheckConfigFromProjectUptimeCheckConfigName', () => {
-        const result = client.matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'uptimeCheckConfigValue');
         assert(
-          (client.pathTemplates.projectUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

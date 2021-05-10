@@ -410,10 +410,10 @@ export namespace google {
                         constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.ITrigger);
 
                         /** Trigger count. */
-                        public count: number;
+                        public count?: (number|null);
 
                         /** Trigger percent. */
-                        public percent: number;
+                        public percent?: (number|null);
 
                         /** Trigger type. */
                         public type?: ("count"|"percent");
@@ -870,16 +870,16 @@ export namespace google {
                 constructor(properties?: google.monitoring.v3.ITypedValue);
 
                 /** TypedValue boolValue. */
-                public boolValue: boolean;
+                public boolValue?: (boolean|null);
 
                 /** TypedValue int64Value. */
-                public int64Value: (number|Long|string);
+                public int64Value?: (number|Long|string|null);
 
                 /** TypedValue doubleValue. */
-                public doubleValue: number;
+                public doubleValue?: (number|null);
 
                 /** TypedValue stringValue. */
-                public stringValue: string;
+                public stringValue?: (string|null);
 
                 /** TypedValue distributionValue. */
                 public distributionValue?: (google.api.IDistribution|null);
@@ -2426,13 +2426,13 @@ export namespace google {
                 public name: string;
 
                 /** ListGroupsRequest childrenOfGroup. */
-                public childrenOfGroup: string;
+                public childrenOfGroup?: (string|null);
 
                 /** ListGroupsRequest ancestorsOfGroup. */
-                public ancestorsOfGroup: string;
+                public ancestorsOfGroup?: (string|null);
 
                 /** ListGroupsRequest descendantsOfGroup. */
-                public descendantsOfGroup: string;
+                public descendantsOfGroup?: (string|null);
 
                 /** ListGroupsRequest pageSize. */
                 public pageSize: number;
@@ -3857,13 +3857,13 @@ export namespace google {
                 constructor(properties?: google.monitoring.v3.ILabelValue);
 
                 /** LabelValue boolValue. */
-                public boolValue: boolean;
+                public boolValue?: (boolean|null);
 
                 /** LabelValue int64Value. */
-                public int64Value: (number|Long|string);
+                public int64Value?: (number|Long|string|null);
 
                 /** LabelValue stringValue. */
-                public stringValue: string;
+                public stringValue?: (string|null);
 
                 /** LabelValue value. */
                 public value?: ("boolValue"|"int64Value"|"stringValue");
@@ -8850,7 +8850,7 @@ export namespace google {
                 public rollingPeriod?: (google.protobuf.IDuration|null);
 
                 /** ServiceLevelObjective calendarPeriod. */
-                public calendarPeriod: (google.type.CalendarPeriod|keyof typeof google.type.CalendarPeriod);
+                public calendarPeriod?: (google.type.CalendarPeriod|keyof typeof google.type.CalendarPeriod|null);
 
                 /** ServiceLevelObjective period. */
                 public period?: ("rollingPeriod"|"calendarPeriod");
@@ -9757,7 +9757,7 @@ export namespace google {
                 constructor(properties?: google.monitoring.v3.IWindowsBasedSli);
 
                 /** WindowsBasedSli goodBadMetricFilter. */
-                public goodBadMetricFilter: string;
+                public goodBadMetricFilter?: (string|null);
 
                 /** WindowsBasedSli goodTotalRatioThreshold. */
                 public goodTotalRatioThreshold?: (google.monitoring.v3.WindowsBasedSli.IPerformanceThreshold|null);
@@ -14556,19 +14556,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
@@ -19908,16 +19908,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);

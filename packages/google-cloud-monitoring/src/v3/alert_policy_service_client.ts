@@ -192,36 +192,42 @@ export class AlertPolicyServiceClient {
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      folderServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-      ),
-      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-      ),
+      organizationAlertPolicyConditionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
+        ),
+      organizationChannelDescriptorPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
+        ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannels/{notification_channel}'
-      ),
+      organizationNotificationChannelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannels/{notification_channel}'
+        ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
-      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-      ),
+      organizationServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
+      organizationUptimeCheckConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -243,9 +249,10 @@ export class AlertPolicyServiceClient {
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      projectServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
@@ -316,13 +323,14 @@ export class AlertPolicyServiceClient {
     ];
     for (const methodName of alertPolicyServiceStubMethods) {
       const callPromise = this.alertPolicyServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -476,11 +484,10 @@ export class AlertPolicyServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getAlertPolicy(request, options, callback);
   }
@@ -576,11 +583,10 @@ export class AlertPolicyServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.createAlertPolicy(request, options, callback);
   }
@@ -666,11 +672,10 @@ export class AlertPolicyServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteAlertPolicy(request, options, callback);
   }
@@ -780,11 +785,10 @@ export class AlertPolicyServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'alert_policy.name': request.alertPolicy!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'alert_policy.name': request.alertPolicy!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateAlertPolicy(request, options, callback);
   }
@@ -897,11 +901,10 @@ export class AlertPolicyServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.listAlertPolicies(request, options, callback);
   }
@@ -959,11 +962,10 @@ export class AlertPolicyServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listAlertPolicies.createStream(
@@ -1032,17 +1034,16 @@ export class AlertPolicyServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listAlertPolicies.asyncIterate(
       this.innerApiCalls['listAlertPolicies'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IAlertPolicy>;
   }

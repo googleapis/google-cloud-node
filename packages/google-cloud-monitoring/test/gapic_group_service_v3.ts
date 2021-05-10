@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -247,9 +246,8 @@ describe('v3.GroupServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
-      client.innerApiCalls.getGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getGroup(
           request,
@@ -356,9 +354,8 @@ describe('v3.GroupServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
-      client.innerApiCalls.createGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createGroup(
           request,
@@ -470,9 +467,8 @@ describe('v3.GroupServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
-      client.innerApiCalls.updateGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateGroup(
           request,
@@ -583,9 +579,8 @@ describe('v3.GroupServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteGroup(
           request,
@@ -699,9 +694,8 @@ describe('v3.GroupServiceClient', () => {
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
       ];
-      client.innerApiCalls.listGroups = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listGroups =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listGroups(
           request,
@@ -773,9 +767,8 @@ describe('v3.GroupServiceClient', () => {
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
       ];
-      client.descriptors.page.listGroups.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listGroupsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.monitoring.v3.Group[] = [];
@@ -863,9 +856,8 @@ describe('v3.GroupServiceClient', () => {
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
       ];
-      client.descriptors.page.listGroups.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.monitoring.v3.IGroup[] = [];
       const iterable = client.listGroupsAsync(request);
       for await (const resource of iterable) {
@@ -981,9 +973,8 @@ describe('v3.GroupServiceClient', () => {
         generateSampleMessage(new protos.google.api.MonitoredResource()),
         generateSampleMessage(new protos.google.api.MonitoredResource()),
       ];
-      client.innerApiCalls.listGroupMembers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listGroupMembers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listGroupMembers(
           request,
@@ -1055,9 +1046,8 @@ describe('v3.GroupServiceClient', () => {
         generateSampleMessage(new protos.google.api.MonitoredResource()),
         generateSampleMessage(new protos.google.api.MonitoredResource()),
       ];
-      client.descriptors.page.listGroupMembers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGroupMembers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listGroupMembersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.api.MonitoredResource[] = [];
@@ -1079,10 +1069,9 @@ describe('v3.GroupServiceClient', () => {
           .calledWith(client.innerApiCalls.listGroupMembers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGroupMembers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGroupMembers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1099,10 +1088,8 @@ describe('v3.GroupServiceClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listGroupMembers.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listGroupMembers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listGroupMembersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.api.MonitoredResource[] = [];
@@ -1123,10 +1110,9 @@ describe('v3.GroupServiceClient', () => {
           .calledWith(client.innerApiCalls.listGroupMembers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGroupMembers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGroupMembers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1147,9 +1133,8 @@ describe('v3.GroupServiceClient', () => {
         generateSampleMessage(new protos.google.api.MonitoredResource()),
         generateSampleMessage(new protos.google.api.MonitoredResource()),
       ];
-      client.descriptors.page.listGroupMembers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGroupMembers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.api.IMonitoredResource[] = [];
       const iterable = client.listGroupMembersAsync(request);
       for await (const resource of iterable) {
@@ -1157,15 +1142,15 @@ describe('v3.GroupServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listGroupMembers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGroupMembers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGroupMembers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGroupMembers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1182,10 +1167,8 @@ describe('v3.GroupServiceClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listGroupMembers.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listGroupMembers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listGroupMembersAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.api.IMonitoredResource[] = [];
@@ -1194,15 +1177,15 @@ describe('v3.GroupServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listGroupMembers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGroupMembers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGroupMembers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGroupMembers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1234,8 +1217,10 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderAlertPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1245,21 +1230,24 @@ describe('v3.GroupServiceClient', () => {
         const result = client.matchFolderFromFolderAlertPolicyName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromFolderAlertPolicyName', () => {
-        const result = client.matchAlertPolicyFromFolderAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromFolderAlertPolicyName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1293,47 +1281,52 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderAlertPolicyConditionName', () => {
-        const result = client.matchFolderFromFolderAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromFolderAlertPolicyConditionName', () => {
-        const result = client.matchAlertPolicyFromFolderAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromFolderAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConditionFromFolderAlertPolicyConditionName', () => {
-        const result = client.matchConditionFromFolderAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchConditionFromFolderAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'conditionValue');
         assert(
-          (client.pathTemplates.folderAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1365,34 +1358,40 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderChannelDescriptorPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderChannelDescriptorPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderChannelDescriptorName', () => {
-        const result = client.matchFolderFromFolderChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderChannelDescriptorName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchChannelDescriptorFromFolderChannelDescriptorName', () => {
-        const result = client.matchChannelDescriptorFromFolderChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchChannelDescriptorFromFolderChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'channelDescriptorValue');
         assert(
-          (client.pathTemplates.folderChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1473,34 +1472,40 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderNotificationChannelPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderNotificationChannelPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderNotificationChannelName', () => {
-        const result = client.matchFolderFromFolderNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderNotificationChannelName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchNotificationChannelFromFolderNotificationChannelName', () => {
-        const result = client.matchNotificationChannelFromFolderNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchNotificationChannelFromFolderNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'notificationChannelValue');
         assert(
-          (client.pathTemplates.folderNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1568,12 +1573,10 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('folderServiceServiceLevelObjectivePath', () => {
         const result = client.folderServiceServiceLevelObjectivePath(
@@ -1583,47 +1586,58 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderServiceServiceLevelObjectiveName', () => {
-        const result = client.matchFolderFromFolderServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceFromFolderServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceFromFolderServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceFromFolderServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceLevelObjectiveValue');
         assert(
-          (client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1655,34 +1669,40 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderUptimeCheckConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchFolderFromFolderUptimeCheckConfigName', () => {
-        const result = client.matchFolderFromFolderUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchFolderFromFolderUptimeCheckConfigName(fakePath);
         assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.folderUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchUptimeCheckConfigFromFolderUptimeCheckConfigName', () => {
-        const result = client.matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'uptimeCheckConfigValue');
         assert(
-          (client.pathTemplates.folderUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1714,34 +1734,38 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationAlertPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationAlertPolicyName', () => {
-        const result = client.matchOrganizationFromOrganizationAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationAlertPolicyName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromOrganizationAlertPolicyName', () => {
-        const result = client.matchAlertPolicyFromOrganizationAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromOrganizationAlertPolicyName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1760,12 +1784,10 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationAlertPolicyConditionPath', () => {
         const result = client.organizationAlertPolicyConditionPath(
@@ -1775,47 +1797,58 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationAlertPolicyConditionName', () => {
-        const result = client.matchOrganizationFromOrganizationAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationAlertPolicyConditionName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromOrganizationAlertPolicyConditionName', () => {
-        const result = client.matchAlertPolicyFromOrganizationAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromOrganizationAlertPolicyConditionName(
+            fakePath
+          );
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConditionFromOrganizationAlertPolicyConditionName', () => {
-        const result = client.matchConditionFromOrganizationAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchConditionFromOrganizationAlertPolicyConditionName(
+            fakePath
+          );
         assert.strictEqual(result, 'conditionValue');
         assert(
-          (client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1833,12 +1866,10 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationChannelDescriptorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationChannelDescriptorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationChannelDescriptorPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationChannelDescriptorPath', () => {
         const result = client.organizationChannelDescriptorPath(
@@ -1847,34 +1878,42 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationChannelDescriptorPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationChannelDescriptorPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationChannelDescriptorName', () => {
-        const result = client.matchOrganizationFromOrganizationChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchChannelDescriptorFromOrganizationChannelDescriptorName', () => {
-        const result = client.matchChannelDescriptorFromOrganizationChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchChannelDescriptorFromOrganizationChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'channelDescriptorValue');
         assert(
-          (client.pathTemplates.organizationChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1906,21 +1945,24 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationGroupPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationGroupPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationGroupName', () => {
-        const result = client.matchOrganizationFromOrganizationGroupName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationGroupName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1930,8 +1972,10 @@ describe('v3.GroupServiceClient', () => {
         const result = client.matchGroupFromOrganizationGroupName(fakePath);
         assert.strictEqual(result, 'groupValue');
         assert(
-          (client.pathTemplates.organizationGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1949,12 +1993,10 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationNotificationChannelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationNotificationChannelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationNotificationChannelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationNotificationChannelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationNotificationChannelPath', () => {
         const result = client.organizationNotificationChannelPath(
@@ -1963,34 +2005,42 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationNotificationChannelPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationNotificationChannelPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationNotificationChannelName', () => {
-        const result = client.matchOrganizationFromOrganizationNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchNotificationChannelFromOrganizationNotificationChannelName', () => {
-        const result = client.matchNotificationChannelFromOrganizationNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchNotificationChannelFromOrganizationNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'notificationChannelValue');
         assert(
-          (client.pathTemplates.organizationNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2022,21 +2072,24 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationServicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationServicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationServiceName', () => {
-        const result = client.matchOrganizationFromOrganizationServiceName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationServiceName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationServicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationServicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2046,8 +2099,10 @@ describe('v3.GroupServiceClient', () => {
         const result = client.matchServiceFromOrganizationServiceName(fakePath);
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates.organizationServicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationServicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2067,12 +2122,10 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationServiceServiceLevelObjectivePath', () => {
         const result = client.organizationServiceServiceLevelObjectivePath(
@@ -2082,51 +2135,62 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result = client.matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceFromOrganizationServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceFromOrganizationServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceLevelObjectiveValue');
         assert(
-          (client.pathTemplates
-            .organizationServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2144,12 +2208,10 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationUptimeCheckConfigPath', () => {
         const result = client.organizationUptimeCheckConfigPath(
@@ -2158,34 +2220,42 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationUptimeCheckConfigName', () => {
-        const result = client.matchOrganizationFromOrganizationUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName', () => {
-        const result = client.matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'uptimeCheckConfigValue');
         assert(
-          (client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2255,8 +2325,10 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectAlertPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2266,21 +2338,24 @@ describe('v3.GroupServiceClient', () => {
         const result = client.matchProjectFromProjectAlertPolicyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromProjectAlertPolicyName', () => {
-        const result = client.matchAlertPolicyFromProjectAlertPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromProjectAlertPolicyName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2299,9 +2374,8 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectAlertPolicyConditionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
+      client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
+        sinon.stub().returns(fakePath);
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
@@ -2314,47 +2388,52 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectAlertPolicyConditionName', () => {
-        const result = client.matchProjectFromProjectAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAlertPolicyFromProjectAlertPolicyConditionName', () => {
-        const result = client.matchAlertPolicyFromProjectAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchAlertPolicyFromProjectAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'alertPolicyValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConditionFromProjectAlertPolicyConditionName', () => {
-        const result = client.matchConditionFromProjectAlertPolicyConditionName(
-          fakePath
-        );
+        const result =
+          client.matchConditionFromProjectAlertPolicyConditionName(fakePath);
         assert.strictEqual(result, 'conditionValue');
         assert(
-          (client.pathTemplates.projectAlertPolicyConditionPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2386,34 +2465,40 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectChannelDescriptorPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectChannelDescriptorPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectChannelDescriptorName', () => {
-        const result = client.matchProjectFromProjectChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectChannelDescriptorName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchChannelDescriptorFromProjectChannelDescriptorName', () => {
-        const result = client.matchChannelDescriptorFromProjectChannelDescriptorName(
-          fakePath
-        );
+        const result =
+          client.matchChannelDescriptorFromProjectChannelDescriptorName(
+            fakePath
+          );
         assert.strictEqual(result, 'channelDescriptorValue');
         assert(
-          (client.pathTemplates.projectChannelDescriptorPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectChannelDescriptorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2494,34 +2579,40 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectNotificationChannelPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectNotificationChannelPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectNotificationChannelName', () => {
-        const result = client.matchProjectFromProjectNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectNotificationChannelName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchNotificationChannelFromProjectNotificationChannelName', () => {
-        const result = client.matchNotificationChannelFromProjectNotificationChannelName(
-          fakePath
-        );
+        const result =
+          client.matchNotificationChannelFromProjectNotificationChannelName(
+            fakePath
+          );
         assert.strictEqual(result, 'notificationChannelValue');
         assert(
-          (client.pathTemplates.projectNotificationChannelPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectNotificationChannelPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2592,12 +2683,10 @@ describe('v3.GroupServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectServiceServiceLevelObjectivePath', () => {
         const result = client.projectServiceServiceLevelObjectivePath(
@@ -2607,47 +2696,58 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectServiceServiceLevelObjectiveName', () => {
-        const result = client.matchProjectFromProjectServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceFromProjectServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceFromProjectServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceFromProjectServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceValue');
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName', () => {
-        const result = client.matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
-          fakePath
-        );
+        const result =
+          client.matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
+            fakePath
+          );
         assert.strictEqual(result, 'serviceLevelObjectiveValue');
         assert(
-          (client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2679,34 +2779,40 @@ describe('v3.GroupServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectUptimeCheckConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectUptimeCheckConfigName', () => {
-        const result = client.matchProjectFromProjectUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectUptimeCheckConfigName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchUptimeCheckConfigFromProjectUptimeCheckConfigName', () => {
-        const result = client.matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
-          fakePath
-        );
+        const result =
+          client.matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'uptimeCheckConfigValue');
         assert(
-          (client.pathTemplates.projectUptimeCheckConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

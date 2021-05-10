@@ -1144,19 +1144,19 @@
     
                             /**
                              * Trigger count.
-                             * @member {number} count
+                             * @member {number|null|undefined} count
                              * @memberof google.monitoring.v3.AlertPolicy.Condition.Trigger
                              * @instance
                              */
-                            Trigger.prototype.count = 0;
+                            Trigger.prototype.count = null;
     
                             /**
                              * Trigger percent.
-                             * @member {number} percent
+                             * @member {number|null|undefined} percent
                              * @memberof google.monitoring.v3.AlertPolicy.Condition.Trigger
                              * @instance
                              */
-                            Trigger.prototype.percent = 0;
+                            Trigger.prototype.percent = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -2366,35 +2366,35 @@
     
                     /**
                      * TypedValue boolValue.
-                     * @member {boolean} boolValue
+                     * @member {boolean|null|undefined} boolValue
                      * @memberof google.monitoring.v3.TypedValue
                      * @instance
                      */
-                    TypedValue.prototype.boolValue = false;
+                    TypedValue.prototype.boolValue = null;
     
                     /**
                      * TypedValue int64Value.
-                     * @member {number|Long} int64Value
+                     * @member {number|Long|null|undefined} int64Value
                      * @memberof google.monitoring.v3.TypedValue
                      * @instance
                      */
-                    TypedValue.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                    TypedValue.prototype.int64Value = null;
     
                     /**
                      * TypedValue doubleValue.
-                     * @member {number} doubleValue
+                     * @member {number|null|undefined} doubleValue
                      * @memberof google.monitoring.v3.TypedValue
                      * @instance
                      */
-                    TypedValue.prototype.doubleValue = 0;
+                    TypedValue.prototype.doubleValue = null;
     
                     /**
                      * TypedValue stringValue.
-                     * @member {string} stringValue
+                     * @member {string|null|undefined} stringValue
                      * @memberof google.monitoring.v3.TypedValue
                      * @instance
                      */
-                    TypedValue.prototype.stringValue = "";
+                    TypedValue.prototype.stringValue = null;
     
                     /**
                      * TypedValue distributionValue.
@@ -5986,27 +5986,27 @@
     
                     /**
                      * ListGroupsRequest childrenOfGroup.
-                     * @member {string} childrenOfGroup
+                     * @member {string|null|undefined} childrenOfGroup
                      * @memberof google.monitoring.v3.ListGroupsRequest
                      * @instance
                      */
-                    ListGroupsRequest.prototype.childrenOfGroup = "";
+                    ListGroupsRequest.prototype.childrenOfGroup = null;
     
                     /**
                      * ListGroupsRequest ancestorsOfGroup.
-                     * @member {string} ancestorsOfGroup
+                     * @member {string|null|undefined} ancestorsOfGroup
                      * @memberof google.monitoring.v3.ListGroupsRequest
                      * @instance
                      */
-                    ListGroupsRequest.prototype.ancestorsOfGroup = "";
+                    ListGroupsRequest.prototype.ancestorsOfGroup = null;
     
                     /**
                      * ListGroupsRequest descendantsOfGroup.
-                     * @member {string} descendantsOfGroup
+                     * @member {string|null|undefined} descendantsOfGroup
                      * @memberof google.monitoring.v3.ListGroupsRequest
                      * @instance
                      */
-                    ListGroupsRequest.prototype.descendantsOfGroup = "";
+                    ListGroupsRequest.prototype.descendantsOfGroup = null;
     
                     /**
                      * ListGroupsRequest pageSize.
@@ -9612,27 +9612,27 @@
     
                     /**
                      * LabelValue boolValue.
-                     * @member {boolean} boolValue
+                     * @member {boolean|null|undefined} boolValue
                      * @memberof google.monitoring.v3.LabelValue
                      * @instance
                      */
-                    LabelValue.prototype.boolValue = false;
+                    LabelValue.prototype.boolValue = null;
     
                     /**
                      * LabelValue int64Value.
-                     * @member {number|Long} int64Value
+                     * @member {number|Long|null|undefined} int64Value
                      * @memberof google.monitoring.v3.LabelValue
                      * @instance
                      */
-                    LabelValue.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                    LabelValue.prototype.int64Value = null;
     
                     /**
                      * LabelValue stringValue.
-                     * @member {string} stringValue
+                     * @member {string|null|undefined} stringValue
                      * @memberof google.monitoring.v3.LabelValue
                      * @instance
                      */
-                    LabelValue.prototype.stringValue = "";
+                    LabelValue.prototype.stringValue = null;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -21217,11 +21217,11 @@
     
                     /**
                      * ServiceLevelObjective calendarPeriod.
-                     * @member {google.type.CalendarPeriod} calendarPeriod
+                     * @member {google.type.CalendarPeriod|null|undefined} calendarPeriod
                      * @memberof google.monitoring.v3.ServiceLevelObjective
                      * @instance
                      */
-                    ServiceLevelObjective.prototype.calendarPeriod = 0;
+                    ServiceLevelObjective.prototype.calendarPeriod = null;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -23463,11 +23463,11 @@
     
                     /**
                      * WindowsBasedSli goodBadMetricFilter.
-                     * @member {string} goodBadMetricFilter
+                     * @member {string|null|undefined} goodBadMetricFilter
                      * @memberof google.monitoring.v3.WindowsBasedSli
                      * @instance
                      */
-                    WindowsBasedSli.prototype.goodBadMetricFilter = "";
+                    WindowsBasedSli.prototype.goodBadMetricFilter = null;
     
                     /**
                      * WindowsBasedSli goodTotalRatioThreshold.
@@ -34874,43 +34874,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
@@ -49120,35 +49120,35 @@
     
                 /**
                  * Value nullValue.
-                 * @member {google.protobuf.NullValue} nullValue
+                 * @member {google.protobuf.NullValue|null|undefined} nullValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.nullValue = 0;
+                Value.prototype.nullValue = null;
     
                 /**
                  * Value numberValue.
-                 * @member {number} numberValue
+                 * @member {number|null|undefined} numberValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.numberValue = 0;
+                Value.prototype.numberValue = null;
     
                 /**
                  * Value stringValue.
-                 * @member {string} stringValue
+                 * @member {string|null|undefined} stringValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.stringValue = "";
+                Value.prototype.stringValue = null;
     
                 /**
                  * Value boolValue.
-                 * @member {boolean} boolValue
+                 * @member {boolean|null|undefined} boolValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.boolValue = false;
+                Value.prototype.boolValue = null;
     
                 /**
                  * Value structValue.

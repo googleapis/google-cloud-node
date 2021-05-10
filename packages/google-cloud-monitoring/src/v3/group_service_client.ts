@@ -195,36 +195,42 @@ export class GroupServiceClient {
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      folderServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-      ),
-      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-      ),
+      organizationAlertPolicyConditionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
+        ),
+      organizationChannelDescriptorPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
+        ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannels/{notification_channel}'
-      ),
+      organizationNotificationChannelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannels/{notification_channel}'
+        ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
-      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-      ),
+      organizationServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
+      organizationUptimeCheckConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -246,9 +252,10 @@ export class GroupServiceClient {
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      projectServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+        ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
@@ -325,13 +332,14 @@ export class GroupServiceClient {
     ];
     for (const methodName of groupServiceStubMethods) {
       const callPromise = this.groupServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -485,11 +493,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getGroup(request, options, callback);
   }
@@ -576,11 +583,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.createGroup(request, options, callback);
   }
@@ -664,11 +670,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'group.name': request.group!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'group.name': request.group!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateGroup(request, options, callback);
   }
@@ -754,11 +759,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteGroup(request, options, callback);
   }
@@ -874,11 +878,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.listGroups(request, options, callback);
   }
@@ -941,11 +944,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listGroups.createStream(
@@ -1019,17 +1021,16 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IGroup>;
   }
@@ -1136,11 +1137,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.listGroupMembers(request, options, callback);
   }
@@ -1193,11 +1193,10 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listGroupMembers.createStream(
@@ -1261,17 +1260,16 @@ export class GroupServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listGroupMembers.asyncIterate(
       this.innerApiCalls['listGroupMembers'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.api.IMonitoredResource>;
   }

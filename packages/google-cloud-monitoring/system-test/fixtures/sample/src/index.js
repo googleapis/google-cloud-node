@@ -23,9 +23,11 @@ function main() {
   const alertPolicyServiceClient = new monitoring.AlertPolicyServiceClient();
   const groupServiceClient = new monitoring.GroupServiceClient();
   const metricServiceClient = new monitoring.MetricServiceClient();
-  const notificationChannelServiceClient = new monitoring.NotificationChannelServiceClient();
+  const notificationChannelServiceClient =
+    new monitoring.NotificationChannelServiceClient();
   const queryServiceClient = new monitoring.QueryServiceClient();
-  const serviceMonitoringServiceClient = new monitoring.ServiceMonitoringServiceClient();
+  const serviceMonitoringServiceClient =
+    new monitoring.ServiceMonitoringServiceClient();
   const uptimeCheckServiceClient = new monitoring.UptimeCheckServiceClient();
 }
 
