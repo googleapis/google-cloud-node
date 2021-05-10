@@ -757,13 +757,13 @@ export namespace google {
                     public repoName: string;
 
                     /** RepoSource branchName. */
-                    public branchName: string;
+                    public branchName?: (string|null);
 
                     /** RepoSource tagName. */
-                    public tagName: string;
+                    public tagName?: (string|null);
 
                     /** RepoSource commitSha. */
-                    public commitSha: string;
+                    public commitSha?: (string|null);
 
                     /** RepoSource dir. */
                     public dir: string;
@@ -3447,7 +3447,7 @@ export namespace google {
                     public build?: (google.devtools.cloudbuild.v1.IBuild|null);
 
                     /** BuildTrigger filename. */
-                    public filename: string;
+                    public filename?: (string|null);
 
                     /** BuildTrigger createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -3801,7 +3801,7 @@ export namespace google {
                     constructor(properties?: google.devtools.cloudbuild.v1.IPullRequestFilter);
 
                     /** PullRequestFilter branch. */
-                    public branch: string;
+                    public branch?: (string|null);
 
                     /** PullRequestFilter commentControl. */
                     public commentControl: (google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl|keyof typeof google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl);
@@ -3916,10 +3916,10 @@ export namespace google {
                     constructor(properties?: google.devtools.cloudbuild.v1.IPushFilter);
 
                     /** PushFilter branch. */
-                    public branch: string;
+                    public branch?: (string|null);
 
                     /** PushFilter tag. */
-                    public tag: string;
+                    public tag?: (string|null);
 
                     /** PushFilter invertRegex. */
                     public invertRegex: boolean;
@@ -6051,19 +6051,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

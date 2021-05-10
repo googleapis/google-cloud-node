@@ -1427,27 +1427,27 @@
     
                         /**
                          * RepoSource branchName.
-                         * @member {string} branchName
+                         * @member {string|null|undefined} branchName
                          * @memberof google.devtools.cloudbuild.v1.RepoSource
                          * @instance
                          */
-                        RepoSource.prototype.branchName = "";
+                        RepoSource.prototype.branchName = null;
     
                         /**
                          * RepoSource tagName.
-                         * @member {string} tagName
+                         * @member {string|null|undefined} tagName
                          * @memberof google.devtools.cloudbuild.v1.RepoSource
                          * @instance
                          */
-                        RepoSource.prototype.tagName = "";
+                        RepoSource.prototype.tagName = null;
     
                         /**
                          * RepoSource commitSha.
-                         * @member {string} commitSha
+                         * @member {string|null|undefined} commitSha
                          * @memberof google.devtools.cloudbuild.v1.RepoSource
                          * @instance
                          */
-                        RepoSource.prototype.commitSha = "";
+                        RepoSource.prototype.commitSha = null;
     
                         /**
                          * RepoSource dir.
@@ -8626,11 +8626,11 @@
     
                         /**
                          * BuildTrigger filename.
-                         * @member {string} filename
+                         * @member {string|null|undefined} filename
                          * @memberof google.devtools.cloudbuild.v1.BuildTrigger
                          * @instance
                          */
-                        BuildTrigger.prototype.filename = "";
+                        BuildTrigger.prototype.filename = null;
     
                         /**
                          * BuildTrigger createTime.
@@ -9808,11 +9808,11 @@
     
                         /**
                          * PullRequestFilter branch.
-                         * @member {string} branch
+                         * @member {string|null|undefined} branch
                          * @memberof google.devtools.cloudbuild.v1.PullRequestFilter
                          * @instance
                          */
-                        PullRequestFilter.prototype.branch = "";
+                        PullRequestFilter.prototype.branch = null;
     
                         /**
                          * PullRequestFilter commentControl.
@@ -10093,19 +10093,19 @@
     
                         /**
                          * PushFilter branch.
-                         * @member {string} branch
+                         * @member {string|null|undefined} branch
                          * @memberof google.devtools.cloudbuild.v1.PushFilter
                          * @instance
                          */
-                        PushFilter.prototype.branch = "";
+                        PushFilter.prototype.branch = null;
     
                         /**
                          * PushFilter tag.
-                         * @member {string} tag
+                         * @member {string|null|undefined} tag
                          * @memberof google.devtools.cloudbuild.v1.PushFilter
                          * @instance
                          */
-                        PushFilter.prototype.tag = "";
+                        PushFilter.prototype.tag = null;
     
                         /**
                          * PushFilter invertRegex.
@@ -15349,43 +15349,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
-      client.innerApiCalls.getBuild = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getBuild =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getBuild(
           request,
@@ -393,9 +391,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
-      client.innerApiCalls.cancelBuild = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelBuild =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelBuild(
           request,
@@ -475,9 +472,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
-      client.innerApiCalls.createBuildTrigger = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createBuildTrigger =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createBuildTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -508,9 +504,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
-      client.innerApiCalls.createBuildTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createBuildTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createBuildTrigger(
           request,
@@ -620,9 +615,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
-      client.innerApiCalls.getBuildTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getBuildTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getBuildTrigger(
           request,
@@ -701,9 +695,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteBuildTrigger = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteBuildTrigger =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteBuildTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -734,9 +727,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteBuildTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteBuildTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteBuildTrigger(
           request,
@@ -815,9 +807,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
-      client.innerApiCalls.updateBuildTrigger = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateBuildTrigger =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateBuildTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -848,9 +839,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
-      client.innerApiCalls.updateBuildTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateBuildTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateBuildTrigger(
           request,
@@ -929,9 +919,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
       );
-      client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.receiveTriggerWebhook =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.receiveTriggerWebhook(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -962,9 +951,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
       );
-      client.innerApiCalls.receiveTriggerWebhook = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.receiveTriggerWebhook =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.receiveTriggerWebhook(
           request,
@@ -1061,9 +1049,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
-      client.innerApiCalls.createWorkerPool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createWorkerPool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createWorkerPool(
           request,
@@ -1149,9 +1136,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
-      client.innerApiCalls.getWorkerPool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getWorkerPool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getWorkerPool(
           request,
@@ -1237,9 +1223,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteWorkerPool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteWorkerPool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteWorkerPool(
           request,
@@ -1325,9 +1310,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
-      client.innerApiCalls.updateWorkerPool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateWorkerPool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateWorkerPool(
           request,
@@ -1413,9 +1397,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsResponse()
       );
-      client.innerApiCalls.listWorkerPools = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listWorkerPools =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listWorkerPools(
           request,
@@ -1520,9 +1503,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createBuild = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createBuild =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createBuild(
           request,
@@ -1715,9 +1697,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.retryBuild = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.retryBuild =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.retryBuild(
           request,
@@ -1876,9 +1857,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.runBuildTrigger =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.runBuildTrigger(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1910,9 +1890,8 @@ describe('v1.CloudBuildClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.runBuildTrigger = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.runBuildTrigger =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.runBuildTrigger(
           request,
@@ -2109,9 +2088,8 @@ describe('v1.CloudBuildClient', () => {
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
       ];
-      client.innerApiCalls.listBuilds = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listBuilds =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listBuilds(
           request,
@@ -2185,9 +2163,8 @@ describe('v1.CloudBuildClient', () => {
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
       ];
-      client.descriptors.page.listBuilds.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBuilds.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listBuildsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.devtools.cloudbuild.v1.Build[] = [];
@@ -2283,9 +2260,8 @@ describe('v1.CloudBuildClient', () => {
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
       ];
-      client.descriptors.page.listBuilds.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBuilds.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.devtools.cloudbuild.v1.IBuild[] = [];
       const iterable = client.listBuildsAsync(request);
       for await (const resource of iterable) {
@@ -2414,9 +2390,8 @@ describe('v1.CloudBuildClient', () => {
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
         ),
       ];
-      client.innerApiCalls.listBuildTriggers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listBuildTriggers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listBuildTriggers(
           request,
@@ -2494,12 +2469,12 @@ describe('v1.CloudBuildClient', () => {
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
         ),
       ];
-      client.descriptors.page.listBuildTriggers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBuildTriggers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listBuildTriggersStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] = [];
+        const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.devtools.cloudbuild.v1.BuildTrigger) => {
@@ -2521,10 +2496,9 @@ describe('v1.CloudBuildClient', () => {
           .calledWith(client.innerApiCalls.listBuildTriggers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listBuildTriggers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBuildTriggers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2541,13 +2515,12 @@ describe('v1.CloudBuildClient', () => {
       request.projectId = '';
       const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listBuildTriggers.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listBuildTriggers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listBuildTriggersStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] = [];
+        const responses: protos.google.devtools.cloudbuild.v1.BuildTrigger[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.devtools.cloudbuild.v1.BuildTrigger) => {
@@ -2568,10 +2541,9 @@ describe('v1.CloudBuildClient', () => {
           .calledWith(client.innerApiCalls.listBuildTriggers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listBuildTriggers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBuildTriggers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2598,25 +2570,25 @@ describe('v1.CloudBuildClient', () => {
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
         ),
       ];
-      client.descriptors.page.listBuildTriggers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] = [];
+      client.descriptors.page.listBuildTriggers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] =
+        [];
       const iterable = client.listBuildTriggersAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listBuildTriggers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listBuildTriggers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2633,27 +2605,26 @@ describe('v1.CloudBuildClient', () => {
       request.projectId = '';
       const expectedHeaderRequestParams = 'project_id=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listBuildTriggers.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listBuildTriggers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listBuildTriggersAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] = [];
+        const responses: protos.google.devtools.cloudbuild.v1.IBuildTrigger[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listBuildTriggers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listBuildTriggers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2899,34 +2870,38 @@ describe('v1.CloudBuildClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationBuildPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationBuildPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationBuildName', () => {
-        const result = client.matchProjectFromProjectLocationBuildName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationBuildName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationBuildPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationBuildPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationBuildName', () => {
-        const result = client.matchLocationFromProjectLocationBuildName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationBuildName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationBuildPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationBuildPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2936,8 +2911,10 @@ describe('v1.CloudBuildClient', () => {
         const result = client.matchBuildFromProjectLocationBuildName(fakePath);
         assert.strictEqual(result, 'buildValue');
         assert(
-          (client.pathTemplates.projectLocationBuildPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationBuildPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3050,9 +3027,8 @@ describe('v1.CloudBuildClient', () => {
       });
 
       it('matchServiceAccountFromServiceAccountName', () => {
-        const result = client.matchServiceAccountFromServiceAccountName(
-          fakePath
-        );
+        const result =
+          client.matchServiceAccountFromServiceAccountName(fakePath);
         assert.strictEqual(result, 'serviceAccountValue');
         assert(
           (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
