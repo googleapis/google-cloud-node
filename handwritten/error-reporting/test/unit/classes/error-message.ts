@@ -143,7 +143,7 @@ describe('Fuzzing against setServiceContext', () => {
     );
   });
   it('Should set default values on both', () => {
-    em.setServiceContext((2 as {}) as string, (1.3 as {}) as string);
+    em.setServiceContext(2 as {} as string, 1.3 as {} as string);
     deepStrictEqual(
       em.serviceContext,
       {
@@ -157,10 +157,7 @@ describe('Fuzzing against setServiceContext', () => {
     );
   });
   it('Should set as default', () => {
-    em.setServiceContext(
-      ({test: 'true'} as {}) as string,
-      ([] as {}) as string
-    );
+    em.setServiceContext({test: 'true'} as {} as string, [] as {} as string);
     deepStrictEqual(
       em.serviceContext,
       {
@@ -623,7 +620,7 @@ describe('Fuzzing against consumeRequestInformation', () => {
   });
   it('Should default when consuming mistyped response object properties', () => {
     em.consumeRequestInformation(
-      (NEGATIVE_TEST_VALUE as {}) as RequestInformationContainer
+      NEGATIVE_TEST_VALUE as {} as RequestInformationContainer
     );
     assert(
       em.context.httpRequest.method === NEGATIVE_STRING_CASE,

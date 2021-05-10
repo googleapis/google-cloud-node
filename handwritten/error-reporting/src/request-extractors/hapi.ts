@@ -33,10 +33,9 @@ function attemptToExtractStatusCode(req: hapi.Request) {
     if ('statusCode' in req.response) {
       return (req.response as hapi.ResponseObject).statusCode;
     } else if (
-      ((req.response as unknown) as boom).output?.toString() ===
-      '[object Object]'
+      (req.response as unknown as boom).output?.toString() === '[object Object]'
     ) {
-      return ((req.response as unknown) as boom).output.statusCode;
+      return (req.response as unknown as boom).output.statusCode;
     }
   }
   return 0;
@@ -86,7 +85,7 @@ export function hapiRequestInformationExtractor(req?: hapi.Request) {
 
   let urlString: string;
   if (typeof req!.url === 'string') {
-    urlString = (req!.url as {}) as string;
+    urlString = req!.url as {} as string;
   } else {
     urlString = req!.url.pathname;
   }

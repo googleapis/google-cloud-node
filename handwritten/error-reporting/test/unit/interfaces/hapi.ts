@@ -52,10 +52,7 @@ describe('Hapi interface', () => {
     };
     let plugin: HapiPlugin;
     beforeEach(() => {
-      plugin = hapiInterface(
-        null!,
-        (givenConfig as {}) as config.Configuration
-      );
+      plugin = hapiInterface(null!, givenConfig as {} as config.Configuration);
     });
     it('should have plain object as plugin', () => {
       assert(plugin?.toString() === '[object Object]');
@@ -82,15 +79,15 @@ describe('Hapi interface', () => {
       fakeServer = new EventEmitter();
     });
     it('Should call fn when the request-error event is emitted', () => {
-      const fakeClient = ({
+      const fakeClient = {
         sendError(errMsg: ErrorMessage) {
           assert(
             errMsg instanceof ErrorMessage,
             'should be an instance of Error message'
           );
         },
-      } as {}) as RequestHandler;
-      const plugin = hapiInterface(fakeClient, ({
+      } as {} as RequestHandler;
+      const plugin = hapiInterface(fakeClient, {
         lacksCredentials() {
           return false;
         },
@@ -100,14 +97,14 @@ describe('Hapi interface', () => {
         getServiceContext() {
           return {service: 'node'};
         },
-      } as {}) as config.Configuration);
+      } as {} as config.Configuration);
       plugin.register(fakeServer, null!, null!);
       fakeServer.emit('request-error');
     });
   });
   describe('Behaviour around the request/response lifecycle', () => {
     const EVENT = 'onPreResponse';
-    const fakeClient = ({sendError() {}} as {}) as RequestHandler;
+    const fakeClient = {sendError() {}} as {} as RequestHandler;
     let fakeServer: EventEmitter & {ext?: Function},
       config: Configuration & {lacksCredentials?: () => boolean},
       plugin: HapiPlugin;
@@ -163,12 +160,12 @@ describe('Hapi interface', () => {
       );
     });
     it('Should call sendError when a boom is received', done => {
-      const fakeClient = ({
+      const fakeClient = {
         sendError(err: ErrorMessage) {
           assert(err instanceof ErrorMessage);
           done();
         },
-      } as {}) as RequestHandler;
+      } as {} as RequestHandler;
       const plugin = hapiInterface(fakeClient, config);
       plugin.register(fakeServer, null!, () => {});
       fakeServer.emit('onPreResponse', {
@@ -190,7 +187,7 @@ describe('Hapi interface', () => {
   describe('Hapi17', () => {
     const errorsSent: ErrorMessage[] = [];
     // the only method in the client that should be used is `sendError`
-    const fakeClient = ({
+    const fakeClient = {
       sendError: (
         errorMessage: ErrorMessage,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -202,7 +199,7 @@ describe('Hapi interface', () => {
       ) => {
         errorsSent.push(errorMessage);
       },
-    } as {}) as RequestHandler;
+    } as {} as RequestHandler;
 
     // the configuration should be not be needed to send errors correctly
     const plugin = hapiInterface(fakeClient, {} as Configuration);
@@ -249,7 +246,7 @@ describe('Hapi interface', () => {
       // properties are the properties that are being tested.  In
       // addition other properties of hapi.Request should be needed
       // to properly send the error.
-      const fakeRequest = ({
+      const fakeRequest = {
         method: 'custom-method',
         url: 'custom-url',
         headers: {
@@ -258,7 +255,7 @@ describe('Hapi interface', () => {
           'x-forwarded-for': 'some-remote-address',
         },
         response: {statusCode: 42},
-      } as {}) as hapi.Request;
+      } as {} as hapi.Request;
 
       const testError = new Error('Error emitted through a request event');
 

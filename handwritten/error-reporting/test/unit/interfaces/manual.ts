@@ -20,7 +20,7 @@ import * as manual from '../../../src/interfaces/manual';
 import {FakeConfiguration as Configuration} from '../../fixtures/configuration';
 
 const config = new Configuration({});
-((config as {}) as {lacksCredentials: Function}).lacksCredentials = () => {
+(config as {} as {lacksCredentials: Function}).lacksCredentials = () => {
   return false;
 };
 import {ErrorMessage} from '../../../src/classes/error-message';
@@ -31,15 +31,15 @@ import {Request} from '../../../src/request-extractors/manual';
 describe('Manual handler', () => {
   // nock.disableNetConnect();
   // Mocked client
-  const client: RequestHandler = ({
+  const client: RequestHandler = {
     sendError(e: ErrorMessage, cb: () => void) {
       // immediately callback
       if (cb) {
         setImmediate(cb);
       }
     },
-  } as {}) as RequestHandler;
-  const report = manual.handlerSetup(client, config, ({
+  } as {} as RequestHandler;
+  const report = manual.handlerSetup(client, config, {
     warn(message: string) {
       // The use of `report` in this class should issue the following
       // warning becasue the `report` class is used directly and, as such,
@@ -56,7 +56,7 @@ describe('Manual handler', () => {
           'console.'
       );
     },
-  } as {}) as Logger);
+  } as {} as Logger);
   describe('Report invocation behaviour', () => {
     it('Should allow argument-less invocation', () => {
       const r = report(null!);
@@ -122,10 +122,10 @@ describe('Manual handler', () => {
     it('Should ignore arguments', done => {
       const r = report(
         'hockey',
-        ((() => {
+        (() => {
           done();
-        }) as unknown) as string,
-        ('field' as unknown) as manual.Callback
+        }) as unknown as string,
+        'field' as unknown as manual.Callback
       );
       assert(
         r.message.match('hockey') && !r.message.match('field'),
@@ -135,10 +135,10 @@ describe('Manual handler', () => {
     it('Should ignore arguments', done => {
       const r = report(
         'passkey',
-        ((() => {
+        (() => {
           done();
-        }) as unknown) as string,
-        ({method: 'HONK'} as unknown) as manual.Callback
+        }) as unknown as string,
+        {method: 'HONK'} as unknown as manual.Callback
       );
       assert.notStrictEqual(r.context.httpRequest.method, 'HONK');
     });
@@ -151,8 +151,8 @@ describe('Manual handler', () => {
     it('Should allow explicit undefined', done => {
       const r = report(
         'Turkey',
-        (undefined as unknown) as Request,
-        (undefined as unknown) as string,
+        undefined as unknown as Request,
+        undefined as unknown as string,
         () => {
           done();
         }
@@ -162,7 +162,7 @@ describe('Manual handler', () => {
     it('Should allow request to be supplied as undefined', done => {
       const r = report(
         'turnkey',
-        (undefined as unknown) as Request,
+        undefined as unknown as Request,
         'solution',
         () => {
           done();
@@ -174,7 +174,7 @@ describe('Manual handler', () => {
       const r = report(
         'Mickey',
         {method: 'SNIFF'},
-        (undefined as unknown) as string,
+        undefined as unknown as string,
         () => {
           done();
         }
