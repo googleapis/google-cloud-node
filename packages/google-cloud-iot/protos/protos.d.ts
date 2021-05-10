@@ -1546,13 +1546,13 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IGatewayListOptions);
 
                     /** GatewayListOptions gatewayType. */
-                    public gatewayType: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType);
+                    public gatewayType?: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType|null);
 
                     /** GatewayListOptions associationsGatewayId. */
-                    public associationsGatewayId: string;
+                    public associationsGatewayId?: (string|null);
 
                     /** GatewayListOptions associationsDeviceId. */
-                    public associationsDeviceId: string;
+                    public associationsDeviceId?: (string|null);
 
                     /** GatewayListOptions filter. */
                     public filter?: ("gatewayType"|"associationsGatewayId"|"associationsDeviceId");
@@ -4464,19 +4464,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

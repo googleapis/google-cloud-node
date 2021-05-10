@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -216,9 +215,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
-      client.innerApiCalls.createDeviceRegistry = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createDeviceRegistry =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createDeviceRegistry(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -249,9 +247,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
-      client.innerApiCalls.createDeviceRegistry = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDeviceRegistry =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDeviceRegistry(
           request,
@@ -361,9 +358,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
-      client.innerApiCalls.getDeviceRegistry = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDeviceRegistry =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDeviceRegistry(
           request,
@@ -443,9 +439,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
-      client.innerApiCalls.updateDeviceRegistry = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDeviceRegistry =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateDeviceRegistry(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -477,9 +472,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
-      client.innerApiCalls.updateDeviceRegistry = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDeviceRegistry =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDeviceRegistry(
           request,
@@ -559,9 +553,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDeviceRegistry = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDeviceRegistry =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDeviceRegistry(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -592,9 +585,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDeviceRegistry = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDeviceRegistry =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDeviceRegistry(
           request,
@@ -704,9 +696,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
-      client.innerApiCalls.createDevice = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDevice =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDevice(
           request,
@@ -816,9 +807,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
-      client.innerApiCalls.getDevice = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDevice =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDevice(
           request,
@@ -927,9 +917,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
-      client.innerApiCalls.updateDevice = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDevice =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDevice(
           request,
@@ -1040,9 +1029,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDevice = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDevice =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDevice(
           request,
@@ -1121,9 +1109,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceConfig()
       );
-      client.innerApiCalls.modifyCloudToDeviceConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.modifyCloudToDeviceConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.modifyCloudToDeviceConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1154,9 +1141,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceConfig()
       );
-      client.innerApiCalls.modifyCloudToDeviceConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.modifyCloudToDeviceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.modifyCloudToDeviceConfig(
           request,
@@ -1238,9 +1224,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse()
       );
-      client.innerApiCalls.listDeviceConfigVersions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listDeviceConfigVersions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listDeviceConfigVersions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1271,9 +1256,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse()
       );
-      client.innerApiCalls.listDeviceConfigVersions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDeviceConfigVersions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDeviceConfigVersions(
           request,
@@ -1386,9 +1370,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesResponse()
       );
-      client.innerApiCalls.listDeviceStates = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDeviceStates =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDeviceStates(
           request,
@@ -1498,9 +1481,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -1610,9 +1592,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -1691,9 +1672,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1724,9 +1704,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -1805,9 +1784,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceResponse()
       );
-      client.innerApiCalls.sendCommandToDevice = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.sendCommandToDevice =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.sendCommandToDevice(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1838,9 +1816,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceResponse()
       );
-      client.innerApiCalls.sendCommandToDevice = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.sendCommandToDevice =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.sendCommandToDevice(
           request,
@@ -1919,9 +1896,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayResponse()
       );
-      client.innerApiCalls.bindDeviceToGateway = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.bindDeviceToGateway =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.bindDeviceToGateway(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1952,9 +1928,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayResponse()
       );
-      client.innerApiCalls.bindDeviceToGateway = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.bindDeviceToGateway =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.bindDeviceToGateway(
           request,
@@ -2033,9 +2008,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse()
       );
-      client.innerApiCalls.unbindDeviceFromGateway = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.unbindDeviceFromGateway =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.unbindDeviceFromGateway(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2066,9 +2040,8 @@ describe('v1.DeviceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse()
       );
-      client.innerApiCalls.unbindDeviceFromGateway = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.unbindDeviceFromGateway =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.unbindDeviceFromGateway(
           request,
@@ -2152,9 +2125,8 @@ describe('v1.DeviceManagerClient', () => {
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
       ];
-      client.innerApiCalls.listDeviceRegistries = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listDeviceRegistries =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listDeviceRegistries(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2187,9 +2159,8 @@ describe('v1.DeviceManagerClient', () => {
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
       ];
-      client.innerApiCalls.listDeviceRegistries = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDeviceRegistries =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDeviceRegistries(
           request,
@@ -2261,9 +2232,8 @@ describe('v1.DeviceManagerClient', () => {
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
       ];
-      client.descriptors.page.listDeviceRegistries.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDeviceRegistries.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDeviceRegistriesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.iot.v1.DeviceRegistry[] = [];
@@ -2288,10 +2258,9 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(client.innerApiCalls.listDeviceRegistries, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeviceRegistries
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeviceRegistries.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2308,10 +2277,8 @@ describe('v1.DeviceManagerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDeviceRegistries.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDeviceRegistries.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDeviceRegistriesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.iot.v1.DeviceRegistry[] = [];
@@ -2335,10 +2302,9 @@ describe('v1.DeviceManagerClient', () => {
           .calledWith(client.innerApiCalls.listDeviceRegistries, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeviceRegistries
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeviceRegistries.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2359,9 +2325,8 @@ describe('v1.DeviceManagerClient', () => {
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
       ];
-      client.descriptors.page.listDeviceRegistries.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDeviceRegistries.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.iot.v1.IDeviceRegistry[] = [];
       const iterable = client.listDeviceRegistriesAsync(request);
       for await (const resource of iterable) {
@@ -2369,15 +2334,15 @@ describe('v1.DeviceManagerClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDeviceRegistries
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeviceRegistries
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2394,10 +2359,8 @@ describe('v1.DeviceManagerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDeviceRegistries.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDeviceRegistries.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDeviceRegistriesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.iot.v1.IDeviceRegistry[] = [];
@@ -2406,15 +2369,15 @@ describe('v1.DeviceManagerClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDeviceRegistries
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeviceRegistries
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2477,9 +2440,8 @@ describe('v1.DeviceManagerClient', () => {
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
       ];
-      client.innerApiCalls.listDevices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDevices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDevices(
           request,
@@ -2551,9 +2513,8 @@ describe('v1.DeviceManagerClient', () => {
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
       ];
-      client.descriptors.page.listDevices.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDevices.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDevicesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.iot.v1.Device[] = [];
@@ -2641,9 +2602,8 @@ describe('v1.DeviceManagerClient', () => {
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
       ];
-      client.descriptors.page.listDevices.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDevices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.iot.v1.IDevice[] = [];
       const iterable = client.listDevicesAsync(request);
       for await (const resource of iterable) {
