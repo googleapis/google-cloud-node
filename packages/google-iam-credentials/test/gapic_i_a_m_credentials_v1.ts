@@ -26,10 +26,9 @@ import * as iamcredentialsModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -155,9 +154,8 @@ describe('v1.IAMCredentialsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenResponse()
       );
-      client.innerApiCalls.generateAccessToken = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.generateAccessToken =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.generateAccessToken(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -188,9 +186,8 @@ describe('v1.IAMCredentialsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenResponse()
       );
-      client.innerApiCalls.generateAccessToken = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.generateAccessToken =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.generateAccessToken(
           request,
@@ -300,9 +297,8 @@ describe('v1.IAMCredentialsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenResponse()
       );
-      client.innerApiCalls.generateIdToken = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.generateIdToken =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.generateIdToken(
           request,
@@ -412,9 +408,8 @@ describe('v1.IAMCredentialsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobResponse()
       );
-      client.innerApiCalls.signBlob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.signBlob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.signBlob(
           request,
@@ -521,9 +516,8 @@ describe('v1.IAMCredentialsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtResponse()
       );
-      client.innerApiCalls.signJwt = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.signJwt =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.signJwt(
           request,
