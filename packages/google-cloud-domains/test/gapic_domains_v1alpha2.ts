@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.SearchDomainsResponse()
       );
-      client.innerApiCalls.searchDomains = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchDomains =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchDomains(
           request,
@@ -360,9 +358,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.RetrieveRegisterParametersResponse()
       );
-      client.innerApiCalls.retrieveRegisterParameters = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.retrieveRegisterParameters =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.retrieveRegisterParameters(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -393,9 +390,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.RetrieveRegisterParametersResponse()
       );
-      client.innerApiCalls.retrieveRegisterParameters = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.retrieveRegisterParameters =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.retrieveRegisterParameters(
           request,
@@ -508,9 +504,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.Registration()
       );
-      client.innerApiCalls.getRegistration = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getRegistration =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getRegistration(
           request,
@@ -589,9 +584,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.AuthorizationCode()
       );
-      client.innerApiCalls.retrieveAuthorizationCode = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.retrieveAuthorizationCode =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.retrieveAuthorizationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -622,9 +616,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.AuthorizationCode()
       );
-      client.innerApiCalls.retrieveAuthorizationCode = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.retrieveAuthorizationCode =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.retrieveAuthorizationCode(
           request,
@@ -706,9 +699,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.AuthorizationCode()
       );
-      client.innerApiCalls.resetAuthorizationCode = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.resetAuthorizationCode =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.resetAuthorizationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -739,9 +731,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1alpha2.AuthorizationCode()
       );
-      client.innerApiCalls.resetAuthorizationCode = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.resetAuthorizationCode =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.resetAuthorizationCode(
           request,
@@ -823,9 +814,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.registerDomain = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.registerDomain =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.registerDomain(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -857,9 +847,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.registerDomain = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.registerDomain =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.registerDomain(
           request,
@@ -1020,9 +1009,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateRegistration = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateRegistration =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateRegistration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1055,9 +1043,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateRegistration = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateRegistration =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateRegistration(
           request,
@@ -1219,9 +1206,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.configureManagementSettings = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.configureManagementSettings =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.configureManagementSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1253,9 +1239,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.configureManagementSettings = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.configureManagementSettings =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.configureManagementSettings(
           request,
@@ -1368,9 +1353,10 @@ describe('v1alpha2.DomainsClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkConfigureManagementSettingsProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkConfigureManagementSettingsProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1418,9 +1404,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.configureDnsSettings = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.configureDnsSettings =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.configureDnsSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1452,9 +1437,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.configureDnsSettings = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.configureDnsSettings =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.configureDnsSettings(
           request,
@@ -1614,9 +1598,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.configureContactSettings = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.configureContactSettings =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.configureContactSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1648,9 +1631,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.configureContactSettings = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.configureContactSettings =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.configureContactSettings(
           request,
@@ -1763,9 +1745,10 @@ describe('v1alpha2.DomainsClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkConfigureContactSettingsProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkConfigureContactSettingsProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1813,9 +1796,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportRegistration = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.exportRegistration =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.exportRegistration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1847,9 +1829,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportRegistration = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportRegistration =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportRegistration(
           request,
@@ -2009,9 +1990,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteRegistration = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteRegistration =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteRegistration(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2043,9 +2023,8 @@ describe('v1alpha2.DomainsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteRegistration = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteRegistration =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteRegistration(
           request,
@@ -2252,9 +2231,8 @@ describe('v1alpha2.DomainsClient', () => {
           new protos.google.cloud.domains.v1alpha2.Registration()
         ),
       ];
-      client.innerApiCalls.listRegistrations = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listRegistrations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listRegistrations(
           request,
@@ -2332,12 +2310,12 @@ describe('v1alpha2.DomainsClient', () => {
           new protos.google.cloud.domains.v1alpha2.Registration()
         ),
       ];
-      client.descriptors.page.listRegistrations.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listRegistrations.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listRegistrationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.domains.v1alpha2.Registration[] = [];
+        const responses: protos.google.cloud.domains.v1alpha2.Registration[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.domains.v1alpha2.Registration) => {
@@ -2359,10 +2337,9 @@ describe('v1alpha2.DomainsClient', () => {
           .calledWith(client.innerApiCalls.listRegistrations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listRegistrations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRegistrations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2379,13 +2356,12 @@ describe('v1alpha2.DomainsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listRegistrations.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listRegistrations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listRegistrationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.domains.v1alpha2.Registration[] = [];
+        const responses: protos.google.cloud.domains.v1alpha2.Registration[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.domains.v1alpha2.Registration) => {
@@ -2406,10 +2382,9 @@ describe('v1alpha2.DomainsClient', () => {
           .calledWith(client.innerApiCalls.listRegistrations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listRegistrations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRegistrations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2436,25 +2411,25 @@ describe('v1alpha2.DomainsClient', () => {
           new protos.google.cloud.domains.v1alpha2.Registration()
         ),
       ];
-      client.descriptors.page.listRegistrations.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.domains.v1alpha2.IRegistration[] = [];
+      client.descriptors.page.listRegistrations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.domains.v1alpha2.IRegistration[] =
+        [];
       const iterable = client.listRegistrationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listRegistrations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listRegistrations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listRegistrations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRegistrations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2471,27 +2446,26 @@ describe('v1alpha2.DomainsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listRegistrations.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listRegistrations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listRegistrationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.domains.v1alpha2.IRegistration[] = [];
+        const responses: protos.google.cloud.domains.v1alpha2.IRegistration[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listRegistrations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listRegistrations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listRegistrations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRegistrations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
