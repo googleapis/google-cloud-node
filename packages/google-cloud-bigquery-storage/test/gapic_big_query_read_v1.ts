@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -209,9 +208,8 @@ describe('v1.BigQueryReadClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.ReadSession()
       );
-      client.innerApiCalls.createReadSession = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createReadSession =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createReadSession(
           request,
@@ -322,9 +320,8 @@ describe('v1.BigQueryReadClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.SplitReadStreamResponse()
       );
-      client.innerApiCalls.splitReadStream = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.splitReadStream =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.splitReadStream(
           request,

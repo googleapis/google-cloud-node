@@ -233,13 +233,14 @@ export class BigQueryStorageClient {
     ];
     for (const methodName of bigQueryStorageStubMethods) {
       const callPromise = this.bigQueryStorageStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -437,12 +438,11 @@ export class BigQueryStorageClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'table_reference.project_id': request.tableReference!.projectId || '',
-      'table_reference.dataset_id': request.tableReference!.datasetId || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'table_reference.project_id': request.tableReference!.projectId || '',
+        'table_reference.dataset_id': request.tableReference!.datasetId || '',
+      });
     this.initialize();
     return this.innerApiCalls.createReadSession(request, options, callback);
   }
@@ -543,11 +543,10 @@ export class BigQueryStorageClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'session.name': request.session!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'session.name': request.session!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.batchCreateReadSessionStreams(
       request,
@@ -658,11 +657,10 @@ export class BigQueryStorageClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'stream.name': request.stream!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'stream.name': request.stream!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.finalizeStream(request, options, callback);
   }
@@ -776,11 +774,10 @@ export class BigQueryStorageClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'original_stream.name': request.originalStream!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'original_stream.name': request.originalStream!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.splitReadStream(request, options, callback);
   }
@@ -822,11 +819,10 @@ export class BigQueryStorageClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'read_position.stream.name': request.readPosition!.stream!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'read_position.stream.name': request.readPosition!.stream!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.readRows(request, options);
   }

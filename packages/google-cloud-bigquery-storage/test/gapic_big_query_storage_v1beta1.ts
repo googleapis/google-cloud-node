@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -217,9 +216,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1beta1.ReadSession()
       );
-      client.innerApiCalls.createReadSession = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createReadSession =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createReadSession(
           request,
@@ -303,9 +301,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsResponse()
       );
-      client.innerApiCalls.batchCreateReadSessionStreams = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateReadSessionStreams =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.batchCreateReadSessionStreams(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -337,9 +334,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsResponse()
       );
-      client.innerApiCalls.batchCreateReadSessionStreams = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateReadSessionStreams =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchCreateReadSessionStreams(
           request,
@@ -455,9 +451,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.finalizeStream = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.finalizeStream =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.finalizeStream(
           request,
@@ -570,9 +565,8 @@ describe('v1beta1.BigQueryStorageClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1beta1.SplitReadStreamResponse()
       );
-      client.innerApiCalls.splitReadStream = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.splitReadStream =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.splitReadStream(
           request,
