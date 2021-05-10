@@ -84,7 +84,7 @@ function assignMethodsToMessages(
         // Capture reference to `enhancedMessage` class in closure below.
         const _addFromValue = {
           fromValue: (value: object): object | undefined => {
-            const messageType = (enhancedMessage as unknown) as protobuf.Type;
+            const messageType = enhancedMessage as unknown as protobuf.Type;
             const message = messageType.create();
             const convertedValue = _helpers.fromValue(value);
             if (convertedValue !== undefined) {
@@ -102,8 +102,9 @@ function assignMethodsToMessages(
 
 export function _enhance(apiVersion: string): void {
   const schemaRoot = enhancedTypesJson[apiVersion]['schema'];
-  const namespaceRoot = ((protos.google.cloud
-    .aiplatform as unknown) as NestedNamespace)[apiVersion] as NestedNamespace;
+  const namespaceRoot = (
+    protos.google.cloud.aiplatform as unknown as NestedNamespace
+  )[apiVersion] as NestedNamespace;
   const namespaceSchemaRoot = namespaceRoot['schema'];
   walkNamespaces(schemaRoot, namespaceSchemaRoot as NestedNamespace);
 }

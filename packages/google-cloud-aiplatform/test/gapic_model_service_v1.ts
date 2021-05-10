@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Model()
       );
-      client.innerApiCalls.getModel = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getModel =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getModel(
           request,
@@ -390,9 +388,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Model()
       );
-      client.innerApiCalls.updateModel = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateModel =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateModel(
           request,
@@ -472,9 +469,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ModelEvaluation()
       );
-      client.innerApiCalls.getModelEvaluation = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getModelEvaluation =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getModelEvaluation(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -505,9 +501,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ModelEvaluation()
       );
-      client.innerApiCalls.getModelEvaluation = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getModelEvaluation =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getModelEvaluation(
           request,
@@ -586,9 +581,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ModelEvaluationSlice()
       );
-      client.innerApiCalls.getModelEvaluationSlice = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getModelEvaluationSlice =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getModelEvaluationSlice(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -619,9 +613,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ModelEvaluationSlice()
       );
-      client.innerApiCalls.getModelEvaluationSlice = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getModelEvaluationSlice =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getModelEvaluationSlice(
           request,
@@ -735,9 +728,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.uploadModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.uploadModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.uploadModel(
           request,
@@ -926,9 +918,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteModel(
           request,
@@ -1117,9 +1108,8 @@ describe('v1.ModelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportModel(
           request,
@@ -1311,9 +1301,8 @@ describe('v1.ModelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Model()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Model()),
       ];
-      client.innerApiCalls.listModels = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listModels =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listModels(
           request,
@@ -1385,9 +1374,8 @@ describe('v1.ModelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Model()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Model()),
       ];
-      client.descriptors.page.listModels.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listModels.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listModelsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.Model[] = [];
@@ -1481,9 +1469,8 @@ describe('v1.ModelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Model()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Model()),
       ];
-      client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listModels.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1.IModel[] = [];
       const iterable = client.listModelsAsync(request);
       for await (const resource of iterable) {
@@ -1572,9 +1559,8 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluation()
         ),
       ];
-      client.innerApiCalls.listModelEvaluations = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listModelEvaluations =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listModelEvaluations(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1613,9 +1599,8 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluation()
         ),
       ];
-      client.innerApiCalls.listModelEvaluations = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listModelEvaluations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listModelEvaluations(
           request,
@@ -1693,12 +1678,12 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluation()
         ),
       ];
-      client.descriptors.page.listModelEvaluations.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listModelEvaluations.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listModelEvaluationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluation[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluation[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1.ModelEvaluation) => {
@@ -1720,10 +1705,9 @@ describe('v1.ModelServiceClient', () => {
           .calledWith(client.innerApiCalls.listModelEvaluations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1740,13 +1724,12 @@ describe('v1.ModelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluations.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listModelEvaluations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listModelEvaluationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluation[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluation[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1.ModelEvaluation) => {
@@ -1767,10 +1750,9 @@ describe('v1.ModelServiceClient', () => {
           .calledWith(client.innerApiCalls.listModelEvaluations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1797,25 +1779,25 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluation()
         ),
       ];
-      client.descriptors.page.listModelEvaluations.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1.IModelEvaluation[] = [];
+      client.descriptors.page.listModelEvaluations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IModelEvaluation[] =
+        [];
       const iterable = client.listModelEvaluationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1832,27 +1814,26 @@ describe('v1.ModelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluations.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listModelEvaluations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listModelEvaluationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.IModelEvaluation[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.IModelEvaluation[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1888,9 +1869,8 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluationSlice()
         ),
       ];
-      client.innerApiCalls.listModelEvaluationSlices = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listModelEvaluationSlices =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listModelEvaluationSlices(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1929,9 +1909,8 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluationSlice()
         ),
       ];
-      client.innerApiCalls.listModelEvaluationSlices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listModelEvaluationSlices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listModelEvaluationSlices(
           request,
@@ -2014,12 +1993,12 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluationSlice()
         ),
       ];
-      client.descriptors.page.listModelEvaluationSlices.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listModelEvaluationSlices.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listModelEvaluationSlicesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluationSlice[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluationSlice[] =
+          [];
         stream.on(
           'data',
           (
@@ -2038,16 +2017,18 @@ describe('v1.ModelServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listModelEvaluationSlices
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listModelEvaluationSlices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluationSlices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2064,13 +2045,12 @@ describe('v1.ModelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluationSlices.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listModelEvaluationSlices.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listModelEvaluationSlicesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluationSlice[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.ModelEvaluationSlice[] =
+          [];
         stream.on(
           'data',
           (
@@ -2088,16 +2068,18 @@ describe('v1.ModelServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listModelEvaluationSlices
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listModelEvaluationSlices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluationSlices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2124,25 +2106,27 @@ describe('v1.ModelServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.ModelEvaluationSlice()
         ),
       ];
-      client.descriptors.page.listModelEvaluationSlices.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1.IModelEvaluationSlice[] = [];
+      client.descriptors.page.listModelEvaluationSlices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IModelEvaluationSlice[] =
+        [];
       const iterable = client.listModelEvaluationSlicesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listModelEvaluationSlices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluationSlices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2159,27 +2143,28 @@ describe('v1.ModelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluationSlices.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listModelEvaluationSlices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listModelEvaluationSlicesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.IModelEvaluationSlice[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.IModelEvaluationSlice[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listModelEvaluationSlices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluationSlices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluationSlices
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2340,9 +2325,8 @@ describe('v1.ModelServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -2379,8 +2363,10 @@ describe('v1.ModelServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2390,8 +2376,10 @@ describe('v1.ModelServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2401,21 +2389,24 @@ describe('v1.ModelServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2616,9 +2607,8 @@ describe('v1.ModelServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -2783,47 +2773,54 @@ describe('v1.ModelServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3050,34 +3047,38 @@ describe('v1.ModelServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3087,21 +3088,24 @@ describe('v1.ModelServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3111,8 +3115,10 @@ describe('v1.ModelServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3173,9 +3179,8 @@ describe('v1.ModelServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -3212,8 +3217,10 @@ describe('v1.ModelServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -3240,9 +3247,8 @@ describe('v1.ModelServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)

@@ -27,10 +27,10 @@ interface ToValueFunction {
 
 // Assigns the toValue() function as a member of an enhanced class.
 export function addToValue() {
-  const methods: ToValueFunction = ({} as unknown) as ToValueFunction;
+  const methods: ToValueFunction = {} as unknown as ToValueFunction;
 
   methods.toValue = function () {
-    return toValue((this as unknown) as protobuf.Message);
+    return toValue(this as unknown as protobuf.Message);
   };
 
   return methods;
@@ -49,7 +49,7 @@ export function toValue(
   }
 
   const value = googleProtobufValueFromObject(
-    (message as unknown) as ValueType,
+    message as unknown as ValueType,
     (val: object) => {
       return val;
     }

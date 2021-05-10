@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Dataset()
       );
-      client.innerApiCalls.getDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDataset(
           request,
@@ -395,9 +393,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Dataset()
       );
-      client.innerApiCalls.updateDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDataset(
           request,
@@ -508,9 +505,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.AnnotationSpec()
       );
-      client.innerApiCalls.getAnnotationSpec = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAnnotationSpec =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAnnotationSpec(
           request,
@@ -589,9 +585,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createDataset = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createDataset =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createDataset(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -623,9 +618,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createDataset = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDataset =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDataset(
           request,
@@ -785,9 +779,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDataset = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDataset =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteDataset(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -819,9 +812,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDataset = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDataset =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDataset(
           request,
@@ -1013,9 +1005,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importData = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importData =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importData(
           request,
@@ -1204,9 +1195,8 @@ describe('v1.DatasetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportData = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportData =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportData(
           request,
@@ -1398,9 +1388,8 @@ describe('v1.DatasetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
       ];
-      client.innerApiCalls.listDatasets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDatasets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDatasets(
           request,
@@ -1472,9 +1461,8 @@ describe('v1.DatasetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
       ];
-      client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDatasets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDatasetsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.Dataset[] = [];
@@ -1499,10 +1487,9 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1546,10 +1533,9 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1570,9 +1556,8 @@ describe('v1.DatasetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
       ];
-      client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDatasets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1.IDataset[] = [];
       const iterable = client.listDatasetsAsync(request);
       for await (const resource of iterable) {
@@ -1580,15 +1565,15 @@ describe('v1.DatasetServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1605,10 +1590,8 @@ describe('v1.DatasetServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDatasets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDatasetsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.aiplatform.v1.IDataset[] = [];
@@ -1617,15 +1600,15 @@ describe('v1.DatasetServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1688,9 +1671,8 @@ describe('v1.DatasetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
       ];
-      client.innerApiCalls.listDataItems = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDataItems =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDataItems(
           request,
@@ -1762,9 +1744,8 @@ describe('v1.DatasetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
       ];
-      client.descriptors.page.listDataItems.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDataItems.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDataItemsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.DataItem[] = [];
@@ -1789,10 +1770,9 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataItems, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1809,10 +1789,8 @@ describe('v1.DatasetServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataItems.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataItems.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDataItemsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.DataItem[] = [];
@@ -1836,10 +1814,9 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataItems, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1860,9 +1837,8 @@ describe('v1.DatasetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
       ];
-      client.descriptors.page.listDataItems.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDataItems.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1.IDataItem[] = [];
       const iterable = client.listDataItemsAsync(request);
       for await (const resource of iterable) {
@@ -1870,15 +1846,15 @@ describe('v1.DatasetServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1895,10 +1871,8 @@ describe('v1.DatasetServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataItems.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataItems.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDataItemsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.aiplatform.v1.IDataItem[] = [];
@@ -1907,15 +1881,15 @@ describe('v1.DatasetServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataItems
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataItems.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1990,9 +1964,8 @@ describe('v1.DatasetServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.Annotation()
         ),
       ];
-      client.innerApiCalls.listAnnotations = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAnnotations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAnnotations(
           request,
@@ -2070,9 +2043,8 @@ describe('v1.DatasetServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.Annotation()
         ),
       ];
-      client.descriptors.page.listAnnotations.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAnnotations.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAnnotationsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.Annotation[] = [];
@@ -2097,10 +2069,9 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(client.innerApiCalls.listAnnotations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2117,10 +2088,8 @@ describe('v1.DatasetServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAnnotations.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAnnotations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listAnnotationsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.Annotation[] = [];
@@ -2144,10 +2113,9 @@ describe('v1.DatasetServiceClient', () => {
           .calledWith(client.innerApiCalls.listAnnotations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2174,9 +2142,8 @@ describe('v1.DatasetServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.Annotation()
         ),
       ];
-      client.descriptors.page.listAnnotations.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAnnotations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1.IAnnotation[] = [];
       const iterable = client.listAnnotationsAsync(request);
       for await (const resource of iterable) {
@@ -2184,15 +2151,15 @@ describe('v1.DatasetServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listAnnotations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAnnotations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2209,10 +2176,8 @@ describe('v1.DatasetServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAnnotations.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAnnotations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listAnnotationsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.aiplatform.v1.IAnnotation[] = [];
@@ -2221,15 +2186,15 @@ describe('v1.DatasetServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listAnnotations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAnnotations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAnnotations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAnnotations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2390,9 +2355,8 @@ describe('v1.DatasetServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -2429,8 +2393,10 @@ describe('v1.DatasetServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2440,8 +2406,10 @@ describe('v1.DatasetServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2451,21 +2419,24 @@ describe('v1.DatasetServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2666,9 +2637,8 @@ describe('v1.DatasetServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -2833,47 +2803,54 @@ describe('v1.DatasetServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3100,34 +3077,38 @@ describe('v1.DatasetServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3137,21 +3118,24 @@ describe('v1.DatasetServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3161,8 +3145,10 @@ describe('v1.DatasetServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3223,9 +3209,8 @@ describe('v1.DatasetServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -3262,8 +3247,10 @@ describe('v1.DatasetServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -3290,9 +3277,8 @@ describe('v1.DatasetServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)

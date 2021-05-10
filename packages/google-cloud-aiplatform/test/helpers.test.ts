@@ -183,12 +183,10 @@ describe('AI Platform helper methods', () => {
   });
 
   describe('dynamically assigned methods', () => {
-    const {
-      definition,
-    } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
-    const {
-      instance,
-    } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
+    const {definition} =
+      aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
+    const {instance} =
+      aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
     describe('toValue', () => {
       const imageClassificationTrainingInputs = {
@@ -203,17 +201,20 @@ describe('AI Platform helper methods', () => {
       };
 
       it('exposes toValue() on instances of enhanced types', () => {
-        const actualTrainingTaskInputs = new definition.AutoMlImageClassificationInputs();
+        const actualTrainingTaskInputs =
+          new definition.AutoMlImageClassificationInputs();
         assert.ok(actualTrainingTaskInputs.toValue);
       });
 
       it('converts an enhanced type to a protobuf-formatted object', () => {
-        const trainingTaskInputs = new definition.AutoMlImageClassificationInputs(
-          imageClassificationTrainingInputs
-        );
-        const predictionInstance = new instance.TextClassificationPredictionInstance(
-          textClassificationPredictionInstance
-        );
+        const trainingTaskInputs =
+          new definition.AutoMlImageClassificationInputs(
+            imageClassificationTrainingInputs
+          );
+        const predictionInstance =
+          new instance.TextClassificationPredictionInstance(
+            textClassificationPredictionInstance
+          );
 
         const actualTrainingTaskInputValue = trainingTaskInputs.toValue();
         const actualPredictionInstanceValue = predictionInstance.toValue();
@@ -295,12 +296,14 @@ describe('AI Platform helper methods', () => {
       });
 
       it('converts protobuf-formatted objects into instanced of enhanced types', () => {
-        const actualTrainingTaskInputs = definition.AutoMlImageClassificationInputs.fromValue(
-          imageClassificationTrainingInputs
-        );
-        const actualPredictionInstance = instance.TextClassificationPredictionInstance.fromValue(
-          textClassificationPredictionInstance
-        );
+        const actualTrainingTaskInputs =
+          definition.AutoMlImageClassificationInputs.fromValue(
+            imageClassificationTrainingInputs
+          );
+        const actualPredictionInstance =
+          instance.TextClassificationPredictionInstance.fromValue(
+            textClassificationPredictionInstance
+          );
 
         assert.strictEqual(actualTrainingTaskInputs.budgetMilliNodeHours, 8000);
         assert.strictEqual(

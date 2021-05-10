@@ -193,10 +193,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1.IUserActionReference);
 
                     /** UserActionReference operation. */
-                    public operation: string;
+                    public operation?: (string|null);
 
                     /** UserActionReference dataLabelingJob. */
-                    public dataLabelingJob: string;
+                    public dataLabelingJob?: (string|null);
 
                     /** UserActionReference method. */
                     public method: string;
@@ -825,10 +825,10 @@ export namespace google {
                         constructor(properties?: google.cloud.aiplatform.v1.BatchPredictionJob.IOutputInfo);
 
                         /** OutputInfo gcsOutputDirectory. */
-                        public gcsOutputDirectory: string;
+                        public gcsOutputDirectory?: (string|null);
 
                         /** OutputInfo bigqueryOutputDataset. */
-                        public bigqueryOutputDataset: string;
+                        public bigqueryOutputDataset?: (string|null);
 
                         /** OutputInfo outputLocation. */
                         public outputLocation?: ("gcsOutputDirectory"|"bigqueryOutputDataset");
@@ -3371,10 +3371,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1.IActiveLearningConfig);
 
                     /** ActiveLearningConfig maxDataItemCount. */
-                    public maxDataItemCount: (number|Long|string);
+                    public maxDataItemCount?: (number|Long|string|null);
 
                     /** ActiveLearningConfig maxDataItemPercentage. */
-                    public maxDataItemPercentage: number;
+                    public maxDataItemPercentage?: (number|null);
 
                     /** ActiveLearningConfig sampleConfig. */
                     public sampleConfig?: (google.cloud.aiplatform.v1.ISampleConfig|null);
@@ -3479,10 +3479,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1.ISampleConfig);
 
                     /** SampleConfig initialBatchSamplePercentage. */
-                    public initialBatchSamplePercentage: number;
+                    public initialBatchSamplePercentage?: (number|null);
 
                     /** SampleConfig followingBatchSamplePercentage. */
-                    public followingBatchSamplePercentage: number;
+                    public followingBatchSamplePercentage?: (number|null);
 
                     /** SampleConfig sampleStrategy. */
                     public sampleStrategy: (google.cloud.aiplatform.v1.SampleConfig.SampleStrategy|keyof typeof google.cloud.aiplatform.v1.SampleConfig.SampleStrategy);
@@ -15663,10 +15663,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1.IMigrateResourceResponse);
 
                     /** MigrateResourceResponse dataset. */
-                    public dataset: string;
+                    public dataset?: (string|null);
 
                     /** MigrateResourceResponse model. */
-                    public model: string;
+                    public model?: (string|null);
 
                     /** MigrateResourceResponse migratableResource. */
                     public migratableResource?: (google.cloud.aiplatform.v1.IMigratableResource|null);
@@ -15872,10 +15872,10 @@ export namespace google {
                         public error?: (google.rpc.IStatus|null);
 
                         /** PartialResult model. */
-                        public model: string;
+                        public model?: (string|null);
 
                         /** PartialResult dataset. */
-                        public dataset: string;
+                        public dataset?: (string|null);
 
                         /** PartialResult request. */
                         public request?: (google.cloud.aiplatform.v1.IMigrateResourceRequest|null);
@@ -23116,10 +23116,10 @@ export namespace google {
                                 constructor(properties?: google.cloud.aiplatform.v1.schema.trainingjob.definition.IAutoMlTablesInputs);
 
                                 /** AutoMlTablesInputs optimizationObjectiveRecallValue. */
-                                public optimizationObjectiveRecallValue: number;
+                                public optimizationObjectiveRecallValue?: (number|null);
 
                                 /** AutoMlTablesInputs optimizationObjectivePrecisionValue. */
-                                public optimizationObjectivePrecisionValue: number;
+                                public optimizationObjectivePrecisionValue?: (number|null);
 
                                 /** AutoMlTablesInputs predictionType. */
                                 public predictionType: string;
@@ -26468,10 +26468,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IUserActionReference);
 
                     /** UserActionReference operation. */
-                    public operation: string;
+                    public operation?: (string|null);
 
                     /** UserActionReference dataLabelingJob. */
-                    public dataLabelingJob: string;
+                    public dataLabelingJob?: (string|null);
 
                     /** UserActionReference method. */
                     public method: string;
@@ -27112,10 +27112,10 @@ export namespace google {
                         constructor(properties?: google.cloud.aiplatform.v1beta1.BatchPredictionJob.IOutputInfo);
 
                         /** OutputInfo gcsOutputDirectory. */
-                        public gcsOutputDirectory: string;
+                        public gcsOutputDirectory?: (string|null);
 
                         /** OutputInfo bigqueryOutputDataset. */
-                        public bigqueryOutputDataset: string;
+                        public bigqueryOutputDataset?: (string|null);
 
                         /** OutputInfo outputLocation. */
                         public outputLocation?: ("gcsOutputDirectory"|"bigqueryOutputDataset");
@@ -28208,7 +28208,7 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1beta1.ISmoothGradConfig);
 
                     /** SmoothGradConfig noiseSigma. */
-                    public noiseSigma: number;
+                    public noiseSigma?: (number|null);
 
                     /** SmoothGradConfig featureNoiseSigma. */
                     public featureNoiseSigma?: (google.cloud.aiplatform.v1beta1.IFeatureNoiseSigma|null);
@@ -29324,7 +29324,7 @@ export namespace google {
                         public indexDisplayNameMapping?: (google.protobuf.IValue|null);
 
                         /** OutputMetadata displayNameMappingKey. */
-                        public displayNameMappingKey: string;
+                        public displayNameMappingKey?: (string|null);
 
                         /** OutputMetadata outputTensorName. */
                         public outputTensorName: string;
@@ -31769,10 +31769,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IActiveLearningConfig);
 
                     /** ActiveLearningConfig maxDataItemCount. */
-                    public maxDataItemCount: (number|Long|string);
+                    public maxDataItemCount?: (number|Long|string|null);
 
                     /** ActiveLearningConfig maxDataItemPercentage. */
-                    public maxDataItemPercentage: number;
+                    public maxDataItemPercentage?: (number|null);
 
                     /** ActiveLearningConfig sampleConfig. */
                     public sampleConfig?: (google.cloud.aiplatform.v1beta1.ISampleConfig|null);
@@ -31877,10 +31877,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1beta1.ISampleConfig);
 
                     /** SampleConfig initialBatchSamplePercentage. */
-                    public initialBatchSamplePercentage: number;
+                    public initialBatchSamplePercentage?: (number|null);
 
                     /** SampleConfig followingBatchSamplePercentage. */
-                    public followingBatchSamplePercentage: number;
+                    public followingBatchSamplePercentage?: (number|null);
 
                     /** SampleConfig sampleStrategy. */
                     public sampleStrategy: (google.cloud.aiplatform.v1beta1.SampleConfig.SampleStrategy|keyof typeof google.cloud.aiplatform.v1beta1.SampleConfig.SampleStrategy);
@@ -44519,10 +44519,10 @@ export namespace google {
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IMigrateResourceResponse);
 
                     /** MigrateResourceResponse dataset. */
-                    public dataset: string;
+                    public dataset?: (string|null);
 
                     /** MigrateResourceResponse model. */
-                    public model: string;
+                    public model?: (string|null);
 
                     /** MigrateResourceResponse migratableResource. */
                     public migratableResource?: (google.cloud.aiplatform.v1beta1.IMigratableResource|null);
@@ -44728,10 +44728,10 @@ export namespace google {
                         public error?: (google.rpc.IStatus|null);
 
                         /** PartialResult model. */
-                        public model: string;
+                        public model?: (string|null);
 
                         /** PartialResult dataset. */
-                        public dataset: string;
+                        public dataset?: (string|null);
 
                         /** PartialResult request. */
                         public request?: (google.cloud.aiplatform.v1beta1.IMigrateResourceRequest|null);
@@ -55302,10 +55302,10 @@ export namespace google {
                                 constructor(properties?: google.cloud.aiplatform.v1beta1.schema.trainingjob.definition.IAutoMlTablesInputs);
 
                                 /** AutoMlTablesInputs optimizationObjectiveRecallValue. */
-                                public optimizationObjectiveRecallValue: number;
+                                public optimizationObjectiveRecallValue?: (number|null);
 
                                 /** AutoMlTablesInputs optimizationObjectivePrecisionValue. */
-                                public optimizationObjectivePrecisionValue: number;
+                                public optimizationObjectivePrecisionValue?: (number|null);
 
                                 /** AutoMlTablesInputs predictionType. */
                                 public predictionType: string;
@@ -61079,19 +61079,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
@@ -64779,16 +64779,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);

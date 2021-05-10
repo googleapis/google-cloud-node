@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -168,49 +167,46 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient();
+    const client =
+      new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-      {
+    const client =
+      new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-      {
+    const client =
+      new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.specialistPoolServiceStub, undefined);
     await client.initialize();
     assert(client.specialistPoolServiceStub);
   });
 
   it('has close method', () => {
-    const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-      {
+    const client =
+      new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-      {
+    const client =
+      new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -219,12 +215,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-      {
+    const client =
+      new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -243,12 +238,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
 
   describe('getSpecialistPool', () => {
     it('invokes getSpecialistPool without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetSpecialistPoolRequest()
@@ -276,12 +270,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes getSpecialistPool without error using callback', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetSpecialistPoolRequest()
@@ -298,9 +291,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()
       );
-      client.innerApiCalls.getSpecialistPool = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getSpecialistPool =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getSpecialistPool(
           request,
@@ -326,12 +318,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes getSpecialistPool with error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetSpecialistPoolRequest()
@@ -361,12 +352,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
 
   describe('createSpecialistPool', () => {
     it('invokes createSpecialistPool without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest()
@@ -383,9 +373,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createSpecialistPool = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createSpecialistPool =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createSpecialistPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -397,12 +386,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes createSpecialistPool without error using callback', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest()
@@ -419,9 +407,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createSpecialistPool = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createSpecialistPool =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createSpecialistPool(
           request,
@@ -454,12 +441,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes createSpecialistPool with call error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest()
@@ -487,12 +473,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes createSpecialistPool with LRO error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateSpecialistPoolRequest()
@@ -522,12 +507,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes checkCreateSpecialistPoolProgress without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -546,12 +530,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes checkCreateSpecialistPoolProgress with error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -569,12 +552,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
 
   describe('deleteSpecialistPool', () => {
     it('invokes deleteSpecialistPool without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest()
@@ -591,9 +573,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteSpecialistPool = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSpecialistPool =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteSpecialistPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -605,12 +586,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes deleteSpecialistPool without error using callback', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest()
@@ -627,9 +607,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteSpecialistPool = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSpecialistPool =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteSpecialistPool(
           request,
@@ -662,12 +641,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes deleteSpecialistPool with call error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest()
@@ -695,12 +673,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes deleteSpecialistPool with LRO error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteSpecialistPoolRequest()
@@ -730,12 +707,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes checkDeleteSpecialistPoolProgress without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -754,12 +730,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes checkDeleteSpecialistPoolProgress with error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -777,12 +752,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
 
   describe('updateSpecialistPool', () => {
     it('invokes updateSpecialistPool without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest()
@@ -800,9 +774,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateSpecialistPool = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSpecialistPool =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateSpecialistPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -814,12 +787,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes updateSpecialistPool without error using callback', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest()
@@ -837,9 +809,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateSpecialistPool = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSpecialistPool =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateSpecialistPool(
           request,
@@ -872,12 +843,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes updateSpecialistPool with call error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest()
@@ -906,12 +876,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes updateSpecialistPool with LRO error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateSpecialistPoolRequest()
@@ -942,12 +911,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes checkUpdateSpecialistPoolProgress without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -966,12 +934,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes checkUpdateSpecialistPoolProgress with error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -989,12 +956,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
 
   describe('listSpecialistPools', () => {
     it('invokes listSpecialistPools without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest()
@@ -1019,9 +985,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()
         ),
       ];
-      client.innerApiCalls.listSpecialistPools = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listSpecialistPools =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listSpecialistPools(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1032,12 +997,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes listSpecialistPools without error using callback', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest()
@@ -1062,9 +1026,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()
         ),
       ];
-      client.innerApiCalls.listSpecialistPools = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listSpecialistPools =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listSpecialistPools(
           request,
@@ -1092,12 +1055,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes listSpecialistPools with error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest()
@@ -1125,12 +1087,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     it('invokes listSpecialistPoolsStream without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest()
@@ -1148,12 +1109,12 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()
         ),
       ];
-      client.descriptors.page.listSpecialistPools.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSpecialistPools.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listSpecialistPoolsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.SpecialistPool[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.SpecialistPool[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.SpecialistPool) => {
@@ -1175,21 +1136,19 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           .calledWith(client.innerApiCalls.listSpecialistPools, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listSpecialistPools
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSpecialistPools.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listSpecialistPoolsStream with error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest()
@@ -1197,13 +1156,12 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSpecialistPools.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listSpecialistPools.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listSpecialistPoolsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.SpecialistPool[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.SpecialistPool[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.SpecialistPool) => {
@@ -1224,21 +1182,19 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           .calledWith(client.innerApiCalls.listSpecialistPools, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listSpecialistPools
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSpecialistPools.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listSpecialistPools without error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest()
@@ -1256,36 +1212,35 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.SpecialistPool()
         ),
       ];
-      client.descriptors.page.listSpecialistPools.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[] = [];
+      client.descriptors.page.listSpecialistPools.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[] =
+        [];
       const iterable = client.listSpecialistPoolsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listSpecialistPools
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listSpecialistPools
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listSpecialistPools with error', async () => {
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsRequest()
@@ -1293,27 +1248,26 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSpecialistPools.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listSpecialistPools.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listSpecialistPoolsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listSpecialistPools
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listSpecialistPools
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1329,12 +1283,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -1418,12 +1371,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -1478,9 +1430,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -1497,12 +1448,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -1519,8 +1469,10 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1530,8 +1482,10 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1541,21 +1495,24 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1569,12 +1526,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -1636,12 +1592,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -1713,12 +1668,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -1762,9 +1716,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -1781,12 +1734,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -1847,12 +1799,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
@@ -1913,12 +1864,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -1935,47 +1885,54 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1988,12 +1945,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -2040,12 +1996,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -2107,12 +2062,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -2186,12 +2140,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -2210,34 +2163,38 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2247,21 +2204,24 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2271,8 +2231,10 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2286,12 +2248,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -2335,9 +2296,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -2354,12 +2314,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -2420,12 +2379,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -2442,8 +2400,10 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2470,9 +2430,8 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
@@ -2490,12 +2449,11 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client = new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
-        {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()

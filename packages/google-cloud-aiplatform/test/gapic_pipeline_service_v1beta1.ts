@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -250,9 +249,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
       );
-      client.innerApiCalls.createTrainingPipeline = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createTrainingPipeline =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createTrainingPipeline(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -283,9 +281,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
       );
-      client.innerApiCalls.createTrainingPipeline = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTrainingPipeline =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTrainingPipeline(
           request,
@@ -367,9 +364,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
       );
-      client.innerApiCalls.getTrainingPipeline = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getTrainingPipeline =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getTrainingPipeline(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -400,9 +396,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
       );
-      client.innerApiCalls.getTrainingPipeline = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTrainingPipeline =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTrainingPipeline(
           request,
@@ -481,9 +476,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelTrainingPipeline = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelTrainingPipeline =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.cancelTrainingPipeline(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -514,9 +508,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelTrainingPipeline = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelTrainingPipeline =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelTrainingPipeline(
           request,
@@ -598,9 +591,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTrainingPipeline = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTrainingPipeline =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteTrainingPipeline(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -632,9 +624,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTrainingPipeline = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTrainingPipeline =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTrainingPipeline(
           request,
@@ -805,9 +796,8 @@ describe('v1beta1.PipelineServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
         ),
       ];
-      client.innerApiCalls.listTrainingPipelines = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTrainingPipelines =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTrainingPipelines(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -846,9 +836,8 @@ describe('v1beta1.PipelineServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
         ),
       ];
-      client.innerApiCalls.listTrainingPipelines = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTrainingPipelines =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTrainingPipelines(
           request,
@@ -931,12 +920,12 @@ describe('v1beta1.PipelineServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
         ),
       ];
-      client.descriptors.page.listTrainingPipelines.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTrainingPipelines.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTrainingPipelinesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TrainingPipeline[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TrainingPipeline[] =
+          [];
         stream.on(
           'data',
           (
@@ -955,16 +944,18 @@ describe('v1beta1.PipelineServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listTrainingPipelines
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTrainingPipelines
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTrainingPipelines, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTrainingPipelines
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTrainingPipelines
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -981,13 +972,12 @@ describe('v1beta1.PipelineServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTrainingPipelines.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTrainingPipelines.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTrainingPipelinesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TrainingPipeline[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TrainingPipeline[] =
+          [];
         stream.on(
           'data',
           (
@@ -1005,16 +995,18 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listTrainingPipelines
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTrainingPipelines
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTrainingPipelines, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTrainingPipelines
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTrainingPipelines
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1041,25 +1033,27 @@ describe('v1beta1.PipelineServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TrainingPipeline()
         ),
       ];
-      client.descriptors.page.listTrainingPipelines.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[] = [];
+      client.descriptors.page.listTrainingPipelines.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[] =
+        [];
       const iterable = client.listTrainingPipelinesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTrainingPipelines
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTrainingPipelines
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTrainingPipelines
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTrainingPipelines
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1076,27 +1070,28 @@ describe('v1beta1.PipelineServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTrainingPipelines.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTrainingPipelines.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTrainingPipelinesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTrainingPipelines
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTrainingPipelines
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTrainingPipelines
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTrainingPipelines
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1257,9 +1252,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -1296,8 +1290,10 @@ describe('v1beta1.PipelineServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1307,8 +1303,10 @@ describe('v1beta1.PipelineServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1318,21 +1316,24 @@ describe('v1beta1.PipelineServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1533,9 +1534,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -1700,47 +1700,54 @@ describe('v1beta1.PipelineServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1967,34 +1974,38 @@ describe('v1beta1.PipelineServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2004,21 +2015,24 @@ describe('v1beta1.PipelineServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2028,8 +2042,10 @@ describe('v1beta1.PipelineServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2090,9 +2106,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -2193,8 +2208,10 @@ describe('v1beta1.PipelineServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2221,9 +2238,8 @@ describe('v1beta1.PipelineServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)

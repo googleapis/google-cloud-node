@@ -27,7 +27,8 @@ function main() {
   const modelServiceClient = new aiplatform.ModelServiceClient();
   const pipelineServiceClient = new aiplatform.PipelineServiceClient();
   const predictionServiceClient = new aiplatform.PredictionServiceClient();
-  const specialistPoolServiceClient = new aiplatform.SpecialistPoolServiceClient();
+  const specialistPoolServiceClient =
+    new aiplatform.SpecialistPoolServiceClient();
 }
 
 main();

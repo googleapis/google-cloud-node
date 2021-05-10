@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CustomJob()
       );
-      client.innerApiCalls.createCustomJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createCustomJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createCustomJob(
           request,
@@ -391,9 +389,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CustomJob()
       );
-      client.innerApiCalls.getCustomJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getCustomJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getCustomJob(
           request,
@@ -503,9 +500,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelCustomJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelCustomJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelCustomJob(
           request,
@@ -584,9 +580,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DataLabelingJob()
       );
-      client.innerApiCalls.createDataLabelingJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createDataLabelingJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createDataLabelingJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -617,9 +612,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DataLabelingJob()
       );
-      client.innerApiCalls.createDataLabelingJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDataLabelingJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDataLabelingJob(
           request,
@@ -701,9 +695,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DataLabelingJob()
       );
-      client.innerApiCalls.getDataLabelingJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getDataLabelingJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getDataLabelingJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -734,9 +727,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DataLabelingJob()
       );
-      client.innerApiCalls.getDataLabelingJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDataLabelingJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDataLabelingJob(
           request,
@@ -815,9 +807,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelDataLabelingJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelDataLabelingJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.cancelDataLabelingJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -848,9 +839,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelDataLabelingJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelDataLabelingJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelDataLabelingJob(
           request,
@@ -932,9 +922,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
       );
-      client.innerApiCalls.createHyperparameterTuningJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createHyperparameterTuningJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createHyperparameterTuningJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -965,9 +954,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
       );
-      client.innerApiCalls.createHyperparameterTuningJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createHyperparameterTuningJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createHyperparameterTuningJob(
           request,
@@ -1049,9 +1037,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
       );
-      client.innerApiCalls.getHyperparameterTuningJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getHyperparameterTuningJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getHyperparameterTuningJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1082,9 +1069,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
       );
-      client.innerApiCalls.getHyperparameterTuningJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getHyperparameterTuningJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getHyperparameterTuningJob(
           request,
@@ -1166,9 +1152,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelHyperparameterTuningJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelHyperparameterTuningJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.cancelHyperparameterTuningJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1199,9 +1184,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelHyperparameterTuningJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelHyperparameterTuningJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelHyperparameterTuningJob(
           request,
@@ -1283,9 +1267,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
       );
-      client.innerApiCalls.createBatchPredictionJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createBatchPredictionJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createBatchPredictionJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1316,9 +1299,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
       );
-      client.innerApiCalls.createBatchPredictionJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createBatchPredictionJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createBatchPredictionJob(
           request,
@@ -1400,9 +1382,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
       );
-      client.innerApiCalls.getBatchPredictionJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getBatchPredictionJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getBatchPredictionJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1433,9 +1414,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
       );
-      client.innerApiCalls.getBatchPredictionJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getBatchPredictionJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getBatchPredictionJob(
           request,
@@ -1517,9 +1497,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelBatchPredictionJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelBatchPredictionJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.cancelBatchPredictionJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1550,9 +1529,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelBatchPredictionJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelBatchPredictionJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelBatchPredictionJob(
           request,
@@ -1634,9 +1612,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteCustomJob = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCustomJob =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteCustomJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1668,9 +1645,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteCustomJob = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCustomJob =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteCustomJob(
           request,
@@ -1830,9 +1806,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDataLabelingJob = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDataLabelingJob =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteDataLabelingJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1864,9 +1839,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDataLabelingJob = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDataLabelingJob =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDataLabelingJob(
           request,
@@ -2029,9 +2003,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteHyperparameterTuningJob = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteHyperparameterTuningJob =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteHyperparameterTuningJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2063,9 +2036,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteHyperparameterTuningJob = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteHyperparameterTuningJob =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteHyperparameterTuningJob(
           request,
@@ -2178,9 +2150,10 @@ describe('v1.JobServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteHyperparameterTuningJobProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkDeleteHyperparameterTuningJobProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2228,9 +2201,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteBatchPredictionJob = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteBatchPredictionJob =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteBatchPredictionJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2262,9 +2234,8 @@ describe('v1.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteBatchPredictionJob = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteBatchPredictionJob =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteBatchPredictionJob(
           request,
@@ -2377,9 +2348,10 @@ describe('v1.JobServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteBatchPredictionJobProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkDeleteBatchPredictionJobProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2474,9 +2446,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.CustomJob()
         ),
       ];
-      client.innerApiCalls.listCustomJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listCustomJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listCustomJobs(
           request,
@@ -2554,9 +2525,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.CustomJob()
         ),
       ];
-      client.descriptors.page.listCustomJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCustomJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listCustomJobsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.CustomJob[] = [];
@@ -2581,10 +2551,9 @@ describe('v1.JobServiceClient', () => {
           .calledWith(client.innerApiCalls.listCustomJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2601,10 +2570,8 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCustomJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCustomJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listCustomJobsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1.CustomJob[] = [];
@@ -2628,10 +2595,9 @@ describe('v1.JobServiceClient', () => {
           .calledWith(client.innerApiCalls.listCustomJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2658,9 +2624,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.CustomJob()
         ),
       ];
-      client.descriptors.page.listCustomJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCustomJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1.ICustomJob[] = [];
       const iterable = client.listCustomJobsAsync(request);
       for await (const resource of iterable) {
@@ -2668,15 +2633,15 @@ describe('v1.JobServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listCustomJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCustomJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2693,10 +2658,8 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCustomJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCustomJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listCustomJobsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.aiplatform.v1.ICustomJob[] = [];
@@ -2705,15 +2668,15 @@ describe('v1.JobServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listCustomJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCustomJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2749,9 +2712,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.DataLabelingJob()
         ),
       ];
-      client.innerApiCalls.listDataLabelingJobs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listDataLabelingJobs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listDataLabelingJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2790,9 +2752,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.DataLabelingJob()
         ),
       ];
-      client.innerApiCalls.listDataLabelingJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDataLabelingJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDataLabelingJobs(
           request,
@@ -2870,12 +2831,12 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.DataLabelingJob()
         ),
       ];
-      client.descriptors.page.listDataLabelingJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDataLabelingJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDataLabelingJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.DataLabelingJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.DataLabelingJob[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1.DataLabelingJob) => {
@@ -2897,10 +2858,9 @@ describe('v1.JobServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataLabelingJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataLabelingJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataLabelingJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2917,13 +2877,12 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataLabelingJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataLabelingJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDataLabelingJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.DataLabelingJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.DataLabelingJob[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1.DataLabelingJob) => {
@@ -2944,10 +2903,9 @@ describe('v1.JobServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataLabelingJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataLabelingJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataLabelingJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2974,25 +2932,25 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.DataLabelingJob()
         ),
       ];
-      client.descriptors.page.listDataLabelingJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1.IDataLabelingJob[] = [];
+      client.descriptors.page.listDataLabelingJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IDataLabelingJob[] =
+        [];
       const iterable = client.listDataLabelingJobsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataLabelingJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataLabelingJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3009,27 +2967,26 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataLabelingJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataLabelingJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDataLabelingJobsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.IDataLabelingJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.IDataLabelingJob[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataLabelingJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataLabelingJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3065,9 +3022,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
         ),
       ];
-      client.innerApiCalls.listHyperparameterTuningJobs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listHyperparameterTuningJobs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listHyperparameterTuningJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3106,9 +3062,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
         ),
       ];
-      client.innerApiCalls.listHyperparameterTuningJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listHyperparameterTuningJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listHyperparameterTuningJobs(
           request,
@@ -3191,12 +3146,12 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
         ),
       ];
-      client.descriptors.page.listHyperparameterTuningJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listHyperparameterTuningJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listHyperparameterTuningJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.HyperparameterTuningJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.HyperparameterTuningJob[] =
+          [];
         stream.on(
           'data',
           (
@@ -3215,8 +3170,10 @@ describe('v1.JobServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(
             client.innerApiCalls.listHyperparameterTuningJobs,
@@ -3224,10 +3181,10 @@ describe('v1.JobServiceClient', () => {
           )
       );
       assert.strictEqual(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3244,13 +3201,12 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listHyperparameterTuningJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listHyperparameterTuningJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listHyperparameterTuningJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.HyperparameterTuningJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.HyperparameterTuningJob[] =
+          [];
         stream.on(
           'data',
           (
@@ -3268,8 +3224,10 @@ describe('v1.JobServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(
             client.innerApiCalls.listHyperparameterTuningJobs,
@@ -3277,10 +3235,10 @@ describe('v1.JobServiceClient', () => {
           )
       );
       assert.strictEqual(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3307,25 +3265,27 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.HyperparameterTuningJob()
         ),
       ];
-      client.descriptors.page.listHyperparameterTuningJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[] = [];
+      client.descriptors.page.listHyperparameterTuningJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[] =
+        [];
       const iterable = client.listHyperparameterTuningJobsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3342,27 +3302,28 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listHyperparameterTuningJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listHyperparameterTuningJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listHyperparameterTuningJobsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listHyperparameterTuningJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listHyperparameterTuningJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3398,9 +3359,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
         ),
       ];
-      client.innerApiCalls.listBatchPredictionJobs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listBatchPredictionJobs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listBatchPredictionJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3439,9 +3399,8 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
         ),
       ];
-      client.innerApiCalls.listBatchPredictionJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listBatchPredictionJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listBatchPredictionJobs(
           request,
@@ -3524,12 +3483,12 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
         ),
       ];
-      client.descriptors.page.listBatchPredictionJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBatchPredictionJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listBatchPredictionJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.BatchPredictionJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.BatchPredictionJob[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1.BatchPredictionJob) => {
@@ -3546,16 +3505,18 @@ describe('v1.JobServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listBatchPredictionJobs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listBatchPredictionJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listBatchPredictionJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3572,13 +3533,12 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listBatchPredictionJobs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listBatchPredictionJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listBatchPredictionJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.BatchPredictionJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.BatchPredictionJob[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1.BatchPredictionJob) => {
@@ -3594,16 +3554,18 @@ describe('v1.JobServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listBatchPredictionJobs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listBatchPredictionJobs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listBatchPredictionJobs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3630,25 +3592,27 @@ describe('v1.JobServiceClient', () => {
           new protos.google.cloud.aiplatform.v1.BatchPredictionJob()
         ),
       ];
-      client.descriptors.page.listBatchPredictionJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1.IBatchPredictionJob[] = [];
+      client.descriptors.page.listBatchPredictionJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IBatchPredictionJob[] =
+        [];
       const iterable = client.listBatchPredictionJobsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listBatchPredictionJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listBatchPredictionJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3665,27 +3629,28 @@ describe('v1.JobServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listBatchPredictionJobs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listBatchPredictionJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listBatchPredictionJobsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.IBatchPredictionJob[] = [];
+        const responses: protos.google.cloud.aiplatform.v1.IBatchPredictionJob[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listBatchPredictionJobs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listBatchPredictionJobs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listBatchPredictionJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3846,9 +3811,8 @@ describe('v1.JobServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -3885,8 +3849,10 @@ describe('v1.JobServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -3896,8 +3862,10 @@ describe('v1.JobServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3907,21 +3875,24 @@ describe('v1.JobServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4122,9 +4093,8 @@ describe('v1.JobServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -4289,47 +4259,54 @@ describe('v1.JobServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4556,34 +4533,38 @@ describe('v1.JobServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4593,21 +4574,24 @@ describe('v1.JobServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4617,8 +4601,10 @@ describe('v1.JobServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4679,9 +4665,8 @@ describe('v1.JobServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -4718,8 +4703,10 @@ describe('v1.JobServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -4746,9 +4733,8 @@ describe('v1.JobServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)

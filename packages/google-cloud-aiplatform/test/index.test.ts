@@ -39,14 +39,10 @@ describe('AI Platform enhanced types', () => {
     const predictResultTypeNames =
       enhancedTypes.v1beta1.schema.predict.prediction;
 
-    const {
-      definition,
-    } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
-    const {
-      instance,
-      params,
-      prediction,
-    } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
+    const {definition} =
+      aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
+    const {instance, params, prediction} =
+      aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
     it('adds training job definition types', () => {
       testNamespaceAgainstArray(definition, definitionTypeNames);
@@ -71,14 +67,10 @@ describe('AI Platform enhanced types', () => {
     const predictParamsTypeNames = enhancedTypes.v1.schema.predict.params;
     const predictResultTypeNames = enhancedTypes.v1.schema.predict.prediction;
 
-    const {
-      definition,
-    } = aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
-    const {
-      instance,
-      params,
-      prediction,
-    } = aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
+    const {definition} =
+      aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
+    const {instance, params, prediction} =
+      aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
 
     it('adds training job definition types', () => {
       testNamespaceAgainstArray(definition, definitionTypeNames);
