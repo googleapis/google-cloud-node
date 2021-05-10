@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -248,9 +247,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse()
       );
-      client.innerApiCalls.batchGetAssetsHistory = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchGetAssetsHistory =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.batchGetAssetsHistory(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -281,9 +279,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse()
       );
-      client.innerApiCalls.batchGetAssetsHistory = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchGetAssetsHistory =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchGetAssetsHistory(
           request,
@@ -396,9 +393,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
-      client.innerApiCalls.createFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createFeed(
           request,
@@ -508,9 +504,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
-      client.innerApiCalls.getFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getFeed(
           request,
@@ -617,9 +612,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsResponse()
       );
-      client.innerApiCalls.listFeeds = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listFeeds =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listFeeds(
           request,
@@ -728,9 +722,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
-      client.innerApiCalls.updateFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateFeed(
           request,
@@ -841,9 +834,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteFeed(
           request,
@@ -955,9 +947,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse()
       );
-      client.innerApiCalls.analyzeIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.analyzeIamPolicy(
           request,
@@ -1069,9 +1060,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportAssets = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportAssets =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportAssets(
           request,
@@ -1229,9 +1219,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeIamPolicyLongrunning =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.analyzeIamPolicyLongrunning(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1264,9 +1253,8 @@ describe('v1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeIamPolicyLongrunning =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.analyzeIamPolicyLongrunning(
           request,
@@ -1381,9 +1369,10 @@ describe('v1.AssetServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkAnalyzeIamPolicyLongrunningProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkAnalyzeIamPolicyLongrunningProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1439,9 +1428,8 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.ResourceSearchResult()
         ),
       ];
-      client.innerApiCalls.searchAllResources = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.searchAllResources =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.searchAllResources(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1480,9 +1468,8 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.ResourceSearchResult()
         ),
       ];
-      client.innerApiCalls.searchAllResources = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchAllResources =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchAllResources(
           request,
@@ -1560,12 +1547,12 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.ResourceSearchResult()
         ),
       ];
-      client.descriptors.page.searchAllResources.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.searchAllResources.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.searchAllResourcesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.asset.v1.ResourceSearchResult[] = [];
+        const responses: protos.google.cloud.asset.v1.ResourceSearchResult[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.asset.v1.ResourceSearchResult) => {
@@ -1587,10 +1574,9 @@ describe('v1.AssetServiceClient', () => {
           .calledWith(client.innerApiCalls.searchAllResources, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllResources
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllResources.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1607,13 +1593,12 @@ describe('v1.AssetServiceClient', () => {
       request.scope = '';
       const expectedHeaderRequestParams = 'scope=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchAllResources.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchAllResources.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.searchAllResourcesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.asset.v1.ResourceSearchResult[] = [];
+        const responses: protos.google.cloud.asset.v1.ResourceSearchResult[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.asset.v1.ResourceSearchResult) => {
@@ -1634,10 +1619,9 @@ describe('v1.AssetServiceClient', () => {
           .calledWith(client.innerApiCalls.searchAllResources, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllResources
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllResources.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1664,25 +1648,25 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.ResourceSearchResult()
         ),
       ];
-      client.descriptors.page.searchAllResources.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.asset.v1.IResourceSearchResult[] = [];
+      client.descriptors.page.searchAllResources.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.asset.v1.IResourceSearchResult[] =
+        [];
       const iterable = client.searchAllResourcesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.searchAllResources
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchAllResources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllResources
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllResources.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1699,27 +1683,26 @@ describe('v1.AssetServiceClient', () => {
       request.scope = '';
       const expectedHeaderRequestParams = 'scope=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchAllResources.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchAllResources.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.searchAllResourcesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.asset.v1.IResourceSearchResult[] = [];
+        const responses: protos.google.cloud.asset.v1.IResourceSearchResult[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.searchAllResources
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchAllResources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllResources
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllResources.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1755,9 +1738,8 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
         ),
       ];
-      client.innerApiCalls.searchAllIamPolicies = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.searchAllIamPolicies =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.searchAllIamPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1796,9 +1778,8 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
         ),
       ];
-      client.innerApiCalls.searchAllIamPolicies = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchAllIamPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchAllIamPolicies(
           request,
@@ -1878,12 +1859,12 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
         ),
       ];
-      client.descriptors.page.searchAllIamPolicies.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.searchAllIamPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.searchAllIamPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.asset.v1.IamPolicySearchResult[] = [];
+        const responses: protos.google.cloud.asset.v1.IamPolicySearchResult[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.asset.v1.IamPolicySearchResult) => {
@@ -1905,10 +1886,9 @@ describe('v1.AssetServiceClient', () => {
           .calledWith(client.innerApiCalls.searchAllIamPolicies, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllIamPolicies
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllIamPolicies.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1925,13 +1905,12 @@ describe('v1.AssetServiceClient', () => {
       request.scope = '';
       const expectedHeaderRequestParams = 'scope=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchAllIamPolicies.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchAllIamPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.searchAllIamPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.asset.v1.IamPolicySearchResult[] = [];
+        const responses: protos.google.cloud.asset.v1.IamPolicySearchResult[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.asset.v1.IamPolicySearchResult) => {
@@ -1952,10 +1931,9 @@ describe('v1.AssetServiceClient', () => {
           .calledWith(client.innerApiCalls.searchAllIamPolicies, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllIamPolicies
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllIamPolicies.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1982,25 +1960,25 @@ describe('v1.AssetServiceClient', () => {
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
         ),
       ];
-      client.descriptors.page.searchAllIamPolicies.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.asset.v1.IIamPolicySearchResult[] = [];
+      client.descriptors.page.searchAllIamPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.asset.v1.IIamPolicySearchResult[] =
+        [];
       const iterable = client.searchAllIamPoliciesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.searchAllIamPolicies
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllIamPolicies
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2017,27 +1995,26 @@ describe('v1.AssetServiceClient', () => {
       request.scope = '';
       const expectedHeaderRequestParams = 'scope=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchAllIamPolicies.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.searchAllIamPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.searchAllIamPoliciesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.asset.v1.IIamPolicySearchResult[] = [];
+        const responses: protos.google.cloud.asset.v1.IIamPolicySearchResult[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.searchAllIamPolicies
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.searchAllIamPolicies
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2118,17 +2095,18 @@ describe('v1.AssetServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationFeedPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationFeedPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationFeedName', () => {
-        const result = client.matchOrganizationFromOrganizationFeedName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationFeedName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
           (client.pathTemplates.organizationFeedPathTemplate.match as SinonStub)

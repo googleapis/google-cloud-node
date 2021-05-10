@@ -1555,10 +1555,10 @@ export namespace google {
                     constructor(properties?: google.cloud.asset.v1.IGcsDestination);
 
                     /** GcsDestination uri. */
-                    public uri: string;
+                    public uri?: (string|null);
 
                     /** GcsDestination uriPrefix. */
-                    public uriPrefix: string;
+                    public uriPrefix?: (string|null);
 
                     /** GcsDestination objectUri. */
                     public objectUri?: ("uri"|"uriPrefix");
@@ -5156,10 +5156,10 @@ export namespace google {
                         constructor(properties?: google.cloud.asset.v1.IamPolicyAnalysisResult.IAccess);
 
                         /** Access role. */
-                        public role: string;
+                        public role?: (string|null);
 
                         /** Access permission. */
-                        public permission: string;
+                        public permission?: (string|null);
 
                         /** Access analysisState. */
                         public analysisState?: (google.cloud.asset.v1.IIamPolicyAnalysisState|null);
@@ -7349,7 +7349,7 @@ export namespace google {
                     constructor(properties?: google.cloud.asset.v1p2beta1.IGcsDestination);
 
                     /** GcsDestination uri. */
-                    public uri: string;
+                    public uri?: (string|null);
 
                     /** GcsDestination objectUri. */
                     public objectUri?: "uri";
@@ -9888,10 +9888,10 @@ export namespace google {
                         constructor(properties?: google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccess);
 
                         /** Access role. */
-                        public role: string;
+                        public role?: (string|null);
 
                         /** Access permission. */
-                        public permission: string;
+                        public permission?: (string|null);
 
                         /** Access analysisState. */
                         public analysisState?: (google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState|null);
@@ -12563,19 +12563,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
@@ -16539,16 +16539,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);
