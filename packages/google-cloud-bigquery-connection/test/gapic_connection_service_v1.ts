@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.Connection()
       );
-      client.innerApiCalls.createConnection = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createConnection =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createConnection(
           request,
@@ -361,9 +359,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.Connection()
       );
-      client.innerApiCalls.getConnection = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getConnection =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getConnection(
           request,
@@ -473,9 +470,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.Connection()
       );
-      client.innerApiCalls.updateConnection = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateConnection =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateConnection(
           request,
@@ -585,9 +581,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteConnection = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteConnection =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteConnection(
           request,
@@ -697,9 +692,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -809,9 +803,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -890,9 +883,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -923,9 +915,8 @@ describe('v1.ConnectionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -1051,9 +1042,8 @@ describe('v1.ConnectionServiceClient', () => {
           new protos.google.cloud.bigquery.connection.v1.Connection()
         ),
       ];
-      client.innerApiCalls.listConnections = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listConnections =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listConnections(
           request,
@@ -1133,12 +1123,12 @@ describe('v1.ConnectionServiceClient', () => {
           new protos.google.cloud.bigquery.connection.v1.Connection()
         ),
       ];
-      client.descriptors.page.listConnections.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listConnections.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listConnectionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.connection.v1.Connection[] = [];
+        const responses: protos.google.cloud.bigquery.connection.v1.Connection[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.bigquery.connection.v1.Connection) => {
@@ -1160,10 +1150,9 @@ describe('v1.ConnectionServiceClient', () => {
           .calledWith(client.innerApiCalls.listConnections, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listConnections
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConnections.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1180,13 +1169,12 @@ describe('v1.ConnectionServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listConnections.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listConnections.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listConnectionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.connection.v1.Connection[] = [];
+        const responses: protos.google.cloud.bigquery.connection.v1.Connection[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.bigquery.connection.v1.Connection) => {
@@ -1207,10 +1195,9 @@ describe('v1.ConnectionServiceClient', () => {
           .calledWith(client.innerApiCalls.listConnections, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listConnections
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConnections.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1237,25 +1224,25 @@ describe('v1.ConnectionServiceClient', () => {
           new protos.google.cloud.bigquery.connection.v1.Connection()
         ),
       ];
-      client.descriptors.page.listConnections.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.bigquery.connection.v1.IConnection[] = [];
+      client.descriptors.page.listConnections.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.bigquery.connection.v1.IConnection[] =
+        [];
       const iterable = client.listConnectionsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listConnections
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listConnections.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listConnections
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConnections.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1272,27 +1259,26 @@ describe('v1.ConnectionServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listConnections.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listConnections.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listConnectionsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.connection.v1.IConnection[] = [];
+        const responses: protos.google.cloud.bigquery.connection.v1.IConnection[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listConnections
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listConnections.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listConnections
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConnections.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
