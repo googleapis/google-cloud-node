@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -247,9 +246,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentResponse()
       );
-      client.innerApiCalls.inspectContent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.inspectContent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.inspectContent(
           request,
@@ -359,9 +357,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageResponse()
       );
-      client.innerApiCalls.redactImage = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.redactImage =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.redactImage(
           request,
@@ -471,9 +468,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentResponse()
       );
-      client.innerApiCalls.deidentifyContent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deidentifyContent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deidentifyContent(
           request,
@@ -583,9 +579,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentResponse()
       );
-      client.innerApiCalls.reidentifyContent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.reidentifyContent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.reidentifyContent(
           request,
@@ -695,9 +690,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesResponse()
       );
-      client.innerApiCalls.listInfoTypes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listInfoTypes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInfoTypes(
           request,
@@ -776,9 +770,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
-      client.innerApiCalls.createInspectTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createInspectTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -809,9 +802,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
-      client.innerApiCalls.createInspectTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createInspectTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createInspectTemplate(
           request,
@@ -893,9 +885,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
-      client.innerApiCalls.updateInspectTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateInspectTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -926,9 +917,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
-      client.innerApiCalls.updateInspectTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateInspectTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateInspectTemplate(
           request,
@@ -1010,9 +1000,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
-      client.innerApiCalls.getInspectTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getInspectTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1043,9 +1032,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
-      client.innerApiCalls.getInspectTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getInspectTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getInspectTemplate(
           request,
@@ -1124,9 +1112,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteInspectTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInspectTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1157,9 +1144,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteInspectTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInspectTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteInspectTemplate(
           request,
@@ -1241,9 +1227,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
-      client.innerApiCalls.createDeidentifyTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createDeidentifyTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1274,9 +1259,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
-      client.innerApiCalls.createDeidentifyTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDeidentifyTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDeidentifyTemplate(
           request,
@@ -1358,9 +1342,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
-      client.innerApiCalls.updateDeidentifyTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDeidentifyTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1391,9 +1374,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
-      client.innerApiCalls.updateDeidentifyTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDeidentifyTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDeidentifyTemplate(
           request,
@@ -1475,9 +1457,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
-      client.innerApiCalls.getDeidentifyTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getDeidentifyTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1508,9 +1489,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
-      client.innerApiCalls.getDeidentifyTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDeidentifyTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDeidentifyTemplate(
           request,
@@ -1592,9 +1572,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDeidentifyTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDeidentifyTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1625,9 +1604,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDeidentifyTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDeidentifyTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDeidentifyTemplate(
           request,
@@ -1740,9 +1718,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
-      client.innerApiCalls.createJobTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createJobTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createJobTrigger(
           request,
@@ -1852,9 +1829,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
-      client.innerApiCalls.updateJobTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateJobTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateJobTrigger(
           request,
@@ -1933,9 +1909,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
-      client.innerApiCalls.hybridInspectJobTrigger = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.hybridInspectJobTrigger =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.hybridInspectJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1966,9 +1941,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
-      client.innerApiCalls.hybridInspectJobTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.hybridInspectJobTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.hybridInspectJobTrigger(
           request,
@@ -2081,9 +2055,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
-      client.innerApiCalls.getJobTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getJobTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getJobTrigger(
           request,
@@ -2193,9 +2166,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteJobTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteJobTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteJobTrigger(
           request,
@@ -2274,9 +2246,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
-      client.innerApiCalls.activateJobTrigger = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.activateJobTrigger =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.activateJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2307,9 +2278,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
-      client.innerApiCalls.activateJobTrigger = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.activateJobTrigger =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.activateJobTrigger(
           request,
@@ -2419,9 +2389,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
-      client.innerApiCalls.createDlpJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDlpJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDlpJob(
           request,
@@ -2531,9 +2500,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
-      client.innerApiCalls.getDlpJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDlpJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDlpJob(
           request,
@@ -2640,9 +2608,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDlpJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDlpJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDlpJob(
           request,
@@ -2752,9 +2719,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.cancelDlpJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelDlpJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelDlpJob(
           request,
@@ -2833,9 +2799,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
-      client.innerApiCalls.createStoredInfoType = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createStoredInfoType =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createStoredInfoType(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2866,9 +2831,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
-      client.innerApiCalls.createStoredInfoType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createStoredInfoType =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createStoredInfoType(
           request,
@@ -2947,9 +2911,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
-      client.innerApiCalls.updateStoredInfoType = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateStoredInfoType =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateStoredInfoType(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2980,9 +2943,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
-      client.innerApiCalls.updateStoredInfoType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateStoredInfoType =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateStoredInfoType(
           request,
@@ -3092,9 +3054,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
-      client.innerApiCalls.getStoredInfoType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getStoredInfoType =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getStoredInfoType(
           request,
@@ -3173,9 +3134,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteStoredInfoType = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteStoredInfoType =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteStoredInfoType(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3206,9 +3166,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteStoredInfoType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteStoredInfoType =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteStoredInfoType(
           request,
@@ -3287,9 +3246,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
-      client.innerApiCalls.hybridInspectDlpJob = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.hybridInspectDlpJob =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.hybridInspectDlpJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3320,9 +3278,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
-      client.innerApiCalls.hybridInspectDlpJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.hybridInspectDlpJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.hybridInspectDlpJob(
           request,
@@ -3432,9 +3389,8 @@ describe('v2.DlpServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.finishDlpJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.finishDlpJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.finishDlpJob(
           request,
@@ -3521,9 +3477,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.InspectTemplate()
         ),
       ];
-      client.innerApiCalls.listInspectTemplates = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listInspectTemplates =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listInspectTemplates(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3562,9 +3517,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.InspectTemplate()
         ),
       ];
-      client.innerApiCalls.listInspectTemplates = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listInspectTemplates =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInspectTemplates(
           request,
@@ -3642,9 +3596,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.InspectTemplate()
         ),
       ];
-      client.descriptors.page.listInspectTemplates.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInspectTemplates.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listInspectTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.InspectTemplate[] = [];
@@ -3669,10 +3622,9 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(client.innerApiCalls.listInspectTemplates, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInspectTemplates
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInspectTemplates.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3689,10 +3641,8 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInspectTemplates.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInspectTemplates.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listInspectTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.InspectTemplate[] = [];
@@ -3716,10 +3666,9 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(client.innerApiCalls.listInspectTemplates, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInspectTemplates
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInspectTemplates.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3746,9 +3695,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.InspectTemplate()
         ),
       ];
-      client.descriptors.page.listInspectTemplates.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInspectTemplates.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.privacy.dlp.v2.IInspectTemplate[] = [];
       const iterable = client.listInspectTemplatesAsync(request);
       for await (const resource of iterable) {
@@ -3756,15 +3704,15 @@ describe('v2.DlpServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listInspectTemplates
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInspectTemplates
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3781,10 +3729,8 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInspectTemplates.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInspectTemplates.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listInspectTemplatesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IInspectTemplate[] = [];
@@ -3793,15 +3739,15 @@ describe('v2.DlpServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listInspectTemplates
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInspectTemplates
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3837,9 +3783,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
         ),
       ];
-      client.innerApiCalls.listDeidentifyTemplates = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listDeidentifyTemplates =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listDeidentifyTemplates(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3878,9 +3823,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
         ),
       ];
-      client.innerApiCalls.listDeidentifyTemplates = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDeidentifyTemplates =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDeidentifyTemplates(
           request,
@@ -3961,9 +3905,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
         ),
       ];
-      client.descriptors.page.listDeidentifyTemplates.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDeidentifyTemplates.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDeidentifyTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.DeidentifyTemplate[] = [];
@@ -3983,16 +3926,18 @@ describe('v2.DlpServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listDeidentifyTemplates
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeidentifyTemplates, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeidentifyTemplates
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4009,10 +3954,8 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDeidentifyTemplates.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDeidentifyTemplates.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDeidentifyTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.DeidentifyTemplate[] = [];
@@ -4031,16 +3974,18 @@ describe('v2.DlpServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listDeidentifyTemplates
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeidentifyTemplates, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeidentifyTemplates
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4067,9 +4012,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
         ),
       ];
-      client.descriptors.page.listDeidentifyTemplates.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDeidentifyTemplates.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.privacy.dlp.v2.IDeidentifyTemplate[] = [];
       const iterable = client.listDeidentifyTemplatesAsync(request);
       for await (const resource of iterable) {
@@ -4077,15 +4021,17 @@ describe('v2.DlpServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDeidentifyTemplates
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeidentifyTemplates
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4102,27 +4048,28 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDeidentifyTemplates.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDeidentifyTemplates.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDeidentifyTemplatesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.privacy.dlp.v2.IDeidentifyTemplate[] = [];
+        const responses: protos.google.privacy.dlp.v2.IDeidentifyTemplate[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDeidentifyTemplates
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDeidentifyTemplates
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDeidentifyTemplates
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4185,9 +4132,8 @@ describe('v2.DlpServiceClient', () => {
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
       ];
-      client.innerApiCalls.listJobTriggers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listJobTriggers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listJobTriggers(
           request,
@@ -4259,9 +4205,8 @@ describe('v2.DlpServiceClient', () => {
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
       ];
-      client.descriptors.page.listJobTriggers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobTriggers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listJobTriggersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.JobTrigger[] = [];
@@ -4286,10 +4231,9 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(client.innerApiCalls.listJobTriggers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listJobTriggers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listJobTriggers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4306,10 +4250,8 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listJobTriggers.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listJobTriggers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listJobTriggersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.JobTrigger[] = [];
@@ -4333,10 +4275,9 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(client.innerApiCalls.listJobTriggers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listJobTriggers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listJobTriggers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4357,9 +4298,8 @@ describe('v2.DlpServiceClient', () => {
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
       ];
-      client.descriptors.page.listJobTriggers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobTriggers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.privacy.dlp.v2.IJobTrigger[] = [];
       const iterable = client.listJobTriggersAsync(request);
       for await (const resource of iterable) {
@@ -4367,15 +4307,15 @@ describe('v2.DlpServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listJobTriggers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listJobTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listJobTriggers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listJobTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4392,10 +4332,8 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listJobTriggers.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listJobTriggers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listJobTriggersAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IJobTrigger[] = [];
@@ -4404,15 +4342,15 @@ describe('v2.DlpServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listJobTriggers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listJobTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listJobTriggers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listJobTriggers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4475,9 +4413,8 @@ describe('v2.DlpServiceClient', () => {
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
       ];
-      client.innerApiCalls.listDlpJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDlpJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDlpJobs(
           request,
@@ -4549,9 +4486,8 @@ describe('v2.DlpServiceClient', () => {
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
       ];
-      client.descriptors.page.listDlpJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDlpJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDlpJobsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.DlpJob[] = [];
@@ -4639,9 +4575,8 @@ describe('v2.DlpServiceClient', () => {
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
       ];
-      client.descriptors.page.listDlpJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDlpJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.privacy.dlp.v2.IDlpJob[] = [];
       const iterable = client.listDlpJobsAsync(request);
       for await (const resource of iterable) {
@@ -4730,9 +4665,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.StoredInfoType()
         ),
       ];
-      client.innerApiCalls.listStoredInfoTypes = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listStoredInfoTypes =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listStoredInfoTypes(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4771,9 +4705,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.StoredInfoType()
         ),
       ];
-      client.innerApiCalls.listStoredInfoTypes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listStoredInfoTypes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listStoredInfoTypes(
           request,
@@ -4851,9 +4784,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.StoredInfoType()
         ),
       ];
-      client.descriptors.page.listStoredInfoTypes.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listStoredInfoTypes.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listStoredInfoTypesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.StoredInfoType[] = [];
@@ -4878,10 +4810,9 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(client.innerApiCalls.listStoredInfoTypes, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listStoredInfoTypes
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listStoredInfoTypes.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4898,10 +4829,8 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listStoredInfoTypes.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listStoredInfoTypes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listStoredInfoTypesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.privacy.dlp.v2.StoredInfoType[] = [];
@@ -4925,10 +4854,9 @@ describe('v2.DlpServiceClient', () => {
           .calledWith(client.innerApiCalls.listStoredInfoTypes, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listStoredInfoTypes
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listStoredInfoTypes.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4955,9 +4883,8 @@ describe('v2.DlpServiceClient', () => {
           new protos.google.privacy.dlp.v2.StoredInfoType()
         ),
       ];
-      client.descriptors.page.listStoredInfoTypes.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listStoredInfoTypes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.privacy.dlp.v2.IStoredInfoType[] = [];
       const iterable = client.listStoredInfoTypesAsync(request);
       for await (const resource of iterable) {
@@ -4965,15 +4892,15 @@ describe('v2.DlpServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listStoredInfoTypes
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listStoredInfoTypes
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4990,10 +4917,8 @@ describe('v2.DlpServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listStoredInfoTypes.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listStoredInfoTypes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listStoredInfoTypesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.privacy.dlp.v2.IStoredInfoType[] = [];
@@ -5002,15 +4927,15 @@ describe('v2.DlpServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listStoredInfoTypes
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listStoredInfoTypes
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5130,12 +5055,10 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationDeidentifyTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationDeidentifyTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationDeidentifyTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationDeidentifyTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationDeidentifyTemplatePath', () => {
         const result = client.organizationDeidentifyTemplatePath(
@@ -5144,34 +5067,42 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationDeidentifyTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationDeidentifyTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationDeidentifyTemplateName', () => {
-        const result = client.matchOrganizationFromOrganizationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeidentifyTemplateFromOrganizationDeidentifyTemplateName', () => {
-        const result = client.matchDeidentifyTemplateFromOrganizationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchDeidentifyTemplateFromOrganizationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'deidentifyTemplateValue');
         assert(
-          (client.pathTemplates.organizationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5189,9 +5120,8 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationInspectTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
+      client.pathTemplates.organizationInspectTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
       client.pathTemplates.organizationInspectTemplatePathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
@@ -5203,34 +5133,40 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationInspectTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationInspectTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationInspectTemplateName', () => {
-        const result = client.matchOrganizationFromOrganizationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationInspectTemplateName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchInspectTemplateFromOrganizationInspectTemplateName', () => {
-        const result = client.matchInspectTemplateFromOrganizationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchInspectTemplateFromOrganizationInspectTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'inspectTemplateValue');
         assert(
-          (client.pathTemplates.organizationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5249,12 +5185,10 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationLocationDeidentifyTemplatePath', () => {
         const result = client.organizationLocationDeidentifyTemplatePath(
@@ -5264,51 +5198,62 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .organizationLocationDeidentifyTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationLocationDeidentifyTemplateName', () => {
-        const result = client.matchOrganizationFromOrganizationLocationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationLocationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates
-            .organizationLocationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromOrganizationLocationDeidentifyTemplateName', () => {
-        const result = client.matchLocationFromOrganizationLocationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromOrganizationLocationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates
-            .organizationLocationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName', () => {
-        const result = client.matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'deidentifyTemplateValue');
         assert(
-          (client.pathTemplates
-            .organizationLocationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5327,12 +5272,10 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationLocationInspectTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationLocationInspectTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationLocationInspectTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationInspectTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationLocationInspectTemplatePath', () => {
         const result = client.organizationLocationInspectTemplatePath(
@@ -5342,47 +5285,58 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationLocationInspectTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationLocationInspectTemplateName', () => {
-        const result = client.matchOrganizationFromOrganizationLocationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationLocationInspectTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationLocationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromOrganizationLocationInspectTemplateName', () => {
-        const result = client.matchLocationFromOrganizationLocationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromOrganizationLocationInspectTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.organizationLocationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchInspectTemplateFromOrganizationLocationInspectTemplateName', () => {
-        const result = client.matchInspectTemplateFromOrganizationLocationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchInspectTemplateFromOrganizationLocationInspectTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'inspectTemplateValue');
         assert(
-          (client.pathTemplates.organizationLocationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5401,12 +5355,10 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationLocationStoredInfoTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationLocationStoredInfoTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationLocationStoredInfoTypePath', () => {
         const result = client.organizationLocationStoredInfoTypePath(
@@ -5416,47 +5368,58 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationLocationStoredInfoTypeName', () => {
-        const result = client.matchOrganizationFromOrganizationLocationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationLocationStoredInfoTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromOrganizationLocationStoredInfoTypeName', () => {
-        const result = client.matchLocationFromOrganizationLocationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromOrganizationLocationStoredInfoTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchStoredInfoTypeFromOrganizationLocationStoredInfoTypeName', () => {
-        const result = client.matchStoredInfoTypeFromOrganizationLocationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchStoredInfoTypeFromOrganizationLocationStoredInfoTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'storedInfoTypeValue');
         assert(
-          (client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationLocationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5488,34 +5451,40 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationStoredInfoTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationStoredInfoTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationStoredInfoTypeName', () => {
-        const result = client.matchOrganizationFromOrganizationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationStoredInfoTypeName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchStoredInfoTypeFromOrganizationStoredInfoTypeName', () => {
-        const result = client.matchStoredInfoTypeFromOrganizationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchStoredInfoTypeFromOrganizationStoredInfoTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'storedInfoTypeValue');
         assert(
-          (client.pathTemplates.organizationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5585,34 +5554,40 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectDeidentifyTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectDeidentifyTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectDeidentifyTemplateName', () => {
-        const result = client.matchProjectFromProjectDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectDeidentifyTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeidentifyTemplateFromProjectDeidentifyTemplateName', () => {
-        const result = client.matchDeidentifyTemplateFromProjectDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchDeidentifyTemplateFromProjectDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'deidentifyTemplateValue');
         assert(
-          (client.pathTemplates.projectDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5640,8 +5615,10 @@ describe('v2.DlpServiceClient', () => {
         const result = client.projectDlpContentPath('projectValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectDlpContentPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectDlpContentPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -5651,8 +5628,10 @@ describe('v2.DlpServiceClient', () => {
         const result = client.matchProjectFromProjectDlpContentName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectDlpContentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectDlpContentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5733,34 +5712,38 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectInspectTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectInspectTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectInspectTemplateName', () => {
-        const result = client.matchProjectFromProjectInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectInspectTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchInspectTemplateFromProjectInspectTemplateName', () => {
-        const result = client.matchInspectTemplateFromProjectInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchInspectTemplateFromProjectInspectTemplateName(fakePath);
         assert.strictEqual(result, 'inspectTemplateValue');
         assert(
-          (client.pathTemplates.projectInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5792,8 +5775,10 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectJobTriggerPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectJobTriggerPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -5803,21 +5788,24 @@ describe('v2.DlpServiceClient', () => {
         const result = client.matchProjectFromProjectJobTriggerName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectJobTriggerPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectJobTriggerPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchJobTriggerFromProjectJobTriggerName', () => {
-        const result = client.matchJobTriggerFromProjectJobTriggerName(
-          fakePath
-        );
+        const result =
+          client.matchJobTriggerFromProjectJobTriggerName(fakePath);
         assert.strictEqual(result, 'jobTriggerValue');
         assert(
-          (client.pathTemplates.projectJobTriggerPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectJobTriggerPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5836,12 +5824,10 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationDeidentifyTemplatePath', () => {
         const result = client.projectLocationDeidentifyTemplatePath(
@@ -5851,47 +5837,58 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationDeidentifyTemplateName', () => {
-        const result = client.matchProjectFromProjectLocationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationDeidentifyTemplateName', () => {
-        const result = client.matchLocationFromProjectLocationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName', () => {
-        const result = client.matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'deidentifyTemplateValue');
         assert(
-          (client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5925,47 +5922,52 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationDlpJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationDlpJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationDlpJobName', () => {
-        const result = client.matchProjectFromProjectLocationDlpJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationDlpJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationDlpJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDlpJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationDlpJobName', () => {
-        const result = client.matchLocationFromProjectLocationDlpJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationDlpJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationDlpJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDlpJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDlpJobFromProjectLocationDlpJobName', () => {
-        const result = client.matchDlpJobFromProjectLocationDlpJobName(
-          fakePath
-        );
+        const result =
+          client.matchDlpJobFromProjectLocationDlpJobName(fakePath);
         assert.strictEqual(result, 'dlpJobValue');
         assert(
-          (client.pathTemplates.projectLocationDlpJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDlpJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5984,12 +5986,10 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectLocationInspectTemplatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationInspectTemplatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationInspectTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationInspectTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationInspectTemplatePath', () => {
         const result = client.projectLocationInspectTemplatePath(
@@ -5999,47 +5999,54 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationInspectTemplatePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationInspectTemplateName', () => {
-        const result = client.matchProjectFromProjectLocationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationInspectTemplateName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationInspectTemplateName', () => {
-        const result = client.matchLocationFromProjectLocationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationInspectTemplateName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchInspectTemplateFromProjectLocationInspectTemplateName', () => {
-        const result = client.matchInspectTemplateFromProjectLocationInspectTemplateName(
-          fakePath
-        );
+        const result =
+          client.matchInspectTemplateFromProjectLocationInspectTemplateName(
+            fakePath
+          );
         assert.strictEqual(result, 'inspectTemplateValue');
         assert(
-          (client.pathTemplates.projectLocationInspectTemplatePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6073,47 +6080,52 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationJobTriggerPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationJobTriggerPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationJobTriggerName', () => {
-        const result = client.matchProjectFromProjectLocationJobTriggerName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationJobTriggerName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationJobTriggerPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationJobTriggerPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationJobTriggerName', () => {
-        const result = client.matchLocationFromProjectLocationJobTriggerName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationJobTriggerName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationJobTriggerPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationJobTriggerPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchJobTriggerFromProjectLocationJobTriggerName', () => {
-        const result = client.matchJobTriggerFromProjectLocationJobTriggerName(
-          fakePath
-        );
+        const result =
+          client.matchJobTriggerFromProjectLocationJobTriggerName(fakePath);
         assert.strictEqual(result, 'jobTriggerValue');
         assert(
-          (client.pathTemplates.projectLocationJobTriggerPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationJobTriggerPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6132,12 +6144,10 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectLocationStoredInfoTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationStoredInfoTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationStoredInfoTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationStoredInfoTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationStoredInfoTypePath', () => {
         const result = client.projectLocationStoredInfoTypePath(
@@ -6147,47 +6157,54 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationStoredInfoTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationStoredInfoTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationStoredInfoTypeName', () => {
-        const result = client.matchProjectFromProjectLocationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationStoredInfoTypeName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationStoredInfoTypeName', () => {
-        const result = client.matchLocationFromProjectLocationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationStoredInfoTypeName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchStoredInfoTypeFromProjectLocationStoredInfoTypeName', () => {
-        const result = client.matchStoredInfoTypeFromProjectLocationStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchStoredInfoTypeFromProjectLocationStoredInfoTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'storedInfoTypeValue');
         assert(
-          (client.pathTemplates.projectLocationStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6219,34 +6236,38 @@ describe('v2.DlpServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectStoredInfoTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectStoredInfoTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectStoredInfoTypeName', () => {
-        const result = client.matchProjectFromProjectStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectStoredInfoTypeName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchStoredInfoTypeFromProjectStoredInfoTypeName', () => {
-        const result = client.matchStoredInfoTypeFromProjectStoredInfoTypeName(
-          fakePath
-        );
+        const result =
+          client.matchStoredInfoTypeFromProjectStoredInfoTypeName(fakePath);
         assert.strictEqual(result, 'storedInfoTypeValue');
         assert(
-          (client.pathTemplates.projectStoredInfoTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectStoredInfoTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

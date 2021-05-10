@@ -3555,11 +3555,11 @@
     
                         /**
                          * ContentItem value.
-                         * @member {string} value
+                         * @member {string|null|undefined} value
                          * @memberof google.privacy.dlp.v2.ContentItem
                          * @instance
                          */
-                        ContentItem.prototype.value = "";
+                        ContentItem.prototype.value = null;
     
                         /**
                          * ContentItem table.
@@ -8163,11 +8163,11 @@
     
                             /**
                              * ImageRedactionConfig redactAllText.
-                             * @member {boolean} redactAllText
+                             * @member {boolean|null|undefined} redactAllText
                              * @memberof google.privacy.dlp.v2.RedactImageRequest.ImageRedactionConfig
                              * @instance
                              */
-                            ImageRedactionConfig.prototype.redactAllText = false;
+                            ImageRedactionConfig.prototype.redactAllText = null;
     
                             /**
                              * ImageRedactionConfig redactionColor.
@@ -13074,11 +13074,11 @@
     
                         /**
                          * QuasiId customTag.
-                         * @member {string} customTag
+                         * @member {string|null|undefined} customTag
                          * @memberof google.privacy.dlp.v2.QuasiId
                          * @instance
                          */
-                        QuasiId.prototype.customTag = "";
+                        QuasiId.prototype.customTag = null;
     
                         /**
                          * QuasiId inferred.
@@ -15360,11 +15360,11 @@
     
                                 /**
                                  * TaggedField customTag.
-                                 * @member {string} customTag
+                                 * @member {string|null|undefined} customTag
                                  * @memberof google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.TaggedField
                                  * @instance
                                  */
-                                TaggedField.prototype.customTag = "";
+                                TaggedField.prototype.customTag = null;
     
                                 /**
                                  * TaggedField inferred.
@@ -21387,35 +21387,35 @@
     
                         /**
                          * Value integerValue.
-                         * @member {number|Long} integerValue
+                         * @member {number|Long|null|undefined} integerValue
                          * @memberof google.privacy.dlp.v2.Value
                          * @instance
                          */
-                        Value.prototype.integerValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Value.prototype.integerValue = null;
     
                         /**
                          * Value floatValue.
-                         * @member {number} floatValue
+                         * @member {number|null|undefined} floatValue
                          * @memberof google.privacy.dlp.v2.Value
                          * @instance
                          */
-                        Value.prototype.floatValue = 0;
+                        Value.prototype.floatValue = null;
     
                         /**
                          * Value stringValue.
-                         * @member {string} stringValue
+                         * @member {string|null|undefined} stringValue
                          * @memberof google.privacy.dlp.v2.Value
                          * @instance
                          */
-                        Value.prototype.stringValue = "";
+                        Value.prototype.stringValue = null;
     
                         /**
                          * Value booleanValue.
-                         * @member {boolean} booleanValue
+                         * @member {boolean|null|undefined} booleanValue
                          * @memberof google.privacy.dlp.v2.Value
                          * @instance
                          */
-                        Value.prototype.booleanValue = false;
+                        Value.prototype.booleanValue = null;
     
                         /**
                          * Value timestampValue.
@@ -21443,11 +21443,11 @@
     
                         /**
                          * Value dayOfWeekValue.
-                         * @member {google.type.DayOfWeek} dayOfWeekValue
+                         * @member {google.type.DayOfWeek|null|undefined} dayOfWeekValue
                          * @memberof google.privacy.dlp.v2.Value
                          * @instance
                          */
-                        Value.prototype.dayOfWeekValue = 0;
+                        Value.prototype.dayOfWeekValue = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -25152,19 +25152,19 @@
     
                         /**
                          * CharsToIgnore charactersToSkip.
-                         * @member {string} charactersToSkip
+                         * @member {string|null|undefined} charactersToSkip
                          * @memberof google.privacy.dlp.v2.CharsToIgnore
                          * @instance
                          */
-                        CharsToIgnore.prototype.charactersToSkip = "";
+                        CharsToIgnore.prototype.charactersToSkip = null;
     
                         /**
                          * CharsToIgnore commonCharactersToIgnore.
-                         * @member {google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore} commonCharactersToIgnore
+                         * @member {google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|null|undefined} commonCharactersToIgnore
                          * @memberof google.privacy.dlp.v2.CharsToIgnore
                          * @instance
                          */
-                        CharsToIgnore.prototype.commonCharactersToIgnore = 0;
+                        CharsToIgnore.prototype.commonCharactersToIgnore = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -26433,27 +26433,27 @@
     
                         /**
                          * CryptoReplaceFfxFpeConfig commonAlphabet.
-                         * @member {google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet} commonAlphabet
+                         * @member {google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|null|undefined} commonAlphabet
                          * @memberof google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig
                          * @instance
                          */
-                        CryptoReplaceFfxFpeConfig.prototype.commonAlphabet = 0;
+                        CryptoReplaceFfxFpeConfig.prototype.commonAlphabet = null;
     
                         /**
                          * CryptoReplaceFfxFpeConfig customAlphabet.
-                         * @member {string} customAlphabet
+                         * @member {string|null|undefined} customAlphabet
                          * @memberof google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig
                          * @instance
                          */
-                        CryptoReplaceFfxFpeConfig.prototype.customAlphabet = "";
+                        CryptoReplaceFfxFpeConfig.prototype.customAlphabet = null;
     
                         /**
                          * CryptoReplaceFfxFpeConfig radix.
-                         * @member {number} radix
+                         * @member {number|null|undefined} radix
                          * @memberof google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig
                          * @instance
                          */
-                        CryptoReplaceFfxFpeConfig.prototype.radix = 0;
+                        CryptoReplaceFfxFpeConfig.prototype.radix = null;
     
                         /**
                          * CryptoReplaceFfxFpeConfig surrogateInfoType.
@@ -47679,19 +47679,19 @@
     
                                 /**
                                  * LikelihoodAdjustment fixedLikelihood.
-                                 * @member {google.privacy.dlp.v2.Likelihood} fixedLikelihood
+                                 * @member {google.privacy.dlp.v2.Likelihood|null|undefined} fixedLikelihood
                                  * @memberof google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment
                                  * @instance
                                  */
-                                LikelihoodAdjustment.prototype.fixedLikelihood = 0;
+                                LikelihoodAdjustment.prototype.fixedLikelihood = null;
     
                                 /**
                                  * LikelihoodAdjustment relativeLikelihood.
-                                 * @member {number} relativeLikelihood
+                                 * @member {number|null|undefined} relativeLikelihood
                                  * @memberof google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment
                                  * @instance
                                  */
-                                LikelihoodAdjustment.prototype.relativeLikelihood = 0;
+                                LikelihoodAdjustment.prototype.relativeLikelihood = null;
     
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
@@ -52304,19 +52304,19 @@
     
                             /**
                              * PathElement id.
-                             * @member {number|Long} id
+                             * @member {number|Long|null|undefined} id
                              * @memberof google.privacy.dlp.v2.Key.PathElement
                              * @instance
                              */
-                            PathElement.prototype.id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                            PathElement.prototype.id = null;
     
                             /**
                              * PathElement name.
-                             * @member {string} name
+                             * @member {string|null|undefined} name
                              * @memberof google.privacy.dlp.v2.Key.PathElement
                              * @instance
                              */
-                            PathElement.prototype.name = "";
+                            PathElement.prototype.name = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -54625,43 +54625,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

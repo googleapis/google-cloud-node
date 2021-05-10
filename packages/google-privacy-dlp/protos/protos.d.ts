@@ -1634,7 +1634,7 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IContentItem);
 
                     /** ContentItem value. */
-                    public value: string;
+                    public value?: (string|null);
 
                     /** ContentItem table. */
                     public table?: (google.privacy.dlp.v2.ITable|null);
@@ -3433,7 +3433,7 @@ export namespace google {
                         public infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                         /** ImageRedactionConfig redactAllText. */
-                        public redactAllText: boolean;
+                        public redactAllText?: (boolean|null);
 
                         /** ImageRedactionConfig redactionColor. */
                         public redactionColor?: (google.privacy.dlp.v2.IColor|null);
@@ -5418,7 +5418,7 @@ export namespace google {
                     public infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                     /** QuasiId customTag. */
-                    public customTag: string;
+                    public customTag?: (string|null);
 
                     /** QuasiId inferred. */
                     public inferred?: (google.protobuf.IEmpty|null);
@@ -6331,7 +6331,7 @@ export namespace google {
                             public infoType?: (google.privacy.dlp.v2.IInfoType|null);
 
                             /** TaggedField customTag. */
-                            public customTag: string;
+                            public customTag?: (string|null);
 
                             /** TaggedField inferred. */
                             public inferred?: (google.protobuf.IEmpty|null);
@@ -8616,16 +8616,16 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.IValue);
 
                     /** Value integerValue. */
-                    public integerValue: (number|Long|string);
+                    public integerValue?: (number|Long|string|null);
 
                     /** Value floatValue. */
-                    public floatValue: number;
+                    public floatValue?: (number|null);
 
                     /** Value stringValue. */
-                    public stringValue: string;
+                    public stringValue?: (string|null);
 
                     /** Value booleanValue. */
-                    public booleanValue: boolean;
+                    public booleanValue?: (boolean|null);
 
                     /** Value timestampValue. */
                     public timestampValue?: (google.protobuf.ITimestamp|null);
@@ -8637,7 +8637,7 @@ export namespace google {
                     public dateValue?: (google.type.IDate|null);
 
                     /** Value dayOfWeekValue. */
-                    public dayOfWeekValue: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+                    public dayOfWeekValue?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
 
                     /** Value type. */
                     public type?: ("integerValue"|"floatValue"|"stringValue"|"booleanValue"|"timestampValue"|"timeValue"|"dateValue"|"dayOfWeekValue");
@@ -10109,10 +10109,10 @@ export namespace google {
                     constructor(properties?: google.privacy.dlp.v2.ICharsToIgnore);
 
                     /** CharsToIgnore charactersToSkip. */
-                    public charactersToSkip: string;
+                    public charactersToSkip?: (string|null);
 
                     /** CharsToIgnore commonCharactersToIgnore. */
-                    public commonCharactersToIgnore: (google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|keyof typeof google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore);
+                    public commonCharactersToIgnore?: (google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|keyof typeof google.privacy.dlp.v2.CharsToIgnore.CommonCharsToIgnore|null);
 
                     /** CharsToIgnore characters. */
                     public characters?: ("charactersToSkip"|"commonCharactersToIgnore");
@@ -10644,13 +10644,13 @@ export namespace google {
                     public context?: (google.privacy.dlp.v2.IFieldId|null);
 
                     /** CryptoReplaceFfxFpeConfig commonAlphabet. */
-                    public commonAlphabet: (google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|keyof typeof google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet);
+                    public commonAlphabet?: (google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|keyof typeof google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig.FfxCommonNativeAlphabet|null);
 
                     /** CryptoReplaceFfxFpeConfig customAlphabet. */
-                    public customAlphabet: string;
+                    public customAlphabet?: (string|null);
 
                     /** CryptoReplaceFfxFpeConfig radix. */
-                    public radix: number;
+                    public radix?: (number|null);
 
                     /** CryptoReplaceFfxFpeConfig surrogateInfoType. */
                     public surrogateInfoType?: (google.privacy.dlp.v2.IInfoType|null);
@@ -19401,10 +19401,10 @@ export namespace google {
                             constructor(properties?: google.privacy.dlp.v2.CustomInfoType.DetectionRule.ILikelihoodAdjustment);
 
                             /** LikelihoodAdjustment fixedLikelihood. */
-                            public fixedLikelihood: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood);
+                            public fixedLikelihood?: (google.privacy.dlp.v2.Likelihood|keyof typeof google.privacy.dlp.v2.Likelihood|null);
 
                             /** LikelihoodAdjustment relativeLikelihood. */
-                            public relativeLikelihood: number;
+                            public relativeLikelihood?: (number|null);
 
                             /** LikelihoodAdjustment adjustment. */
                             public adjustment?: ("fixedLikelihood"|"relativeLikelihood");
@@ -21259,10 +21259,10 @@ export namespace google {
                         public kind: string;
 
                         /** PathElement id. */
-                        public id: (number|Long|string);
+                        public id?: (number|Long|string|null);
 
                         /** PathElement name. */
-                        public name: string;
+                        public name?: (string|null);
 
                         /** PathElement idType. */
                         public idType?: ("id"|"name");
@@ -22220,19 +22220,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
