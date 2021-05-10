@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/dialogflow-cx": "^2.6.0",
+    "@google-cloud/dialogflow-cx": "^2.7.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {

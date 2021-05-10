@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.7.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.6.0...v2.7.0) (2021-05-10)
+
+
+### Features
+
+* add support for service directory webhooks ([#110](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/110)) ([d4b87a5](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/d4b87a5ba49dfa723079be71f9a7c6e69b4240b2))
+* add support for service directory webhooks ([#113](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/113)) ([2ce89d5](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/2ce89d5a885f73bb66630f2ba1e5ad79b7c40730))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#106](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/106)) ([2c333d7](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/2c333d73df45ff13b0a2a85332bbcb23be2e7d41))
+* use require() to load JSON protos ([#112](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/112)) ([d0cf055](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/d0cf055738496681fa351a9228f2a788b4132910))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.5.0...v2.6.0) (2021-05-05)
 
 
