@@ -3587,7 +3587,7 @@ export namespace google {
                     public allowImpreciseAddresses: boolean;
 
                     /** CommuteFilter roadTraffic. */
-                    public roadTraffic: (google.cloud.talent.v4.CommuteFilter.RoadTraffic|keyof typeof google.cloud.talent.v4.CommuteFilter.RoadTraffic);
+                    public roadTraffic?: (google.cloud.talent.v4.CommuteFilter.RoadTraffic|keyof typeof google.cloud.talent.v4.CommuteFilter.RoadTraffic|null);
 
                     /** CommuteFilter departureTime. */
                     public departureTime?: (google.type.ITimeOfDay|null);
@@ -12606,7 +12606,7 @@ export namespace google {
                     public allowImpreciseAddresses: boolean;
 
                     /** CommuteFilter roadTraffic. */
-                    public roadTraffic: (google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic|keyof typeof google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic);
+                    public roadTraffic?: (google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic|keyof typeof google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic|null);
 
                     /** CommuteFilter departureTime. */
                     public departureTime?: (google.type.ITimeOfDay|null);
@@ -17106,7 +17106,7 @@ export namespace google {
                     constructor(properties?: google.cloud.talent.v4beta1.IPersonName);
 
                     /** PersonName formattedName. */
-                    public formattedName: string;
+                    public formattedName?: (string|null);
 
                     /** PersonName structuredName. */
                     public structuredName?: (google.cloud.talent.v4beta1.PersonName.IPersonStructuredName|null);
@@ -17340,7 +17340,7 @@ export namespace google {
                     public usage: (google.cloud.talent.v4beta1.ContactInfoUsage|keyof typeof google.cloud.talent.v4beta1.ContactInfoUsage);
 
                     /** Address unstructuredAddress. */
-                    public unstructuredAddress: string;
+                    public unstructuredAddress?: (string|null);
 
                     /** Address structuredAddress. */
                     public structuredAddress?: (google.type.IPostalAddress|null);
@@ -18059,7 +18059,7 @@ export namespace google {
                     public address?: (google.cloud.talent.v4beta1.IAddress|null);
 
                     /** EducationRecord degreeDescription. */
-                    public degreeDescription: string;
+                    public degreeDescription?: (string|null);
 
                     /** EducationRecord structuredDegree. */
                     public structuredDegree?: (google.cloud.talent.v4beta1.IDegree|null);
@@ -20765,19 +20765,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

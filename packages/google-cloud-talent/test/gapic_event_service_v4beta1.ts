@@ -26,10 +26,9 @@ import * as eventserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v4beta1.EventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ClientEvent()
       );
-      client.innerApiCalls.createClientEvent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createClientEvent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createClientEvent(
           request,
@@ -552,21 +550,24 @@ describe('v4beta1.EventServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectTenantCompanyName', () => {
-        const result = client.matchProjectFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -576,21 +577,24 @@ describe('v4beta1.EventServiceClient', () => {
         const result = client.matchTenantFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'tenantValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchCompanyFromProjectTenantCompanyName', () => {
-        const result = client.matchCompanyFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchCompanyFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'companyValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -624,8 +628,10 @@ describe('v4beta1.EventServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );

@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Job()
       );
-      client.innerApiCalls.createJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createJob(
           request,
@@ -388,9 +386,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Job()
       );
-      client.innerApiCalls.getJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getJob(
           request,
@@ -499,9 +496,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Job()
       );
-      client.innerApiCalls.updateJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateJob(
           request,
@@ -609,9 +605,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteJob = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteJob =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteJob(
           request,
@@ -718,9 +713,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.SearchJobsResponse()
       );
-      client.innerApiCalls.searchJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchJobs(
           request,
@@ -799,9 +793,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.SearchJobsResponse()
       );
-      client.innerApiCalls.searchJobsForAlert = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.searchJobsForAlert =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.searchJobsForAlert(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -832,9 +825,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.SearchJobsResponse()
       );
-      client.innerApiCalls.searchJobsForAlert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchJobsForAlert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchJobsForAlert(
           request,
@@ -913,9 +905,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchCreateJobs = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateJobs =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.batchCreateJobs(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -947,9 +938,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchCreateJobs = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateJobs =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchCreateJobs(
           request,
@@ -1109,9 +1099,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchUpdateJobs = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchUpdateJobs =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.batchUpdateJobs(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1143,9 +1132,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchUpdateJobs = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchUpdateJobs =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchUpdateJobs(
           request,
@@ -1305,9 +1293,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchDeleteJobs = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchDeleteJobs =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.batchDeleteJobs(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1339,9 +1326,8 @@ describe('v4.JobServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchDeleteJobs = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchDeleteJobs =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchDeleteJobs(
           request,
@@ -1536,9 +1522,8 @@ describe('v4.JobServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4.Job()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Job()),
       ];
-      client.innerApiCalls.listJobs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listJobs(
           request,
@@ -1607,9 +1592,8 @@ describe('v4.JobServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4.Job()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Job()),
       ];
-      client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listJobsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.talent.v4.Job[] = [];
@@ -1695,9 +1679,8 @@ describe('v4.JobServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4.Job()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Job()),
       ];
-      client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.talent.v4.IJob[] = [];
       const iterable = client.listJobsAsync(request);
       for await (const resource of iterable) {

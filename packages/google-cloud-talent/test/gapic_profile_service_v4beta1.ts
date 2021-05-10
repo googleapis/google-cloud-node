@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v4beta1.ProfileServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Profile()
       );
-      client.innerApiCalls.createProfile = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createProfile =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createProfile(
           request,
@@ -361,9 +359,8 @@ describe('v4beta1.ProfileServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Profile()
       );
-      client.innerApiCalls.getProfile = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getProfile =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getProfile(
           request,
@@ -475,9 +472,8 @@ describe('v4beta1.ProfileServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Profile()
       );
-      client.innerApiCalls.updateProfile = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateProfile =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateProfile(
           request,
@@ -588,9 +584,8 @@ describe('v4beta1.ProfileServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteProfile = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteProfile =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteProfile(
           request,
@@ -700,9 +695,8 @@ describe('v4beta1.ProfileServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchProfilesResponse()
       );
-      client.innerApiCalls.searchProfiles = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchProfiles =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchProfiles(
           request,
@@ -816,9 +810,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Profile()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Profile()),
       ];
-      client.innerApiCalls.listProfiles = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listProfiles =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listProfiles(
           request,
@@ -890,9 +883,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Profile()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Profile()),
       ];
-      client.descriptors.page.listProfiles.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProfiles.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listProfilesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.talent.v4beta1.Profile[] = [];
@@ -917,10 +909,9 @@ describe('v4beta1.ProfileServiceClient', () => {
           .calledWith(client.innerApiCalls.listProfiles, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProfiles
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProfiles.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -964,10 +955,9 @@ describe('v4beta1.ProfileServiceClient', () => {
           .calledWith(client.innerApiCalls.listProfiles, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProfiles
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProfiles.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -988,9 +978,8 @@ describe('v4beta1.ProfileServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Profile()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Profile()),
       ];
-      client.descriptors.page.listProfiles.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProfiles.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.talent.v4beta1.IProfile[] = [];
       const iterable = client.listProfilesAsync(request);
       for await (const resource of iterable) {
@@ -998,15 +987,15 @@ describe('v4beta1.ProfileServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listProfiles
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProfiles.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProfiles
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProfiles.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1023,10 +1012,8 @@ describe('v4beta1.ProfileServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProfiles.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProfiles.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listProfilesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.IProfile[] = [];
@@ -1035,15 +1022,15 @@ describe('v4beta1.ProfileServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listProfiles
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProfiles.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProfiles
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProfiles.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1356,21 +1343,24 @@ describe('v4beta1.ProfileServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectTenantCompanyName', () => {
-        const result = client.matchProjectFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1380,21 +1370,24 @@ describe('v4beta1.ProfileServiceClient', () => {
         const result = client.matchTenantFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'tenantValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchCompanyFromProjectTenantCompanyName', () => {
-        const result = client.matchCompanyFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchCompanyFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'companyValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1428,8 +1421,10 @@ describe('v4beta1.ProfileServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );

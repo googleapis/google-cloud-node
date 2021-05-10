@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v4beta1.TenantServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
-      client.innerApiCalls.createTenant = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTenant =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTenant(
           request,
@@ -361,9 +359,8 @@ describe('v4beta1.TenantServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
-      client.innerApiCalls.getTenant = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTenant =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTenant(
           request,
@@ -472,9 +469,8 @@ describe('v4beta1.TenantServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Tenant()
       );
-      client.innerApiCalls.updateTenant = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTenant =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTenant(
           request,
@@ -585,9 +581,8 @@ describe('v4beta1.TenantServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTenant = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTenant =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTenant(
           request,
@@ -701,9 +696,8 @@ describe('v4beta1.TenantServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
       ];
-      client.innerApiCalls.listTenants = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTenants =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTenants(
           request,
@@ -775,9 +769,8 @@ describe('v4beta1.TenantServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
       ];
-      client.descriptors.page.listTenants.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTenants.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTenantsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.talent.v4beta1.Tenant[] = [];
@@ -871,9 +864,8 @@ describe('v4beta1.TenantServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
         generateSampleMessage(new protos.google.cloud.talent.v4beta1.Tenant()),
       ];
-      client.descriptors.page.listTenants.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTenants.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.talent.v4beta1.ITenant[] = [];
       const iterable = client.listTenantsAsync(request);
       for await (const resource of iterable) {
@@ -1239,21 +1231,24 @@ describe('v4beta1.TenantServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectTenantCompanyName', () => {
-        const result = client.matchProjectFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1263,21 +1258,24 @@ describe('v4beta1.TenantServiceClient', () => {
         const result = client.matchTenantFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'tenantValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchCompanyFromProjectTenantCompanyName', () => {
-        const result = client.matchCompanyFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchCompanyFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'companyValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1311,8 +1309,10 @@ describe('v4beta1.TenantServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );

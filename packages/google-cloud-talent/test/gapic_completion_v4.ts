@@ -26,10 +26,9 @@ import * as completionModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -184,9 +183,8 @@ describe('v4.CompletionClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryResponse()
       );
-      client.innerApiCalls.completeQuery = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.completeQuery =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.completeQuery(
           request,

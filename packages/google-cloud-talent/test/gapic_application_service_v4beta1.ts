@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -133,49 +132,46 @@ describe('v4beta1.ApplicationServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient();
+    const client =
+      new applicationserviceModule.v4beta1.ApplicationServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-      {
+    const client =
+      new applicationserviceModule.v4beta1.ApplicationServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-      {
+    const client =
+      new applicationserviceModule.v4beta1.ApplicationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.applicationServiceStub, undefined);
     await client.initialize();
     assert(client.applicationServiceStub);
   });
 
   it('has close method', () => {
-    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-      {
+    const client =
+      new applicationserviceModule.v4beta1.ApplicationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-      {
+    const client =
+      new applicationserviceModule.v4beta1.ApplicationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -184,12 +180,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-      {
+    const client =
+      new applicationserviceModule.v4beta1.ApplicationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -208,12 +203,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
 
   describe('createApplication', () => {
     it('invokes createApplication without error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateApplicationRequest()
@@ -241,12 +235,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes createApplication without error using callback', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateApplicationRequest()
@@ -263,9 +256,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Application()
       );
-      client.innerApiCalls.createApplication = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createApplication =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createApplication(
           request,
@@ -291,12 +283,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes createApplication with error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateApplicationRequest()
@@ -326,12 +317,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
 
   describe('getApplication', () => {
     it('invokes getApplication without error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetApplicationRequest()
@@ -359,12 +349,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes getApplication without error using callback', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetApplicationRequest()
@@ -381,9 +370,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Application()
       );
-      client.innerApiCalls.getApplication = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getApplication =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getApplication(
           request,
@@ -409,12 +397,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes getApplication with error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetApplicationRequest()
@@ -444,12 +431,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
 
   describe('updateApplication', () => {
     it('invokes updateApplication without error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.UpdateApplicationRequest()
@@ -478,12 +464,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes updateApplication without error using callback', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.UpdateApplicationRequest()
@@ -501,9 +486,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.Application()
       );
-      client.innerApiCalls.updateApplication = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateApplication =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateApplication(
           request,
@@ -529,12 +513,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes updateApplication with error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.UpdateApplicationRequest()
@@ -565,12 +548,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
 
   describe('deleteApplication', () => {
     it('invokes deleteApplication without error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteApplicationRequest()
@@ -598,12 +580,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes deleteApplication without error using callback', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteApplicationRequest()
@@ -620,9 +601,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteApplication = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteApplication =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteApplication(
           request,
@@ -648,12 +628,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes deleteApplication with error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteApplicationRequest()
@@ -683,12 +662,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
 
   describe('listApplications', () => {
     it('invokes listApplications without error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListApplicationsRequest()
@@ -724,12 +702,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes listApplications without error using callback', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListApplicationsRequest()
@@ -754,9 +731,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           new protos.google.cloud.talent.v4beta1.Application()
         ),
       ];
-      client.innerApiCalls.listApplications = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listApplications =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listApplications(
           request,
@@ -782,12 +758,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes listApplications with error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListApplicationsRequest()
@@ -815,12 +790,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
     });
 
     it('invokes listApplicationsStream without error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListApplicationsRequest()
@@ -838,9 +812,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           new protos.google.cloud.talent.v4beta1.Application()
         ),
       ];
-      client.descriptors.page.listApplications.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listApplications.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listApplicationsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.talent.v4beta1.Application[] = [];
@@ -865,21 +838,19 @@ describe('v4beta1.ApplicationServiceClient', () => {
           .calledWith(client.innerApiCalls.listApplications, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listApplications
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApplications.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listApplicationsStream with error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListApplicationsRequest()
@@ -887,10 +858,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listApplications.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listApplications.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listApplicationsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.talent.v4beta1.Application[] = [];
@@ -914,21 +883,19 @@ describe('v4beta1.ApplicationServiceClient', () => {
           .calledWith(client.innerApiCalls.listApplications, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listApplications
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApplications.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listApplications without error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListApplicationsRequest()
@@ -946,9 +913,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
           new protos.google.cloud.talent.v4beta1.Application()
         ),
       ];
-      client.descriptors.page.listApplications.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listApplications.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.talent.v4beta1.IApplication[] = [];
       const iterable = client.listApplicationsAsync(request);
       for await (const resource of iterable) {
@@ -956,26 +922,25 @@ describe('v4beta1.ApplicationServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listApplications
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listApplications.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listApplications
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApplications.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listApplications with error', async () => {
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListApplicationsRequest()
@@ -983,10 +948,8 @@ describe('v4beta1.ApplicationServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listApplications.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listApplications.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listApplicationsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4beta1.IApplication[] = [];
@@ -995,15 +958,15 @@ describe('v4beta1.ApplicationServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listApplications
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listApplications.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listApplications
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApplications.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1018,12 +981,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
         profile: 'profileValue',
         application: 'applicationValue',
       };
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.applicationPathTemplate.render = sinon
         .stub()
@@ -1095,12 +1057,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
         tenant: 'tenantValue',
         profile: 'profileValue',
       };
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.profilePathTemplate.render = sinon
         .stub()
@@ -1160,12 +1121,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
         project: 'projectValue',
         company: 'companyValue',
       };
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectCompanyPathTemplate.render = sinon
         .stub()
@@ -1214,12 +1174,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
         project: 'projectValue',
         job: 'jobValue',
       };
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectJobPathTemplate.render = sinon
         .stub()
@@ -1266,12 +1225,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
         tenant: 'tenantValue',
         company: 'companyValue',
       };
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectTenantCompanyPathTemplate.render = sinon
         .stub()
@@ -1288,21 +1246,24 @@ describe('v4beta1.ApplicationServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectTenantCompanyName', () => {
-        const result = client.matchProjectFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1312,21 +1273,24 @@ describe('v4beta1.ApplicationServiceClient', () => {
         const result = client.matchTenantFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'tenantValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchCompanyFromProjectTenantCompanyName', () => {
-        const result = client.matchCompanyFromProjectTenantCompanyName(
-          fakePath
-        );
+        const result =
+          client.matchCompanyFromProjectTenantCompanyName(fakePath);
         assert.strictEqual(result, 'companyValue');
         assert(
-          (client.pathTemplates.projectTenantCompanyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTenantCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1340,12 +1304,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
         tenant: 'tenantValue',
         job: 'jobValue',
       };
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectTenantJobPathTemplate.render = sinon
         .stub()
@@ -1362,8 +1325,10 @@ describe('v4beta1.ApplicationServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTenantJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTenantJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1406,12 +1371,11 @@ describe('v4beta1.ApplicationServiceClient', () => {
         project: 'projectValue',
         tenant: 'tenantValue',
       };
-      const client = new applicationserviceModule.v4beta1.ApplicationServiceClient(
-        {
+      const client =
+        new applicationserviceModule.v4beta1.ApplicationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.tenantPathTemplate.render = sinon
         .stub()

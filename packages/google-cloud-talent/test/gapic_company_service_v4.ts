@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v4.CompanyServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
-      client.innerApiCalls.createCompany = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createCompany =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createCompany(
           request,
@@ -361,9 +359,8 @@ describe('v4.CompanyServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
-      client.innerApiCalls.getCompany = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getCompany =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getCompany(
           request,
@@ -475,9 +472,8 @@ describe('v4.CompanyServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.Company()
       );
-      client.innerApiCalls.updateCompany = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateCompany =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateCompany(
           request,
@@ -588,9 +584,8 @@ describe('v4.CompanyServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteCompany = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCompany =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteCompany(
           request,
@@ -704,9 +699,8 @@ describe('v4.CompanyServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
       ];
-      client.innerApiCalls.listCompanies = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listCompanies =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listCompanies(
           request,
@@ -778,9 +772,8 @@ describe('v4.CompanyServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
       ];
-      client.descriptors.page.listCompanies.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCompanies.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listCompaniesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.talent.v4.Company[] = [];
@@ -802,10 +795,9 @@ describe('v4.CompanyServiceClient', () => {
           .calledWith(client.innerApiCalls.listCompanies, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCompanies
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCompanies.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -822,10 +814,8 @@ describe('v4.CompanyServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCompanies.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCompanies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listCompaniesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.talent.v4.Company[] = [];
@@ -846,10 +836,9 @@ describe('v4.CompanyServiceClient', () => {
           .calledWith(client.innerApiCalls.listCompanies, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCompanies
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCompanies.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -870,9 +859,8 @@ describe('v4.CompanyServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
         generateSampleMessage(new protos.google.cloud.talent.v4.Company()),
       ];
-      client.descriptors.page.listCompanies.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCompanies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.talent.v4.ICompany[] = [];
       const iterable = client.listCompaniesAsync(request);
       for await (const resource of iterable) {
@@ -880,15 +868,15 @@ describe('v4.CompanyServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listCompanies
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCompanies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCompanies
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCompanies.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -905,10 +893,8 @@ describe('v4.CompanyServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCompanies.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCompanies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listCompaniesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.talent.v4.ICompany[] = [];
@@ -917,15 +903,15 @@ describe('v4.CompanyServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listCompanies
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCompanies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCompanies
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCompanies.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
