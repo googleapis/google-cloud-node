@@ -789,7 +789,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1.ISecret);
 
                     /** Secret cloudSecret. */
-                    public cloudSecret: string;
+                    public cloudSecret?: (string|null);
 
                     /** Secret value. */
                     public value?: "cloudSecret";
@@ -1230,7 +1230,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1.IMetadataExport);
 
                     /** MetadataExport destinationGcsUri. */
-                    public destinationGcsUri: string;
+                    public destinationGcsUri?: (string|null);
 
                     /** MetadataExport startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
@@ -2484,7 +2484,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1.IExportMetadataRequest);
 
                     /** ExportMetadataRequest destinationGcsFolder. */
-                    public destinationGcsFolder: string;
+                    public destinationGcsFolder?: (string|null);
 
                     /** ExportMetadataRequest service. */
                     public service: string;
@@ -4035,7 +4035,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1alpha.ISecret);
 
                     /** Secret cloudSecret. */
-                    public cloudSecret: string;
+                    public cloudSecret?: (string|null);
 
                     /** Secret value. */
                     public value?: "cloudSecret";
@@ -4488,7 +4488,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1alpha.IMetadataExport);
 
                     /** MetadataExport destinationGcsUri. */
-                    public destinationGcsUri: string;
+                    public destinationGcsUri?: (string|null);
 
                     /** MetadataExport startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
@@ -6523,7 +6523,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1alpha.IExportMetadataRequest);
 
                     /** ExportMetadataRequest destinationGcsFolder. */
-                    public destinationGcsFolder: string;
+                    public destinationGcsFolder?: (string|null);
 
                     /** ExportMetadataRequest service. */
                     public service: string;
@@ -8182,7 +8182,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1beta.ISecret);
 
                     /** Secret cloudSecret. */
-                    public cloudSecret: string;
+                    public cloudSecret?: (string|null);
 
                     /** Secret value. */
                     public value?: "cloudSecret";
@@ -8635,7 +8635,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1beta.IMetadataExport);
 
                     /** MetadataExport destinationGcsUri. */
-                    public destinationGcsUri: string;
+                    public destinationGcsUri?: (string|null);
 
                     /** MetadataExport startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
@@ -10670,7 +10670,7 @@ export namespace google {
                     constructor(properties?: google.cloud.metastore.v1beta.IExportMetadataRequest);
 
                     /** ExportMetadataRequest destinationGcsFolder. */
-                    public destinationGcsFolder: string;
+                    public destinationGcsFolder?: (string|null);
 
                     /** ExportMetadataRequest service. */
                     public service: string;
@@ -11420,19 +11420,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

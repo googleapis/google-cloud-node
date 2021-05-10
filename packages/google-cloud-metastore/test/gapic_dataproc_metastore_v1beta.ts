@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -285,9 +284,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.Service()
       );
-      client.innerApiCalls.getService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getService(
           request,
@@ -403,9 +401,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.MetadataImport()
       );
-      client.innerApiCalls.getMetadataImport = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getMetadataImport =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getMetadataImport(
           request,
@@ -521,9 +518,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.Backup()
       );
-      client.innerApiCalls.getBackup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getBackup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getBackup(
           request,
@@ -603,9 +599,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -639,9 +634,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createService(
           request,
@@ -812,9 +806,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -849,9 +842,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateService(
           request,
@@ -1023,9 +1015,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1059,9 +1050,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteService(
           request,
@@ -1231,9 +1221,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createMetadataImport = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createMetadataImport =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createMetadataImport(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1267,9 +1256,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createMetadataImport = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createMetadataImport =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createMetadataImport(
           request,
@@ -1440,9 +1428,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateMetadataImport = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateMetadataImport =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateMetadataImport(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1477,9 +1464,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateMetadataImport = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateMetadataImport =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateMetadataImport(
           request,
@@ -1651,9 +1637,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportMetadata = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.exportMetadata =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.exportMetadata(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1687,9 +1672,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportMetadata = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportMetadata =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportMetadata(
           request,
@@ -1859,9 +1843,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.restoreService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.restoreService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.restoreService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1895,9 +1878,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.restoreService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.restoreService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.restoreService(
           request,
@@ -2101,9 +2083,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createBackup = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createBackup =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createBackup(
           request,
@@ -2304,9 +2285,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteBackup = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteBackup =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteBackup(
           request,
@@ -2522,9 +2502,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.Service()
         ),
       ];
-      client.innerApiCalls.listServices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServices(
           request,
@@ -2606,9 +2585,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.Service()
         ),
       ];
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServicesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.metastore.v1beta.Service[] = [];
@@ -2633,10 +2611,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
           .calledWith(client.innerApiCalls.listServices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2682,10 +2659,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
           .calledWith(client.innerApiCalls.listServices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2714,9 +2690,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.Service()
         ),
       ];
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.metastore.v1beta.IService[] = [];
       const iterable = client.listServicesAsync(request);
       for await (const resource of iterable) {
@@ -2724,15 +2699,15 @@ describe('v1beta.DataprocMetastoreClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2751,10 +2726,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServicesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.metastore.v1beta.IService[] = [];
@@ -2763,15 +2736,15 @@ describe('v1beta.DataprocMetastoreClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2809,9 +2782,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.MetadataImport()
         ),
       ];
-      client.innerApiCalls.listMetadataImports = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listMetadataImports =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listMetadataImports(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2852,9 +2824,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.MetadataImport()
         ),
       ];
-      client.innerApiCalls.listMetadataImports = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listMetadataImports =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listMetadataImports(
           request,
@@ -2938,12 +2909,12 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.MetadataImport()
         ),
       ];
-      client.descriptors.page.listMetadataImports.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listMetadataImports.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listMetadataImportsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] = [];
+        const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.metastore.v1beta.MetadataImport) => {
@@ -2965,10 +2936,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
           .calledWith(client.innerApiCalls.listMetadataImports, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataImports
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataImports.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2987,13 +2957,12 @@ describe('v1beta.DataprocMetastoreClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataImports.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMetadataImports.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listMetadataImportsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] = [];
+        const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.metastore.v1beta.MetadataImport) => {
@@ -3014,10 +2983,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
           .calledWith(client.innerApiCalls.listMetadataImports, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataImports
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataImports.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3046,25 +3014,25 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.MetadataImport()
         ),
       ];
-      client.descriptors.page.listMetadataImports.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] = [];
+      client.descriptors.page.listMetadataImports.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] =
+        [];
       const iterable = client.listMetadataImportsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listMetadataImports
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMetadataImports.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataImports
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataImports.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3083,27 +3051,26 @@ describe('v1beta.DataprocMetastoreClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataImports.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMetadataImports.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listMetadataImportsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] = [];
+        const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listMetadataImports
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMetadataImports.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataImports
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataImports.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3182,9 +3149,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.Backup()
         ),
       ];
-      client.innerApiCalls.listBackups = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listBackups =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listBackups(
           request,
@@ -3266,9 +3232,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.Backup()
         ),
       ];
-      client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBackups.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listBackupsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.metastore.v1beta.Backup[] = [];
@@ -3372,9 +3337,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
           new protos.google.cloud.metastore.v1beta.Backup()
         ),
       ];
-      client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBackups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.metastore.v1beta.IBackup[] = [];
       const iterable = client.listBackupsAsync(request);
       for await (const resource of iterable) {
@@ -3633,9 +3597,8 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
 
       it('matchMetadataImportFromMetadataImportName', () => {
-        const result = client.matchMetadataImportFromMetadataImportName(
-          fakePath
-        );
+        const result =
+          client.matchMetadataImportFromMetadataImportName(fakePath);
         assert.strictEqual(result, 'metadataImportValue');
         assert(
           (client.pathTemplates.metadataImportPathTemplate.match as SinonStub)

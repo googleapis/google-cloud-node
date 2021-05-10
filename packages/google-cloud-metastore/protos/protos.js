@@ -1961,11 +1961,11 @@
     
                         /**
                          * Secret cloudSecret.
-                         * @member {string} cloudSecret
+                         * @member {string|null|undefined} cloudSecret
                          * @memberof google.cloud.metastore.v1.Secret
                          * @instance
                          */
-                        Secret.prototype.cloudSecret = "";
+                        Secret.prototype.cloudSecret = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -3031,11 +3031,11 @@
     
                         /**
                          * MetadataExport destinationGcsUri.
-                         * @member {string} destinationGcsUri
+                         * @member {string|null|undefined} destinationGcsUri
                          * @memberof google.cloud.metastore.v1.MetadataExport
                          * @instance
                          */
-                        MetadataExport.prototype.destinationGcsUri = "";
+                        MetadataExport.prototype.destinationGcsUri = null;
     
                         /**
                          * MetadataExport startTime.
@@ -6074,11 +6074,11 @@
     
                         /**
                          * ExportMetadataRequest destinationGcsFolder.
-                         * @member {string} destinationGcsFolder
+                         * @member {string|null|undefined} destinationGcsFolder
                          * @memberof google.cloud.metastore.v1.ExportMetadataRequest
                          * @instance
                          */
-                        ExportMetadataRequest.prototype.destinationGcsFolder = "";
+                        ExportMetadataRequest.prototype.destinationGcsFolder = null;
     
                         /**
                          * ExportMetadataRequest service.
@@ -9731,11 +9731,11 @@
     
                         /**
                          * Secret cloudSecret.
-                         * @member {string} cloudSecret
+                         * @member {string|null|undefined} cloudSecret
                          * @memberof google.cloud.metastore.v1alpha.Secret
                          * @instance
                          */
-                        Secret.prototype.cloudSecret = "";
+                        Secret.prototype.cloudSecret = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -10867,11 +10867,11 @@
     
                         /**
                          * MetadataExport destinationGcsUri.
-                         * @member {string} destinationGcsUri
+                         * @member {string|null|undefined} destinationGcsUri
                          * @memberof google.cloud.metastore.v1alpha.MetadataExport
                          * @instance
                          */
-                        MetadataExport.prototype.destinationGcsUri = "";
+                        MetadataExport.prototype.destinationGcsUri = null;
     
                         /**
                          * MetadataExport startTime.
@@ -15863,11 +15863,11 @@
     
                         /**
                          * ExportMetadataRequest destinationGcsFolder.
-                         * @member {string} destinationGcsFolder
+                         * @member {string|null|undefined} destinationGcsFolder
                          * @memberof google.cloud.metastore.v1alpha.ExportMetadataRequest
                          * @instance
                          */
-                        ExportMetadataRequest.prototype.destinationGcsFolder = "";
+                        ExportMetadataRequest.prototype.destinationGcsFolder = null;
     
                         /**
                          * ExportMetadataRequest service.
@@ -19792,11 +19792,11 @@
     
                         /**
                          * Secret cloudSecret.
-                         * @member {string} cloudSecret
+                         * @member {string|null|undefined} cloudSecret
                          * @memberof google.cloud.metastore.v1beta.Secret
                          * @instance
                          */
-                        Secret.prototype.cloudSecret = "";
+                        Secret.prototype.cloudSecret = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -20928,11 +20928,11 @@
     
                         /**
                          * MetadataExport destinationGcsUri.
-                         * @member {string} destinationGcsUri
+                         * @member {string|null|undefined} destinationGcsUri
                          * @memberof google.cloud.metastore.v1beta.MetadataExport
                          * @instance
                          */
-                        MetadataExport.prototype.destinationGcsUri = "";
+                        MetadataExport.prototype.destinationGcsUri = null;
     
                         /**
                          * MetadataExport startTime.
@@ -25924,11 +25924,11 @@
     
                         /**
                          * ExportMetadataRequest destinationGcsFolder.
-                         * @member {string} destinationGcsFolder
+                         * @member {string|null|undefined} destinationGcsFolder
                          * @memberof google.cloud.metastore.v1beta.ExportMetadataRequest
                          * @instance
                          */
-                        ExportMetadataRequest.prototype.destinationGcsFolder = "";
+                        ExportMetadataRequest.prototype.destinationGcsFolder = null;
     
                         /**
                          * ExportMetadataRequest service.
@@ -27668,43 +27668,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
