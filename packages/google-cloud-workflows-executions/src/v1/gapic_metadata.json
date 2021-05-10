@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.workflows.v1",
+  "libraryPackage": "@google-cloud/workflows",
+  "services": {
+    "Workflows": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WorkflowsClient",
+          "rpcs": {
+            "GetWorkflow": {
+              "methods": [
+                "getWorkflow"
+              ]
+            },
+            "CreateWorkflow": {
+              "methods": [
+                "createWorkflow"
+              ]
+            },
+            "DeleteWorkflow": {
+              "methods": [
+                "deleteWorkflow"
+              ]
+            },
+            "UpdateWorkflow": {
+              "methods": [
+                "updateWorkflow"
+              ]
+            },
+            "ListWorkflows": {
+              "methods": [
+                "listWorkflows",
+                "listWorkflowsStream",
+                "listWorkflowsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WorkflowsClient",
+          "rpcs": {
+            "GetWorkflow": {
+              "methods": [
+                "getWorkflow"
+              ]
+            },
+            "CreateWorkflow": {
+              "methods": [
+                "createWorkflow"
+              ]
+            },
+            "DeleteWorkflow": {
+              "methods": [
+                "deleteWorkflow"
+              ]
+            },
+            "UpdateWorkflow": {
+              "methods": [
+                "updateWorkflow"
+              ]
+            },
+            "ListWorkflows": {
+              "methods": [
+                "listWorkflows",
+                "listWorkflowsStream",
+                "listWorkflowsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

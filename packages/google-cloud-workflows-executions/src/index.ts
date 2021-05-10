@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
-const ExecutionsClient = v1beta.ExecutionsClient;
-type ExecutionsClient = v1beta.ExecutionsClient;
-const WorkflowsClient = v1beta.WorkflowsClient;
-type WorkflowsClient = v1beta.WorkflowsClient;
-export {v1beta, ExecutionsClient, WorkflowsClient};
-export default {v1beta, ExecutionsClient, WorkflowsClient};
+const ExecutionsClient = v1.ExecutionsClient;
+type ExecutionsClient = v1.ExecutionsClient;
+const WorkflowsClient = v1.WorkflowsClient;
+type WorkflowsClient = v1.WorkflowsClient;
+export {v1, v1beta, ExecutionsClient, WorkflowsClient};
+export default {v1, v1beta, ExecutionsClient, WorkflowsClient};
 import * as protos from '../protos/protos';
 export {protos};

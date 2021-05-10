@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-workflows",
   "distribution_name": "@google-cloud/workflows",
   "api_id": "workflows.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "default_version": "v1"
 }

@@ -144,37 +144,37 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.WorkflowsClient', () => {
+describe('v1.WorkflowsClient', () => {
   it('has servicePath', () => {
-    const servicePath = workflowsModule.v1beta.WorkflowsClient.servicePath;
+    const servicePath = workflowsModule.v1.WorkflowsClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
-    const apiEndpoint = workflowsModule.v1beta.WorkflowsClient.apiEndpoint;
+    const apiEndpoint = workflowsModule.v1.WorkflowsClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port = workflowsModule.v1beta.WorkflowsClient.port;
+    const port = workflowsModule.v1.WorkflowsClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no option', () => {
-    const client = new workflowsModule.v1beta.WorkflowsClient();
+    const client = new workflowsModule.v1.WorkflowsClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new workflowsModule.v1beta.WorkflowsClient({
+    const client = new workflowsModule.v1.WorkflowsClient({
       fallback: true,
     });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new workflowsModule.v1beta.WorkflowsClient({
+    const client = new workflowsModule.v1.WorkflowsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -184,7 +184,7 @@ describe('v1beta.WorkflowsClient', () => {
   });
 
   it('has close method', () => {
-    const client = new workflowsModule.v1beta.WorkflowsClient({
+    const client = new workflowsModule.v1.WorkflowsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -193,7 +193,7 @@ describe('v1beta.WorkflowsClient', () => {
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new workflowsModule.v1beta.WorkflowsClient({
+    const client = new workflowsModule.v1.WorkflowsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -205,7 +205,7 @@ describe('v1beta.WorkflowsClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new workflowsModule.v1beta.WorkflowsClient({
+    const client = new workflowsModule.v1.WorkflowsClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -227,13 +227,13 @@ describe('v1beta.WorkflowsClient', () => {
 
   describe('getWorkflow', () => {
     it('invokes getWorkflow without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
+        new protos.google.cloud.workflows.v1.GetWorkflowRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -245,7 +245,7 @@ describe('v1beta.WorkflowsClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.Workflow()
+        new protos.google.cloud.workflows.v1.Workflow()
       );
       client.innerApiCalls.getWorkflow = stubSimpleCall(expectedResponse);
       const [response] = await client.getWorkflow(request);
@@ -258,13 +258,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes getWorkflow without error using callback', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
+        new protos.google.cloud.workflows.v1.GetWorkflowRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -276,7 +276,7 @@ describe('v1beta.WorkflowsClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.Workflow()
+        new protos.google.cloud.workflows.v1.Workflow()
       );
       client.innerApiCalls.getWorkflow =
         stubSimpleCallWithCallback(expectedResponse);
@@ -285,7 +285,7 @@ describe('v1beta.WorkflowsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.workflows.v1beta.IWorkflow | null
+            result?: protos.google.cloud.workflows.v1.IWorkflow | null
           ) => {
             if (err) {
               reject(err);
@@ -305,13 +305,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes getWorkflow with error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
+        new protos.google.cloud.workflows.v1.GetWorkflowRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -338,13 +338,13 @@ describe('v1beta.WorkflowsClient', () => {
 
   describe('createWorkflow', () => {
     it('invokes createWorkflow without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.CreateWorkflowRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -371,13 +371,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes createWorkflow without error using callback', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.CreateWorkflowRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -399,8 +399,8 @@ describe('v1beta.WorkflowsClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.workflows.v1beta.IWorkflow,
-              protos.google.cloud.workflows.v1beta.IOperationMetadata
+              protos.google.cloud.workflows.v1.IWorkflow,
+              protos.google.cloud.workflows.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -412,8 +412,8 @@ describe('v1beta.WorkflowsClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.workflows.v1beta.IWorkflow,
-        protos.google.cloud.workflows.v1beta.IOperationMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -425,13 +425,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes createWorkflow with call error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.CreateWorkflowRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -456,13 +456,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes createWorkflow with LRO error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.CreateWorkflowRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -489,7 +489,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes checkCreateWorkflowProgress without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -511,7 +511,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes checkCreateWorkflowProgress with error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -532,13 +532,13 @@ describe('v1beta.WorkflowsClient', () => {
 
   describe('deleteWorkflow', () => {
     it('invokes deleteWorkflow without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
+        new protos.google.cloud.workflows.v1.DeleteWorkflowRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -565,13 +565,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes deleteWorkflow without error using callback', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
+        new protos.google.cloud.workflows.v1.DeleteWorkflowRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -594,7 +594,7 @@ describe('v1beta.WorkflowsClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.workflows.v1beta.IOperationMetadata
+              protos.google.cloud.workflows.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -607,7 +607,7 @@ describe('v1beta.WorkflowsClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.workflows.v1beta.IOperationMetadata
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -619,13 +619,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes deleteWorkflow with call error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
+        new protos.google.cloud.workflows.v1.DeleteWorkflowRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -650,13 +650,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes deleteWorkflow with LRO error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
+        new protos.google.cloud.workflows.v1.DeleteWorkflowRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -683,7 +683,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes checkDeleteWorkflowProgress without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -705,7 +705,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes checkDeleteWorkflowProgress with error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -726,13 +726,13 @@ describe('v1beta.WorkflowsClient', () => {
 
   describe('updateWorkflow', () => {
     it('invokes updateWorkflow without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.UpdateWorkflowRequest()
       );
       request.workflow = {};
       request.workflow.name = '';
@@ -760,13 +760,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes updateWorkflow without error using callback', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.UpdateWorkflowRequest()
       );
       request.workflow = {};
       request.workflow.name = '';
@@ -789,8 +789,8 @@ describe('v1beta.WorkflowsClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.workflows.v1beta.IWorkflow,
-              protos.google.cloud.workflows.v1beta.IOperationMetadata
+              protos.google.cloud.workflows.v1.IWorkflow,
+              protos.google.cloud.workflows.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -802,8 +802,8 @@ describe('v1beta.WorkflowsClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.workflows.v1beta.IWorkflow,
-        protos.google.cloud.workflows.v1beta.IOperationMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -815,13 +815,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes updateWorkflow with call error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.UpdateWorkflowRequest()
       );
       request.workflow = {};
       request.workflow.name = '';
@@ -847,13 +847,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes updateWorkflow with LRO error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
+        new protos.google.cloud.workflows.v1.UpdateWorkflowRequest()
       );
       request.workflow = {};
       request.workflow.name = '';
@@ -881,7 +881,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes checkUpdateWorkflowProgress without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -903,7 +903,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes checkUpdateWorkflowProgress with error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -924,13 +924,13 @@ describe('v1beta.WorkflowsClient', () => {
 
   describe('listWorkflows', () => {
     it('invokes listWorkflows without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
+        new protos.google.cloud.workflows.v1.ListWorkflowsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -942,15 +942,9 @@ describe('v1beta.WorkflowsClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
       ];
       client.innerApiCalls.listWorkflows = stubSimpleCall(expectedResponse);
       const [response] = await client.listWorkflows(request);
@@ -963,13 +957,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes listWorkflows without error using callback', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
+        new protos.google.cloud.workflows.v1.ListWorkflowsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -981,15 +975,9 @@ describe('v1beta.WorkflowsClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
       ];
       client.innerApiCalls.listWorkflows =
         stubSimpleCallWithCallback(expectedResponse);
@@ -998,7 +986,7 @@ describe('v1beta.WorkflowsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.workflows.v1beta.IWorkflow[] | null
+            result?: protos.google.cloud.workflows.v1.IWorkflow[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1018,13 +1006,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes listWorkflows with error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
+        new protos.google.cloud.workflows.v1.ListWorkflowsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1049,35 +1037,29 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes listWorkflowsStream without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
+        new protos.google.cloud.workflows.v1.ListWorkflowsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
       ];
       client.descriptors.page.listWorkflows.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listWorkflowsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.workflows.v1beta.Workflow[] = [];
+        const responses: protos.google.cloud.workflows.v1.Workflow[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.workflows.v1beta.Workflow) => {
+          (response: protos.google.cloud.workflows.v1.Workflow) => {
             responses.push(response);
           }
         );
@@ -1104,13 +1086,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('invokes listWorkflowsStream with error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
+        new protos.google.cloud.workflows.v1.ListWorkflowsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1119,10 +1101,10 @@ describe('v1beta.WorkflowsClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listWorkflowsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.workflows.v1beta.Workflow[] = [];
+        const responses: protos.google.cloud.workflows.v1.Workflow[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.workflows.v1beta.Workflow) => {
+          (response: protos.google.cloud.workflows.v1.Workflow) => {
             responses.push(response);
           }
         );
@@ -1148,30 +1130,24 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('uses async iteration with listWorkflows without error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
+        new protos.google.cloud.workflows.v1.ListWorkflowsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.workflows.v1beta.Workflow()
-        ),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
+        generateSampleMessage(new protos.google.cloud.workflows.v1.Workflow()),
       ];
       client.descriptors.page.listWorkflows.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.workflows.v1beta.IWorkflow[] = [];
+      const responses: protos.google.cloud.workflows.v1.IWorkflow[] = [];
       const iterable = client.listWorkflowsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1192,13 +1168,13 @@ describe('v1beta.WorkflowsClient', () => {
     });
 
     it('uses async iteration with listWorkflows with error', async () => {
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
+        new protos.google.cloud.workflows.v1.ListWorkflowsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1207,7 +1183,7 @@ describe('v1beta.WorkflowsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listWorkflowsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.workflows.v1beta.IWorkflow[] = [];
+        const responses: protos.google.cloud.workflows.v1.IWorkflow[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1234,7 +1210,7 @@ describe('v1beta.WorkflowsClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1284,7 +1260,7 @@ describe('v1beta.WorkflowsClient', () => {
         location: 'locationValue',
         workflow: 'workflowValue',
       };
-      const client = new workflowsModule.v1beta.WorkflowsClient({
+      const client = new workflowsModule.v1.WorkflowsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
