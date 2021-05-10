@@ -26,10 +26,9 @@ import * as assetserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1p2beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
-      client.innerApiCalls.createFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createFeed(
           request,
@@ -298,9 +296,8 @@ describe('v1p2beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
-      client.innerApiCalls.getFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getFeed(
           request,
@@ -407,9 +404,8 @@ describe('v1p2beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.ListFeedsResponse()
       );
-      client.innerApiCalls.listFeeds = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listFeeds =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listFeeds(
           request,
@@ -518,9 +514,8 @@ describe('v1p2beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
-      client.innerApiCalls.updateFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateFeed(
           request,
@@ -631,9 +626,8 @@ describe('v1p2beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteFeed = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteFeed =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteFeed(
           request,
@@ -765,17 +759,18 @@ describe('v1p2beta1.AssetServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationFeedPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationFeedPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationFeedName', () => {
-        const result = client.matchOrganizationFromOrganizationFeedName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationFeedName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
           (client.pathTemplates.organizationFeedPathTemplate.match as SinonStub)

@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -253,9 +252,8 @@ describe('v1p5beta1.AssetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
       ];
-      client.innerApiCalls.listAssets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAssets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAssets(
           request,
@@ -327,9 +325,8 @@ describe('v1p5beta1.AssetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
       ];
-      client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAssets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAssetsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.asset.v1p5beta1.Asset[] = [];
@@ -423,9 +420,8 @@ describe('v1p5beta1.AssetServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
       ];
-      client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAssets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.asset.v1p5beta1.IAsset[] = [];
       const iterable = client.listAssetsAsync(request);
       for await (const resource of iterable) {
