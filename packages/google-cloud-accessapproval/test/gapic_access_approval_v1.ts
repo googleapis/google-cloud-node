@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -218,9 +217,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
-      client.innerApiCalls.getApprovalRequest = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getApprovalRequest =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getApprovalRequest(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -251,9 +249,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
-      client.innerApiCalls.getApprovalRequest = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getApprovalRequest =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getApprovalRequest(
           request,
@@ -332,9 +329,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
-      client.innerApiCalls.approveApprovalRequest = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.approveApprovalRequest =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.approveApprovalRequest(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -365,9 +361,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
-      client.innerApiCalls.approveApprovalRequest = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.approveApprovalRequest =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.approveApprovalRequest(
           request,
@@ -449,9 +444,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
-      client.innerApiCalls.dismissApprovalRequest = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.dismissApprovalRequest =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.dismissApprovalRequest(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -482,9 +476,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
-      client.innerApiCalls.dismissApprovalRequest = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.dismissApprovalRequest =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.dismissApprovalRequest(
           request,
@@ -566,9 +559,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
-      client.innerApiCalls.getAccessApprovalSettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getAccessApprovalSettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getAccessApprovalSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -599,9 +591,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
-      client.innerApiCalls.getAccessApprovalSettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAccessApprovalSettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAccessApprovalSettings(
           request,
@@ -684,9 +675,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
-      client.innerApiCalls.updateAccessApprovalSettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateAccessApprovalSettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateAccessApprovalSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -718,9 +708,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
-      client.innerApiCalls.updateAccessApprovalSettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateAccessApprovalSettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateAccessApprovalSettings(
           request,
@@ -803,9 +792,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAccessApprovalSettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAccessApprovalSettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAccessApprovalSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -836,9 +824,8 @@ describe('v1.AccessApprovalClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAccessApprovalSettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAccessApprovalSettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteAccessApprovalSettings(
           request,
@@ -928,9 +915,8 @@ describe('v1.AccessApprovalClient', () => {
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
         ),
       ];
-      client.innerApiCalls.listApprovalRequests = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listApprovalRequests =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listApprovalRequests(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -969,9 +955,8 @@ describe('v1.AccessApprovalClient', () => {
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
         ),
       ];
-      client.innerApiCalls.listApprovalRequests = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listApprovalRequests =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listApprovalRequests(
           request,
@@ -1051,12 +1036,12 @@ describe('v1.AccessApprovalClient', () => {
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
         ),
       ];
-      client.descriptors.page.listApprovalRequests.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listApprovalRequests.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listApprovalRequestsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.accessapproval.v1.ApprovalRequest[] = [];
+        const responses: protos.google.cloud.accessapproval.v1.ApprovalRequest[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.accessapproval.v1.ApprovalRequest) => {
@@ -1078,10 +1063,9 @@ describe('v1.AccessApprovalClient', () => {
           .calledWith(client.innerApiCalls.listApprovalRequests, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listApprovalRequests
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApprovalRequests.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1098,13 +1082,12 @@ describe('v1.AccessApprovalClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listApprovalRequests.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listApprovalRequests.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listApprovalRequestsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.accessapproval.v1.ApprovalRequest[] = [];
+        const responses: protos.google.cloud.accessapproval.v1.ApprovalRequest[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.accessapproval.v1.ApprovalRequest) => {
@@ -1125,10 +1108,9 @@ describe('v1.AccessApprovalClient', () => {
           .calledWith(client.innerApiCalls.listApprovalRequests, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listApprovalRequests
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApprovalRequests.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1155,25 +1137,25 @@ describe('v1.AccessApprovalClient', () => {
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
         ),
       ];
-      client.descriptors.page.listApprovalRequests.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.accessapproval.v1.IApprovalRequest[] = [];
+      client.descriptors.page.listApprovalRequests.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.accessapproval.v1.IApprovalRequest[] =
+        [];
       const iterable = client.listApprovalRequestsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listApprovalRequests
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listApprovalRequests
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1190,27 +1172,26 @@ describe('v1.AccessApprovalClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listApprovalRequests.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listApprovalRequests.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listApprovalRequestsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.accessapproval.v1.IApprovalRequest[] = [];
+        const responses: protos.google.cloud.accessapproval.v1.IApprovalRequest[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listApprovalRequests
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listApprovalRequests
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listApprovalRequests.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
