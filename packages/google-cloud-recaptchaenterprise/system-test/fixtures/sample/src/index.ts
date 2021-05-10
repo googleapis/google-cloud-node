@@ -27,7 +27,8 @@ function doStuffWithRecaptchaEnterpriseServiceClient(
 
 function main() {
   // check that the client instance can be created
-  const recaptchaEnterpriseServiceClient = new RecaptchaEnterpriseServiceClient();
+  const recaptchaEnterpriseServiceClient =
+    new RecaptchaEnterpriseServiceClient();
   doStuffWithRecaptchaEnterpriseServiceClient(recaptchaEnterpriseServiceClient);
 }
 
