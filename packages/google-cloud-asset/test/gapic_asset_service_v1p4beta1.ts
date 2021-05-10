@@ -26,10 +26,9 @@ import * as assetserviceModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -220,9 +219,8 @@ describe('v1p4beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse()
       );
-      client.innerApiCalls.analyzeIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.analyzeIamPolicy(
           request,
@@ -303,9 +301,8 @@ describe('v1p4beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportIamPolicyAnalysis = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.exportIamPolicyAnalysis =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.exportIamPolicyAnalysis(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -338,9 +335,8 @@ describe('v1p4beta1.AssetServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportIamPolicyAnalysis = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportIamPolicyAnalysis =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportIamPolicyAnalysis(
           request,
@@ -455,9 +451,10 @@ describe('v1p4beta1.AssetServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportIamPolicyAnalysisProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkExportIamPolicyAnalysisProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
