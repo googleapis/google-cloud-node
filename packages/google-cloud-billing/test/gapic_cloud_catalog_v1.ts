@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -235,9 +234,8 @@ describe('v1.CloudCatalogClient', () => {
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
       ];
-      client.innerApiCalls.listServices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServices(
           request,
@@ -299,9 +297,8 @@ describe('v1.CloudCatalogClient', () => {
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
       ];
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServicesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.billing.v1.Service[] = [];
@@ -379,9 +376,8 @@ describe('v1.CloudCatalogClient', () => {
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
       ];
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.billing.v1.IService[] = [];
       const iterable = client.listServicesAsync(request);
       for await (const resource of iterable) {
@@ -389,8 +385,9 @@ describe('v1.CloudCatalogClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -405,10 +402,8 @@ describe('v1.CloudCatalogClient', () => {
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServicesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.billing.v1.IService[] = [];
@@ -417,8 +412,9 @@ describe('v1.CloudCatalogClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -481,9 +477,8 @@ describe('v1.CloudCatalogClient', () => {
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
       ];
-      client.innerApiCalls.listSkus = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listSkus =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listSkus(
           request,
@@ -552,9 +547,8 @@ describe('v1.CloudCatalogClient', () => {
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
       ];
-      client.descriptors.page.listSkus.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSkus.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listSkusStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.billing.v1.Sku[] = [];
@@ -640,9 +634,8 @@ describe('v1.CloudCatalogClient', () => {
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Sku()),
       ];
-      client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSkus.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.billing.v1.ISku[] = [];
       const iterable = client.listSkusAsync(request);
       for await (const resource of iterable) {

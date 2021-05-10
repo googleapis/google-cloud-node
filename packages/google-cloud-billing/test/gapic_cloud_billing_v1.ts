@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -247,9 +246,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
-      client.innerApiCalls.getBillingAccount = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getBillingAccount =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getBillingAccount(
           request,
@@ -328,9 +326,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
-      client.innerApiCalls.updateBillingAccount = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateBillingAccount =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateBillingAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -361,9 +358,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
-      client.innerApiCalls.updateBillingAccount = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateBillingAccount =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateBillingAccount(
           request,
@@ -434,9 +430,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
-      client.innerApiCalls.createBillingAccount = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createBillingAccount =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createBillingAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -459,9 +454,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
-      client.innerApiCalls.createBillingAccount = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createBillingAccount =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createBillingAccount(
           request,
@@ -532,9 +526,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
-      client.innerApiCalls.getProjectBillingInfo = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getProjectBillingInfo =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getProjectBillingInfo(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -565,9 +558,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
-      client.innerApiCalls.getProjectBillingInfo = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getProjectBillingInfo =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getProjectBillingInfo(
           request,
@@ -649,9 +641,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
-      client.innerApiCalls.updateProjectBillingInfo = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateProjectBillingInfo =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateProjectBillingInfo(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -682,9 +673,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.ProjectBillingInfo()
       );
-      client.innerApiCalls.updateProjectBillingInfo = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateProjectBillingInfo =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateProjectBillingInfo(
           request,
@@ -797,9 +787,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -909,9 +898,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -990,9 +978,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1023,9 +1010,8 @@ describe('v1.CloudBillingClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -1104,9 +1090,8 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.BillingAccount()
         ),
       ];
-      client.innerApiCalls.listBillingAccounts = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listBillingAccounts =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listBillingAccounts(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1137,9 +1122,8 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.BillingAccount()
         ),
       ];
-      client.innerApiCalls.listBillingAccounts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listBillingAccounts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listBillingAccounts(
           request,
@@ -1207,9 +1191,8 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.BillingAccount()
         ),
       ];
-      client.descriptors.page.listBillingAccounts.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBillingAccounts.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listBillingAccountsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.billing.v1.BillingAccount[] = [];
@@ -1245,10 +1228,8 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listBillingAccounts.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listBillingAccounts.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listBillingAccountsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.billing.v1.BillingAccount[] = [];
@@ -1293,9 +1274,8 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.BillingAccount()
         ),
       ];
-      client.descriptors.page.listBillingAccounts.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listBillingAccounts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.billing.v1.IBillingAccount[] = [];
       const iterable = client.listBillingAccountsAsync(request);
       for await (const resource of iterable) {
@@ -1303,8 +1283,9 @@ describe('v1.CloudBillingClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listBillingAccounts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listBillingAccounts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -1319,10 +1300,8 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listBillingAccounts.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listBillingAccounts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listBillingAccountsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.billing.v1.IBillingAccount[] = [];
@@ -1331,8 +1310,9 @@ describe('v1.CloudBillingClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listBillingAccounts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listBillingAccounts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -1368,9 +1348,8 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
         ),
       ];
-      client.innerApiCalls.listProjectBillingInfo = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listProjectBillingInfo =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listProjectBillingInfo(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1409,9 +1388,8 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
         ),
       ];
-      client.innerApiCalls.listProjectBillingInfo = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listProjectBillingInfo =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listProjectBillingInfo(
           request,
@@ -1492,12 +1470,12 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
         ),
       ];
-      client.descriptors.page.listProjectBillingInfo.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProjectBillingInfo.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listProjectBillingInfoStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] = [];
+        const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.billing.v1.ProjectBillingInfo) => {
@@ -1514,16 +1492,18 @@ describe('v1.CloudBillingClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listProjectBillingInfo
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listProjectBillingInfo, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProjectBillingInfo
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1540,13 +1520,12 @@ describe('v1.CloudBillingClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProjectBillingInfo.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProjectBillingInfo.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listProjectBillingInfoStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] = [];
+        const responses: protos.google.cloud.billing.v1.ProjectBillingInfo[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.billing.v1.ProjectBillingInfo) => {
@@ -1562,16 +1541,18 @@ describe('v1.CloudBillingClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listProjectBillingInfo
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listProjectBillingInfo, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProjectBillingInfo
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1598,25 +1579,27 @@ describe('v1.CloudBillingClient', () => {
           new protos.google.cloud.billing.v1.ProjectBillingInfo()
         ),
       ];
-      client.descriptors.page.listProjectBillingInfo.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] = [];
+      client.descriptors.page.listProjectBillingInfo.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] =
+        [];
       const iterable = client.listProjectBillingInfoAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listProjectBillingInfo
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProjectBillingInfo
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1633,27 +1616,28 @@ describe('v1.CloudBillingClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProjectBillingInfo.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProjectBillingInfo.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listProjectBillingInfoAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] = [];
+        const responses: protos.google.cloud.billing.v1.IProjectBillingInfo[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listProjectBillingInfo
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProjectBillingInfo
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProjectBillingInfo
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1688,9 +1672,8 @@ describe('v1.CloudBillingClient', () => {
       });
 
       it('matchBillingAccountFromBillingAccountName', () => {
-        const result = client.matchBillingAccountFromBillingAccountName(
-          fakePath
-        );
+        const result =
+          client.matchBillingAccountFromBillingAccountName(fakePath);
         assert.strictEqual(result, 'billingAccountValue');
         assert(
           (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
