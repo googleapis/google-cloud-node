@@ -370,13 +370,13 @@ export namespace google {
                     public description: string;
 
                     /** CloudFunction sourceArchiveUrl. */
-                    public sourceArchiveUrl: string;
+                    public sourceArchiveUrl?: (string|null);
 
                     /** CloudFunction sourceRepository. */
                     public sourceRepository?: (google.cloud.functions.v1.ISourceRepository|null);
 
                     /** CloudFunction sourceUploadUrl. */
-                    public sourceUploadUrl: string;
+                    public sourceUploadUrl?: (string|null);
 
                     /** CloudFunction httpsTrigger. */
                     public httpsTrigger?: (google.cloud.functions.v1.IHttpsTrigger|null);
@@ -2428,19 +2428,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

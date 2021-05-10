@@ -20,7 +20,8 @@
 const functions = require('@google-cloud/functions');
 
 function main() {
-  const cloudFunctionsServiceClient = new functions.CloudFunctionsServiceClient();
+  const cloudFunctionsServiceClient =
+    new functions.CloudFunctionsServiceClient();
 }
 
 main();
