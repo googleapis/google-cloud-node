@@ -66,9 +66,8 @@ npm install @google-cloud/documentai
 // const processorId = 'YOUR_PROCESSOR_ID'; // Create processor in Cloud Console
 // const filePath = '/path/to/local/pdf';
 
-const {
-  DocumentProcessorServiceClient,
-} = require('@google-cloud/documentai').v1;
+const {DocumentProcessorServiceClient} =
+  require('@google-cloud/documentai').v1;
 
 // Instantiates a client
 const client = new DocumentProcessorServiceClient();

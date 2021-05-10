@@ -19,9 +19,8 @@ const path = require('path');
 const assert = require('assert');
 const cp = require('child_process');
 
-const {
-  DocumentProcessorServiceClient,
-} = require('@google-cloud/documentai').v1beta3;
+const {DocumentProcessorServiceClient} =
+  require('@google-cloud/documentai').v1beta3;
 const client = new DocumentProcessorServiceClient({
   apiEndpoint: 'us-documentai.googleapis.com',
 });

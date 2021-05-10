@@ -26,10 +26,9 @@ import * as documentprocessorserviceModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -106,49 +105,54 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient();
+    const client =
+      new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.documentProcessorServiceStub, undefined);
     await client.initialize();
     assert(client.documentProcessorServiceStub);
   });
 
   it('has close method', () => {
-    const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -157,12 +161,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -181,12 +186,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
 
   describe('processDocument', () => {
     it('invokes processDocument without error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
@@ -214,12 +220,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes processDocument without error using callback', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
@@ -236,9 +243,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessResponse()
       );
-      client.innerApiCalls.processDocument = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.processDocument =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.processDocument(
           request,
@@ -264,12 +270,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes processDocument with error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
@@ -299,12 +306,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
 
   describe('batchProcessDocuments', () => {
     it('invokes batchProcessDocuments without error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
@@ -321,9 +329,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchProcessDocuments = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchProcessDocuments =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.batchProcessDocuments(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -335,12 +342,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes batchProcessDocuments without error using callback', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
@@ -357,9 +365,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchProcessDocuments = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchProcessDocuments =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchProcessDocuments(
           request,
@@ -392,12 +399,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes batchProcessDocuments with call error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
@@ -428,12 +436,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes batchProcessDocuments with LRO error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
@@ -463,12 +472,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes checkBatchProcessDocumentsProgress without error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -487,12 +497,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes checkBatchProcessDocumentsProgress with error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -510,12 +521,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
 
   describe('reviewDocument', () => {
     it('invokes reviewDocument without error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -532,9 +544,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.reviewDocument = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.reviewDocument =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.reviewDocument(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -546,12 +557,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes reviewDocument without error using callback', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -568,9 +580,8 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.reviewDocument = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.reviewDocument =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.reviewDocument(
           request,
@@ -603,12 +614,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes reviewDocument with call error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -636,12 +648,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes reviewDocument with LRO error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -671,12 +684,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes checkReviewDocumentProgress without error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -695,12 +709,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
 
     it('invokes checkReviewDocumentProgress with error', async () => {
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -724,12 +739,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         location: 'locationValue',
         processor: 'processorValue',
       };
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.humanReviewConfigPathTemplate.render = sinon
         .stub()
@@ -746,8 +762,10 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.humanReviewConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.humanReviewConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -757,8 +775,10 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         const result = client.matchProjectFromHumanReviewConfigName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.humanReviewConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.humanReviewConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -768,8 +788,10 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         const result = client.matchLocationFromHumanReviewConfigName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.humanReviewConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.humanReviewConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -779,8 +801,10 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         const result = client.matchProcessorFromHumanReviewConfigName(fakePath);
         assert.strictEqual(result, 'processorValue');
         assert(
-          (client.pathTemplates.humanReviewConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.humanReviewConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -794,12 +818,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         location: 'locationValue',
         processor: 'processorValue',
       };
-      const client = new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.processorPathTemplate.render = sinon
         .stub()
