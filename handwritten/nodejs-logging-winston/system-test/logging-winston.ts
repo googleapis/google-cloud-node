@@ -96,9 +96,11 @@ describe('LoggingWinston', function () {
           level: 'error',
           verify: (entry: Entry) => {
             assert(
-              (entry.data as {
-                message: string;
-              }).message.startsWith('fourth Error:')
+              (
+                entry.data as {
+                  message: string;
+                }
+              ).message.startsWith('fourth Error:')
             );
           },
         },
@@ -113,9 +115,11 @@ describe('LoggingWinston', function () {
           level: 'log',
           verify: (entry: Entry) => {
             assert(
-              (entry.data as {
-                message: string;
-              }).message.startsWith('fifth message')
+              (
+                entry.data as {
+                  message: string;
+                }
+              ).message.startsWith('fifth message')
             );
           },
         },
@@ -143,7 +147,7 @@ describe('LoggingWinston', function () {
       assert.strictEqual(entries.length, testData.length);
       entries.reverse().forEach((entry, index) => {
         const test = testData[index];
-        test.verify((entry as {}) as Entry);
+        test.verify(entry as {} as Entry);
       });
     });
 
@@ -180,8 +184,9 @@ describe('LoggingWinston', function () {
     it('reports errors', async () => {
       const start = Date.now();
       const service = `logging-winston-system-test-winston3-${UUID}`;
-      const LoggingWinston = proxyquire('../src/index', {winston})
-        .LoggingWinston;
+      const LoggingWinston = proxyquire('../src/index', {
+        winston,
+      }).LoggingWinston;
 
       const logger = winston.createLogger({
         transports: [
