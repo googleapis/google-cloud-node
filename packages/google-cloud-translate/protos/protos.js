@@ -1533,11 +1533,11 @@
     
                         /**
                          * DetectLanguageRequest content.
-                         * @member {string} content
+                         * @member {string|null|undefined} content
                          * @memberof google.cloud.translation.v3.DetectLanguageRequest
                          * @instance
                          */
-                        DetectLanguageRequest.prototype.content = "";
+                        DetectLanguageRequest.prototype.content = null;
     
                         /**
                          * DetectLanguageRequest mimeType.
@@ -9393,11 +9393,11 @@
     
                         /**
                          * DetectLanguageRequest content.
-                         * @member {string} content
+                         * @member {string|null|undefined} content
                          * @memberof google.cloud.translation.v3beta1.DetectLanguageRequest
                          * @instance
                          */
-                        DetectLanguageRequest.prototype.content = "";
+                        DetectLanguageRequest.prototype.content = null;
     
                         /**
                          * DetectLanguageRequest mimeType.
@@ -11636,11 +11636,11 @@
     
                         /**
                          * DocumentInputConfig content.
-                         * @member {Uint8Array} content
+                         * @member {Uint8Array|null|undefined} content
                          * @memberof google.cloud.translation.v3beta1.DocumentInputConfig
                          * @instance
                          */
-                        DocumentInputConfig.prototype.content = $util.newBuffer([]);
+                        DocumentInputConfig.prototype.content = null;
     
                         /**
                          * DocumentInputConfig gcsSource.
@@ -19344,43 +19344,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

@@ -685,7 +685,7 @@ export namespace google {
                     public model: string;
 
                     /** DetectLanguageRequest content. */
-                    public content: string;
+                    public content?: (string|null);
 
                     /** DetectLanguageRequest mimeType. */
                     public mimeType: string;
@@ -3926,7 +3926,7 @@ export namespace google {
                     public model: string;
 
                     /** DetectLanguageRequest content. */
-                    public content: string;
+                    public content?: (string|null);
 
                     /** DetectLanguageRequest mimeType. */
                     public mimeType: string;
@@ -4889,7 +4889,7 @@ export namespace google {
                     constructor(properties?: google.cloud.translation.v3beta1.IDocumentInputConfig);
 
                     /** DocumentInputConfig content. */
-                    public content: (Uint8Array|string);
+                    public content?: (Uint8Array|string|null);
 
                     /** DocumentInputConfig gcsSource. */
                     public gcsSource?: (google.cloud.translation.v3beta1.IGcsSource|null);
@@ -7770,19 +7770,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
