@@ -212,13 +212,14 @@ export class StreamingVideoIntelligenceServiceClient {
     ];
     for (const methodName of streamingVideoIntelligenceServiceStubMethods) {
       const callPromise = this.streamingVideoIntelligenceServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }

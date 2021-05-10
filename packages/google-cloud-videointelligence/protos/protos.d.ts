@@ -4398,7 +4398,7 @@ export namespace google {
                     public segment?: (google.cloud.videointelligence.v1.IVideoSegment|null);
 
                     /** ObjectTrackingAnnotation trackId. */
-                    public trackId: (number|Long|string);
+                    public trackId?: (number|Long|string|null);
 
                     /** ObjectTrackingAnnotation entity. */
                     public entity?: (google.cloud.videointelligence.v1.IEntity|null);
@@ -16061,7 +16061,7 @@ export namespace google {
                     public segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
 
                     /** ObjectTrackingAnnotation trackId. */
-                    public trackId: (number|Long|string);
+                    public trackId?: (number|Long|string|null);
 
                     /** ObjectTrackingAnnotation entity. */
                     public entity?: (google.cloud.videointelligence.v1p3beta1.IEntity|null);
@@ -16271,7 +16271,7 @@ export namespace google {
                     public videoConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig|null);
 
                     /** StreamingAnnotateVideoRequest inputContent. */
-                    public inputContent: (Uint8Array|string);
+                    public inputContent?: (Uint8Array|string|null);
 
                     /** StreamingAnnotateVideoRequest streamingRequest. */
                     public streamingRequest?: ("videoConfig"|"inputContent");
@@ -17555,19 +17555,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
