@@ -20,7 +20,8 @@
 const datatransfer = require('@google-cloud/bigquery-data-transfer');
 
 function main() {
-  const dataTransferServiceClient = new datatransfer.DataTransferServiceClient();
+  const dataTransferServiceClient =
+    new datatransfer.DataTransferServiceClient();
 }
 
 main();
