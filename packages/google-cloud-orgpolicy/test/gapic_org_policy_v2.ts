@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -247,9 +246,8 @@ describe('v2.OrgPolicyClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
-      client.innerApiCalls.getPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getPolicy(
           request,
@@ -325,9 +323,8 @@ describe('v2.OrgPolicyClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
-      client.innerApiCalls.getEffectivePolicy = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getEffectivePolicy =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getEffectivePolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -358,9 +355,8 @@ describe('v2.OrgPolicyClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
-      client.innerApiCalls.getEffectivePolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getEffectivePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getEffectivePolicy(
           request,
@@ -470,9 +466,8 @@ describe('v2.OrgPolicyClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
-      client.innerApiCalls.createPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createPolicy(
           request,
@@ -584,9 +579,8 @@ describe('v2.OrgPolicyClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
-      client.innerApiCalls.updatePolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updatePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updatePolicy(
           request,
@@ -697,9 +691,8 @@ describe('v2.OrgPolicyClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deletePolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deletePolicy(
           request,
@@ -825,9 +818,8 @@ describe('v2.OrgPolicyClient', () => {
           new protos.google.cloud.orgpolicy.v2.Constraint()
         ),
       ];
-      client.innerApiCalls.listConstraints = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listConstraints =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listConstraints(
           request,
@@ -905,9 +897,8 @@ describe('v2.OrgPolicyClient', () => {
           new protos.google.cloud.orgpolicy.v2.Constraint()
         ),
       ];
-      client.descriptors.page.listConstraints.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listConstraints.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listConstraintsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.orgpolicy.v2.Constraint[] = [];
@@ -932,10 +923,9 @@ describe('v2.OrgPolicyClient', () => {
           .calledWith(client.innerApiCalls.listConstraints, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listConstraints
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConstraints.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -952,10 +942,8 @@ describe('v2.OrgPolicyClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listConstraints.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listConstraints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listConstraintsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.orgpolicy.v2.Constraint[] = [];
@@ -979,10 +967,9 @@ describe('v2.OrgPolicyClient', () => {
           .calledWith(client.innerApiCalls.listConstraints, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listConstraints
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConstraints.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1009,9 +996,8 @@ describe('v2.OrgPolicyClient', () => {
           new protos.google.cloud.orgpolicy.v2.Constraint()
         ),
       ];
-      client.descriptors.page.listConstraints.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listConstraints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.orgpolicy.v2.IConstraint[] = [];
       const iterable = client.listConstraintsAsync(request);
       for await (const resource of iterable) {
@@ -1019,15 +1005,15 @@ describe('v2.OrgPolicyClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listConstraints
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listConstraints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listConstraints
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConstraints.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1044,10 +1030,8 @@ describe('v2.OrgPolicyClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listConstraints.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listConstraints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listConstraintsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.orgpolicy.v2.IConstraint[] = [];
@@ -1056,15 +1040,15 @@ describe('v2.OrgPolicyClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listConstraints
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listConstraints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listConstraints
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listConstraints.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1127,9 +1111,8 @@ describe('v2.OrgPolicyClient', () => {
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
       ];
-      client.innerApiCalls.listPolicies = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPolicies(
           request,
@@ -1201,9 +1184,8 @@ describe('v2.OrgPolicyClient', () => {
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
       ];
-      client.descriptors.page.listPolicies.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.orgpolicy.v2.Policy[] = [];
@@ -1228,10 +1210,9 @@ describe('v2.OrgPolicyClient', () => {
           .calledWith(client.innerApiCalls.listPolicies, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPolicies
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPolicies.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1275,10 +1256,9 @@ describe('v2.OrgPolicyClient', () => {
           .calledWith(client.innerApiCalls.listPolicies, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPolicies
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPolicies.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1299,9 +1279,8 @@ describe('v2.OrgPolicyClient', () => {
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
       ];
-      client.descriptors.page.listPolicies.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.orgpolicy.v2.IPolicy[] = [];
       const iterable = client.listPoliciesAsync(request);
       for await (const resource of iterable) {
@@ -1309,15 +1288,15 @@ describe('v2.OrgPolicyClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listPolicies
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPolicies
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1334,10 +1313,8 @@ describe('v2.OrgPolicyClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPolicies.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listPoliciesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.orgpolicy.v2.IPolicy[] = [];
@@ -1346,15 +1323,15 @@ describe('v2.OrgPolicyClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listPolicies
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPolicies
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1386,8 +1363,10 @@ describe('v2.OrgPolicyClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.folderConstraintPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.folderConstraintPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1488,34 +1467,38 @@ describe('v2.OrgPolicyClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationConstraintPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationConstraintPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationConstraintName', () => {
-        const result = client.matchOrganizationFromOrganizationConstraintName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationConstraintName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationConstraintPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationConstraintPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConstraintFromOrganizationConstraintName', () => {
-        const result = client.matchConstraintFromOrganizationConstraintName(
-          fakePath
-        );
+        const result =
+          client.matchConstraintFromOrganizationConstraintName(fakePath);
         assert.strictEqual(result, 'constraintValue');
         assert(
-          (client.pathTemplates.organizationConstraintPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationConstraintPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1547,21 +1530,24 @@ describe('v2.OrgPolicyClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationPolicyPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationPolicyPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationPolicyName', () => {
-        const result = client.matchOrganizationFromOrganizationPolicyName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationPolicyName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1571,8 +1557,10 @@ describe('v2.OrgPolicyClient', () => {
         const result = client.matchPolicyFromOrganizationPolicyName(fakePath);
         assert.strictEqual(result, 'policyValue');
         assert(
-          (client.pathTemplates.organizationPolicyPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationPolicyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1642,8 +1630,10 @@ describe('v2.OrgPolicyClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectConstraintPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectConstraintPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1653,21 +1643,24 @@ describe('v2.OrgPolicyClient', () => {
         const result = client.matchProjectFromProjectConstraintName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectConstraintPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectConstraintPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchConstraintFromProjectConstraintName', () => {
-        const result = client.matchConstraintFromProjectConstraintName(
-          fakePath
-        );
+        const result =
+          client.matchConstraintFromProjectConstraintName(fakePath);
         assert.strictEqual(result, 'constraintValue');
         assert(
-          (client.pathTemplates.projectConstraintPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectConstraintPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

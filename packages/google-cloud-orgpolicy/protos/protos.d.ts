@@ -856,13 +856,13 @@ export namespace google {
                         public values?: (google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.IStringValues|null);
 
                         /** PolicyRule allowAll. */
-                        public allowAll: boolean;
+                        public allowAll?: (boolean|null);
 
                         /** PolicyRule denyAll. */
-                        public denyAll: boolean;
+                        public denyAll?: (boolean|null);
 
                         /** PolicyRule enforce. */
-                        public enforce: boolean;
+                        public enforce?: (boolean|null);
 
                         /** PolicyRule condition. */
                         public condition?: (google.type.IExpr|null);
@@ -2291,19 +2291,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

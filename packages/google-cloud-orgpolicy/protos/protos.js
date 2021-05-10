@@ -1866,27 +1866,27 @@
     
                             /**
                              * PolicyRule allowAll.
-                             * @member {boolean} allowAll
+                             * @member {boolean|null|undefined} allowAll
                              * @memberof google.cloud.orgpolicy.v2.PolicySpec.PolicyRule
                              * @instance
                              */
-                            PolicyRule.prototype.allowAll = false;
+                            PolicyRule.prototype.allowAll = null;
     
                             /**
                              * PolicyRule denyAll.
-                             * @member {boolean} denyAll
+                             * @member {boolean|null|undefined} denyAll
                              * @memberof google.cloud.orgpolicy.v2.PolicySpec.PolicyRule
                              * @instance
                              */
-                            PolicyRule.prototype.denyAll = false;
+                            PolicyRule.prototype.denyAll = null;
     
                             /**
                              * PolicyRule enforce.
-                             * @member {boolean} enforce
+                             * @member {boolean|null|undefined} enforce
                              * @memberof google.cloud.orgpolicy.v2.PolicySpec.PolicyRule
                              * @instance
                              */
-                            PolicyRule.prototype.enforce = false;
+                            PolicyRule.prototype.enforce = null;
     
                             /**
                              * PolicyRule condition.
@@ -5242,43 +5242,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
