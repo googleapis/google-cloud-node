@@ -261,7 +261,7 @@ describe('Configuration class', () => {
         assert.throws(() => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-            ({reportMode: new Date()} as {}) as ConfigurationOptions,
+            {reportMode: new Date()} as {} as ConfigurationOptions,
             logger
           );
         });
@@ -270,7 +270,7 @@ describe('Configuration class', () => {
         assert.throws(() => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-            ({reportMode: 'invalid-mode'} as {}) as ConfigurationOptions,
+            {reportMode: 'invalid-mode'} as {} as ConfigurationOptions,
             logger
           );
         });
@@ -280,10 +280,7 @@ describe('Configuration class', () => {
           // we are intentionally providing an invalid configuration
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
-          new Configuration(
-            ({key: null} as {}) as ConfigurationOptions,
-            logger
-          );
+          new Configuration({key: null} as {} as ConfigurationOptions, logger);
         });
       });
       it('Should throw if invalid for ignoreEnvironmentCheck', () => {
@@ -292,7 +289,7 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-            ({ignoreEnvironmentCheck: null} as {}) as ConfigurationOptions,
+            {ignoreEnvironmentCheck: null} as {} as ConfigurationOptions,
             logger
           );
         });
@@ -303,7 +300,7 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-            ({serviceContext: {service: false}} as {}) as ConfigurationOptions,
+            {serviceContext: {service: false}} as {} as ConfigurationOptions,
             logger
           );
         });
@@ -314,7 +311,7 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-            ({serviceContext: {version: true}} as {}) as ConfigurationOptions,
+            {serviceContext: {version: true}} as {} as ConfigurationOptions,
             logger
           );
         });
@@ -325,9 +322,9 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-            ({
+            {
               reportUnhandledRejections: 'INVALID',
-            } as {}) as ConfigurationOptions,
+            } as {} as ConfigurationOptions,
             logger
           );
         });
@@ -362,7 +359,7 @@ describe('Configuration class', () => {
         before(() => {
           sterilizeConfigEnv();
           c = new Configuration(
-            ({projectId: pn} as {}) as ConfigurationOptions,
+            {projectId: pn} as {} as ConfigurationOptions,
             logger
           );
         });
@@ -399,7 +396,7 @@ describe('Configuration class', () => {
           // we are intentionally providing an invalid configuration
           // thus an explicit cast is needed
           c = new Configuration(
-            ({projectId: null} as {}) as ConfigurationOptions,
+            {projectId: null} as {} as ConfigurationOptions,
             logger
           );
         });

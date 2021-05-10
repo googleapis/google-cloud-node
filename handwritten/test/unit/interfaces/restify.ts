@@ -69,7 +69,7 @@ describe('restifyInterface', () => {
       ee.removeAllListeners();
       const req = new EventEmitter();
       const res = new EventEmitter();
-      ((res as {}) as {statusCode: number}).statusCode = 200;
+      (res as {} as {statusCode: number}).statusCode = 200;
       it('Should have 0 listeners on the finish event', () => {
         assert.strictEqual(res.listenerCount(FINISH), 0);
       });
@@ -98,7 +98,7 @@ describe('restifyInterface', () => {
           assert(true, 'sendError should be called');
         },
       };
-      const config = ({
+      const config = {
         getServiceContext() {
           assert(true, 'getServiceContext should be called');
           return {
@@ -112,15 +112,15 @@ describe('restifyInterface', () => {
         getVersion() {
           return '1';
         },
-      } as {}) as Configuration;
+      } as {} as Configuration;
       const errorHandlerInstance = restifyInterface(
-        (client as {}) as RequestHandler,
+        client as {} as RequestHandler,
         config
       );
       const requestHandlerInstance = errorHandlerInstance(ee as restify.Server);
       const req = new EventEmitter();
       const res = new EventEmitter();
-      ((res as {}) as {statusCode: number}).statusCode = 500;
+      (res as {} as {statusCode: number}).statusCode = 500;
       it('Should have 0 Listeners on the finish event', () => {
         assert.strictEqual(res.listenerCount(FINISH), 0);
       });
