@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.Instance()
       );
-      client.innerApiCalls.getInstance = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getInstance =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getInstance(
           request,
@@ -360,9 +358,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -394,9 +391,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createInstance(
           request,
@@ -557,9 +553,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -592,9 +587,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateInstance(
           request,
@@ -756,9 +750,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.upgradeInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.upgradeInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.upgradeInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -790,9 +783,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.upgradeInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.upgradeInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.upgradeInstance(
           request,
@@ -952,9 +944,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.importInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.importInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -986,9 +977,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importInstance(
           request,
@@ -1148,9 +1138,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.exportInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.exportInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1182,9 +1171,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportInstance(
           request,
@@ -1344,9 +1332,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.failoverInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.failoverInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.failoverInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1378,9 +1365,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.failoverInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.failoverInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.failoverInstance(
           request,
@@ -1540,9 +1526,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1574,9 +1559,8 @@ describe('v1beta1.CloudRedisClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteInstance(
           request,
@@ -1771,9 +1755,8 @@ describe('v1beta1.CloudRedisClient', () => {
         generateSampleMessage(new protos.google.cloud.redis.v1beta1.Instance()),
         generateSampleMessage(new protos.google.cloud.redis.v1beta1.Instance()),
       ];
-      client.innerApiCalls.listInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInstances(
           request,
@@ -1845,9 +1828,8 @@ describe('v1beta1.CloudRedisClient', () => {
         generateSampleMessage(new protos.google.cloud.redis.v1beta1.Instance()),
         generateSampleMessage(new protos.google.cloud.redis.v1beta1.Instance()),
       ];
-      client.descriptors.page.listInstances.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInstances.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listInstancesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.redis.v1beta1.Instance[] = [];
@@ -1872,10 +1854,9 @@ describe('v1beta1.CloudRedisClient', () => {
           .calledWith(client.innerApiCalls.listInstances, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1892,10 +1873,8 @@ describe('v1beta1.CloudRedisClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstances.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listInstancesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.redis.v1beta1.Instance[] = [];
@@ -1919,10 +1898,9 @@ describe('v1beta1.CloudRedisClient', () => {
           .calledWith(client.innerApiCalls.listInstances, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1943,9 +1921,8 @@ describe('v1beta1.CloudRedisClient', () => {
         generateSampleMessage(new protos.google.cloud.redis.v1beta1.Instance()),
         generateSampleMessage(new protos.google.cloud.redis.v1beta1.Instance()),
       ];
-      client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInstances.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.redis.v1beta1.IInstance[] = [];
       const iterable = client.listInstancesAsync(request);
       for await (const resource of iterable) {
@@ -1953,15 +1930,15 @@ describe('v1beta1.CloudRedisClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1978,10 +1955,8 @@ describe('v1beta1.CloudRedisClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstances.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listInstancesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.redis.v1beta1.IInstance[] = [];
@@ -1990,15 +1965,15 @@ describe('v1beta1.CloudRedisClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
