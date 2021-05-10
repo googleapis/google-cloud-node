@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.Source()
       );
-      client.innerApiCalls.createSource = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createSource =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createSource(
           request,
@@ -393,9 +391,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.Finding()
       );
-      client.innerApiCalls.createFinding = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createFinding =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createFinding(
           request,
@@ -474,9 +471,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
       );
-      client.innerApiCalls.createNotificationConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createNotificationConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createNotificationConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -507,9 +503,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
       );
-      client.innerApiCalls.createNotificationConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createNotificationConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createNotificationConfig(
           request,
@@ -591,9 +586,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteNotificationConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteNotificationConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteNotificationConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -624,9 +618,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteNotificationConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteNotificationConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteNotificationConfig(
           request,
@@ -739,9 +732,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -820,9 +812,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
       );
-      client.innerApiCalls.getNotificationConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getNotificationConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getNotificationConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -853,9 +844,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
       );
-      client.innerApiCalls.getNotificationConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getNotificationConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getNotificationConfig(
           request,
@@ -937,9 +927,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.OrganizationSettings()
       );
-      client.innerApiCalls.getOrganizationSettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getOrganizationSettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getOrganizationSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -970,9 +959,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.OrganizationSettings()
       );
-      client.innerApiCalls.getOrganizationSettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getOrganizationSettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getOrganizationSettings(
           request,
@@ -1085,9 +1073,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.Source()
       );
-      client.innerApiCalls.getSource = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getSource =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getSource(
           request,
@@ -1194,9 +1181,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.Finding()
       );
-      client.innerApiCalls.setFindingState = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setFindingState =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setFindingState(
           request,
@@ -1306,9 +1292,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -1387,9 +1372,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1420,9 +1404,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -1534,9 +1517,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.Finding()
       );
-      client.innerApiCalls.updateFinding = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateFinding =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateFinding(
           request,
@@ -1617,9 +1599,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
       );
-      client.innerApiCalls.updateNotificationConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateNotificationConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateNotificationConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1651,9 +1632,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
       );
-      client.innerApiCalls.updateNotificationConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateNotificationConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateNotificationConfig(
           request,
@@ -1737,9 +1717,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.OrganizationSettings()
       );
-      client.innerApiCalls.updateOrganizationSettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateOrganizationSettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateOrganizationSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1771,9 +1750,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.OrganizationSettings()
       );
-      client.innerApiCalls.updateOrganizationSettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateOrganizationSettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateOrganizationSettings(
           request,
@@ -1889,9 +1867,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.Source()
       );
-      client.innerApiCalls.updateSource = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSource =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateSource(
           request,
@@ -1972,9 +1949,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.SecurityMarks()
       );
-      client.innerApiCalls.updateSecurityMarks = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSecurityMarks =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateSecurityMarks(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2006,9 +1982,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1p1beta1.SecurityMarks()
       );
-      client.innerApiCalls.updateSecurityMarks = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSecurityMarks =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateSecurityMarks(
           request,
@@ -2088,9 +2063,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.runAssetDiscovery = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.runAssetDiscovery =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.runAssetDiscovery(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2122,9 +2096,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.runAssetDiscovery = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.runAssetDiscovery =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.runAssetDiscovery(
           request,
@@ -2331,9 +2304,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.GroupResult()
         ),
       ];
-      client.innerApiCalls.groupAssets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.groupAssets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.groupAssets(
           request,
@@ -2413,12 +2385,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.GroupResult()
         ),
       ];
-      client.descriptors.page.groupAssets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.groupAssets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.groupAssetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -2467,7 +2439,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       const stream = client.groupAssetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -2519,10 +2492,10 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.GroupResult()
         ),
       ];
-      client.descriptors.page.groupAssets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] = [];
+      client.descriptors.page.groupAssets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] =
+        [];
       const iterable = client.groupAssetsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2560,7 +2533,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       const iterable = client.groupAssetsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2649,9 +2623,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.GroupResult()
         ),
       ];
-      client.innerApiCalls.groupFindings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.groupFindings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.groupFindings(
           request,
@@ -2731,12 +2704,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.GroupResult()
         ),
       ];
-      client.descriptors.page.groupFindings.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.groupFindings.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.groupFindingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -2760,10 +2733,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           .calledWith(client.innerApiCalls.groupFindings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.groupFindings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.groupFindings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2780,13 +2752,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.groupFindings.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.groupFindings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.groupFindingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.GroupResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -2809,10 +2780,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           .calledWith(client.innerApiCalls.groupFindings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.groupFindings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.groupFindings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2839,25 +2809,25 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.GroupResult()
         ),
       ];
-      client.descriptors.page.groupFindings.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] = [];
+      client.descriptors.page.groupFindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] =
+        [];
       const iterable = client.groupFindingsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.groupFindings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.groupFindings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.groupFindings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.groupFindings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2874,27 +2844,26 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.groupFindings.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.groupFindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.groupFindingsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.IGroupResult[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.groupFindings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.groupFindings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.groupFindings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.groupFindings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2969,9 +2938,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.ListAssetsResult()
         ),
       ];
-      client.innerApiCalls.listAssets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAssets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAssets(
           request,
@@ -3051,12 +3019,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.ListAssetsResult()
         ),
       ];
-      client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAssets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAssetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.ListAssetsResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.ListAssetsResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -3105,7 +3073,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       const stream = client.listAssetsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.ListAssetsResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.ListAssetsResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -3157,10 +3126,10 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.ListAssetsResult()
         ),
       ];
-      client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.IListAssetsResult[] = [];
+      client.descriptors.page.listAssets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.IListAssetsResult[] =
+        [];
       const iterable = client.listAssetsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3198,7 +3167,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       const iterable = client.listAssetsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.IListAssetsResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.IListAssetsResult[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3287,9 +3257,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.ListFindingsResult()
         ),
       ];
-      client.innerApiCalls.listFindings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listFindings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listFindings(
           request,
@@ -3369,12 +3338,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.ListFindingsResult()
         ),
       ];
-      client.descriptors.page.listFindings.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listFindings.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listFindingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.ListFindingsResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.ListFindingsResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -3398,10 +3367,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           .calledWith(client.innerApiCalls.listFindings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3424,7 +3392,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       const stream = client.listFindingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.ListFindingsResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.ListFindingsResult[] =
+          [];
         stream.on(
           'data',
           (
@@ -3447,10 +3416,9 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           .calledWith(client.innerApiCalls.listFindings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3477,25 +3445,25 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.ListFindingsResult()
         ),
       ];
-      client.descriptors.page.listFindings.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.IListFindingsResult[] = [];
+      client.descriptors.page.listFindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.IListFindingsResult[] =
+        [];
       const iterable = client.listFindingsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3512,27 +3480,26 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listFindings.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listFindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listFindingsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.IListFindingsResult[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.IListFindingsResult[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3568,9 +3535,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
         ),
       ];
-      client.innerApiCalls.listNotificationConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listNotificationConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listNotificationConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3609,9 +3575,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
         ),
       ];
-      client.innerApiCalls.listNotificationConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listNotificationConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listNotificationConfigs(
           request,
@@ -3694,12 +3659,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
         ),
       ];
-      client.descriptors.page.listNotificationConfigs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listNotificationConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listNotificationConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig[] =
+          [];
         stream.on(
           'data',
           (
@@ -3718,16 +3683,18 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listNotificationConfigs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listNotificationConfigs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listNotificationConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listNotificationConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNotificationConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3744,13 +3711,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listNotificationConfigs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listNotificationConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listNotificationConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig[] =
+          [];
         stream.on(
           'data',
           (
@@ -3768,16 +3734,18 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listNotificationConfigs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listNotificationConfigs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listNotificationConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listNotificationConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNotificationConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3804,25 +3772,27 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.NotificationConfig()
         ),
       ];
-      client.descriptors.page.listNotificationConfigs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig[] = [];
+      client.descriptors.page.listNotificationConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig[] =
+        [];
       const iterable = client.listNotificationConfigsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listNotificationConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listNotificationConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listNotificationConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNotificationConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3839,27 +3809,28 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listNotificationConfigs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listNotificationConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listNotificationConfigsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listNotificationConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listNotificationConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listNotificationConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNotificationConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3934,9 +3905,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.Source()
         ),
       ];
-      client.innerApiCalls.listSources = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listSources =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listSources(
           request,
@@ -4016,12 +3986,12 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.Source()
         ),
       ];
-      client.descriptors.page.listSources.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSources.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listSourcesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.Source[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.Source[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.securitycenter.v1p1beta1.Source) => {
@@ -4068,7 +4038,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       const stream = client.listSourcesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.Source[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.Source[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.securitycenter.v1p1beta1.Source) => {
@@ -4118,10 +4089,10 @@ describe('v1p1beta1.SecurityCenterClient', () => {
           new protos.google.cloud.securitycenter.v1p1beta1.Source()
         ),
       ];
-      client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.securitycenter.v1p1beta1.ISource[] = [];
+      client.descriptors.page.listSources.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1p1beta1.ISource[] =
+        [];
       const iterable = client.listSourcesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -4159,7 +4130,8 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       );
       const iterable = client.listSourcesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.securitycenter.v1p1beta1.ISource[] = [];
+        const responses: protos.google.cloud.securitycenter.v1p1beta1.ISource[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -4318,34 +4290,38 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.notificationConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.notificationConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromNotificationConfigName', () => {
-        const result = client.matchOrganizationFromNotificationConfigName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromNotificationConfigName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.notificationConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.notificationConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchNotificationConfigFromNotificationConfigName', () => {
-        const result = client.matchNotificationConfigFromNotificationConfigName(
-          fakePath
-        );
+        const result =
+          client.matchNotificationConfigFromNotificationConfigName(fakePath);
         assert.strictEqual(result, 'notificationConfigValue');
         assert(
-          (client.pathTemplates.notificationConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.notificationConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4401,12 +4377,10 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationAssetSecurityMarksPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationAssetSecurityMarksPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationAssetSecurityMarksPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationAssetSecurityMarksPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationAssetSecurityMarksPath', () => {
         const result = client.organizationAssetSecurityMarksPath(
@@ -4415,34 +4389,40 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationAssetSecurityMarksPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationAssetSecurityMarksPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationAssetSecurityMarksName', () => {
-        const result = client.matchOrganizationFromOrganizationAssetSecurityMarksName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationAssetSecurityMarksName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationAssetSecurityMarksPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAssetFromOrganizationAssetSecurityMarksName', () => {
-        const result = client.matchAssetFromOrganizationAssetSecurityMarksName(
-          fakePath
-        );
+        const result =
+          client.matchAssetFromOrganizationAssetSecurityMarksName(fakePath);
         assert.strictEqual(result, 'assetValue');
         assert(
-          (client.pathTemplates.organizationAssetSecurityMarksPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4470,21 +4450,24 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         const result = client.organizationSettingsPath('organizationValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.organizationSettingsPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.organizationSettingsPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationSettingsName', () => {
-        const result = client.matchOrganizationFromOrganizationSettingsName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationSettingsName(fakePath);
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates.organizationSettingsPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.organizationSettingsPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4503,12 +4486,10 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('organizationSourceFindingSecurityMarksPath', () => {
         const result = client.organizationSourceFindingSecurityMarksPath(
@@ -4518,51 +4499,62 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .organizationSourceFindingSecurityMarksPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .organizationSourceFindingSecurityMarksPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchOrganizationFromOrganizationSourceFindingSecurityMarksName', () => {
-        const result = client.matchOrganizationFromOrganizationSourceFindingSecurityMarksName(
-          fakePath
-        );
+        const result =
+          client.matchOrganizationFromOrganizationSourceFindingSecurityMarksName(
+            fakePath
+          );
         assert.strictEqual(result, 'organizationValue');
         assert(
-          (client.pathTemplates
-            .organizationSourceFindingSecurityMarksPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchSourceFromOrganizationSourceFindingSecurityMarksName', () => {
-        const result = client.matchSourceFromOrganizationSourceFindingSecurityMarksName(
-          fakePath
-        );
+        const result =
+          client.matchSourceFromOrganizationSourceFindingSecurityMarksName(
+            fakePath
+          );
         assert.strictEqual(result, 'sourceValue');
         assert(
-          (client.pathTemplates
-            .organizationSourceFindingSecurityMarksPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchFindingFromOrganizationSourceFindingSecurityMarksName', () => {
-        const result = client.matchFindingFromOrganizationSourceFindingSecurityMarksName(
-          fakePath
-        );
+        const result =
+          client.matchFindingFromOrganizationSourceFindingSecurityMarksName(
+            fakePath
+          );
         assert.strictEqual(result, 'findingValue');
         assert(
-          (client.pathTemplates
-            .organizationSourceFindingSecurityMarksPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .organizationSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
