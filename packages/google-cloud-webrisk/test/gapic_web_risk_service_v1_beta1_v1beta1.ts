@@ -26,10 +26,9 @@ import * as webriskservicev1beta1Module from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -73,49 +72,46 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
+    const client =
+      new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
+    const client =
+      new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
+    const client =
+      new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
     await client.initialize();
     assert(client.webRiskServiceV1Beta1Stub);
   });
 
   it('has close method', () => {
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
+    const client =
+      new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
+    const client =
+      new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -124,12 +120,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-      {
+    const client =
+      new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -148,12 +143,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
 
   describe('computeThreatListDiff', () => {
     it('invokes computeThreatListDiff without error', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
@@ -162,9 +156,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
       );
-      client.innerApiCalls.computeThreatListDiff = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.computeThreatListDiff =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.computeThreatListDiff(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -175,12 +168,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes computeThreatListDiff without error using callback', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
@@ -189,9 +181,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
       );
-      client.innerApiCalls.computeThreatListDiff = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.computeThreatListDiff =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.computeThreatListDiff(
           request,
@@ -217,12 +208,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes computeThreatListDiff with error', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
@@ -247,12 +237,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
 
   describe('searchUris', () => {
     it('invokes searchUris without error', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
@@ -272,12 +261,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchUris without error using callback', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
@@ -286,9 +274,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
       );
-      client.innerApiCalls.searchUris = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchUris =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchUris(
           request,
@@ -314,12 +301,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchUris with error', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
@@ -341,12 +327,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
 
   describe('searchHashes', () => {
     it('invokes searchHashes without error', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
@@ -366,12 +351,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchHashes without error using callback', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
@@ -380,9 +364,8 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
       );
-      client.innerApiCalls.searchHashes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchHashes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchHashes(
           request,
@@ -408,12 +391,11 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchHashes with error', async () => {
-      const client = new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-        {
+      const client =
+        new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()

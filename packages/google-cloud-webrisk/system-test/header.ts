@@ -28,7 +28,7 @@ describe('header', () => {
       threatTypes: ['MALWARE'],
     };
     await client.searchUris(
-      (request as unknown) as protoTypes.google.cloud.webrisk.v1beta1.SearchUrisRequest
+      request as unknown as protoTypes.google.cloud.webrisk.v1beta1.SearchUrisRequest
     );
     assert.ok(
       /^gax\/[\w.-]+ gapic\/[\w.-]+ gl-node\/[0-9]+\.[\w.-]+ grpc\/[\w.-]+$/.test(

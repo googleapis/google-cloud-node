@@ -216,13 +216,14 @@ export class WebRiskServiceClient {
     ];
     for (const methodName of webRiskServiceStubMethods) {
       const callPromise = this.webRiskServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -653,11 +654,10 @@ export class WebRiskServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.createSubmission(request, options, callback);
   }

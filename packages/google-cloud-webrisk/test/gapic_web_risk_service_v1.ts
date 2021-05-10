@@ -26,10 +26,9 @@ import * as webriskserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -147,9 +146,8 @@ describe('v1.WebRiskServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.ComputeThreatListDiffResponse()
       );
-      client.innerApiCalls.computeThreatListDiff = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.computeThreatListDiff =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.computeThreatListDiff(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -172,9 +170,8 @@ describe('v1.WebRiskServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.ComputeThreatListDiffResponse()
       );
-      client.innerApiCalls.computeThreatListDiff = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.computeThreatListDiff =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.computeThreatListDiff(
           request,
@@ -263,9 +260,8 @@ describe('v1.WebRiskServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.SearchUrisResponse()
       );
-      client.innerApiCalls.searchUris = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchUris =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchUris(
           request,
@@ -351,9 +347,8 @@ describe('v1.WebRiskServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.SearchHashesResponse()
       );
-      client.innerApiCalls.searchHashes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.searchHashes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.searchHashes(
           request,
@@ -455,9 +450,8 @@ describe('v1.WebRiskServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.Submission()
       );
-      client.innerApiCalls.createSubmission = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createSubmission =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createSubmission(
           request,
