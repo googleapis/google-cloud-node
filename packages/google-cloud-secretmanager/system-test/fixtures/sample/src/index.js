@@ -20,7 +20,8 @@
 const secretmanager = require('@google-cloud/secret-manager');
 
 function main() {
-  const secretManagerServiceClient = new secretmanager.SecretManagerServiceClient();
+  const secretManagerServiceClient =
+    new secretmanager.SecretManagerServiceClient();
 }
 
 main();
