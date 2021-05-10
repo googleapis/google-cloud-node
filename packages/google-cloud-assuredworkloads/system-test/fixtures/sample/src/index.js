@@ -20,7 +20,8 @@
 const assuredworkloads = require('@google-cloud/assured-workloads');
 
 function main() {
-  const assuredWorkloadsServiceClient = new assuredworkloads.AssuredWorkloadsServiceClient();
+  const assuredWorkloadsServiceClient =
+    new assuredworkloads.AssuredWorkloadsServiceClient();
 }
 
 main();

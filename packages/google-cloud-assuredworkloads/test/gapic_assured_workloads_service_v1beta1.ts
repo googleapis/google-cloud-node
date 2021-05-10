@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -168,49 +167,46 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient();
+    const client =
+      new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-      {
+    const client =
+      new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-      {
+    const client =
+      new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.assuredWorkloadsServiceStub, undefined);
     await client.initialize();
     assert(client.assuredWorkloadsServiceStub);
   });
 
   it('has close method', () => {
-    const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-      {
+    const client =
+      new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-      {
+    const client =
+      new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -219,12 +215,11 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-      {
+    const client =
+      new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -243,12 +238,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
 
   describe('updateWorkload', () => {
     it('invokes updateWorkload without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
@@ -277,12 +273,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes updateWorkload without error using callback', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
@@ -300,9 +297,8 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
-      client.innerApiCalls.updateWorkload = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateWorkload =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateWorkload(
           request,
@@ -328,12 +324,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes updateWorkload with error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
@@ -364,12 +361,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
 
   describe('deleteWorkload', () => {
     it('invokes deleteWorkload without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
@@ -397,12 +395,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes deleteWorkload without error using callback', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
@@ -419,9 +418,8 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteWorkload = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteWorkload =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteWorkload(
           request,
@@ -447,12 +445,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes deleteWorkload with error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
@@ -482,12 +481,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
 
   describe('getWorkload', () => {
     it('invokes getWorkload without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest()
@@ -515,12 +515,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes getWorkload without error using callback', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest()
@@ -537,9 +538,8 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
-      client.innerApiCalls.getWorkload = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getWorkload =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getWorkload(
           request,
@@ -565,12 +565,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes getWorkload with error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest()
@@ -600,12 +601,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
 
   describe('createWorkload', () => {
     it('invokes createWorkload without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
@@ -622,9 +624,8 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createWorkload = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createWorkload =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createWorkload(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -636,12 +637,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes createWorkload without error using callback', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
@@ -658,9 +660,8 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createWorkload = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createWorkload =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createWorkload(
           request,
@@ -693,12 +694,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes createWorkload with call error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
@@ -726,12 +728,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes createWorkload with LRO error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
@@ -761,12 +764,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes checkCreateWorkloadProgress without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -785,12 +789,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes checkCreateWorkloadProgress with error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -808,12 +813,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
 
   describe('listWorkloads', () => {
     it('invokes listWorkloads without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
@@ -849,12 +855,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes listWorkloads without error using callback', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
@@ -879,9 +886,8 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
           new protos.google.cloud.assuredworkloads.v1beta1.Workload()
         ),
       ];
-      client.innerApiCalls.listWorkloads = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listWorkloads =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listWorkloads(
           request,
@@ -909,12 +915,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes listWorkloads with error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
@@ -942,12 +949,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
     });
 
     it('invokes listWorkloadsStream without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
@@ -965,12 +973,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
           new protos.google.cloud.assuredworkloads.v1beta1.Workload()
         ),
       ];
-      client.descriptors.page.listWorkloads.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listWorkloads.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listWorkloadsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.assuredworkloads.v1beta1.Workload[] = [];
+        const responses: protos.google.cloud.assuredworkloads.v1beta1.Workload[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.assuredworkloads.v1beta1.Workload) => {
@@ -992,21 +1000,21 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
           .calledWith(client.innerApiCalls.listWorkloads, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkloads
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkloads.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listWorkloadsStream with error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
@@ -1014,13 +1022,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listWorkloads.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listWorkloads.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listWorkloadsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.assuredworkloads.v1beta1.Workload[] = [];
+        const responses: protos.google.cloud.assuredworkloads.v1beta1.Workload[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.assuredworkloads.v1beta1.Workload) => {
@@ -1041,21 +1048,21 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
           .calledWith(client.innerApiCalls.listWorkloads, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkloads
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkloads.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listWorkloads without error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
@@ -1073,36 +1080,37 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
           new protos.google.cloud.assuredworkloads.v1beta1.Workload()
         ),
       ];
-      client.descriptors.page.listWorkloads.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.assuredworkloads.v1beta1.IWorkload[] = [];
+      client.descriptors.page.listWorkloads.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.assuredworkloads.v1beta1.IWorkload[] =
+        [];
       const iterable = client.listWorkloadsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listWorkloads
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkloads
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listWorkloads with error', async () => {
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
@@ -1110,27 +1118,26 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listWorkloads.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listWorkloads.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listWorkloadsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.assuredworkloads.v1beta1.IWorkload[] = [];
+        const responses: protos.google.cloud.assuredworkloads.v1beta1.IWorkload[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listWorkloads
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listWorkloads
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1143,12 +1150,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         organization: 'organizationValue',
         location: 'locationValue',
       };
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -1196,12 +1204,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const expectedParameters = {
         organization: 'organizationValue',
       };
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
@@ -1238,12 +1247,13 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         location: 'locationValue',
         workload: 'workloadValue',
       };
-      const client = new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.workloadPathTemplate.render = sinon
         .stub()
