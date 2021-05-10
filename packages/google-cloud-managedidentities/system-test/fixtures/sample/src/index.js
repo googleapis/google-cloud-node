@@ -20,7 +20,8 @@
 const managedidentities = require('@google-cloud/managed-identities');
 
 function main() {
-  const managedIdentitiesServiceClient = new managedidentities.ManagedIdentitiesServiceClient();
+  const managedIdentitiesServiceClient =
+    new managedidentities.ManagedIdentitiesServiceClient();
 }
 
 main();
