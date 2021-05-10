@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
-      client.innerApiCalls.createProductSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createProductSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createProductSet(
           request,
@@ -391,9 +389,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
-      client.innerApiCalls.getProductSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getProductSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getProductSet(
           request,
@@ -505,9 +502,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
-      client.innerApiCalls.updateProductSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateProductSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateProductSet(
           request,
@@ -618,9 +614,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteProductSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteProductSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteProductSet(
           request,
@@ -730,9 +725,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
-      client.innerApiCalls.createProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createProduct(
           request,
@@ -842,9 +836,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
-      client.innerApiCalls.getProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getProduct(
           request,
@@ -956,9 +949,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
-      client.innerApiCalls.updateProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateProduct(
           request,
@@ -1069,9 +1061,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteProduct(
           request,
@@ -1150,9 +1141,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ReferenceImage()
       );
-      client.innerApiCalls.createReferenceImage = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createReferenceImage =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createReferenceImage(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1183,9 +1173,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ReferenceImage()
       );
-      client.innerApiCalls.createReferenceImage = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createReferenceImage =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createReferenceImage(
           request,
@@ -1264,9 +1253,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteReferenceImage = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteReferenceImage =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteReferenceImage(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1297,9 +1285,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteReferenceImage = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteReferenceImage =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteReferenceImage(
           request,
@@ -1409,9 +1396,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ReferenceImage()
       );
-      client.innerApiCalls.getReferenceImage = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getReferenceImage =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getReferenceImage(
           request,
@@ -1490,9 +1476,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.addProductToProductSet = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.addProductToProductSet =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.addProductToProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1523,9 +1508,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.addProductToProductSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addProductToProductSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addProductToProductSet(
           request,
@@ -1607,9 +1591,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.removeProductFromProductSet = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.removeProductFromProductSet =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.removeProductFromProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1640,9 +1623,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.removeProductFromProductSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.removeProductFromProductSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.removeProductFromProductSet(
           request,
@@ -1724,9 +1706,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importProductSets = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.importProductSets =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.importProductSets(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1758,9 +1739,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importProductSets = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importProductSets =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importProductSets(
           request,
@@ -1920,9 +1900,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.purgeProducts = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.purgeProducts =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.purgeProducts(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1954,9 +1933,8 @@ describe('v1.ProductSearchClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.purgeProducts = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.purgeProducts =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.purgeProducts(
           request,
@@ -2151,9 +2129,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
       ];
-      client.innerApiCalls.listProductSets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listProductSets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listProductSets(
           request,
@@ -2225,9 +2202,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
       ];
-      client.descriptors.page.listProductSets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProductSets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listProductSetsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.vision.v1.ProductSet[] = [];
@@ -2252,10 +2228,9 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(client.innerApiCalls.listProductSets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductSets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductSets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2272,10 +2247,8 @@ describe('v1.ProductSearchClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProductSets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProductSets.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listProductSetsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.vision.v1.ProductSet[] = [];
@@ -2299,10 +2272,9 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(client.innerApiCalls.listProductSets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductSets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductSets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2323,9 +2295,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
       ];
-      client.descriptors.page.listProductSets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProductSets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.vision.v1.IProductSet[] = [];
       const iterable = client.listProductSetsAsync(request);
       for await (const resource of iterable) {
@@ -2333,15 +2304,15 @@ describe('v1.ProductSearchClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listProductSets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProductSets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductSets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductSets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2358,10 +2329,8 @@ describe('v1.ProductSearchClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProductSets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProductSets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listProductSetsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1.IProductSet[] = [];
@@ -2370,15 +2339,15 @@ describe('v1.ProductSearchClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listProductSets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProductSets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductSets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductSets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2441,9 +2410,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
       ];
-      client.innerApiCalls.listProducts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listProducts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listProducts(
           request,
@@ -2515,9 +2483,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
       ];
-      client.descriptors.page.listProducts.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProducts.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listProductsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.vision.v1.Product[] = [];
@@ -2539,10 +2506,9 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(client.innerApiCalls.listProducts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProducts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProducts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2583,10 +2549,9 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(client.innerApiCalls.listProducts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProducts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProducts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2607,9 +2572,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
       ];
-      client.descriptors.page.listProducts.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProducts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.vision.v1.IProduct[] = [];
       const iterable = client.listProductsAsync(request);
       for await (const resource of iterable) {
@@ -2617,15 +2581,15 @@ describe('v1.ProductSearchClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listProducts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProducts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2642,10 +2606,8 @@ describe('v1.ProductSearchClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProducts.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProducts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listProductsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1.IProduct[] = [];
@@ -2654,15 +2616,15 @@ describe('v1.ProductSearchClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listProducts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProducts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2698,9 +2660,8 @@ describe('v1.ProductSearchClient', () => {
           new protos.google.cloud.vision.v1.ReferenceImage()
         ),
       ];
-      client.innerApiCalls.listReferenceImages = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listReferenceImages =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listReferenceImages(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2739,9 +2700,8 @@ describe('v1.ProductSearchClient', () => {
           new protos.google.cloud.vision.v1.ReferenceImage()
         ),
       ];
-      client.innerApiCalls.listReferenceImages = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listReferenceImages =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listReferenceImages(
           request,
@@ -2819,9 +2779,8 @@ describe('v1.ProductSearchClient', () => {
           new protos.google.cloud.vision.v1.ReferenceImage()
         ),
       ];
-      client.descriptors.page.listReferenceImages.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listReferenceImages.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listReferenceImagesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.vision.v1.ReferenceImage[] = [];
@@ -2846,10 +2805,9 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(client.innerApiCalls.listReferenceImages, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listReferenceImages
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listReferenceImages.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2866,10 +2824,8 @@ describe('v1.ProductSearchClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listReferenceImages.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listReferenceImages.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listReferenceImagesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.vision.v1.ReferenceImage[] = [];
@@ -2893,10 +2849,9 @@ describe('v1.ProductSearchClient', () => {
           .calledWith(client.innerApiCalls.listReferenceImages, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listReferenceImages
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listReferenceImages.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2923,9 +2878,8 @@ describe('v1.ProductSearchClient', () => {
           new protos.google.cloud.vision.v1.ReferenceImage()
         ),
       ];
-      client.descriptors.page.listReferenceImages.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listReferenceImages.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.vision.v1.IReferenceImage[] = [];
       const iterable = client.listReferenceImagesAsync(request);
       for await (const resource of iterable) {
@@ -2933,15 +2887,15 @@ describe('v1.ProductSearchClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listReferenceImages
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listReferenceImages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listReferenceImages
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listReferenceImages.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2958,10 +2912,8 @@ describe('v1.ProductSearchClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listReferenceImages.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listReferenceImages.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listReferenceImagesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1.IReferenceImage[] = [];
@@ -2970,15 +2922,15 @@ describe('v1.ProductSearchClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listReferenceImages
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listReferenceImages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listReferenceImages
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listReferenceImages.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3008,9 +2960,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
       ];
-      client.innerApiCalls.listProductsInProductSet = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listProductsInProductSet =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listProductsInProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3043,9 +2994,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
       ];
-      client.innerApiCalls.listProductsInProductSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listProductsInProductSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listProductsInProductSet(
           request,
@@ -3120,9 +3070,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
       ];
-      client.descriptors.page.listProductsInProductSet.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProductsInProductSet.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listProductsInProductSetStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.vision.v1.Product[] = [];
@@ -3139,16 +3088,18 @@ describe('v1.ProductSearchClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listProductsInProductSet
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listProductsInProductSet
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listProductsInProductSet, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductsInProductSet
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductsInProductSet
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3165,10 +3116,8 @@ describe('v1.ProductSearchClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProductsInProductSet.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProductsInProductSet.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listProductsInProductSetStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.vision.v1.Product[] = [];
@@ -3184,16 +3133,18 @@ describe('v1.ProductSearchClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listProductsInProductSet
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listProductsInProductSet
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listProductsInProductSet, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductsInProductSet
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductsInProductSet
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3214,9 +3165,8 @@ describe('v1.ProductSearchClient', () => {
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
       ];
-      client.descriptors.page.listProductsInProductSet.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProductsInProductSet.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.vision.v1.IProduct[] = [];
       const iterable = client.listProductsInProductSetAsync(request);
       for await (const resource of iterable) {
@@ -3224,15 +3174,17 @@ describe('v1.ProductSearchClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listProductsInProductSet
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProductsInProductSet
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductsInProductSet
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductsInProductSet
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3249,10 +3201,8 @@ describe('v1.ProductSearchClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listProductsInProductSet.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProductsInProductSet.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listProductsInProductSetAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.vision.v1.IProduct[] = [];
@@ -3261,15 +3211,17 @@ describe('v1.ProductSearchClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listProductsInProductSet
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProductsInProductSet
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listProductsInProductSet
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listProductsInProductSet
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3519,9 +3471,8 @@ describe('v1.ProductSearchClient', () => {
       });
 
       it('matchReferenceImageFromReferenceImageName', () => {
-        const result = client.matchReferenceImageFromReferenceImageName(
-          fakePath
-        );
+        const result =
+          client.matchReferenceImageFromReferenceImageName(fakePath);
         assert.strictEqual(result, 'referenceImageValue');
         assert(
           (client.pathTemplates.referenceImagePathTemplate.match as SinonStub)

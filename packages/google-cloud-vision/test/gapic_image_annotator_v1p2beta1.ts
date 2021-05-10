@@ -26,10 +26,9 @@ import * as imageannotatorModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -179,9 +178,8 @@ describe('v1p2beta1.ImageAnnotatorClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p2beta1.BatchAnnotateImagesResponse()
       );
-      client.innerApiCalls.batchAnnotateImages = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchAnnotateImages =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.batchAnnotateImages(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -204,9 +202,8 @@ describe('v1p2beta1.ImageAnnotatorClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p2beta1.BatchAnnotateImagesResponse()
       );
-      client.innerApiCalls.batchAnnotateImages = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchAnnotateImages =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchAnnotateImages(
           request,
@@ -269,9 +266,8 @@ describe('v1p2beta1.ImageAnnotatorClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.asyncBatchAnnotateFiles = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.asyncBatchAnnotateFiles =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.asyncBatchAnnotateFiles(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -295,9 +291,8 @@ describe('v1p2beta1.ImageAnnotatorClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.asyncBatchAnnotateFiles = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.asyncBatchAnnotateFiles =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.asyncBatchAnnotateFiles(
           request,
@@ -394,9 +389,10 @@ describe('v1p2beta1.ImageAnnotatorClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkAsyncBatchAnnotateFilesProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkAsyncBatchAnnotateFilesProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));

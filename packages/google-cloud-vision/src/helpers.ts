@@ -95,21 +95,21 @@ const _requestToObject = (request: any) => {
     // Guess based on what the string looks like, and build the full
     // request object in the correct format.
     if (request.indexOf('://') === -1 || request.indexOf('file://') === 0) {
-      request = ({
+      request = {
         image: {source: {filename: request}},
-      } as unknown) as ImprovedRequest;
+      } as unknown as ImprovedRequest;
     } else {
-      request = ({
+      request = {
         image: {source: {imageUri: request}},
-      } as unknown) as ImprovedRequest;
+      } as unknown as ImprovedRequest;
     }
   } else if (Buffer.isBuffer(request)) {
     // Drop the buffer one level lower; it will get dealt with later
     // in the function. This allows sending <Buffer> and {image: <Buffer>} to
     // both work identically.
-    request = ({image: request} as unknown) as ImprovedRequest;
+    request = {image: request} as unknown as ImprovedRequest;
   }
-  return (request as unknown) as ImprovedRequest;
+  return request as unknown as ImprovedRequest;
 };
 
 const _coerceRequest = (
@@ -216,7 +216,7 @@ const _createSingleFeatureMethod = (
 };
 
 export function call(apiVersion: string) {
-  const methods: FeaturesMethod = ({} as unknown) as FeaturesMethod;
+  const methods: FeaturesMethod = {} as unknown as FeaturesMethod;
   /**
    * Annotate a single image with the requested features.
    *
@@ -314,11 +314,13 @@ export function call(apiVersion: string) {
         req: protoTypes.google.cloud.vision.v1.IAnnotateImageRequest | undefined
       ) => {
         if (err) {
-          return ((callback as unknown) as gax.Callback<
-            protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
-            {},
-            {}
-          >)(err);
+          return (
+            callback as unknown as gax.Callback<
+              protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
+              {},
+              {}
+            >
+          )(err);
         }
 
         // Call the GAPIC batch annotation function.
@@ -335,11 +337,13 @@ export function call(apiVersion: string) {
           ) => {
             // If there is an error, handle it.
             if (err) {
-              return ((callback as unknown) as gax.Callback<
-                protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
-                {},
-                {}
-              >)(err);
+              return (
+                callback as unknown as gax.Callback<
+                  protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
+                  {},
+                  {}
+                >
+              )(err);
             }
 
             // We are guaranteed to only have one response element, since we
@@ -347,11 +351,13 @@ export function call(apiVersion: string) {
             const response = r!.responses![0];
 
             // Fire the callback if applicable.
-            return ((callback as unknown) as gax.Callback<
-              protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
-              {},
-              {}
-            >)(undefined, response);
+            return (
+              callback as unknown as gax.Callback<
+                protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
+                {},
+                {}
+              >
+            )(undefined, response);
           }
         );
       }
@@ -362,9 +368,11 @@ export function call(apiVersion: string) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     require('../protos/protos.json')
   );
-  const features = (protoFilesRoot.lookup(
-    `google.cloud.vision.${apiVersion}.Feature.Type`
-  ) as gax.protobuf.Enum).values;
+  const features = (
+    protoFilesRoot.lookup(
+      `google.cloud.vision.${apiVersion}.Feature.Type`
+    ) as gax.protobuf.Enum
+  ).values;
 
   /**
    * Annotate a single image with face detection.
