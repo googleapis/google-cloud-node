@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1beta1.Instance()
       );
-      client.innerApiCalls.getInstance = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getInstance =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getInstance(
           request,
@@ -362,9 +360,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse()
       );
-      client.innerApiCalls.isInstanceUpgradeable = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.isInstanceUpgradeable =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.isInstanceUpgradeable(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -395,9 +392,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse()
       );
-      client.innerApiCalls.isInstanceUpgradeable = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.isInstanceUpgradeable =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.isInstanceUpgradeable(
           request,
@@ -510,9 +506,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1beta1.Environment()
       );
-      client.innerApiCalls.getEnvironment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getEnvironment =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getEnvironment(
           request,
@@ -591,9 +586,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -625,9 +619,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createInstance(
           request,
@@ -787,9 +780,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.registerInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.registerInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.registerInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -821,9 +813,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.registerInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.registerInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.registerInstance(
           request,
@@ -983,9 +974,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.setInstanceAccelerator = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceAccelerator =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.setInstanceAccelerator(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1017,9 +1007,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.setInstanceAccelerator = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceAccelerator =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setInstanceAccelerator(
           request,
@@ -1182,9 +1171,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.setInstanceMachineType = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceMachineType =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.setInstanceMachineType(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1216,9 +1204,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.setInstanceMachineType = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceMachineType =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setInstanceMachineType(
           request,
@@ -1381,9 +1368,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.setInstanceLabels = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceLabels =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.setInstanceLabels(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1415,9 +1401,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.setInstanceLabels = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceLabels =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setInstanceLabels(
           request,
@@ -1577,9 +1562,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1611,9 +1595,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteInstance(
           request,
@@ -1773,9 +1756,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.startInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.startInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.startInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1807,9 +1789,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.startInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.startInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.startInstance(
           request,
@@ -2001,9 +1982,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.stopInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.stopInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.stopInstance(
           request,
@@ -2160,9 +2140,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.resetInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.resetInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.resetInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2194,9 +2173,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.resetInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.resetInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.resetInstance(
           request,
@@ -2356,9 +2334,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.reportInstanceInfo = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.reportInstanceInfo =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.reportInstanceInfo(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2390,9 +2367,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.reportInstanceInfo = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.reportInstanceInfo =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.reportInstanceInfo(
           request,
@@ -2552,9 +2528,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.upgradeInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.upgradeInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.upgradeInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2586,9 +2561,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.upgradeInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.upgradeInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.upgradeInstance(
           request,
@@ -2748,9 +2722,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.upgradeInstanceInternal = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.upgradeInstanceInternal =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.upgradeInstanceInternal(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2782,9 +2755,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.upgradeInstanceInternal = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.upgradeInstanceInternal =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.upgradeInstanceInternal(
           request,
@@ -2897,9 +2869,10 @@ describe('v1beta1.NotebookServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpgradeInstanceInternalProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkUpgradeInstanceInternalProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2947,9 +2920,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEnvironment = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createEnvironment =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createEnvironment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2981,9 +2953,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEnvironment = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createEnvironment =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createEnvironment(
           request,
@@ -3143,9 +3114,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteEnvironment = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteEnvironment =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteEnvironment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -3177,9 +3147,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteEnvironment = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteEnvironment =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteEnvironment(
           request,
@@ -3386,9 +3355,8 @@ describe('v1beta1.NotebookServiceClient', () => {
           new protos.google.cloud.notebooks.v1beta1.Instance()
         ),
       ];
-      client.innerApiCalls.listInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInstances(
           request,
@@ -3466,9 +3434,8 @@ describe('v1beta1.NotebookServiceClient', () => {
           new protos.google.cloud.notebooks.v1beta1.Instance()
         ),
       ];
-      client.descriptors.page.listInstances.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInstances.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listInstancesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.notebooks.v1beta1.Instance[] = [];
@@ -3493,10 +3460,9 @@ describe('v1beta1.NotebookServiceClient', () => {
           .calledWith(client.innerApiCalls.listInstances, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3513,10 +3479,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstances.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listInstancesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.notebooks.v1beta1.Instance[] = [];
@@ -3540,10 +3504,9 @@ describe('v1beta1.NotebookServiceClient', () => {
           .calledWith(client.innerApiCalls.listInstances, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3570,9 +3533,8 @@ describe('v1beta1.NotebookServiceClient', () => {
           new protos.google.cloud.notebooks.v1beta1.Instance()
         ),
       ];
-      client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInstances.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.notebooks.v1beta1.IInstance[] = [];
       const iterable = client.listInstancesAsync(request);
       for await (const resource of iterable) {
@@ -3580,15 +3542,15 @@ describe('v1beta1.NotebookServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3605,10 +3567,8 @@ describe('v1beta1.NotebookServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstances.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listInstancesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.notebooks.v1beta1.IInstance[] = [];
@@ -3617,15 +3577,15 @@ describe('v1beta1.NotebookServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3700,9 +3660,8 @@ describe('v1beta1.NotebookServiceClient', () => {
           new protos.google.cloud.notebooks.v1beta1.Environment()
         ),
       ];
-      client.innerApiCalls.listEnvironments = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listEnvironments =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listEnvironments(
           request,
@@ -3780,12 +3739,12 @@ describe('v1beta1.NotebookServiceClient', () => {
           new protos.google.cloud.notebooks.v1beta1.Environment()
         ),
       ];
-      client.descriptors.page.listEnvironments.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listEnvironments.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listEnvironmentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.notebooks.v1beta1.Environment[] = [];
+        const responses: protos.google.cloud.notebooks.v1beta1.Environment[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.notebooks.v1beta1.Environment) => {
@@ -3807,10 +3766,9 @@ describe('v1beta1.NotebookServiceClient', () => {
           .calledWith(client.innerApiCalls.listEnvironments, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEnvironments
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEnvironments.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3827,13 +3785,12 @@ describe('v1beta1.NotebookServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEnvironments.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEnvironments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listEnvironmentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.notebooks.v1beta1.Environment[] = [];
+        const responses: protos.google.cloud.notebooks.v1beta1.Environment[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.notebooks.v1beta1.Environment) => {
@@ -3854,10 +3811,9 @@ describe('v1beta1.NotebookServiceClient', () => {
           .calledWith(client.innerApiCalls.listEnvironments, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEnvironments
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEnvironments.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3884,25 +3840,25 @@ describe('v1beta1.NotebookServiceClient', () => {
           new protos.google.cloud.notebooks.v1beta1.Environment()
         ),
       ];
-      client.descriptors.page.listEnvironments.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.notebooks.v1beta1.IEnvironment[] = [];
+      client.descriptors.page.listEnvironments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.notebooks.v1beta1.IEnvironment[] =
+        [];
       const iterable = client.listEnvironmentsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listEnvironments
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEnvironments
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3919,27 +3875,26 @@ describe('v1beta1.NotebookServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEnvironments.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEnvironments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listEnvironmentsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.notebooks.v1beta1.IEnvironment[] = [];
+        const responses: protos.google.cloud.notebooks.v1beta1.IEnvironment[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listEnvironments
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEnvironments
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

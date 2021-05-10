@@ -464,19 +464,19 @@
     
                         /**
                          * VmImage imageName.
-                         * @member {string} imageName
+                         * @member {string|null|undefined} imageName
                          * @memberof google.cloud.notebooks.v1beta1.VmImage
                          * @instance
                          */
-                        VmImage.prototype.imageName = "";
+                        VmImage.prototype.imageName = null;
     
                         /**
                          * VmImage imageFamily.
-                         * @member {string} imageFamily
+                         * @member {string|null|undefined} imageFamily
                          * @memberof google.cloud.notebooks.v1beta1.VmImage
                          * @instance
                          */
-                        VmImage.prototype.imageFamily = "";
+                        VmImage.prototype.imageFamily = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -9123,43 +9123,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.
