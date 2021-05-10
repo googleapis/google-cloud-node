@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -253,9 +252,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Namespace()
       );
-      client.innerApiCalls.createNamespace = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createNamespace =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createNamespace(
           request,
@@ -371,9 +369,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Namespace()
       );
-      client.innerApiCalls.getNamespace = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getNamespace =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getNamespace(
           request,
@@ -491,9 +488,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Namespace()
       );
-      client.innerApiCalls.updateNamespace = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateNamespace =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateNamespace(
           request,
@@ -610,9 +606,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteNamespace = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteNamespace =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteNamespace(
           request,
@@ -728,9 +723,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Service()
       );
-      client.innerApiCalls.createService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createService(
           request,
@@ -846,9 +840,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Service()
       );
-      client.innerApiCalls.getService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getService(
           request,
@@ -966,9 +959,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Service()
       );
-      client.innerApiCalls.updateService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateService(
           request,
@@ -1085,9 +1077,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteService(
           request,
@@ -1203,9 +1194,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Endpoint()
       );
-      client.innerApiCalls.createEndpoint = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createEndpoint =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createEndpoint(
           request,
@@ -1321,9 +1311,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Endpoint()
       );
-      client.innerApiCalls.getEndpoint = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getEndpoint =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getEndpoint(
           request,
@@ -1441,9 +1430,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.Endpoint()
       );
-      client.innerApiCalls.updateEndpoint = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateEndpoint =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateEndpoint(
           request,
@@ -1560,9 +1548,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteEndpoint = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteEndpoint =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteEndpoint(
           request,
@@ -1678,9 +1665,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -1796,9 +1782,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -1881,9 +1866,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1916,9 +1900,8 @@ describe('v1.RegistrationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -2050,9 +2033,8 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Namespace()
         ),
       ];
-      client.innerApiCalls.listNamespaces = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listNamespaces =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listNamespaces(
           request,
@@ -2134,12 +2116,12 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Namespace()
         ),
       ];
-      client.descriptors.page.listNamespaces.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listNamespaces.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listNamespacesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Namespace[] = [];
+        const responses: protos.google.cloud.servicedirectory.v1.Namespace[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.servicedirectory.v1.Namespace) => {
@@ -2161,10 +2143,9 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(client.innerApiCalls.listNamespaces, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listNamespaces
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNamespaces.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2183,13 +2164,12 @@ describe('v1.RegistrationServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listNamespaces.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listNamespaces.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listNamespacesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Namespace[] = [];
+        const responses: protos.google.cloud.servicedirectory.v1.Namespace[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.servicedirectory.v1.Namespace) => {
@@ -2210,10 +2190,9 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(client.innerApiCalls.listNamespaces, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listNamespaces
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNamespaces.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2242,25 +2221,25 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Namespace()
         ),
       ];
-      client.descriptors.page.listNamespaces.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.servicedirectory.v1.INamespace[] = [];
+      client.descriptors.page.listNamespaces.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.servicedirectory.v1.INamespace[] =
+        [];
       const iterable = client.listNamespacesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listNamespaces
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listNamespaces
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2279,27 +2258,26 @@ describe('v1.RegistrationServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listNamespaces.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listNamespaces.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listNamespacesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicedirectory.v1.INamespace[] = [];
+        const responses: protos.google.cloud.servicedirectory.v1.INamespace[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listNamespaces
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listNamespaces
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2378,9 +2356,8 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Service()
         ),
       ];
-      client.innerApiCalls.listServices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServices(
           request,
@@ -2462,9 +2439,8 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Service()
         ),
       ];
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServicesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.servicedirectory.v1.Service[] = [];
@@ -2489,10 +2465,9 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(client.innerApiCalls.listServices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2538,10 +2513,9 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(client.innerApiCalls.listServices, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2570,9 +2544,8 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Service()
         ),
       ];
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.servicedirectory.v1.IService[] = [];
       const iterable = client.listServicesAsync(request);
       for await (const resource of iterable) {
@@ -2580,15 +2553,15 @@ describe('v1.RegistrationServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2607,27 +2580,26 @@ describe('v1.RegistrationServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServicesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicedirectory.v1.IService[] = [];
+        const responses: protos.google.cloud.servicedirectory.v1.IService[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2706,9 +2678,8 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Endpoint()
         ),
       ];
-      client.innerApiCalls.listEndpoints = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listEndpoints =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listEndpoints(
           request,
@@ -2790,12 +2761,12 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Endpoint()
         ),
       ];
-      client.descriptors.page.listEndpoints.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listEndpoints.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] = [];
+        const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.servicedirectory.v1.Endpoint) => {
@@ -2817,10 +2788,9 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(client.innerApiCalls.listEndpoints, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEndpoints
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEndpoints.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2839,13 +2809,12 @@ describe('v1.RegistrationServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEndpoints.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEndpoints.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] = [];
+        const responses: protos.google.cloud.servicedirectory.v1.Endpoint[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.servicedirectory.v1.Endpoint) => {
@@ -2866,10 +2835,9 @@ describe('v1.RegistrationServiceClient', () => {
           .calledWith(client.innerApiCalls.listEndpoints, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEndpoints
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEndpoints.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2898,9 +2866,8 @@ describe('v1.RegistrationServiceClient', () => {
           new protos.google.cloud.servicedirectory.v1.Endpoint()
         ),
       ];
-      client.descriptors.page.listEndpoints.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listEndpoints.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.servicedirectory.v1.IEndpoint[] = [];
       const iterable = client.listEndpointsAsync(request);
       for await (const resource of iterable) {
@@ -2908,15 +2875,15 @@ describe('v1.RegistrationServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listEndpoints
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEndpoints
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2935,27 +2902,26 @@ describe('v1.RegistrationServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEndpoints.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEndpoints.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listEndpointsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.servicedirectory.v1.IEndpoint[] = [];
+        const responses: protos.google.cloud.servicedirectory.v1.IEndpoint[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listEndpoints
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEndpoints
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
