@@ -21,82 +21,102 @@
       },
       "methods": {
         "CreateCustomJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetCustomJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListCustomJobs": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteCustomJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CancelCustomJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateDataLabelingJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetDataLabelingJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListDataLabelingJobs": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteDataLabelingJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CancelDataLabelingJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateHyperparameterTuningJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetHyperparameterTuningJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListHyperparameterTuningJobs": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteHyperparameterTuningJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CancelHyperparameterTuningJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateBatchPredictionJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetBatchPredictionJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListBatchPredictionJobs": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteBatchPredictionJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CancelBatchPredictionJob": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

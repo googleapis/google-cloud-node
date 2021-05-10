@@ -174,8 +174,14 @@ export class JobServiceClient {
       annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
+      artifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}'
+      ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
+      ),
+      contextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
       customJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/customJobs/{custom_job}'
@@ -192,26 +198,69 @@ export class JobServiceClient {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
+      entityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
+      ),
+      executionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
+      ),
+      featurePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+      ),
+      featurestorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}'
+      ),
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
+      ),
+      indexPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexes/{index}'
+      ),
+      indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
+      ),
+      metadataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}'
+      ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
       studyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/studies/{study}'
+      ),
+      tensorboardPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
+      ),
+      tensorboardExperimentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
+      ),
+      tensorboardRunPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
+      ),
+      tensorboardTimeSeriesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}'
       ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
@@ -244,6 +293,17 @@ export class JobServiceClient {
         'pageToken',
         'nextPageToken',
         'batchPredictionJobs'
+      ),
+      searchModelDeploymentMonitoringStatsAnomalies:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'monitoringStats'
+        ),
+      listModelDeploymentMonitoringJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'modelDeploymentMonitoringJobs'
       ),
     };
 
@@ -287,6 +347,18 @@ export class JobServiceClient {
     const deleteBatchPredictionJobMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateModelDeploymentMonitoringJobResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob'
+    ) as gax.protobuf.Type;
+    const updateModelDeploymentMonitoringJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteModelDeploymentMonitoringJobResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteModelDeploymentMonitoringJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteCustomJob: new this._gaxModule.LongrunningDescriptor(
@@ -319,6 +391,26 @@ export class JobServiceClient {
           deleteBatchPredictionJobMetadata
         )
       ),
+      updateModelDeploymentMonitoringJob:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateModelDeploymentMonitoringJobResponse.decode.bind(
+            updateModelDeploymentMonitoringJobResponse
+          ),
+          updateModelDeploymentMonitoringJobMetadata.decode.bind(
+            updateModelDeploymentMonitoringJobMetadata
+          )
+        ),
+      deleteModelDeploymentMonitoringJob:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteModelDeploymentMonitoringJobResponse.decode.bind(
+            deleteModelDeploymentMonitoringJobResponse
+          ),
+          deleteModelDeploymentMonitoringJobMetadata.decode.bind(
+            deleteModelDeploymentMonitoringJobMetadata
+          )
+        ),
     };
 
     // Put together the default options sent with requests.
@@ -387,6 +479,14 @@ export class JobServiceClient {
       'listBatchPredictionJobs',
       'deleteBatchPredictionJob',
       'cancelBatchPredictionJob',
+      'createModelDeploymentMonitoringJob',
+      'searchModelDeploymentMonitoringStatsAnomalies',
+      'getModelDeploymentMonitoringJob',
+      'listModelDeploymentMonitoringJobs',
+      'updateModelDeploymentMonitoringJob',
+      'deleteModelDeploymentMonitoringJob',
+      'pauseModelDeploymentMonitoringJob',
+      'resumeModelDeploymentMonitoringJob',
     ];
     for (const methodName of jobServiceStubMethods) {
       const callPromise = this.jobServiceStub.then(
@@ -1707,6 +1807,424 @@ export class JobServiceClient {
       callback
     );
   }
+  createModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a ModelDeploymentMonitoringJob. It will run periodically on a
+   * configured interval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
+   *   Required. The ModelDeploymentMonitoringJob to create
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createModelDeploymentMonitoringJob(request);
+   */
+  createModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  getModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getModelDeploymentMonitoringJob(request);
+   */
+  getModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  pauseModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  pauseModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
+   * makes a best effort to cancel the job. Will mark
+   * {@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state} to 'PAUSED'.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to pause.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.pauseModelDeploymentMonitoringJob(request);
+   */
+  pauseModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.pauseModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  resumeModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  resumeModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
+   * next scheduled time. A deleted ModelDeploymentMonitoringJob can't be
+   * resumed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to resume.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.resumeModelDeploymentMonitoringJob(request);
+   */
+  resumeModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.resumeModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
 
   deleteCustomJob(
     request: protos.google.cloud.aiplatform.v1beta1.IDeleteCustomJobRequest,
@@ -2282,6 +2800,302 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteBatchPredictionJob,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
+   *   Required. The model monitoring configuration which replaces the resource on the
+   *   server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.updateModelDeploymentMonitoringJob(request);
+   * const [response] = await operation.promise();
+   */
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'model_deployment_monitoring_job.name':
+          request.modelDeploymentMonitoringJob!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateModelDeploymentMonitoringJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateModelDeploymentMonitoringJobProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkUpdateModelDeploymentMonitoringJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob,
+      protos.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateModelDeploymentMonitoringJob,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob,
+      protos.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobOperationMetadata
+    >;
+  }
+  deleteModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model monitoring job to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteModelDeploymentMonitoringJob(request);
+   * const [response] = await operation.promise();
+   */
+  deleteModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteModelDeploymentMonitoringJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteModelDeploymentMonitoringJobProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteModelDeploymentMonitoringJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteModelDeploymentMonitoringJob,
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -3367,6 +4181,477 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob>;
   }
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies[],
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+    ]
+  >;
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
+  /**
+   * Searches Model Monitoring Statistics generated within a given time window.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link google.cloud.aiplatform.v1beta1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ModelMonitoringStatsAnomalies]{@link google.cloud.aiplatform.v1beta1.ModelMonitoringStatsAnomalies}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+          | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies[],
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link google.cloud.aiplatform.v1beta1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ModelMonitoringStatsAnomalies]{@link google.cloud.aiplatform.v1beta1.ModelMonitoringStatsAnomalies} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchModelDeploymentMonitoringStatsAnomaliesStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream(
+      this.innerApiCalls
+        .searchModelDeploymentMonitoringStatsAnomalies as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchModelDeploymentMonitoringStatsAnomalies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link google.cloud.aiplatform.v1beta1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ModelMonitoringStatsAnomalies]{@link google.cloud.aiplatform.v1beta1.ModelMonitoringStatsAnomalies}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  searchModelDeploymentMonitoringStatsAnomaliesAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.asyncIterate(
+      this.innerApiCalls[
+        'searchModelDeploymentMonitoringStatsAnomalies'
+      ] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies>;
+  }
+  listModelDeploymentMonitoringJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsResponse
+    ]
+  >;
+  listModelDeploymentMonitoringJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob
+    >
+  ): void;
+  listModelDeploymentMonitoringJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob
+    >
+  ): void;
+  /**
+   * Lists ModelDeploymentMonitoringJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listModelDeploymentMonitoringJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listModelDeploymentMonitoringJobs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listModelDeploymentMonitoringJobsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listModelDeploymentMonitoringJobs.createStream(
+      this.innerApiCalls.listModelDeploymentMonitoringJobs as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listModelDeploymentMonitoringJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listModelDeploymentMonitoringJobsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listModelDeploymentMonitoringJobsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate(
+      this.innerApiCalls['listModelDeploymentMonitoringJobs'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -3533,6 +4818,74 @@ export class JobServiceClient {
   }
 
   /**
+   * Return a fully-qualified artifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} artifact
+   * @returns {string} Resource name string.
+   */
+  artifactPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    artifact: string
+  ) {
+    return this.pathTemplates.artifactPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      artifact: artifact,
+    });
+  }
+
+  /**
+   * Parse the project from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).project;
+  }
+
+  /**
+   * Parse the location from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the artifact from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the artifact.
+   */
+  matchArtifactFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).artifact;
+  }
+
+  /**
    * Return a fully-qualified batchPredictionJob resource name string.
    *
    * @param {string} project
@@ -3591,6 +4944,74 @@ export class JobServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified context resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  contextPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    context: string
+  ) {
+    return this.pathTemplates.contextPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      context: context,
+    });
+  }
+
+  /**
+   * Parse the project from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).project;
+  }
+
+  /**
+   * Parse the location from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the context from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).context;
   }
 
   /**
@@ -3871,6 +5292,283 @@ export class JobServiceClient {
   }
 
   /**
+   * Return a fully-qualified entityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  entityTypePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.entityTypePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Parse the project from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the featurestore from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .featurestore;
+  }
+
+  /**
+   * Parse the entity_type from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .entity_type;
+  }
+
+  /**
+   * Return a fully-qualified execution resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} execution
+   * @returns {string} Resource name string.
+   */
+  executionPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    execution: string
+  ) {
+    return this.pathTemplates.executionPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      execution: execution,
+    });
+  }
+
+  /**
+   * Parse the project from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
+  }
+
+  /**
+   * Parse the metadata_store from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the execution from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
+  }
+
+  /**
+   * Return a fully-qualified feature resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @param {string} entity_type
+   * @param {string} feature
+   * @returns {string} Resource name string.
+   */
+  featurePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string,
+    feature: string
+  ) {
+    return this.pathTemplates.featurePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+      feature: feature,
+    });
+  }
+
+  /**
+   * Parse the project from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).project;
+  }
+
+  /**
+   * Parse the location from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).location;
+  }
+
+  /**
+   * Parse the featurestore from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName)
+      .featurestore;
+  }
+
+  /**
+   * Parse the entity_type from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName)
+      .entity_type;
+  }
+
+  /**
+   * Parse the feature from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the feature.
+   */
+  matchFeatureFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).feature;
+  }
+
+  /**
+   * Return a fully-qualified featurestore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @returns {string} Resource name string.
+   */
+  featurestorePath(project: string, location: string, featurestore: string) {
+    return this.pathTemplates.featurestorePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+    });
+  }
+
+  /**
+   * Parse the project from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .location;
+  }
+
+  /**
+   * Parse the featurestore from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .featurestore;
+  }
+
+  /**
    * Return a fully-qualified hyperparameterTuningJob resource name string.
    *
    * @param {string} project
@@ -3936,6 +5634,107 @@ export class JobServiceClient {
   }
 
   /**
+   * Return a fully-qualified index resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index
+   * @returns {string} Resource name string.
+   */
+  indexPath(project: string, location: string, index: string) {
+    return this.pathTemplates.indexPathTemplate.render({
+      project: project,
+      location: location,
+      index: index,
+    });
+  }
+
+  /**
+   * Parse the project from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).project;
+  }
+
+  /**
+   * Parse the location from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).location;
+  }
+
+  /**
+   * Parse the index from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the index.
+   */
+  matchIndexFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).index;
+  }
+
+  /**
+   * Return a fully-qualified indexEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index_endpoint
+   * @returns {string} Resource name string.
+   */
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      index_endpoint: indexEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
+  }
+
+  /**
+   * Parse the location from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
+  }
+
+  /**
+   * Parse the index_endpoint from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the index_endpoint.
+   */
+  matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -3969,6 +5768,133 @@ export class JobServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} metadata_schema
+   * @returns {string} Resource name string.
+   */
+  metadataSchemaPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    metadataSchema: string
+  ) {
+    return this.pathTemplates.metadataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      metadata_schema: metadataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).location;
+  }
+
+  /**
+   * Parse the metadata_store from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_store;
+  }
+
+  /**
+   * Parse the metadata_schema from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the metadata_schema.
+   */
+  matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_schema;
+  }
+
+  /**
+   * Return a fully-qualified metadataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @returns {string} Resource name string.
+   */
+  metadataStorePath(project: string, location: string, metadataStore: string) {
+    return this.pathTemplates.metadataStorePathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the metadata_store from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .metadata_store;
   }
 
   /**
@@ -4018,6 +5944,71 @@ export class JobServiceClient {
    */
   matchModelFromModelName(modelName: string) {
     return this.pathTemplates.modelPathTemplate.match(modelName).model;
+  }
+
+  /**
+   * Return a fully-qualified modelDeploymentMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_deployment_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_deployment_monitoring_job: modelDeploymentMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_deployment_monitoring_job from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the model_deployment_monitoring_job.
+   */
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -4189,6 +6180,58 @@ export class JobServiceClient {
   }
 
   /**
+   * Return a fully-qualified pipelineJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} pipeline_job
+   * @returns {string} Resource name string.
+   */
+  pipelineJobPath(project: string, location: string, pipelineJob: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.render({
+      project: project,
+      location: location,
+      pipeline_job: pipelineJob,
+    });
+  }
+
+  /**
+   * Parse the project from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .location;
+  }
+
+  /**
+   * Parse the pipeline_job from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the pipeline_job.
+   */
+  matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .pipeline_job;
+  }
+
+  /**
    * Return a fully-qualified specialistPool resource name string.
    *
    * @param {string} project
@@ -4294,6 +6337,345 @@ export class JobServiceClient {
    */
   matchStudyFromStudyName(studyName: string) {
     return this.pathTemplates.studyPathTemplate.match(studyName).study;
+  }
+
+  /**
+   * Return a fully-qualified tensorboard resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @returns {string} Resource name string.
+   */
+  tensorboardPath(project: string, location: string, tensorboard: string) {
+    return this.pathTemplates.tensorboardPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+    });
+  }
+
+  /**
+   * Parse the project from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .location;
+  }
+
+  /**
+   * Parse the tensorboard from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .tensorboard;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardExperiment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @returns {string} Resource name string.
+   */
+  tensorboardExperimentPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).experiment;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardRun resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @param {string} run
+   * @returns {string} Resource name string.
+   */
+  tensorboardRunPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string
+  ) {
+    return this.pathTemplates.tensorboardRunPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+      run: run,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).experiment;
+  }
+
+  /**
+   * Parse the run from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the run.
+   */
+  matchRunFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).run;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardTimeSeries resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @param {string} run
+   * @param {string} time_series
+   * @returns {string} Resource name string.
+   */
+  tensorboardTimeSeriesPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string,
+    timeSeries: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+      run: run,
+      time_series: timeSeries,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).experiment;
+  }
+
+  /**
+   * Parse the run from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the run.
+   */
+  matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).run;
+  }
+
+  /**
+   * Parse the time_series from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the time_series.
+   */
+  matchTimeSeriesFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).time_series;
   }
 
   /**

@@ -3,10 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-classification.js",
-    "https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-entity-extraction.js",
-    "https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-sentiment-analysis.js"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10

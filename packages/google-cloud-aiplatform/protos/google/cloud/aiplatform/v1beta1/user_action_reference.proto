@@ -40,7 +40,7 @@ message UserActionReference {
     string data_labeling_job = 2;
   }
 
-  // The method name of the API call. For example,
-  // "/google.cloud.aiplatform.v1alpha1.DatasetService.CreateDataset"
+  // The method name of the API RPC call. For example,
+  // "/google.cloud.aiplatform.{apiVersion}.DatasetService.CreateDataset"
   string method = 3;
 }

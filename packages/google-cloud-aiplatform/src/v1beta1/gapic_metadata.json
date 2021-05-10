@@ -219,6 +219,421 @@
         }
       }
     },
+    "FeaturestoreOnlineServingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeaturestoreOnlineServingServiceClient",
+          "rpcs": {
+            "ReadFeatureValues": {
+              "methods": [
+                "readFeatureValues"
+              ]
+            },
+            "StreamingReadFeatureValues": {
+              "methods": [
+                "streamingReadFeatureValues"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeaturestoreOnlineServingServiceClient",
+          "rpcs": {
+            "ReadFeatureValues": {
+              "methods": [
+                "readFeatureValues"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeaturestoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeaturestoreServiceClient",
+          "rpcs": {
+            "GetFeaturestore": {
+              "methods": [
+                "getFeaturestore"
+              ]
+            },
+            "GetEntityType": {
+              "methods": [
+                "getEntityType"
+              ]
+            },
+            "UpdateEntityType": {
+              "methods": [
+                "updateEntityType"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "CreateFeaturestore": {
+              "methods": [
+                "createFeaturestore"
+              ]
+            },
+            "UpdateFeaturestore": {
+              "methods": [
+                "updateFeaturestore"
+              ]
+            },
+            "DeleteFeaturestore": {
+              "methods": [
+                "deleteFeaturestore"
+              ]
+            },
+            "CreateEntityType": {
+              "methods": [
+                "createEntityType"
+              ]
+            },
+            "DeleteEntityType": {
+              "methods": [
+                "deleteEntityType"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "ImportFeatureValues": {
+              "methods": [
+                "importFeatureValues"
+              ]
+            },
+            "BatchReadFeatureValues": {
+              "methods": [
+                "batchReadFeatureValues"
+              ]
+            },
+            "ExportFeatureValues": {
+              "methods": [
+                "exportFeatureValues"
+              ]
+            },
+            "ListFeaturestores": {
+              "methods": [
+                "listFeaturestores",
+                "listFeaturestoresStream",
+                "listFeaturestoresAsync"
+              ]
+            },
+            "ListEntityTypes": {
+              "methods": [
+                "listEntityTypes",
+                "listEntityTypesStream",
+                "listEntityTypesAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            },
+            "SearchFeatures": {
+              "methods": [
+                "searchFeatures",
+                "searchFeaturesStream",
+                "searchFeaturesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeaturestoreServiceClient",
+          "rpcs": {
+            "GetFeaturestore": {
+              "methods": [
+                "getFeaturestore"
+              ]
+            },
+            "GetEntityType": {
+              "methods": [
+                "getEntityType"
+              ]
+            },
+            "UpdateEntityType": {
+              "methods": [
+                "updateEntityType"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "CreateFeaturestore": {
+              "methods": [
+                "createFeaturestore"
+              ]
+            },
+            "UpdateFeaturestore": {
+              "methods": [
+                "updateFeaturestore"
+              ]
+            },
+            "DeleteFeaturestore": {
+              "methods": [
+                "deleteFeaturestore"
+              ]
+            },
+            "CreateEntityType": {
+              "methods": [
+                "createEntityType"
+              ]
+            },
+            "DeleteEntityType": {
+              "methods": [
+                "deleteEntityType"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batchCreateFeatures"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "ImportFeatureValues": {
+              "methods": [
+                "importFeatureValues"
+              ]
+            },
+            "BatchReadFeatureValues": {
+              "methods": [
+                "batchReadFeatureValues"
+              ]
+            },
+            "ExportFeatureValues": {
+              "methods": [
+                "exportFeatureValues"
+              ]
+            },
+            "ListFeaturestores": {
+              "methods": [
+                "listFeaturestores",
+                "listFeaturestoresStream",
+                "listFeaturestoresAsync"
+              ]
+            },
+            "ListEntityTypes": {
+              "methods": [
+                "listEntityTypes",
+                "listEntityTypesStream",
+                "listEntityTypesAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            },
+            "SearchFeatures": {
+              "methods": [
+                "searchFeatures",
+                "searchFeaturesStream",
+                "searchFeaturesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "IndexEndpointService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IndexEndpointServiceClient",
+          "rpcs": {
+            "GetIndexEndpoint": {
+              "methods": [
+                "getIndexEndpoint"
+              ]
+            },
+            "UpdateIndexEndpoint": {
+              "methods": [
+                "updateIndexEndpoint"
+              ]
+            },
+            "CreateIndexEndpoint": {
+              "methods": [
+                "createIndexEndpoint"
+              ]
+            },
+            "DeleteIndexEndpoint": {
+              "methods": [
+                "deleteIndexEndpoint"
+              ]
+            },
+            "DeployIndex": {
+              "methods": [
+                "deployIndex"
+              ]
+            },
+            "UndeployIndex": {
+              "methods": [
+                "undeployIndex"
+              ]
+            },
+            "ListIndexEndpoints": {
+              "methods": [
+                "listIndexEndpoints",
+                "listIndexEndpointsStream",
+                "listIndexEndpointsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IndexEndpointServiceClient",
+          "rpcs": {
+            "GetIndexEndpoint": {
+              "methods": [
+                "getIndexEndpoint"
+              ]
+            },
+            "UpdateIndexEndpoint": {
+              "methods": [
+                "updateIndexEndpoint"
+              ]
+            },
+            "CreateIndexEndpoint": {
+              "methods": [
+                "createIndexEndpoint"
+              ]
+            },
+            "DeleteIndexEndpoint": {
+              "methods": [
+                "deleteIndexEndpoint"
+              ]
+            },
+            "DeployIndex": {
+              "methods": [
+                "deployIndex"
+              ]
+            },
+            "UndeployIndex": {
+              "methods": [
+                "undeployIndex"
+              ]
+            },
+            "ListIndexEndpoints": {
+              "methods": [
+                "listIndexEndpoints",
+                "listIndexEndpointsStream",
+                "listIndexEndpointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "IndexService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IndexServiceClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IndexServiceClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "JobService": {
       "clients": {
         "grpc": {
@@ -284,6 +699,26 @@
                 "cancelBatchPredictionJob"
               ]
             },
+            "CreateModelDeploymentMonitoringJob": {
+              "methods": [
+                "createModelDeploymentMonitoringJob"
+              ]
+            },
+            "GetModelDeploymentMonitoringJob": {
+              "methods": [
+                "getModelDeploymentMonitoringJob"
+              ]
+            },
+            "PauseModelDeploymentMonitoringJob": {
+              "methods": [
+                "pauseModelDeploymentMonitoringJob"
+              ]
+            },
+            "ResumeModelDeploymentMonitoringJob": {
+              "methods": [
+                "resumeModelDeploymentMonitoringJob"
+              ]
+            },
             "DeleteCustomJob": {
               "methods": [
                 "deleteCustomJob"
@@ -302,6 +737,16 @@
             "DeleteBatchPredictionJob": {
               "methods": [
                 "deleteBatchPredictionJob"
+              ]
+            },
+            "UpdateModelDeploymentMonitoringJob": {
+              "methods": [
+                "updateModelDeploymentMonitoringJob"
+              ]
+            },
+            "DeleteModelDeploymentMonitoringJob": {
+              "methods": [
+                "deleteModelDeploymentMonitoringJob"
               ]
             },
             "ListCustomJobs": {
@@ -330,6 +775,20 @@
                 "listBatchPredictionJobs",
                 "listBatchPredictionJobsStream",
                 "listBatchPredictionJobsAsync"
+              ]
+            },
+            "SearchModelDeploymentMonitoringStatsAnomalies": {
+              "methods": [
+                "searchModelDeploymentMonitoringStatsAnomalies",
+                "searchModelDeploymentMonitoringStatsAnomaliesStream",
+                "searchModelDeploymentMonitoringStatsAnomaliesAsync"
+              ]
+            },
+            "ListModelDeploymentMonitoringJobs": {
+              "methods": [
+                "listModelDeploymentMonitoringJobs",
+                "listModelDeploymentMonitoringJobsStream",
+                "listModelDeploymentMonitoringJobsAsync"
               ]
             }
           }
@@ -397,6 +856,26 @@
                 "cancelBatchPredictionJob"
               ]
             },
+            "CreateModelDeploymentMonitoringJob": {
+              "methods": [
+                "createModelDeploymentMonitoringJob"
+              ]
+            },
+            "GetModelDeploymentMonitoringJob": {
+              "methods": [
+                "getModelDeploymentMonitoringJob"
+              ]
+            },
+            "PauseModelDeploymentMonitoringJob": {
+              "methods": [
+                "pauseModelDeploymentMonitoringJob"
+              ]
+            },
+            "ResumeModelDeploymentMonitoringJob": {
+              "methods": [
+                "resumeModelDeploymentMonitoringJob"
+              ]
+            },
             "DeleteCustomJob": {
               "methods": [
                 "deleteCustomJob"
@@ -415,6 +894,16 @@
             "DeleteBatchPredictionJob": {
               "methods": [
                 "deleteBatchPredictionJob"
+              ]
+            },
+            "UpdateModelDeploymentMonitoringJob": {
+              "methods": [
+                "updateModelDeploymentMonitoringJob"
+              ]
+            },
+            "DeleteModelDeploymentMonitoringJob": {
+              "methods": [
+                "deleteModelDeploymentMonitoringJob"
               ]
             },
             "ListCustomJobs": {
@@ -443,6 +932,314 @@
                 "listBatchPredictionJobs",
                 "listBatchPredictionJobsStream",
                 "listBatchPredictionJobsAsync"
+              ]
+            },
+            "SearchModelDeploymentMonitoringStatsAnomalies": {
+              "methods": [
+                "searchModelDeploymentMonitoringStatsAnomalies",
+                "searchModelDeploymentMonitoringStatsAnomaliesStream",
+                "searchModelDeploymentMonitoringStatsAnomaliesAsync"
+              ]
+            },
+            "ListModelDeploymentMonitoringJobs": {
+              "methods": [
+                "listModelDeploymentMonitoringJobs",
+                "listModelDeploymentMonitoringJobsStream",
+                "listModelDeploymentMonitoringJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MetadataService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MetadataServiceClient",
+          "rpcs": {
+            "GetMetadataStore": {
+              "methods": [
+                "getMetadataStore"
+              ]
+            },
+            "CreateArtifact": {
+              "methods": [
+                "createArtifact"
+              ]
+            },
+            "GetArtifact": {
+              "methods": [
+                "getArtifact"
+              ]
+            },
+            "UpdateArtifact": {
+              "methods": [
+                "updateArtifact"
+              ]
+            },
+            "CreateContext": {
+              "methods": [
+                "createContext"
+              ]
+            },
+            "GetContext": {
+              "methods": [
+                "getContext"
+              ]
+            },
+            "UpdateContext": {
+              "methods": [
+                "updateContext"
+              ]
+            },
+            "AddContextArtifactsAndExecutions": {
+              "methods": [
+                "addContextArtifactsAndExecutions"
+              ]
+            },
+            "AddContextChildren": {
+              "methods": [
+                "addContextChildren"
+              ]
+            },
+            "QueryContextLineageSubgraph": {
+              "methods": [
+                "queryContextLineageSubgraph"
+              ]
+            },
+            "CreateExecution": {
+              "methods": [
+                "createExecution"
+              ]
+            },
+            "GetExecution": {
+              "methods": [
+                "getExecution"
+              ]
+            },
+            "UpdateExecution": {
+              "methods": [
+                "updateExecution"
+              ]
+            },
+            "AddExecutionEvents": {
+              "methods": [
+                "addExecutionEvents"
+              ]
+            },
+            "QueryExecutionInputsAndOutputs": {
+              "methods": [
+                "queryExecutionInputsAndOutputs"
+              ]
+            },
+            "CreateMetadataSchema": {
+              "methods": [
+                "createMetadataSchema"
+              ]
+            },
+            "GetMetadataSchema": {
+              "methods": [
+                "getMetadataSchema"
+              ]
+            },
+            "QueryArtifactLineageSubgraph": {
+              "methods": [
+                "queryArtifactLineageSubgraph"
+              ]
+            },
+            "CreateMetadataStore": {
+              "methods": [
+                "createMetadataStore"
+              ]
+            },
+            "DeleteMetadataStore": {
+              "methods": [
+                "deleteMetadataStore"
+              ]
+            },
+            "DeleteContext": {
+              "methods": [
+                "deleteContext"
+              ]
+            },
+            "ListMetadataStores": {
+              "methods": [
+                "listMetadataStores",
+                "listMetadataStoresStream",
+                "listMetadataStoresAsync"
+              ]
+            },
+            "ListArtifacts": {
+              "methods": [
+                "listArtifacts",
+                "listArtifactsStream",
+                "listArtifactsAsync"
+              ]
+            },
+            "ListContexts": {
+              "methods": [
+                "listContexts",
+                "listContextsStream",
+                "listContextsAsync"
+              ]
+            },
+            "ListExecutions": {
+              "methods": [
+                "listExecutions",
+                "listExecutionsStream",
+                "listExecutionsAsync"
+              ]
+            },
+            "ListMetadataSchemas": {
+              "methods": [
+                "listMetadataSchemas",
+                "listMetadataSchemasStream",
+                "listMetadataSchemasAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MetadataServiceClient",
+          "rpcs": {
+            "GetMetadataStore": {
+              "methods": [
+                "getMetadataStore"
+              ]
+            },
+            "CreateArtifact": {
+              "methods": [
+                "createArtifact"
+              ]
+            },
+            "GetArtifact": {
+              "methods": [
+                "getArtifact"
+              ]
+            },
+            "UpdateArtifact": {
+              "methods": [
+                "updateArtifact"
+              ]
+            },
+            "CreateContext": {
+              "methods": [
+                "createContext"
+              ]
+            },
+            "GetContext": {
+              "methods": [
+                "getContext"
+              ]
+            },
+            "UpdateContext": {
+              "methods": [
+                "updateContext"
+              ]
+            },
+            "AddContextArtifactsAndExecutions": {
+              "methods": [
+                "addContextArtifactsAndExecutions"
+              ]
+            },
+            "AddContextChildren": {
+              "methods": [
+                "addContextChildren"
+              ]
+            },
+            "QueryContextLineageSubgraph": {
+              "methods": [
+                "queryContextLineageSubgraph"
+              ]
+            },
+            "CreateExecution": {
+              "methods": [
+                "createExecution"
+              ]
+            },
+            "GetExecution": {
+              "methods": [
+                "getExecution"
+              ]
+            },
+            "UpdateExecution": {
+              "methods": [
+                "updateExecution"
+              ]
+            },
+            "AddExecutionEvents": {
+              "methods": [
+                "addExecutionEvents"
+              ]
+            },
+            "QueryExecutionInputsAndOutputs": {
+              "methods": [
+                "queryExecutionInputsAndOutputs"
+              ]
+            },
+            "CreateMetadataSchema": {
+              "methods": [
+                "createMetadataSchema"
+              ]
+            },
+            "GetMetadataSchema": {
+              "methods": [
+                "getMetadataSchema"
+              ]
+            },
+            "QueryArtifactLineageSubgraph": {
+              "methods": [
+                "queryArtifactLineageSubgraph"
+              ]
+            },
+            "CreateMetadataStore": {
+              "methods": [
+                "createMetadataStore"
+              ]
+            },
+            "DeleteMetadataStore": {
+              "methods": [
+                "deleteMetadataStore"
+              ]
+            },
+            "DeleteContext": {
+              "methods": [
+                "deleteContext"
+              ]
+            },
+            "ListMetadataStores": {
+              "methods": [
+                "listMetadataStores",
+                "listMetadataStoresStream",
+                "listMetadataStoresAsync"
+              ]
+            },
+            "ListArtifacts": {
+              "methods": [
+                "listArtifacts",
+                "listArtifactsStream",
+                "listArtifactsAsync"
+              ]
+            },
+            "ListContexts": {
+              "methods": [
+                "listContexts",
+                "listContextsStream",
+                "listContextsAsync"
+              ]
+            },
+            "ListExecutions": {
+              "methods": [
+                "listExecutions",
+                "listExecutionsStream",
+                "listExecutionsAsync"
+              ]
+            },
+            "ListMetadataSchemas": {
+              "methods": [
+                "listMetadataSchemas",
+                "listMetadataSchemasStream",
+                "listMetadataSchemasAsync"
               ]
             }
           }
@@ -633,9 +1430,29 @@
                 "cancelTrainingPipeline"
               ]
             },
+            "CreatePipelineJob": {
+              "methods": [
+                "createPipelineJob"
+              ]
+            },
+            "GetPipelineJob": {
+              "methods": [
+                "getPipelineJob"
+              ]
+            },
+            "CancelPipelineJob": {
+              "methods": [
+                "cancelPipelineJob"
+              ]
+            },
             "DeleteTrainingPipeline": {
               "methods": [
                 "deleteTrainingPipeline"
+              ]
+            },
+            "DeletePipelineJob": {
+              "methods": [
+                "deletePipelineJob"
               ]
             },
             "ListTrainingPipelines": {
@@ -643,6 +1460,13 @@
                 "listTrainingPipelines",
                 "listTrainingPipelinesStream",
                 "listTrainingPipelinesAsync"
+              ]
+            },
+            "ListPipelineJobs": {
+              "methods": [
+                "listPipelineJobs",
+                "listPipelineJobsStream",
+                "listPipelineJobsAsync"
               ]
             }
           }
@@ -665,9 +1489,29 @@
                 "cancelTrainingPipeline"
               ]
             },
+            "CreatePipelineJob": {
+              "methods": [
+                "createPipelineJob"
+              ]
+            },
+            "GetPipelineJob": {
+              "methods": [
+                "getPipelineJob"
+              ]
+            },
+            "CancelPipelineJob": {
+              "methods": [
+                "cancelPipelineJob"
+              ]
+            },
             "DeleteTrainingPipeline": {
               "methods": [
                 "deleteTrainingPipeline"
+              ]
+            },
+            "DeletePipelineJob": {
+              "methods": [
+                "deletePipelineJob"
               ]
             },
             "ListTrainingPipelines": {
@@ -675,6 +1519,13 @@
                 "listTrainingPipelines",
                 "listTrainingPipelinesStream",
                 "listTrainingPipelinesAsync"
+              ]
+            },
+            "ListPipelineJobs": {
+              "methods": [
+                "listPipelineJobs",
+                "listPipelineJobsStream",
+                "listPipelineJobsAsync"
               ]
             }
           }
@@ -777,6 +1628,275 @@
                 "listSpecialistPools",
                 "listSpecialistPoolsStream",
                 "listSpecialistPoolsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TensorboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TensorboardServiceClient",
+          "rpcs": {
+            "GetTensorboard": {
+              "methods": [
+                "getTensorboard"
+              ]
+            },
+            "CreateTensorboardExperiment": {
+              "methods": [
+                "createTensorboardExperiment"
+              ]
+            },
+            "GetTensorboardExperiment": {
+              "methods": [
+                "getTensorboardExperiment"
+              ]
+            },
+            "UpdateTensorboardExperiment": {
+              "methods": [
+                "updateTensorboardExperiment"
+              ]
+            },
+            "CreateTensorboardRun": {
+              "methods": [
+                "createTensorboardRun"
+              ]
+            },
+            "GetTensorboardRun": {
+              "methods": [
+                "getTensorboardRun"
+              ]
+            },
+            "UpdateTensorboardRun": {
+              "methods": [
+                "updateTensorboardRun"
+              ]
+            },
+            "CreateTensorboardTimeSeries": {
+              "methods": [
+                "createTensorboardTimeSeries"
+              ]
+            },
+            "GetTensorboardTimeSeries": {
+              "methods": [
+                "getTensorboardTimeSeries"
+              ]
+            },
+            "UpdateTensorboardTimeSeries": {
+              "methods": [
+                "updateTensorboardTimeSeries"
+              ]
+            },
+            "ReadTensorboardTimeSeriesData": {
+              "methods": [
+                "readTensorboardTimeSeriesData"
+              ]
+            },
+            "WriteTensorboardRunData": {
+              "methods": [
+                "writeTensorboardRunData"
+              ]
+            },
+            "ReadTensorboardBlobData": {
+              "methods": [
+                "readTensorboardBlobData"
+              ]
+            },
+            "CreateTensorboard": {
+              "methods": [
+                "createTensorboard"
+              ]
+            },
+            "UpdateTensorboard": {
+              "methods": [
+                "updateTensorboard"
+              ]
+            },
+            "DeleteTensorboard": {
+              "methods": [
+                "deleteTensorboard"
+              ]
+            },
+            "DeleteTensorboardExperiment": {
+              "methods": [
+                "deleteTensorboardExperiment"
+              ]
+            },
+            "DeleteTensorboardRun": {
+              "methods": [
+                "deleteTensorboardRun"
+              ]
+            },
+            "DeleteTensorboardTimeSeries": {
+              "methods": [
+                "deleteTensorboardTimeSeries"
+              ]
+            },
+            "ListTensorboards": {
+              "methods": [
+                "listTensorboards",
+                "listTensorboardsStream",
+                "listTensorboardsAsync"
+              ]
+            },
+            "ListTensorboardExperiments": {
+              "methods": [
+                "listTensorboardExperiments",
+                "listTensorboardExperimentsStream",
+                "listTensorboardExperimentsAsync"
+              ]
+            },
+            "ListTensorboardRuns": {
+              "methods": [
+                "listTensorboardRuns",
+                "listTensorboardRunsStream",
+                "listTensorboardRunsAsync"
+              ]
+            },
+            "ListTensorboardTimeSeries": {
+              "methods": [
+                "listTensorboardTimeSeries",
+                "listTensorboardTimeSeriesStream",
+                "listTensorboardTimeSeriesAsync"
+              ]
+            },
+            "ExportTensorboardTimeSeriesData": {
+              "methods": [
+                "exportTensorboardTimeSeriesData",
+                "exportTensorboardTimeSeriesDataStream",
+                "exportTensorboardTimeSeriesDataAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TensorboardServiceClient",
+          "rpcs": {
+            "GetTensorboard": {
+              "methods": [
+                "getTensorboard"
+              ]
+            },
+            "CreateTensorboardExperiment": {
+              "methods": [
+                "createTensorboardExperiment"
+              ]
+            },
+            "GetTensorboardExperiment": {
+              "methods": [
+                "getTensorboardExperiment"
+              ]
+            },
+            "UpdateTensorboardExperiment": {
+              "methods": [
+                "updateTensorboardExperiment"
+              ]
+            },
+            "CreateTensorboardRun": {
+              "methods": [
+                "createTensorboardRun"
+              ]
+            },
+            "GetTensorboardRun": {
+              "methods": [
+                "getTensorboardRun"
+              ]
+            },
+            "UpdateTensorboardRun": {
+              "methods": [
+                "updateTensorboardRun"
+              ]
+            },
+            "CreateTensorboardTimeSeries": {
+              "methods": [
+                "createTensorboardTimeSeries"
+              ]
+            },
+            "GetTensorboardTimeSeries": {
+              "methods": [
+                "getTensorboardTimeSeries"
+              ]
+            },
+            "UpdateTensorboardTimeSeries": {
+              "methods": [
+                "updateTensorboardTimeSeries"
+              ]
+            },
+            "ReadTensorboardTimeSeriesData": {
+              "methods": [
+                "readTensorboardTimeSeriesData"
+              ]
+            },
+            "WriteTensorboardRunData": {
+              "methods": [
+                "writeTensorboardRunData"
+              ]
+            },
+            "CreateTensorboard": {
+              "methods": [
+                "createTensorboard"
+              ]
+            },
+            "UpdateTensorboard": {
+              "methods": [
+                "updateTensorboard"
+              ]
+            },
+            "DeleteTensorboard": {
+              "methods": [
+                "deleteTensorboard"
+              ]
+            },
+            "DeleteTensorboardExperiment": {
+              "methods": [
+                "deleteTensorboardExperiment"
+              ]
+            },
+            "DeleteTensorboardRun": {
+              "methods": [
+                "deleteTensorboardRun"
+              ]
+            },
+            "DeleteTensorboardTimeSeries": {
+              "methods": [
+                "deleteTensorboardTimeSeries"
+              ]
+            },
+            "ListTensorboards": {
+              "methods": [
+                "listTensorboards",
+                "listTensorboardsStream",
+                "listTensorboardsAsync"
+              ]
+            },
+            "ListTensorboardExperiments": {
+              "methods": [
+                "listTensorboardExperiments",
+                "listTensorboardExperimentsStream",
+                "listTensorboardExperimentsAsync"
+              ]
+            },
+            "ListTensorboardRuns": {
+              "methods": [
+                "listTensorboardRuns",
+                "listTensorboardRunsStream",
+                "listTensorboardRunsAsync"
+              ]
+            },
+            "ListTensorboardTimeSeries": {
+              "methods": [
+                "listTensorboardTimeSeries",
+                "listTensorboardTimeSeriesStream",
+                "listTensorboardTimeSeriesAsync"
+              ]
+            },
+            "ExportTensorboardTimeSeriesData": {
+              "methods": [
+                "exportTensorboardTimeSeriesData",
+                "exportTensorboardTimeSeriesDataStream",
+                "exportTensorboardTimeSeriesDataAsync"
               ]
             }
           }

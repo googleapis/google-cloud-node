@@ -21,30 +21,37 @@
       },
       "methods": {
         "CreateEndpoint": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetEndpoint": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListEndpoints": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateEndpoint": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteEndpoint": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeployModel": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UndeployModel": {
+          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

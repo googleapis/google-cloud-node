@@ -173,8 +173,14 @@ export class EndpointServiceClient {
       annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
+      artifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}'
+      ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
+      ),
+      contextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
       customJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/customJobs/{custom_job}'
@@ -191,26 +197,69 @@ export class EndpointServiceClient {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
+      entityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
+      ),
+      executionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
+      ),
+      featurePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+      ),
+      featurestorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}'
+      ),
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
+      ),
+      indexPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexes/{index}'
+      ),
+      indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
+      ),
+      metadataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}'
+      ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
       studyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/studies/{study}'
+      ),
+      tensorboardPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
+      ),
+      tensorboardExperimentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
+      ),
+      tensorboardRunPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
+      ),
+      tensorboardTimeSeriesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}'
       ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
@@ -1646,6 +1695,74 @@ export class EndpointServiceClient {
   }
 
   /**
+   * Return a fully-qualified artifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} artifact
+   * @returns {string} Resource name string.
+   */
+  artifactPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    artifact: string
+  ) {
+    return this.pathTemplates.artifactPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      artifact: artifact,
+    });
+  }
+
+  /**
+   * Parse the project from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).project;
+  }
+
+  /**
+   * Parse the location from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the artifact from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the artifact.
+   */
+  matchArtifactFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).artifact;
+  }
+
+  /**
    * Return a fully-qualified batchPredictionJob resource name string.
    *
    * @param {string} project
@@ -1704,6 +1821,74 @@ export class EndpointServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified context resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  contextPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    context: string
+  ) {
+    return this.pathTemplates.contextPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      context: context,
+    });
+  }
+
+  /**
+   * Parse the project from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).project;
+  }
+
+  /**
+   * Parse the location from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the context from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).context;
   }
 
   /**
@@ -1984,6 +2169,283 @@ export class EndpointServiceClient {
   }
 
   /**
+   * Return a fully-qualified entityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  entityTypePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.entityTypePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Parse the project from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the featurestore from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .featurestore;
+  }
+
+  /**
+   * Parse the entity_type from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .entity_type;
+  }
+
+  /**
+   * Return a fully-qualified execution resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} execution
+   * @returns {string} Resource name string.
+   */
+  executionPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    execution: string
+  ) {
+    return this.pathTemplates.executionPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      execution: execution,
+    });
+  }
+
+  /**
+   * Parse the project from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
+  }
+
+  /**
+   * Parse the metadata_store from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the execution from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
+  }
+
+  /**
+   * Return a fully-qualified feature resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @param {string} entity_type
+   * @param {string} feature
+   * @returns {string} Resource name string.
+   */
+  featurePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string,
+    feature: string
+  ) {
+    return this.pathTemplates.featurePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+      feature: feature,
+    });
+  }
+
+  /**
+   * Parse the project from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).project;
+  }
+
+  /**
+   * Parse the location from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).location;
+  }
+
+  /**
+   * Parse the featurestore from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName)
+      .featurestore;
+  }
+
+  /**
+   * Parse the entity_type from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName)
+      .entity_type;
+  }
+
+  /**
+   * Parse the feature from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the feature.
+   */
+  matchFeatureFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).feature;
+  }
+
+  /**
+   * Return a fully-qualified featurestore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @returns {string} Resource name string.
+   */
+  featurestorePath(project: string, location: string, featurestore: string) {
+    return this.pathTemplates.featurestorePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+    });
+  }
+
+  /**
+   * Parse the project from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .location;
+  }
+
+  /**
+   * Parse the featurestore from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .featurestore;
+  }
+
+  /**
    * Return a fully-qualified hyperparameterTuningJob resource name string.
    *
    * @param {string} project
@@ -2049,6 +2511,107 @@ export class EndpointServiceClient {
   }
 
   /**
+   * Return a fully-qualified index resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index
+   * @returns {string} Resource name string.
+   */
+  indexPath(project: string, location: string, index: string) {
+    return this.pathTemplates.indexPathTemplate.render({
+      project: project,
+      location: location,
+      index: index,
+    });
+  }
+
+  /**
+   * Parse the project from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).project;
+  }
+
+  /**
+   * Parse the location from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).location;
+  }
+
+  /**
+   * Parse the index from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the index.
+   */
+  matchIndexFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).index;
+  }
+
+  /**
+   * Return a fully-qualified indexEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index_endpoint
+   * @returns {string} Resource name string.
+   */
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      index_endpoint: indexEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
+  }
+
+  /**
+   * Parse the location from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
+  }
+
+  /**
+   * Parse the index_endpoint from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the index_endpoint.
+   */
+  matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -2082,6 +2645,133 @@ export class EndpointServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} metadata_schema
+   * @returns {string} Resource name string.
+   */
+  metadataSchemaPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    metadataSchema: string
+  ) {
+    return this.pathTemplates.metadataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      metadata_schema: metadataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).location;
+  }
+
+  /**
+   * Parse the metadata_store from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_store;
+  }
+
+  /**
+   * Parse the metadata_schema from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the metadata_schema.
+   */
+  matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_schema;
+  }
+
+  /**
+   * Return a fully-qualified metadataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @returns {string} Resource name string.
+   */
+  metadataStorePath(project: string, location: string, metadataStore: string) {
+    return this.pathTemplates.metadataStorePathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the metadata_store from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .metadata_store;
   }
 
   /**
@@ -2131,6 +2821,71 @@ export class EndpointServiceClient {
    */
   matchModelFromModelName(modelName: string) {
     return this.pathTemplates.modelPathTemplate.match(modelName).model;
+  }
+
+  /**
+   * Return a fully-qualified modelDeploymentMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_deployment_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_deployment_monitoring_job: modelDeploymentMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_deployment_monitoring_job from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the model_deployment_monitoring_job.
+   */
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -2302,6 +3057,58 @@ export class EndpointServiceClient {
   }
 
   /**
+   * Return a fully-qualified pipelineJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} pipeline_job
+   * @returns {string} Resource name string.
+   */
+  pipelineJobPath(project: string, location: string, pipelineJob: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.render({
+      project: project,
+      location: location,
+      pipeline_job: pipelineJob,
+    });
+  }
+
+  /**
+   * Parse the project from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .location;
+  }
+
+  /**
+   * Parse the pipeline_job from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the pipeline_job.
+   */
+  matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .pipeline_job;
+  }
+
+  /**
    * Return a fully-qualified specialistPool resource name string.
    *
    * @param {string} project
@@ -2407,6 +3214,345 @@ export class EndpointServiceClient {
    */
   matchStudyFromStudyName(studyName: string) {
     return this.pathTemplates.studyPathTemplate.match(studyName).study;
+  }
+
+  /**
+   * Return a fully-qualified tensorboard resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @returns {string} Resource name string.
+   */
+  tensorboardPath(project: string, location: string, tensorboard: string) {
+    return this.pathTemplates.tensorboardPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+    });
+  }
+
+  /**
+   * Parse the project from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .location;
+  }
+
+  /**
+   * Parse the tensorboard from Tensorboard resource.
+   *
+   * @param {string} tensorboardName
+   *   A fully-qualified path representing Tensorboard resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardName(tensorboardName: string) {
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .tensorboard;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardExperiment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @returns {string} Resource name string.
+   */
+  tensorboardExperimentPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardExperiment resource.
+   *
+   * @param {string} tensorboardExperimentName
+   *   A fully-qualified path representing TensorboardExperiment resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).experiment;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardRun resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @param {string} run
+   * @returns {string} Resource name string.
+   */
+  tensorboardRunPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string
+  ) {
+    return this.pathTemplates.tensorboardRunPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+      run: run,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).experiment;
+  }
+
+  /**
+   * Parse the run from TensorboardRun resource.
+   *
+   * @param {string} tensorboardRunName
+   *   A fully-qualified path representing TensorboardRun resource.
+   * @returns {string} A string representing the run.
+   */
+  matchRunFromTensorboardRunName(tensorboardRunName: string) {
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).run;
+  }
+
+  /**
+   * Return a fully-qualified tensorboardTimeSeries resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tensorboard
+   * @param {string} experiment
+   * @param {string} run
+   * @param {string} time_series
+   * @returns {string} Resource name string.
+   */
+  tensorboardTimeSeriesPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string,
+    timeSeries: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
+      project: project,
+      location: location,
+      tensorboard: tensorboard,
+      experiment: experiment,
+      run: run,
+      time_series: timeSeries,
+    });
+  }
+
+  /**
+   * Parse the project from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).location;
+  }
+
+  /**
+   * Parse the tensorboard from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the tensorboard.
+   */
+  matchTensorboardFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).tensorboard;
+  }
+
+  /**
+   * Parse the experiment from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).experiment;
+  }
+
+  /**
+   * Parse the run from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the run.
+   */
+  matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).run;
+  }
+
+  /**
+   * Parse the time_series from TensorboardTimeSeries resource.
+   *
+   * @param {string} tensorboardTimeSeriesName
+   *   A fully-qualified path representing TensorboardTimeSeries resource.
+   * @returns {string} A string representing the time_series.
+   */
+  matchTimeSeriesFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).time_series;
   }
 
   /**

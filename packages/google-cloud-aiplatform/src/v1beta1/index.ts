@@ -18,10 +18,16 @@
 
 export {DatasetServiceClient} from './dataset_service_client';
 export {EndpointServiceClient} from './endpoint_service_client';
+export {FeaturestoreOnlineServingServiceClient} from './featurestore_online_serving_service_client';
+export {FeaturestoreServiceClient} from './featurestore_service_client';
+export {IndexEndpointServiceClient} from './index_endpoint_service_client';
+export {IndexServiceClient} from './index_service_client';
 export {JobServiceClient} from './job_service_client';
+export {MetadataServiceClient} from './metadata_service_client';
 export {MigrationServiceClient} from './migration_service_client';
 export {ModelServiceClient} from './model_service_client';
 export {PipelineServiceClient} from './pipeline_service_client';
 export {PredictionServiceClient} from './prediction_service_client';
 export {SpecialistPoolServiceClient} from './specialist_pool_service_client';
+export {TensorboardServiceClient} from './tensorboard_service_client';
 export {VizierServiceClient} from './vizier_service_client';
