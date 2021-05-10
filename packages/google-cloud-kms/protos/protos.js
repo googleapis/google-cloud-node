@@ -7980,11 +7980,11 @@
     
                         /**
                          * ImportCryptoKeyVersionRequest rsaAesWrappedKey.
-                         * @member {Uint8Array} rsaAesWrappedKey
+                         * @member {Uint8Array|null|undefined} rsaAesWrappedKey
                          * @memberof google.cloud.kms.v1.ImportCryptoKeyVersionRequest
                          * @instance
                          */
-                        ImportCryptoKeyVersionRequest.prototype.rsaAesWrappedKey = $util.newBuffer([]);
+                        ImportCryptoKeyVersionRequest.prototype.rsaAesWrappedKey = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -11704,27 +11704,27 @@
     
                         /**
                          * Digest sha256.
-                         * @member {Uint8Array} sha256
+                         * @member {Uint8Array|null|undefined} sha256
                          * @memberof google.cloud.kms.v1.Digest
                          * @instance
                          */
-                        Digest.prototype.sha256 = $util.newBuffer([]);
+                        Digest.prototype.sha256 = null;
     
                         /**
                          * Digest sha384.
-                         * @member {Uint8Array} sha384
+                         * @member {Uint8Array|null|undefined} sha384
                          * @memberof google.cloud.kms.v1.Digest
                          * @instance
                          */
-                        Digest.prototype.sha384 = $util.newBuffer([]);
+                        Digest.prototype.sha384 = null;
     
                         /**
                          * Digest sha512.
-                         * @member {Uint8Array} sha512
+                         * @member {Uint8Array|null|undefined} sha512
                          * @memberof google.cloud.kms.v1.Digest
                          * @instance
                          */
-                        Digest.prototype.sha512 = $util.newBuffer([]);
+                        Digest.prototype.sha512 = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -13108,43 +13108,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

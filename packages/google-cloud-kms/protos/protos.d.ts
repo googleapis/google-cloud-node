@@ -3306,7 +3306,7 @@ export namespace google {
                     public importJob: string;
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey. */
-                    public rsaAesWrappedKey: (Uint8Array|string);
+                    public rsaAesWrappedKey?: (Uint8Array|string|null);
 
                     /** ImportCryptoKeyVersionRequest wrappedKeyMaterial. */
                     public wrappedKeyMaterial?: "rsaAesWrappedKey";
@@ -4827,13 +4827,13 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IDigest);
 
                     /** Digest sha256. */
-                    public sha256: (Uint8Array|string);
+                    public sha256?: (Uint8Array|string|null);
 
                     /** Digest sha384. */
-                    public sha384: (Uint8Array|string);
+                    public sha384?: (Uint8Array|string|null);
 
                     /** Digest sha512. */
-                    public sha512: (Uint8Array|string);
+                    public sha512?: (Uint8Array|string|null);
 
                     /** Digest digest. */
                     public digest?: ("sha256"|"sha384"|"sha512");
@@ -5403,19 +5403,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
