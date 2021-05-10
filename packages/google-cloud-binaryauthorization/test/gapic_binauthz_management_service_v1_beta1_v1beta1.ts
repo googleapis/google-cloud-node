@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -137,49 +136,54 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client();
+    const client =
+      new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.binauthzManagementServiceV1Beta1Stub, undefined);
     await client.initialize();
     assert(client.binauthzManagementServiceV1Beta1Stub);
   });
 
   it('has close method', () => {
-    const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -188,12 +192,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -212,12 +217,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   describe('getPolicy', () => {
     it('invokes getPolicy without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
@@ -245,12 +251,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes getPolicy without error using callback', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
@@ -267,9 +274,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
-      client.innerApiCalls.getPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getPolicy(
           request,
@@ -295,12 +301,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes getPolicy with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
@@ -327,12 +334,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   describe('updatePolicy', () => {
     it('invokes updatePolicy without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
@@ -361,12 +369,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes updatePolicy without error using callback', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
@@ -384,9 +393,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
-      client.innerApiCalls.updatePolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updatePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updatePolicy(
           request,
@@ -412,12 +420,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes updatePolicy with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
@@ -448,12 +457,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   describe('createAttestor', () => {
     it('invokes createAttestor without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
@@ -481,12 +491,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes createAttestor without error using callback', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
@@ -503,9 +514,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
-      client.innerApiCalls.createAttestor = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createAttestor =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createAttestor(
           request,
@@ -531,12 +541,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes createAttestor with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
@@ -566,12 +577,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   describe('getAttestor', () => {
     it('invokes getAttestor without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
@@ -599,12 +611,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes getAttestor without error using callback', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
@@ -621,9 +634,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
-      client.innerApiCalls.getAttestor = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAttestor =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAttestor(
           request,
@@ -649,12 +661,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes getAttestor with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
@@ -684,12 +697,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   describe('updateAttestor', () => {
     it('invokes updateAttestor without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
@@ -718,12 +732,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes updateAttestor without error using callback', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
@@ -741,9 +756,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
-      client.innerApiCalls.updateAttestor = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateAttestor =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateAttestor(
           request,
@@ -769,12 +783,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes updateAttestor with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
@@ -805,12 +820,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   describe('deleteAttestor', () => {
     it('invokes deleteAttestor without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
@@ -838,12 +854,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes deleteAttestor without error using callback', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
@@ -860,9 +877,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAttestor = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAttestor =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteAttestor(
           request,
@@ -888,12 +904,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes deleteAttestor with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
@@ -923,12 +940,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
 
   describe('listAttestors', () => {
     it('invokes listAttestors without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
@@ -964,12 +982,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes listAttestors without error using callback', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
@@ -994,9 +1013,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
         ),
       ];
-      client.innerApiCalls.listAttestors = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAttestors =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAttestors(
           request,
@@ -1024,12 +1042,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes listAttestors with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
@@ -1057,12 +1076,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
     });
 
     it('invokes listAttestorsStream without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
@@ -1080,12 +1100,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
         ),
       ];
-      client.descriptors.page.listAttestors.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAttestors.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAttestorsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.binaryauthorization.v1beta1.Attestor[] = [];
+        const responses: protos.google.cloud.binaryauthorization.v1beta1.Attestor[] =
+          [];
         stream.on(
           'data',
           (
@@ -1109,21 +1129,21 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .calledWith(client.innerApiCalls.listAttestors, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAttestors
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAttestors.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listAttestorsStream with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
@@ -1131,13 +1151,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAttestors.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAttestors.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listAttestorsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.binaryauthorization.v1beta1.Attestor[] = [];
+        const responses: protos.google.cloud.binaryauthorization.v1beta1.Attestor[] =
+          [];
         stream.on(
           'data',
           (
@@ -1160,21 +1179,21 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .calledWith(client.innerApiCalls.listAttestors, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAttestors
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAttestors.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listAttestors without error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
@@ -1192,36 +1211,37 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
         ),
       ];
-      client.descriptors.page.listAttestors.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.binaryauthorization.v1beta1.IAttestor[] = [];
+      client.descriptors.page.listAttestors.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.binaryauthorization.v1beta1.IAttestor[] =
+        [];
       const iterable = client.listAttestorsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listAttestors
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAttestors.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAttestors
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAttestors.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listAttestors with error', async () => {
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
@@ -1229,27 +1249,26 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAttestors.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAttestors.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listAttestorsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.binaryauthorization.v1beta1.IAttestor[] = [];
+        const responses: protos.google.cloud.binaryauthorization.v1beta1.IAttestor[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listAttestors
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAttestors.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAttestors
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAttestors.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1262,12 +1281,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         project: 'projectValue',
         attestor: 'attestorValue',
       };
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.attestorPathTemplate.render = sinon
         .stub()
@@ -1312,12 +1332,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.policyPathTemplate.render = sinon
         .stub()
@@ -1352,12 +1373,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()

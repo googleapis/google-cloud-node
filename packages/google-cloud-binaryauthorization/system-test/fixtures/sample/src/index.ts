@@ -27,7 +27,8 @@ function doStuffWithBinauthzManagementServiceV1Beta1Client(
 
 function main() {
   // check that the client instance can be created
-  const binauthzManagementServiceV1Beta1Client = new BinauthzManagementServiceV1Beta1Client();
+  const binauthzManagementServiceV1Beta1Client =
+    new BinauthzManagementServiceV1Beta1Client();
   doStuffWithBinauthzManagementServiceV1Beta1Client(
     binauthzManagementServiceV1Beta1Client
   );
