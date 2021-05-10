@@ -26,10 +26,9 @@ import * as predictionserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -70,7 +69,8 @@ describe('v2alpha.PredictionServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new predictionserviceModule.v2alpha.PredictionServiceClient();
+    const client =
+      new predictionserviceModule.v2alpha.PredictionServiceClient();
     assert(client);
   });
 
@@ -135,12 +135,11 @@ describe('v2alpha.PredictionServiceClient', () => {
 
   describe('predict', () => {
     it('invokes predict without error', async () => {
-      const client = new predictionserviceModule.v2alpha.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v2alpha.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictRequest()
@@ -168,12 +167,11 @@ describe('v2alpha.PredictionServiceClient', () => {
     });
 
     it('invokes predict without error using callback', async () => {
-      const client = new predictionserviceModule.v2alpha.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v2alpha.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictRequest()
@@ -190,9 +188,8 @@ describe('v2alpha.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictResponse()
       );
-      client.innerApiCalls.predict = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.predict =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.predict(
           request,
@@ -218,12 +215,11 @@ describe('v2alpha.PredictionServiceClient', () => {
     });
 
     it('invokes predict with error', async () => {
-      const client = new predictionserviceModule.v2alpha.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v2alpha.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictRequest()
@@ -256,12 +252,11 @@ describe('v2alpha.PredictionServiceClient', () => {
         location: 'locationValue',
         catalog: 'catalogValue',
       };
-      const client = new predictionserviceModule.v2alpha.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v2alpha.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.catalogPathTemplate.render = sinon
         .stub()
@@ -324,12 +319,11 @@ describe('v2alpha.PredictionServiceClient', () => {
         branch: 'branchValue',
         product: 'productValue',
       };
-      const client = new predictionserviceModule.v2alpha.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v2alpha.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()

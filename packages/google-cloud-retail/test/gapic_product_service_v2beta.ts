@@ -26,10 +26,9 @@ import * as productserviceModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -218,9 +217,8 @@ describe('v2beta.ProductServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
-      client.innerApiCalls.createProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createProduct(
           request,
@@ -330,9 +328,8 @@ describe('v2beta.ProductServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
-      client.innerApiCalls.getProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getProduct(
           request,
@@ -444,9 +441,8 @@ describe('v2beta.ProductServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.Product()
       );
-      client.innerApiCalls.updateProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateProduct(
           request,
@@ -557,9 +553,8 @@ describe('v2beta.ProductServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteProduct = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteProduct =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteProduct(
           request,
@@ -638,9 +633,8 @@ describe('v2beta.ProductServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importProducts = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.importProducts =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.importProducts(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -672,9 +666,8 @@ describe('v2beta.ProductServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importProducts = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importProducts =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importProducts(
           request,

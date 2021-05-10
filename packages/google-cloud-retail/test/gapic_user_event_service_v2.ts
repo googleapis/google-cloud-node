@@ -26,10 +26,9 @@ import * as usereventserviceModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -218,9 +217,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.UserEvent()
       );
-      client.innerApiCalls.writeUserEvent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.writeUserEvent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.writeUserEvent(
           request,
@@ -330,9 +328,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
-      client.innerApiCalls.collectUserEvent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.collectUserEvent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.collectUserEvent(
           request,
@@ -408,9 +405,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.purgeUserEvents = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.purgeUserEvents =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.purgeUserEvents(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -442,9 +438,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.purgeUserEvents = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.purgeUserEvents =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.purgeUserEvents(
           request,
@@ -604,9 +599,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importUserEvents = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.importUserEvents =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.importUserEvents(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -638,9 +632,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importUserEvents = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importUserEvents =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importUserEvents(
           request,
@@ -800,9 +793,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.rejoinUserEvents = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.rejoinUserEvents =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.rejoinUserEvents(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -834,9 +826,8 @@ describe('v2.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.rejoinUserEvents = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.rejoinUserEvents =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.rejoinUserEvents(
           request,

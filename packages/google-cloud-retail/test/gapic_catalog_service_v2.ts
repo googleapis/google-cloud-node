@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -251,9 +250,8 @@ describe('v2.CatalogServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2.Catalog()
       );
-      client.innerApiCalls.updateCatalog = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateCatalog =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateCatalog(
           request,
@@ -368,9 +366,8 @@ describe('v2.CatalogServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.retail.v2.Catalog()),
         generateSampleMessage(new protos.google.cloud.retail.v2.Catalog()),
       ];
-      client.innerApiCalls.listCatalogs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listCatalogs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listCatalogs(
           request,
@@ -442,9 +439,8 @@ describe('v2.CatalogServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.retail.v2.Catalog()),
         generateSampleMessage(new protos.google.cloud.retail.v2.Catalog()),
       ];
-      client.descriptors.page.listCatalogs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCatalogs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listCatalogsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.retail.v2.Catalog[] = [];
@@ -466,10 +462,9 @@ describe('v2.CatalogServiceClient', () => {
           .calledWith(client.innerApiCalls.listCatalogs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCatalogs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCatalogs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -510,10 +505,9 @@ describe('v2.CatalogServiceClient', () => {
           .calledWith(client.innerApiCalls.listCatalogs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCatalogs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCatalogs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -534,9 +528,8 @@ describe('v2.CatalogServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.retail.v2.Catalog()),
         generateSampleMessage(new protos.google.cloud.retail.v2.Catalog()),
       ];
-      client.descriptors.page.listCatalogs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCatalogs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.retail.v2.ICatalog[] = [];
       const iterable = client.listCatalogsAsync(request);
       for await (const resource of iterable) {
@@ -544,15 +537,15 @@ describe('v2.CatalogServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listCatalogs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCatalogs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCatalogs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCatalogs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -569,10 +562,8 @@ describe('v2.CatalogServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCatalogs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCatalogs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listCatalogsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.retail.v2.ICatalog[] = [];
@@ -581,15 +572,15 @@ describe('v2.CatalogServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listCatalogs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCatalogs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCatalogs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCatalogs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

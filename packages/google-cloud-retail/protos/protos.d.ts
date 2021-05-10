@@ -1405,7 +1405,7 @@ export namespace google {
                     constructor(properties?: google.cloud.retail.v2.IImportErrorsConfig);
 
                     /** ImportErrorsConfig gcsPrefix. */
-                    public gcsPrefix: string;
+                    public gcsPrefix?: (string|null);
 
                     /** ImportErrorsConfig destination. */
                     public destination?: "gcsPrefix";
@@ -6044,7 +6044,7 @@ export namespace google {
                     constructor(properties?: google.cloud.retail.v2alpha.IImportErrorsConfig);
 
                     /** ImportErrorsConfig gcsPrefix. */
-                    public gcsPrefix: string;
+                    public gcsPrefix?: (string|null);
 
                     /** ImportErrorsConfig destination. */
                     public destination?: "gcsPrefix";
@@ -10683,7 +10683,7 @@ export namespace google {
                     constructor(properties?: google.cloud.retail.v2beta.IImportErrorsConfig);
 
                     /** ImportErrorsConfig gcsPrefix. */
-                    public gcsPrefix: string;
+                    public gcsPrefix?: (string|null);
 
                     /** ImportErrorsConfig destination. */
                     public destination?: "gcsPrefix";
@@ -14088,19 +14088,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
@@ -19066,16 +19066,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);
