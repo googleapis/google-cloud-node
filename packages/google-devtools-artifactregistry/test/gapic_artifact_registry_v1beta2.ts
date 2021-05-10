@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.Repository()
       );
-      client.innerApiCalls.getRepository = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getRepository =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getRepository(
           request,
@@ -395,9 +393,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.Repository()
       );
-      client.innerApiCalls.updateRepository = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateRepository =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateRepository(
           request,
@@ -508,9 +505,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.Package()
       );
-      client.innerApiCalls.getPackage = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getPackage =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getPackage(
           request,
@@ -620,9 +616,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.Version()
       );
-      client.innerApiCalls.getVersion = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getVersion =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getVersion(
           request,
@@ -732,9 +727,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.File()
       );
-      client.innerApiCalls.getFile = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getFile =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getFile(
           request,
@@ -841,9 +835,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.Tag()
       );
-      client.innerApiCalls.getTag = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTag =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTag(
           request,
@@ -950,9 +943,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.Tag()
       );
-      client.innerApiCalls.createTag = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTag =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTag(
           request,
@@ -1061,9 +1053,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.Tag()
       );
-      client.innerApiCalls.updateTag = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTag =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTag(
           request,
@@ -1171,9 +1162,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTag = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTag =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTag(
           request,
@@ -1280,9 +1270,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -1392,9 +1381,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -1473,9 +1461,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1506,9 +1493,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -1587,9 +1573,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createRepository = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createRepository =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createRepository(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1621,9 +1606,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createRepository = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createRepository =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createRepository(
           request,
@@ -1783,9 +1767,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteRepository = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteRepository =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteRepository(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1817,9 +1800,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteRepository = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteRepository =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteRepository(
           request,
@@ -1979,9 +1961,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deletePackage = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePackage =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deletePackage(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2013,9 +1994,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deletePackage = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePackage =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deletePackage(
           request,
@@ -2175,9 +2155,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteVersion = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteVersion =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteVersion(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2209,9 +2188,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteVersion = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteVersion =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteVersion(
           request,
@@ -2418,9 +2396,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Repository()
         ),
       ];
-      client.innerApiCalls.listRepositories = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listRepositories =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listRepositories(
           request,
@@ -2500,12 +2477,12 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Repository()
         ),
       ];
-      client.descriptors.page.listRepositories.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listRepositories.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listRepositoriesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Repository[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Repository[] =
+          [];
         stream.on(
           'data',
           (
@@ -2529,10 +2506,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(client.innerApiCalls.listRepositories, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listRepositories
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRepositories.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2549,13 +2525,12 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listRepositories.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listRepositories.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listRepositoriesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Repository[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Repository[] =
+          [];
         stream.on(
           'data',
           (
@@ -2578,10 +2553,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(client.innerApiCalls.listRepositories, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listRepositories
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRepositories.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2608,25 +2582,25 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Repository()
         ),
       ];
-      client.descriptors.page.listRepositories.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.devtools.artifactregistry.v1beta2.IRepository[] = [];
+      client.descriptors.page.listRepositories.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1beta2.IRepository[] =
+        [];
       const iterable = client.listRepositoriesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listRepositories
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listRepositories.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listRepositories
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRepositories.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2643,27 +2617,26 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listRepositories.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listRepositories.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listRepositoriesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.IRepository[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.IRepository[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listRepositories
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listRepositories.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listRepositories
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listRepositories.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2738,9 +2711,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Package()
         ),
       ];
-      client.innerApiCalls.listPackages = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPackages =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPackages(
           request,
@@ -2820,12 +2792,12 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Package()
         ),
       ];
-      client.descriptors.page.listPackages.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPackages.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listPackagesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Package[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Package[] =
+          [];
         stream.on(
           'data',
           (
@@ -2849,10 +2821,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(client.innerApiCalls.listPackages, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPackages
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPackages.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2875,7 +2846,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       const stream = client.listPackagesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Package[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Package[] =
+          [];
         stream.on(
           'data',
           (
@@ -2898,10 +2870,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(client.innerApiCalls.listPackages, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPackages
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPackages.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2928,25 +2899,25 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Package()
         ),
       ];
-      client.descriptors.page.listPackages.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.devtools.artifactregistry.v1beta2.IPackage[] = [];
+      client.descriptors.page.listPackages.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1beta2.IPackage[] =
+        [];
       const iterable = client.listPackagesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listPackages
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPackages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPackages
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPackages.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2963,27 +2934,26 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPackages.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPackages.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listPackagesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.IPackage[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.IPackage[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listPackages
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPackages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPackages
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPackages.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3058,9 +3028,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Version()
         ),
       ];
-      client.innerApiCalls.listVersions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listVersions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listVersions(
           request,
@@ -3140,12 +3109,12 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Version()
         ),
       ];
-      client.descriptors.page.listVersions.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listVersions.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listVersionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Version[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Version[] =
+          [];
         stream.on(
           'data',
           (
@@ -3169,10 +3138,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(client.innerApiCalls.listVersions, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listVersions
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listVersions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3195,7 +3163,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       const stream = client.listVersionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Version[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Version[] =
+          [];
         stream.on(
           'data',
           (
@@ -3218,10 +3187,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           .calledWith(client.innerApiCalls.listVersions, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listVersions
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listVersions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3248,25 +3216,25 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Version()
         ),
       ];
-      client.descriptors.page.listVersions.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.devtools.artifactregistry.v1beta2.IVersion[] = [];
+      client.descriptors.page.listVersions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1beta2.IVersion[] =
+        [];
       const iterable = client.listVersionsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listVersions
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listVersions
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listVersions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3283,27 +3251,26 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listVersions.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listVersions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listVersionsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.IVersion[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.IVersion[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listVersions
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listVersions
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listVersions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3378,9 +3345,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.File()
         ),
       ];
-      client.innerApiCalls.listFiles = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listFiles =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listFiles(
           request,
@@ -3457,12 +3423,12 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.File()
         ),
       ];
-      client.descriptors.page.listFiles.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listFiles.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listFilesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.File[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.File[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.devtools.artifactregistry.v1beta2.File) => {
@@ -3508,7 +3474,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       const stream = client.listFilesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.File[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.File[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.devtools.artifactregistry.v1beta2.File) => {
@@ -3557,10 +3524,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.File()
         ),
       ];
-      client.descriptors.page.listFiles.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.devtools.artifactregistry.v1beta2.IFile[] = [];
+      client.descriptors.page.listFiles.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1beta2.IFile[] =
+        [];
       const iterable = client.listFilesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3596,7 +3563,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       const iterable = client.listFilesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.IFile[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.IFile[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3683,9 +3651,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Tag()
         ),
       ];
-      client.innerApiCalls.listTags = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTags =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTags(
           request,
@@ -3762,12 +3729,12 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Tag()
         ),
       ];
-      client.descriptors.page.listTags.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTags.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTagsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Tag[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Tag[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.devtools.artifactregistry.v1beta2.Tag) => {
@@ -3813,7 +3780,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       const stream = client.listTagsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.Tag[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.Tag[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.devtools.artifactregistry.v1beta2.Tag) => {
@@ -3862,10 +3830,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
           new protos.google.devtools.artifactregistry.v1beta2.Tag()
         ),
       ];
-      client.descriptors.page.listTags.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.devtools.artifactregistry.v1beta2.ITag[] = [];
+      client.descriptors.page.listTags.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1beta2.ITag[] =
+        [];
       const iterable = client.listTagsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3901,7 +3869,8 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       const iterable = client.listTagsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.devtools.artifactregistry.v1beta2.ITag[] = [];
+        const responses: protos.google.devtools.artifactregistry.v1beta2.ITag[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
