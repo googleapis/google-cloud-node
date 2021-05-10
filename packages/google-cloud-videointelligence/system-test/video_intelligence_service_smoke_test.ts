@@ -19,11 +19,10 @@ const videoIntelligence = require('../src');
 
 describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
-    const client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
-      {
+    const client =
+      new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient({
         // optional auth parameters.
-      }
-    );
+      });
 
     const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
     const featuresElement = 'LABEL_DETECTION';
@@ -64,11 +63,10 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
   });
 
   it('successfully makes a call to the service', done => {
-    const client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
-      {
+    const client =
+      new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient({
         // optional auth parameters.
-      }
-    );
+      });
 
     const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
     const featuresElement = 'LABEL_DETECTION';
