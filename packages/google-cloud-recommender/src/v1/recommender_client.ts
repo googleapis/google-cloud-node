@@ -169,54 +169,66 @@ export class RecommenderClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      billingAccountLocationInsightTypePathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}'
-      ),
-      billingAccountLocationInsightTypeInsightPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
-      ),
-      billingAccountLocationRecommenderPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}'
-      ),
-      billingAccountLocationRecommenderRecommendationPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
-      ),
+      billingAccountLocationInsightTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}'
+        ),
+      billingAccountLocationInsightTypeInsightPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
+        ),
+      billingAccountLocationRecommenderPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}'
+        ),
+      billingAccountLocationRecommenderRecommendationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
+        ),
       folderLocationInsightTypePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/insightTypes/{insight_type}'
       ),
-      folderLocationInsightTypeInsightPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
-      ),
+      folderLocationInsightTypeInsightPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
+        ),
       folderLocationRecommenderPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/recommenders/{recommender}'
       ),
-      folderLocationRecommenderRecommendationPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
-      ),
-      organizationLocationInsightTypePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/insightTypes/{insight_type}'
-      ),
-      organizationLocationInsightTypeInsightPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
-      ),
-      organizationLocationRecommenderPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/recommenders/{recommender}'
-      ),
-      organizationLocationRecommenderRecommendationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
-      ),
+      folderLocationRecommenderRecommendationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
+        ),
+      organizationLocationInsightTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/insightTypes/{insight_type}'
+        ),
+      organizationLocationInsightTypeInsightPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
+        ),
+      organizationLocationRecommenderPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/recommenders/{recommender}'
+        ),
+      organizationLocationRecommenderRecommendationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
+        ),
       projectLocationInsightTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/insightTypes/{insight_type}'
       ),
-      projectLocationInsightTypeInsightPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
-      ),
+      projectLocationInsightTypeInsightPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
+        ),
       projectLocationRecommenderPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/recommenders/{recommender}'
       ),
-      projectLocationRecommenderRecommendationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
-      ),
+      projectLocationRecommenderRecommendationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -292,13 +304,14 @@ export class RecommenderClient {
     ];
     for (const methodName of recommenderStubMethods) {
       const callPromise = this.recommenderStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -449,11 +462,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getInsight(request, options, callback);
   }
@@ -557,11 +569,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.markInsightAccepted(request, options, callback);
   }
@@ -650,11 +661,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getRecommendation(request, options, callback);
   }
@@ -764,11 +774,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.markRecommendationClaimed(
       request,
@@ -883,11 +892,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.markRecommendationSucceeded(
       request,
@@ -1002,11 +1010,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.markRecommendationFailed(
       request,
@@ -1125,11 +1132,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listInsights(request, options, callback);
   }
@@ -1182,11 +1188,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listInsights.createStream(
@@ -1250,17 +1255,16 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listInsights.asyncIterate(
       this.innerApiCalls['listInsights'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.recommender.v1.IInsight>;
   }
@@ -1374,11 +1378,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listRecommendations(request, options, callback);
   }
@@ -1431,11 +1434,10 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listRecommendations.createStream(
@@ -1499,17 +1501,16 @@ export class RecommenderClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listRecommendations.asyncIterate(
       this.innerApiCalls['listRecommendations'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.recommender.v1.IRecommendation>;
   }
