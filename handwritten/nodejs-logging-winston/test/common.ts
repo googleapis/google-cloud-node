@@ -74,7 +74,7 @@ describe('logging-common', () => {
   };
 
   beforeEach(() => {
-    fakeLogInstance = ({} as unknown) as Logging;
+    fakeLogInstance = {} as unknown as Logging;
     fakeLoggingOptions_ = null;
     fakeLogName_ = null;
     loggingCommon = new loggingCommonLib.LoggingCommon(OPTIONS);
