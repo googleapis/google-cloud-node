@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.memcache.v1beta2.Instance()
       );
-      client.innerApiCalls.getInstance = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getInstance =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getInstance(
           request,
@@ -362,9 +360,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -396,9 +393,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createInstance(
           request,
@@ -559,9 +555,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -594,9 +589,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateInstance(
           request,
@@ -758,9 +752,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateParameters = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateParameters =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateParameters(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -792,9 +785,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateParameters = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateParameters =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateParameters(
           request,
@@ -954,9 +946,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteInstance = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstance =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteInstance(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -988,9 +979,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteInstance = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstance =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteInstance(
           request,
@@ -1150,9 +1140,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.applyParameters = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.applyParameters =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.applyParameters(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1184,9 +1173,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.applyParameters = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.applyParameters =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.applyParameters(
           request,
@@ -1346,9 +1334,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.applySoftwareUpdate = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.applySoftwareUpdate =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.applySoftwareUpdate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1380,9 +1367,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.applySoftwareUpdate = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.applySoftwareUpdate =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.applySoftwareUpdate(
           request,
@@ -1589,9 +1575,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
           new protos.google.cloud.memcache.v1beta2.Instance()
         ),
       ];
-      client.innerApiCalls.listInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInstances(
           request,
@@ -1669,9 +1654,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
           new protos.google.cloud.memcache.v1beta2.Instance()
         ),
       ];
-      client.descriptors.page.listInstances.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInstances.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listInstancesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.memcache.v1beta2.Instance[] = [];
@@ -1696,10 +1680,9 @@ describe('v1beta2.CloudMemcacheClient', () => {
           .calledWith(client.innerApiCalls.listInstances, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1716,10 +1699,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstances.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listInstancesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.memcache.v1beta2.Instance[] = [];
@@ -1743,10 +1724,9 @@ describe('v1beta2.CloudMemcacheClient', () => {
           .calledWith(client.innerApiCalls.listInstances, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1773,9 +1753,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
           new protos.google.cloud.memcache.v1beta2.Instance()
         ),
       ];
-      client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listInstances.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.memcache.v1beta2.IInstance[] = [];
       const iterable = client.listInstancesAsync(request);
       for await (const resource of iterable) {
@@ -1783,15 +1762,15 @@ describe('v1beta2.CloudMemcacheClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1808,10 +1787,8 @@ describe('v1beta2.CloudMemcacheClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listInstances.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listInstancesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.memcache.v1beta2.IInstance[] = [];
@@ -1820,15 +1797,15 @@ describe('v1beta2.CloudMemcacheClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listInstances
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listInstances.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
