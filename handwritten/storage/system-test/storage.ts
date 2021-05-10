@@ -191,7 +191,8 @@ describe('storage', () => {
     });
 
     after(() => {
-      process.env.GOOGLE_APPLICATION_CREDENTIALS = GOOGLE_APPLICATION_CREDENTIALS;
+      process.env.GOOGLE_APPLICATION_CREDENTIALS =
+        GOOGLE_APPLICATION_CREDENTIALS;
       process.env.GOOGLE_CLOUD_PROJECT = GOOGLE_APPLICATION_CREDENTIALS;
     });
 
@@ -2743,10 +2744,11 @@ describe('storage', () => {
             // Strip the project ID, as it could be the placeholder locally, but
             // the real value upstream.
             const projectIdRegExp = /^.+\/locations/;
-            const actualKmsKeyName = metadata.encryption.defaultKmsKeyName.replace(
-              projectIdRegExp,
-              ''
-            );
+            const actualKmsKeyName =
+              metadata.encryption.defaultKmsKeyName.replace(
+                projectIdRegExp,
+                ''
+              );
             const expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
             assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);

@@ -1046,9 +1046,8 @@ class File extends ServiceObject<File> {
     if (this.encryptionKey !== undefined) {
       headers['x-goog-copy-source-encryption-algorithm'] = 'AES256';
       headers['x-goog-copy-source-encryption-key'] = this.encryptionKeyBase64;
-      headers[
-        'x-goog-copy-source-encryption-key-sha256'
-      ] = this.encryptionKeyHash;
+      headers['x-goog-copy-source-encryption-key-sha256'] =
+        this.encryptionKeyHash;
     }
 
     if (newFile.encryptionKey !== undefined) {
@@ -1220,7 +1219,9 @@ class File extends ServiceObject<File> {
 
     if (typeof options.validation === 'string') {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (options as any).validation = (options.validation as string).toLowerCase();
+      (options as any).validation = (
+        options.validation as string
+      ).toLowerCase();
       crc32c = options.validation === 'crc32c';
       md5 = options.validation === 'md5';
     } else if (options.validation === false) {
@@ -2125,9 +2126,8 @@ class File extends ServiceObject<File> {
         reqOpts.headers = reqOpts.headers || {};
         reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
         reqOpts.headers['x-goog-encryption-key'] = this.encryptionKeyBase64;
-        reqOpts.headers[
-          'x-goog-encryption-key-sha256'
-        ] = this.encryptionKeyHash;
+        reqOpts.headers['x-goog-encryption-key-sha256'] =
+          this.encryptionKeyHash;
         return reqOpts as DecorateRequestOptions;
       },
     };

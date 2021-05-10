@@ -18,12 +18,12 @@ export function normalize<T = {}, U = Function>(
   optionsOrCallback?: T | U,
   cb?: U
 ) {
-  const options = (typeof optionsOrCallback === 'object'
-    ? optionsOrCallback
-    : {}) as T;
-  const callback = (typeof optionsOrCallback === 'function'
-    ? optionsOrCallback
-    : cb)! as U;
+  const options = (
+    typeof optionsOrCallback === 'object' ? optionsOrCallback : {}
+  ) as T;
+  const callback = (
+    typeof optionsOrCallback === 'function' ? optionsOrCallback : cb
+  )! as U;
   return {options, callback};
 }
 

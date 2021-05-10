@@ -636,7 +636,7 @@ export class Storage extends Service {
       metadata = metadataOrCallback as CreateBucketRequest;
     }
 
-    const body = (Object.assign({}, metadata, {name}) as {}) as {
+    const body = Object.assign({}, metadata, {name}) as {} as {
       [index: string]: string | {};
     };
 

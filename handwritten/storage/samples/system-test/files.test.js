@@ -218,7 +218,8 @@ describe('file', () => {
 
     after(async () => {
       await promisify(fs.unlink)(downloadPublicFilePath).catch(console.error);
-      process.env.GOOGLE_APPLICATION_CREDENTIALS = GOOGLE_APPLICATION_CREDENTIALS;
+      process.env.GOOGLE_APPLICATION_CREDENTIALS =
+        GOOGLE_APPLICATION_CREDENTIALS;
       process.env.GOOGLE_CLOUD_PROJECT = GOOGLE_CLOUD_PROJECT;
       await bucket.file(publicFileName).delete();
     });

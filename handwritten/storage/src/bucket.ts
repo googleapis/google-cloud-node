@@ -1193,9 +1193,9 @@ class Bucket extends ServiceObject {
 
       for (const condition in rule.condition) {
         if (rule.condition[condition] instanceof Date) {
-          apiFormattedRule.condition[condition] = (rule.condition[
-            condition
-          ] as Date)
+          apiFormattedRule.condition[condition] = (
+            rule.condition[condition] as Date
+          )
             .toISOString()
             .replace(/T.+$/, '');
         } else {
