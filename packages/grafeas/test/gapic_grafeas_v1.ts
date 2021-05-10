@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -247,9 +246,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.Occurrence()
       );
-      client.innerApiCalls.getOccurrence = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getOccurrence =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getOccurrence(
           request,
@@ -359,9 +357,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteOccurrence = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteOccurrence =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteOccurrence(
           request,
@@ -471,9 +468,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.Occurrence()
       );
-      client.innerApiCalls.createOccurrence = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createOccurrence =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createOccurrence(
           request,
@@ -552,9 +548,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.BatchCreateOccurrencesResponse()
       );
-      client.innerApiCalls.batchCreateOccurrences = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateOccurrences =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.batchCreateOccurrences(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -585,9 +580,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.BatchCreateOccurrencesResponse()
       );
-      client.innerApiCalls.batchCreateOccurrences = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateOccurrences =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchCreateOccurrences(
           request,
@@ -700,9 +694,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.Occurrence()
       );
-      client.innerApiCalls.updateOccurrence = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateOccurrence =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateOccurrence(
           request,
@@ -812,9 +805,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.Note()
       );
-      client.innerApiCalls.getOccurrenceNote = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getOccurrenceNote =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getOccurrenceNote(
           request,
@@ -921,9 +913,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.Note()
       );
-      client.innerApiCalls.getNote = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getNote =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getNote(
           request,
@@ -1027,9 +1018,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteNote = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteNote =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteNote(
           request,
@@ -1139,9 +1129,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.Note()
       );
-      client.innerApiCalls.createNote = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createNote =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createNote(
           request,
@@ -1248,9 +1237,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.BatchCreateNotesResponse()
       );
-      client.innerApiCalls.batchCreateNotes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchCreateNotes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchCreateNotes(
           request,
@@ -1360,9 +1348,8 @@ describe('v1.GrafeasClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.grafeas.v1.Note()
       );
-      client.innerApiCalls.updateNote = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateNote =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateNote(
           request,
@@ -1473,9 +1460,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
-      client.innerApiCalls.listOccurrences = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listOccurrences =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listOccurrences(
           request,
@@ -1547,9 +1533,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
-      client.descriptors.page.listOccurrences.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listOccurrences.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.grafeas.v1.Occurrence[] = [];
@@ -1571,10 +1556,9 @@ describe('v1.GrafeasClient', () => {
           .calledWith(client.innerApiCalls.listOccurrences, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listOccurrences
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listOccurrences.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1591,10 +1575,8 @@ describe('v1.GrafeasClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listOccurrences.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listOccurrences.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.grafeas.v1.Occurrence[] = [];
@@ -1615,10 +1597,9 @@ describe('v1.GrafeasClient', () => {
           .calledWith(client.innerApiCalls.listOccurrences, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listOccurrences
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listOccurrences.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1639,9 +1620,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
-      client.descriptors.page.listOccurrences.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listOccurrences.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.grafeas.v1.IOccurrence[] = [];
       const iterable = client.listOccurrencesAsync(request);
       for await (const resource of iterable) {
@@ -1649,15 +1629,15 @@ describe('v1.GrafeasClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1674,10 +1654,8 @@ describe('v1.GrafeasClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listOccurrences.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listOccurrences.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listOccurrencesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.grafeas.v1.IOccurrence[] = [];
@@ -1686,15 +1664,15 @@ describe('v1.GrafeasClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1757,9 +1735,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Note()),
         generateSampleMessage(new protos.grafeas.v1.Note()),
       ];
-      client.innerApiCalls.listNotes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listNotes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listNotes(
           request,
@@ -1825,9 +1802,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Note()),
         generateSampleMessage(new protos.grafeas.v1.Note()),
       ];
-      client.descriptors.page.listNotes.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listNotes.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listNotesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.grafeas.v1.Note[] = [];
@@ -1913,9 +1889,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Note()),
         generateSampleMessage(new protos.grafeas.v1.Note()),
       ];
-      client.descriptors.page.listNotes.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listNotes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.grafeas.v1.INote[] = [];
       const iterable = client.listNotesAsync(request);
       for await (const resource of iterable) {
@@ -1994,9 +1969,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
-      client.innerApiCalls.listNoteOccurrences = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listNoteOccurrences =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listNoteOccurrences(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2029,9 +2003,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
-      client.innerApiCalls.listNoteOccurrences = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listNoteOccurrences =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listNoteOccurrences(
           request,
@@ -2103,9 +2076,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
-      client.descriptors.page.listNoteOccurrences.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listNoteOccurrences.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listNoteOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.grafeas.v1.Occurrence[] = [];
@@ -2127,10 +2099,9 @@ describe('v1.GrafeasClient', () => {
           .calledWith(client.innerApiCalls.listNoteOccurrences, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listNoteOccurrences
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNoteOccurrences.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2147,10 +2118,8 @@ describe('v1.GrafeasClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listNoteOccurrences.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listNoteOccurrences.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listNoteOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.grafeas.v1.Occurrence[] = [];
@@ -2171,10 +2140,9 @@ describe('v1.GrafeasClient', () => {
           .calledWith(client.innerApiCalls.listNoteOccurrences, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listNoteOccurrences
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNoteOccurrences.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2195,9 +2163,8 @@ describe('v1.GrafeasClient', () => {
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
         generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
-      client.descriptors.page.listNoteOccurrences.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listNoteOccurrences.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.grafeas.v1.IOccurrence[] = [];
       const iterable = client.listNoteOccurrencesAsync(request);
       for await (const resource of iterable) {
@@ -2205,15 +2172,15 @@ describe('v1.GrafeasClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listNoteOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listNoteOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listNoteOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNoteOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2230,10 +2197,8 @@ describe('v1.GrafeasClient', () => {
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listNoteOccurrences.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listNoteOccurrences.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listNoteOccurrencesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.grafeas.v1.IOccurrence[] = [];
@@ -2242,15 +2207,15 @@ describe('v1.GrafeasClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listNoteOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listNoteOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listNoteOccurrences
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listNoteOccurrences.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

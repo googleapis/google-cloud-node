@@ -4050,11 +4050,11 @@
     
                 /**
                  * CloudRepoSourceContext revisionId.
-                 * @member {string} revisionId
+                 * @member {string|null|undefined} revisionId
                  * @memberof grafeas.v1.CloudRepoSourceContext
                  * @instance
                  */
-                CloudRepoSourceContext.prototype.revisionId = "";
+                CloudRepoSourceContext.prototype.revisionId = null;
     
                 /**
                  * CloudRepoSourceContext aliasContext.
@@ -4326,11 +4326,11 @@
     
                 /**
                  * GerritSourceContext revisionId.
-                 * @member {string} revisionId
+                 * @member {string|null|undefined} revisionId
                  * @memberof grafeas.v1.GerritSourceContext
                  * @instance
                  */
-                GerritSourceContext.prototype.revisionId = "";
+                GerritSourceContext.prototype.revisionId = null;
     
                 /**
                  * GerritSourceContext aliasContext.
@@ -4811,11 +4811,11 @@
     
                 /**
                  * RepoId uid.
-                 * @member {string} uid
+                 * @member {string|null|undefined} uid
                  * @memberof grafeas.v1.RepoId
                  * @instance
                  */
-                RepoId.prototype.uid = "";
+                RepoId.prototype.uid = null;
     
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
@@ -29381,43 +29381,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

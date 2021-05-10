@@ -1612,7 +1612,7 @@ export namespace grafeas {
             public repoId?: (grafeas.v1.IRepoId|null);
 
             /** CloudRepoSourceContext revisionId. */
-            public revisionId: string;
+            public revisionId?: (string|null);
 
             /** CloudRepoSourceContext aliasContext. */
             public aliasContext?: (grafeas.v1.IAliasContext|null);
@@ -1723,7 +1723,7 @@ export namespace grafeas {
             public gerritProject: string;
 
             /** GerritSourceContext revisionId. */
-            public revisionId: string;
+            public revisionId?: (string|null);
 
             /** GerritSourceContext aliasContext. */
             public aliasContext?: (grafeas.v1.IAliasContext|null);
@@ -1921,7 +1921,7 @@ export namespace grafeas {
             public projectRepoId?: (grafeas.v1.IProjectRepoId|null);
 
             /** RepoId uid. */
-            public uid: string;
+            public uid?: (string|null);
 
             /** RepoId id. */
             public id?: ("projectRepoId"|"uid");
@@ -11372,19 +11372,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
