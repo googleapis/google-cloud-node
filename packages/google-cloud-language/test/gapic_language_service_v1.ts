@@ -26,10 +26,9 @@ import * as languageserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -170,9 +169,8 @@ describe('v1.LanguageServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSentimentResponse()
       );
-      client.innerApiCalls.analyzeSentiment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeSentiment =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.analyzeSentiment(
           request,
@@ -258,9 +256,8 @@ describe('v1.LanguageServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitiesResponse()
       );
-      client.innerApiCalls.analyzeEntities = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeEntities =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.analyzeEntities(
           request,
@@ -323,9 +320,8 @@ describe('v1.LanguageServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitySentimentResponse()
       );
-      client.innerApiCalls.analyzeEntitySentiment = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeEntitySentiment =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeEntitySentiment(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -348,9 +344,8 @@ describe('v1.LanguageServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitySentimentResponse()
       );
-      client.innerApiCalls.analyzeEntitySentiment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeEntitySentiment =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.analyzeEntitySentiment(
           request,
@@ -439,9 +434,8 @@ describe('v1.LanguageServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSyntaxResponse()
       );
-      client.innerApiCalls.analyzeSyntax = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.analyzeSyntax =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.analyzeSyntax(
           request,
@@ -527,9 +521,8 @@ describe('v1.LanguageServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.ClassifyTextResponse()
       );
-      client.innerApiCalls.classifyText = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.classifyText =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.classifyText(
           request,
@@ -615,9 +608,8 @@ describe('v1.LanguageServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnnotateTextResponse()
       );
-      client.innerApiCalls.annotateText = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.annotateText =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.annotateText(
           request,
