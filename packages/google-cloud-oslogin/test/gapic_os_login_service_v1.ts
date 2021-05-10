@@ -26,10 +26,9 @@ import * as osloginserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -155,9 +154,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deletePosixAccount = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePosixAccount =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deletePosixAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -188,9 +186,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deletePosixAccount = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePosixAccount =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deletePosixAccount(
           request,
@@ -269,9 +266,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteSshPublicKey = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSshPublicKey =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSshPublicKey(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -302,9 +298,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteSshPublicKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSshPublicKey =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteSshPublicKey(
           request,
@@ -414,9 +409,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.LoginProfile()
       );
-      client.innerApiCalls.getLoginProfile = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getLoginProfile =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getLoginProfile(
           request,
@@ -526,9 +520,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.oslogin.common.SshPublicKey()
       );
-      client.innerApiCalls.getSshPublicKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getSshPublicKey =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getSshPublicKey(
           request,
@@ -607,9 +600,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse()
       );
-      client.innerApiCalls.importSshPublicKey = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.importSshPublicKey =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.importSshPublicKey(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -640,9 +632,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse()
       );
-      client.innerApiCalls.importSshPublicKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importSshPublicKey =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importSshPublicKey(
           request,
@@ -721,9 +712,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.oslogin.common.SshPublicKey()
       );
-      client.innerApiCalls.updateSshPublicKey = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSshPublicKey =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateSshPublicKey(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -754,9 +744,8 @@ describe('v1.OsLoginServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.oslogin.common.SshPublicKey()
       );
-      client.innerApiCalls.updateSshPublicKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSshPublicKey =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateSshPublicKey(
           request,
