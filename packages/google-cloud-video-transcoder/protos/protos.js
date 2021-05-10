@@ -139,11 +139,11 @@
     
                             /**
                              * Job templateId.
-                             * @member {string} templateId
+                             * @member {string|null|undefined} templateId
                              * @memberof google.cloud.video.transcoder.v1beta1.Job
                              * @instance
                              */
-                            Job.prototype.templateId = "";
+                            Job.prototype.templateId = null;
     
                             /**
                              * Job config.
@@ -3759,11 +3759,11 @@
     
                             /**
                              * SpriteSheet totalCount.
-                             * @member {number} totalCount
+                             * @member {number|null|undefined} totalCount
                              * @memberof google.cloud.video.transcoder.v1beta1.SpriteSheet
                              * @instance
                              */
-                            SpriteSheet.prototype.totalCount = 0;
+                            SpriteSheet.prototype.totalCount = null;
     
                             /**
                              * SpriteSheet interval.
@@ -7080,11 +7080,11 @@
     
                             /**
                              * VideoStream gopFrameCount.
-                             * @member {number} gopFrameCount
+                             * @member {number|null|undefined} gopFrameCount
                              * @memberof google.cloud.video.transcoder.v1beta1.VideoStream
                              * @instance
                              */
-                            VideoStream.prototype.gopFrameCount = 0;
+                            VideoStream.prototype.gopFrameCount = null;
     
                             /**
                              * VideoStream gopDuration.
@@ -14251,43 +14251,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

@@ -94,7 +94,7 @@ export namespace google {
                         public outputUri: string;
 
                         /** Job templateId. */
-                        public templateId: string;
+                        public templateId?: (string|null);
 
                         /** Job config. */
                         public config?: (google.cloud.video.transcoder.v1beta1.IJobConfig|null);
@@ -1439,7 +1439,7 @@ export namespace google {
                         public endTimeOffset?: (google.protobuf.IDuration|null);
 
                         /** SpriteSheet totalCount. */
-                        public totalCount: number;
+                        public totalCount?: (number|null);
 
                         /** SpriteSheet interval. */
                         public interval?: (google.protobuf.IDuration|null);
@@ -2847,7 +2847,7 @@ export namespace google {
                         public allowOpenGop: boolean;
 
                         /** VideoStream gopFrameCount. */
-                        public gopFrameCount: number;
+                        public gopFrameCount?: (number|null);
 
                         /** VideoStream gopDuration. */
                         public gopDuration?: (google.protobuf.IDuration|null);
@@ -5899,19 +5899,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
