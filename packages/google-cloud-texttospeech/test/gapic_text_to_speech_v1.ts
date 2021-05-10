@@ -26,10 +26,9 @@ import * as texttospeechModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -168,9 +167,8 @@ describe('v1.TextToSpeechClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesResponse()
       );
-      client.innerApiCalls.listVoices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listVoices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listVoices(
           request,
@@ -256,9 +254,8 @@ describe('v1.TextToSpeechClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechResponse()
       );
-      client.innerApiCalls.synthesizeSpeech = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.synthesizeSpeech =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.synthesizeSpeech(
           request,

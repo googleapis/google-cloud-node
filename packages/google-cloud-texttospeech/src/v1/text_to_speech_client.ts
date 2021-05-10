@@ -200,13 +200,14 @@ export class TextToSpeechClient {
     const textToSpeechStubMethods = ['listVoices', 'synthesizeSpeech'];
     for (const methodName of textToSpeechStubMethods) {
       const callPromise = this.textToSpeechStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
