@@ -6265,7 +6265,8 @@
                           "oneofs": {
                             "webhook": {
                               "oneof": [
-                                "genericWebService"
+                                "genericWebService",
+                                "serviceDirectory"
                               ]
                             }
                           },
@@ -6284,6 +6285,10 @@
                             "genericWebService": {
                               "type": "GenericWebService",
                               "id": 4
+                            },
+                            "serviceDirectory": {
+                              "type": "ServiceDirectoryConfig",
+                              "id": 7
                             },
                             "timeout": {
                               "type": "google.protobuf.Duration",
@@ -6322,6 +6327,22 @@
                                   "keyType": "string",
                                   "type": "string",
                                   "id": 4
+                                }
+                              }
+                            },
+                            "ServiceDirectoryConfig": {
+                              "fields": {
+                                "service": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Service"
+                                  }
+                                },
+                                "genericWebService": {
+                                  "type": "GenericWebService",
+                                  "id": 2
                                 }
                               }
                             }

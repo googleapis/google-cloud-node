@@ -22694,6 +22694,9 @@ export namespace google {
                         /** Webhook genericWebService */
                         genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
 
+                        /** Webhook serviceDirectory */
+                        serviceDirectory?: (google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig|null);
+
                         /** Webhook timeout */
                         timeout?: (google.protobuf.IDuration|null);
 
@@ -22719,6 +22722,9 @@ export namespace google {
                         /** Webhook genericWebService. */
                         public genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
 
+                        /** Webhook serviceDirectory. */
+                        public serviceDirectory?: (google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig|null);
+
                         /** Webhook timeout. */
                         public timeout?: (google.protobuf.IDuration|null);
 
@@ -22726,7 +22732,7 @@ export namespace google {
                         public disabled: boolean;
 
                         /** Webhook webhook. */
-                        public webhook?: "genericWebService";
+                        public webhook?: ("genericWebService"|"serviceDirectory");
 
                         /**
                          * Creates a new Webhook instance using the specified properties.
@@ -22904,6 +22910,102 @@ export namespace google {
 
                             /**
                              * Converts this GenericWebService to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a ServiceDirectoryConfig. */
+                        interface IServiceDirectoryConfig {
+
+                            /** ServiceDirectoryConfig service */
+                            service?: (string|null);
+
+                            /** ServiceDirectoryConfig genericWebService */
+                            genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
+                        }
+
+                        /** Represents a ServiceDirectoryConfig. */
+                        class ServiceDirectoryConfig implements IServiceDirectoryConfig {
+
+                            /**
+                             * Constructs a new ServiceDirectoryConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig);
+
+                            /** ServiceDirectoryConfig service. */
+                            public service: string;
+
+                            /** ServiceDirectoryConfig genericWebService. */
+                            public genericWebService?: (google.cloud.dialogflow.cx.v3.Webhook.IGenericWebService|null);
+
+                            /**
+                             * Creates a new ServiceDirectoryConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ServiceDirectoryConfig instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Encodes the specified ServiceDirectoryConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig.verify|verify} messages.
+                             * @param message ServiceDirectoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ServiceDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig.verify|verify} messages.
+                             * @param message ServiceDirectoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Webhook.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ServiceDirectoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ServiceDirectoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Verifies a ServiceDirectoryConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ServiceDirectoryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ServiceDirectoryConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig;
+
+                            /**
+                             * Creates a plain object from a ServiceDirectoryConfig message. Also converts values to other types if specified.
+                             * @param message ServiceDirectoryConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ServiceDirectoryConfig to JSON.
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
