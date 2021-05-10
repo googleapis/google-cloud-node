@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.1.0...v1.2.0) (2021-05-10)
+
+
+### Features
+
+* adds v1 API surface  ([#52](https://www.github.com/googleapis/nodejs-workflows/issues/52)) ([c1ddc23](https://www.github.com/googleapis/nodejs-workflows/commit/c1ddc237ea9965881176d93b3fe678da260fc4fc))
+* update release level to GA ([#54](https://www.github.com/googleapis/nodejs-workflows/issues/54)) ([5f05e45](https://www.github.com/googleapis/nodejs-workflows/commit/5f05e45f113756f5727fcd4a900652dd51bdb8ac))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#48](https://www.github.com/googleapis/nodejs-workflows/issues/48)) ([e642151](https://www.github.com/googleapis/nodejs-workflows/commit/e6421515b0a34ed1e9e5290c7fafe6fb7ad7390e))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.0.2...v1.1.0) (2021-01-09)
 
 
