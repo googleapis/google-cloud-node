@@ -30,34 +30,34 @@ describe('logger', () => {
       it('Should not throw given undefined', () => {
         assert.doesNotThrow(
           createLogger,
-          (createLogger() as {}) as (err: Error) => boolean
+          createLogger() as {} as (err: Error) => boolean
         );
       });
       it('Should not throw given an empty object', () => {
         assert.doesNotThrow(
           createLogger.bind(null, {}),
-          (createLogger() as {}) as (err: Error) => boolean
+          createLogger() as {} as (err: Error) => boolean
         );
       });
       it('Should not throw given logLevel as a number', () => {
         assert.doesNotThrow(
           createLogger.bind(null, {logLevel: 3}),
-          (createLogger({logLevel: 3}) as {}) as (err: Error) => boolean
+          createLogger({logLevel: 3}) as {} as (err: Error) => boolean
         );
       });
       it('Should not throw given logLevel as a string', () => {
         assert.doesNotThrow(
           createLogger.bind(null, {logLevel: '3'}),
-          (createLogger({logLevel: 3}) as {}) as (err: Error) => boolean
+          createLogger({logLevel: 3}) as {} as (err: Error) => boolean
         );
       });
       it('Should not throw given an env variable to use', () => {
         process.env.GCLOUD_ERRORS_LOGLEVEL = '4';
         assert.doesNotThrow(
           createLogger,
-          (createLogger({
+          createLogger({
             logLevel: 4,
-          }) as {}) as (err: Error) => boolean
+          }) as {} as (err: Error) => boolean
         );
         delete process.env.GCLOUD_ERRORS_LOGLEVEL;
       });

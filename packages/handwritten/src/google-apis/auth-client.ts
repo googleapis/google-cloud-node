@@ -171,9 +171,9 @@ export class RequestHandler extends Service {
       body: {}
     ) => void
   ) {
-    const cb: Function = (typeof userCb === 'function'
-      ? userCb
-      : RequestHandler.noOp)!;
+    const cb: Function = (
+      typeof userCb === 'function' ? userCb : RequestHandler.noOp
+    )!;
     if (!this._config.isReportingEnabled()) {
       cb(null, null, {});
       return;

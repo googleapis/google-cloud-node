@@ -98,16 +98,17 @@ export class Fuzzer {
       allowedDepth?: number
     ) {
       const lenChecked = (typeof len === 'number' ? len : _random(1, 10))!;
-      let availableTypes = (typeof ofOneType === 'string' &&
-      this.types().indexOf(ofOneType!) > -1
-        ? [ofOneType]
-        : this.types())!;
-      let currentDepthChecked = (typeof currentDepth === 'number'
-        ? currentDepth
-        : 0)!;
-      const allowedDepthChecked = (typeof allowedDepth === 'number'
-        ? allowedDepth
-        : 3)!;
+      let availableTypes = (
+        typeof ofOneType === 'string' && this.types().indexOf(ofOneType!) > -1
+          ? [ofOneType]
+          : this.types()
+      )!;
+      let currentDepthChecked = (
+        typeof currentDepth === 'number' ? currentDepth : 0
+      )!;
+      const allowedDepthChecked = (
+        typeof allowedDepth === 'number' ? allowedDepth : 3
+      )!;
       const arr: Array<{}> = [];
       let currentTypeBeingGenerated: string | undefined = '';
       currentDepthChecked += 1;
@@ -155,15 +156,15 @@ export class Fuzzer {
       currentDepth?: number,
       allowedDepth?: number
     ) {
-      const numPropertiesChecked = (typeof numProperties === 'number'
-        ? numProperties
-        : _random(1, 10))!;
-      let currentDepthChecked = (typeof currentDepth === 'number'
-        ? currentDepth
-        : 0)!;
-      const allowedDepthChecked = (typeof allowedDepth === 'number'
-        ? allowedDepth
-        : 3)!;
+      const numPropertiesChecked = (
+        typeof numProperties === 'number' ? numProperties : _random(1, 10)
+      )!;
+      let currentDepthChecked = (
+        typeof currentDepth === 'number' ? currentDepth : 0
+      )!;
+      const allowedDepthChecked = (
+        typeof allowedDepth === 'number' ? allowedDepth : 3
+      )!;
       const obj: {[key: string]: {}} = {};
       currentDepthChecked += 1;
 
@@ -290,9 +291,9 @@ export class Fuzzer {
     cb?: Function,
     withContext?: {}
   ) {
-    const expectsArgTypesChecked = (Array.isArray(expectsArgTypes)
-      ? expectsArgTypes
-      : [])!;
+    const expectsArgTypesChecked = (
+      Array.isArray(expectsArgTypes) ? expectsArgTypes : []
+    )!;
     const typesToFuzzOnEach = this._generateTypesToFuzzWith(
       expectsArgTypesChecked
     ) as string[][];
