@@ -20,7 +20,8 @@
 const websecurityscanner = require('@google-cloud/web-security-scanner');
 
 function main() {
-  const webSecurityScannerClient = new websecurityscanner.WebSecurityScannerClient();
+  const webSecurityScannerClient =
+    new websecurityscanner.WebSecurityScannerClient();
 }
 
 main();

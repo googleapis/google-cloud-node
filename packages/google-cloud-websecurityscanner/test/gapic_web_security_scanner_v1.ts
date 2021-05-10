@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -249,9 +248,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ScanConfig()
       );
-      client.innerApiCalls.createScanConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createScanConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createScanConfig(
           request,
@@ -361,9 +359,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteScanConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteScanConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteScanConfig(
           request,
@@ -473,9 +470,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ScanConfig()
       );
-      client.innerApiCalls.getScanConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getScanConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getScanConfig(
           request,
@@ -587,9 +583,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ScanConfig()
       );
-      client.innerApiCalls.updateScanConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateScanConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateScanConfig(
           request,
@@ -700,9 +695,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ScanRun()
       );
-      client.innerApiCalls.startScanRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.startScanRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.startScanRun(
           request,
@@ -812,9 +806,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ScanRun()
       );
-      client.innerApiCalls.getScanRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getScanRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getScanRun(
           request,
@@ -924,9 +917,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ScanRun()
       );
-      client.innerApiCalls.stopScanRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.stopScanRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.stopScanRun(
           request,
@@ -1036,9 +1028,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.Finding()
       );
-      client.innerApiCalls.getFinding = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getFinding =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getFinding(
           request,
@@ -1117,9 +1108,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ListFindingTypeStatsResponse()
       );
-      client.innerApiCalls.listFindingTypeStats = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listFindingTypeStats =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listFindingTypeStats(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1150,9 +1140,8 @@ describe('v1.WebSecurityScannerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1.ListFindingTypeStatsResponse()
       );
-      client.innerApiCalls.listFindingTypeStats = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listFindingTypeStats =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listFindingTypeStats(
           request,
@@ -1278,9 +1267,8 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.ScanConfig()
         ),
       ];
-      client.innerApiCalls.listScanConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listScanConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listScanConfigs(
           request,
@@ -1360,12 +1348,12 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.ScanConfig()
         ),
       ];
-      client.descriptors.page.listScanConfigs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listScanConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listScanConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.ScanConfig[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.ScanConfig[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.ScanConfig) => {
@@ -1387,10 +1375,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listScanConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1407,13 +1394,12 @@ describe('v1.WebSecurityScannerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listScanConfigs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listScanConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listScanConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.ScanConfig[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.ScanConfig[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.ScanConfig) => {
@@ -1434,10 +1420,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listScanConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1464,25 +1449,25 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.ScanConfig()
         ),
       ];
-      client.descriptors.page.listScanConfigs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.websecurityscanner.v1.IScanConfig[] = [];
+      client.descriptors.page.listScanConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.websecurityscanner.v1.IScanConfig[] =
+        [];
       const iterable = client.listScanConfigsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1499,27 +1484,26 @@ describe('v1.WebSecurityScannerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listScanConfigs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listScanConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listScanConfigsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.websecurityscanner.v1.IScanConfig[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.IScanConfig[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1594,9 +1578,8 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.ScanRun()
         ),
       ];
-      client.innerApiCalls.listScanRuns = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listScanRuns =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listScanRuns(
           request,
@@ -1674,12 +1657,12 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.ScanRun()
         ),
       ];
-      client.descriptors.page.listScanRuns.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listScanRuns.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listScanRunsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.ScanRun[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.ScanRun[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.ScanRun) => {
@@ -1701,10 +1684,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listScanRuns, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanRuns
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanRuns.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1727,7 +1709,8 @@ describe('v1.WebSecurityScannerClient', () => {
       );
       const stream = client.listScanRunsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.ScanRun[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.ScanRun[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.ScanRun) => {
@@ -1748,10 +1731,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listScanRuns, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanRuns
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanRuns.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1778,25 +1760,25 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.ScanRun()
         ),
       ];
-      client.descriptors.page.listScanRuns.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.websecurityscanner.v1.IScanRun[] = [];
+      client.descriptors.page.listScanRuns.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.websecurityscanner.v1.IScanRun[] =
+        [];
       const iterable = client.listScanRunsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listScanRuns
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listScanRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanRuns
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanRuns.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1813,27 +1795,26 @@ describe('v1.WebSecurityScannerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listScanRuns.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listScanRuns.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listScanRunsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.websecurityscanner.v1.IScanRun[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.IScanRun[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listScanRuns
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listScanRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listScanRuns
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listScanRuns.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1908,9 +1889,8 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.CrawledUrl()
         ),
       ];
-      client.innerApiCalls.listCrawledUrls = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listCrawledUrls =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listCrawledUrls(
           request,
@@ -1990,12 +1970,12 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.CrawledUrl()
         ),
       ];
-      client.descriptors.page.listCrawledUrls.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCrawledUrls.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listCrawledUrlsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.CrawledUrl[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.CrawledUrl[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.CrawledUrl) => {
@@ -2017,10 +1997,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listCrawledUrls, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCrawledUrls
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCrawledUrls.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2037,13 +2016,12 @@ describe('v1.WebSecurityScannerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCrawledUrls.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCrawledUrls.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listCrawledUrlsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.CrawledUrl[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.CrawledUrl[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.CrawledUrl) => {
@@ -2064,10 +2042,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listCrawledUrls, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCrawledUrls
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCrawledUrls.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2094,25 +2071,25 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.CrawledUrl()
         ),
       ];
-      client.descriptors.page.listCrawledUrls.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.websecurityscanner.v1.ICrawledUrl[] = [];
+      client.descriptors.page.listCrawledUrls.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.websecurityscanner.v1.ICrawledUrl[] =
+        [];
       const iterable = client.listCrawledUrlsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listCrawledUrls
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCrawledUrls
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2129,27 +2106,26 @@ describe('v1.WebSecurityScannerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCrawledUrls.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCrawledUrls.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listCrawledUrlsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.websecurityscanner.v1.ICrawledUrl[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.ICrawledUrl[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listCrawledUrls
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCrawledUrls
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCrawledUrls.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2224,9 +2200,8 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.Finding()
         ),
       ];
-      client.innerApiCalls.listFindings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listFindings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listFindings(
           request,
@@ -2304,12 +2279,12 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.Finding()
         ),
       ];
-      client.descriptors.page.listFindings.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listFindings.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listFindingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.Finding[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.Finding[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.Finding) => {
@@ -2331,10 +2306,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listFindings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2357,7 +2331,8 @@ describe('v1.WebSecurityScannerClient', () => {
       );
       const stream = client.listFindingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.websecurityscanner.v1.Finding[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.Finding[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.websecurityscanner.v1.Finding) => {
@@ -2378,10 +2353,9 @@ describe('v1.WebSecurityScannerClient', () => {
           .calledWith(client.innerApiCalls.listFindings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2408,25 +2382,25 @@ describe('v1.WebSecurityScannerClient', () => {
           new protos.google.cloud.websecurityscanner.v1.Finding()
         ),
       ];
-      client.descriptors.page.listFindings.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.websecurityscanner.v1.IFinding[] = [];
+      client.descriptors.page.listFindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.websecurityscanner.v1.IFinding[] =
+        [];
       const iterable = client.listFindingsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2443,27 +2417,26 @@ describe('v1.WebSecurityScannerClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listFindings.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listFindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listFindingsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.websecurityscanner.v1.IFinding[] = [];
+        const responses: protos.google.cloud.websecurityscanner.v1.IFinding[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listFindings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listFindings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
